@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-198`, 174 of 176
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-199`, 175 of 177
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M198 |
+| Track | Available | Earned at M199 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M198 risk-weighted proof completion estimate is therefore 35 percent, with
+The M199 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -171,6 +171,20 @@ scan may be exponential. No fixed checkpoint or global gate closes. Coverage
 becomes 174 of 176 while the score remains 35 percent, the uncertainty range
 remains 20 to 40 percent, and all five gates remain open. No retrospective
 score was invented.
+
+M199 then proves that a shape-specific sparse V53 basis is equivalent to the
+complete proper-cut constant equation on every finite carrier of size at least
+two. Its total classifier checks only the two-anchor full weight, three
+singleton cuts, or four-plus full-span support and weight. At the checked PCC
+boundary, an accepted basis derives constant activation and reuses the
+Packet/BN6/BCEL/HB conditional ZeroSlack contradiction without calling M195's
+powerset classifier; a rejection remains one typed structural obstruction.
+Raw cells and the remaining terminal, table, rank, route, HB, and polynomial
+construction data remain supplied; basis rejection is not a gain or global
+rank decrease; and upstream construction may still enumerate subsets. No
+fixed checkpoint or global gate closes. Coverage becomes 175 of 177 while the
+score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
+all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

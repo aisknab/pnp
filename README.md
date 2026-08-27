@@ -168,7 +168,7 @@ resolvers, normalizer, and polynomial bounds remain supplied or open. M197
 therefore earns no fixed proof-completion point and closes no global gate. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md).
 
-The current M198 canonical cut-ledger milestone proves that this duplicate-
+The M198 canonical cut-ledger milestone proves that this duplicate-
 footprint coalescing preserves the direct raw positive-cell crossing-mass sum
 for every finite cut. The checked endpoint therefore states the remaining
 proper-cut activation mismatch directly against the raw positive-cell cut
@@ -179,6 +179,20 @@ resolvers, normalizer, and polynomial bounds remain supplied or open. The
 mismatch is not yet a strict gain or globally decreasing route. M198 therefore
 earns no fixed proof-completion point and closes no global gate. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
+
+The current M199 canonical constant-cut-basis milestone replaces the new
+endpoint's inherited all-proper-cut powerset scan with an exact sparse basis.
+For every V53 carrier of size at least two, Lean proves that the two-anchor
+full weight, the three singleton cuts, or the four-plus full-span support and
+weight conditions are equivalent to the complete proper-cut constant
+equation. A total classifier either supplies that equation to the existing
+checked Packet/BN6/BCEL/HB conditional ZeroSlack route or returns one typed
+structural obstruction. The raw cells and payloads, terminal construction,
+tables, ranks, route-clear and HB data, resolvers, normalizer, and complete
+encoded-size polynomial bounds remain supplied or open; a rejected basis is
+not a strict gain or globally decreasing route. M199 therefore earns no fixed
+proof-completion point and closes no global gate. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
 
 ## Current claim boundary
 

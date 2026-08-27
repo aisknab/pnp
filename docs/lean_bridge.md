@@ -1864,6 +1864,27 @@ risk-weighted proof-completion estimate therefore remains 35 percent and zero
 of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
 
+The M199 canonical constant-cut-basis boundary removes the all-proper-cut
+powerset scan from the new checked endpoint. Lean proves, for every sparse V53
+carrier with at least two anchors, that a fixed shape-specific basis is
+equivalent to the complete proper-cut equation: one full-span weight at two
+anchors, three singleton cuts at three anchors, and full-span-only support plus
+its weight at four or more anchors. A total typed classifier either installs
+the resulting constant activation in the existing Packet/BN6/BCEL/HB
+conditional ZeroSlack boundary or returns one exact structural obstruction.
+The twenty-two reviewed declarations use no project-specific axiom or
+`Classical.choice`; only permitted `propext` and `Quot.sound` closure appears
+where required. Raw cells and payloads, terminal construction, tables, ranks,
+route-clear and HB data, resolvers, normalizer, and complete encoded-size
+polynomial bounds remain supplied or open. A rejected basis is not a strict
+gain or decreasing global route, and upstream construction may still enumerate
+subsets. This does not complete PkgC/BN3--BN6 integration, prove
+manuscript-wide SaturatePositive or BCELReady, establish unconditional
+ZeroSlack, or construct polynomial PCCMin. The risk-weighted proof-completion
+estimate therefore remains 35 percent and zero of five global gates are
+closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
+
 ## Discharged by Lean so far
 
 ```text

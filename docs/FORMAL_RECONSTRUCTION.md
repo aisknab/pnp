@@ -266,6 +266,25 @@ ZeroSlack, or construct polynomial PCCMin. The score remains 35 percent and
 zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
 
+M199 proves that a shape-specific sparse basis is exactly equivalent to the
+complete V53 proper-cut constant equation on every carrier of size at least
+two. The two-anchor branch checks the full-span weight, the three-anchor branch
+checks three singleton cuts, and the four-plus branch checks full-span-only
+support and its declared weight. Its total typed classifier feeds only an
+accepted basis into the existing checked Packet/BN6/BCEL/HB conditional
+ZeroSlack contradiction and otherwise preserves one structural obstruction;
+it does not call M195's powerset classifier. All twenty-two focused
+declarations avoid project axioms and `Classical.choice`; permitted closures
+are limited to `propext` and `Quot.sound`. Raw cells and payloads, terminal
+construction, tables, ranks, route-clear and HB data, resolvers, normalizer,
+and complete encoded-size polynomial bounds remain supplied or open. A basis
+obstruction is not a gain or globally decreasing transition, and upstream
+construction may still enumerate subsets. This does not complete
+PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or
+BCELReady, establish unconditional ZeroSlack, or construct polynomial PCCMin.
+The score remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
