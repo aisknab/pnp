@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-201';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -578,6 +578,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCBN6PositiveCellizationAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCBN6PositiveCellization.lean',
   'node --test audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRoute.lean',
+  'node --test audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -784,6 +787,7 @@ const NON_CLAIMS = Object.freeze([
   'The M199 canonical constant-cut-basis boundary proves that, on every sparse positive V53 hypergraph with at least two anchors, a shape-specific sparse basis is equivalent to the complete proper-cut constant equation: the full-span weight at two anchors, three singleton cuts at three anchors, and full-span-only support plus its weight at four or more anchors. Its total classifier returns one typed structural obstruction or feeds the accepted basis directly into the checked Packet/BN6/BCEL/HB conditional ZeroSlack route while retaining M198\'s exact raw cut-ledger equality. This removes the inherited M195 powerset scan from the new endpoint, but the terminal problem, checked ready certificate, raw cells and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied; rejected basis routes are not gains or globally decreasing transitions, upstream construction may still enumerate subsets, and the raw cells are not derived from every terminal input. This does not complete PkgC/BN3--BN6 integration, prove manuscript-wide SaturatePositive or BCELReady, establish unconditional ZeroSlack, construct executable polynomial PCCMin, close a global gate, put SAT in P, create the eligible root theorem, or prove P = NP.',
   'The M200 sparse activation-route boundary replaces M199\'s structural-only rejection with the first exact singleton-or-pair proper cut whose positive-cell activation weight differs from the checked BCEL defect. Lean proves for every finite sparse positive V53 carrier of size at least two that testing this duplicate-free quadratic-size family is equivalent to the complete proper-cut constant equation. The checked adapter reflects a mismatch through M198\'s direct raw ledger or reaches M199\'s conditional ZeroSlack branch. The terminal problem, checked ready certificate, raw cells and payloads, table, ranks, route-clear and HB data, resolvers, normalizer, and complete encoded-input runtime bounds remain supplied; the quadratic list bound is local, a mismatch is not a verified gain or globally decreasing transition, and raw cells are not derived from every terminal input. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
   'The M201 PkgC-to-BN6 positive-cellization boundary starts from an arbitrary finite list of supplied active V54 consumer systems over one common carrier and a supplied typed restorer. It recursively returns the first exact same-key PkgC cancellation realization, or proves every system singletonized and constructs the corresponding raw BN6 positive-cell support directly from each singleton footprint. Active-cut semantics derive support size at least two, payload order is preserved, and the exact V54 crossing contribution is conserved on every cut. The terminal problem, consumer systems, active cuts, payloads, restorer, and all upstream BN3--BN5 data remain supplied; a cancellation is not yet a verified global gain or rank-decreasing transition, and no complete construction or encoded-size polynomial runtime theorem is proved. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
+  'The M202 source-derived PkgC/BN6/BCEL boundary composes M201 with M200 without accepting an independent raw BN6 ledger. Its total classifier preserves an exact source-member same-key cancellation, reaches genuine conditional ZeroSlack under supplied checked selector silence, or reflects one exact nonempty proper singleton/pair activation mismatch back to the original PkgC source ledger through the all-cut conservation theorem. The terminal problem, checked finite BCEL-ready certificate, active source systems and cuts, payloads, typed restorer, realizer table, claims, rank assignment, dependency table, checked HB closure, route-clear result, and selector silence remain supplied; cancellation or mismatch is not a verified gain or globally rank-decreasing transition, and no complete encoded-input polynomial construction or runtime theorem is proved. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1741,6 +1745,25 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPkgCBN6PositiveCellizationUnconditionalZeroSlack: false,
   leanResidualTerminalPkgCBN6PositiveCellizationScope:
     'arbitrary-finite-supplied-active-v54-consumer-systems-over-one-carrier-classified-by-exact-pkgc-same-key-cancellation-or-derived-raw-bn6-positive-cells-with-payload-order-and-all-cut-activation-conservation-over-a-supplied-restorer',
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteFormalized: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAuditPassed: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteAuditedDeclarationCount: 7,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteEndpointProjectAssumptionFree: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteSourceCellsArbitraryFinite: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteRawCellsDerivedFromPkgCSource: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteActivationWeightConservedAllCuts: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRoutePkgCCancellationProofBearing: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteSparseCutLengthAtMostTwo: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteActivationMismatchReflectedToSourceLedger: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteConditionalZeroSlackOnly: true,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteDerivesSourcesFromTerminalInput: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteConstructsDownstreamTables: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCancellationOrMismatchIsGlobalGain: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCompletePkgCBN6Integration: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCompleteEncodedPolynomialRuntimeProved: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteUnconditionalZeroSlack: false,
+  leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteScope:
+    'arbitrary-finite-supplied-active-pkgc-source-ledger-over-the-exact-checked-bcel-nucleus-with-source-derived-raw-bn6-cells-exact-pkgc-cancellation-or-source-ledger-singleton-pair-activation-mismatch-and-conditional-zeroslack-under-supplied-checked-downstream-data',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -3184,6 +3207,25 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPkgCBN6PositiveCellizationUnconditionalZeroSlack: false,
       leanResidualTerminalPkgCBN6PositiveCellizationScope:
         'arbitrary-finite-supplied-active-v54-consumer-systems-over-one-carrier-classified-by-exact-pkgc-same-key-cancellation-or-derived-raw-bn6-positive-cells-with-payload-order-and-all-cut-activation-conservation-over-a-supplied-restorer',
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteFormalized: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAuditPassed: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteAuditedDeclarationCount: 7,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteEndpointProjectAssumptionFree: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteSourceCellsArbitraryFinite: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteRawCellsDerivedFromPkgCSource: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteActivationWeightConservedAllCuts: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRoutePkgCCancellationProofBearing: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteSparseCutLengthAtMostTwo: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteActivationMismatchReflectedToSourceLedger: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteConditionalZeroSlackOnly: true,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteDerivesSourcesFromTerminalInput: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteConstructsDownstreamTables: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCancellationOrMismatchIsGlobalGain: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCompletePkgCBN6Integration: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteCompleteEncodedPolynomialRuntimeProved: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteUnconditionalZeroSlack: false,
+      leanPCCMinCheckedPacketPkgCBN6BCELSourceRouteScope:
+        'arbitrary-finite-supplied-active-pkgc-source-ledger-over-the-exact-checked-bcel-nucleus-with-source-derived-raw-bn6-cells-exact-pkgc-cancellation-or-source-ledger-singleton-pair-activation-mismatch-and-conditional-zeroslack-under-supplied-checked-downstream-data',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3741,7 +3783,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-27-201',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-28-202',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

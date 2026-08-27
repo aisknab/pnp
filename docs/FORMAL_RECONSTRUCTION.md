@@ -311,6 +311,19 @@ complete encoded-input polynomial bounds remain supplied or open. The score
 remains 35 percent and zero of five global gates are closed. See
 [`lean_residual_terminal_pkgc_bn6_positive_cellization.md`](./lean_residual_terminal_pkgc_bn6_positive_cellization.md).
 
+M202 composes that source-derived cellization with M200's checked sparse
+BN6/BCEL/Packet/HB classifier. It accepts no independent raw BN6 ledger:
+M201's constructed cells enter canonical grouping directly. The total result
+is genuine conditional ZeroSlack, an exact source-member PkgC cancellation,
+or one nonempty proper singleton/pair cut whose activation mismatch is
+rewritten to the original source ledger by all-cut conservation. The seven
+reviewed declarations exclude project axioms and `Classical.choice`. Source
+systems, payloads, the restorer, checked tables, ranks, dependency closure,
+route-clear evidence, selector silence, gain/descent semantics, and complete
+encoded-input polynomial bounds remain supplied or open. The score remains
+35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md`](./lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

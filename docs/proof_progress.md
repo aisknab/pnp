@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-201`, 177 of 179
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202`, 178 of 180
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M201 |
+| Track | Available | Earned at M202 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M201 risk-weighted proof completion estimate is therefore 35 percent, with
+The M202 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -212,6 +212,21 @@ decrease, and no complete encoded-size polynomial construction is proved. No
 fixed checkpoint or global gate closes. Coverage becomes 177 of 179 while the
 score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
 all five gates remain open. No retrospective score was invented.
+
+M202 composes M201's source-derived positive cells directly with M200's
+checked sparse BN6/BCEL/Packet/HB route. Its total classifier retains the
+exact source-member same-key cancellation, returns genuine conditional
+ZeroSlack under supplied checked selector silence, or reflects one nonempty
+proper singleton/pair activation mismatch through all-cut conservation to the
+original PkgC source ledger. No independent raw BN6 ledger is accepted. The
+terminal problem, checked ready certificate, source systems and cuts,
+payloads, restorer, realizer table, claims, ranks, dependency table, checked
+HB closure, route-clear result, and selector silence remain supplied;
+cancellation or mismatch is not a gain or global rank decrease, and no
+complete encoded-size polynomial construction is proved. No fixed checkpoint
+or global gate closes. Coverage becomes 178 of 180 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
 
 ## Changing the score
 

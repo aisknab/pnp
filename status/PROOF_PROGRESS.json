@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-201",
-  "lastReviewedDate": "2026-08-27",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202",
+  "lastReviewedDate": "2026-08-28",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 177,
-    "totalRows": 179,
+    "earnedRows": 178,
+    "totalRows": 180,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,8 +261,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M201 constructs raw BN6 positive-cell supports from supplied active V54 consumer systems or returns an exact PkgC cancellation, but the terminal problem, source consumer systems, active cuts, payloads, restorer, maps, ranks and tables remain supplied rather than constructed from every valid terminal input.",
-          "lastReviewedDate": "2026-08-27"
+          "remainingLimitation": "M202 feeds M201's source-derived raw BN6 ledger into the checked sparse BCEL route, but the terminal problem, source consumer systems, active cuts, payloads, restorer, maps, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
+          "lastReviewedDate": "2026-08-28"
         },
         {
           "id": "residual-pkgc-bn3-bn6-integration",
@@ -275,8 +275,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M201 closes a local PkgC-to-raw-BN6 cellization edge under supplied active consumer systems and a supplied restorer, but PkgC/BN3--BN6 must still derive those systems and payloads from terminal input, turn every cancellation into a decreasing global route, and integrate the construction without supplied global data.",
-          "lastReviewedDate": "2026-08-27"
+          "remainingLimitation": "M202 composes the local PkgC cellization and checked BN6/BCEL boundary, but PkgC/BN3--BN6 must still derive the source systems, payloads and downstream tables from terminal input and turn every cancellation or activation mismatch into a decreasing global route.",
+          "lastReviewedDate": "2026-08-28"
         },
         {
           "id": "residual-hn-bud-hb-semantics",
@@ -981,6 +981,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M201 proves an arbitrary-finite PkgC-to-BN6 cellization boundary over one supplied carrier and typed restorer. Each supplied active V54 consumer system either yields the exact first same-key PkgC cancellation realization or is proved singletonized; in the all-singletonized branch Lean derives each raw BN6 support from the consumer footprint, derives support size at least two from the active cut, preserves positive payload order, and proves exact activation-weight conservation on every cut. The terminal problem, source consumer systems, active cuts, payload atoms, typed restorer, and all upstream BN3--BN5 construction remain supplied; a returned cancellation is not yet a verified global gain or rank-decreasing transition, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 177 of 179, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202",
+      "formalArtefactCoverage": { "earnedRows": 178, "totalRows": 180 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M202 composes M201's arbitrary-finite PkgC cellization with M200's checked sparse BN6/BCEL/Packet/HB boundary without accepting an independent raw BN6 ledger. The total classifier retains the exact source-member same-key cancellation, returns genuine conditional ZeroSlack on the checked coherent branch, or reflects one exact nonempty proper singleton/pair cut mismatch through all-cut activation conservation to the original PkgC source activation ledger. The terminal problem, checked finite BCEL-ready certificate, active source systems and cuts, payloads, typed restorer, realizer table, claims, rank assignment, dependency table, checked HB closure, route-clear result and selector silence remain supplied; cancellation or mismatch is not a verified gain or globally rank-decreasing transition, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 178 of 180, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
