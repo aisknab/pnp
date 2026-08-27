@@ -1,0 +1,21 @@
+import PNP.ResidualTerminalPkgCBN6PositiveCellization
+
+#print axioms PNP.DirectWire.terminalBN6NormalizeSupport_eq_self_of_sublist
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.singletonFootprint_sublist
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.carrier_nodup
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.singletonFootprint_nodup
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.singletonFootprint_length_at_least_two
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.normalized_singletonFootprint
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.toBN6PositiveCell
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.toBN6PositiveCell_footprint
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.cutContribution
+#print axioms PNP.DirectWire.TerminalPkgCBN6SourceCell.toBN6PositiveCell_cutContribution
+#print axioms PNP.DirectWire.terminalPkgCBN6SourceActivationWeight
+#print axioms PNP.DirectWire.terminalPkgCBN6PositiveCells
+#print axioms PNP.DirectWire.terminalPkgCBN6PositiveCells_length
+#print axioms PNP.DirectWire.terminalPkgCBN6PositiveCells_payloadAtoms
+#print axioms PNP.DirectWire.terminalPkgCBN6PositiveCells_activationWeight
+#print axioms PNP.DirectWire.TerminalPkgCBN6CellizationOutcome
+#print axioms PNP.DirectWire.classifyTerminalPkgCBN6Cellization
+#print axioms PNP.DirectWire.terminalPkgC_bn6_positive_cellization_checked_complete

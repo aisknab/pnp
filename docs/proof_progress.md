@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-200`, 176 of 178
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-201`, 177 of 179
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M200 |
+| Track | Available | Earned at M201 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M200 risk-weighted proof completion estimate is therefore 35 percent, with
+The M201 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -199,6 +199,19 @@ not a gain or global rank decrease. No fixed checkpoint or global gate closes.
 Coverage becomes 176 of 178 while the score remains 35 percent, the
 uncertainty range remains 20 to 40 percent, and all five gates remain open. No
 retrospective score was invented.
+
+M201 reconstructs the next PkgC-to-BN6 edge over arbitrary finite supplied
+active V54 consumer systems. Its total classifier returns the first exact
+same-key cancellation realization or proves every source singletonized; that
+branch derives each raw BN6 positive-cell support from the consumer footprint,
+derives support size at least two from activity, preserves payload order, and
+conserves the exact activation weight on every cut. The terminal source
+systems, active cuts, payload atoms, typed restorer, and upstream BN3--BN5
+construction remain supplied; cancellation is not a global gain or rank
+decrease, and no complete encoded-size polynomial construction is proved. No
+fixed checkpoint or global gate closes. Coverage becomes 177 of 179 while the
+score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
+all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

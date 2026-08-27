@@ -299,6 +299,18 @@ encoded-input polynomial construction remain supplied or open. The score
 remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md).
 
+M201 formalizes an arbitrary-finite PkgC-to-BN6 cellization boundary. From
+each supplied active V54 consumer system it either retains an exact same-key
+PkgC cancellation realization or, on the all-singletonized branch, derives a
+raw BN6 positive-cell support from the singleton footprint. Activity derives
+support size at least two; mapping preserves payload order and exact activation
+weight on every cut. The nineteen reviewed declarations exclude project
+axioms and `Classical.choice`. Source consumer systems, active cuts, payloads,
+the typed restorer, terminal construction, global gain/descent semantics, and
+complete encoded-input polynomial bounds remain supplied or open. The score
+remains 35 percent and zero of five global gates are closed. See
+[`lean_residual_terminal_pkgc_bn6_positive_cellization.md`](./lean_residual_terminal_pkgc_bn6_positive_cellization.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

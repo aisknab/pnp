@@ -200,6 +200,19 @@ semantics, and complete encoded-input polynomial bounds remain supplied or
 open, so this does not establish unconditional ZeroSlack, complete PCCMin, or
 polynomial runtime.
 
+M201 adds `PNP.ResidualTerminalPkgCBN6PositiveCellization`. Over an arbitrary
+finite list of supplied active V54 consumer systems on one carrier, its total
+classifier returns the first exact same-key PkgC cancellation realization or
+proves all systems singletonized. The latter branch derives each raw BN6
+positive-cell support and its size-at-least-two fact from the active consumer
+data, preserves payload order, and conserves activation weight on every cut.
+All nineteen reviewed declarations avoid project-specific axioms and
+`Classical.choice`; only permitted `propext` and `Quot.sound` appear where
+required. Terminal source systems, active cuts, payloads, the typed restorer,
+global gain/descent semantics, and complete encoded-input polynomial bounds
+remain supplied or open, so this does not establish complete PkgC/BN3--BN6,
+unconditional ZeroSlack, complete PCCMin, or polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every
