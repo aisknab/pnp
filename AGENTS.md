@@ -20,9 +20,11 @@ limits in private user-level instructions rather than this public file.
 - Keep host, proxy, account, key, network, capacity, and credential details out
   of this repository. Perform connection and identity preflight using the
   private user-level runbook before starting a long remote job.
-- Local commands should be limited to source edits and lightweight inspection,
-  such as `rg`, `sed`, `git diff`, `git status`, and targeted syntax checks that
-  cannot consume substantial memory.
+- Local commands are limited to source edits and lightweight inspection, such as
+  `rg`, `sed`, `git diff`, and `git status`. Do not execute repository source,
+  syntax checks, tests, generators, validators, builds, package-manager commands,
+  renderers, or servers locally; dispatch even targeted executions to the remote
+  build host.
 - Before starting or resuming a remote phase, confirm that no task-created local
   build, test, generator, renderer, server, or validator process remains active.
 
