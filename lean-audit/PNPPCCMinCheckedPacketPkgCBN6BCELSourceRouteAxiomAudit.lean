@@ -1,0 +1,9 @@
+import PNP.PCCMinCheckedPacketPkgCBN6BCELSourceRoute
+
+#print axioms PNP.DirectWire.terminalPkgCBN6BCELPositiveCells
+#print axioms PNP.DirectWire.PCCMinCheckedPacketPkgCBN6BCELCellizedData
+#print axioms PNP.DirectWire.PCCMinCheckedPacketPkgCBN6BCELCellizedData.toCanonicalGroupingData
+#print axioms PNP.DirectWire.PCCMinCheckedPacketPkgCBN6BCELSourceHBData
+#print axioms PNP.DirectWire.PCCMinCheckedPacketPkgCBN6BCELSourceRouteOrZeroSlack
+#print axioms PNP.DirectWire.PCCMinCheckedPacketPkgCBN6BCELSourceHBData.sourceRouteOrZeroSlack
+#print axioms PNP.DirectWire.pccmin_checked_packet_pkgc_bn6_bcel_source_route_or_zeroslack_checked_complete

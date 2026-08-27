@@ -213,6 +213,18 @@ global gain/descent semantics, and complete encoded-input polynomial bounds
 remain supplied or open, so this does not establish complete PkgC/BN3--BN6,
 unconditional ZeroSlack, complete PCCMin, or polynomial runtime.
 
+M202 adds `PNP.PCCMinCheckedPacketPkgCBN6BCELSourceRoute`. It definitionally
+installs M201's source-derived positive cells in M200's canonical checked
+boundary and accepts no independent raw BN6 ledger. The total classifier
+retains an exact source-member PkgC cancellation, returns conditional
+ZeroSlack under checked supplied silence, or reflects one length-at-most-two
+proper-cut activation mismatch back to the original PkgC source ledger. All
+seven reviewed declarations avoid project-specific axioms and
+`Classical.choice`; only permitted `propext` and `Quot.sound` appear. Terminal
+source data, downstream tables, blocker semantics, gain and global descent,
+complete PkgC/BN3--BN6, unconditional ZeroSlack, and encoded-input polynomial
+bounds remain supplied or open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

@@ -284,6 +284,13 @@ terminal source systems, active cuts, payloads, and typed restorer remain
 supplied, cancellation has no global gain or rank-decrease theorem, and the
 complete encoded-input construction remains open. The risk-weighted estimate
 therefore remains 35 percent and zero of five global gates are closed.
+M202 composes those source-derived cells with the checked sparse BN6/BCEL
+route. It retains exact cancellation, conditional ZeroSlack, or one exact
+singleton/pair source-ledger activation mismatch, without accepting a second
+raw-cell list. Source construction, downstream tables, selector silence,
+blocker semantics, gain, global rank decrease, and complete polynomial bounds
+remain supplied or open, so the risk-weighted estimate remains 35 percent and
+zero of five global gates are closed.
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

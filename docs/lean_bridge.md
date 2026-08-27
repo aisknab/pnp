@@ -1916,6 +1916,20 @@ or establish complete polynomial PCCMin. The risk-weighted estimate remains
 35 percent and zero of five global gates are closed. See
 [`lean_residual_terminal_pkgc_bn6_positive_cellization.md`](./lean_residual_terminal_pkgc_bn6_positive_cellization.md).
 
+M202 now feeds M201's constructed BN6 cells into M200's canonical checked
+Packet/HB boundary without a parallel raw-cell input. Its total source-level
+classifier preserves exact PkgC cancellation evidence, returns genuine
+conditional ZeroSlack on the checked coherent branch, or transports M200's
+singleton/pair raw-cell mismatch through all-cut conservation to the original
+PkgC source activation ledger. All seven audited declarations avoid
+project-specific axioms and `Classical.choice`. The source systems, active
+cuts, payloads, restorer, checked tables, ranks, dependency closure,
+route-clear result, and selector silence remain supplied; neither returned
+obstruction is yet a global decreasing gain. Complete PkgC/BN3--BN6,
+unconditional ZeroSlack, and polynomial PCCMin remain open. The risk-weighted
+estimate remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md`](./lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md).
+
 ## Discharged by Lean so far
 
 ```text

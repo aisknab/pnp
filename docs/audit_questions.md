@@ -2689,6 +2689,59 @@ payload order and activation weight are preserved on every cut.
 
 ---
 
+### M202 source-derived PkgC/BN6 sparse BCEL route
+
+**Claim**
+
+For every arbitrary finite supplied active PkgC source ledger over the exact
+checked BCEL nucleus, the total classifier returns conditional ZeroSlack, an
+exact source-member same-key cancellation, or one exact nonempty proper
+singleton/pair cut whose original source activation differs from the checked
+BCEL defect.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketPkgCBN6BCELSourceRoute.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRoute.lean`.
+- `audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the seven-declaration M202 axiom audit and three-branch regression.
+3. Confirm the M197 positive-cell field is definitionally M201's constructed
+   list and that no independent raw BN6 ledger is a source-data field.
+4. Confirm the total classifier invokes M201 first, preserves its exact
+   cancellation branch, and enters M200 only after complete singletonization.
+5. Confirm M200's mismatch is rewritten with
+   `terminalPkgCBN6PositiveCells_activationWeight` for the same exact cut.
+6. Confirm the returned cut is included, nonempty, proper, and has length at
+   most two.
+7. Confirm supplied downstream data and conditional selector silence remain
+   explicit and are not described as terminal derivation or unconditional
+   ZeroSlack.
+8. Mutate the derived-cell, cancellation, mismatch-reflection, fixed-instance,
+   exhaustive-scan, polynomial-runtime, and ZeroSlack boundaries and require
+   the hostile contract to reject each mutation.
+
+**What would count as a refutation or material defect**
+
+- The checked downstream path accepts raw BN6 cells independent of the PkgC
+  source ledger.
+- A PkgC cancellation loses its exact source membership, separating pair, or
+  typed restoration realization.
+- A raw-cell mismatch cannot be reflected to the original source activation
+  ledger for the same cut.
+- The small cut is empty, full-carrier, longer than two, or outside the checked
+  nucleus.
+- Conditional checked silence is presented as unconditional ZeroSlack.
+- Cancellation or mismatch is described as a verified global gain, rank
+  decrease, complete PkgC/BN3--BN6 integration, or polynomial PCCMin.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
