@@ -1885,6 +1885,22 @@ estimate therefore remains 35 percent and zero of five global gates are
 closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
 
+The M200 sparse activation-route boundary replaces M199's structural-only
+rejection with one exact small proper-cut mismatch. Lean proves that all
+singleton and order-preserving pair cuts form a duplicate-free, quadratic-size
+test family equivalent to the complete V53 proper-cut equation for every
+finite carrier with at least two anchors. The total classifier either supplies
+that equation to M199's checked conditional ZeroSlack branch or returns its
+first mismatching cut, which is reflected through M198's direct raw positive-
+cell ledger. The thirty reviewed declarations use no project-specific axiom or
+`Classical.choice`. Raw cells and payloads, terminal construction, tables,
+ranks, route-clear and HB data, gain and global rank-decrease semantics, and
+the complete encoded-input polynomial construction remain supplied or open.
+The local quadratic family-size theorem is not a complete PCCMin runtime bound.
+The risk-weighted estimate remains 35 percent and zero of five global gates
+are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md).
+
 ## Discharged by Lean so far
 
 ```text

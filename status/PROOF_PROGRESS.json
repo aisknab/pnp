@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-199",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-200",
   "lastReviewedDate": "2026-08-27",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 175,
-    "totalRows": 177,
+    "earnedRows": 176,
+    "totalRows": 178,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,7 +261,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M199 replaces the checked endpoint's inherited proper-cut powerset scan with an exact sparse V53 basis, but the terminal problem, raw positive cells, maps, ranks and tables remain supplied rather than constructed from every valid terminal input.",
+          "remainingLimitation": "M200 replaces structural-only basis rejection with one exact singleton-or-pair raw activation mismatch, but the terminal problem, raw positive cells, maps, ranks and tables remain supplied rather than constructed from every valid terminal input.",
           "lastReviewedDate": "2026-08-27"
         },
         {
@@ -275,7 +275,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M199 derives constant activation exactly on the accepted sparse-basis branch and returns a typed obstruction otherwise, but PkgC/BN3--BN6 must still derive the raw cells, force basis acceptance or turn every rejection into a decreasing route, and integrate the construction without supplied global data.",
+          "remainingLimitation": "M200 derives the complete constant equation from a quadratic-size small-cut test family or returns one exact raw activation mismatch, but PkgC/BN3--BN6 must still derive the raw cells, turn every mismatch into a decreasing route, and integrate the construction without supplied global data.",
           "lastReviewedDate": "2026-08-27"
         },
         {
@@ -953,6 +953,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M199 proves that a shape-specific sparse V53 basis is equivalent to the complete constant proper-cut equation on every finite carrier of size at least two, and supplies a total typed classifier using only the two-anchor full weight, three singleton cuts, or four-plus full-span support and weight. The checked PCCMin adapter consumes an accepted basis directly, retains M198's exact raw cut-ledger reflection, and reaches the existing Packet/BN6/BCEL/HB conditional ZeroSlack contradiction without invoking M195's powerset classifier; every rejection remains one explicit structural route. The terminal problem, checked ready certificate, raw cells and payloads, realizer table, claims, ranks, route-clear and HB data, resolvers, normalizer, and encoded-size polynomial bounds remain supplied; a rejected basis is not a gain or globally decreasing transition, raw cells are not derived from every terminal input, and upstream construction may still enumerate subsets. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 175 of 177, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-200",
+      "formalArtefactCoverage": { "earnedRows": 176, "totalRows": 178 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M200 proves that all singleton and order-preserving pair cuts form a duplicate-free quadratic-size test family equivalent to the complete constant proper-cut equation on every finite sparse positive V53 carrier of size at least two. Its total classifier returns the first exact small proper-cut mismatch rather than M199's structural-only rejection, and the checked PCCMin adapter reflects that mismatch through M198's direct raw positive-cell activation ledger or reaches M199's Packet/BN6/BCEL/HB conditional ZeroSlack branch. The terminal problem, checked ready certificate, raw cells and payloads, realizer table, claims, ranks, route-clear and HB data, resolvers, normalizer, and complete encoded-input polynomial bounds remain supplied; the local quadratic list bound is not a complete PCCMin runtime theorem, a mismatch is not a gain or globally decreasing transition, raw cells are not derived from every terminal input, and upstream construction may still enumerate subsets. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate, and all fixed checkpoints remain open. Formal artefact coverage becomes 176 of 178, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

@@ -186,6 +186,20 @@ global rank-decrease semantics, and complete encoded-size polynomial bounds
 remain supplied or open, so this does not establish unconditional ZeroSlack,
 complete PCCMin, or polynomial runtime.
 
+M200 adds `PNP.ResidualTerminalV53SparseProperCutBasis` and
+`PNP.PCCMinCheckedPacketBN6BCELSparseActivationRoute`. It proves that every
+singleton and order-preserving pair cut forms a duplicate-free family with a
+direct quadratic length bound, and that equality on this family is equivalent
+to the complete V53 proper-cut equation for every finite carrier of size at
+least two. Its total classifier returns the first exact small-cut mismatch,
+and the checked adapter reflects that mismatch through the direct raw
+activation ledger or reaches conditional ZeroSlack. The thirty reviewed
+declarations contain no project-specific axiom or `Classical.choice`. Raw
+cells, payloads, terminal construction, gain and global rank-decrease
+semantics, and complete encoded-input polynomial bounds remain supplied or
+open, so this does not establish unconditional ZeroSlack, complete PCCMin, or
+polynomial runtime.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

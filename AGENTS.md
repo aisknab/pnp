@@ -6,15 +6,25 @@ limits in private user-level instructions rather than this public file.
 
 ## Remote Builder Policy
 
-- Run resource-intensive verification on the configured remote build host under
-  the private user-level resource policy. Do not bypass that policy or silently
-  fall back to a heavyweight local command when the builder is unavailable.
+- Treat the local workstation as an orchestration and source-editing harness, not
+  as a build or test machine. Run all repository processing on the configured
+  remote build host under the private user-level resource policy, including every
+  Lean/Lake build, Node test, test suite, repository-wide validator, dependency
+  installation, generator, theorem inventory, TeX/PDF build, browser or server
+  operation, production verifier, and clean reproduction clone. This applies even
+  when a targeted command appears small. If a command's resource behaviour is
+  uncertain, run it remotely.
+- Do not bypass that policy or silently fall back to local processing when the
+  builder is unavailable. Diagnose the connection, notify the user when the stall
+  is actionable, and wait or pursue only lightweight source work.
 - Keep host, proxy, account, key, network, capacity, and credential details out
   of this repository. Perform connection and identity preflight using the
   private user-level runbook before starting a long remote job.
 - Local commands should be limited to source edits and lightweight inspection,
   such as `rg`, `sed`, `git diff`, `git status`, and targeted syntax checks that
   cannot consume substantial memory.
+- Before starting or resuming a remote phase, confirm that no task-created local
+  build, test, generator, renderer, server, or validator process remains active.
 
 ### Remote-job preflight
 
@@ -129,7 +139,8 @@ a small read-only way instead of adding branch-specific finalizer workflows.
 
 If a task needs generated or mechanical edits:
 
-- run the generator locally or in the agent environment;
+- run the generator on the configured remote build host and copy back only its
+  reviewed outputs; never run it on the local workstation;
 - commit only the final source/documentation changes that should be reviewed;
 - do not commit temporary generators, diagnostics, or one-off workflow files;
 - do not rely on GitHub Actions to transform the PR branch into its final form.

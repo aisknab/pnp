@@ -2587,6 +2587,60 @@ ZeroSlack or one typed structural basis obstruction.
 
 ---
 
+### M200 sparse proper-cut activation route
+
+**Claim**
+
+For every finite sparse positive V53 hypergraph with at least two carrier
+anchors, the singleton and order-preserving pair proper cuts form a
+duplicate-free quadratic-size test family equivalent to the complete
+proper-cut constant equation. The checked PCCMin endpoint returns either
+conditional ZeroSlack or the first exact small-cut raw activation mismatch.
+
+**Where it appears**
+
+- `lean/PNP/ResidualTerminalV53SparseProperCutBasis.lean`.
+- `lean/PNP/PCCMinCheckedPacketBN6BCELSparseActivationRoute.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketBN6BCELSparseActivationRouteAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketBN6BCELSparseActivationRoute.lean`.
+- `audits/lean-pccmin-checked-packet-bn6-bcel-sparse-activation-route0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the M200 axiom audit and arbitrary-finite regression.
+3. Confirm the generator emits only singleton and order-preserving pair cuts,
+   has exact membership and duplicate-freedom theorems, and satisfies its
+   direct quadratic length bound.
+4. Confirm the small-cut equation is equivalent to the complete proper-cut
+   equation for every carrier of size at least two.
+5. Confirm the executable classifier returns the first mismatching cut with
+   properness, length-at-most-two, and exact unequal-weight evidence.
+6. Confirm the checked adapter reflects that mismatch through M198's raw
+   ledger and uses M199 only on the coherent branch.
+7. Confirm the source does not call `terminalListSubsets`, an all-proper-cut
+   classifier, or a caller-supplied constant equation.
+8. Confirm the axiom closure contains only the fixed Lean-standard allowlist.
+9. Mutate the generator, membership bound, classifier, route preservation, or
+   claim boundary and require the hostile contract to reject the mutation.
+
+**What would count as a refutation or material defect**
+
+- A singleton/pair-coherent V53 system has a nonempty proper cut of different
+  weight, or the generated list omits or duplicates a required small cut.
+- The classifier enumerates a powerset, calls an inherited broad classifier,
+  accepts a supplied constant equation, or erases the exact mismatch.
+- The result holds only for a fixed carrier, cut, cell ledger, rank, or table.
+- A mismatch is called a strict gain or globally decreasing transition.
+- The local quadratic list bound is described as a complete encoded-input
+  polynomial PCCMin construction or runtime theorem.
+- Conditional ZeroSlack is described as complete PkgC/BN3--BN6 integration,
+  manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, or a
+  closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
