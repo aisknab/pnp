@@ -27,7 +27,7 @@ mathematical validation.
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | The Lean toolchain/root, concrete machine kernel, all executable pipeline stages, recursive function/decision `RawRefinement`, the finite charged-pipeline P/NP/reduction interface, direct proof that `CNFSAT ∈ NP`, the current Cook–Levin schedule/builder prefix, both concrete CNF-to-NAND and strict locked-NAND polynomial reductions, their exact report-facing compatibility layer, the locked-NAND baseline through its total polynomial machines, and the current finite residual kernels through explicit BN5, PkgC restoration and ambient reduction, V54, V53, grouped BN6 packets, payload-backed Packet selector seeds, exact grouped-footprint membership, canonical handles, a total unary handle codec, exact source-payload materialization, a source-cell candidate-gain scan, an exhaustive scan over every selector in the supplied finite family, its conditional gain-or-ZeroSlack upgrade under an explicit global gain-coverage certificate, the arbitrary finite occurrence-ledger charge-surplus kernel, the constructive supplied-family unit-charge blueprint validator/realizer, the arbitrary-finite data-only typed gain/HN/budget/lower-seed contract, supplied exact-rank HN/BUD blocker-graph acyclicity, total-table HB representation closure with well-founded induction, checked HB active-dependency closure with all supplied activity false, conditional supplied-table selector-silence rank closure under explicit global semantic gain exclusion, and executable selector-silence induction without that global no-gain premise are formalized and axiom-audited. Exact first-route semantics, RankWF descent reflection, canonical handle-rank reflection, internal source-route reflection, positive-source-charge reflection, canonical grouped-footprint colour reflection, and typed frontier-signature reflection additionally exclude colour, charge, rank, and exact-route results while preserving frontier inequality and exact failure evidence; the four remaining routes are still supplied-field boundaries. Remaining work includes finishing the Cook–Levin builder and reduction; using the now-concrete locked-NAND endpoint to derive a deterministic SAT theorem; proving the remaining NP-hardness/NP-completeness transport and a deterministic `CNFSAT ∈ P` decider; deriving the explicit residual inputs, grouped family, replacement blueprints, gain-coverage certificate, faithful rank table, dependency table, and blocker-activity tables from terminal candidates; completing PkgC route integration and silence; deriving blocker semantics, semantic dependency completeness, and the checked local active-dependency premise from terminal data; establishing selector faithfulness or compatibility, unconditional HB negative closure, and complete route silence; bounding and generating the selector universe in encoded circuit size; proving polynomial runtime; formalizing unconditional global `ZeroSlack` and polynomial PCCMin; eliminating assumptions; and auditing the root theorem. `PNP.Main.ConcretePEqualsNP` is only an inactive definition; `PNP.Main.p_eq_np` is absent. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Two separate metrics are used. [Formal artefact coverage](./docs/proof_progress.md) is 174 of 176 current scoped publication rows earned; it is not proof completion and its denominator can grow. The fixed-checkpoint risk-weighted proof completion estimate is 35 percent, with a 20 to 40 percent uncertainty range. Zero of five global gates are closed, the compiled project-specific axiom inventory is empty, `PNP.Main.p_eq_np` is absent, and the publication gate is false. |
+| **How is progress measured?** | Two separate metrics are used. [Formal artefact coverage](./docs/proof_progress.md) is 176 of 178 current scoped publication rows earned; it is not proof completion and its denominator can grow. The fixed-checkpoint risk-weighted proof completion estimate is 35 percent, with a 20 to 40 percent uncertainty range. Zero of five global gates are closed, the compiled project-specific axiom inventory is empty, `PNP.Main.p_eq_np` is absent, and the publication gate is false. |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
@@ -180,7 +180,7 @@ mismatch is not yet a strict gain or globally decreasing route. M198 therefore
 earns no fixed proof-completion point and closes no global gate. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md).
 
-The current M199 canonical constant-cut-basis milestone replaces the new
+The M199 canonical constant-cut-basis milestone replaces the new
 endpoint's inherited all-proper-cut powerset scan with an exact sparse basis.
 For every V53 carrier of size at least two, Lean proves that the two-anchor
 full weight, the three singleton cuts, or the four-plus full-span support and
@@ -193,6 +193,21 @@ encoded-size polynomial bounds remain supplied or open; a rejected basis is
 not a strict gain or globally decreasing route. M199 therefore earns no fixed
 proof-completion point and closes no global gate. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
+
+The current M200 sparse activation-route milestone proves that singleton and
+order-preserving pair cuts form a complete test family for the V53 proper-cut
+constant equation on every finite carrier of size at least two. The family is
+duplicate-free and has a direct quadratic length bound. Its total classifier
+returns either the complete equation or the first exact small proper-cut
+mismatch, which the checked PCCMin adapter reflects through M198's direct raw
+positive-cell ledger; the coherent branch retains M199's conditional
+ZeroSlack result. Raw cells and payloads, terminal construction, tables,
+ranks, route-clear and HB data, resolvers, normalizer, and complete
+encoded-input polynomial bounds remain supplied or open. A mismatch is not a
+strict gain or globally decreasing route, and the local list-size bound is not
+a complete PCCMin runtime theorem. M200 earns no fixed proof-completion point
+and closes no global gate. See
+[`lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md`](./docs/lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md).
 
 ## Current claim boundary
 

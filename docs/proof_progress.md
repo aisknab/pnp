@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-199`, 175 of 177
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-200`, 176 of 178
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M199 |
+| Track | Available | Earned at M200 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M199 risk-weighted proof completion estimate is therefore 35 percent, with
+The M200 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -185,6 +185,20 @@ rank decrease; and upstream construction may still enumerate subsets. No
 fixed checkpoint or global gate closes. Coverage becomes 175 of 177 while the
 score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
 all five gates remain open. No retrospective score was invented.
+
+M200 replaces M199's structural-only rejection with the first exact
+singleton-or-pair proper cut whose crossing weight misses the checked value.
+Lean proves for every finite sparse positive V53 carrier of size at least two
+that this duplicate-free, quadratic-size test family is equivalent to the
+complete proper-cut constant equation. The checked adapter reflects a
+mismatch into M198's direct raw activation ledger or reaches M199's
+conditional ZeroSlack branch. Raw cells and terminal, table, rank, route, HB,
+and complete encoded-input polynomial construction data remain supplied; the
+local family-size bound is not complete PCCMin runtime, and the mismatch is
+not a gain or global rank decrease. No fixed checkpoint or global gate closes.
+Coverage becomes 176 of 178 while the score remains 35 percent, the
+uncertainty range remains 20 to 40 percent, and all five gates remain open. No
+retrospective score was invented.
 
 ## Changing the score
 

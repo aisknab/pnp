@@ -213,6 +213,7 @@ import PNP.PCCMinCheckedPacketBN6BCELDerivedFamily
 import PNP.PCCMinCheckedPacketBN6BCELCanonicalGrouping
 import PNP.PCCMinCheckedPacketBN6BCELCanonicalCutLedger
 import PNP.PCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis
+import PNP.PCCMinCheckedPacketBN6BCELSparseActivationRoute
 import PNP.Bridge
 import PNP.ConcreteLegacyLockedNANDCompatibility
 import PNP.ConcreteResidualBandCompatibility

@@ -285,6 +285,20 @@ BCELReady, establish unconditional ZeroSlack, or construct polynomial PCCMin.
 The score remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md`](./lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md).
 
+M200 proves that the canonical singleton and order-preserving pair cuts are a
+complete test family for the V53 proper-cut constant equation on every finite
+carrier with at least two anchors. The family is duplicate-free and has a
+direct quadratic length bound. Its total classifier either proves the complete
+equation or returns the first exact small proper-cut mismatch; the checked PCC
+adapter reflects that mismatch into M198's direct raw activation ledger and
+retains M199's conditional ZeroSlack branch on coherence. The thirty reviewed
+declarations exclude project axioms and `Classical.choice`. Raw cells and
+payloads, terminal construction, tables, ranks, route-clear and HB data,
+resolvers, normalizer, gain and global descent semantics, and the complete
+encoded-input polynomial construction remain supplied or open. The score
+remains 35 percent and zero of five global gates are closed. See
+[`lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

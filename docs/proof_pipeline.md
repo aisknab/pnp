@@ -269,7 +269,11 @@ mismatch against that raw ledger. M199 replaces the resulting endpoint's
 all-proper-cut powerset scan with an exact two-anchor, three-singleton, or
 four-plus full-span basis and a total typed classifier. The raw cells, forced
 basis acceptance or decreasing rejection routes, global descent, and complete
-polynomial construction remain open, so the
+polynomial construction remain open. M200 then proves that singleton and pair
+proper cuts alone are a complete quadratic-size test family and returns the
+first exact small-cut raw activation mismatch on rejection. That mismatch
+still lacks gain and global rank-decrease semantics, while the raw cells and
+complete encoded-input construction remain supplied, so the
 risk-weighted estimate remains 35 percent and zero of five global gates are
 closed. A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
