@@ -2641,6 +2641,54 @@ conditional ZeroSlack or the first exact small-cut raw activation mismatch.
 
 ---
 
+### M201 PkgC-to-BN6 positive cellization
+
+**Claim**
+
+For every finite list of supplied active V54 consumer systems over one carrier,
+the total classifier returns the first exact same-key PkgC cancellation or
+proves all systems singletonized and constructs raw BN6 positive cells whose
+payload order and activation weight are preserved on every cut.
+
+**Where it appears**
+
+- `lean/PNP/ResidualTerminalPkgCBN6PositiveCellization.lean`.
+- `lean-audit/PNPResidualTerminalPkgCBN6PositiveCellizationAxiomAudit.lean`.
+- `lean-regression/PNPResidualTerminalPkgCBN6PositiveCellization.lean`.
+- `audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the nineteen-declaration M201 axiom audit and arbitrary-finite
+   regression.
+3. Confirm a source cell accepts no caller-supplied BN6 support or support-size
+   proof; both come from the active consumer system.
+4. Confirm the recursive classifier invokes the exact PkgC same-key
+   cancellation classifier and retains its typed realization.
+5. Confirm the all-singletonized branch preserves payload order and exact
+   activation weight for every cut.
+6. Confirm the source contains no powerset or exhaustive implementation scan,
+   fixed carrier, polynomial-runtime claim, or unconditional ZeroSlack claim.
+7. Mutate those boundaries and require the hostile contract to reject each
+   mutation.
+
+**What would count as a refutation or material defect**
+
+- A supplied active consumer system is classified as singletonized when it has
+  an exact same-key cancellation, or the cancellation evidence is erased.
+- The derived BN6 support differs from the singleton footprint, has fewer than
+  two atoms, changes payload order, or changes activation weight on any cut.
+- A support or size certificate is accepted as caller input rather than derived.
+- The result holds only for one fixed carrier or uses an exhaustive subset or
+  implementation scan hidden inside the construction.
+- The supplied-data boundary is described as terminal derivation, complete
+  PkgC/BN3--BN6 integration, a global gain, polynomial PCCMin, unconditional
+  ZeroSlack, or a closed global gate.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

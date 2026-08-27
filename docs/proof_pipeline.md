@@ -275,7 +275,16 @@ first exact small-cut raw activation mismatch on rejection. That mismatch
 still lacks gain and global rank-decrease semantics, while the raw cells and
 complete encoded-input construction remain supplied, so the
 risk-weighted estimate remains 35 percent and zero of five global gates are
-closed. A deterministic target decider, the
+closed.
+M201 then classifies arbitrary finite supplied active V54 consumer systems into
+the first exact PkgC same-key cancellation or an all-singletonized branch whose
+raw BN6 positive-cell supports are derived from the consumer footprints. It
+preserves payload order and exact activation weight on every cut, but the
+terminal source systems, active cuts, payloads, and typed restorer remain
+supplied, cancellation has no global gain or rank-decrease theorem, and the
+complete encoded-input construction remains open. The risk-weighted estimate
+therefore remains 35 percent and zero of five global gates are closed.
+A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](lean_concrete_legacy_locked_nand_compatibility.md).

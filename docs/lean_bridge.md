@@ -1901,6 +1901,21 @@ The risk-weighted estimate remains 35 percent and zero of five global gates
 are closed. See
 [`lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md`](./lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md).
 
+M201 now reconnects the manuscript's PkgC classification directly to raw BN6
+positive cells over arbitrary finite supplied active V54 consumer systems. The
+total recursive classifier returns an exact proof-bearing same-key
+cancellation at the first nonsingletonized system; otherwise it derives every
+BN6 support from the singleton consumer footprint, obtains the required
+support cardinality from activity, preserves payload order, and conserves the
+exact V54 activation ledger for every cut. All nineteen audited declarations
+avoid project-specific axioms and `Classical.choice`. This is still a supplied-
+data boundary: it does not construct the consumer systems, active cuts,
+payloads, or restorer from a terminal candidate, turn cancellation into a
+global decreasing route, complete PkgC/BN3--BN6, prove unconditional ZeroSlack,
+or establish complete polynomial PCCMin. The risk-weighted estimate remains
+35 percent and zero of five global gates are closed. See
+[`lean_residual_terminal_pkgc_bn6_positive_cellization.md`](./lean_residual_terminal_pkgc_bn6_positive_cellization.md).
+
 ## Discharged by Lean so far
 
 ```text

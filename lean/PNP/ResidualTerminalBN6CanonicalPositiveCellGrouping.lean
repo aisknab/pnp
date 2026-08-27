@@ -127,6 +127,17 @@ private theorem terminalBN6_filter_membership_eq_sublist
       simp only [if_true]
       rw [tailFilter, ih tailNodup]
 
+/-- Carrier normalization is the identity on a duplicate-free ordered
+    carrier sublist.  This is the reusable boundary needed when an upstream
+    construction already supplies its footprint in canonical carrier order. -/
+theorem terminalBN6NormalizeSupport_eq_self_of_sublist
+    {Atom : Type} [DecidableEq Atom]
+    {support carrier : List Atom}
+    (supportSublist : support.Sublist carrier)
+    (carrierNodup : carrier.Nodup) :
+    terminalBN6NormalizeSupport carrier support = support :=
+  terminalBN6_filter_membership_eq_sublist supportSublist carrierNodup
+
 /-- The V54 consumer system canonically associated with one ordered footprint:
     its minimal consumers are exactly the footprint singletons. -/
 def terminalBN6SingletonConsumerSystem
