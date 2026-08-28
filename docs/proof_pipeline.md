@@ -299,6 +299,17 @@ BN4 kernel against the same checked BCEL nucleus. The ambient ledger and other
 source/downstream objects remain supplied, the remainder is not proved empty,
 and incompatibility is not yet a global decreasing route, so the risk-weighted
 estimate remains 35 percent and zero of five global gates are closed.
+M204 replaces the local always-total typed restorer with the finite exact-
+coordinate restoration classifier. It retains the first Hall deficit and
+forced Q route, or constructs balanced BN4 unit cells from complete coverage
+and computes the exact ambient remainder and residual reduction in arbitrary
+order, with a proof-bearing no-embedding alternative. The restoration
+universe and maps, consumer system and ambient ledger remain supplied;
+coordinate coverage is not semantic full-candidate materialization and no
+returned branch is yet a verified global rank decrease. The risk-weighted
+estimate therefore remains 35 percent and zero of five global gates are
+closed.
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

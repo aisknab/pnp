@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-203`, 179 of 181
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-204`, 180 of 182
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M203 |
+| Track | Available | Earned at M204 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M203 risk-weighted proof completion estimate is therefore 35 percent, with
+The M204 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -241,6 +241,20 @@ failure nor cancellation reduction is a global gain or rank decrease. No fixed
 checkpoint or global gate closes. Coverage becomes 179 of 181 while the score
 remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
 five gates remain open. No retrospective score was invented.
+
+M204 replaces the always-total supplied typed-restorer branch at this local
+PkgC boundary with the arbitrary-finite restoration-coordinate classifier.
+The incomplete-coverage branch retains an exact Hall deficit and forced Q
+route. Complete coverage constructs balanced opposite-sign BN4 unit cells
+for every canonical quotient coordinate, then computes an arbitrary-order
+ambient remainder with exact residual-ledger reduction or proves no exact
+embedding. The restoration universe and maps, consumer system and ambient
+ledger remain supplied; equality-fibre coverage does not materialize
+semantic full candidates, the Hall route is not a verified global gain, and
+the computed remainder is not proved empty. No fixed checkpoint or global
+gate closes. Coverage becomes 180 of 182 while the score remains 35 percent,
+the uncertainty range remains 20 to 40 percent, and all five gates remain
+open. No retrospective score was invented.
 
 ## Changing the score
 

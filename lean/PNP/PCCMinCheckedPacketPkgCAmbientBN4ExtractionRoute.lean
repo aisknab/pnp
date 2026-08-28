@@ -30,7 +30,7 @@ namespace DirectWire
 /-- Internal proof-bearing result for remove-first multiset extraction.  The
     failure branch retains both a required occurrence and the stronger proof
     that no exact remainder decomposition exists. -/
-private inductive ExactSubledgerExtractionOutcome {Alpha : Type}
+inductive TerminalExactSubledgerExtractionOutcome {Alpha : Type}
     (required ambient : List Alpha) : Type where
   | extracted
       (remainder : List Alpha)
@@ -65,15 +65,16 @@ private theorem permConsEraseConstructive
 
 /-- Constructively remove every required occurrence from the ambient list.
     `erase` makes the result order independent and preserves multiplicity. -/
-private def classifyExactSubledgerExtraction
+def classifyTerminalExactSubledgerExtraction
     {Alpha : Type} [DecidableEq Alpha] :
     (required ambient : List Alpha) ->
-      ExactSubledgerExtractionOutcome required ambient
+      TerminalExactSubledgerExtractionOutcome required ambient
   | [], ambient =>
       .extracted ambient (by simp)
   | head :: tail, ambient =>
       if found : head ∈ ambient then
-        match classifyExactSubledgerExtraction tail (ambient.erase head) with
+        match classifyTerminalExactSubledgerExtraction tail
+            (ambient.erase head) with
         | .extracted remainder exactDecomposition =>
             .extracted remainder <|
               (permConsEraseConstructive found).trans
@@ -144,7 +145,7 @@ def classifyTerminalPkgCAmbientBN4Extraction
     (ambient : List (TerminalBN4ActivationCell ActivationAtom
       SemanticSignature TransportType)) :
     TerminalPkgCAmbientBN4ExtractionOutcome pair restorer ambient :=
-  match classifyExactSubledgerExtraction
+  match classifyTerminalExactSubledgerExtraction
       (pair.restorationCancellationCells restorer) ambient with
   | .extracted remainder exactDecomposition =>
       let embedding : TerminalPkgCAmbientBN4LedgerEmbedding pair restorer

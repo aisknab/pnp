@@ -2793,6 +2793,47 @@ source activation mismatch branches.
 
 ---
 
+### M204 restoration-coverage ambient route
+
+**Claim**
+
+For every arbitrary finite supplied consumer system, restoration-coordinate
+universe and ambient BN4 ledger, the existing finite matcher returns
+singletonization, the exact first Hall deficit and forced Q route, or complete
+coverage. Complete coverage constructs balanced coordinate-level BN4
+cancellation cells and computes the exact ambient remainder and residual
+reduction, or proves that no exact embedding exists.
+
+**Where it appears**
+
+- lean/PNP/ResidualTerminalPkgCRestorationCoverageAmbientRoute.lean.
+- lean-audit/PNPResidualTerminalPkgCRestorationCoverageAmbientRouteAxiomAudit.lean.
+- lean-regression/PNPResidualTerminalPkgCRestorationCoverageAmbientRoute.lean.
+- audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Build the explicit PNP root.
+2. Compile the 17-declaration axiom audit and four-branch regression.
+3. Confirm the Hall branch retains the exact deficit and qRestorationHall route.
+4. Confirm the covered branch constructs cells from canonical quotient units
+   without a typed restorer or supplied semantic full candidates.
+5. Confirm reordered duplicate cells preserve multiplicity and a deficient
+   ambient ledger returns proof that no exact embedding exists.
+6. Confirm no branch is described as a global gain, unconditional ZeroSlack,
+   complete integration, or polynomial PCCMin.
+
+**What would count as a refutation or material defect**
+
+- A Hall-deficient coordinate fibre is erased or accepted as covered.
+- Cancellation cells, a typed restorer, remainder, or embedding are supplied.
+- Complete equality-fibre coverage is presented as semantic candidate adequacy.
+- Ambient order or duplicate multiplicity changes the accepted result.
+- Hall failure or no-embedding is described as a verified gain or global route.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

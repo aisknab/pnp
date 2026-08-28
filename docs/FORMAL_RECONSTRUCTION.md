@@ -336,6 +336,19 @@ supplied or open. The score remains 35 percent and zero of five global gates
 are closed. See
 [`lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md`](./lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md).
 
+M204 replaces the typed-restorer branch at this local PkgC boundary with the
+finite restoration-coordinate classifier. Incomplete coverage preserves the
+exact Hall deficit and qRestorationHall route. Complete coverage constructs
+balanced BN4 unit cells for every quotient coordinate and computes an exact
+arbitrary-order ambient remainder and residual reduction, or proves no exact
+embedding. All 17 reviewed declarations exclude project axioms and
+Classical.choice. The restoration universe and maps, consumer system,
+ambient ledger, semantic full-candidate realization, global gain/descent
+semantics, and complete encoded-input polynomial bounds remain supplied or
+open. The score remains 35 percent and zero of five global gates are closed.
+See
+[lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md](./lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

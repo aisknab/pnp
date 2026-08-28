@@ -1944,6 +1944,21 @@ remain open. The risk-weighted estimate remains 35 percent and zero of five
 global gates are closed. See
 [`lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md`](./lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md).
 
+M204 runs the finite restoration-coordinate classifier before ambient BN4
+extraction. It preserves singletonization or the exact first Hall deficit
+with its forced Q route. Complete coverage constructs one balanced
+opposite-sign unit pair per quotient coordinate, then computes the exact
+remainder and residual-ledger equality for every admissible ambient order or
+proves no exact embedding. All 17 audited declarations avoid
+project-specific axioms and Classical.choice. The restoration universe,
+coordinate maps, consumer system and ambient ledger remain supplied;
+coordinate coverage does not materialize semantic full candidates, and
+neither Hall failure nor ambient incompatibility is a global decreasing
+route. Complete PkgC/BN3--BN6, unconditional ZeroSlack and polynomial PCCMin
+remain open. The risk-weighted estimate remains 35 percent and zero of five
+global gates are closed. See
+[lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md](./lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md).
+
 ## Discharged by Lean so far
 
 ```text

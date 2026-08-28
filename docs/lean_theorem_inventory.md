@@ -237,6 +237,18 @@ systems, restorer, downstream tables, proof that the remainder is empty, gain
 and global descent, complete PkgC/BN3--BN6, unconditional ZeroSlack and
 encoded-input polynomial bounds remain supplied or open.
 
+M204 adds PNP.ResidualTerminalPkgCRestorationCoverageAmbientRoute. It
+reuses the arbitrary-finite restoration matcher, preserves its exact Hall
+deficit and Q-route branch, and constructs balanced coordinate-level BN4
+cancellation cells in the complete-coverage branch without a typed restorer.
+Constructive extraction then computes the arbitrary-order ambient remainder
+and exact residual reduction or proves no exact embedding. All 17 reviewed
+declarations avoid project-specific axioms and Classical.choice; only
+permitted propext and Quot.sound appear. The restoration universe and maps,
+consumer system, ambient ledger, semantic full candidates, global gain and
+descent, complete PkgC/BN3--BN6, unconditional ZeroSlack and encoded-input
+polynomial bounds remain supplied or open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-203",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-204",
   "lastReviewedDate": "2026-08-28",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 179,
-    "totalRows": 181,
+    "earnedRows": 180,
+    "totalRows": 182,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,7 +261,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M203 computes the exact ambient BN4 remainder or proves no embedding for M202's PkgC cancellation branch, but the terminal problem, source consumer systems, active cuts, payloads, restorer, ambient ledger, maps, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
+          "remainingLimitation": "M204 replaces the typed-restorer seam at this local branch with a finite restoration-coordinate classifier and constructs its balanced BN4 cancellation cells, but the terminal problem, consumer systems, restoration universe and maps, ambient ledger, semantic full candidates, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
           "lastReviewedDate": "2026-08-28"
         },
         {
@@ -275,7 +275,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M203 removes the supplied-remainder and permutation seam from the local PkgC-to-ambient-BN4 bridge, but PkgC/BN3--BN6 must still derive the source systems, ambient ledger, payloads, restorer and downstream tables from terminal input, prove the computed remainder eliminates the surviving residual, and turn every incompatibility or activation mismatch into a decreasing global route.",
+          "remainingLimitation": "M204 preserves the exact Hall-deficit branch and constructs coordinate-level cancellation without a typed restorer, but PkgC/BN3--BN6 must still materialize semantically adequate full candidates, derive the restoration universe, ambient ledger and downstream tables from terminal input, prove the computed remainder eliminates the surviving residual, and turn every Hall deficit or incompatibility into a decreasing global route.",
           "lastReviewedDate": "2026-08-28"
         },
         {
@@ -1009,6 +1009,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M203 removes the caller-supplied remainder and permutation seam from M202's exact PkgC cancellation branch. Constructive remove-first recursion over every arbitrary finite ambient BN4 ledger preserves duplicate multiplicity and accepts every admissible order while computing the exact remainder, multiset embedding and complete residual-ledger reduction, or retaining a generated cell with proof that no exact remainder embedding exists. The same checked BCEL nucleus constructs the ambient BN4 kernel internally, and M202's conditional ZeroSlack and source activation mismatch branches are preserved. The terminal problem, active source systems and cuts, payloads, typed restorer, ambient ledger, realizer table, claims, ranks, dependency table, checked HB closure, route-clear result and selector silence remain supplied; the remainder is not proved empty, extraction incompatibility is not a global route, neither cancellation branch is a verified gain or rank descent, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 179 of 181, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-204",
+      "formalArtefactCoverage": { "earnedRows": 180, "totalRows": 182 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M204 replaces the always-total supplied typed-restorer branch at this boundary with the existing arbitrary-finite exact-coordinate restoration classifier. If the first separating pair has incomplete restoration coverage, Lean retains the exact TerminalBN5HallDeficit, its forced qRestorationHall route and strict neighbourhood deficit. Complete coverage constructs one positive and one negative BN4 unit cell for every canonical quotient unit, proves keywise balance, empty executable residual and zero signed mass, then uses constructive exact-subledger extraction to compute an arbitrary-order ambient remainder and complete residual-ledger equality or prove no exact embedding exists. The consumer system, finite restoration-coordinate universe, quotient map, full-restoration coordinate lists and ambient ledger remain supplied; equality-fibre coverage does not materialize semantic full candidates or prove restoration adequacy, the Hall deficit is not yet a verified gain or global rank descent, the remainder is not proved empty, incompatibility is not a complete global route, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 180 of 182, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

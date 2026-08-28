@@ -84,7 +84,7 @@ export function validatePkgCAmbientBN4ExtractionRoute0(files) {
   }
 
   const helper = compact0(declarationBlock0(files.source,
-    'classifyExactSubledgerExtraction'));
+    'classifyTerminalExactSubledgerExtraction'));
   for (const obligation of [
     /\[DecidableEq Alpha\]/u,
     /ambient\.erase head/u,
@@ -113,7 +113,7 @@ export function validatePkgCAmbientBN4ExtractionRoute0(files) {
   const extractionClassifier = compact0(declarationBlock0(files.source,
     'classifyTerminalPkgCAmbientBN4Extraction'));
   for (const obligation of [
-    /classifyExactSubledgerExtraction \(pair\.restorationCancellationCells restorer\) ambient/u,
+    /classifyTerminalExactSubledgerExtraction \(pair\.restorationCancellationCells restorer\) ambient/u,
     /exactDecomposition := exactDecomposition/u,
     /embedding\.canonicalResidualLedger_eq_remainder/u,
     /noExactDecomposition remainder embedding\.exactDecomposition/u,
@@ -359,7 +359,7 @@ test('hostile mutations reject supplied extraction evidence, erased failures, fi
     { ...files, source: files.source.replace('ambient.erase head', 'ambient') },
     { ...files, source: files.source.replace('List.Perm.cons_inv', 'suppliedCancellation') },
     { ...files, source: files.source.replace(
-      'classifyExactSubledgerExtraction\n      (pair.restorationCancellationCells restorer) ambient',
+      'classifyTerminalExactSubledgerExtraction\n      (pair.restorationCancellationCells restorer) ambient',
       'suppliedRemainderClassification') },
     { ...files, source: files.source.replace(
       'exactDecomposition := exactDecomposition',
