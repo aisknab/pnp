@@ -260,6 +260,18 @@ remainder is not proved empty. M204 leaves the risk-weighted estimate at 35
 percent and closes no global gate. See
 [lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md](./docs/lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md).
 
+M205 lifts M204 across the complete arbitrary-finite active PkgC source
+ledger. The list-order classifier constructs M201's BN6 positive cells only
+when every source system singletonizes, preserving ledger length, payload
+order, and activation weight on every cut; otherwise it retains the first
+source-member Hall deficit, exact ambient reduction, or no-embedding witness.
+The source cells and cuts, payloads, per-source restoration universes and
+ambient ledgers remain supplied. No returned obstruction is yet a global gain
+or rank decrease, and the computed remainder is not proved empty. Formal
+artefact coverage becomes 181 of 183, while the risk-weighted estimate remains
+35 percent and zero of five global gates are closed. See
+[lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./docs/lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
+
 ## Current claim boundary
 
 The project targets:

@@ -2834,6 +2834,49 @@ reduction, or proves that no exact embedding exists.
 
 ---
 
+### M205 restoration-coverage BN6 ledger
+
+**Claim**
+
+For every arbitrary finite supplied active PkgC source ledger with per-source
+restoration and ambient BN4 data, list-order recursion either proves every
+source system singletonized and constructs the complete BN6 ledger with exact
+length, payload order, and all-cut activation conservation, or retains the
+first source-member Hall deficit, exact ambient reduction, or no-embedding
+witness.
+
+**Where it appears**
+
+- lean/PNP/ResidualTerminalPkgCRestorationCoverageBN6Ledger.lean.
+- lean-audit/PNPResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAudit.lean.
+- lean-regression/PNPResidualTerminalPkgCRestorationCoverageBN6Ledger.lean.
+- audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Build the explicit PNP root.
+2. Compile the 11-declaration axiom audit and four-branch regression.
+3. Confirm the all-singletonized branch constructs one BN6 cell per source,
+   preserves payload order, and conserves activation on every cut.
+4. Put each obstruction after a singletonized prefix and verify the first exact
+   source member and its Hall, reduction, or mismatch evidence are retained.
+5. Confirm no typed restorer, raw BN6 ledger, or independent singletonization
+   certificate is supplied to the classifier.
+6. Confirm no branch is described as complete integration, global gain,
+   unconditional ZeroSlack, or polynomial PCCMin.
+
+**What would count as a refutation or material defect**
+
+- A source obstruction is skipped, reordered, or loses exact list membership.
+- The all-source branch accepts a typed restorer or independently supplied BN6
+  cells, payload ordering, or activation equality.
+- A Hall deficit, nonempty computed remainder, or ambient mismatch is presented
+  as a complete global decreasing route.
+- Supplied restoration or ambient data are described as terminal-derived.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

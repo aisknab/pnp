@@ -349,6 +349,18 @@ open. The score remains 35 percent and zero of five global gates are closed.
 See
 [lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md](./lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md).
 
+M205 scans an arbitrary finite ledger of those M204-enriched source cells in
+canonical list order. The all-singletonized branch constructs the complete
+M201 BN6 ledger and proves exact length, payload order, and all-cut activation
+conservation; every other branch retains the first exact source-member Hall,
+ambient-reduction, or no-embedding evidence. All 11 reviewed declarations
+exclude project axioms and Classical.choice. Source cells, active cuts,
+payloads, restoration universes and maps, and ambient BN4 ledgers remain
+supplied; the obstructions have no proved global gain/descent semantics and
+the remainder is not proved empty. Formal artefact coverage is 181 of 183,
+the score remains 35 percent, and zero of five global gates are closed. See
+[lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

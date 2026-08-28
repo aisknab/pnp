@@ -249,6 +249,20 @@ consumer system, ambient ledger, semantic full candidates, global gain and
 descent, complete PkgC/BN3--BN6, unconditional ZeroSlack and encoded-input
 polynomial bounds remain supplied or open.
 
+M205 adds PNP.ResidualTerminalPkgCRestorationCoverageBN6Ledger. It scans the
+complete arbitrary-finite active PkgC source ledger in canonical list order,
+constructs M201's BN6 positive cells only after proving every source system
+singletonized, and preserves exact source length, payload order, and all-cut
+activation weight. Otherwise it retains the first source-member M204 Hall,
+ambient-reduction, or no-embedding result. All 11 reviewed declarations avoid
+project-specific axioms and Classical.choice; only permitted propext and
+Quot.sound appear. The source cells and active cuts, payloads, restoration
+universes and maps, ambient ledgers, semantic full candidates, global gain and
+descent, complete PkgC/BN3--BN6, unconditional ZeroSlack and encoded-input
+polynomial bounds remain supplied or open. Formal artefact coverage is 181 of
+183 while the risk-weighted estimate remains 35 percent and all five global
+gates remain open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every
