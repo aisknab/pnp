@@ -321,6 +321,18 @@ the risk-weighted estimate remains 35 percent, and zero of five global gates
 are closed. See
 [lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
 
+M206 binds those source and ambient ledgers to the same computed BCEL nucleus
+and composes only the all-singletonized branch with the checked sparse BN6/BCEL
+Packet/HB classifier. Exact Hall, residual-reduction, and no-embedding
+outcomes remain first-class; the downstream alternatives are conditional
+ZeroSlack or a proper singleton/pair activation mismatch reflected to the
+original enriched source ledger. Terminal, source, restoration, ambient, rank,
+claim, dependency, and selector data remain supplied. No local obstruction has
+yet been proved a complete global descent. Formal artefact coverage is 182 of
+184, the risk-weighted estimate remains 35 percent, and zero of five global
+gates are closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
