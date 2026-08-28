@@ -150,6 +150,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-pccmin-checked-packet-bn6-bcel-sparse-activation-route0.test.mjs',
   'audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs',
   'audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs',
+  'audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs',
   'audits/lean-residual-terminal-rank-wf0.test.mjs',
   'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs',
   'audits/bn3-joint-realizability-gap0.test.mjs',

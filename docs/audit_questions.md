@@ -2742,6 +2742,57 @@ BCEL defect.
 
 ---
 
+### M203 computed PkgC ambient-BN4 extraction route
+
+**Claim**
+
+For every arbitrary finite supplied ambient BN4 ledger, the generated PkgC
+cancellation cells are removed constructively with exact multiplicity and
+order independence, yielding a computed remainder and complete residual-ledger
+reduction, or a generated cell and proof that no exact remainder embedding
+exists. The result refines M202 without changing its conditional ZeroSlack or
+source activation mismatch branches.
+
+**Where it appears**
+
+- `lean/PNP/PCCMinCheckedPacketPkgCAmbientBN4ExtractionRoute.lean`.
+- `lean-audit/PNPPCCMinCheckedPacketPkgCAmbientBN4ExtractionRouteAxiomAudit.lean`.
+- `lean-regression/PNPPCCMinCheckedPacketPkgCAmbientBN4ExtractionRoute.lean`.
+- `audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs`.
+- `status/PROOF_PROGRESS.json`.
+
+**How to test or inspect it**
+
+1. Build the explicit `PNP` root.
+2. Compile the ten-declaration M203 axiom audit and four-branch regression.
+3. Confirm the extractor uses explicit `DecidableEq`, `List.erase`, and
+   constructive permutation recursion rather than the choice-bearing standard
+   convenience theorem.
+4. Confirm reordered ledgers and duplicate generated cells retain exact
+   multiplicity and that a one-occurrence deficit returns no-embedding proof.
+5. Confirm neither the public extractor nor source data accepts a remainder,
+   permutation, or embedding from the caller.
+6. Confirm the ambient BN4 kernel is built from the same checked BCEL nucleus
+   and canonical request-atom condition.
+7. Confirm the source composition preserves exact cancellation membership,
+   conditional ZeroSlack, and the same small source-activation mismatch.
+8. Mutate erase/cancellation, embedding, canonical-atom, fixed-instance,
+   exhaustive-scan, polynomial-runtime, and ZeroSlack boundaries and require
+   the hostile contract to reject each mutation.
+
+**What would count as a refutation or material defect**
+
+- A differently ordered but multiset-equal ambient ledger is rejected.
+- Duplicate generated cells are collapsed to set membership.
+- A remainder or permutation certificate is supplied rather than computed.
+- Failure does not prove that every exact remainder embedding is impossible.
+- The ambient BN4 kernel is detached from the checked BCEL nucleus.
+- The computed remainder is described as empty without proof, or extraction
+  failure is described as a gain, global rank decrease, complete route,
+  unconditional ZeroSlack, or polynomial PCCMin.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
