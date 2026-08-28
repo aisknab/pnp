@@ -263,6 +263,21 @@ polynomial bounds remain supplied or open. Formal artefact coverage is 181 of
 183 while the risk-weighted estimate remains 35 percent and all five global
 gates remain open.
 
+M206 adds PNP.PCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRoute. It
+specializes M205's arbitrary-finite enriched ledger to one computed BCEL
+nucleus, retains the first exact Hall, ambient-reduction, or no-embedding
+outcome, and permits only the all-singletonized branch to enter the checked
+sparse Packet/HB classifier. The resulting alternative is conditional
+ZeroSlack or one proper singleton/pair activation mismatch reflected to the
+original enriched source ledger. All four reviewed declarations avoid
+project-specific axioms and Classical.choice; only permitted propext and
+Quot.sound appear. Terminal, source, restoration, ambient, rank, claim,
+dependency, and selector construction, global gain and descent, complete
+PkgC/BN3--BN6, unconditional ZeroSlack, and encoded-input polynomial bounds
+remain supplied or open. Formal artefact coverage is 182 of 184 while the
+risk-weighted estimate remains 35 percent and all five global gates remain
+open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

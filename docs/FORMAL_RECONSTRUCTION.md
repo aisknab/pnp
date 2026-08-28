@@ -361,6 +361,19 @@ the remainder is not proved empty. Formal artefact coverage is 181 of 183,
 the score remains 35 percent, and zero of five global gates are closed. See
 [lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
 
+M206 specializes that ledger to one checked BCEL nucleus and composes its
+all-singletonized branch with the existing sparse BN6/BCEL Packet/HB
+classifier. Every ambient ledger is tied to the same candidate atoms. Hall,
+ambient-reduction, and no-embedding evidence is preserved exactly; the
+downstream alternative is conditional ZeroSlack or a source-reflected proper
+singleton/pair activation mismatch. All four reviewed declarations exclude
+project axioms and Classical.choice. The terminal, source, restoration,
+ambient, rank, claim, dependency, and selector inputs remain supplied, and no
+obstruction has complete global descent semantics. Formal artefact coverage is
+182 of 184, the score remains 35 percent, and zero of five global gates are
+closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

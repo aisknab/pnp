@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-205",
-  "lastReviewedDate": "2026-08-28",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206",
+  "lastReviewedDate": "2026-08-29",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 181,
-    "totalRows": 183,
+    "earnedRows": 182,
+    "totalRows": 184,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,8 +261,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M205 removes the typed-restorer seam across the complete supplied active source ledger and constructs the BN6 ledger only on the all-singletonized branch, but the terminal problem, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
-          "lastReviewedDate": "2026-08-28"
+          "remainingLimitation": "M206 removes the typed-restorer and independently supplied BN6-ledger seams across the candidate-bound checked route, but the terminal problem, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
+          "lastReviewedDate": "2026-08-29"
         },
         {
           "id": "residual-pkgc-bn3-bn6-integration",
@@ -275,8 +275,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M205 composes M204's exact first Hall, ambient-reduction and no-embedding outcomes with M201's complete BN6 cellization across one supplied source ledger, but PkgC/BN3--BN6 must still materialize semantically adequate full candidates, derive the source, restoration, ambient and downstream data from terminal input, prove every computed remainder eliminates the surviving residual, and turn every Hall deficit or incompatibility into a decreasing global route.",
-          "lastReviewedDate": "2026-08-28"
+          "remainingLimitation": "M206 connects M205's exact Hall, ambient-reduction, no-embedding and constructed BN6 outcomes to one candidate-bound checked sparse BN6/BCEL route, but PkgC/BN3--BN6 must still materialize semantically adequate full candidates, derive the source, restoration, ambient and downstream data from terminal input, prove every computed remainder eliminates the surviving residual, and turn every Hall deficit, incompatibility or activation mismatch into a decreasing global route.",
+          "lastReviewedDate": "2026-08-29"
         },
         {
           "id": "residual-hn-bud-hb-semantics",
@@ -1037,6 +1037,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M205 lifts M204's proof-bearing restoration-coverage result over the complete arbitrary-finite active PkgC source ledger in canonical list order without accepting an always-total typed restorer. The all-source singletonized branch constructs M201's complete BN6 positive-cell ledger and proves exact source length, payload order and activation-weight conservation on every cut. Otherwise the classifier retains the first exact source member carrying a Hall deficit and forced qRestorationHall route, a coverage-constructed balanced cancellation with computed ambient remainder and residual-ledger reduction, or a generated cell proving no exact embedding exists. The source cells and active cuts, payloads, per-source restoration universes and maps, full-restoration coordinate lists, and ambient BN4 ledgers remain supplied; coordinate coverage does not materialize semantic full candidates, the Hall route is not a verified global gain or rank descent, the computed remainder is not proved empty, no-embedding is not a complete global route, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore terminal-input derivation, complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 181 of 183, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206",
+      "formalArtefactCoverage": { "earnedRows": 182, "totalRows": 184 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M206 composes M205's arbitrary-finite typed-restorer-free restoration-coverage ledger with the checked sparse BN6/BCEL Packet/HB boundary. Every ambient ledger is tied to the same computed BCEL nucleus. The total classifier retains the first exact source-member Hall deficit, coverage-derived ambient reduction, or no-embedding witness; only the proved all-singletonized branch constructs the M205 BN6 ledger and enters the downstream checked classifier, whose raw small-cut mismatch is reflected back to the original enriched source activation ledger while its coherent branch yields conditional ZeroSlack. The terminal problem, checked BCEL-ready certificate, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, ranks, claims, dependency table, checked HB closure, route-clear result and selector silence remain supplied; the Hall route is not a verified global gain or rank descent, the remainder is not proved empty, incompatibility and activation mismatch are not complete decreasing routes, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore terminal-input derivation, complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 182 of 184, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

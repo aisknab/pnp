@@ -1972,6 +1972,20 @@ PCCMin remain open. Formal artefact coverage is 181 of 183, the risk-weighted
 estimate remains 35 percent, and zero of five global gates are closed. See
 [lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
 
+M206 ties every M205 source and ambient activation atom to one computed BCEL
+nucleus and enters the checked sparse BN6/BCEL route only after all source
+systems singletonize. The first Hall deficit, ambient reduction, or
+no-embedding witness remains exact; the downstream branch returns conditional
+ZeroSlack or reflects one proper singleton/pair activation mismatch to the
+original enriched source ledger. All four audited declarations avoid
+project-specific axioms and Classical.choice. The terminal problem, source,
+restoration, ambient, rank, claim, dependency, and selector data remain
+supplied, so complete PkgC/BN3--BN6, global route descent, unconditional
+ZeroSlack, and polynomial PCCMin remain open. Formal artefact coverage is 182
+of 184, the risk-weighted estimate remains 35 percent, and zero of five global
+gates are closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
+
 ## Discharged by Lean so far
 
 ```text

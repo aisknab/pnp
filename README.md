@@ -272,6 +272,18 @@ artefact coverage becomes 181 of 183, while the risk-weighted estimate remains
 35 percent and zero of five global gates are closed. See
 [lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./docs/lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
 
+M206 connects that complete typed-restorer-free ledger to the checked
+BN6/BCEL route for the same computed candidate nucleus. The exact Hall,
+ambient-reduction, and no-embedding branches remain visible; only the proved
+all-singletonized branch enters the downstream Packet/HB classifier, yielding
+conditional ZeroSlack or one small-cut activation mismatch reflected to the
+original enriched source ledger. The source, restoration, ambient, rank, claim,
+dependency, and selector data remain supplied, and no returned obstruction is
+yet a verified global descent. Formal artefact coverage becomes 182 of 184,
+while the risk-weighted estimate remains 35 percent and zero of five global
+gates are closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](./docs/lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
+
 ## Current claim boundary
 
 The project targets:

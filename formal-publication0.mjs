@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '911c934b9eed433dd806ad13e431dcb5a073c57a8c8d5a2f5b3974b6d8180f9f';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd81d19b8777944128a05b77ff789396562610fb0c43ec674c315bbe2d1b64bb4';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -3138,6 +3138,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.pccmin_checked_packet_pkgc_ambient_bn4_extraction_route_or_zeroslack_checked_complete',
   'PNP.DirectWire.terminalPkgC_restorationCoverage_ambientBN4_route_checked_complete',
   'PNP.DirectWire.terminalPkgC_restorationCoverage_bn6_cellization_checked_complete',
+  'PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route_or_zeroslack_checked_complete',
   'PNP.Main.concretePEqualsNP_iff',
   'PNP.Main.locked_nand_threshold',
   'PNP.Concrete.LockedNAND.encodedDirectWireMinimumThreshold_ofCandidate_iff',
@@ -3182,7 +3183,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-28-205') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-29-206') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3459,7 +3460,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-28-205') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-29-206') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

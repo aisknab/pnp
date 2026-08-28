@@ -2877,6 +2877,50 @@ witness.
 
 ---
 
+### M206 candidate-bound restoration-coverage BN6/BCEL route
+
+**Claim**
+
+For every arbitrary finite M205 source ledger tied to one computed BCEL
+nucleus, the total classifier preserves the first exact Hall deficit, ambient
+residual reduction, or no-embedding witness. Only the all-singletonized branch
+enters the checked sparse BN6/BCEL classifier, which yields conditional
+ZeroSlack or one exact proper singleton/pair activation mismatch reflected to
+the original enriched source ledger.
+
+**Where it appears**
+
+- lean/PNP/PCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRoute.lean.
+- lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRouteAxiomAudit.lean.
+- lean-regression/PNPPCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRoute.lean.
+- audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-bn6-bcel-route0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Build the explicit PNP root.
+2. Compile the four-declaration axiom audit and five-branch regression.
+3. Confirm every ambient ledger is bound to the same computed BCEL nucleus.
+4. Confirm Hall, ambient-reduction, and ambient-mismatch branches preserve the
+   first exact source member and their complete proof objects.
+5. Confirm the downstream positive cells are M205-derived and a raw mismatch is
+   rewritten through all-cut activation conservation.
+6. Confirm no typed restorer, independent BN6 ledger, erased obstruction,
+   global-descent claim, unconditional ZeroSlack, or polynomial PCCMin is
+   admitted.
+
+**What would count as a refutation or material defect**
+
+- Any M205 obstruction is erased or reordered before the checked BN6/BCEL
+  boundary.
+- The successful branch accepts an independent BN6 ledger or activation
+  equality.
+- An ambient ledger is detached from the computed candidate nucleus.
+- A Hall deficit, nonempty remainder, incompatibility, or activation mismatch
+  is presented as complete PkgC integration or a globally decreasing route.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

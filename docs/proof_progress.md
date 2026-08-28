@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-205`, 181 of 183
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206`, 182 of 184
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M205 |
+| Track | Available | Earned at M206 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M205 risk-weighted proof completion estimate is therefore 35 percent, with
+The M206 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -268,6 +268,20 @@ is not proved empty, and ambient incompatibility is not a complete global
 route. No fixed checkpoint or global gate closes. Coverage becomes 181 of 183
 while the score remains 35 percent, the uncertainty range remains 20 to 40
 percent, and all five gates remain open. No retrospective score was invented.
+
+M206 binds the complete M205 restoration-coverage ledger to one computed
+BCEL nucleus and composes only its all-singletonized branch with the checked
+sparse BN6/BCEL Packet/HB classifier. The first exact Hall, ambient-reduction,
+or no-embedding outcome is preserved; the downstream branch yields conditional
+ZeroSlack or reflects one proper singleton/pair activation mismatch to the
+original enriched source ledger. The terminal problem, checked certificate,
+source cells and cuts, restoration universes and maps, ambient ledgers, ranks,
+claims, dependency table, checked HB closure, route-clear result, and selector
+silence remain supplied. No obstruction is yet a verified global descent and
+the computed remainder is not proved empty. No fixed checkpoint or global gate
+closes. Coverage becomes 182 of 184 while the score remains 35 percent, the
+uncertainty range remains 20 to 40 percent, and all five gates remain open. No
+retrospective score was invented.
 
 ## Changing the score
 
