@@ -1930,6 +1930,20 @@ unconditional ZeroSlack, and polynomial PCCMin remain open. The risk-weighted
 estimate remains 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md`](./lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md).
 
+M203 computes the ambient BN4 consequence of M202's PkgC cancellation rather
+than accepting a proposed remainder and permutation. Remove-first recursion is
+order independent and multiplicity preserving: success returns the exact
+remainder, permutation and complete residual-ledger equality, while failure
+proves that no exact embedding exists. The same checked BCEL nucleus constructs
+the BN4 kernel internally. All ten audited declarations avoid project-specific
+axioms and `Classical.choice`. The ambient ledger, source systems, restorer,
+payloads, downstream tables and selector silence remain supplied; the
+remainder is not shown empty and neither branch is a global gain or rank
+decrease. Complete PkgC/BN3--BN6, unconditional ZeroSlack and polynomial PCCMin
+remain open. The risk-weighted estimate remains 35 percent and zero of five
+global gates are closed. See
+[`lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md`](./lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md).
+
 ## Discharged by Lean so far
 
 ```text

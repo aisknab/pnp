@@ -291,6 +291,14 @@ raw-cell list. Source construction, downstream tables, selector silence,
 blocker semantics, gain, global rank decrease, and complete polynomial bounds
 remain supplied or open, so the risk-weighted estimate remains 35 percent and
 zero of five global gates are closed.
+M203 then computes the exact ambient BN4 remainder for M202's PkgC
+cancellation with order-independent, multiplicity-preserving remove-first
+recursion. It returns the induced complete residual-ledger reduction or proves
+that no exact remainder embedding exists, and constructs the candidate-bound
+BN4 kernel against the same checked BCEL nucleus. The ambient ledger and other
+source/downstream objects remain supplied, the remainder is not proved empty,
+and incompatibility is not yet a global decreasing route, so the risk-weighted
+estimate remains 35 percent and zero of five global gates are closed.
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

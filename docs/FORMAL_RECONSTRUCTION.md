@@ -324,6 +324,18 @@ encoded-input polynomial bounds remain supplied or open. The score remains
 35 percent and zero of five global gates are closed. See
 [`lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md`](./lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md).
 
+M203 refines M202's exact PkgC cancellation into a computed ambient-BN4
+boundary. A constructive remove-first extractor accepts arbitrary ledger order
+and duplicate cells, computes the exact remainder and full residual-ledger
+reduction, or proves that no exact remainder embedding exists. The candidate-
+bound BN4 kernel is constructed internally from the same checked BCEL nucleus.
+The ten reviewed declarations exclude project axioms and `Classical.choice`.
+The terminal sources, ambient ledger, restorer, downstream tables, global
+gain/descent semantics, and complete encoded-input polynomial bounds remain
+supplied or open. The score remains 35 percent and zero of five global gates
+are closed. See
+[`lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md`](./lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

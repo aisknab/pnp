@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202`, 178 of 180
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-203`, 179 of 181
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M202 |
+| Track | Available | Earned at M203 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M202 risk-weighted proof completion estimate is therefore 35 percent, with
+The M203 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -227,6 +227,20 @@ complete encoded-size polynomial construction is proved. No fixed checkpoint
 or global gate closes. Coverage becomes 178 of 180 while the score remains 35
 percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
+
+M203 removes the caller-supplied remainder and permutation seam from M202's
+PkgC cancellation branch. Constructive remove-first recursion computes an
+order-independent, multiplicity-preserving ambient BN4 remainder with an exact
+permutation and complete residual-ledger equality, or proves that no exact
+remainder embedding exists. The candidate-bound BN4 kernel is constructed from
+the same checked BCEL nucleus, while conditional ZeroSlack and the source
+activation mismatch branches remain unchanged. The terminal source systems,
+ambient ledger, payloads, restorer, downstream tables and selector silence
+remain supplied; the remainder is not proved empty and neither extraction
+failure nor cancellation reduction is a global gain or rank decrease. No fixed
+checkpoint or global gate closes. Coverage becomes 179 of 181 while the score
+remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
+five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

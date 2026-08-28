@@ -225,6 +225,18 @@ source data, downstream tables, blocker semantics, gain and global descent,
 complete PkgC/BN3--BN6, unconditional ZeroSlack, and encoded-input polynomial
 bounds remain supplied or open.
 
+M203 adds `PNP.PCCMinCheckedPacketPkgCAmbientBN4ExtractionRoute`. It computes
+an arbitrary-order, multiplicity-preserving remainder for the generated PkgC
+cancellation subledger and derives the exact complete ambient residual-ledger
+reduction, or proves that no exact remainder embedding exists. The source
+composition constructs the candidate-bound BN4 kernel internally and preserves
+M202's conditional ZeroSlack and source activation mismatch branches. All ten
+reviewed declarations avoid project-specific axioms and `Classical.choice`;
+only permitted `propext` and `Quot.sound` appear. The ambient ledger, source
+systems, restorer, downstream tables, proof that the remainder is empty, gain
+and global descent, complete PkgC/BN3--BN6, unconditional ZeroSlack and
+encoded-input polynomial bounds remain supplied or open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every
