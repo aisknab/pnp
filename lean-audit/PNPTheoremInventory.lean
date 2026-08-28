@@ -3207,7 +3207,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.DirectWire.pccmin_checked_packet_bn6_bcel_sparse_activation_route_or_zeroslack_checked_complete,
   `PNP.DirectWire.terminalPkgC_bn6_positive_cellization_checked_complete,
   `PNP.DirectWire.pccmin_checked_packet_pkgc_bn6_bcel_source_route_or_zeroslack_checked_complete,
-  `PNP.DirectWire.pccmin_checked_packet_pkgc_ambient_bn4_extraction_route_or_zeroslack_checked_complete
+  `PNP.DirectWire.pccmin_checked_packet_pkgc_ambient_bn4_extraction_route_or_zeroslack_checked_complete,
+  `PNP.DirectWire.terminalPkgC_restorationCoverage_ambientBN4_route_checked_complete
 ]
 
 private def inventory : CommandElabM Json := do
@@ -3266,7 +3267,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-28-203"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-08-28-204"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),
