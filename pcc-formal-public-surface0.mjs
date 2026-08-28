@@ -45,7 +45,7 @@ const CURRENT_PACKAGE_SCRIPTS_BASE0 = Object.freeze({
 
 export const CURRENT_PACKAGE_SCRIPTS0 = Object.freeze({
   ...CURRENT_PACKAGE_SCRIPTS_BASE0,
-  posttest: `${CURRENT_PACKAGE_SCRIPTS_BASE0.posttest} audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs`,
+  posttest: `${CURRENT_PACKAGE_SCRIPTS_BASE0.posttest} audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs`,
 });
 
 export const CURRENT_PUBLIC_EXPORTS0 = Object.freeze([

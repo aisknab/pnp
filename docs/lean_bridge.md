@@ -1959,6 +1959,19 @@ remain open. The risk-weighted estimate remains 35 percent and zero of five
 global gates are closed. See
 [lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md](./lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md).
 
+M205 lifts that four-way exact result over the complete arbitrary-finite
+active PkgC source ledger. Only an all-source singletonization proof constructs
+the BN6 ledger; Lean then preserves source length, payload order, and activation
+weight on every cut. Otherwise, the first source member carrying a Hall
+deficit, computed ambient reduction, or no-embedding witness is retained.
+All 11 audited declarations avoid project-specific axioms and
+Classical.choice. The source cells and active cuts, payloads, restoration
+universes and maps, and ambient ledgers remain supplied, so complete
+PkgC/BN3--BN6, global route descent, unconditional ZeroSlack, and polynomial
+PCCMin remain open. Formal artefact coverage is 181 of 183, the risk-weighted
+estimate remains 35 percent, and zero of five global gates are closed. See
+[lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](./lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
+
 ## Discharged by Lean so far
 
 ```text

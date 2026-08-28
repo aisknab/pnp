@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-204';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-205';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -587,6 +587,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCRestorationCoverageAmbientRouteAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCRestorationCoverageAmbientRoute.lean',
   'node --test audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs',
+  'lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCRestorationCoverageBN6Ledger.lean',
+  'node --test audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs',
   'node scripts/export-lean-theorem-inventory.mjs --check',
   'node scripts/generate-formal-publication.mjs --check',
   'node --test audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs',
@@ -796,6 +799,7 @@ const NON_CLAIMS = Object.freeze([
   'The M202 source-derived PkgC/BN6/BCEL boundary composes M201 with M200 without accepting an independent raw BN6 ledger. Its total classifier preserves an exact source-member same-key cancellation, reaches genuine conditional ZeroSlack under supplied checked selector silence, or reflects one exact nonempty proper singleton/pair activation mismatch back to the original PkgC source ledger through the all-cut conservation theorem. The terminal problem, checked finite BCEL-ready certificate, active source systems and cuts, payloads, typed restorer, realizer table, claims, rank assignment, dependency table, checked HB closure, route-clear result, and selector silence remain supplied; cancellation or mismatch is not a verified gain or globally rank-decreasing transition, and no complete encoded-input polynomial construction or runtime theorem is proved. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
   'The M203 PkgC ambient-BN4 extraction boundary removes the caller-supplied remainder and permutation seam from M202\'s exact cancellation branch. Constructive remove-first recursion computes an order-independent multiplicity-preserving remainder, proves the exact ambient permutation and complete residual-ledger reduction, or retains a generated cell with proof that no exact remainder embedding exists. The same checked BCEL nucleus constructs the ambient BN4 kernel internally, while conditional ZeroSlack and source-ledger activation mismatch are preserved. The terminal problem, active source systems and cuts, payloads, typed restorer, ambient ledger, realizer table, claims, ranks, dependency table, checked HB closure, route-clear result, and selector silence remain supplied; the ambient remainder is not proved empty, extraction failure is not a global route, and neither branch is a verified gain or rank descent. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
   'The M204 restoration-coverage ambient route replaces the always-total typed-restorer branch at this boundary with the existing finite exact-coordinate restoration classifier. An exact Hall deficit retains its qRestorationHall route and strict neighbourhood deficit; complete coordinate coverage constructs one positive/negative BN4 unit pair per canonical quotient unit, then arbitrary-order exact extraction computes the ambient remainder and complete residual-ledger reduction or proves no exact embedding. The consumer system, restoration-coordinate universe and maps, ambient ledger, and semantic adequacy remain supplied; coordinate coverage does not materialize semantic full candidates, the Hall route is not yet a verified global gain, the remainder is not proved empty, and incompatibility is not a complete global route. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
+  'The M205 restoration-coverage BN6-ledger boundary scans the complete arbitrary-finite active PkgC source ledger in list order without an always-total typed restorer. It constructs M201\'s BN6 positive cells only when every source system singletonizes, preserving exact length, payload order and all-cut activation weight; otherwise it retains the first source-member M204 Hall deficit, computed ambient reduction or no-embedding witness. The active source cells and cuts, payloads, restoration universes and maps, full-restoration coordinate lists, and ambient BN4 ledgers remain supplied; a Hall deficit is not a verified global gain, the computed remainder is not proved empty, and incompatibility is not a complete global route. This does not complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, any global gate, SAT in P, the eligible root theorem, or P = NP.',
   'Residual RankWF is now formalized for the manuscript\'s fixed ten-coordinate natural lexicographic rank, with an executable comparison, exact Boolean equivalence, coordinate-priority witnesses, accessibility, induction, and kernel-checked well-foundedness. This does not map current finite routes into the complete global outcome system, prove that any route decreases the rank, establish route completeness or Package E, remove the explicit positive premise, establish full SaturatePositive or BCELReady, prove ZeroSlack, PCCMin, polynomial runtime, SAT in P, or P = NP.',
   'External review is optional audit evidence and is not a mathematical premise or release blocker.',
   'Historical releases and coordinates are preserved for auditability but are not current theorem-status authority.',
@@ -1814,6 +1818,26 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPkgCRestorationCoverageAmbientRouteUnconditionalZeroSlack: false,
   leanResidualTerminalPkgCRestorationCoverageAmbientRouteScope:
     'arbitrary-finite-restoration-coordinate-coverage-classified-as-an-exact-q-restoration-hall-deficit-or-a-constructed-balanced-bn4-unit-cancellation-subledger-with-computed-arbitrary-order-ambient-remainder-exact-residual-reduction-or-proof-of-no-exact-embedding',
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerFormalized: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAuditPassed: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerAuditedDeclarationCount: 11,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerEndpointProjectAssumptionFree: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerSourceLedgerArbitraryFinite: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerTypedRestorerRequired: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerAllSourceSingletonizationRequiredForCellization: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerFirstObstructionPreserved: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerBN6CellsConstructed: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerPayloadOrderPreserved: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerAllCutActivationConserved: true,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerDerivesRestorationUniverseFromTerminalInput: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerDerivesAmbientLedgerFromTerminalInput: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerHallRouteIsGlobalGain: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerComputedRemainderProvedEmpty: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerCompletePkgCBN6Integration: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerCompleteEncodedPolynomialRuntimeProved: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerUnconditionalZeroSlack: false,
+  leanResidualTerminalPkgCRestorationCoverageBN6LedgerScope:
+    'arbitrary-finite-supplied-active-pkgc-source-ledger-scanned-in-list-order-for-the-first-exact-restoration-hall-ambient-reduction-or-no-embedding-outcome-or-complete-derived-bn6-cellization-with-payload-order-and-all-cut-activation-conservation',
   leanLockedNANDPolynomialBuilderFormalized: true,
   leanCompatibleReplacementFormalized: false,
   leanGlobalSlackLawFormalized: false,
@@ -3318,6 +3342,26 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPkgCRestorationCoverageAmbientRouteUnconditionalZeroSlack: false,
       leanResidualTerminalPkgCRestorationCoverageAmbientRouteScope:
         'arbitrary-finite-restoration-coordinate-coverage-classified-as-an-exact-q-restoration-hall-deficit-or-a-constructed-balanced-bn4-unit-cancellation-subledger-with-computed-arbitrary-order-ambient-remainder-exact-residual-reduction-or-proof-of-no-exact-embedding',
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerFormalized: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAuditPassed: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerAuditedDeclarationCount: 11,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerEndpointProjectAssumptionFree: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerSourceLedgerArbitraryFinite: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerTypedRestorerRequired: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerAllSourceSingletonizationRequiredForCellization: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerFirstObstructionPreserved: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerBN6CellsConstructed: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerPayloadOrderPreserved: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerAllCutActivationConserved: true,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerDerivesRestorationUniverseFromTerminalInput: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerDerivesAmbientLedgerFromTerminalInput: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerHallRouteIsGlobalGain: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerComputedRemainderProvedEmpty: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerCompletePkgCBN6Integration: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerCompleteEncodedPolynomialRuntimeProved: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerUnconditionalZeroSlack: false,
+      leanResidualTerminalPkgCRestorationCoverageBN6LedgerScope:
+        'arbitrary-finite-supplied-active-pkgc-source-ledger-scanned-in-list-order-for-the-first-exact-restoration-hall-ambient-reduction-or-no-embedding-outcome-or-complete-derived-bn6-cellization-with-payload-order-and-all-cut-activation-conservation',
       leanLockedNANDPolynomialBuilderFormalized: true,
       leanCompatibleReplacementFormalized: false,
       leanGlobalSlackLawFormalized: false,
@@ -3875,7 +3919,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-28-204',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-28-205',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

@@ -309,6 +309,17 @@ coordinate coverage is not semantic full-candidate materialization and no
 returned branch is yet a verified global rank decrease. The risk-weighted
 estimate therefore remains 35 percent and zero of five global gates are
 closed.
+M205 lifts M204 over the complete arbitrary-finite active PkgC source ledger
+in list order. If every source singletonizes, the complete BN6 positive-cell
+ledger is constructed with exact length, payload order, and all-cut activation
+conservation. Otherwise, the first source-member Hall deficit, exact ambient
+reduction, or no-embedding witness is retained. The source cells and cuts,
+payloads, restoration universes and maps, and ambient ledgers remain supplied;
+the computed remainder is not proved empty and no obstruction has a complete
+global gain or rank-decrease theorem. Formal artefact coverage is 181 of 183,
+the risk-weighted estimate remains 35 percent, and zero of five global gates
+are closed. See
+[lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md](lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md).
 
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
