@@ -3011,6 +3011,51 @@ coordinate, and accepts within an explicit input-size polynomial bound.
 
 ---
 
+### M209 Cook-Levin arbitrary-slot header router
+
+**Claim**
+
+For every concrete verifier and every natural coordinate, one fixed 54-rule
+work machine compares that coordinate with the exact problem-derived first-body
+boundary. Its exact verdict agrees with the semantic top-level route, and every
+coordinate below the terminal schedule slot compiles within an explicit
+encoded-input-size polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderArbitrarySlotHeaderRouter.lean.
+- lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean.
+- audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm `outerRoute` splits at the exact M208 first-body slot and its two
+   branches reconstruct `formulaTokenSlotDirect`.
+2. Confirm the raw table is fixed at 54 rules and does not depend on the
+   problem, coordinate, boundary, or any host schedule lookup.
+3. Confirm less-than accepts while equality and greater-than reject for
+   arbitrary unary coordinate/boundary pairs.
+4. Confirm the source-size bound uses the verifier-derived terminal-slot
+   polynomial and covers every in-range coordinate.
+5. Confirm one-step-short fuel and malformed symbols remain timeout.
+6. Confirm all 51 declarations exclude project axioms and `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The boundary is shifted or caller supplied.
+- The transition table is specialized to a coordinate or problem.
+- Equality is accepted, or a post-header coordinate is classified as header.
+- The compiled bound depends on the supplied coordinate without an in-range
+  reduction to encoded input size.
+- The theorem is described as decoding the post-header quotient or emitting a
+  token when it only selects the outer branch.
+- M209 is credited as the complete builder, packaged reduction, CNFSAT
+  NP-completeness, CNFSAT in P, a global gate, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

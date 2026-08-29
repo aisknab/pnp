@@ -83,6 +83,8 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs'
       - 'docs/lean_cook_levin_builder_full_schedule_cursor_controller.md'
+      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs'
+      - 'docs/lean_cook_levin_builder_arbitrary_slot_header_router.md'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
@@ -525,6 +527,8 @@ on:
       - 'audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs'
       - 'docs/lean_cook_levin_builder_full_schedule_cursor_controller.md'
+      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs'
+      - 'docs/lean_cook_levin_builder_arbitrary_slot_header_router.md'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
@@ -945,6 +949,9 @@ jobs:
 
       - name: Audit Cook-Levin full-schedule cursor controller
         run: node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs
+
+      - name: Audit Cook-Levin arbitrary-slot header router
+        run: node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs
 
       - name: Audit Cook-Levin second-clause separator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs
@@ -1648,6 +1655,27 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean
+
+      - name: Print Cook-Levin arbitrary-slot header-router axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderArbitrarySlotHeaderRouter\.")" -eq 51
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin arbitrary-slot header-router axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin arbitrary-slot header router reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 27
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 18
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

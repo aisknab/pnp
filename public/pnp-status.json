@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -458,6 +458,15 @@
   "leanConcreteCookLevinBuilderFullScheduleCursorControllerExternalInputSizePolynomialFormalized": true,
   "leanConcreteCookLevinBuilderFullScheduleCursorControllerFailClosedBoundaryTimeoutFormalized": true,
   "leanConcreteCookLevinBuilderFullScheduleCursorControllerEmitsBodyTokens": false,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAuditPassed": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterAuditedDeclarationCount": 51,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterLiteralRawMachineFormalized": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterExactRawTraceFormalized": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterExternalInputSizePolynomialFormalized": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFailClosedBoundaryTimeoutFormalized": true,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate": false,
+  "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterEmitsBodyTokens": false,
   "leanConcreteCookLevinBuilderDynamicCursorFormalized": false,
   "leanConcreteCookLevinFormulaBuilderFormalized": false,
   "leanConcreteCookLevinBuilderRawRefinementFormalized": false,
@@ -1528,6 +1537,7 @@
     "node --test audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs",
@@ -1629,6 +1639,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePaddingRun.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean",
@@ -2135,6 +2147,7 @@
     "CookLevin.BuilderDynamicTokenCursorStep composes that complete first-clause machine with one total launch and one fixed 45-rule cursor-advance table. Every raw bitstring preserves the emitted clause, consumes the proved first in-range padding opportunity, and advances the retained unary token coordinate from FormulaVariableSlotBound + 12 to FormulaVariableSlotBound + 13 in exactly 2*cursorWord.length + 8 additional work steps and within FirstClausePrefix.rawTimeBound + 48 + 12*cursorWord.length compiled raw steps. Its 47 public declarations, including the two reviewed dead-state dispatch facts used by downstream collision-free composition, use only propext and Quot.sound, never Classical.choice or a project axiom. This is one literal padding transition, not a complete dynamic cursor loop, arbitrary raw slot decoder, remaining formula-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderFirstClausePaddingRun composes the preceding one-slot cursor step with two structurally generated unary evaluators and one fixed 25-rule countdown controller. Every raw bitstring executes all D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6) remaining padding opportunities without emitting a token, reaches FormulaVariableSlotBound + 1 + FormulaTokensPerClause, and proves that the next direct schedule outcome is Sep. Its literal table has 1244 plus six inherited/generated evaluator rule counts, and its compiled execution has an explicit external input-size polynomial bound. The 84-line combined audit covers all 83 public declarations plus one predecessor transport theorem: 37 have empty closure, 11 use only propext, and 36 use only propext and Quot.sound, never Classical.choice or a project axiom. This is the exact remaining first-clause padding block and second-clause boundary only, not a general dynamic formula cursor, remaining formula-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderFullScheduleCursorController replaces continued fixed-slot control extension with one all-input schedule controller. The exact body count is computed from the verifier and raw input, a semantic cursor returns the entire canonical token schedule, and one deterministic finite raw machine composes the complete header, two generated unary evaluators, three total bridges, and the fixed positive countdown table. Every raw input reaches the exact terminal coordinate within an explicit input-size polynomial bound, while malformed countdown states, the unlaunched header endpoint, and one-step-short fuel remain timeout. The raw loop does not decode or emit each visited body entry, so the dynamic raw decoder, complete formula builder, builder RawRefinement, PolynomialReduction, CNFSAT NP-completeness and in-P result, and P = NP remain absent.",
+    "CookLevin.BuilderArbitrarySlotHeaderRouter is the first non-repeatable raw decoder layer. One fixed 54-rule table compares every supplied natural coordinate with the exact problem-derived first-body boundary, and its exact trace accepts precisely the header branch, rejects equality and the post-header branch, stays timeout one step short, and sends malformed symbols to a nonhalting dead state. The semantic route is definitionally faithful to formulaTokenSlotDirect, and every in-range coordinate compiles within the verifier-derived polynomial 36 * terminalSlotPolynomial^2. The router does not decode the post-header quotient into a clause and within-clause slot or emit a body token, so the complete raw decoder and formula builder, builder RawRefinement, PolynomialReduction, CNFSAT NP-hardness or in-P result, and P = NP remain absent.",
     "CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run with a selected 59-rule Sep appender, two total nine-symbol bridges, and the existing 45-rule cursor advance. Its literal table has 1366 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the canonical separator beginning clause two, advances the retained unary coordinate by one, and proves that the following direct token is F; its emitted bits equal encodedFormula.take (2 * (FormulaWidth + 13)). The external compiled bound is BuilderFirstClausePaddingRun.rawTimeBound + 246 + 24*n + 12*FormulaWidth + 12*cursorWord.length. The combined 56-declaration audit has 15 empty closures, 11 using only propext, and 30 using only propext and Quot.sound, never Classical.choice or a project axiom. Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain timeout. This is one fixed populated transition, not a general dynamic formula cursor, following-F or remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderSecondClauseFirstLiteralPrefix composes the complete second-clause separator prefix with two selected 59-rule F appenders, four total symbol-preserving bridges, and two copies of the existing 45-rule cursor advance. Its literal table has 1610 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable zero in clause two, retains the following negative-sign coordinate on variable one, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 15)). The external compiled bound is BuilderSecondClauseSeparatorStep.rawTimeBound + 564 + 48*n + 24*FormulaWidth + 24*cursorWord.length. The combined 87-declaration audit has 25 empty closures, 18 using only propext, and 44 using only propext and Quot.sound, never Classical.choice or a project axiom. All four pre-launch endpoints, malformed appender tally/output in both copies, malformed cursor scratch in both copies, and one-step-short fuel remain timeout. This is one fixed negative literal, not a complete clause-two emitter, general dynamic formula cursor, remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderSecondClauseSecondLiteralPrefix composes the complete clause-two first-literal prefix with selected 59-rule F, T, and F appenders, six total symbol-preserving bridges, and three copies of the existing 45-rule cursor advance. Its literal table has 1976 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable one in clause two, retains the following Finish coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 18)). The external compiled bound is BuilderSecondClauseFirstLiteralPrefix.rawTimeBound + 1026 + 72*n + 36*FormulaWidth + 36*cursorWord.length. The combined 115-declaration audit has 34 empty closures, 25 using only propext, and 56 using only propext and Quot.sound, never Classical.choice or a project axiom. All six pre-launch endpoints, malformed appender tally/output in all three copies, malformed cursor scratch in all three copies, and one-step-short fuel remain timeout. This is one fixed negative literal and does not emit the clause terminator, complete clause two, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
@@ -2287,7 +2300,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "da08e94d3a8a765bc7d1735a82178813e338f04d24832b7bad37c1a740e8adc9",
+    "actualSourceClosureSha256": "2672e6d41182ea8a184ad2db68efb5bd7f4f65aef305a673cfae324f36654b3b",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2317,22 +2330,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-29-208",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-29-209",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "54a3474f3c0c2a6c66c6d890ffa9836f67989a989e3ce18334a4be97c313ab06",
+  "leanTheoremInventorySha256": "697befa21cf6f566182a14a36a17c515d65a863ad81c785d6f22b7d47182398a",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 31976,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15219,
-  "leanTheoremInventoryTheoremCount": 16246,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7740,
-  "leanTheoremInventorySourceClosureModuleCount": 328,
-  "leanSourceClosureSha256": "da08e94d3a8a765bc7d1735a82178813e338f04d24832b7bad37c1a740e8adc9",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-208",
+  "leanTheoremInventoryDeclarationCount": 32158,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15311,
+  "leanTheoremInventoryTheoremCount": 16350,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7799,
+  "leanTheoremInventorySourceClosureModuleCount": 329,
+  "leanSourceClosureSha256": "2672e6d41182ea8a184ad2db68efb5bd7f4f65aef305a673cfae324f36654b3b",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-209",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "cef08f0831113c21cf56fc63b1a41cb5f438a0e9fff707ba942ad076793c829b",
+  "formalPublicationMapSha256": "134690fb8be00420328319155a37b50b17ad8bd311d75d1d834d3e3045eb90dc",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9793,6 +9806,37 @@
           ],
           "actualKernelTypeSha256": "43e0a8a651dea0dba61e661579405cd081a7ec33df48be4575cc4b3729bdbc95",
           "expectedKernelTypeSha256": "43e0a8a651dea0dba61e661579405cd081a7ec33df48be4575cc4b3729bdbc95",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-arbitrary-slot-header-router",
+      "nonClaim": "This milestone routes only the top-level header boundary. It does not decode the post-header quotient and remainder into a clause and within-clause token slot, does not emit a body token, and is not the complete raw formula builder or its FunctionProgram.RawRefinement. It does not package the concrete Cook-Levin PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a global gate, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.cook_levin_arbitrary_slot_header_router_checked_complete"
+      ],
+      "scope": "For every concrete polynomial-time verifier and every coordinate below its complete direct token schedule, one fixed 54-rule deterministic work machine compares the coordinate with the exact problem-derived first-body boundary. Its exact trace accepts precisely the header branch and rejects equality or the post-header branch. The semantic route is definitionally faithful to formulaTokenSlotDirect; the compiled execution is bounded by the verifier-derived polynomial 36 * terminalSlotPolynomial^2; one-step-short fuel and malformed symbols remain timeout. All 51 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "title": "Uniform Cook-Levin arbitrary-slot header router",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.cook_levin_arbitrary_slot_header_router_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6794a8f27d2587b3c7960116aa3fdd0ac582ab71f9b90f39644c3a676d2cf2bf",
+          "expectedKernelTypeSha256": "6794a8f27d2587b3c7960116aa3fdd0ac582ab71f9b90f39644c3a676d2cf2bf",
           "kernelTypeFingerprintMatches": true
         }
       ],
@@ -47412,7 +47456,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-29-208",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-29-209",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
