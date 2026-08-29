@@ -1986,6 +1986,20 @@ of 184, the risk-weighted estimate remains 35 percent, and zero of five global
 gates are closed. See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
 
+M207 computes a mass-sensitive unsigned BN4 charge measure over M206's exact
+ambient embedding. The removed coverage subledger has positive charge, so the
+computed remainder has strictly smaller charge while preserving the complete
+canonical residual ledger. Installing those two computed values into the
+eighth coordinate of `TerminalResidualRank` gives exact `LexLT` descent for
+every fixed surrounding context. All 16 audited declarations avoid
+project-specific axioms and Classical.choice. This closes only the successful
+ambient branch: Hall, incompatibility, activation mismatch, terminal-data
+construction, complete route coverage, unconditional ZeroSlack, and
+polynomial PCCMin remain open. Formal artefact coverage is 183 of 185, the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
+
 ## Discharged by Lean so far
 
 ```text

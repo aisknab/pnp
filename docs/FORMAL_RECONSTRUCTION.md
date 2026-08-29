@@ -374,6 +374,19 @@ obstruction has complete global descent semantics. Formal artefact coverage is
 closed. See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
 
+M207 turns the successful M206 ambient reduction into one exact ranked
+transition. Lean sums cell masses rather than counting cells, proves the
+coverage-derived cancellation subledger has strictly positive unsigned charge,
+uses exact permutation to decompose ambient charge, and derives strict
+`chargeSize`-coordinate descent for every fixed assignment of the other nine
+residual-rank coordinates. All 16 reviewed declarations exclude
+project-specific axioms and Classical.choice. Hall, ambient incompatibility,
+and activation mismatch remain incomplete routes; terminal objects and
+downstream Packet/HB tables remain supplied. Formal artefact coverage is 183
+of 185, the score remains 35 percent, and zero of five global gates are closed.
+See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

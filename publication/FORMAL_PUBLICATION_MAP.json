@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-206",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-207",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3146,7 +3146,8 @@
     "PNP.locked_nand_in_p_from_residual_band_in_p": "687aee8e08c38b6be49dca31a051d7fd019adc9866c456712657fa5ee7606286",
     "PNP.report_residual_band_eq_concrete_minimum_threshold": "07dc72c6a93d72ab65435705ba99ea6b84f69c2d06930af90c07f6bd09b5fc8a",
     "PNP.report_locked_nand_eq_residual_band": "14140f257b5e6ddf140cc9957a86248b1ed7defb691daf40c6080a859ce6e128",
-    "PNP.concrete_residual_band_compatibility_checked_complete": "c4d3ccd4bc92297fd50b22d1be51b80d3930a10ecebce2d3e6c3ee25d95d03db"
+    "PNP.concrete_residual_band_compatibility_checked_complete": "c4d3ccd4bc92297fd50b22d1be51b80d3930a10ecebce2d3e6c3ee25d95d03db",
+    "PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_charge_route_or_zeroslack_checked_complete": "2205a2a1ef56e31519ab2320d6ed83004a252026e1d92731de4fba539c4a9d7e"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3164,7 +3165,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a2458a11f7babd8cb4d5996dbd6623188db2fd98fad6e2dcf8d9fc9ca2b18aba",
+  "milestoneSourceClosureSha256": "00219f5c58c6490abf6c83a8b4b826d11cb4380b55627afa6f41a96d5f3d4265",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8183,6 +8184,16 @@
       ],
       "scope": "For every arbitrary finite M205 restoration-coverage source ledger tied to one computed BCEL nucleus, the total classifier preserves the first exact Hall deficit, ambient residual reduction, or no-embedding witness. Only the all-singletonized branch constructs the source-derived BN6 ledger and enters the checked sparse BN6/BCEL Packet/HB classifier, yielding conditional ZeroSlack or one exact small-cut mismatch reflected to the original enriched source activation ledger.",
       "title": "Candidate-bound PkgC restoration coverage and checked BN6/BCEL route"
+    },
+    {
+      "classification": "formalized-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent",
+      "id": "pccmin-checked-packet-pkgc-restoration-coverage-charge-descent",
+      "nonClaim": "The terminal problem, checked BCEL-ready certificate, active PkgC source cells and cuts, restoration-coordinate universes and maps, ambient BN4 ledgers, semantic full candidates, Packet ranks and claims, dependency table, checked HB closure, route-clear result, and selector silence remain explicit supplied inputs. M207 proves exact charge-coordinate descent only for M206's successful ambient embedding. It does not prove the computed remainder is empty or turn Hall deficits, ambient incompatibility, or activation mismatches into complete global routes. This milestone does not finish terminal-input derivation, complete PkgC/BN3--BN6 integration, HN/BUD/HB semantic completeness, manuscript-wide SaturatePositive or BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, complete encoded-size polynomial bounds, CNFSAT in P, a global gate, the eligible root theorem, or P = NP.",
+      "requiredTheorems": [
+        "PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_charge_route_or_zeroslack_checked_complete"
+      ],
+      "scope": "For every arbitrary finite exact ambient embedding returned by M206, unsigned BN4 charge is computed as the sum of cell masses. Exact permutation decomposes ambient charge into a strictly positive coverage-derived cancellation charge plus remainder charge. The remainder therefore strictly decreases the eighth chargeSize coordinate of the exact ten-coordinate TerminalResidualRank for every fixed surrounding context while preserving the complete canonical residual ledger. All other M206 outcomes remain explicit.",
+      "title": "PkgC restoration coverage and exact ambient charge-coordinate descent"
     },
     {
       "classification": "not-formalized",
