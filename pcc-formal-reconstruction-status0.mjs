@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-210';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -90,6 +90,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs',
+  'node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
@@ -193,6 +194,8 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoder.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean',
@@ -701,6 +704,7 @@ const NON_CLAIMS = Object.freeze([
   'CookLevin.BuilderFirstClausePaddingRun composes the preceding one-slot cursor step with two structurally generated unary evaluators and one fixed 25-rule countdown controller. Every raw bitstring executes all D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6) remaining padding opportunities without emitting a token, reaches FormulaVariableSlotBound + 1 + FormulaTokensPerClause, and proves that the next direct schedule outcome is Sep. Its literal table has 1244 plus six inherited/generated evaluator rule counts, and its compiled execution has an explicit external input-size polynomial bound. The 84-line combined audit covers all 83 public declarations plus one predecessor transport theorem: 37 have empty closure, 11 use only propext, and 36 use only propext and Quot.sound, never Classical.choice or a project axiom. This is the exact remaining first-clause padding block and second-clause boundary only, not a general dynamic formula cursor, remaining formula-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.',
   'CookLevin.BuilderFullScheduleCursorController replaces continued fixed-slot control extension with one all-input schedule controller. The exact body count is computed from the verifier and raw input, a semantic cursor returns the entire canonical token schedule, and one deterministic finite raw machine composes the complete header, two generated unary evaluators, three total bridges, and the fixed positive countdown table. Every raw input reaches the exact terminal coordinate within an explicit input-size polynomial bound, while malformed countdown states, the unlaunched header endpoint, and one-step-short fuel remain timeout. The raw loop does not decode or emit each visited body entry, so the dynamic raw decoder, complete formula builder, builder RawRefinement, PolynomialReduction, CNFSAT NP-completeness and in-P result, and P = NP remain absent.',
   'CookLevin.BuilderArbitrarySlotHeaderRouter is the first non-repeatable raw decoder layer. One fixed 54-rule table compares every supplied natural coordinate with the exact problem-derived first-body boundary, and its exact trace accepts precisely the header branch, rejects equality and the post-header branch, stays timeout one step short, and sends malformed symbols to a nonhalting dead state. The semantic route is definitionally faithful to formulaTokenSlotDirect, and every in-range coordinate compiles within the verifier-derived polynomial 36 * terminalSlotPolynomial^2. The router does not decode the post-header quotient into a clause and within-clause slot or emit a body token, so the complete raw decoder and formula builder, builder RawRefinement, PolynomialReduction, CNFSAT NP-hardness or in-P result, and P = NP remain absent.',
+  'CookLevin.BuilderArbitrarySlotPostHeaderDecoder adds one unbounded semantic decoder after the M209 raw header route. For every natural post-header coordinate it computes the exact finite clause and within-clause pair, the unique Finish position, or the out-of-range suffix; reconstructs every body coordinate; agrees with direct token lookup; and reads the exact shifted remainder from the checked M209 raw result configuration. It does not implement raw division or raw body-token emission, so the complete raw formula builder, builder RawRefinement, PolynomialReduction, CNFSAT NP-hardness or in-P result, and P = NP remain absent.',
   'CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run with a selected 59-rule Sep appender, two total nine-symbol bridges, and the existing 45-rule cursor advance. Its literal table has 1366 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the canonical separator beginning clause two, advances the retained unary coordinate by one, and proves that the following direct token is F; its emitted bits equal encodedFormula.take (2 * (FormulaWidth + 13)). The external compiled bound is BuilderFirstClausePaddingRun.rawTimeBound + 246 + 24*n + 12*FormulaWidth + 12*cursorWord.length. The combined 56-declaration audit has 15 empty closures, 11 using only propext, and 30 using only propext and Quot.sound, never Classical.choice or a project axiom. Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain timeout. This is one fixed populated transition, not a general dynamic formula cursor, following-F or remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.',
   'CookLevin.BuilderSecondClauseFirstLiteralPrefix composes the complete second-clause separator prefix with two selected 59-rule F appenders, four total symbol-preserving bridges, and two copies of the existing 45-rule cursor advance. Its literal table has 1610 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable zero in clause two, retains the following negative-sign coordinate on variable one, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 15)). The external compiled bound is BuilderSecondClauseSeparatorStep.rawTimeBound + 564 + 48*n + 24*FormulaWidth + 24*cursorWord.length. The combined 87-declaration audit has 25 empty closures, 18 using only propext, and 44 using only propext and Quot.sound, never Classical.choice or a project axiom. All four pre-launch endpoints, malformed appender tally/output in both copies, malformed cursor scratch in both copies, and one-step-short fuel remain timeout. This is one fixed negative literal, not a complete clause-two emitter, general dynamic formula cursor, remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.',
   'CookLevin.BuilderSecondClauseSecondLiteralPrefix composes the complete clause-two first-literal prefix with selected 59-rule F, T, and F appenders, six total symbol-preserving bridges, and three copies of the existing 45-rule cursor advance. Its literal table has 1976 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable one in clause two, retains the following Finish coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 18)). The external compiled bound is BuilderSecondClauseFirstLiteralPrefix.rawTimeBound + 1026 + 72*n + 36*FormulaWidth + 36*cursorWord.length. The combined 115-declaration audit has 34 empty closures, 25 using only propext, and 56 using only propext and Quot.sound, never Classical.choice or a project axiom. All six pre-launch endpoints, malformed appender tally/output in all three copies, malformed cursor scratch in all three copies, and one-step-short fuel remain timeout. This is one fixed negative literal and does not emit the clause terminator, complete clause two, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.',
@@ -1400,6 +1404,15 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFailClosedBoundaryTimeoutFormalized: true,
   leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate: false,
   leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterEmitsBodyTokens: false,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderFormalized: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAuditPassed: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAuditedDeclarationCount: 22,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderExactClauseWithinClauseReconstructionFormalized: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderDirectBodyTokenRouteFormalized: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawPostHeaderRemainderExtractionFormalized: true,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized: false,
+  leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized: false,
   leanConcreteCookLevinBuilderDynamicCursorFormalized: false,
   leanConcreteCookLevinFormulaBuilderFormalized: false,
   leanConcreteCookLevinBuilderRawRefinementFormalized: false,
@@ -2984,6 +2997,15 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFailClosedBoundaryTimeoutFormalized: true,
       leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate: false,
       leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterEmitsBodyTokens: false,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderFormalized: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAuditPassed: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAuditedDeclarationCount: 22,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderExactClauseWithinClauseReconstructionFormalized: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderDirectBodyTokenRouteFormalized: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawPostHeaderRemainderExtractionFormalized: true,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized: false,
+      leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized: false,
       leanConcreteCookLevinBuilderDynamicCursorFormalized: false,
       leanConcreteCookLevinFormulaBuilderFormalized: false,
       leanConcreteCookLevinBuilderRawRefinementFormalized: false,
@@ -4055,7 +4077,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-29-209',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-30-210',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

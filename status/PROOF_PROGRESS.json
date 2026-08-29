@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209",
-  "lastReviewedDate": "2026-08-29",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-210",
+  "lastReviewedDate": "2026-08-30",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 185,
-    "totalRows": 187,
+    "earnedRows": 186,
+    "totalRows": 188,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -165,12 +165,13 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-full-schedule-cursor-controller" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-header-router" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, and M209 adds the first uniform arbitrary-coordinate raw routing layer, while the status correctly keeps the full builder false.",
-          "remainingLimitation": "The M209 raw router separates header from post-header coordinates but does not decode the post-header quotient or emit each visited entry; the complete formula builder and packaged reduction remain unformalized.",
-          "lastReviewedDate": "2026-08-29"
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, and M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, while the status correctly keeps the full raw builder false.",
+          "remainingLimitation": "M210 does not perform raw quotient/remainder decoding or raw body-token emission; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
+          "lastReviewedDate": "2026-08-30"
         },
         {
           "id": "reductions-report-locked-nand-linkage",
@@ -195,13 +196,17 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold and M209 earns the first fixed-table arbitrary-coordinate router, but the checked status explicitly records post-header decoding, the complete builder and packaged polynomial reduction as false.",
-          "remainingLimitation": "The router must decode the post-header quotient and within-clause slot, emit every selected entry, and then be packaged with RawRefinement and the concrete PolynomialReduction.",
-          "lastReviewedDate": "2026-08-29"
+          "justification": "M208 earns a uniform all-position control scaffold, M209 earns the fixed-table arbitrary-coordinate outer router, and M210 earns exact all-coordinate semantic clause/slot decoding plus checked extraction of the raw post-header remainder. The checked status still records raw division, raw body-token emission, the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "A literal raw decoder must consume the extracted remainder, derive the clause and within-clause coordinates, emit every selected body entry and Finish, and then be packaged with RawRefinement and the concrete PolynomialReduction.",
+          "lastReviewedDate": "2026-08-30"
         },
         {
           "id": "reductions-concrete-np-hardness",
@@ -1098,6 +1103,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M209 adds the first non-repeatable raw decoder layer after M208's complete-schedule controller. One fixed 54-rule deterministic work machine compares every supplied natural coordinate with the exact problem-derived first-body boundary; its exact trace accepts precisely the header branch, rejects equality and post-header coordinates, stays timeout one step short, and sends malformed symbols into a nonhalting dead state. The semantic route is definitionally faithful to formulaTokenSlotDirect, and every coordinate below the terminal slot compiles within the verifier-derived polynomial 36 * terminalSlotPolynomial^2. The router does not decode the post-header quotient into a clause and within-clause slot or emit a body token, so the complete builder, RawRefinement and packaged PolynomialReduction remain false. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 185 of 187, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-210",
+      "formalArtefactCoverage": { "earnedRows": 186, "totalRows": 188 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M210 adds an unbounded semantic decoder after M209's fixed raw header route. For every natural post-header coordinate, a structurally recursive rectangle decoder returns the exact finite clause and within-clause position, the unique final Finish coordinate, or the out-of-range suffix; every body result reconstructs the original coordinate and the typed route agrees exactly with direct token lookup. A checked reader also recovers the exact shifted remainder already encoded by M209's raw result configuration for every comparison trace. M210 does not implement raw division, raw body-token emission, the complete raw builder, RawRefinement or the packaged PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 186 of 188, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

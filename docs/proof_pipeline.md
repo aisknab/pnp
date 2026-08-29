@@ -364,6 +364,17 @@ open. Formal artefact coverage is 185 of 187, the risk-weighted estimate
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_arbitrary_slot_header_router.md](lean_cook_levin_builder_arbitrary_slot_header_router.md).
 
+M210 refines every post-header coordinate with one structurally recursive
+semantic rectangle decoder. It returns the exact finite clause/within-clause
+pair, the unique `Finish`, or the out-of-range suffix; reconstructs body
+coordinates; agrees with direct token lookup; and reads the exact shifted
+remainder from M209's checked raw result configuration. It does not implement
+raw division or raw body-token emission, so the complete raw formula builder
+and packaged reduction remain open. Formal artefact coverage is 186 of 188,
+the risk-weighted estimate remains 35 percent, and zero of five global gates
+are closed. See
+[lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md](lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

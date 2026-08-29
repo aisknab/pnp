@@ -300,6 +300,16 @@ body token, so the complete builder and packaged reduction remain open. Formal
 artefact coverage is 185 of 187 while the risk-weighted estimate remains 35
 percent and all five global gates remain open.
 
+M210 adds the arbitrary-slot Cook-Levin post-header-decoder endpoint. The
+compiled theorem binds every natural post-header coordinate to an exact typed
+clause/within-clause pair, the unique `Finish`, or the out-of-range suffix;
+reconstructs each body coordinate; agrees with direct token lookup; and
+extracts the exact shifted remainder from M209's checked raw result. It does
+not implement raw division or raw body-token emission, so the complete raw
+builder and packaged reduction remain open. Formal artefact coverage is 186 of
+188 while the risk-weighted estimate remains 35 percent and all five global
+gates remain open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

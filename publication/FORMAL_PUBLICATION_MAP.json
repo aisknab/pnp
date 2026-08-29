@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-209",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-30-210",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -249,6 +249,7 @@
     "PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.work_one_step_short_timeout": "acf0af0b30b9f36c737d02adc55054f9ff2607fe3907fe981ff2ae7039e39985",
     "PNP.Concrete.CookLevin.BuilderFullScheduleCursorController.cook_levin_full_schedule_cursor_controller_checked_complete": "43e0a8a651dea0dba61e661579405cd081a7ec33df48be4575cc4b3729bdbc95",
     "PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.cook_levin_arbitrary_slot_header_router_checked_complete": "6794a8f27d2587b3c7960116aa3fdd0ac582ab71f9b90f39644c3a676d2cf2bf",
+    "PNP.Concrete.CookLevin.BuilderArbitrarySlotPostHeaderDecoder.cook_levin_arbitrary_slot_post_header_decoder_checked_complete": "56ce613c7f034579229b382e1eb985564fd443a612579191daea72381d709d9c",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents": "22f2b5433d277971dd68d297a0ef268965c668881c237b7b0beaaea393fc3393",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState": "bc337e8ad3997c97419ede5fe2d70226bfc7b2008c7ffc388133177ca20bed06",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length": "406a7220601b34561d5544d8a3ad63daf6e061a67b981c0aa4474daab5a28687",
@@ -3167,7 +3168,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "2672e6d41182ea8a184ad2db68efb5bd7f4f65aef305a673cfae324f36654b3b",
+  "milestoneSourceClosureSha256": "15490107cc10167d19449858b9292e6c7a88353eb000a8cd02c6fe727c54823a",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4006,6 +4007,16 @@
       ],
       "scope": "For every concrete polynomial-time verifier and every coordinate below its complete direct token schedule, one fixed 54-rule deterministic work machine compares the coordinate with the exact problem-derived first-body boundary. Its exact trace accepts precisely the header branch and rejects equality or the post-header branch. The semantic route is definitionally faithful to formulaTokenSlotDirect; the compiled execution is bounded by the verifier-derived polynomial 36 * terminalSlotPolynomial^2; one-step-short fuel and malformed symbols remain timeout. All 51 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
       "title": "Uniform Cook-Levin arbitrary-slot header router"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder",
+      "nonClaim": "This milestone adds an unbounded semantic clause/within-clause decoder and extracts the exact shifted remainder from M209's checked raw result. It does not implement raw division, raw body-token emission, the complete raw formula builder or its FunctionProgram.RawRefinement. It does not package the concrete Cook-Levin PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a global gate, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderArbitrarySlotPostHeaderDecoder.cook_levin_arbitrary_slot_post_header_decoder_checked_complete"
+      ],
+      "scope": "For every concrete polynomial-time verifier and every coordinate below its complete direct token schedule, the M209 outer route is refined by a structurally recursive all-coordinate post-header decoder. Every body result gives typed finite clause and within-clause coordinates that reconstruct the exact remainder; the unique Finish and out-of-range cases are characterized; and the interpreted route agrees with direct token lookup. A checked reader recovers the exact shifted remainder from every M209 raw comparison result while preserving M209's exact raw trace. All 22 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "title": "Uniform Cook-Levin arbitrary-slot post-header decoder"
     },
     {
       "classification": "formalized-foundation-only",
