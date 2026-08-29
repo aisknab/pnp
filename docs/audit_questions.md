@@ -2921,6 +2921,47 @@ the original enriched source ledger.
 
 ---
 
+### M207 PkgC restoration-coverage charge descent
+
+**Claim**
+
+For every exact M206 ambient embedding, the mass-summed unsigned charge of the
+computed remainder is strictly smaller than the ambient charge. For every
+fixed assignment of the other nine residual-rank coordinates, the remainder
+therefore strictly decreases the exact `chargeSize` coordinate while the
+canonical residual ledger is preserved.
+
+**Where it appears**
+
+- lean/PNP/PCCMinCheckedPacketPkgCRestorationCoverageChargeDescent.lean.
+- lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageChargeDescentAxiomAudit.lean.
+- lean-regression/PNPPCCMinCheckedPacketPkgCRestorationCoverageChargeDescent.lean.
+- audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm unsigned charge sums cell masses and is permutation invariant.
+2. Confirm both separating consumers are nonempty and the removed unit-mass
+   subledger therefore has positive charge.
+3. Confirm exact multiset decomposition yields strict remainder charge
+   decrease.
+4. Confirm `terminalResidualRank_chargeSize_lt` is applied with the other nine
+   coordinates unchanged.
+5. Confirm the charge descent is constructed from the embedding and all five
+   M206 outcomes remain represented.
+
+**What would count as a refutation or material defect**
+
+- Cell count replaces mass summation.
+- Membership replaces exact multiplicity-preserving permutation.
+- A rank, inequality, descent proof, or success flag is supplied by the caller.
+- Strict `LexLT` is weakened or the charge coordinate is reordered.
+- Hall, ambient incompatibility, or activation mismatch is called a complete
+  global descent.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

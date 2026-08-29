@@ -262,7 +262,8 @@ test('status, publication, progress, workflow, and docs retain conservative M206
   const history = progress.history.find(({ asOfCoordinate }) =>
     asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206');
   assert.notEqual(history, undefined);
-  assert.deepEqual(history.formalArtefactCoverage, { earnedRows, totalRows });
+  assert.deepEqual(history.formalArtefactCoverage,
+    { earnedRows: 182, totalRows: 184 });
   assert.equal(history.riskWeightedProofCompletionPercent, 35);
   assert.equal(history.scoreChanged, false);
   assert.deepEqual(history.changedCheckpointIds, []);
@@ -283,13 +284,13 @@ test('status, publication, progress, workflow, and docs retain conservative M206
   assert.equal(publicSurface.includes(
     'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-bn6-bcel-route0.test.mjs'),
   true);
-  const coverageLabel = `${earnedRows} of ${totalRows}`;
+  const historicalCoverageLabel = '182 of 184';
   for (const document of [readme, formalDoc, bridgeDoc, focusedDoc, progressDoc]) {
     assert.match(document, /M206/u);
     assert.match(document, /PkgC/u);
     assert.match(document, /BN6\/BCEL|BN6 and BCEL/u);
-    assert.equal(document.replace(/\s+/gu, ' ').includes(coverageLabel),
-      true, coverageLabel);
+    assert.equal(document.replace(/\s+/gu, ' ').includes(historicalCoverageLabel),
+      true, historicalCoverageLabel);
     assert.match(document, /35(?:%| percent)/u);
     assert.match(document,
       /zero of five|no[\s\S]{0,80}global gate|0(?:\s*\/\s*5)? global gates/iu);

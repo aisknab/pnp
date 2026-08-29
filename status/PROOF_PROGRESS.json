@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207",
   "lastReviewedDate": "2026-08-29",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 182,
-    "totalRows": 184,
+    "earnedRows": 183,
+    "totalRows": 185,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -261,7 +261,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
-          "remainingLimitation": "M206 removes the typed-restorer and independently supplied BN6-ledger seams across the candidate-bound checked route, but the terminal problem, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, ranks, claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
+          "remainingLimitation": "M207 derives the unsigned charge and exact rank transition for M206's successful ambient embedding, but the terminal problem, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, Packet ranks and claims, dependency table and selector silence remain supplied rather than constructed from every valid terminal input.",
           "lastReviewedDate": "2026-08-29"
         },
         {
@@ -275,7 +275,7 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
-          "remainingLimitation": "M206 connects M205's exact Hall, ambient-reduction, no-embedding and constructed BN6 outcomes to one candidate-bound checked sparse BN6/BCEL route, but PkgC/BN3--BN6 must still materialize semantically adequate full candidates, derive the source, restoration, ambient and downstream data from terminal input, prove every computed remainder eliminates the surviving residual, and turn every Hall deficit, incompatibility or activation mismatch into a decreasing global route.",
+          "remainingLimitation": "M207 turns M206's successful ambient-reduction outcome into a context-parametric exact chargeSize-coordinate descent while preserving the residual ledger. PkgC/BN3--BN6 must still materialize semantically adequate full candidates, derive all source, restoration, ambient and downstream data from terminal input, connect the remainder transition to the complete terminal state, and turn every Hall deficit, incompatibility and activation mismatch into a genuine gain or formal rank decrease.",
           "lastReviewedDate": "2026-08-29"
         },
         {
@@ -302,8 +302,8 @@
           ],
           "awardedAtCoordinate": null,
           "justification": "Global gain-route completeness is explicitly false.",
-          "remainingLimitation": "Every required terminal outcome must enter one complete decreasing route system.",
-          "lastReviewedDate": "2026-08-23"
+          "remainingLimitation": "M207 proves one M206 ambient branch strictly decreases the formal rank at the computed chargeSize coordinate. Hall deficits, ambient incompatibility, source activation mismatch, the other terminal routes, and one complete globally covered decreasing outcome system remain open.",
+          "lastReviewedDate": "2026-08-29"
         },
         {
           "id": "residual-unconditional-saturate-positive",
@@ -1051,6 +1051,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M206 composes M205's arbitrary-finite typed-restorer-free restoration-coverage ledger with the checked sparse BN6/BCEL Packet/HB boundary. Every ambient ledger is tied to the same computed BCEL nucleus. The total classifier retains the first exact source-member Hall deficit, coverage-derived ambient reduction, or no-embedding witness; only the proved all-singletonized branch constructs the M205 BN6 ledger and enters the downstream checked classifier, whose raw small-cut mismatch is reflected back to the original enriched source activation ledger while its coherent branch yields conditional ZeroSlack. The terminal problem, checked BCEL-ready certificate, source cells and cuts, restoration universes and maps, ambient ledgers, semantic full candidates, ranks, claims, dependency table, checked HB closure, route-clear result and selector silence remain supplied; the Hall route is not a verified global gain or rank descent, the remainder is not proved empty, incompatibility and activation mismatch are not complete decreasing routes, and no complete encoded-input polynomial construction or runtime theorem is proved. Therefore terminal-input derivation, complete PkgC/BN3--BN6 integration, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, executable polynomial PCCMin, every global gate and all fixed checkpoints remain open. Formal artefact coverage becomes 182 of 184, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207",
+      "formalArtefactCoverage": { "earnedRows": 183, "totalRows": 185 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M207 upgrades M206's successful ambient-extraction branch to an exact computed rank transition. Unsigned BN4 charge is the sum of every cell mass, is additive under concatenation and invariant under exact permutation. The coverage-derived cancellation subledger has charge 2 times the combined lengths of the two nonempty separating consumers and is therefore strictly positive. M206's exact multiset embedding decomposes ambient charge into that removed charge plus remainder charge, so the remainder strictly decreases the eighth chargeSize coordinate of TerminalResidualRank for every fixed assignment of the other nine coordinates while the complete canonical residual ledger is preserved. No rank, inequality, descent proof or success flag is supplied. Hall, ambient-incompatibility and activation-mismatch branches remain explicit diagnostics rather than complete global routes, the remainder is not proved empty, and terminal, source, restoration, ambient, semantic, Packet and HB data remain supplied. Therefore complete terminal-input derivation, PkgC/BN3--BN6 integration, global route coverage, HN/BUD/HB semantic completeness, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, exact polynomial PCCMin and every global gate remain open. Formal artefact coverage becomes 183 of 185, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

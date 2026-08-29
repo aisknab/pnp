@@ -333,6 +333,16 @@ yet been proved a complete global descent. Formal artefact coverage is 182 of
 gates are closed. See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md](lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md).
 
+M207 compiles M206's successful ambient extraction into a strict formal
+rank transition. Exact permutation preserves multiplicity, the removed
+coverage subledger has strictly positive mass-summed unsigned charge, and the
+remainder decreases the ten-coordinate rank at `chargeSize` for every fixed
+surrounding context while preserving the canonical residual ledger. The other
+M206 branches and all supplied terminal, Packet, and HB inputs remain open.
+Formal artefact coverage is 183 of 185, the risk-weighted estimate remains 35
+percent, and zero of five global gates are closed. See
+[lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

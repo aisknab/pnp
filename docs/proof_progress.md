@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206`, 182 of 184
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207`, 183 of 185
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M206 |
+| Track | Available | Earned at M207 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M206 risk-weighted proof completion estimate is therefore 35 percent, with
+The M207 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -282,6 +282,19 @@ the computed remainder is not proved empty. No fixed checkpoint or global gate
 closes. Coverage becomes 182 of 184 while the score remains 35 percent, the
 uncertainty range remains 20 to 40 percent, and all five gates remain open. No
 retrospective score was invented.
+
+M207 upgrades M206's successful ambient-extraction branch to one computed
+formal rank transition. Unsigned BN4 charge sums cell masses, exact permutation
+decomposes the ambient charge into a strictly positive coverage-derived
+cancellation charge plus remainder charge, and the remainder therefore
+strictly decreases the eighth `chargeSize` coordinate for every fixed
+surrounding rank context while preserving the complete canonical residual
+ledger. Hall, ambient incompatibility, and source activation mismatch remain
+incomplete routes; terminal, source, restoration, semantic, Packet, and HB
+data remain supplied; and the remainder is not proved empty. No fixed
+checkpoint or global gate closes. Coverage becomes 183 of 185 while the score
+remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
+five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 
