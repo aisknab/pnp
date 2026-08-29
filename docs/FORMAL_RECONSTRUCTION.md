@@ -387,6 +387,19 @@ of 185, the score remains 35 percent, and zero of five global gates are closed.
 See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
 
+M208 replaces continued fixed-slot Cook-Levin control extension with one
+uniform full-schedule controller. The exact polynomial body-opportunity count
+matches the complete canonical token schedule after the padded header; a
+semantic cursor returns that full schedule, while one deterministic finite raw
+machine consumes the arbitrary count, materializes the exact terminal
+coordinate, and accepts within an explicit input-size polynomial bound.
+Malformed countdown geometry, the unlaunched header endpoint, and
+one-step-short fuel remain timeout. The loop does not yet decode or emit each
+visited body entry, so the complete builder, `RawRefinement`, and packaged
+reduction remain open. Formal artefact coverage is 184 of 186, the score
+remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_full_schedule_cursor_controller.md](./lean_cook_levin_builder_full_schedule_cursor_controller.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

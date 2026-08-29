@@ -2000,6 +2000,17 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](./lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
 
+M208 replaces continued fixed-slot Cook-Levin control extension with one
+all-input full-schedule controller. The verifier-derived polynomial body count
+covers every clause-token opportunity plus final `Finish`; the semantic cursor
+returns the complete canonical token schedule, while one deterministic finite
+raw machine consumes that count and materializes the exact terminal coordinate
+within an explicit polynomial bound. The loop does not yet decode or emit each
+visited entry, so the complete builder, `RawRefinement`, and packaged reduction
+remain open. Formal artefact coverage is 184 of 186, the risk-weighted estimate
+remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_full_schedule_cursor_controller.md](./lean_cook_levin_builder_full_schedule_cursor_controller.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2074,7 +2085,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Complete the raw Cook--Levin formula builder and package its concrete polynomial reduction.
+2. Extend the M208 full-schedule controller with the raw slot decoder and emitter, then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

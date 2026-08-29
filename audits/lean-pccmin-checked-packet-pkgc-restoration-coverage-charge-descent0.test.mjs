@@ -312,7 +312,6 @@ test('status, publication, progress, workflow, and docs retain conservative M207
   const earnedRows = status.formalPublicationMilestones.filter(
     ({ earned }) => earned).length;
   const totalRows = status.formalPublicationMilestones.length;
-  assert.deepEqual({ earnedRows, totalRows }, { earnedRows: 183, totalRows: 185 });
   assert.equal(progress.asOfCoordinate, status.coordinate);
   assert.equal(progress.formalArtefactCoverage.earnedRows, earnedRows);
   assert.equal(progress.formalArtefactCoverage.totalRows, totalRows);
@@ -323,7 +322,8 @@ test('status, publication, progress, workflow, and docs retain conservative M207
   const history = progress.history.find(({ asOfCoordinate }) =>
     asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207');
   assert.notEqual(history, undefined);
-  assert.deepEqual(history.formalArtefactCoverage, { earnedRows, totalRows });
+  assert.deepEqual(history.formalArtefactCoverage,
+    { earnedRows: 183, totalRows: 185 });
   assert.equal(history.riskWeightedProofCompletionPercent, 35);
   assert.equal(history.scoreChanged, false);
   assert.deepEqual(history.changedCheckpointIds, []);
@@ -344,8 +344,8 @@ test('status, publication, progress, workflow, and docs retain conservative M207
   assert.equal(publicSurface.includes(
     'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent0.test.mjs'),
   true);
-  assert.match(readme,
-    /How is progress measured[\s\S]{0,300}183 of 185 current scoped publication rows/u);
+  assert.equal(readme.replace(/\s+/gu, ' ').includes(
+    `${earnedRows} of ${totalRows} current scoped publication rows`), true);
   for (const document of [readme, formalDoc, bridgeDoc, pipelineDoc,
     focusedDoc, progressDoc]) {
     assert.match(document, /M207/u);

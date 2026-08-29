@@ -1581,6 +1581,78 @@ theorem rules_pairwise_query_distinct {language : Language}
   rw [hRules, List.pairwise_append]
   exact ⟨hBridges, hComponents, hCross⟩
 
+/-- No rule in the literal complete-header table is sourced at its global
+accept state.  This is the exact non-shadowing interface needed by a later
+literal composition bridge. -/
+theorem rule_source_ne_acceptState {language : Language}
+    (problem : VerifierTableauProblem language) (rule : WorkRule)
+    (hMem : rule ∈ (machine problem).rules) :
+    rule.sourceState ≠ (machine problem).acceptState := by
+  change rule.sourceState ≠
+    fAppenderState BuilderTokenAppender.machine.acceptState
+  change rule ∈ rules problem at hMem
+  unfold rules at hMem
+  rcases List.mem_append.mp hMem with hBridges | hComponents
+  · unfold bridgeRules at hBridges
+    simp only [List.mem_append] at hBridges
+    rcases hBridges with hBridge | hBridge | hBridge | hBridge | hBridge
+    · have hSource : rule.sourceState =
+          prefixState BuilderFirstTokenPrefix.machine.acceptState := by
+        apply launchRules_source_eq
+        simpa [prefixEvaluatorBridge] using hBridge
+      rw [hSource]
+      exact prefixState_ne_fAppenderState _ _
+    · have hSource : rule.sourceState = evaluatorState
+          (BuilderUnaryPolynomial.machine
+            (widthPolynomial problem)).acceptState := by
+        apply launchRules_source_eq
+        simpa [evaluatorControllerBridge] using hBridge
+      rw [hSource]
+      exact evaluatorState_ne_fAppenderState _ _
+    · have hSource : rule.sourceState =
+          controllerState HeaderController.moreExitState := by
+        apply launchRules_source_eq
+        simpa [controllerTBridge] using hBridge
+      rw [hSource]
+      exact controllerState_ne_fAppenderState _ _
+    · have hSource : rule.sourceState =
+          tAppenderState BuilderTokenAppender.machine.acceptState := by
+        apply launchRules_source_eq
+        simpa [tControllerBridge] using hBridge
+      rw [hSource]
+      exact tAppenderState_ne_fAppenderState _ _
+    · have hSource : rule.sourceState =
+          controllerState HeaderController.doneExitState := by
+        apply launchRules_source_eq
+        simpa [controllerFBridge] using hBridge
+      rw [hSource]
+      exact controllerState_ne_fAppenderState _ _
+  · simp only [List.mem_append] at hComponents
+    rcases hComponents with hComponent | hComponent | hComponent |
+      hComponent | hComponent
+    · rcases renamedRules_source hComponent with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact prefixState_ne_fAppenderState _ _
+    · rcases renamedRules_source hComponent with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact evaluatorState_ne_fAppenderState _ _
+    · rcases renamedRules_source hComponent with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact controllerState_ne_fAppenderState _ _
+    · rcases renamedRules_source hComponent with
+        ⟨localRule, _hLocal, hSource⟩
+      rw [hSource]
+      exact tAppenderState_ne_fAppenderState _ _
+    · rcases renamedRules_source hComponent with
+        ⟨localRule, hLocal, hSource⟩
+      rw [hSource]
+      intro hEqual
+      exact appender_rule_source_ne_accept localRule hLocal
+        (fAppenderState_injective hEqual)
+
 /-! ### Halt separation and first-match lookup isolation -/
 
 private theorem nat_beq_false_of_ne (left right : Nat)

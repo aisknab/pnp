@@ -112,7 +112,7 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderUnaryPolynomialExactRuntimePolynomialFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderAxiomAuditPassed, true);
-  assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderAuditedDeclarationCount, 84);
+  assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderAuditedDeclarationCount, 85);
   assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderCompiledRawMachineFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderExternalInputSizePolynomialFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderCompleteHeaderExactFormulaBitsFormalized, true);
@@ -167,6 +167,13 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderFirstClausePaddingRunNoEmissionSpecificationFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderFirstClausePaddingRunInputPrefixAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderFirstClausePaddingRunFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerAuditedDeclarationCount, 70);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerExactRawTraceFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerEmitsBodyTokens, false);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAuditPassed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAuditedDeclarationCount, 56);
@@ -1733,6 +1740,9 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePaddingRunAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePaddingRun.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean',
     'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
@@ -1880,6 +1890,8 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'CookLevin.BuilderDynamicTokenCursorStep composes that complete first-clause machine')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderFirstClausePaddingRun composes the preceding one-slot cursor step')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderFullScheduleCursorController replaces continued fixed-slot control extension')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
