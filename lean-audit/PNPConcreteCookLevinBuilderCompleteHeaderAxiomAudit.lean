@@ -47,6 +47,7 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.rules_length
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.machine_acceptState_ne_rejectState
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.rules_pairwise_query_distinct
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.rule_source_ne_acceptState
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.findWorkRule_prefix_of_some
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.findWorkRule_evaluator_of_some
 #print axioms PNP.Concrete.CookLevin.BuilderCompleteHeader.findWorkRule_controller_of_some

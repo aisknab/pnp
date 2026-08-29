@@ -96,6 +96,7 @@ const HEADER_HEADS = Object.freeze([
   ['def', 'machine'], ['theorem', 'rules_length'],
   ['theorem', 'machine_acceptState_ne_rejectState'],
   ['theorem', 'rules_pairwise_query_distinct'],
+  ['theorem', 'rule_source_ne_acceptState'],
   ['theorem', 'findWorkRule_prefix_of_some'],
   ['theorem', 'findWorkRule_evaluator_of_some'],
   ['theorem', 'findWorkRule_controller_of_some'],
@@ -264,11 +265,11 @@ test('kernel transcripts cover every public declaration exactly once', async () 
     text0(UNARY_AUDIT), text0(HEADER_AUDIT),
   ]);
   assert.equal(UNARY_HEADS.length, 74);
-  assert.equal(HEADER_HEADS.length, 84);
+  assert.equal(HEADER_HEADS.length, 85);
   assert.equal(printed0(unaryAudit).length, 74);
   assert.equal(new Set(printed0(unaryAudit)).size, 74);
-  assert.equal(printed0(headerAudit).length, 84);
-  assert.equal(new Set(printed0(headerAudit)).size, 84);
+  assert.equal(printed0(headerAudit).length, 85);
+  assert.equal(new Set(printed0(headerAudit)).size, 85);
   assert.deepEqual(imports0(unaryAudit), ['PNP']);
   assert.deepEqual(imports0(headerAudit), ['PNP']);
   assert.ok(printed0(unaryAudit).every((name) =>

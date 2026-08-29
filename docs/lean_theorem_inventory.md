@@ -278,6 +278,19 @@ remain supplied or open. Formal artefact coverage is 182 of 184 while the
 risk-weighted estimate remains 35 percent and all five global gates remain
 open.
 
+M207 adds the exact PkgC restoration-coverage charge-descent endpoint. It
+derives one strict `chargeSize`-coordinate rank transition from M206's
+successful exact ambient embedding without caller-supplied rank or descent
+evidence. Hall, incompatibility and activation-mismatch routes remain open.
+
+M208 adds the all-input Cook-Levin full-schedule cursor-controller endpoint.
+The compiled theorem binds the exact semantic full traversal to one literal
+raw countdown trace, its terminal coordinate, explicit polynomial bound and
+fail-closed timing boundaries. The raw loop does not decode or emit each body
+entry, so the complete builder and packaged reduction remain open. Formal
+artefact coverage is 184 of 186 while the risk-weighted estimate remains 35
+percent and all five global gates remain open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

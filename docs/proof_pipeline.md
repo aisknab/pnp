@@ -343,6 +343,17 @@ Formal artefact coverage is 183 of 185, the risk-weighted estimate remains 35
 percent, and zero of five global gates are closed. See
 [lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md](lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md).
 
+M208 replaces further fixed-slot Cook-Levin control extension with one
+all-input full-schedule controller. The semantic cursor returns the entire
+canonical token schedule, and a deterministic finite raw machine computes and
+consumes the exact polynomial body-opportunity count before materializing the
+terminal coordinate within an explicit polynomial bound. The raw loop does not
+yet decode or emit each body entry, so the complete formula builder and
+packaged reduction remain open. Formal artefact coverage is 184 of 186, the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_full_schedule_cursor_controller.md](lean_cook_levin_builder_full_schedule_cursor_controller.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

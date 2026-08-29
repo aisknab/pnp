@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207`, 183 of 185
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208`, 184 of 186
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M207 |
+| Track | Available | Earned at M208 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M207 risk-weighted proof completion estimate is therefore 35 percent, with
+The M208 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -295,6 +295,22 @@ data remain supplied; and the remainder is not proved empty. No fixed
 checkpoint or global gate closes. Coverage becomes 183 of 185 while the score
 remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
 five gates remain open. No retrospective score was invented.
+
+M208 replaces continued fixed-slot Cook-Levin control extension with one
+all-input full-schedule controller. The verifier-derived polynomial body count
+covers every rectangular clause-token opportunity plus final `Finish`; the
+semantic cursor returns the complete canonical token schedule and encoded
+formula. One deterministic finite raw machine composes the complete header,
+generated count and terminal-coordinate evaluators, three total bridges and
+the fixed positive countdown table. It consumes the arbitrary count exactly,
+materializes the terminal coordinate, accepts within an explicit input-size
+polynomial bound and remains fail-closed for malformed countdown geometry, the
+unlaunched header endpoint and one-step-short fuel. The raw loop does not yet
+decode or emit each visited entry, so the complete builder, `RawRefinement` and
+packaged `PolynomialReduction` remain open. No fixed checkpoint or global gate
+closes. Coverage becomes 184 of 186 while the score remains 35 percent, the
+uncertainty range remains 20 to 40 percent, and all five gates remain open. No
+retrospective score was invented.
 
 ## Changing the score
 

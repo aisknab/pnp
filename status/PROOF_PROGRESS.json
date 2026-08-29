@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208",
   "lastReviewedDate": "2026-08-29",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 183,
-    "totalRows": 185,
+    "earnedRows": 184,
+    "totalRows": 186,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -163,12 +163,13 @@
           "evidence": [
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-first-clause-prefix" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-full-schedule-cursor-controller" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes and fixed cursor steps are checked, while the status correctly keeps the full builder false.",
-          "remainingLimitation": "The complete uniform formula builder and packaged reduction are not yet formalized.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "Many literal raw-machine prefixes are checked, and M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, while the status correctly keeps the full builder false.",
+          "remainingLimitation": "The M208 raw loop controls every body opportunity but does not decode or emit each visited entry; the complete formula builder and packaged reduction remain unformalized.",
+          "lastReviewedDate": "2026-08-29"
         },
         {
           "id": "reductions-report-locked-nand-linkage",
@@ -190,13 +191,14 @@
           "points": 3,
           "status": "open",
           "evidence": [
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "The checked status explicitly records both the complete builder and packaged polynomial reduction as false.",
-          "remainingLimitation": "All required formula positions must be emitted by one uniform polynomial machine.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "M208 earns a uniform all-position control scaffold, but the checked status explicitly records both the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "The controller must be extended with a literal raw decoder and emitter for every visited entry, then packaged with RawRefinement and the concrete PolynomialReduction.",
+          "lastReviewedDate": "2026-08-29"
         },
         {
           "id": "reductions-concrete-np-hardness",
@@ -1065,6 +1067,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M207 upgrades M206's successful ambient-extraction branch to an exact computed rank transition. Unsigned BN4 charge is the sum of every cell mass, is additive under concatenation and invariant under exact permutation. The coverage-derived cancellation subledger has charge 2 times the combined lengths of the two nonempty separating consumers and is therefore strictly positive. M206's exact multiset embedding decomposes ambient charge into that removed charge plus remainder charge, so the remainder strictly decreases the eighth chargeSize coordinate of TerminalResidualRank for every fixed assignment of the other nine coordinates while the complete canonical residual ledger is preserved. No rank, inequality, descent proof or success flag is supplied. Hall, ambient-incompatibility and activation-mismatch branches remain explicit diagnostics rather than complete global routes, the remainder is not proved empty, and terminal, source, restoration, ambient, semantic, Packet and HB data remain supplied. Therefore complete terminal-input derivation, PkgC/BN3--BN6 integration, global route coverage, HN/BUD/HB semantic completeness, manuscript-wide SaturatePositive and BCELReady, unconditional ZeroSlack, exact polynomial PCCMin and every global gate remain open. Formal artefact coverage becomes 183 of 185, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208",
+      "formalArtefactCoverage": { "earnedRows": 184, "totalRows": 186 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M208 replaces continued fixed-slot Cook-Levin control extension with one all-input full-schedule controller. The exact polynomial body-opportunity count covers every rectangular clause-token slot plus final Finish; the semantic cursor traverses the complete canonical schedule and emits the canonical encoded formula. One deterministic finite raw machine composes the complete header, generated count and terminal-coordinate evaluators, three total bridges and the fixed positive countdown table. It consumes the arbitrary count exactly, materializes the terminal coordinate, accepts within an explicit input-size polynomial bound and remains fail-closed for malformed countdown geometry, the unlaunched header endpoint and one-step-short fuel. The raw loop does not decode or emit each visited body entry, so the complete builder, RawRefinement and packaged PolynomialReduction remain false. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 184 of 186, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

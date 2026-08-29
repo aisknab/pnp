@@ -2962,6 +2962,55 @@ canonical residual ledger is preserved.
 
 ---
 
+### M208 Cook-Levin full-schedule cursor controller
+
+**Claim**
+
+For every concrete verifier and raw input, one verifier-derived polynomial
+counts all token opportunities after the padded header. A semantic cursor
+returns the full canonical token schedule, while one deterministic finite raw
+controller consumes that arbitrary count, materializes the exact terminal
+coordinate, and accepts within an explicit input-size polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderFullScheduleCursorController.lean.
+- lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean.
+- audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the body count is `clauseCount * tokensPerClause + 1`, not a fixed
+   slot count or supplied trace length.
+2. Confirm the initial body coordinate plus that count equals the canonical
+   terminal token coordinate.
+3. Confirm the semantic run returns the entire canonical token schedule and
+   emits `encodeCNFTokens problem.formula`.
+4. Confirm the raw table contains the complete-header machine, generated count
+   and terminal evaluators, fixed countdown table, and exactly three total
+   bridges under collision-free state renaming.
+5. Confirm the external polynomial covers all component work and the complete
+   input-dependent countdown.
+6. Confirm malformed countdown geometry, the unlaunched header endpoint, and
+   one-step-short fuel remain timeout.
+
+**What would count as a refutation or material defect**
+
+- The raw controller reads the canonical formula or token schedule from host
+  definitions instead of its finite tape state.
+- The opportunity count is fixed, caller supplied, or omits padding or final
+  `Finish`.
+- The semantic and raw endpoints stop at different coordinates.
+- A missing bridge or rule collision permits an early global halt.
+- The countdown controller is described as a raw decoder or emitter even
+  though it does not inspect or append the visited body entries.
+- M208 is credited as the complete builder, packaged reduction, CNFSAT
+  NP-completeness, CNFSAT in P, a global gate, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

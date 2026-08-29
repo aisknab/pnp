@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-207",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-29-208",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -247,6 +247,7 @@
     "PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workBoundedDecide_accept": "a10b7df091f941dd40f42e69ec94306deda2bdcfa02daf6f59294956ff969b9c",
     "PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.workRunExact": "a023c1357be86f78812d0c237385168e0118446d37a7f7d975dcb303e49a6bd5",
     "PNP.Concrete.CookLevin.BuilderFirstClausePaddingRun.work_one_step_short_timeout": "acf0af0b30b9f36c737d02adc55054f9ff2607fe3907fe981ff2ae7039e39985",
+    "PNP.Concrete.CookLevin.BuilderFullScheduleCursorController.cook_levin_full_schedule_cursor_controller_checked_complete": "43e0a8a651dea0dba61e661579405cd081a7ec33df48be4575cc4b3729bdbc95",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents": "22f2b5433d277971dd68d297a0ef268965c668881c237b7b0beaaea393fc3393",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState": "bc337e8ad3997c97419ede5fe2d70226bfc7b2008c7ffc388133177ca20bed06",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length": "406a7220601b34561d5544d8a3ad63daf6e061a67b981c0aa4474daab5a28687",
@@ -3165,7 +3166,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "00219f5c58c6490abf6c83a8b4b826d11cb4380b55627afa6f41a96d5f3d4265",
+  "milestoneSourceClosureSha256": "da08e94d3a8a765bc7d1735a82178813e338f04d24832b7bad37c1a740e8adc9",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -3984,6 +3985,16 @@
       ],
       "scope": "For every fixed concrete polynomial-time verifier, one literal finite work machine composes the preceding first-clause cursor step with structurally generated unary evaluators for D = (FormulaVariableSlotBound - 1) * (FormulaVariableSlotBound + 6) and the second-clause coordinate, plus one fixed 25-rule countdown controller. Its table has exactly 1244 plus the six inherited and generated evaluator rule counts. Every raw input follows an exact all-input trace, preserves the complete first-clause output, traverses all D remaining first-clause padding coordinates without emitting a token, and reaches FormulaVariableSlotBound + 1 + FormulaTokensPerClause, where direct schedule lookup is proved to return Sep. The recursive specification run agrees at every padding coordinate and the following specification step observes Sep. The compiled exact run has an explicit external input-size polynomial bound, accepts within that bound, and remains fail-closed for malformed countdown scratch/root states, the unlaunched prefix endpoint, and one-step-short fuel. All 83 public declarations plus one predecessor transport theorem are axiom-audited: 37 have empty closure, 11 use only propext, and 36 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "Cook-Levin first-clause remaining-padding run"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-full-schedule-cursor-controller",
+      "nonClaim": "This milestone provides a uniform control scaffold for the complete input-dependent Cook-Levin token schedule, but the raw loop does not decode or emit the visited body entries. It is not the complete raw formula builder or its FunctionProgram.RawRefinement, does not package the concrete Cook-Levin PolynomialReduction, does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, does not close a global gate, and does not prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderFullScheduleCursorController.cook_levin_full_schedule_cursor_controller_checked_complete"
+      ],
+      "scope": "For every concrete polynomial-time verifier and raw input, the exact polynomial body-opportunity count equals the complete token schedule after the padded unary header. A semantic cursor returns the full canonical schedule and emitted formula. One deterministic finite raw machine composes the complete header, generated count and terminal-coordinate evaluators, and a fixed positive countdown table. It consumes the arbitrary body count exactly, materializes the unique terminal coordinate, accepts within an explicit input-size polynomial bound, and remains fail-closed for malformed countdown geometry, the unlaunched header endpoint, and one-step-short fuel.",
+      "title": "Uniform Cook-Levin full-schedule cursor controller"
     },
     {
       "classification": "formalized-foundation-only",
