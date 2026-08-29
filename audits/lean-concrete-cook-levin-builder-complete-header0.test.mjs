@@ -280,12 +280,13 @@ test('kernel transcripts cover every public declaration exactly once', async () 
 
 test('root, verifier, workflow, regression, and documentation publish the milestone',
   async () => {
-    const [root, packageText, verifier, workflow, regression, docs] =
+    const [root, packageText, verifier, workflow, regression, docs, headerAudit] =
       await Promise.all([
         text0('lean/PNP.lean'), text0('package.json'),
         text0('scripts/pnp-verify-all.mjs'),
         text0('.github/workflows/lean-bridge.yml'), text0(REGRESSION),
         text0('docs/lean_cook_levin_builder_complete_header.md'),
+        text0(HEADER_AUDIT),
       ]);
     assert.ok(imports0(root).includes(
       'PNP.Concrete.CookLevinBuilderUnaryPolynomial'));
@@ -299,6 +300,21 @@ test('root, verifier, workflow, regression, and documentation publish the milest
       /PNPConcreteCookLevinBuilderCompleteHeaderAxiomAudit\.lean/u);
     assert.match(workflow,
       /PNPConcreteCookLevinBuilderCompleteHeader\.lean/u);
+    const stepStart = workflow.indexOf(
+      '- name: Print Cook-Levin complete-header builder axiom closure');
+    const stepEnd = workflow.indexOf('\n      - name:', stepStart + 1);
+    assert.ok(stepStart >= 0);
+    const headerStep = workflow.slice(stepStart,
+      stepEnd >= 0 ? stepEnd : workflow.length);
+    const declarationCount = headerStep.match(/grep -Ec [^\n]+\)" -eq (\d+)/u);
+    assert.ok(declarationCount);
+    assert.equal(Number(declarationCount[1]), printed0(headerAudit).length);
+    const closureCounts = [...headerStep.matchAll(
+      /grep -Fc '(?:does not depend on any axioms|depends on axioms: \[[^\n]+\])'\)" -eq (\d+)/gu,
+    )].map((match) => Number(match[1]));
+    assert.equal(closureCounts.length, 3);
+    assert.equal(closureCounts.reduce((total, count) => total + count, 0),
+      printed0(headerAudit).length);
     assert.match(regression, /workSteps \(inputOnlyProblem \[\]\) = 2379/u);
     assert.match(regression, /rawTimeBound inputOnlyVerifier/u);
     assert.match(regression, /work_one_step_short_timeout/u);
