@@ -1,0 +1,55 @@
+import PNP
+
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.OuterRoute
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.postHeaderSlotDirect
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.outerRoute
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.formulaTokenSlotDirect_route
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.outerRoute_eq_header_iff
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.outerRoute_eq_postHeader_iff
+
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.unitSymbol
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.separatorSymbol
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.endSymbol
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.coordinateMark
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.boundaryMark
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.leftBoundary
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rules
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.machine
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rules_length
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rules_pairwise_query_distinct
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.machine_acceptState_ne_rejectState
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rule_source_ne_acceptState
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.comparisonWord
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.comparisonTape
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.loopConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.ComparisonResult
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.ComparisonResult.isLess
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.resultConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.compareResult
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.loopSteps
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.loop_workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.compareResult_isLess_iff
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.resultConfiguration_state
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.workSteps
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.inputTape
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.finalConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.workRunExact
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.finalConfiguration_accept_iff
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.finalConfiguration_reject_iff
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.finalConfiguration_isHalted
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.run_compile_exact
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.loopSteps_le
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.workSteps_le
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rawTimeBound_eval
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.rawTimeBound_le
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.run_compile_rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.workBoundedDecide_eq
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.work_one_step_short_timeout
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.malformedConfiguration
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.malformed_enters_dead
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.deadState_workStep
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.RawRouter.malformed_timeout
+
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.rawRouter_accept_iff_header
+#print axioms PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.cook_levin_arbitrary_slot_header_router_checked_complete

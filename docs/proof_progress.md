@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208`, 184 of 186
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209`, 185 of 187
 current scoped rows are earned, or 98.9 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M208 |
+| Track | Available | Earned at M209 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M208 risk-weighted proof completion estimate is therefore 35 percent, with
+The M209 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -311,6 +311,18 @@ packaged `PolynomialReduction` remain open. No fixed checkpoint or global gate
 closes. Coverage becomes 184 of 186 while the score remains 35 percent, the
 uncertainty range remains 20 to 40 percent, and all five gates remain open. No
 retrospective score was invented.
+
+M209 adds the first non-repeatable raw decoder layer above the complete-schedule
+controller. One fixed 54-rule deterministic machine compares every supplied
+natural coordinate with the exact problem-derived first-body boundary. The raw
+verdict agrees with the semantic top-level direct-slot route, every in-range
+coordinate compiles within `36 * terminalSlotPolynomial^2`, and one-step-short
+fuel or malformed symbols remain timeout. The router does not decode the
+post-header clause/slot quotient or emit a body token, so the complete builder,
+`RawRefinement`, and packaged `PolynomialReduction` remain open. No fixed
+checkpoint or global gate closes. Coverage becomes 185 of 187 while the score
+remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
+five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

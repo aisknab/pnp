@@ -174,6 +174,15 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerExternalInputSizePolynomialFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderFullScheduleCursorControllerEmitsBodyTokens, false);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterAuditedDeclarationCount, 51);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterLiteralRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterExactRawTraceFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterExternalInputSizePolynomialFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate, false);
+  assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterEmitsBodyTokens, false);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAuditPassed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAuditedDeclarationCount, 56);
@@ -1743,6 +1752,9 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean',
     'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
@@ -1892,6 +1904,8 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'CookLevin.BuilderFirstClausePaddingRun composes the preceding one-slot cursor step')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderFullScheduleCursorController replaces continued fixed-slot control extension')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderArbitrarySlotHeaderRouter is the first non-repeatable raw decoder layer')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(

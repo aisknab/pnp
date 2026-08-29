@@ -354,6 +354,16 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_full_schedule_cursor_controller.md](lean_cook_levin_builder_full_schedule_cursor_controller.md).
 
+M209 adds the first uniform raw interpretation layer for arbitrary schedule
+coordinates. One fixed 54-rule comparator chooses the exact header versus
+post-header branch, agrees with the top-level direct lookup, and has exact
+accept/reject, in-range polynomial compiled-time, one-step-short, and malformed
+input theorems. It does not decode the post-header clause/slot quotient or emit
+a body token, so the complete formula builder and packaged reduction remain
+open. Formal artefact coverage is 185 of 187, the risk-weighted estimate
+remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_arbitrary_slot_header_router.md](lean_cook_levin_builder_arbitrary_slot_header_router.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

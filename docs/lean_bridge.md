@@ -2011,6 +2011,18 @@ remain open. Formal artefact coverage is 184 of 186, the risk-weighted estimate
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_full_schedule_cursor_controller.md](./lean_cook_levin_builder_full_schedule_cursor_controller.md).
 
+M209 adds the first uniform raw decoder branch above that controller. One fixed
+54-rule comparator routes every arbitrary coordinate at the exact
+problem-derived first-body boundary, agrees with the top-level direct-slot
+semantics, rejects equality and later coordinates, and compiles within
+`36 * terminalSlotPolynomial^2` for every in-range coordinate. One-step-short
+fuel and malformed symbols remain timeout. It does not decode the post-header
+quotient/remainder or emit a body token, so the complete builder,
+`RawRefinement`, and packaged reduction remain open. Formal artefact coverage
+is 185 of 187, the risk-weighted estimate remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_arbitrary_slot_header_router.md](./lean_cook_levin_builder_arbitrary_slot_header_router.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2085,7 +2097,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Extend the M208 full-schedule controller with the raw slot decoder and emitter, then package the complete Cook--Levin polynomial reduction.
+2. Extend the M209 outer router with a uniform post-header clause/slot decoder and token emitter, then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

@@ -291,6 +291,15 @@ entry, so the complete builder and packaged reduction remain open. Formal
 artefact coverage is 184 of 186 while the risk-weighted estimate remains 35
 percent and all five global gates remain open.
 
+M209 adds the arbitrary-slot Cook-Levin header-router endpoint. The compiled
+theorem binds exact top-level direct-slot semantics to one fixed 54-rule raw
+comparison trace, its accept/reject iff, verifier-derived polynomial compiled
+bound, one-step-short timeout, and fixed table size for every in-range
+coordinate. It does not decode the post-header clause/slot quotient or emit a
+body token, so the complete builder and packaged reduction remain open. Formal
+artefact coverage is 185 of 187 while the risk-weighted estimate remains 35
+percent and all five global gates remain open.
+
 ## Reviewed intermediate milestone bindings
 
 Intermediate milestone credit has a separate evidence boundary from theorem publication. Every

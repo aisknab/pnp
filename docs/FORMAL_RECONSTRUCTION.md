@@ -400,6 +400,19 @@ reduction remain open. Formal artefact coverage is 184 of 186, the score
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_full_schedule_cursor_controller.md](./lean_cook_levin_builder_full_schedule_cursor_controller.md).
 
+M209 adds the first uniform raw interpretation layer for that controller. One
+fixed 54-rule machine compares every supplied natural coordinate with the exact
+problem-derived first-body boundary. Its semantic result is definitionally
+faithful to the top-level direct-slot schedule, its exact trace accepts only
+the header branch and rejects equality or post-header coordinates, and every
+in-range coordinate compiles within `36 * terminalSlotPolynomial^2`. The
+one-step-short trace and malformed symbols remain timeout. The layer does not
+decode the post-header clause/slot quotient or emit a body token, so the
+complete builder, `RawRefinement`, and packaged reduction remain open. Formal
+artefact coverage is 185 of 187, the score remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_arbitrary_slot_header_router.md](./lean_cook_levin_builder_arbitrary_slot_header_router.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

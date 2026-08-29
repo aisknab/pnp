@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209",
   "lastReviewedDate": "2026-08-29",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 184,
-    "totalRows": 186,
+    "earnedRows": 185,
+    "totalRows": 187,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -164,11 +164,12 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-first-clause-prefix" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-full-schedule-cursor-controller" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-header-router" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked, and M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, while the status correctly keeps the full builder false.",
-          "remainingLimitation": "The M208 raw loop controls every body opportunity but does not decode or emit each visited entry; the complete formula builder and packaged reduction remain unformalized.",
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, and M209 adds the first uniform arbitrary-coordinate raw routing layer, while the status correctly keeps the full builder false.",
+          "remainingLimitation": "The M209 raw router separates header from post-header coordinates but does not decode the post-header quotient or emit each visited entry; the complete formula builder and packaged reduction remain unformalized.",
           "lastReviewedDate": "2026-08-29"
         },
         {
@@ -192,12 +193,14 @@
           "status": "open",
           "evidence": [
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold, but the checked status explicitly records both the complete builder and packaged polynomial reduction as false.",
-          "remainingLimitation": "The controller must be extended with a literal raw decoder and emitter for every visited entry, then packaged with RawRefinement and the concrete PolynomialReduction.",
+          "justification": "M208 earns a uniform all-position control scaffold and M209 earns the first fixed-table arbitrary-coordinate router, but the checked status explicitly records post-header decoding, the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "The router must decode the post-header quotient and within-clause slot, emit every selected entry, and then be packaged with RawRefinement and the concrete PolynomialReduction.",
           "lastReviewedDate": "2026-08-29"
         },
         {
@@ -1081,6 +1084,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M208 replaces continued fixed-slot Cook-Levin control extension with one all-input full-schedule controller. The exact polynomial body-opportunity count covers every rectangular clause-token slot plus final Finish; the semantic cursor traverses the complete canonical schedule and emits the canonical encoded formula. One deterministic finite raw machine composes the complete header, generated count and terminal-coordinate evaluators, three total bridges and the fixed positive countdown table. It consumes the arbitrary count exactly, materializes the terminal coordinate, accepts within an explicit input-size polynomial bound and remains fail-closed for malformed countdown geometry, the unlaunched header endpoint and one-step-short fuel. The raw loop does not decode or emit each visited body entry, so the complete builder, RawRefinement and packaged PolynomialReduction remain false. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 184 of 186, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209",
+      "formalArtefactCoverage": { "earnedRows": 185, "totalRows": 187 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M209 adds the first non-repeatable raw decoder layer after M208's complete-schedule controller. One fixed 54-rule deterministic work machine compares every supplied natural coordinate with the exact problem-derived first-body boundary; its exact trace accepts precisely the header branch, rejects equality and post-header coordinates, stays timeout one step short, and sends malformed symbols into a nonhalting dead state. The semantic route is definitionally faithful to formulaTokenSlotDirect, and every coordinate below the terminal slot compiles within the verifier-derived polynomial 36 * terminalSlotPolynomial^2. The router does not decode the post-header quotient into a clause and within-clause slot or emit a body token, so the complete builder, RawRefinement and packaged PolynomialReduction remain false. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 185 of 187, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
