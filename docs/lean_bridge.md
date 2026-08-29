@@ -2023,6 +2023,17 @@ is 185 of 187, the risk-weighted estimate remains 35 percent, and zero of five
 global gates are closed. See
 [lean_cook_levin_builder_arbitrary_slot_header_router.md](./lean_cook_levin_builder_arbitrary_slot_header_router.md).
 
+M210 refines every natural post-header remainder through a structurally
+recursive rectangle decoder. It returns the exact typed clause and
+within-clause coordinate, the unique `Finish`, or the out-of-range suffix;
+reconstructs each body coordinate; agrees with direct token lookup; and reads
+the exact shifted remainder from M209's checked raw result configuration. It
+does not implement raw division or raw body-token emission, so the complete raw
+builder, `RawRefinement`, and packaged reduction remain open. Formal artefact
+coverage is 186 of 188, the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed. See
+[lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md](./lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2097,7 +2108,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Extend the M209 outer router with a uniform post-header clause/slot decoder and token emitter, then package the complete Cook--Levin polynomial reduction.
+2. Implement a literal raw decoder that consumes M210's checked post-header remainder, derives the clause/slot coordinate, emits the selected body token or `Finish`, and then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

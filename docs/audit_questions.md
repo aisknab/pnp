@@ -3056,6 +3056,53 @@ encoded-input-size polynomial bound.
 
 ---
 
+### M210 Cook-Levin arbitrary-slot post-header decoder
+
+**Claim**
+
+For every natural post-header coordinate, a structurally recursive decoder
+returns the exact finite clause and within-clause position, the unique
+`Finish`, or the out-of-range suffix. Every body result reconstructs the input
+coordinate, the interpreted route agrees with direct token lookup, and a
+checked reader recovers the exact shifted remainder from M209's raw result
+configuration.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderArbitrarySlotPostHeaderDecoder.lean.
+- lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoder.lean.
+- audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm `rectangleCoordinate?` accepts an arbitrary natural coordinate and
+   recurses over the problem-derived rectangle rather than enumerating a fixed
+   list of named slots.
+2. Confirm `none` is equivalent to the full rectangle bound and every returned
+   pair reconstructs `clause * width + withinClause` exactly.
+3. Confirm body, `Finish`, and out-of-range routes are disjoint and agree with
+   the existing direct post-header token lookup.
+4. Confirm the raw-result reader returns nothing on the header branch and
+   exactly `coordinate - firstBodySlot` on equality and greater-than branches.
+5. Confirm no host token lookup was added to M209's fixed raw machine.
+6. Confirm all 22 declarations exclude project axioms and `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The decoder covers only named or bounded regression coordinates.
+- A body coordinate fails exact quotient/remainder reconstruction.
+- The final or out-of-range boundary is shifted by one.
+- Direct token lookup and the typed route disagree.
+- The raw-result reader trusts a supplied remainder rather than deriving it
+  from the checked configuration.
+- M210 is described as raw division or raw body-token emission, or credited as
+  the complete builder, packaged reduction, CNFSAT NP-completeness, CNFSAT in
+  P, a global gate, or `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

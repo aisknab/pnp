@@ -413,6 +413,18 @@ artefact coverage is 185 of 187, the score remains 35 percent, and zero of five
 global gates are closed. See
 [lean_cook_levin_builder_arbitrary_slot_header_router.md](./lean_cook_levin_builder_arbitrary_slot_header_router.md).
 
+M210 refines the post-header branch for every natural coordinate. A
+structurally recursive rectangle decoder returns the exact typed clause and
+within-clause position, the unique `Finish`, or the out-of-range suffix. It
+reconstructs every body coordinate and agrees with direct token lookup. A
+checked reader also recovers the exact shifted remainder already represented
+by M209's raw result configuration. The milestone does not implement raw
+division or raw body-token emission, so the complete raw builder,
+`RawRefinement`, and packaged reduction remain open. Formal artefact coverage
+is 186 of 188, the score remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md](./lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
