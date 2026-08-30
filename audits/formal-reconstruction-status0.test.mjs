@@ -192,6 +192,16 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawPostHeaderRemainderExtractionFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized, false);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount, 55);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerLiteralRawMachineFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerCompiledRawSimulationFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerExactQuotientRemainderDecodeFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerExternalUnaryEncodedSizeQuadraticBoundFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerFailClosedBoundaryTimeoutFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerRawBodyTokenEmissionFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAuditPassed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAuditedDeclarationCount, 56);
@@ -1767,6 +1777,9 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoder.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawDividerAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawDivider.lean',
     'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
@@ -1920,6 +1933,8 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'CookLevin.BuilderArbitrarySlotHeaderRouter is the first non-repeatable raw decoder layer')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderArbitrarySlotPostHeaderDecoder adds one unbounded semantic decoder')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderPostHeaderRawDivider adds one fixed 99-rule unary quotient/remainder machine')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(

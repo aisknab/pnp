@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-30-210",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-30-211",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -250,6 +250,7 @@
     "PNP.Concrete.CookLevin.BuilderFullScheduleCursorController.cook_levin_full_schedule_cursor_controller_checked_complete": "43e0a8a651dea0dba61e661579405cd081a7ec33df48be4575cc4b3729bdbc95",
     "PNP.Concrete.CookLevin.BuilderArbitrarySlotHeaderRouter.cook_levin_arbitrary_slot_header_router_checked_complete": "6794a8f27d2587b3c7960116aa3fdd0ac582ab71f9b90f39644c3a676d2cf2bf",
     "PNP.Concrete.CookLevin.BuilderArbitrarySlotPostHeaderDecoder.cook_levin_arbitrary_slot_post_header_decoder_checked_complete": "56ce613c7f034579229b382e1eb985564fd443a612579191daea72381d709d9c",
+    "PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.cook_levin_builder_post_header_raw_divider_checked_complete": "49eafb1e2702755c9a011c7dfcb37897242ab96021b03f64ea75fa621160ea75",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents": "22f2b5433d277971dd68d297a0ef268965c668881c237b7b0beaaea393fc3393",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState": "bc337e8ad3997c97419ede5fe2d70226bfc7b2008c7ffc388133177ca20bed06",
     "PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length": "406a7220601b34561d5544d8a3ad63daf6e061a67b981c0aa4474daab5a28687",
@@ -3168,7 +3169,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "15490107cc10167d19449858b9292e6c7a88353eb000a8cd02c6fe727c54823a",
+  "milestoneSourceClosureSha256": "4d18bf0b2d793f1686bd793001a8d5250418bd2ba874f2e8f377f975d0cba5da",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4017,6 +4018,16 @@
       ],
       "scope": "For every concrete polynomial-time verifier and every coordinate below its complete direct token schedule, the M209 outer route is refined by a structurally recursive all-coordinate post-header decoder. Every body result gives typed finite clause and within-clause coordinates that reconstruct the exact remainder; the unique Finish and out-of-range cases are characterized; and the interpreted route agrees with direct token lookup. A checked reader recovers the exact shifted remainder from every M209 raw comparison result while preserving M209's exact raw trace. All 22 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
       "title": "Uniform Cook-Levin arbitrary-slot post-header decoder"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-post-header-raw-divider",
+      "nonClaim": "This milestone proves a standalone fixed unary divider. It is not spliced onto M209's checked raw result, does not classify Finish or out-of-range routes, does not emit or append a Cook-Levin body token, and does not complete the raw formula builder or its FunctionProgram.RawRefinement. It does not package the concrete Cook-Levin PolynomialReduction, establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a global gate, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.cook_levin_builder_post_header_raw_divider_checked_complete"
+      ],
+      "scope": "For every natural dividend and positive unary width, one fixed 99-rule deterministic work machine reaches the exact natural quotient and strict remainder tape, reconstructs the dividend, compiles with exactly six raw transitions per certified work step, times out one step short, and satisfies an explicit quadratic bound in the complete unary encoded input length. The zero-width dispatcher returns none. M210 body coordinates instantiate the same decoded quotient and remainder. All 55 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "title": "Fixed Cook-Levin post-header raw quotient/remainder divider"
     },
     {
       "classification": "formalized-foundation-only",

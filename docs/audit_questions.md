@@ -3103,6 +3103,57 @@ configuration.
 
 ---
 
+
+### M211 Cook-Levin post-header raw divider
+
+**Claim**
+
+For every natural dividend and positive unary width, one fixed 99-rule work
+machine reaches a canonical terminal tape carrying the exact natural quotient
+and strict remainder. The result reconstructs the dividend, compiles with six
+raw transitions per work step, has a one-step-short timeout theorem, and obeys
+an explicit quadratic bound in the complete unary input length.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPostHeaderRawDivider.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawDividerAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawDivider.lean.
+- audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the literal table has 99 pairwise query-distinct rules and no rule
+   sourced from the accept state.
+2. Confirm `workRunExact` is quantified over arbitrary natural `dividend` and
+   `width`, with only the required `0 < width` premise.
+3. Confirm the terminal tape decodes to `(dividend / width, dividend % width)`,
+   reconstructs the dividend, and proves the remainder strictly below width.
+4. Confirm `run_compile_exact` uses exactly six raw transitions for every work
+   transition and `work_one_step_short_timeout` rejects one less unit of fuel.
+5. Confirm the bound is quadratic in `dividend + width + 1` and no exhaustive
+   subset, support, payload, or implementation enumeration occurs.
+6. Confirm the M210 body-route bridge decodes the exact clause and within-clause
+   coordinates without claiming that the raw machines are already spliced.
+7. Confirm all 55 public declarations exclude project axioms and
+   `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The machine or proof covers only fixed dividends, widths, or regression
+  fixtures.
+- Zero width reaches a public successful division result.
+- The accepted tape gives an off-by-one quotient or remainder, or fails exact
+  reconstruction.
+- The compiled trace, timeout boundary, or quadratic bound is misstated.
+- Hidden exhaustive enumeration is needed to construct or execute the result.
+- M211 is described as already consuming M209's raw result, emitting a body
+  token, completing the builder, closing a checkpoint or gate, proving CNFSAT
+  in P, or proving `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
