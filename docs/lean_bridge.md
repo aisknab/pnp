@@ -2070,6 +2070,19 @@ coverage is 189 of 191, the risk-weighted estimate remains 35 percent, and zero
 of five global gates are closed. See
 [lean_cook_levin_builder_post_header_raw_tape_bridge.md](./lean_cook_levin_builder_post_header_raw_tape_bridge.md).
 
+M214 continues from that exact divider tape with one fixed 180-rule literal
+post-divider classifier. It copies the problem-derived clause count from a
+restored workspace sidecar, preserves the full exterior and remainder ledger,
+and exposes the quotient to a shielded M209 comparator. Exact bridge and
+comparator traces compile at six raw steps per work step, time out one step
+short, agree with every in-range M210 body or unique `Finish` route, and fit
+one verifier-derived source-size polynomial. It still does not inspect, select,
+emit, or append the corresponding token or iterate the complete schedule, so
+the complete raw builder, `RawRefinement`, and packaged reduction remain
+open. Formal artefact coverage is 190 of 192, the risk-weighted estimate
+remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_post_divider_raw_route_classifier.md](./lean_cook_levin_builder_post_divider_raw_route_classifier.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2144,7 +2157,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Use M213's exact quotient/remainder tape to emit every selected body and `Finish` token, iterate the complete schedule, and then package the complete Cook--Levin polynomial reduction.
+2. Use M214's exact literal body/Finish classification to inspect, select and emit every token, iterate the complete schedule, and then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
