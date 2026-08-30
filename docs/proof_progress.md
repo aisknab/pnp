@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213`, 189 of 191
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-214`, 190 of 192
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M213 |
+| Track | Available | Earned at M214 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M213 risk-weighted proof completion estimate is therefore 35 percent, with
+The M214 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -375,6 +375,20 @@ packaged `PolynomialReduction`. No fixed checkpoint or global gate closes.
 Coverage becomes 189 of 191 while the score remains 35 percent, the uncertainty
 range remains 20 to 40 percent, and all five gates remain open. No retrospective
 score was invented.
+
+M214 closes the next literal post-divider routing boundary. One fixed
+collision-free 180-rule bridge consumes both exact M213 divider-terminal
+layouts, copies the exact problem-derived clause count from a restored
+workspace sidecar, preserves the exterior and remainder ledger, and exposes
+the quotient to a shielded M209 comparator. Exact bridge and comparator traces
+compile at six raw steps per work step, time out one step short, agree for every
+in-range coordinate with M210 body or Finish routing, and fit one
+verifier-derived source-size polynomial. It does not inspect, select, emit, or
+append the corresponding token, iterate the complete builder, provide
+`RawRefinement`, or package the `PolynomialReduction`. No fixed checkpoint
+or global gate closes. Coverage becomes 190 of 192 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
 
 ## Changing the score
 

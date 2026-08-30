@@ -3261,6 +3261,60 @@ verifier-derived source-size polynomial.
 
 ---
 
+### M214 Cook-Levin post-divider raw route classifier
+
+**Claim**
+
+For every concrete verifier tableau problem, in-range coordinate, safe
+exterior prefix, and finite workspace, one fixed collision-free 180-rule
+bridge consumes the exact M213 equality or greater-than divider-terminal tape.
+It copies the exact problem clause count from a restored sidecar, preserves the
+complete exterior and remainder ledger, constructs a shielded M209 comparison
+input from the quotient marks, and agrees with the exact M210 body or unique
+`Finish` route under one verifier-derived source-size polynomial.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPostDividerRawRouteClassifier.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifierAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifier.lean.
+- audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the two bridge inputs are exactly M213's equality and greater-than
+   terminal tapes, not a host-constructed comparator input.
+2. Confirm the clause count is copied from the problem-derived sidecar and the
+   sidecar, exterior, remainder ledger, and arbitrary workspace are preserved.
+3. Confirm the fixed bridge table is pairwise collision-free and its exact
+   trace works for arbitrary quotient, remainder, positive width, count,
+   exterior, and workspace.
+4. Confirm M209's comparator trace cannot cross the fresh boundary and its
+   exterior is preserved byte-for-byte.
+5. Confirm every in-range body route recovers the exact clause/token quotient
+   and remainder, equality gives the unique `Finish`, and out-of-range is
+   excluded.
+6. Confirm both traces compile at six raw transitions per work step, remain
+   nonhalting one step short, and share a source-input polynomial bound.
+7. Confirm all 85 public declarations exclude project axioms and
+   `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The bridge receives a supplied route, quotient, comparison tape, or
+  successful trace instead of deriving the physical result.
+- It reads the count from host data rather than the exact protected sidecar, or
+  fails to restore that sidecar.
+- It crosses, overwrites, reorders, or discards the M213 exterior, remainder
+  ledger, or arbitrary workspace.
+- Body or `Finish` classification disagrees with M210, a purported exact
+  trace halts early, or the bound is not uniform in source-input size.
+- M214 is described as a token emitter, complete builder, closed checkpoint or
+  gate, proof of CNFSAT in P, or proof of `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

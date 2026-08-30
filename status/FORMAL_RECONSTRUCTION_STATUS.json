@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-214",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -506,6 +506,18 @@
   "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeOneStepShortNonhaltingFormalized": true,
   "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeSourceSizePolynomialBoundFormalized": true,
   "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeRawBodyTokenEmissionFormalized": false,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierAxiomAuditPassed": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierAuditedDeclarationCount": 85,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierExactDividerTapeInputsFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierProblemClauseCountSidecarDerivedFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierArbitraryWorkspacePreservedFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierShieldedComparatorTraceFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierAllCoordinateBodyFinishAgreementFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierCompiledSimulationFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierOneStepShortNonhaltingFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierSourceSizePolynomialBoundFormalized": true,
+  "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierRawBodyTokenEmissionFormalized": false,
   "leanConcreteCookLevinBuilderDynamicCursorFormalized": false,
   "leanConcreteCookLevinFormulaBuilderFormalized": false,
   "leanConcreteCookLevinBuilderRawRefinementFormalized": false,
@@ -1581,6 +1593,7 @@
     "node --test audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs",
@@ -1692,6 +1705,8 @@
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifierAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifier.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean",
@@ -2203,6 +2218,7 @@
     "CookLevin.BuilderPostHeaderRawDivider adds one fixed 99-rule unary quotient/remainder machine. For every natural dividend and positive unary width it proves an exact accepting trace, exact six-transition raw compilation, decoded natural quotient and strict remainder, a one-step-short timeout boundary, and an explicit quadratic bound in the complete unary input length. The divider is standalone: it is not spliced onto M209 raw output, does not emit or append a Cook-Levin body token, and does not complete the raw formula builder, RawRefinement, PolynomialReduction, CNFSAT NP-hardness or in-P result, or P = NP.",
     "CookLevin.BuilderPostHeaderRawLaunch composes M209 remainder extraction, M210 route classification and M211 division through executable Lean orchestration for every natural coordinate. It preserves both exact machine traces, recovers body, Finish and out-of-range results, excludes out-of-range post-header routing inside the complete schedule, and bounds the summed compiled steps by one verifier-derived source-size polynomial. It is not a literal raw tape bridge, does not preserve the complete builder workspace through such a rewrite, emits no body or Finish token, and does not complete the raw formula builder, RawRefinement, PolynomialReduction, CNFSAT NP-hardness or in-P result, or P = NP.",
     "CookLevin.BuilderPostHeaderRawTapeBridge replaces M212's value-level handoff with one fixed 351-rule literal bridge from both exact M209 post-header terminal tapes into M211's shielded unary divider input. It preserves arbitrary exterior builder workspace, retains the exact bridge and divider traces, recovers the exact quotient and remainder after removing the exterior, compiles every checked work step to six raw steps, fails closed at zero width, times out one step short, covers every in-range coordinate without supplied route data, and has one verifier-derived source-size polynomial bound. It does not emit a body or Finish token, iterate the complete builder, provide RawRefinement, package the PolynomialReduction, prove CNFSAT NP-hard or in P, close a global gate, or prove P = NP.",
+    "CookLevin.BuilderPostDividerRawRouteClassifier closes the next literal post-divider routing boundary with one fixed 180-rule bridge. It consumes both exact M213 divider-terminal tapes, copies the exact problem-derived clause count from a restored workspace sidecar, preserves the complete exterior and remainder ledger, exposes the quotient to a shielded M209 comparator, and agrees for every in-range coordinate with M210 body or Finish routing. Both machines retain exact compiled traces, one-step-short nonhalting evidence, and one verifier-derived source-size polynomial bound. It does not inspect or emit a selected token, iterate the complete builder, provide RawRefinement, package the PolynomialReduction, prove CNFSAT NP-hard or in P, close a global gate, or prove P = NP.",
     "CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run with a selected 59-rule Sep appender, two total nine-symbol bridges, and the existing 45-rule cursor advance. Its literal table has 1366 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the canonical separator beginning clause two, advances the retained unary coordinate by one, and proves that the following direct token is F; its emitted bits equal encodedFormula.take (2 * (FormulaWidth + 13)). The external compiled bound is BuilderFirstClausePaddingRun.rawTimeBound + 246 + 24*n + 12*FormulaWidth + 12*cursorWord.length. The combined 56-declaration audit has 15 empty closures, 11 using only propext, and 30 using only propext and Quot.sound, never Classical.choice or a project axiom. Malformed appender tally/output, malformed cursor scratch, both unlaunched endpoints, and one-step-short fuel remain timeout. This is one fixed populated transition, not a general dynamic formula cursor, following-F or remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderSecondClauseFirstLiteralPrefix composes the complete second-clause separator prefix with two selected 59-rule F appenders, four total symbol-preserving bridges, and two copies of the existing 45-rule cursor advance. Its literal table has 1610 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable zero in clause two, retains the following negative-sign coordinate on variable one, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 15)). The external compiled bound is BuilderSecondClauseSeparatorStep.rawTimeBound + 564 + 48*n + 24*FormulaWidth + 24*cursorWord.length. The combined 87-declaration audit has 25 empty closures, 18 using only propext, and 44 using only propext and Quot.sound, never Classical.choice or a project axiom. All four pre-launch endpoints, malformed appender tally/output in both copies, malformed cursor scratch in both copies, and one-step-short fuel remain timeout. This is one fixed negative literal, not a complete clause-two emitter, general dynamic formula cursor, remaining-body emitter, complete builder, RawRefinement, PolynomialReduction, CNFSAT NP-completeness or in-P result, or P = NP theorem.",
     "CookLevin.BuilderSecondClauseSecondLiteralPrefix composes the complete clause-two first-literal prefix with selected 59-rule F, T, and F appenders, six total symbol-preserving bridges, and three copies of the existing 45-rule cursor advance. Its literal table has 1976 plus six inherited/generated unary-evaluator rule counts. Every raw bitstring emits the complete negative literal on variable one in clause two, retains the following Finish coordinate, and proves exact equality with encodedFormula.take (2 * (FormulaWidth + 18)). The external compiled bound is BuilderSecondClauseFirstLiteralPrefix.rawTimeBound + 1026 + 72*n + 36*FormulaWidth + 36*cursorWord.length. The combined 115-declaration audit has 34 empty closures, 25 using only propext, and 56 using only propext and Quot.sound, never Classical.choice or a project axiom. All six pre-launch endpoints, malformed appender tally/output in all three copies, malformed cursor scratch in all three copies, and one-step-short fuel remain timeout. This is one fixed negative literal and does not emit the clause terminator, complete clause two, implement a general dynamic formula cursor, emit the remaining body, construct a complete builder, provide RawRefinement or PolynomialReduction, prove CNFSAT NP-complete or in P, or prove P = NP.",
@@ -2355,7 +2371,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "db36b8c1ffff8bb05f228e6fb4d93a3322e406ef06fa375e616324074461bb63",
+    "actualSourceClosureSha256": "37c3a12aeb338b2f1d6ccb49a70857ce7808cab0de0f21e878b9eee471877b10",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2385,22 +2401,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-30-213",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-08-31-214",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "2e6ba6a92c3a0b87adcaf8a1ebcc51275e6c322ce1e79df23a89e34cf77418fb",
+  "leanTheoremInventorySha256": "5fd233a7bacc84f3e613c5bc46859c202d6deb29201c783a1ad3f0247ac91914",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 32557,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15585,
-  "leanTheoremInventoryTheoremCount": 16607,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 7909,
-  "leanTheoremInventorySourceClosureModuleCount": 333,
-  "leanSourceClosureSha256": "db36b8c1ffff8bb05f228e6fb4d93a3322e406ef06fa375e616324074461bb63",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-30-213",
+  "leanTheoremInventoryDeclarationCount": 32720,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 15690,
+  "leanTheoremInventoryTheoremCount": 16715,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 7949,
+  "leanTheoremInventorySourceClosureModuleCount": 334,
+  "leanSourceClosureSha256": "37c3a12aeb338b2f1d6ccb49a70857ce7808cab0de0f21e878b9eee471877b10",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-31-214",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "89accb46921ac3c1bf5e6a8dd3384f99ab7f64e78af3fcbae7685e7a148e5908",
+  "formalPublicationMapSha256": "9c5c36fb14a66ac5238afa375a38c44c4a333893196566477aefb91895db9ebf",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -10016,6 +10032,37 @@
           ],
           "actualKernelTypeSha256": "4471f7d515cd8fc13191d7228a74e226adb6ee9fcfa4277d13f38fef26880753",
           "expectedKernelTypeSha256": "4471f7d515cd8fc13191d7228a74e226adb6ee9fcfa4277d13f38fef26880753",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-post-divider-raw-route-classifier",
+      "nonClaim": "This milestone closes the literal post-divider body-versus-Finish route-classification handoff only. It does not inspect, select, emit, or append a Cook-Levin token, iterate the complete token schedule, complete the raw formula builder or its FunctionProgram.RawRefinement, or package the concrete Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPostDividerRawRouteClassifier.cook_levin_builder_post_divider_raw_route_classifier_checked_complete"
+      ],
+      "scope": "For every concrete verifier tableau problem, arbitrary safe exterior prefix and builder workspace, and in-range coordinate, one fixed collision-free 180-rule bridge consumes the exact M213 equality or greater-than divider-terminal tape, copies the exact problem-derived clause count from a restored sidecar, preserves the complete exterior and remainder ledger, and constructs a shielded M209 comparison input from the literal quotient marks. Exact bridge and comparator traces cannot cross their boundaries, compile at six raw steps per work step, time out one step short, agree with every M210 body or Finish route, and fit one verifier-derived source-size polynomial. All 85 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "title": "Literal Cook-Levin post-divider raw route classifier",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.BuilderPostDividerRawRouteClassifier.cook_levin_builder_post_divider_raw_route_classifier_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "59409490565859dd69d80adf3261d0942f5cd81d05d0703a160f7e82388dede6",
+          "expectedKernelTypeSha256": "59409490565859dd69d80adf3261d0942f5cd81d05d0703a160f7e82388dede6",
           "kernelTypeFingerprintMatches": true
         }
       ],
@@ -47635,7 +47682,7 @@
       "status": "not-formalized"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-30-213",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-08-31-214",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a5f15eccee5342c78ac315c46cea027dc39be0dad13e4e46dd5b41a78b1f3a3b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd2bb59e0165c99f6d31923a46912e996cd104ce46af980055205a03b22d683a8';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -223,6 +223,7 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.cook_levin_builder_post_header_raw_divider_checked_complete',
   'PNP.Concrete.CookLevin.BuilderPostHeaderRawLaunch.cook_levin_builder_post_header_raw_launch_checked_complete',
   'PNP.Concrete.CookLevin.BuilderPostHeaderRawTapeBridge.cook_levin_builder_post_header_raw_tape_bridge_checked_complete',
+  'PNP.Concrete.CookLevin.BuilderPostDividerRawRouteClassifier.cook_levin_builder_post_divider_raw_route_classifier_checked_complete',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length',
@@ -3190,7 +3191,7 @@ export function ValidateLeanTheoremInventory0(inventory) {
   if (inventory.kind !== 'PNPLeanTheoremInventory0' || inventory.version !== 0) {
     throw new Error('Lean theorem inventory kind/version mismatch');
   }
-  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-30-213') {
+  if (inventory.coordinate !== 'PNP-LEAN-THEOREM-INVENTORY-2026-08-31-214') {
     throw new Error('Lean theorem inventory coordinate mismatch');
   }
   if (inventory.leanToolchain !== 'leanprover/lean4:v4.31.0' || inventory.rootModule !== 'PNP') {
@@ -3467,7 +3468,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-30-213') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-08-31-214') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
