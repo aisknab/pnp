@@ -3154,6 +3154,59 @@ an explicit quadratic bound in the complete unary input length.
 
 ---
 
+### M212 Cook-Levin post-header raw launch
+
+**Claim**
+
+For every concrete verifier tableau problem and natural coordinate,
+executable Lean orchestration reads the exact shifted remainder from M209's
+checked terminal configuration and conditionally launches M211's exact fixed
+divider. It retains both exact traces, recovers every M210 body, `Finish`, and
+out-of-range result, excludes the out-of-range post-header branch for every
+coordinate inside the complete schedule, and has one verifier-derived
+source-size polynomial bound for the summed compiled work.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPostHeaderRawLaunch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawLaunchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean.
+- audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm `recoveredRemainder?` is applied to M209's exact terminal
+   configuration and equals the semantic outer route for every coordinate.
+2. Confirm the post-header branch invokes M211's `divide?` with the exact
+   problem-derived positive clause-token width.
+3. Confirm both `router_workRunExact` and `divider_workRunExact` occur in the
+   public endpoint without supplied execution transcripts.
+4. Confirm `RouteDecodeHolds` covers body, `Finish`, and out-of-range cases and
+   `inRange_launch` quantifies over the complete finite schedule.
+5. Confirm `stagedCompiledSteps_le_rawTimeBound` is uniform in the external
+   source-input length and does not enumerate finite semantic candidates.
+6. Confirm the endpoint has no supplied route certificate and the documentation
+   distinguishes orchestration from a literal tape-to-tape bridge.
+7. Confirm all 24 public declarations exclude project axioms and
+   `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The launch covers only fixed coordinates or regression fixtures.
+- A post-header result can launch the wrong remainder or a zero-width divider.
+- Any M210 route class is omitted or an in-range coordinate can remain
+  out-of-range.
+- The bound depends on a coordinate outside the proved complete-schedule
+  restriction or is not a source-size polynomial.
+- The endpoint needs a supplied route, quotient, remainder, or successful
+  execution trace.
+- M212 is described as a literal raw tape bridge, token emitter, complete
+  builder, closed checkpoint or gate, proof of CNFSAT in P, or proof of
+  `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

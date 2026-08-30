@@ -437,6 +437,18 @@ artefact coverage is 187 of 189, the score remains 35 percent, and zero of five
 global gates are closed. See
 [lean_cook_levin_builder_post_header_raw_divider.md](./lean_cook_levin_builder_post_header_raw_divider.md).
 
+M212 joins the checked M209 remainder reader, M210 all-coordinate route
+classifier, and M211 divider through executable Lean orchestration. Every
+natural coordinate derives its header or post-header launch without a supplied
+route witness; both exact traces are retained; body, `Finish`, and out-of-range
+results are recovered; and one verifier-derived source-size polynomial bounds
+the combined compiled work. The handoff is not yet a literal raw tape rewrite,
+does not preserve the complete builder workspace through such a bridge, and
+emits no body or `Finish` token, so the complete raw builder, `RawRefinement`,
+and packaged reduction remain open. Formal artefact coverage is 188 of 190,
+the score remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_launch.md](./lean_cook_levin_builder_post_header_raw_launch.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
