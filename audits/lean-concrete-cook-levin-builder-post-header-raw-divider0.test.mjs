@@ -143,15 +143,18 @@ test('kernel transcript covers every public M211 declaration exactly once',
 test('root, durable verification, status, publication, and docs publish M211',
   async () => {
     const [root, packageText, verifier, workflow, regression, docs,
-      statusText, publicationText, progressText, inventoryText] =
-      await Promise.all([
+      readme, auditQuestions, statusText, publicationText, progressText,
+      inventoryText, axiomAuditText, compiledInventoryText] =
+        await Promise.all([
         text0('lean/PNP.lean'), text0('package.json'),
         text0('scripts/pnp-verify-all.mjs'),
         text0('.github/workflows/lean-bridge.yml'), text0(REGRESSION),
-        text0(DOCS), text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
+        text0(DOCS), text0('README.md'), text0('docs/audit_questions.md'),
+        text0('status/FORMAL_RECONSTRUCTION_STATUS.json'),
         text0('publication/FORMAL_PUBLICATION_MAP.json'),
         text0('status/PROOF_PROGRESS.json'),
-        text0('lean-audit/PNPTheoremInventory.lean'),
+        text0('lean-audit/PNPTheoremInventory.lean'), text0(AXIOM_AUDIT),
+        text0('status/LEAN_THEOREM_INVENTORY.json'),
       ]);
     const status = JSON.parse(statusText);
     const publication = JSON.parse(publicationText);
@@ -170,6 +173,28 @@ test('root, durable verification, status, publication, and docs publish M211',
       .flatMap((track) => track.checkpoints)
       .find((checkpoint) =>
         checkpoint.id === 'reductions-complete-cook-levin-builder');
+    const declarationCount = declarations0(await text0(SOURCE)).length;
+    const compiledInventory = JSON.parse(compiledInventoryText);
+    const declarationByName = new Map(compiledInventory.declarations
+      .map((entry) => [entry.name, entry]));
+    const auditedRows = printed0(axiomAuditText).map((name) => {
+      const row = declarationByName.get(name);
+      assert.ok(row);
+      return row;
+    });
+    const closureCounts = new Map();
+    for (const row of auditedRows) {
+      const key = JSON.stringify([...row.axioms].sort());
+      closureCounts.set(key, (closureCounts.get(key) ?? 0) + 1);
+    }
+    const emptyClosureCount = closureCounts.get('[]') ?? 0;
+    const propextOnlyCount = closureCounts.get('["propext"]') ?? 0;
+    const propextQuotSoundCount =
+      closureCounts.get('["Quot.sound","propext"]') ?? 0;
+    assert.equal(auditedRows.length, declarationCount);
+    assert.equal(closureCounts.size, 3);
+    const readmeMilestoneRow = readme.split('\n').find((line) =>
+      line.includes('Fixed Cook–Levin post-header raw divider'));
     assert.ok(imports0(root).includes(
       'PNP.Concrete.CookLevinBuilderPostHeaderRawDivider'));
     assert.ok(packageText.includes(TEST));
@@ -181,6 +206,18 @@ test('root, durable verification, status, publication, and docs publish M211',
     assert.match(regression,
       /cook_levin_builder_post_header_raw_divider_checked_complete/u);
     assert.match(docs, /standalone raw arithmetic kernel/u);
+    assert.ok(docs.includes(
+      `every one of the ${declarationCount} public declarations`));
+    assert.ok(docs.includes(
+      `- ${emptyClosureCount} declarations with empty axiom closure;`));
+    assert.ok(docs.includes('- ' + propextOnlyCount
+      + ' declarations using only `propext`;'));
+    assert.ok(docs.includes('- ' + propextQuotSoundCount
+      + ' declarations using only `propext` and `Quot.sound`.'));
+    assert.ok(auditQuestions.includes(
+      `Confirm all ${declarationCount} public declarations`));
+    assert.ok(readmeMilestoneRow?.includes(
+      `All ${declarationCount} public declarations`));
     assert.equal(inventoryText.includes(ENDPOINT), true);
     assert.equal(
       status.leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized,
@@ -190,7 +227,7 @@ test('root, durable verification, status, publication, and docs publish M211',
       true);
     assert.equal(
       status.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount,
-      declarations0(await text0(SOURCE)).length);
+      declarationCount);
     assert.equal(
       status.leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized,
       true);
@@ -202,6 +239,9 @@ test('root, durable verification, status, publication, and docs publish M211',
       false);
     assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
     assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
+    assert.ok(milestone?.scope.includes(
+      `All ${declarationCount} public declarations`));
+    assert.equal(publishedMilestone?.scope, milestone?.scope);
     assert.equal(publishedMilestone?.earned, true);
     assert.equal(builderCheckpoint?.status, 'open');
     assert.deepEqual(review?.formalArtefactCoverage,

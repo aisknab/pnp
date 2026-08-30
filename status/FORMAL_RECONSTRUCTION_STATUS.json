@@ -2400,7 +2400,7 @@
   "leanSourceClosureSha256": "db36b8c1ffff8bb05f228e6fb4d93a3322e406ef06fa375e616324074461bb63",
   "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-30-213",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "640fd23be192fc3b83a3e60076419430f165d1a3a08053c14eeb4429f31f1a3d",
+  "formalPublicationMapSha256": "89accb46921ac3c1bf5e6a8dd3384f99ab7f64e78af3fcbae7685e7a148e5908",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9941,7 +9941,7 @@
       "requiredTheorems": [
         "PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.cook_levin_builder_post_header_raw_divider_checked_complete"
       ],
-      "scope": "For every natural dividend and positive unary width, one fixed 99-rule deterministic work machine reaches the exact natural quotient and strict remainder tape, reconstructs the dividend, compiles with exactly six raw transitions per certified work step, times out one step short, and satisfies an explicit quadratic bound in the complete unary encoded input length. The zero-width dispatcher returns none. M210 body coordinates instantiate the same decoded quotient and remainder. All 55 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "scope": "For every natural dividend and positive unary width, one fixed 99-rule deterministic work machine reaches the exact natural quotient and strict remainder tape, reconstructs the dividend, compiles with exactly six raw transitions per certified work step, times out one step short, and satisfies an explicit quadratic bound in the complete unary encoded input length. The zero-width dispatcher returns none. M210 body coordinates instantiate the same decoded quotient and remainder. All 57 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
       "title": "Fixed Cook-Levin post-header raw quotient/remainder divider",
       "theoremRows": [
         {
