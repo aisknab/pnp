@@ -86,10 +86,10 @@ one step less than the exact work budget returns timeout.
 
 ## Proof authority
 
-The axiom transcript prints every one of the 55 public declarations exactly
+The axiom transcript prints every one of the 57 public declarations exactly
 once. The current closure distribution is:
 
-- 31 declarations with empty axiom closure;
+- 33 declarations with empty axiom closure;
 - 3 declarations using only `propext`; and
 - 21 declarations using only `propext` and `Quot.sound`.
 

@@ -3136,7 +3136,7 @@ an explicit quadratic bound in the complete unary input length.
    subset, support, payload, or implementation enumeration occurs.
 6. Confirm the M210 body-route bridge decodes the exact clause and within-clause
    coordinates without claiming that the raw machines are already spliced.
-7. Confirm all 55 public declarations exclude project axioms and
+7. Confirm all 57 public declarations exclude project axioms and
    `Classical.choice`.
 
 **What would count as a refutation or material defect**
