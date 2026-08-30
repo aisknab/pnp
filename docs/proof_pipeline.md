@@ -386,6 +386,20 @@ remain open. Formal artefact coverage is 187 of 189, the risk-weighted estimate
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_post_header_raw_divider.md](lean_cook_levin_builder_post_header_raw_divider.md).
 
+M212 joins M209's exact checked remainder, M210's all-coordinate semantic route
+classifier, and M211's exact divider through executable Lean orchestration.
+For every natural coordinate it derives the header or post-header launch
+without supplied route data, retains both exact traces, recovers body,
+`Finish`, and out-of-range results, excludes out-of-range post-header results
+inside the complete schedule, and bounds the combined compiled work by one
+verifier-derived source-size polynomial. It is not a literal raw tape rewrite,
+does not preserve the complete builder workspace through such a bridge, and
+emits no body or `Finish` token, so the complete raw formula builder and
+packaged reduction remain open. Formal artefact coverage is 188 of 190, the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_post_header_raw_launch.md](lean_cook_levin_builder_post_header_raw_launch.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

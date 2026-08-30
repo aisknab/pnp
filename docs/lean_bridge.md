@@ -2046,6 +2046,18 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_post_header_raw_divider.md](./lean_cook_levin_builder_post_header_raw_divider.md).
 
+M212 connects M209's checked raw remainder, M210's semantic route classifier,
+and M211's exact divider through executable all-coordinate Lean orchestration.
+Every natural coordinate derives its launch without a supplied route witness;
+both exact traces remain visible; body, `Finish`, and out-of-range results are
+recovered; and one verifier-derived source-size polynomial bounds the combined
+compiled work. This constructs M211's canonical input from the checked value;
+it is not a literal raw tape-to-tape rewrite, does not preserve the complete
+builder workspace through such a bridge, and emits no token. Formal artefact
+coverage is 188 of 190, the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_launch.md](./lean_cook_levin_builder_post_header_raw_launch.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2120,7 +2132,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Splice M209's checked post-header remainder into M211's fixed divider, classify the M210 body/`Finish`/out-of-range routes inside the raw construction, emit the selected token, and then package the complete Cook--Levin polynomial reduction.
+2. Replace M212's executable orchestration with a literal raw tape bridge that preserves the complete builder workspace, emit every selected body and `Finish` token, and then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

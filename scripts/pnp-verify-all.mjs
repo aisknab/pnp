@@ -66,6 +66,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs',
+  'audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
