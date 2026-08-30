@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-212",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213",
   "lastReviewedDate": "2026-08-30",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,9 +17,9 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 188,
-    "totalRows": 190,
-    "percentRoundedOneDecimal": 98.9,
+    "earnedRows": 189,
+    "totalRows": 191,
+    "percentRoundedOneDecimal": 99,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
   },
@@ -168,11 +168,12 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-divider" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-launch" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-tape-bridge" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, and M212 joins those exact interfaces through all-coordinate executable orchestration with complete route classification and one source-size polynomial bound. The status correctly keeps the full raw builder false.",
-          "remainingLimitation": "M212 is not a literal raw tape-to-tape bridge, does not preserve the complete builder workspace through such a rewrite, and does not emit or append body or Finish tokens; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, M212 joins those exact interfaces through all-coordinate executable orchestration, and M213 closes the physical M209-to-M211 tape handoff with a fixed raw bridge that preserves arbitrary exterior workspace. The status correctly keeps raw token emission and the full builder false.",
+          "remainingLimitation": "M213 reaches the exact decoded quotient and remainder but does not emit or append the selected body or Finish token or iterate the complete schedule; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
           "lastReviewedDate": "2026-08-30"
         },
         {
@@ -211,12 +212,22 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchSourceSizePolynomialBoundFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchLiteralTapeBridgeFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchRawBodyTokenEmissionFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeExactRouterTapeInputsFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeLiteralTapeBridgeFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeArbitraryWorkspacePreservedFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeShieldedDividerTraceFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAllRoutesFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeCompiledSimulationFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeOneStepShortNonhaltingFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeSourceSizePolynomialBoundFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeRawBodyTokenEmissionFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold, M209 earns the fixed-table arbitrary-coordinate outer router, M210 earns exact all-coordinate semantic clause/slot decoding plus checked extraction of the raw post-header remainder, M211 earns the fixed raw quotient/remainder kernel, and M212 joins those exact endpoints through executable all-coordinate orchestration, classifies every route and bounds the combined compiled work by one source-size polynomial. The checked status still records the literal tape bridge, raw body-token emission, the complete builder and packaged polynomial reduction as false.",
-          "remainingLimitation": "A literal raw machine must rewrite the checked router terminal tape into the divider input while preserving the full builder workspace, emit every selected body and Finish entry, and package the complete machine with RawRefinement and the concrete PolynomialReduction.",
+          "justification": "M208 earns a uniform all-position control scaffold, M209 earns the fixed-table arbitrary-coordinate outer router, M210 earns exact all-coordinate semantic clause/slot decoding plus checked extraction of the raw post-header remainder, M211 earns the fixed raw quotient/remainder kernel, M212 joins those exact endpoints through executable orchestration, and M213 supplies the fixed literal tape rewrite from both exact M209 terminal layouts into a shielded M211 input while preserving arbitrary workspace. The checked status still records raw body-token emission, the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "The exact quotient/remainder result must drive literal emission of every selected body and Finish entry, the schedule must iterate through the complete formula, and the resulting machine must be packaged with RawRefinement and the concrete PolynomialReduction.",
           "lastReviewedDate": "2026-08-30"
         },
         {
@@ -1156,6 +1167,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M212 joins M209's exact raw remainder endpoint, M210's all-coordinate semantic route classifier and M211's exact fixed divider through executable Lean orchestration. For every natural coordinate it derives the header or post-header launch without a supplied route witness, retains the exact traces of both machines, recovers body, Finish and out-of-range results, excludes the out-of-range post-header branch throughout the complete token schedule, and bounds the summed compiled steps by one verifier-derived polynomial in source-input length. It is not yet a literal raw tape rewrite between the two machines, does not preserve the complete builder workspace through that bridge, and emits no body or Finish token; RawRefinement and the packaged PolynomialReduction remain open. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 188 of 190, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213",
+      "formalArtefactCoverage": { "earnedRows": 189, "totalRows": 191 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M213 replaces M212's value-level launch with a fixed 351-rule literal tape bridge from both exact M209 post-header terminal layouts into M211's shielded unary divider input. For every positive problem-derived width it preserves arbitrary exterior builder workspace, proves exact equality and greater-branch traces, retains the exact shielded divider trace, decodes the quotient and remainder after stripping the exterior, compiles every checked work step to six raw steps, times out one step short, and bounds every in-range staged execution by one verifier-derived source-size polynomial. Zero width enters the nonhalting dead state. The result still emits no selected body or Finish token, does not iterate the complete builder, and supplies neither RawRefinement nor the packaged PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 189 of 191, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

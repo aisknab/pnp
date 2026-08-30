@@ -400,6 +400,19 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_post_header_raw_launch.md](lean_cook_levin_builder_post_header_raw_launch.md).
 
+M213 replaces that value-level launch with one fixed 351-rule literal tape
+bridge from both exact M209 post-header terminal layouts into a shielded M211
+divider input. It copies zero or the exact positive shifted remainder plus the
+positive problem width, preserves arbitrary exterior workspace, retains exact
+bridge and divider traces, decodes the final quotient and remainder, compiles
+at six raw steps per work step, times out one step short, and fits one
+verifier-derived source-size polynomial for every in-range coordinate. It
+emits no selected body or `Finish` token and does not iterate the full schedule,
+so the complete raw builder and packaged reduction remain open. Formal
+artefact coverage is 189 of 191, the risk-weighted estimate remains 35 percent,
+and zero of five global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_tape_bridge.md](lean_cook_levin_builder_post_header_raw_tape_bridge.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

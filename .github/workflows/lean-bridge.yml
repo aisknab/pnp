@@ -91,6 +91,8 @@ on:
       - 'docs/lean_cook_levin_builder_post_header_raw_divider.md'
       - 'audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs'
       - 'docs/lean_cook_levin_builder_post_header_raw_launch.md'
+      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs'
+      - 'docs/lean_cook_levin_builder_post_header_raw_tape_bridge.md'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
@@ -541,6 +543,8 @@ on:
       - 'docs/lean_cook_levin_builder_post_header_raw_divider.md'
       - 'audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs'
       - 'docs/lean_cook_levin_builder_post_header_raw_launch.md'
+      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs'
+      - 'docs/lean_cook_levin_builder_post_header_raw_tape_bridge.md'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
       - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
@@ -973,6 +977,9 @@ jobs:
 
       - name: Audit Cook-Levin post-header raw launch
         run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs
+
+      - name: Audit Cook-Levin post-header raw tape bridge
+        run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs
 
       - name: Audit Cook-Levin second-clause separator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs
@@ -1723,7 +1730,7 @@ jobs:
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawDividerAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
-          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawDivider\.")" -eq 55
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawDivider\.")" -eq 57
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
@@ -1735,7 +1742,7 @@ jobs:
             echo 'Cook-Levin post-header raw divider reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 31
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 33
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawDivider.lean
@@ -1760,6 +1767,27 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 0
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean
+
+      - name: Print Cook-Levin post-header raw-tape-bridge axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawTapeBridge\.")" -eq 78
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin post-header raw-tape-bridge axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin post-header raw tape bridge reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 57
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 19
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

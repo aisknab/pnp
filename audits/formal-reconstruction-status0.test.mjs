@@ -194,7 +194,9 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAxiomAuditPassed, true);
-  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount, 55);
+  assert.equal(
+    out.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount,
+    status.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerLiteralRawMachineFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerCompiledRawSimulationFormalized, true);
@@ -210,6 +212,18 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawLaunchSourceSizePolynomialBoundFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawLaunchLiteralTapeBridgeFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawLaunchRawBodyTokenEmissionFormalized, false);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAuditPassed, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAuditedDeclarationCount, 78);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeExactRouterTapeInputsFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeLiteralTapeBridgeFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeArbitraryWorkspacePreservedFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeShieldedDividerTraceFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAllRoutesFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeCompiledSimulationFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeOneStepShortNonhaltingFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeSourceSizePolynomialBoundFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeRawBodyTokenEmissionFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAuditPassed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondClauseSeparatorStepAuditedDeclarationCount, 56);
@@ -1791,6 +1805,9 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawLaunchAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean',
+    'node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs',
+    'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean',
+    'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean',
     'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
     'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
     'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
@@ -1948,6 +1965,8 @@ test('formal reconstruction status pins the locked-NAND carrier inventory and so
     'CookLevin.BuilderPostHeaderRawDivider adds one fixed 99-rule unary quotient/remainder machine')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderPostHeaderRawLaunch composes M209 remainder extraction')), true);
+  assert.equal(status.nonClaims.some((entry) => entry.includes(
+    'CookLevin.BuilderPostHeaderRawTapeBridge replaces M212')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(
     'CookLevin.BuilderSecondClauseSeparatorStep composes the complete first-clause padding run')), true);
   assert.equal(status.nonClaims.some((entry) => entry.includes(

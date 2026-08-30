@@ -1131,6 +1131,18 @@ def loopConfiguration (consumed remaining width quotient : Nat) :
 def inputTape (dividend width : Nat) : WorkTape :=
   phaseTape 0 0 dividend 0 width 0
 
+/-- Public tape-shape view used by later literal bridge modules without
+exposing the divider's internal path helper. -/
+def inputWordTape (word : List WorkSymbol) : WorkTape :=
+  match word with
+  | [] => { left := [leftBoundary], head := WorkSymbol.blank, right := [] }
+  | head :: right => { left := [leftBoundary], head := head, right := right }
+
+theorem inputTape_eq_inputWordTape (dividend width : Nat) :
+    inputTape dividend width =
+      inputWordTape (phaseWord 0 0 dividend 0 width 0) := by
+  rfl
+
 def terminalTape (consumed remainder width quotient : Nat) : WorkTape :=
   { left :=
       List.replicate width unitSymbol ++

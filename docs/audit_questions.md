@@ -3207,6 +3207,60 @@ source-size polynomial bound for the summed compiled work.
 
 ---
 
+### M213 Cook-Levin post-header raw tape bridge
+
+**Claim**
+
+For every concrete verifier tableau problem, in-range coordinate, and finite
+exterior workspace, one fixed collision-free 351-rule bridge consumes the
+exact M209 equality or greater-than post-header terminal tape. It derives zero
+or the exact positive shifted remainder, copies the positive problem width,
+reaches a shielded M211 input, preserves the exterior, retains exact bridge and
+divider traces and final quotient/remainder decoding, and fits one
+verifier-derived source-size polynomial.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPostHeaderRawTapeBridge.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean.
+- audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm both bridge input tapes are definitionally tied to M209's exact
+   comparison-result configurations rather than a supplied remainder.
+2. Confirm distinct equality and greater entry states execute exact traces and
+   zero width enters the nonhalting dead state.
+3. Confirm the bridge constructs the shielded M211 input and preserves every
+   cell of arbitrary exterior workspace.
+4. Confirm the shielded M211 trace produces the exact quotient and remainder
+   after stripping the exterior.
+5. Confirm bridge and divider traces compile at six raw transitions per work
+   step and all positive-width runs are nonhalting one step short.
+6. Confirm the all-coordinate endpoint has no supplied route, arithmetic, tape,
+   or execution certificate and the bound is polynomial in source-input size.
+7. Confirm all 78 public declarations exclude project axioms and
+   `Classical.choice`.
+
+**What would count as a refutation or material defect**
+
+- The bridge consumes a host-constructed remainder or canonical divider input
+  rather than the exact M209 terminal tape.
+- Equality and greater paths are conflated in a way that loses the shifted
+  remainder, or zero width can accept.
+- The divider can read, overwrite, cross, reorder, or discard exterior
+  workspace.
+- The decoded quotient/remainder differs from natural division, a purported
+  exact trace halts early, or the bound is not uniform in source-input size.
+- The endpoint needs supplied branch, quotient, remainder, route, workspace,
+  or successful execution evidence.
+- M213 is described as a body-token emitter, complete builder, closed
+  checkpoint or gate, proof of CNFSAT in P, or proof of `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
