@@ -194,7 +194,9 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized, false);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAxiomAuditPassed, true);
-  assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount, 55);
+  assert.equal(
+    out.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount,
+    status.leanConcreteCookLevinBuilderPostHeaderRawDividerAuditedDeclarationCount);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerLiteralRawMachineFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderPostHeaderRawDividerCompiledRawSimulationFormalized, true);

@@ -19,6 +19,8 @@ import PNP
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.phaseConfiguration
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.loopConfiguration
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.inputTape
+#print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.inputWordTape
+#print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.inputTape_eq_inputWordTape
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.terminalTape
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.terminalConfiguration
 #print axioms PNP.Concrete.CookLevin.BuilderPostHeaderRawDivider.pairSteps
