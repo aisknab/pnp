@@ -2058,6 +2058,18 @@ coverage is 188 of 190, the risk-weighted estimate remains 35 percent, and zero
 of five global gates are closed. See
 [lean_cook_levin_builder_post_header_raw_launch.md](./lean_cook_levin_builder_post_header_raw_launch.md).
 
+M213 closes that physical boundary with one fixed 351-rule literal tape bridge
+from both exact M209 post-header terminal layouts into a shielded M211 input.
+It copies the derived remainder and positive problem width, preserves arbitrary
+exterior builder workspace, retains the exact bridge and divider traces,
+decodes the final quotient and remainder, compiles at six raw steps per work
+step, times out one step short, and fits one verifier-derived source-size
+polynomial for every in-range coordinate. It emits no selected body or
+`Finish` token and does not iterate the complete schedule. Formal artefact
+coverage is 189 of 191, the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_tape_bridge.md](./lean_cook_levin_builder_post_header_raw_tape_bridge.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2132,7 +2144,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Replace M212's executable orchestration with a literal raw tape bridge that preserves the complete builder workspace, emit every selected body and `Finish` token, and then package the complete Cook--Levin polynomial reduction.
+2. Use M213's exact quotient/remainder tape to emit every selected body and `Finish` token, iterate the complete schedule, and then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

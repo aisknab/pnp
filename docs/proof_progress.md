@@ -7,8 +7,8 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-212`, 188 of 190
-current scoped rows are earned, or 98.9 percent of that evidence ledger.
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213`, 189 of 191
+current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
 difficulty, and the denominator can grow when a dependency is discovered or an
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M212 |
+| Track | Available | Earned at M213 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M212 risk-weighted proof completion estimate is therefore 35 percent, with
+The M213 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -361,6 +361,20 @@ bridge, and emits no body or Finish token, so the complete raw builder,
 checkpoint or global gate closes. Coverage becomes 188 of 190 while the score
 remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
 five gates remain open. No retrospective score was invented.
+
+M213 replaces M212's value-level launch with a fixed 351-rule literal bridge
+from both exact M209 post-header terminal layouts into a shielded M211 divider
+input. It derives zero or the exact positive shifted remainder from the branch
+and tape itself, copies the positive problem width, preserves arbitrary
+exterior workspace, retains exact bridge and divider traces, decodes the final
+quotient and remainder, compiles at six raw steps per work step, times out one
+step short, and fits one verifier-derived source-size polynomial for every
+in-range coordinate. It emits no selected body or Finish token, does not
+iterate the complete schedule, and provides neither `RawRefinement` nor the
+packaged `PolynomialReduction`. No fixed checkpoint or global gate closes.
+Coverage becomes 189 of 191 while the score remains 35 percent, the uncertainty
+range remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 

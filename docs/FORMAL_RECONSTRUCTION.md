@@ -449,6 +449,19 @@ and packaged reduction remain open. Formal artefact coverage is 188 of 190,
 the score remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_post_header_raw_launch.md](./lean_cook_levin_builder_post_header_raw_launch.md).
 
+M213 replaces that value-level handoff with one fixed 351-rule literal tape
+bridge from both exact M209 post-header terminal layouts into a shielded M211
+input. It copies zero or the exact positive shifted remainder and the positive
+problem-derived width, preserves arbitrary exterior workspace, retains the
+exact bridge and divider traces, decodes the final quotient and remainder,
+compiles at six raw steps per work step, times out one step short, and fits one
+source-size polynomial for every in-range coordinate. It does not emit the
+selected body or `Finish` token or iterate the complete schedule, so the raw
+builder, `RawRefinement`, and packaged reduction remain open. Formal artefact
+coverage is 189 of 191, the score remains 35 percent, and zero of five global
+gates are closed. See
+[lean_cook_levin_builder_post_header_raw_tape_bridge.md](./lean_cook_levin_builder_post_header_raw_tape_bridge.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
