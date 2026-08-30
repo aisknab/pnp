@@ -375,6 +375,17 @@ the risk-weighted estimate remains 35 percent, and zero of five global gates
 are closed. See
 [lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md](lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md).
 
+M211 implements one fixed 99-rule unary quotient/remainder machine. Every
+natural dividend and positive width has an exact accepting trace with the
+natural quotient and strict remainder, exact reconstruction, exact six-step
+raw compilation, a one-step-short timeout boundary, and a quadratic bound in
+the complete unary input length. M210 body coordinates instantiate that same
+decoded pair. The divider is not yet spliced onto M209's checked raw result and
+emits no body token, so the complete raw formula builder and packaged reduction
+remain open. Formal artefact coverage is 187 of 189, the risk-weighted estimate
+remains 35 percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_divider.md](lean_cook_levin_builder_post_header_raw_divider.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

@@ -425,6 +425,18 @@ is 186 of 188, the score remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md](./lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md).
 
+M211 implements one fixed 99-rule raw quotient/remainder kernel. For every
+natural dividend and positive unary width, the exact trace reaches the natural
+quotient and strict remainder, reconstructs the dividend, compiles with exactly
+six raw transitions per work step, times out one step short, and satisfies a
+quadratic bound in the complete unary input length. M210 body coordinates
+instantiate the same decoded pair. The machine remains standalone: it is not
+spliced onto M209's checked raw result and emits no body token, so the complete
+raw builder, `RawRefinement`, and packaged reduction remain open. Formal
+artefact coverage is 187 of 189, the score remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_post_header_raw_divider.md](./lean_cook_levin_builder_post_header_raw_divider.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

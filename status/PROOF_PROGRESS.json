@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-210",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-211",
   "lastReviewedDate": "2026-08-30",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 186,
-    "totalRows": 188,
+    "earnedRows": 187,
+    "totalRows": 189,
     "percentRoundedOneDecimal": 98.9,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -166,11 +166,12 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-full-schedule-cursor-controller" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-header-router" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-divider" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, and M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, while the status correctly keeps the full raw builder false.",
-          "remainingLimitation": "M210 does not perform raw quotient/remainder decoding or raw body-token emission; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, and M211 adds a fixed all-dividend positive-width raw quotient/remainder machine with exact compiled execution and a unary encoded-size quadratic bound. The status correctly keeps the full raw builder false.",
+          "remainingLimitation": "M211 remains a standalone divider: it is not spliced onto the checked raw router result and does not classify terminal routes or emit body tokens; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
           "lastReviewedDate": "2026-08-30"
         },
         {
@@ -200,12 +201,15 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerRawBodyTokenEmissionFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold, M209 earns the fixed-table arbitrary-coordinate outer router, and M210 earns exact all-coordinate semantic clause/slot decoding plus checked extraction of the raw post-header remainder. The checked status still records raw division, raw body-token emission, the complete builder and packaged polynomial reduction as false.",
-          "remainingLimitation": "A literal raw decoder must consume the extracted remainder, derive the clause and within-clause coordinates, emit every selected body entry and Finish, and then be packaged with RawRefinement and the concrete PolynomialReduction.",
+          "justification": "M208 earns a uniform all-position control scaffold, M209 earns the fixed-table arbitrary-coordinate outer router, M210 earns exact all-coordinate semantic clause/slot decoding plus checked extraction of the raw post-header remainder, and M211 earns the standalone fixed raw quotient/remainder kernel. The checked status still records raw body-token emission, the complete builder and packaged polynomial reduction as false.",
+          "remainingLimitation": "The checked router result must be spliced into the divider, the quotient/remainder route must distinguish body, Finish and out-of-range cases, every selected entry must be emitted, and the complete machine must be packaged with RawRefinement and the concrete PolynomialReduction.",
           "lastReviewedDate": "2026-08-30"
         },
         {
@@ -1117,6 +1121,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M210 adds an unbounded semantic decoder after M209's fixed raw header route. For every natural post-header coordinate, a structurally recursive rectangle decoder returns the exact finite clause and within-clause position, the unique final Finish coordinate, or the out-of-range suffix; every body result reconstructs the original coordinate and the typed route agrees exactly with direct token lookup. A checked reader also recovers the exact shifted remainder already encoded by M209's raw result configuration for every comparison trace. M210 does not implement raw division, raw body-token emission, the complete raw builder, RawRefinement or the packaged PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 186 of 188, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-211",
+      "formalArtefactCoverage": { "earnedRows": 187, "totalRows": 189 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M211 adds a fixed 99-rule unary quotient/remainder kernel after M210's semantic post-header decoder. For every natural dividend and positive width, its exact work trace accepts with the natural quotient and strict remainder, reconstructs the dividend, compiles with exactly six raw steps per work step, times out one step short and satisfies an explicit quadratic bound in the complete unary encoded input length. The zero-width dispatcher is fail-closed, and M210 body coordinates instantiate the same decoded quotient and remainder. The machine remains standalone: it is not spliced onto M209's checked raw result, does not emit a selected body token or Finish, and does not complete RawRefinement or the packaged PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 187 of 189, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [
