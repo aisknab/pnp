@@ -3406,6 +3406,55 @@ source-size polynomial bound.
 
 ---
 
+### M217 Cook-Levin physical optional-token dispatch
+
+**Claim**
+
+For arbitrary raw input, exterior workspace, emitted prefix, and optional
+token request, one fixed 64-rule work machine reads a tape-resident padding or
+CNF-token symbol, restores the canonical builder boundary, and either preserves
+the prefix or enters the existing renamed appender. Every canonical
+post-header coordinate derives the request from `scheduleEntry` and the
+stage has one source-size polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalOptionalTokenDispatch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatch.lean.
+- audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the request alphabet is exactly padding plus the four CNF tokens and
+   that the fixed table contains five dispatch rules plus the 59-rule appender.
+2. Confirm the first physical transition restores the exact appender workspace
+   and is selected only by the tape-resident request symbol.
+3. Confirm exact work and compiled traces cover every request, arbitrary input,
+   exterior workspace and output prefix, with one-step-short nonhalting.
+4. Confirm the unused blank request symbol remains timeout for every fuel.
+5. Confirm canonical requests come from `scheduleEntry` at every post-header
+   coordinate and fit the verifier-derived polynomial bound.
+6. Confirm all 49 public declarations have the measured 23 empty, 13
+   `propext`, and 13 `propext`/`Quot.sound` closures, with no project
+   axiom or choice.
+
+**What would count as a refutation or material defect**
+
+- The request is carried as a host-language branch instead of a physical tape
+  symbol at the dispatch boundary.
+- Padding changes the output, a token request enters the wrong appender state,
+  or the dispatch transition fails to restore the canonical workspace.
+- A malformed request halts, one-step-short fuel halts, or the claimed compiled
+  trace differs from the exact work trace.
+- M217 is described as deriving the request from raw classifier output,
+  iterating one complete physical schedule loop, completing builder
+  `RawRefinement`, closing a checkpoint or gate, proving deterministic SAT,
+  or proving `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
