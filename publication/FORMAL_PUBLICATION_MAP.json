@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-31-215",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-08-31-216",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3155,7 +3155,8 @@
     "PNP.report_residual_band_eq_concrete_minimum_threshold": "07dc72c6a93d72ab65435705ba99ea6b84f69c2d06930af90c07f6bd09b5fc8a",
     "PNP.report_locked_nand_eq_residual_band": "14140f257b5e6ddf140cc9957a86248b1ed7defb691daf40c6080a859ce6e128",
     "PNP.concrete_residual_band_compatibility_checked_complete": "c4d3ccd4bc92297fd50b22d1be51b80d3930a10ecebce2d3e6c3ee25d95d03db",
-    "PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_charge_route_or_zeroslack_checked_complete": "2205a2a1ef56e31519ab2320d6ed83004a252026e1d92731de4fba539c4a9d7e"
+    "PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_charge_route_or_zeroslack_checked_complete": "2205a2a1ef56e31519ab2320d6ed83004a252026e1d92731de4fba539c4a9d7e",
+    "PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.cook_levin_builder_complete_schedule_iteration_checked_complete": "6b6baad967bde7dafa7de704b0d87df6f5f75ce7a6d1d32b778f8c0c92f7262a"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3173,7 +3174,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "677e233af99e70f92319e1d8b4f501c7c63e2521336ae965f1a679366f436ceb",
+  "milestoneSourceClosureSha256": "77f96b01cd23d6e1371e6f5fcbc5685fc0853491817cfe7e679528c2f0c3538e",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4072,6 +4073,16 @@
       ],
       "scope": "For every concrete verifier tableau problem and every post-header schedule coordinate, the canonical schedule alone derives padding, the exact body token, or the unique Finish token without a supplied route or token. M214's physical classifier contract is retained, every populated entry runs the existing fixed 59-rule appender to the exact next emitted prefix, exact work and compiled traces time out one step short, and the combined staged work fits one verifier-derived source-size polynomial. All 30 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
       "title": "All-coordinate Cook-Levin selected-token launch"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-complete-schedule-iteration",
+      "nonClaim": "This milestone composes M215's proof-carrying per-coordinate stages through executable Lean recursion. It is not one literal raw-machine loop and does not prove a physical tape-to-tape handoff between successive stages, construct the complete raw formula builder or its FunctionProgram.RawRefinement, or package the concrete Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.cook_levin_builder_complete_schedule_iteration_checked_complete"
+      ],
+      "scope": "For every concrete verifier tableau problem, structural recursion consumes every verifier-derived post-header schedule opportunity without a supplied coordinate, token, route, trace, schedule, or precomputed formula. Every bounded run equals the canonical emitted prefix, the complete run equals encodeCNFTokens of the generated formula, every coordinate retains M215's exact classifier/appender evidence for arbitrary workspace, and the aggregate staged compiled work fits one source-size polynomial. All 12 public declarations are axiom-audited with only the approved Lean-standard closure and no project axiom or Classical.choice.",
+      "title": "Complete semantic Cook-Levin schedule iteration"
     },
     {
       "classification": "formalized-foundation-only",

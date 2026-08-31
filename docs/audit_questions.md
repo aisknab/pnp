@@ -3361,6 +3361,51 @@ to the exact next canonical prefix under one source-size polynomial.
 
 ---
 
+### M216 Cook-Levin complete schedule iteration
+
+**Claim**
+
+For every concrete verifier tableau problem, structural recursion consumes
+every verifier-derived post-header opportunity. Every bounded run is the
+canonical emitted prefix, the complete run is the exact encoded formula token
+stream, every coordinate retains M215's physical classifier/appender evidence
+for arbitrary workspace, and aggregate staged compiled work has one
+source-size polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderCompleteScheduleIteration.lean.
+- lean-audit/PNPConcreteCookLevinBuilderCompleteScheduleIterationAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderCompleteScheduleIteration.lean.
+- audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint accepts only the concrete verifier-tableau problem and
+   no coordinate, token, route, trace, schedule, or precomputed formula.
+2. Confirm induction proves every bounded run equals M215's canonical emitted
+   prefix and the terminal count equals the complete `encodeCNFTokens` output.
+3. Confirm every coordinate retains M215's physical classifier/appender
+   contract for arbitrary classifier and exterior workspace.
+4. Confirm the recursive cost accumulator is bounded by the schedule-count
+   polynomial times M215's uniform per-coordinate polynomial.
+5. Confirm all 12 public declarations have the measured 2 empty, 2 `propext`,
+   and 8 `propext`/`Quot.sound` closures, with no project axiom or choice.
+
+**What would count as a refutation or material defect**
+
+- Any coordinate, selected token, schedule, route, trace, or complete formula
+  is supplied instead of derived from the concrete problem.
+- A bounded run differs from the canonical prefix or the terminal result differs
+  from the exact encoded formula.
+- The aggregate bound omits a coordinate or is not polynomial in source size.
+- M216 is described as one literal raw loop, a physical inter-stage handoff,
+  complete builder `RawRefinement`, a closed checkpoint or gate, deterministic
+  SAT theorem, or proof of `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

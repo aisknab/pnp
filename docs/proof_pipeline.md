@@ -440,6 +440,20 @@ coverage is 191 of 193, the risk-weighted estimate remains 35 percent, and
 zero of five global gates are closed. See
 [lean_cook_levin_builder_post_divider_selected_token_launch.md](lean_cook_levin_builder_post_divider_selected_token_launch.md).
 
+M216 recursively consumes every verifier-derived post-header schedule
+opportunity without a supplied coordinate, token, route, trace, schedule, or
+precomputed formula. Every bounded run equals the canonical emitted prefix and
+the complete run equals the exact `encodeCNFTokens problem.formula` stream.
+Every coordinate retains M215's physical classifier/appender evidence for
+arbitrary workspace, while a recursive accumulator bounds the aggregate staged
+compiled work by one source-size polynomial. The recursion is executable Lean
+orchestration over separately checked stages, not one literal raw-machine loop
+or a physical tape-to-tape inter-stage handoff, so complete builder
+`RawRefinement` and the packaged reduction remain open. Formal artefact
+coverage is 192 of 194, the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed. See
+[lean_cook_levin_builder_complete_schedule_iteration.md](lean_cook_levin_builder_complete_schedule_iteration.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

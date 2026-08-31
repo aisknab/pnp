@@ -1,0 +1,14 @@
+import PNP
+
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.run
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.run_succ
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.run_eq_emittedPrefix
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.emittedPrefix_bodySlotCount_eq_encodeCNFTokens
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.run_bodySlotCount_eq_encodeCNFTokens
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.accumulatedStagedCompiledSteps
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.totalStagedCompiledSteps
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.rawTimeBound_eval
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.accumulatedStagedCompiledSteps_le
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.totalStagedCompiledSteps_le_rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.cook_levin_builder_complete_schedule_iteration_checked_complete
