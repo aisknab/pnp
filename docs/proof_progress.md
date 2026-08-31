@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-215`, 191 of 193
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-216`, 192 of 194
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M215 |
+| Track | Available | Earned at M216 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M215 risk-weighted proof completion estimate is therefore 35 percent, with
+The M216 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -402,6 +402,19 @@ schedule is not iterated; the complete builder, `RawRefinement`, and packaged
 Coverage becomes 191 of 193 while the score remains 35 percent, the uncertainty
 range remains 20 to 40 percent, and all five gates remain open. No retrospective
 score was invented.
+
+M216 recursively consumes every verifier-derived post-header opportunity
+without supplied coordinate, token, route, trace, schedule, or precomputed
+formula. Every bounded run equals the canonical emitted prefix, the complete
+pass equals the exact encoded CNF token stream, every coordinate retains M215
+physical classifier/appender evidence for arbitrary workspace, and aggregate
+staged compiled work fits one source-size polynomial. The recursion remains
+executable Lean orchestration over separately checked stages rather than one
+literal raw-machine loop or physical tape-to-tape stage iteration. Complete
+builder `RawRefinement` and the packaged `PolynomialReduction` remain open.
+No fixed checkpoint or global gate closes. Coverage becomes 192 of 194 while
+the score remains 35 percent, the uncertainty range remains 20 to 40 percent,
+and all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 
