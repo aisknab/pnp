@@ -475,6 +475,20 @@ open. Formal artefact coverage is 190 of 192, the risk-weighted estimate
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_post_divider_raw_route_classifier.md](./lean_cook_levin_builder_post_divider_raw_route_classifier.md).
 
+M215 derives every post-header padding, body-token, or unique `Finish` entry
+from the canonical schedule without a supplied route or token. It retains
+M214's physical classifier contract for arbitrary workspace, leaves the
+canonical emitted prefix unchanged at padding, and runs the existing fixed
+59-rule appender for every populated coordinate to reach exactly the next
+emitted prefix. Exact work and six-for-one compiled traces, one-step-short
+nonhalting, and the combined staged source-size polynomial are all checked.
+The selection handoff is still executable Lean orchestration rather than one
+literal raw selector, and the schedule is not iterated, so the complete raw
+builder, `RawRefinement`, and packaged reduction remain open. Formal artefact
+coverage is 191 of 193, the risk-weighted estimate remains 35 percent, and
+zero of five global gates are closed. See
+[lean_cook_levin_builder_post_divider_selected_token_launch.md](./lean_cook_levin_builder_post_divider_selected_token_launch.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and
