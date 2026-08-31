@@ -503,6 +503,23 @@ coverage is 192 of 194, the risk-weighted estimate remains 35 percent, and zero
 of five global gates are closed. See
 [lean_cook_levin_builder_complete_schedule_iteration.md](./lean_cook_levin_builder_complete_schedule_iteration.md).
 
+M217 replaces M215's value-level selector-to-appender handoff with one
+fixed 64-rule physical work machine for the complete five-symbol request
+alphabet. A tape-resident padding or CNF-token request restores the canonical
+builder left boundary and either preserves the emitted prefix or enters the
+existing renamed 59-rule appender. Exact work and six-for-one compiled traces
+cover arbitrary input, exterior workspace and output prefix; malformed blank
+requests and one-step-short fuel remain nonhalting. Every canonical
+post-header coordinate derives its request from `scheduleEntry`, and the
+stage fits one verifier-derived source-size polynomial. The request cell is
+still an input to this stage: it is not produced from M214's raw classifier,
+connected through a literal classifier-to-dispatcher tape handoff, or iterated
+as one physical schedule loop, so complete builder `RawRefinement` and the
+packaged reduction remain open. Formal artefact coverage is 193 of 195, the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_physical_optional_token_dispatch.md](./lean_cook_levin_builder_physical_optional_token_dispatch.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

@@ -71,6 +71,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs',
+  'audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',

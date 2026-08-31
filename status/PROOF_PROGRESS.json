@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-216",
-  "lastReviewedDate": "2026-08-31",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-217",
+  "lastReviewedDate": "2026-09-01",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 192,
-    "totalRows": 194,
+    "earnedRows": 193,
+    "totalRows": 195,
     "percentRoundedOneDecimal": 99,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -172,12 +172,13 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-divider-raw-route-classifier" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-divider-selected-token-launch" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-complete-schedule-iteration" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-optional-token-dispatch" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, M212 joins those exact interfaces through all-coordinate executable orchestration, M213 closes the physical M209-to-M211 tape handoff, M214 classifies every in-range quotient on preserved tape, M215 derives and launches every canonical selected token, and M216 recursively composes all verifier-derived post-header opportunities to the complete encoded formula under one aggregate polynomial. The status correctly keeps the literal raw selection handoff, physical stage iteration, and full builder false.",
-          "remainingLimitation": "M216 iterates the complete schedule semantically, but the selector and successive-stage handoffs are not one literal raw-machine loop; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
-          "lastReviewedDate": "2026-08-31"
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, M212 joins those exact interfaces through all-coordinate executable orchestration, M213 closes the physical M209-to-M211 tape handoff, M214 classifies every in-range quotient on preserved tape, M215 derives and launches every canonical selected token, M216 recursively composes all verifier-derived post-header opportunities to the complete encoded formula, and M217 replaces the value-level selector-to-appender handoff with one fixed physical five-request dispatcher. The status correctly keeps raw request generation, one physical schedule loop, and the full refined builder false.",
+          "remainingLimitation": "M217 physically dispatches every optional token request into the appender, but the request is not yet produced from the raw classifier and successive stages are not one literal raw-machine loop; the complete raw formula builder, refinement and packaged reduction remain unformalized.",
+          "lastReviewedDate": "2026-09-01"
         },
         {
           "id": "reductions-report-locked-nand-linkage",
@@ -250,13 +251,24 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationAggregateSourceSizePolynomialBoundFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationLiteralRawLoopFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationRawStageHandoffFormalized", "expected": false },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-optional-token-dispatch" },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFiveRequestAlphabetFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralRequestTapeHandoffFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchCanonicalAllCoordinatesFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchExactCompiledTraceFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchMalformedRequestTimeoutFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchOneStepShortTimeoutFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchSourceSizePolynomialBoundFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchRawCoordinateSelectorFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralScheduleLoopFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": false }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold, M209 the fixed-table arbitrary-coordinate outer router, M210 exact all-coordinate semantic decoding, M211 the fixed raw quotient/remainder kernel, M212 the executable composed launch, M213 the fixed literal divider tape bridge, M214 the shielded physical body-versus-Finish classifier, M215 canonical all-coordinate selected-token launch, and M216 the first complete verifier-derived semantic schedule iteration. Every bounded prefix is canonical, the terminal output is the exact encoded formula, and the aggregate staged work has one source-size polynomial. The checked status still records the literal raw loop, physical inter-stage handoff, complete refined builder, and packaged polynomial reduction as false.",
-          "remainingLimitation": "The semantic iteration must be replaced or refined by one literal raw loop with exact physical stage-to-stage handoffs, then packaged with RawRefinement and the concrete PolynomialReduction.",
-          "lastReviewedDate": "2026-08-31"
+          "justification": "M208 earns a uniform all-position control scaffold, M209 the fixed-table arbitrary-coordinate outer router, M210 exact all-coordinate semantic decoding, M211 the fixed raw quotient/remainder kernel, M212 the executable composed launch, M213 the fixed literal divider tape bridge, M214 the shielded physical body-versus-Finish classifier, M215 canonical all-coordinate selected-token launch, M216 complete verifier-derived semantic schedule iteration, and M217 one fixed physical five-request dispatcher into the existing appender. Exact work and compiled traces cover arbitrary input, exterior workspace and output prefix; malformed requests and one-step-short fuel fail closed, and canonical all-coordinate requests fit one source-size polynomial. The checked status still records raw request generation, one literal repeated schedule loop, complete refined builder, and packaged polynomial reduction as false.",
+          "remainingLimitation": "Construct the literal raw coordinate-to-request selector feeding M217, compose selector output into the dispatcher, iterate that physical stage through the complete schedule, and then package the complete machine with RawRefinement and the concrete PolynomialReduction.",
+          "lastReviewedDate": "2026-09-01"
         },
         {
           "id": "reductions-concrete-np-hardness",
@@ -1251,6 +1263,20 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M216 recursively consumes every verifier-derived post-header opportunity without supplied coordinate, token, route, trace, schedule, or precomputed formula. Every bounded run equals the canonical emitted prefix, the complete pass equals the exact encoded CNF token stream, every coordinate retains M215's physical classifier/appender evidence for arbitrary workspace, and aggregate staged compiled work fits one source-size polynomial. The recursion remains executable Lean orchestration over separately checked stages rather than one literal raw-machine loop or physical tape-to-tape stage iteration, and it does not provide builder RawRefinement or package the PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 192 of 194, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-217",
+      "formalArtefactCoverage": { "earnedRows": 193, "totalRows": 195 },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M217 replaces M215's value-level selector-to-appender handoff with one fixed 64-rule physical work machine over the complete five-symbol optional-token request alphabet. For arbitrary raw input, exterior workspace, output prefix and request, one tape-resident symbol restores the canonical left boundary and either preserves padding output or enters the existing renamed 59-rule appender. Exact work and six-for-one compiled traces, one-step-short nonhalting, malformed-request timeout, canonical all-coordinate specialization through scheduleEntry, and one verifier-derived source-size polynomial are checked. The request remains an input to the stage: it is not yet produced from M214's raw classifier, connected as a literal classifier-to-dispatcher tape handoff, or iterated as one physical schedule loop, and the result does not provide builder RawRefinement or package the PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 193 of 195, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

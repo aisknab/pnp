@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-216`, 192 of 194
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-217`, 193 of 195
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M216 |
+| Track | Available | Earned at M217 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M216 risk-weighted proof completion estimate is therefore 35 percent, with
+The M217 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -415,6 +415,20 @@ builder `RawRefinement` and the packaged `PolynomialReduction` remain open.
 No fixed checkpoint or global gate closes. Coverage becomes 192 of 194 while
 the score remains 35 percent, the uncertainty range remains 20 to 40 percent,
 and all five gates remain open. No retrospective score was invented.
+
+M217 replaces M215's value-level selector-to-appender handoff with one fixed
+64-rule physical machine over the complete five-symbol optional-token request
+alphabet. For arbitrary raw input, exterior workspace, output prefix and
+request, the tape-resident symbol restores the canonical left boundary and
+either preserves padding output or enters the renamed fixed appender. Exact
+work and compiled traces, one-step-short nonhalting, malformed-request timeout,
+canonical all-coordinate specialization, and one source-size polynomial are
+checked. The request is still not derived from the raw classifier or iterated
+through one literal physical schedule loop; complete builder `RawRefinement`
+and the packaged `PolynomialReduction` remain open. No fixed checkpoint or
+global gate closes. Coverage becomes 193 of 195 while the score remains 35
+percent, the uncertainty range remains 20 to 40 percent, and all five gates
+remain open. No retrospective score was invented.
 
 ## Changing the score
 
