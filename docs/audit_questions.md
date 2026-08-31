@@ -3315,6 +3315,52 @@ input from the quotient marks, and agrees with the exact M210 body or unique
 
 ---
 
+### M215 Cook-Levin post-divider selected-token launch
+
+**Claim**
+
+For every concrete verifier tableau problem and every post-header schedule
+coordinate, the canonical schedule derives padding, the exact body token, or
+the unique `Finish` token without a supplied route or token. M214 physical
+classification is retained for arbitrary workspace. Padding preserves the
+emitted prefix; every populated entry runs the existing fixed 59-rule appender
+to the exact next canonical prefix under one source-size polynomial.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPostDividerSelectedTokenLaunch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunch.lean.
+- audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm every coordinate is embedded after the exact header and the selected
+   entry agrees with both direct lookup and the canonical schedule entry.
+2. Confirm padding leaves the emitted prefix unchanged and a populated body or
+   `Finish` entry appends exactly its selected token.
+3. Confirm the existing fixed appender supplies the exact work trace, exact
+   six-for-one compiled trace, and one-step-short nonhalting result.
+4. Confirm M214 physical classification remains present for arbitrary
+   classifier workspace and the endpoint accepts no route or token witness.
+5. Confirm the M214-plus-appender staged cost is bounded by one polynomial in
+   the encoded source-input length.
+6. Confirm all 30 public declarations have the measured 6 empty, 4 `propext`,
+   and 20 `propext`/`Quot.sound` closures, with no project axiom or choice.
+
+**What would count as a refutation or material defect**
+
+- A route, token, populated-entry certificate, or successful trace is supplied
+  instead of derived from the canonical problem schedule.
+- Padding changes the prefix, a populated entry appends a different token, or
+  the purported compiled trace is not the exact appender simulation.
+- The bound depends on an unbounded supplied object rather than source size.
+- M215 is described as a literal selector, schedule iterator, complete builder,
+  closed checkpoint or gate, deterministic SAT theorem, or proof of `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

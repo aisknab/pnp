@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-214`, 190 of 192
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-215`, 191 of 193
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M214 |
+| Track | Available | Earned at M215 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M214 risk-weighted proof completion estimate is therefore 35 percent, with
+The M215 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -389,6 +389,19 @@ append the corresponding token, iterate the complete builder, provide
 or global gate closes. Coverage becomes 190 of 192 while the score remains 35
 percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
+
+M215 derives every post-header padding, body-token, or `Finish` entry from the
+canonical schedule without a supplied route or token, retains M214 physical
+classification, and launches the existing fixed appender at every populated
+coordinate to reach exactly the next canonical emitted prefix. Exact work and
+compiled traces, one-step-short nonhalting, and the combined staged work fit
+one verifier-derived source-size polynomial. The selection handoff remains
+executable Lean orchestration rather than a literal raw tape rewrite, and the
+schedule is not iterated; the complete builder, `RawRefinement`, and packaged
+`PolynomialReduction` remain open. No fixed checkpoint or global gate closes.
+Coverage becomes 191 of 193 while the score remains 35 percent, the uncertainty
+range remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 

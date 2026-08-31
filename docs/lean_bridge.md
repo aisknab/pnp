@@ -2083,6 +2083,20 @@ open. Formal artefact coverage is 190 of 192, the risk-weighted estimate
 remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_post_divider_raw_route_classifier.md](./lean_cook_levin_builder_post_divider_raw_route_classifier.md).
 
+M215 derives every post-header padding, body-token, or unique `Finish` entry
+from the canonical schedule without a supplied route or token. It retains
+M214's physical classifier contract for arbitrary workspace, leaves the
+canonical emitted prefix unchanged at padding, and runs the existing fixed
+59-rule appender for every populated coordinate to reach exactly the next
+emitted prefix. Exact work and six-for-one compiled traces, one-step-short
+nonhalting, and the combined staged source-size polynomial are all checked.
+The selection handoff is still executable Lean orchestration rather than one
+literal raw selector, and the schedule is not iterated, so the complete raw
+builder, `RawRefinement`, and packaged reduction remain open. Formal artefact
+coverage is 191 of 193, the risk-weighted estimate remains 35 percent, and
+zero of five global gates are closed. See
+[lean_cook_levin_builder_post_divider_selected_token_launch.md](./lean_cook_levin_builder_post_divider_selected_token_launch.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2157,7 +2171,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Use M214's exact literal body/Finish classification to inspect, select and emit every token, iterate the complete schedule, and then package the complete Cook--Levin polynomial reduction.
+2. Implement M215's remaining literal raw selector/workspace handoff, iterate it across the complete schedule, and then package the complete Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
