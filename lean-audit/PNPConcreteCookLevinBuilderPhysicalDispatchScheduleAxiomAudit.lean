@@ -1,0 +1,18 @@
+import PNP
+
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.physicalOutput
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.physicalOutput_succ_of_lt
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.physicalOutput_eq_emittedPrefix
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.physicalOutput_bodySlotCount_eq_encodeCNFTokens
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.stepWorkSteps
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.stepWorkSteps_eq_canonicalWorkSteps
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.PhysicalStepHolds
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.physicalStepHolds
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.stepCompiledSteps_le_rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.accumulatedCompiledSteps
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.totalCompiledSteps
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.rawTimeBound_eval
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.accumulatedCompiledSteps_le
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.totalCompiledSteps_le_rawTimeBound
+#print axioms PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.cook_levin_builder_physical_dispatch_schedule_checked_complete

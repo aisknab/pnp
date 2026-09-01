@@ -3455,6 +3455,52 @@ stage has one source-size polynomial bound.
 
 ---
 
+### M218 Cook-Levin physical dispatch schedule
+
+**Claim**
+
+For every concrete problem, the M217 fixed physical optional-token dispatcher is
+composed across all canonical post-header coordinates. The recursive output is
+the canonical emitted prefix at every bounded coordinate and the complete result
+is exactly the encoded CNF formula. Every coordinate retains exact physical work,
+compiled and one-step-short traces, plus the M214 physical classifier evidence,
+and total compiled work has one source-size polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalDispatchSchedule.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalDispatchScheduleAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalDispatchSchedule.lean.
+- audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm `physicalOutput` agrees with the canonical emitted prefix at every
+   bounded coordinate and reaches `encodeCNFTokens problem.formula` at the
+   complete schedule.
+2. Confirm `PhysicalStepHolds` retains the exact M217 work, compiled and
+   one-step-short traces and the M214 classifier result for every coordinate.
+3. Confirm accumulated and total compiled-step bounds cover every coordinate and
+   are polynomial in encoded source size.
+4. Confirm the status keeps raw request construction, a literal repeated machine
+   loop, complete builder `RawRefinement`, and the packaged reduction false.
+5. Confirm the 16 public declarations have the measured two empty and fourteen
+   `propext`/`Quot.sound` closures, with no project or choice axiom.
+
+**What would count as a refutation or material defect**
+
+- Any bounded recursive output differs from the canonical emitted prefix or the
+  terminal output differs from the exact encoded formula.
+- A coordinate lacks the claimed physical trace or classifier evidence, or the
+  aggregate bound omits work or is not polynomial in source size.
+- M218 is described as deriving the request cell from raw classifier tape,
+  connecting successive configurations through one literal raw-machine loop,
+  completing builder `RawRefinement`, closing a checkpoint or gate, proving
+  deterministic SAT, or proving `P = NP`.
+
+---
+
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

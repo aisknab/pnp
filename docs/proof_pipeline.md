@@ -471,6 +471,22 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_physical_optional_token_dispatch.md](lean_cook_levin_builder_physical_optional_token_dispatch.md).
 
+M218 composes M217's fixed physical optional-token dispatcher across every
+canonical post-header coordinate. The recursive output agrees with the canonical
+emitted prefix at every bounded coordinate and reaches the exact
+`encodeCNFTokens problem.formula` stream at the complete schedule. Every step
+retains exact work, compiled, and one-step-short physical traces for arbitrary
+input and exterior workspace, carries the M214 physical classifier evidence, and
+the aggregate compiled work fits one verifier-derived source-size polynomial.
+Each request is still constructed in Lean from the canonical schedule rather
+than produced by the raw classifier on tape, and successive configurations are
+not connected by one literal raw-machine loop. Complete builder
+`RawRefinement` and the packaged reduction therefore remain open. Formal
+artefact coverage is 194 of 196 current scoped publication rows earned; the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_physical_dispatch_schedule.md](lean_cook_levin_builder_physical_dispatch_schedule.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
