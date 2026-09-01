@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-217`, 193 of 195
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-218`, 194 of 196
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M217 |
+| Track | Available | Earned at M218 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M217 risk-weighted proof completion estimate is therefore 35 percent, with
+The M218 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -429,6 +429,19 @@ and the packaged `PolynomialReduction` remain open. No fixed checkpoint or
 global gate closes. Coverage becomes 193 of 195 while the score remains 35
 percent, the uncertainty range remains 20 to 40 percent, and all five gates
 remain open. No retrospective score was invented.
+
+M218 composes the M217 fixed physical dispatcher across every canonical
+post-header coordinate. Its total recursion agrees with the canonical emitted
+prefix at every bounded coordinate and reaches the exact encoded CNF formula.
+Each coordinate retains exact work, compiled and one-step-short traces for
+arbitrary exterior workspace, the M214 classifier evidence, and the aggregate
+compiled work fits one source-size polynomial. Requests remain constructed from
+the canonical Lean schedule and successive configurations are not one literal
+raw-machine loop or physical tape-to-tape handoff; builder `RawRefinement` and
+the packaged `PolynomialReduction` remain open. No fixed checkpoint or global
+gate closes. Coverage becomes 194 of 196 while the score remains 35 percent, the
+uncertainty range remains 20 to 40 percent, and all five gates remain open. No
+retrospective score was invented.
 
 ## Changing the score
 
