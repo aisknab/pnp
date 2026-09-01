@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-220`, 196 of 198
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-221`, 197 of 199
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M220 |
+| Track | Available | Earned at M221 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M220 risk-weighted proof completion estimate is therefore 35 percent, with
+The M221 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -469,6 +469,19 @@ packaged `PolynomialReduction` remain open. No fixed checkpoint or global gate
 closes. Coverage becomes 196 of 198 while the score remains 35 percent, the
 uncertainty range remains 20 to 40 percent, and all five gates remain open. No
 retrospective score was invented.
+
+M221 connects the unique canonical `Finish` terminal of M220's complete
+physical classifier pipeline to one literal M217-compatible request cell. The
+coordinate is derived internally, the classifier verdict names are swapped
+without changing transition semantics, and one collision-free 721-rule machine
+changes exactly the focused end marker while preserving arbitrary surrounding
+workspace. Exact work, compiled execution, one-step-short nonhalting, and one
+source-size polynomial bound are checked. Body-token and padding request
+generation, dispatcher-ready workspace orientation and connection, one literal
+repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
+remain open. No fixed checkpoint or global gate closes. Coverage becomes 197 of
+199 while the score remains 35 percent, the uncertainty range remains 20 to 40
+percent, and all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

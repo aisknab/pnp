@@ -3593,6 +3593,55 @@ component decomposition and one source-size polynomial bound are proved.
   `P = NP`.
 
 ---
+
+### M221 Cook-Levin full-classifier Finish-request cell
+
+**Claim**
+
+For every concrete verifier problem and arbitrary protected builder workspace,
+the unique canonical `Finish` coordinate is derived internally. M220's complete
+711-rule classifier has its terminal verdict names swapped without changing
+transition semantics and is chained to M219's one-cell writer. The resulting
+fixed collision-free 721-rule machine changes exactly the focused end marker to
+M217's `Finish` request and retains exact work, compiled, one-step-short and
+source-size polynomial evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierFinishRequest.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequestAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequest.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-finish-request0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_finish_request.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint accepts only the verifier problem, derives the canonical
+   `Finish` coordinate and quantifies arbitrary workspace internally.
+2. Confirm the verdict-name swap leaves the classifier rules and operational
+   semantics unchanged and only the proved `Finish` terminal launches the writer.
+3. Confirm the fixed composition has exactly 721 collision-free rules and the
+   final tape is exactly the classifier tape with one focused request-cell write.
+4. Confirm exact work, six-for-one compiled and one-step-short traces, and the
+   added constant work, are included in one verifier-derived polynomial bound.
+5. Confirm all 36 public declarations have the measured nine empty, three
+   `propext`, and 24 `propext`/`Quot.sound` closures with no project or choice
+   axiom.
+
+**What would count as a refutation or material defect**
+
+- The canonical coordinate, request symbol, route, tape, trace or success data
+  is supplied by the public caller rather than derived or universally quantified.
+- The terminal reinterpretation changes a transition, the writer alters a
+  nonfocused tape cell, or any component work is omitted from the exact or
+  polynomial bound.
+- M221 is described as deriving body-token or padding requests, orienting or
+  connecting the dispatcher tape, implementing the complete literal loop,
+  finishing builder `RawRefinement`, closing a checkpoint or gate, or proving
+  `P = NP`.
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

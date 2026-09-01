@@ -518,6 +518,21 @@ current scoped publication rows earned; the risk-weighted estimate remains 35
 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_pipeline.md](lean_cook_levin_builder_physical_classifier_pipeline.md).
 
+M221 closes the full-classifier-to-`Finish`-request-cell edge. It derives the
+unique canonical `Finish` coordinate, reinterprets M220's terminal verdict names
+without changing classifier transition semantics, and chains the complete
+classifier to M219's one-cell writer as one collision-free 721-rule machine.
+For arbitrary protected workspace, the final tape is exactly M220's terminal
+tape with the focused end marker replaced by M217's `Finish` request; exact work,
+six-for-one compiled execution, one-step-short nonhalting, and a source-size
+polynomial bound remain checked. Body-token and padding request generation,
+dispatcher-ready workspace orientation and connection, one literal repeated
+loop, builder `RawRefinement`, and the packaged reduction remain open. Formal
+artefact coverage is 197 of 199 current scoped publication rows earned; the
+risk-weighted estimate remains 35 percent, and zero of five global gates are
+closed. See
+[lean_cook_levin_builder_physical_classifier_finish_request.md](lean_cook_levin_builder_physical_classifier_finish_request.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
