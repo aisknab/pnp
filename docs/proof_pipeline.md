@@ -487,6 +487,22 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_physical_dispatch_schedule.md](lean_cook_levin_builder_physical_dispatch_schedule.md).
 
+M219 closes the first literal classifier-to-request branch for the unique
+canonical `Finish` coordinate. The problem derives that coordinate internally,
+M214 proves its equal-classifier result, and the canonical builder workspace is
+preserved as a protected suffix beyond the comparator's end marker. One fixed
+writer produces M217's tape-resident `Finish` request, and one collision-free
+137-rule composition runs the classifier, writer, and dispatcher. Exact work,
+six-for-one compiled, and one-step-short traces hold for arbitrary classifier
+exterior, and one verifier-derived polynomial bounds the compiled work. Body-token
+and padding request derivation, the preceding suffix-preserving classifier handoff,
+one literal repeated loop, complete builder `RawRefinement`, and the packaged
+reduction remain open. Formal artefact coverage is 195 of 197 current scoped
+publication rows earned; the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed.
+See
+[lean_cook_levin_builder_physical_finish_request.md](lean_cook_levin_builder_physical_finish_request.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

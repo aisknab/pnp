@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-218`, 194 of 196
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-219`, 195 of 197
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M218 |
+| Track | Available | Earned at M219 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M218 risk-weighted proof completion estimate is therefore 35 percent, with
+The M219 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -442,6 +442,19 @@ the packaged `PolynomialReduction` remain open. No fixed checkpoint or global
 gate closes. Coverage becomes 194 of 196 while the score remains 35 percent, the
 uncertainty range remains 20 to 40 percent, and all five gates remain open. No
 retrospective score was invented.
+
+M219 closes the first literal physical classifier-to-request branch for the
+unique canonical `Finish` coordinate. M214 supplies the equal-classifier
+result, the builder suffix is protected beyond the comparator end marker, one
+fixed writer creates M217's tape-resident `Finish` request, and one
+collision-free 137-rule composition runs the comparator, writer, and dispatcher.
+Exact work, compiled and one-step-short traces hold for arbitrary classifier
+exterior under one source-size polynomial. Body and padding request derivation,
+the preceding suffix-preserving classifier handoff, one literal repeated loop,
+builder `RawRefinement`, and the packaged `PolynomialReduction` remain open. No
+fixed checkpoint or global gate closes. Coverage becomes 195 of 197 while the
+score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
+all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

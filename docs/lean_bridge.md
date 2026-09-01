@@ -2144,6 +2144,22 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_physical_dispatch_schedule.md](./lean_cook_levin_builder_physical_dispatch_schedule.md).
 
+M219 closes the first literal classifier-to-request branch for the unique
+canonical `Finish` coordinate. The problem derives that coordinate internally,
+M214 proves its equal-classifier result, and the canonical builder workspace is
+preserved as a protected suffix beyond the comparator's end marker. One fixed
+writer produces M217's tape-resident `Finish` request, and one collision-free
+137-rule composition runs the classifier, writer, and dispatcher. Exact work,
+six-for-one compiled, and one-step-short traces hold for arbitrary classifier
+exterior, and one verifier-derived polynomial bounds the compiled work. Body-token
+and padding request derivation, the preceding suffix-preserving classifier handoff,
+one literal repeated loop, complete builder `RawRefinement`, and the packaged
+reduction remain open. Formal artefact coverage is 195 of 197 current scoped
+publication rows earned; the risk-weighted estimate remains 35 percent, and zero
+of five global gates are closed.
+See
+[lean_cook_levin_builder_physical_finish_request.md](./lean_cook_levin_builder_physical_finish_request.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2218,7 +2234,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Construct a literal raw coordinate-to-request selector feeding M218, connect its exact per-coordinate configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
+2. Extend M219's literal `Finish` branch with raw body-token and padding request derivation, preserve the builder suffix through the preceding classifier stages, connect all exact configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
