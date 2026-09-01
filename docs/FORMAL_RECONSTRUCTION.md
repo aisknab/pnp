@@ -552,6 +552,21 @@ of five global gates are closed.
 See
 [lean_cook_levin_builder_physical_finish_request.md](./lean_cook_levin_builder_physical_finish_request.md).
 
+M220 completes the suffix-preserving physical classifier pipeline for every
+canonical post-header coordinate. One fixed collision-free 711-rule machine
+composes M213's router-to-divider bridge, M211's exact divider, M214's
+divider-to-comparator bridge and comparator through three exact tape handoffs
+over arbitrary protected builder workspace. The final raw state agrees with
+M214's typed body-or-`Finish` semantics, while exact work, six-for-one compiled
+execution, one-step-short nonhalting, component decomposition, and one
+source-size polynomial bound are checked. Body-token and padding request symbols
+are not yet written and the classifier result is not connected to M217's
+dispatcher; one literal repeated schedule loop, complete builder `RawRefinement`,
+and the packaged reduction remain open. Formal artefact coverage is 196 of 198
+current scoped publication rows earned; the risk-weighted estimate remains 35
+percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_pipeline.md](./lean_cook_levin_builder_physical_classifier_pipeline.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

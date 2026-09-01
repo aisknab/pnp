@@ -3544,6 +3544,55 @@ traces under one verifier-derived polynomial bound.
   builder `RawRefinement`, closing a checkpoint or gate, or proving `P = NP`.
 
 ---
+
+### M220 Cook-Levin all-coordinate physical classifier pipeline
+
+**Claim**
+
+For every concrete verifier problem, every canonical post-header coordinate and
+arbitrary protected builder workspace, one fixed collision-free 711-rule machine
+composes the M213 router-to-divider bridge, M211 exact divider, M214
+divider-to-comparator bridge and comparator. Three exact tape handoffs preserve
+the workspace suffix. The final raw state agrees with M214's typed body-or-`Finish`
+semantics, and exact work, compiled execution, one-step-short nonhalting,
+component decomposition and one source-size polynomial bound are proved.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierPipeline.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierPipelineAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierPipeline.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-pipeline0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_pipeline.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint accepts only the verifier problem and quantifies every
+   canonical index and arbitrary workspace internally.
+2. Confirm the fixed composition has exactly 711 collision-free rules and uses
+   the three proved physical tape handoffs between its four checked components.
+3. Confirm exact work, six-for-one compiled, one-step-short and final-route
+   agreement theorems cover both body and unique `Finish` coordinates.
+4. Confirm the 18 added compiled launch transitions are included in one
+   verifier-derived polynomial bound in encoded source-input length.
+5. Confirm all 63 public declarations have the measured 44 empty, four
+   `propext`, and 15 `propext`/`Quot.sound` closures with no project or choice
+   axiom.
+
+**What would count as a refutation or material defect**
+
+- Any component boundary lacks exact tape equality, alters the protected suffix,
+  or omits work from the exact or polynomial bound.
+- The public endpoint accepts a supplied coordinate, workspace, comparison
+  result, quotient, remainder, route, trace, schedule or certificate rather than
+  quantifying the coordinate and workspace in its conclusion.
+- M220 is described as writing body-token or padding request symbols, connecting
+  the classifier to M217's dispatcher, implementing the complete literal loop,
+  finishing builder `RawRefinement`, closing a checkpoint or gate, or proving
+  `P = NP`.
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
