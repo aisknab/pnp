@@ -3501,6 +3501,49 @@ and total compiled work has one source-size polynomial bound.
 
 ---
 
+### M219 Cook-Levin physical Finish-request handoff
+
+**Claim**
+
+For every concrete verifier problem, the unique canonical final coordinate is
+derived internally. M214 supplies its equal-classifier trace while the builder
+workspace is preserved beyond the comparator end marker. One fixed writer creates
+M217's physical `Finish` request, and a collision-free 137-rule composition runs
+the comparator, writer, and dispatcher with exact work, compiled and one-step-short
+traces under one verifier-derived polynomial bound.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalFinishRequest.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalFinishRequestAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalFinishRequest.lean.
+- audits/lean-concrete-cook-levin-builder-physical-finish-request0.test.mjs.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm `finishIndex` is problem-derived and its schedule entry is exactly
+   `some .finish` with M214 in-range classifier evidence.
+2. Confirm the right-exterior transport preserves the builder suffix through every
+   comparator step and the writer physically replaces only the end marker.
+3. Confirm the fixed composition has 137 collision-free rules and proves exact
+   work, six-for-one compiled, and one-step-short traces.
+4. Confirm the compiled-step bound is a verifier-derived polynomial in encoded
+   source-input length.
+5. Confirm all 49 public declarations have the measured 23 empty, six `propext`,
+   and 20 `propext`/`Quot.sound` closures with no project or choice axiom.
+
+**What would count as a refutation or material defect**
+
+- The comparator alters the protected builder suffix, the writer does not create
+  the exact physical `Finish` request, or the composed trace or bound is false.
+- The public endpoint accepts a supplied coordinate, route, request, token, trace,
+  schedule, or success certificate.
+- M219 is described as deriving body or padding requests, preserving every
+  preceding classifier handoff, implementing a complete literal loop, finishing
+  builder `RawRefinement`, closing a checkpoint or gate, or proving `P = NP`.
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
