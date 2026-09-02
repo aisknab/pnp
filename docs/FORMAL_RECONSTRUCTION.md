@@ -598,6 +598,21 @@ current scoped publication rows earned; the risk-weighted estimate remains 35
 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md](./lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md).
 
+M223 closes reflected dispatcher execution for the unique full-classifier
+`Finish` path. It defines spatial reflection for arbitrary literal work
+machines, proves that rule lookup, steps, and exact runs commute with reflection,
+and specializes that result to M217's fixed 64-rule dispatcher. Chained after
+M222, the resulting collision-free 813-rule machine runs from the complete
+classifier entry to a reflected appender endpoint containing the complete
+canonical CNF token stream. Exact work, six-for-one compiled execution,
+one-step-short nonhalting, and one source-size polynomial bound are checked.
+Body-token and padding request generation, all-route dispatcher connection, one
+literal repeated loop, builder `RawRefinement`, and the packaged reduction
+remain open. Formal artefact coverage is 199 of 201 current scoped publication
+rows earned; the risk-weighted estimate remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md](./lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

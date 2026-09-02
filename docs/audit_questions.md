@@ -3692,6 +3692,59 @@ evidence.
   checkpoint or gate, or proving `P = NP`.
 
 ---
+
+### M223 Cook-Levin full-classifier reflected Finish dispatch
+
+**Claim**
+
+For every concrete verifier problem, spatial reflection maps any literal work
+machine by swapping tape sides and left/right moves while preserving rule
+queries and states, and transports every exact run. M217's reflected 64-rule
+dispatcher starts on M222's exact endpoint. The resulting fixed collision-free
+813-rule composition executes the complete classifier's unique `Finish` path
+to a reflected appender endpoint containing the complete canonical CNF token
+stream, with exact work, compiled, one-step-short, and source-size polynomial
+evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierFinishMirroredDispatch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatch.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm reflection exchanges left and right moves, swaps the tape sides,
+   preserves rule queries and control states, and is involutive.
+2. Confirm rule lookup, rule application, one work step, and arbitrary exact
+   work runs commute with reflection.
+3. Confirm the reflected dispatcher has exactly M217's 64 mapped rules and the
+   M222 final tape is exactly its canonical `Finish` entry tape.
+4. Confirm the complete composition has exactly 813 collision-free rules and
+   reaches a final configuration whose appender output is
+   `encodeCNFTokens problem.formula`.
+5. Confirm exact work, six-for-one compiled and one-step-short traces are
+   included in one verifier-derived polynomial bound.
+6. Confirm all 51 public declarations have the measured 23 empty, seven
+   `propext`, and 21 `propext`/`Quot.sound` closures with no project or choice
+   axiom.
+
+**What would count as a refutation or material defect**
+
+- Reflection changes a rule query or state, fails to exchange a head move, or
+  does not transport the exact source trace.
+- The M222 endpoint differs from the reflected M217 entry, the final output is
+  not the complete canonical token stream, or component work is omitted from
+  the exact or polynomial bound.
+- M223 is described as generating body-token or padding requests, connecting
+  every classifier route, implementing the complete literal loop, finishing
+  builder `RawRefinement`, closing a fixed checkpoint or gate, or proving
+  `P = NP`.
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
