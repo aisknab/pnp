@@ -564,6 +564,22 @@ rows earned; the risk-weighted estimate remains 35 percent, and zero of five
 global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md](lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md).
 
+M224 closes the first populated route through the complete physical classifier
+and reflected dispatcher. It derives post-header coordinate zero and proves its
+canonical request is the separator beginning the first clause, runs M220's
+711-rule classifier through the body terminal, crosses the remaining positive
+unary clause count with a fixed two-rule request writer, and reorients the
+protected workspace with a fixed ten-rule scanner. M223's reflected 64-rule
+dispatcher then reaches the exact canonical prefix ending in the first clause
+separator. The collision-free 814-rule composition has exact work,
+six-for-one compiled, one-step-short, and source-size polynomial evidence.
+Arbitrary body-token and padding requests, all-route dispatcher connection, one
+literal repeated loop, builder `RawRefinement`, and the packaged reduction
+remain open. Formal artefact coverage is 200 of 202 current scoped publication
+rows earned; the risk-weighted estimate remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch.md](lean_cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See
