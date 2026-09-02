@@ -3642,6 +3642,56 @@ source-size polynomial evidence.
   `P = NP`.
 
 ---
+
+### M222 Cook-Levin full-classifier Finish-workspace orientation
+
+**Claim**
+
+For every concrete verifier problem, one blank sentinel is inserted before the
+canonical builder workspace supplied to M221. The complete classifier prefix is
+derived and proved blank-free, and a fixed ten-rule left scanner crosses exactly
+that prefix. The resulting fixed collision-free 740-rule composition halts with
+a tape equal to the spatial mirror of M217's canonical `Finish` request entry,
+with exact work, compiled, one-step-short, prefix-size and source-size polynomial
+evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierFinishWorkspaceOrientation.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientation.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint accepts only the verifier problem and derives the
+   classifier prefix, sentinel-protected workspace and final geometry internally.
+2. Confirm the derived classifier prefix contains no blank and satisfies the
+   stated verifier-derived length bound.
+3. Confirm the orienter has ten literal rules, preserves every nonblank scanned
+   cell, and writes the canonical `Finish` request only at the blank sentinel.
+4. Confirm the complete composition has exactly 740 collision-free rules and its
+   final tape is exactly the spatial mirror of M217's canonical request entry.
+5. Confirm exact work, six-for-one compiled and one-step-short traces, and all
+   orientation work, are included in one verifier-derived polynomial bound.
+6. Confirm all 57 public declarations have the measured 27 empty and 30
+   `propext`/`Quot.sound` closures with no project or choice axiom.
+
+**What would count as a refutation or material defect**
+
+- The prefix, sentinel, request cell, trace, final geometry or success data is
+  supplied by the public caller rather than derived from the verifier problem.
+- A blank occurs in the derived classifier prefix, a nonblank scan cell changes,
+  the final tape differs from the stated mirrored request entry, or component
+  work is omitted from the exact or polynomial bound.
+- M222 is described as executing M217 on the mirrored representation, deriving
+  body-token or padding requests, connecting every classifier route, implementing
+  the complete literal loop, finishing builder `RawRefinement`, closing a fixed
+  checkpoint or gate, or proving `P = NP`.
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-221`, 197 of 199
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-222`, 198 of 200
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M221 |
+| Track | Available | Earned at M222 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M221 risk-weighted proof completion estimate is therefore 35 percent, with
+The M222 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -482,6 +482,21 @@ repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
 remain open. No fixed checkpoint or global gate closes. Coverage becomes 197 of
 199 while the score remains 35 percent, the uncertainty range remains 20 to 40
 percent, and all five gates remain open. No retrospective score was invented.
+
+M222 physically orients the unique full-classifier `Finish` workspace. One
+blank sentinel protects the canonical builder workspace, the complete
+classifier prefix is derived and proved blank-free, and a fixed ten-rule left
+scanner is chained to M221. The resulting collision-free 740-rule machine
+crosses exactly that prefix and halts with a tape equal to the spatial mirror of
+M217's canonical `Finish` request entry. Exact work, compiled execution,
+one-step-short nonhalting, a prefix-size bound, and one source-size polynomial
+bound are checked. M217 is not executed on the mirrored representation;
+body-token and padding request generation, all-route dispatcher connection, one
+literal repeated loop, builder `RawRefinement`, and the packaged
+`PolynomialReduction` remain open. No fixed checkpoint or global gate closes.
+Coverage becomes 198 of 200 while the score remains 35 percent, the uncertainty
+range remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 
