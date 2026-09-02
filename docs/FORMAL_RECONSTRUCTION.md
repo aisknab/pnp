@@ -582,6 +582,22 @@ risk-weighted estimate remains 35 percent, and zero of five global gates are
 closed. See
 [lean_cook_levin_builder_physical_classifier_finish_request.md](./lean_cook_levin_builder_physical_classifier_finish_request.md).
 
+M222 closes the unique full-classifier `Finish` workspace-orientation edge.
+It inserts one blank sentinel before the canonical builder workspace, derives
+the complete M220/M221 classifier prefix, proves that prefix is blank-free, and
+chains M221 to a fixed ten-rule left scanner. The resulting collision-free
+740-rule machine crosses exactly the derived prefix and halts with a tape equal
+to the spatial mirror of M217's canonical `Finish` request entry, while
+retaining the classifier evidence as exterior data. Exact work, six-for-one
+compiled execution, one-step-short nonhalting, a prefix-size bound, and one
+source-size polynomial bound are checked. M217 is not yet executed on the
+mirrored representation; body-token and padding request generation, all-route
+dispatcher connection, one literal repeated loop, builder `RawRefinement`, and
+the packaged reduction remain open. Formal artefact coverage is 198 of 200
+current scoped publication rows earned; the risk-weighted estimate remains 35
+percent, and zero of five global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md](./lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md).
+
 The root now also imports an axiom-free concrete foundation: canonical bitstring framing and pair
 decoding, natural-polynomial bound syntax, a finite rule-list single-tape machine, fuel-bounded
 execution, and proof-bearing deterministic runtime witnesses. Above it, finite function and

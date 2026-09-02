@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-02-221",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-02-222",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3158,6 +3158,7 @@
     "PNP.DirectWire.pccmin_checked_packet_pkgc_restoration_coverage_charge_route_or_zeroslack_checked_complete": "2205a2a1ef56e31519ab2320d6ed83004a252026e1d92731de4fba539c4a9d7e",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierPipeline.cook_levin_builder_physical_classifier_pipeline_checked_complete": "4bbd25d56fa38cdee8b2595274ea8897404ee4e23d832f4aa3d62f681311813d",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishRequest.cook_levin_builder_physical_classifier_finish_request_checked_complete": "ca8b4f2f5712ddd7589a609fdaff3df08550d4b33e5d1e9cd374fb8f82c58bd7",
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishWorkspaceOrientation.cook_levin_builder_physical_classifier_finish_workspace_orientation_checked_complete": "22c56aba663179d67726c01ad73acc3b73922afd6607fe16b3b0e94a887a648f",
     "PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.cook_levin_builder_complete_schedule_iteration_checked_complete": "6b6baad967bde7dafa7de704b0d87df6f5f75ce7a6d1d32b778f8c0c92f7262a",
     "PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.cook_levin_builder_physical_dispatch_schedule_checked_complete": "a54a569b4a01cd36d1a9934d3ea1e5c832b702380b2b7507f66267dd7a6b5404",
     "PNP.Concrete.CookLevin.BuilderPhysicalFinishRequest.cook_levin_builder_physical_finish_request_checked_complete": "b51a29e1004e8d0713fb9a663de27dccb417fbe973ef449d6f3532e5319870b0",
@@ -3179,7 +3180,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "4c76442190f7b4027cfe2e4909f3f2bb3baa5026a2b2ccf9ba41489bfe819c32",
+  "milestoneSourceClosureSha256": "a8c458781438a29e3ead3d90b8dba9f324eb959b9a617c7d7ebdde20d01920c1",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4138,6 +4139,16 @@
       ],
       "scope": "For every concrete verifier problem and arbitrary protected builder workspace, the canonical Finish coordinate is derived internally. M220's full 711-rule classifier has its terminal verdict names swapped without changing transition semantics, then is chained through one fixed launch table to M219's one-cell writer as a collision-free 721-rule machine. The classifier reaches the end marker, the writer changes exactly that focused cell to M217's Finish request while preserving the rest of the tape, and exact work, six-for-one compiled execution, one-step-short nonhalting and one source-size polynomial bound are proved. All 36 public declarations are axiom-audited: nine have empty closure, three use only propext, and 24 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "Full-classifier Finish-request cell"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation",
+      "nonClaim": "This milestone closes only the physical workspace-orientation edge for the unique full-classifier Finish path. Equality with a spatial mirror of M217's canonical request entry does not prove that M217's existing machine executes on the mirrored representation. It does not derive body-token or padding requests, run a mirrored dispatcher, connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishWorkspaceOrientation.cook_levin_builder_physical_classifier_finish_workspace_orientation_checked_complete"
+      ],
+      "scope": "For every concrete verifier problem, M222 prepends one blank sentinel to the canonical builder workspace, derives the complete M220/M221 classifier prefix, proves that prefix contains no blank, and chains M221 to one fixed ten-rule left scanner. The resulting collision-free 740-rule machine crosses exactly the classifier prefix and halts at the sentinel with a tape equal to the spatial mirror of M217's canonical Finish request entry, retaining classifier evidence as exterior data. Exact work, six-for-one compiled execution, one-step-short nonhalting, a derived prefix-size bound and one source-input-size polynomial bound are proved. All 57 public declarations are axiom-audited: 27 have empty closure and 30 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "title": "Full-classifier Finish-workspace orientation"
     },
     {
       "classification": "formalized-foundation-only",
