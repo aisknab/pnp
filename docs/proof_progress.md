@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-223`, 199 of 201
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-224`, 200 of 202
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M223 |
+| Track | Available | Earned at M224 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M223 risk-weighted proof completion estimate is therefore 35 percent, with
+The M224 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -509,6 +509,19 @@ padding request generation, all-route dispatcher connection, one literal
 repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
 remain open. No fixed checkpoint or global gate closes. Coverage becomes 199 of
 201 while the score remains 35 percent, the uncertainty range remains 20 to 40
+percent, and all five gates remain open. No retrospective score was invented.
+
+M224 derives and executes the first populated full-classifier route. Coordinate
+zero and its separator request follow from the canonical schedule; the complete
+classifier reaches its positive body terminal, a fixed two-rule writer creates
+the physical request, a fixed ten-rule scanner orients the protected workspace,
+and M223's reflected dispatcher appends the separator to the exact canonical
+header prefix. The collision-free 814-rule machine has exact work, compiled,
+one-step-short and source-size polynomial evidence. Arbitrary body-token and
+padding request generation, all-route dispatcher connection, one literal
+repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
+remain open. No fixed checkpoint or global gate closes. Coverage becomes 200 of
+202 while the score remains 35 percent, the uncertainty range remains 20 to 40
 percent, and all five gates remain open. No retrospective score was invented.
 
 ## Changing the score

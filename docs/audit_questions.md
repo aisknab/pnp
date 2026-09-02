@@ -3744,6 +3744,57 @@ evidence.
   builder `RawRefinement`, closing a fixed checkpoint or gate, or proving
   `P = NP`.
 
+
+---
+
+### M224 Cook-Levin first-body separator physical dispatch
+
+**Claim**
+
+For every concrete verifier problem, the first post-header coordinate is zero
+and its canonical entry is the separator beginning clause one. M220's complete
+classifier reaches its populated-body terminal; a fixed two-rule scanner crosses
+the positive unary clause count and writes the physical separator request. A
+fixed ten-rule orientation pass and M223's reflected 64-rule dispatcher complete
+one collision-free 814-rule run to the exact next canonical emitted prefix, with
+exact work, compiled, one-step-short and source-size polynomial evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the derived index has value zero and its schedule entry is
+   `CNFToken.sep` without a supplied coordinate or request.
+2. Confirm the complete classifier reaches the body/accept terminal with its head
+   on the first clause-count unit and the remaining units before the end marker.
+3. Confirm the fixed two-rule writer crosses exactly that suffix and changes only
+   the end marker into the physical separator request.
+4. Confirm the fixed ten-rule orienter reaches the reflected M217 entry and the
+   reflected 64-rule dispatcher appends exactly one separator.
+5. Confirm the complete composition has 814 collision-free rules and exact work,
+   six-for-one compiled, one-step-short and source-size polynomial evidence.
+6. Confirm all 121 public declarations have the measured 53 empty, one
+   `propext`, and 67 `propext`/`Quot.sound` closures with no project or
+   choice axiom.
+
+**What would count as a refutation or material defect**
+
+- Coordinate zero is not the first body entry, its token is not the separator,
+  or the classifier terminal geometry differs from the writer input.
+- The writer, orienter or reflected dispatcher changes protected workspace,
+  omits a step, or does not reach the exact next canonical prefix.
+- M224 is described as deriving arbitrary body-token or padding requests,
+  connecting every classifier route, implementing the complete literal loop,
+  finishing builder `RawRefinement`, closing a fixed checkpoint or gate, or
+  proving `P = NP`.
+
 ---
 ## Cross-claim completion checklist
 

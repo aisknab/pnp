@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-02-223",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-03-224",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3163,7 +3163,8 @@
     "PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.cook_levin_builder_physical_dispatch_schedule_checked_complete": "a54a569b4a01cd36d1a9934d3ea1e5c832b702380b2b7507f66267dd7a6b5404",
     "PNP.Concrete.CookLevin.BuilderPhysicalFinishRequest.cook_levin_builder_physical_finish_request_checked_complete": "b51a29e1004e8d0713fb9a663de27dccb417fbe973ef449d6f3532e5319870b0",
     "PNP.Concrete.CookLevin.BuilderPhysicalOptionalTokenDispatch.cook_levin_builder_physical_optional_token_dispatch_checked_complete": "fd4609ed040f392e53749bd5458295b60091ffe3ab897d60cad762b733714dbb",
-    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishMirroredDispatch.cook_levin_builder_physical_classifier_finish_mirrored_dispatch_checked_complete": "186d7198c12399f46c5eb478ce4f355b4c0d7a5616bccdf135255a635a4cb2f3"
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishMirroredDispatch.cook_levin_builder_physical_classifier_finish_mirrored_dispatch_checked_complete": "186d7198c12399f46c5eb478ce4f355b4c0d7a5616bccdf135255a635a4cb2f3",
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch_checked_complete": "bda0502211f2094a01ffb98a6402a441afa5ec12ccf05c70efc050b62f558a3c"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3181,7 +3182,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "275863b7bdf73c3a3575cb5a4f80472e0887e5fa0c0adac913d59e45dc919385",
+  "milestoneSourceClosureSha256": "fe19c0528de1aa463aae3f94edb13709409664819a245ab884ab5043f4f1195d",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4160,6 +4161,16 @@
       ],
       "scope": "For every concrete verifier problem, M223 reflects M217's fixed 64-rule dispatcher by exchanging left and right moves while preserving rule queries and states, and proves that reflection transports exact finite-machine execution. Chained after M222, the resulting collision-free 813-rule machine executes the complete classifier's unique Finish path from raw classifier entry through workspace orientation and the reflected dispatcher to an appender endpoint containing the complete canonical CNF token encoding. Exact work, six-for-one compiled execution, one-step-short nonhalting and one source-input-size polynomial bound are proved. All 51 public declarations are axiom-audited: 23 have empty closure, seven use only propext, and 21 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "Full-classifier reflected Finish dispatch"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch",
+      "nonClaim": "This milestone closes only the first populated full-classifier body route. It does not select arbitrary body tokens, derive padding requests, connect every classifier outcome, connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch_checked_complete"
+      ],
+      "scope": "For every concrete verifier problem, M224 derives first-body coordinate zero and its canonical separator entry, runs the complete 711-rule classifier through the populated-body terminal, crosses the positive unary clause-count suffix with a fixed two-rule request writer, reorients the protected builder workspace with a fixed ten-rule scanner, and executes M223's reflected 64-rule dispatcher. One collision-free 814-rule machine reaches the exact canonical prefix ending in the first clause separator, with exact work, six-for-one compiled execution, one-step-short nonhalting and one source-input-size polynomial bound. All 121 public declarations are axiom-audited: 53 have empty closure, one uses only propext, and 67 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "title": "First-body separator physical dispatch"
     },
     {
       "classification": "formalized-foundation-only",
