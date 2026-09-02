@@ -2206,6 +2206,21 @@ current scoped publication rows earned; the risk-weighted estimate remains 35
 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md](./lean_cook_levin_builder_physical_classifier_finish_workspace_orientation.md).
 
+M223 closes reflected dispatcher execution for the unique full-classifier
+`Finish` path. It defines spatial reflection for arbitrary literal work
+machines, proves that rule lookup, steps, and exact runs commute with reflection,
+and specializes that result to M217's fixed 64-rule dispatcher. Chained after
+M222, the resulting collision-free 813-rule machine runs from the complete
+classifier entry to a reflected appender endpoint containing the complete
+canonical CNF token stream. Exact work, six-for-one compiled execution,
+one-step-short nonhalting, and one source-size polynomial bound are checked.
+Body-token and padding request generation, all-route dispatcher connection, one
+literal repeated loop, builder `RawRefinement`, and the packaged reduction
+remain open. Formal artefact coverage is 199 of 201 current scoped publication
+rows earned; the risk-weighted estimate remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md](./lean_cook_levin_builder_physical_classifier_finish_mirrored_dispatch.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2280,7 +2295,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Extend M222's mirrored full-classifier `Finish` request-entry geometry with a literal dispatcher execution or a proved bridge back to M217's native orientation, derive raw body-token and padding requests, connect every exact request configuration, compose successive configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
+2. Extend M223's executed full-classifier `Finish` path with raw body-token and padding request generation, connect every classifier result to the reflected dispatcher, compose successive configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

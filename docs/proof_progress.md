@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-222`, 198 of 200
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-223`, 199 of 201
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M222 |
+| Track | Available | Earned at M223 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M222 risk-weighted proof completion estimate is therefore 35 percent, with
+The M223 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -497,6 +497,19 @@ literal repeated loop, builder `RawRefinement`, and the packaged
 Coverage becomes 198 of 200 while the score remains 35 percent, the uncertainty
 range remains 20 to 40 percent, and all five gates remain open. No retrospective
 score was invented.
+
+M223 mechanically reflects M217's fixed dispatcher and executes it after the
+unique full-classifier `Finish` path. Reflection swaps tape sides and left/right
+head moves while preserving finite rule queries and states; exact steps and
+runs commute with that transformation. Chained after M222, the collision-free
+813-rule machine reaches a reflected appender endpoint containing the complete
+canonical CNF token encoding. Exact work, compiled execution, one-step-short
+nonhalting, and one source-size polynomial bound are checked. Body-token and
+padding request generation, all-route dispatcher connection, one literal
+repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
+remain open. No fixed checkpoint or global gate closes. Coverage becomes 199 of
+201 while the score remains 35 percent, the uncertainty range remains 20 to 40
+percent, and all five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

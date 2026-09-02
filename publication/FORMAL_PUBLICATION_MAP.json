@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-02-222",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-02-223",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3162,7 +3162,8 @@
     "PNP.Concrete.CookLevin.BuilderCompleteScheduleIteration.cook_levin_builder_complete_schedule_iteration_checked_complete": "6b6baad967bde7dafa7de704b0d87df6f5f75ce7a6d1d32b778f8c0c92f7262a",
     "PNP.Concrete.CookLevin.BuilderPhysicalDispatchSchedule.cook_levin_builder_physical_dispatch_schedule_checked_complete": "a54a569b4a01cd36d1a9934d3ea1e5c832b702380b2b7507f66267dd7a6b5404",
     "PNP.Concrete.CookLevin.BuilderPhysicalFinishRequest.cook_levin_builder_physical_finish_request_checked_complete": "b51a29e1004e8d0713fb9a663de27dccb417fbe973ef449d6f3532e5319870b0",
-    "PNP.Concrete.CookLevin.BuilderPhysicalOptionalTokenDispatch.cook_levin_builder_physical_optional_token_dispatch_checked_complete": "fd4609ed040f392e53749bd5458295b60091ffe3ab897d60cad762b733714dbb"
+    "PNP.Concrete.CookLevin.BuilderPhysicalOptionalTokenDispatch.cook_levin_builder_physical_optional_token_dispatch_checked_complete": "fd4609ed040f392e53749bd5458295b60091ffe3ab897d60cad762b733714dbb",
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishMirroredDispatch.cook_levin_builder_physical_classifier_finish_mirrored_dispatch_checked_complete": "186d7198c12399f46c5eb478ce4f355b4c0d7a5616bccdf135255a635a4cb2f3"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3180,7 +3181,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a8c458781438a29e3ead3d90b8dba9f324eb959b9a617c7d7ebdde20d01920c1",
+  "milestoneSourceClosureSha256": "275863b7bdf73c3a3575cb5a4f80472e0887e5fa0c0adac913d59e45dc919385",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4149,6 +4150,16 @@
       ],
       "scope": "For every concrete verifier problem, M222 prepends one blank sentinel to the canonical builder workspace, derives the complete M220/M221 classifier prefix, proves that prefix contains no blank, and chains M221 to one fixed ten-rule left scanner. The resulting collision-free 740-rule machine crosses exactly the classifier prefix and halts at the sentinel with a tape equal to the spatial mirror of M217's canonical Finish request entry, retaining classifier evidence as exterior data. Exact work, six-for-one compiled execution, one-step-short nonhalting, a derived prefix-size bound and one source-input-size polynomial bound are proved. All 57 public declarations are axiom-audited: 27 have empty closure and 30 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "Full-classifier Finish-workspace orientation"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch",
+      "nonClaim": "This milestone closes only reflected M217 execution for the unique full-classifier Finish path. It does not derive body-token or padding request symbols, connect every classifier outcome to the dispatcher, connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishMirroredDispatch.cook_levin_builder_physical_classifier_finish_mirrored_dispatch_checked_complete"
+      ],
+      "scope": "For every concrete verifier problem, M223 reflects M217's fixed 64-rule dispatcher by exchanging left and right moves while preserving rule queries and states, and proves that reflection transports exact finite-machine execution. Chained after M222, the resulting collision-free 813-rule machine executes the complete classifier's unique Finish path from raw classifier entry through workspace orientation and the reflected dispatcher to an appender endpoint containing the complete canonical CNF token encoding. Exact work, six-for-one compiled execution, one-step-short nonhalting and one source-input-size polynomial bound are proved. All 51 public declarations are axiom-audited: 23 have empty closure, seven use only propext, and 21 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "title": "Full-classifier reflected Finish dispatch"
     },
     {
       "classification": "formalized-foundation-only",
