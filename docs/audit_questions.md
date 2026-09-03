@@ -3847,6 +3847,56 @@ polynomial evidence.
 
 
 ---
+
+### M226 Cook-Levin physical classifier terminal join
+
+**Claim**
+
+For every concrete verifier problem, every coordinate in its complete
+post-header schedule and arbitrary protected workspace, one fixed wrapper
+retains M220's body/accept terminal and redirects the unique `Finish`/reject
+terminal to that same continuation-ready state. The redirect is total over all
+nine work symbols and leaves the tape unchanged. The collision-free 720-rule
+machine gives body routes zero additional steps and `Finish` exactly one, with
+exact work, compiled, one-step-short and source-size polynomial evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierTerminalJoin.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoin.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-terminal-join0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_terminal_join.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint takes only a concrete verifier problem and quantifies
+   internally over every post-header coordinate and arbitrary workspace.
+2. Confirm M220's exact route agreement excludes out-of-range coordinates and
+   distinguishes every body route from the unique `Finish` route.
+3. Confirm the redirect table contains one tape-preserving rule for each of the
+   nine work symbols and does not collide with any renamed classifier rule.
+4. Confirm body routes add zero steps, `Finish` adds exactly one, and both end
+   in the same accepting state with the exact classifier terminal tape.
+5. Confirm the fixed machine has 720 rules and exact work, six-for-one compiled,
+   one-step-short and source-size polynomial evidence.
+6. Confirm all 34 public declarations have the measured 22 empty, three
+   `propext`, and nine `propext`/`Quot.sound` closures with no project or choice
+   axiom.
+
+**What would count as a refutation or material defect**
+
+- Any valid coordinate is omitted, a caller supplies the route or terminal
+  verdict, or the supposedly total redirect omits a work symbol.
+- The `Finish` redirect changes the tape, collides with classifier rules, takes
+  more than one step, or reaches a state different from the body terminal.
+- M226 is described as synthesizing or dispatching requests, iterating the
+  schedule, finishing builder refinement, closing a fixed checkpoint or global
+  gate, or proving `P = NP`.
+
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:
