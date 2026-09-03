@@ -580,6 +580,21 @@ rows earned; the risk-weighted estimate remains 35 percent, and zero of five
 global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch.md](lean_cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch.md).
 
+M225 replaces that single coordinate with one theorem over the complete
+clause-token body rectangle. For every populated or padding coordinate, M220's
+711-rule classifier preserves an explicitly staged canonical request, a fixed
+fourteen-rule relay crosses the complete blank-free classifier prefix and
+validates the request, and M223's reflected 64-rule dispatcher reaches the
+exact next canonical emitted prefix. The collision-free 807-rule composition
+has exact work, six-for-one compiled, one-step-short, and source-size polynomial
+evidence. The request is still staged rather than synthesized from raw
+classifier state, and the body routes are not yet joined to Finish in one
+repeated physical loop; builder `RawRefinement` and the packaged reduction
+remain open. Formal artefact coverage is 201 of 203 current scoped publication
+rows earned; the risk-weighted estimate remains 35 percent, and zero of five
+global gates are closed. See
+[lean_cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch.md](lean_cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

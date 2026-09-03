@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-224`, 200 of 202
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-225`, 201 of 203
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M224 |
+| Track | Available | Earned at M225 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M224 risk-weighted proof completion estimate is therefore 35 percent, with
+The M225 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -523,6 +523,19 @@ repeated loop, builder `RawRefinement`, and the packaged `PolynomialReduction`
 remain open. No fixed checkpoint or global gate closes. Coverage becomes 200 of
 202 while the score remains 35 percent, the uncertainty range remains 20 to 40
 percent, and all five gates remain open. No retrospective score was invented.
+
+M225 replaces the single first-separator case with one quantified physical route
+over the complete clause-token body rectangle. For every populated or padding
+coordinate, the classifier preserves an explicitly staged canonical request, a
+fixed fourteen-rule relay validates it across the complete blank-free prefix,
+and the reflected dispatcher reaches the exact next canonical emitted prefix.
+The collision-free 807-rule machine has exact work, compiled, one-step-short
+and source-size polynomial evidence. Raw request synthesis, the combined
+body-and-Finish repeated loop, builder `RawRefinement`, and the packaged
+`PolynomialReduction` remain open. No fixed checkpoint or global gate closes.
+Coverage becomes 201 of 203 while the score remains 35 percent, the uncertainty
+range remains 20 to 40 percent, and all five gates remain open. No retrospective
+score was invented.
 
 ## Changing the score
 
