@@ -3796,6 +3796,57 @@ exact work, compiled, one-step-short and source-size polynomial evidence.
   proving `P = NP`.
 
 ---
+
+### M225 Cook-Levin all-body staged-request physical dispatch
+
+**Claim**
+
+For every concrete verifier problem and every coordinate in its complete
+clause-token body rectangle, M220's classifier preserves an explicit canonical
+optional-token request. One fixed fourteen-rule relay crosses the complete
+blank-free classifier prefix, validates the request, and reaches M223's
+reflected dispatcher entry. The resulting collision-free 807-rule composition
+reaches the exact next canonical emitted prefix for populated and padding
+coordinates, with exact work, compiled, one-step-short and source-size
+polynomial evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the quantified index covers exactly the full clause-count by token-width
+   rectangle and every index decodes as a body route.
+2. Confirm all five canonical optional-token values, including padding, are
+   admitted by one request-independent fourteen-rule relay.
+3. Confirm the request is visibly staged in protected tape rather than claimed
+   to be synthesized from the raw classifier terminal.
+4. Confirm the classifier/relay table has 734 rules, the reflected dispatcher
+   has 64, and the complete collision-free composition has 807.
+5. Confirm exact work, six-for-one compiled, one-step-short and source-size
+   polynomial evidence reaches each exact next canonical prefix.
+6. Confirm all 80 public declarations have the measured 32 empty, nine
+   `propext`, and 39 `propext`/`Quot.sound` closures with no project or
+   choice axiom.
+
+**What would count as a refutation or material defect**
+
+- The finite domain omits a populated or padding body coordinate, or includes
+  the unique Finish coordinate while claiming a body-only theorem.
+- The relay depends on a selected coordinate or request, changes protected
+  workspace, or fails to reach the exact reflected dispatcher entry.
+- The request is described as raw-machine synthesized rather than staged, or
+  M225 is described as a combined repeated loop, complete builder refinement,
+  closed fixed checkpoint or global gate, or proof of `P = NP`.
+
+
+---
 ## Cross-claim completion checklist
 
 A serious review should not mark the overall claim complete until all of the following have independent evidence:

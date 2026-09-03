@@ -2054,6 +2054,27 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 67
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.lean
 
+      - name: Print Cook-Levin all-body staged-request mirrored-dispatch axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch\.")" -eq 80
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin all-body staged-request mirrored-dispatch axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin all-body staged-request mirrored-dispatch reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 32
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 39
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.lean
+
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"
