@@ -94,7 +94,7 @@ function validate0(source) {
   require0(JSON.stringify(imports0(source)) === JSON.stringify([
     'PNP.Concrete.CookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch',
   ]), 'imports');
-  require0(declarations0(source).length === 80, 'surface');
+  require0(declarations0(source).length === 82, 'surface');
 
   require0(compact.includes('def bodyOpportunityCount')
     && compact.includes('problem.formulaClauseSlotCount * problem.formulaTokensPerClause')
@@ -178,9 +178,9 @@ test('kernel transcript covers every public M225 declaration exactly once',
     ]);
     const declarations = declarations0(source);
     const printed = printed0(auditText);
-    assert.equal(declarations.length, 80);
-    assert.equal(printed.length, 80);
-    assert.equal(new Set(printed).size, 80);
+    assert.equal(declarations.length, 82);
+    assert.equal(printed.length, 82);
+    assert.equal(new Set(printed).size, 82);
     assert.deepEqual(imports0(auditText), ['PNP']);
     assert.ok(printed.every((name) => name.startsWith(PREFIX)));
     assert.equal(printed.includes(ENDPOINT), true);
@@ -238,7 +238,7 @@ test('root, verification, publication, and progress surfaces publish M225',
       'leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch';
     assert.equal(status[`${statusPrefix}Formalized`], true);
     assert.equal(status[`${statusPrefix}AxiomAuditPassed`], true);
-    assert.equal(status[`${statusPrefix}AuditedDeclarationCount`], 80);
+    assert.equal(status[`${statusPrefix}AuditedDeclarationCount`], 82);
     assert.equal(status[`${statusPrefix}FixedRequestRelayRuleCount`], 14);
     assert.equal(status[`${statusPrefix}FixedClassifierRelayMachineRuleCount`], 734);
     assert.equal(status[`${statusPrefix}FixedMirroredDispatcherRuleCount`], 64);

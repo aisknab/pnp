@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-226`, 202 of 204
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-04-227`, 203 of 205
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M226 |
+| Track | Available | Earned at M227 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M226 risk-weighted proof completion estimate is therefore 35 percent, with
+The M227 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -547,6 +547,17 @@ nonhalting, and a source-size polynomial bound. Raw request synthesis and
 dispatch, successive-coordinate composition, the repeated builder loop,
 builder `RawRefinement`, and the packaged `PolynomialReduction` remain open. No
 fixed checkpoint or global gate closes. Coverage becomes 202 of 204 while the
+score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
+all five gates remain open. No retrospective score was invented.
+
+M227 connects the common all-route classifier terminal to one fixed staged-request
+relay and reflected dispatcher. The collision-free 816-rule composition covers
+every body and unique `Finish` coordinate, validates all five canonical request
+values, and reaches the exact next emitted prefix with exact work, compiled,
+one-step-short, and source-size polynomial evidence. The request remains staged,
+successive physical configurations are not connected, and the repeated loop,
+builder `RawRefinement`, and packaged `PolynomialReduction` remain open. No
+fixed checkpoint or global gate closes. Coverage becomes 203 of 205 while the
 score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
 all five gates remain open. No retrospective score was invented.
 

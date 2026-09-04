@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-03-226",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-04-227",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3166,7 +3166,8 @@
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFinishMirroredDispatch.cook_levin_builder_physical_classifier_finish_mirrored_dispatch_checked_complete": "186d7198c12399f46c5eb478ce4f355b4c0d7a5616bccdf135255a635a4cb2f3",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.cook_levin_builder_physical_classifier_first_body_separator_mirrored_dispatch_checked_complete": "bda0502211f2094a01ffb98a6402a441afa5ec12ccf05c70efc050b62f558a3c",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch_checked_complete": "8659e14e91dc68c48367f63c0531a29845c29700e9abfbbd7a211e0dad9ab4b4",
-    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierTerminalJoin.cook_levin_builder_physical_classifier_terminal_join_checked_complete": "9942e24e311a740e4f3fa4c4662a4d2c8809ee3cfd17a252aa3e2fb79a1eeeb0"
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierTerminalJoin.cook_levin_builder_physical_classifier_terminal_join_checked_complete": "9942e24e311a740e4f3fa4c4662a4d2c8809ee3cfd17a252aa3e2fb79a1eeeb0",
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch_checked_complete": "f8323850eefda8fb9f731c4be6af9f85f797744e9b90c79539316bab48c11871"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3184,7 +3185,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "788156024f70e435f23ff640772679103e4bc084e0b3c5e601b2a229573d63ce",
+  "milestoneSourceClosureSha256": "8f6388f3e7d73f42dbe133c7d0f75783c82db94004c0547444aa1742c1ae0ad0",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -4181,7 +4182,7 @@
       "requiredTheorems": [
         "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch_checked_complete"
       ],
-      "scope": "For every concrete verifier problem and every coordinate in its complete clause-token body rectangle, M225 runs the complete 711-rule classifier while preserving an explicitly staged canonical optional-token request, relays that request through one fixed 14-rule scanner, and executes M223's reflected 64-rule dispatcher. One collision-free 807-rule composition covers populated and padding coordinates and reaches each exact next canonical emitted prefix, with exact work, six-for-one compiled execution, one-step-short nonhalting and one source-input-size polynomial bound. All 80 public declarations are axiom-audited: 32 have empty closure, nine use only propext, and 39 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "scope": "For every concrete verifier problem and every coordinate in its complete clause-token body rectangle, M225 runs the complete 711-rule classifier while preserving an explicitly staged canonical optional-token request, relays that request through one fixed 14-rule scanner, and executes M223's reflected 64-rule dispatcher. One collision-free 807-rule composition covers populated and padding coordinates and reaches each exact next canonical emitted prefix, with exact work, six-for-one compiled execution, one-step-short nonhalting and one source-input-size polynomial bound. The current M227 audit covers all 82 public declarations: 33 have empty closure, nine use only propext, and 40 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "All-body staged-request physical dispatch"
     },
     {
@@ -8424,6 +8425,16 @@
       ],
       "scope": "Raw-machine-linked complexity classes, concrete SAT completeness and a SAT decider, plus the publication root theorem.",
       "title": "Concrete standard P-versus-NP target and root theorem"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch",
+      "nonClaim": "This milestone keeps the canonical optional-token request explicitly staged on the protected initial tape. It does not synthesize the request from raw classifier state, connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch_checked_complete"
+      ],
+      "scope": "For every concrete verifier problem and every coordinate in its complete post-header schedule, M227 runs M226's fixed terminal-joined classifier over a protected canonical optional-token request, proves common body-or-Finish terminal geometry, crosses the blank-free classifier prefix with M225's fixed 14-rule request relay, and executes M217's reflected fixed 64-rule dispatcher to the exact next canonical emitted prefix. The resulting collision-free 816-rule composition has exact work, six-for-one compiled, one-step-short and source-input-size polynomial evidence. All 65 public declarations are axiom-audited: 23 have empty closure, four use only propext, and 38 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "title": "All-route staged-request physical dispatch"
     }
   ],
   "version": 0

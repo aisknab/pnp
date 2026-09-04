@@ -25,6 +25,12 @@ rules and the full classifier, relay, and dispatcher into one 807-rule table.
 Both tables have pairwise-distinct queries and distinct accepting and rejecting
 states.
 
+M227 later exposed `leftPathTape` and `relayScan_prefix_exact` for uniform
+all-route reuse. The current transcript therefore audits all 82 public
+declarations: 33 have empty closure, nine use only `propext`, and 40 use only
+`propext` and `Quot.sound`. Neither helper adds a project axiom or
+`Classical.choice`.
+
 The module proves:
 
 - every body opportunity decodes to a clause-token rectangle coordinate;

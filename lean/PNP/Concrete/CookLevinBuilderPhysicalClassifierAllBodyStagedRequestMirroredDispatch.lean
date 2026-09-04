@@ -488,7 +488,7 @@ theorem relayRules_pairwise_query_distinct :
 theorem relayMachine_acceptState_ne_rejectState :
     relayMachine.acceptState ≠ relayMachine.rejectState := by decide
 
-private def leftPathTape (rightSide : List WorkSymbol) :
+def leftPathTape (rightSide : List WorkSymbol) :
     List WorkSymbol → WorkTape
   | [] => { left := [], head := WorkSymbol.blank, right := rightSide }
   | head :: left => { left := left, head := head, right := rightSide }
@@ -547,7 +547,7 @@ theorem relayCapture_workStep (selected : Option CNFToken)
   | none => rfl
   | some token => cases token <;> rfl
 
-private theorem relayScan_prefix_exact :
+theorem relayScan_prefix_exact :
     forall (scanWord tail right : List WorkSymbol)
       (selected : Option CNFToken),
       (forall symbol, symbol ∈ scanWord -> symbol ≠ WorkSymbol.blank) ->
