@@ -3947,6 +3947,57 @@ polynomial evidence.
   global gate, or proving `P = NP`.
 
 
+### M228 Cook-Levin all-route derived-Finish request split
+
+**Claim**
+
+For every concrete verifier problem and every coordinate in its complete
+post-header schedule, one fixed composition runs M226's common-terminal
+classifier without a staged request cell. A fixed relay derives body versus
+`Finish` from the physical terminal: body reaches a collision-free pending
+marker, while `Finish` writes the canonical request and executes the reflected
+dispatcher to the exact next emitted prefix. The collision-free 823-rule
+machine has exact work, compiled, one-step-short, and source-size polynomial
+evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint takes only a concrete verifier problem and quantifies
+   internally over every post-header coordinate.
+2. Confirm the protected classifier workspace is exactly a blank sentinel plus
+   the builder word and contains no staged request cell.
+3. Confirm the physical body and `Finish` heads select distinct relay scans,
+   the body-pending symbol differs from all five request symbols, and
+   `outOfRange` is impossible.
+4. Confirm body routes reject at the explicit pending boundary while `Finish`
+   alone writes the canonical request and reaches the exact next prefix.
+5. Confirm the fixed tables have 20 relay, 749 classifier-relay, 65 dispatcher,
+   and 823 complete rules, with exact work, six-for-one compiled,
+   one-step-short, collision, and source-size polynomial evidence.
+6. Confirm all 91 public declarations have the measured 50 empty, 18
+   `propext`, and 23 `propext`/`Quot.sound` closures with no project or
+   choice axiom.
+
+**What would count as a refutation or material defect**
+
+- Any valid body or `Finish` coordinate is omitted, or a caller supplies the
+  route, request, trace, machine, or success certificate.
+- A request remains staged on the classifier workspace, the pending marker
+  collides with a request symbol, or the `Finish` route fails to reach the exact
+  next canonical prefix.
+- M228 is described as synthesizing body or padding requests, iterating
+  successive configurations, finishing builder refinement, closing a fixed
+  checkpoint or global gate, or proving `P = NP`.
+
 ---
 ## Cross-claim completion checklist
 

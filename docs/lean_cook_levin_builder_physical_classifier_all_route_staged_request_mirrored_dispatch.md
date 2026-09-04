@@ -59,3 +59,10 @@ builder `FunctionProgram.RawRefinement`, package the Cook-Levin
 `PolynomialReduction`, establish concrete NP-hardness or NP-completeness, put
 `CNFSAT` in `P`, close a fixed checkpoint or global gate, create the eligible
 root theorem, or prove `P = NP`.
+
+## Subsequent milestone
+
+M228 removes the staged request cell for the complete route split. It derives
+the unique physical `Finish` request and dispatches it, while every body route
+stops at a collision-free non-request pending marker. See
+[lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md](./lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md).
