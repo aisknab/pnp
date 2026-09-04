@@ -3831,9 +3831,9 @@ polynomial evidence.
    has 64, and the complete collision-free composition has 807.
 5. Confirm exact work, six-for-one compiled, one-step-short and source-size
    polynomial evidence reaches each exact next canonical prefix.
-6. Confirm all 80 public declarations have the measured 32 empty, nine
-   `propext`, and 39 `propext`/`Quot.sound` closures with no project or
-   choice axiom.
+6. Confirm the current 82 public declarations have the measured 33 empty,
+   nine `propext`, and 40 `propext`/`Quot.sound` closures with no project
+   or choice axiom. The two declarations exposed for M227 reuse are included.
 
 **What would count as a refutation or material defect**
 
@@ -3894,6 +3894,57 @@ exact work, compiled, one-step-short and source-size polynomial evidence.
 - M226 is described as synthesizing or dispatching requests, iterating the
   schedule, finishing builder refinement, closing a fixed checkpoint or global
   gate, or proving `P = NP`.
+
+
+### M227 Cook-Levin all-route staged-request mirrored dispatch
+
+**Claim**
+
+For every concrete verifier problem and every coordinate in its complete
+post-header schedule, one fixed composition runs M226's common-terminal
+classifier, crosses the exact body-or-`Finish` classifier prefix to a canonical
+request staged behind a protected blank sentinel, and executes the reflected
+M217 dispatcher to the exact next canonical emitted prefix. The collision-free
+816-rule machine has exact work, compiled, one-step-short, and source-size
+polynomial evidence.
+
+**Where it appears**
+
+- lean/PNP/Concrete/CookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.lean.
+- lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAudit.lean.
+- lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.lean.
+- audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch0.test.mjs.
+- docs/lean_cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch.md.
+- status/PROOF_PROGRESS.json.
+
+**How to test or inspect it**
+
+1. Confirm the endpoint takes only a concrete verifier problem and quantifies
+   internally over every post-header coordinate.
+2. Confirm M226 supplies one common accepting classifier terminal and that the
+   route proof excludes `outOfRange` for the complete `Fin bodySlotCount`
+   domain.
+3. Confirm the initial protected workspace contains the canonical request
+   behind one blank sentinel and no caller supplies a request or route.
+4. Confirm the common relay crosses the exact blank-free body-or-`Finish`
+   prefix and forms the reflected dispatcher entry for all five request values.
+5. Confirm the fixed machine has 816 rules and exact next-prefix, work,
+   six-for-one compiled, one-step-short, collision, and source-size polynomial
+   evidence.
+6. Confirm all 65 public declarations have the measured 23 empty, four
+   `propext`, and 38 `propext`/`Quot.sound` closures with no project or choice
+   axiom.
+
+**What would count as a refutation or material defect**
+
+- Any valid body or `Finish` coordinate is omitted, or a caller supplies the
+  route, request, trace, machine, or success certificate.
+- The classifier terminal tape cannot be relayed through one blank sentinel,
+  a request value is omitted, or the dispatch does not reach the exact next
+  canonical prefix.
+- M227 is described as synthesizing the request, iterating successive
+  configurations, finishing builder refinement, closing a fixed checkpoint or
+  global gate, or proving `P = NP`.
 
 
 ---
