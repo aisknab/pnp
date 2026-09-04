@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-04-227",
-  "lastReviewedDate": "2026-09-04",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-228",
+  "lastReviewedDate": "2026-09-05",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 35,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 203,
-    "totalRows": 205,
+    "earnedRows": 204,
+    "totalRows": 206,
     "percentRoundedOneDecimal": 99,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -183,12 +183,13 @@
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-terminal-join" },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split" },
             { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": false }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, M212 joins those exact interfaces through all-coordinate executable orchestration, M213 closes the physical M209-to-M211 tape handoff, M214 classifies every in-range quotient on preserved tape, M215 derives and launches every canonical selected token, M216 recursively composes all verifier-derived post-header opportunities to the complete encoded formula, M217 replaces the value-level selector-to-appender handoff with one fixed physical five-request dispatcher, M218 composes that dispatcher across every canonical coordinate, M219 physically derives the unique Finish request, M220 composes the full suffix-preserving classifier pipeline, M221 writes the exact Finish request cell after that complete classifier, M222 crosses the derived blank-free classifier prefix to a sentinel, M223 reflects M217 and executes the full-classifier Finish endpoint, M224 derives and executes the first populated separator route through one fixed 814-rule composition, M225 generalizes physical execution to every coordinate in the complete clause-token body rectangle through one fixed 807-rule composition with the canonical request explicitly staged on protected tape, M226 joins all physical classifier terminals at one continuation state with a fixed 720-rule wrapper, and M227 sends every body and Finish route through one fixed 816-rule staged-request relay and mirrored-dispatch composition. The status correctly keeps raw request synthesis, successive-coordinate composition, one repeated schedule loop, and the full refined builder false.",
-          "remainingLimitation": "M227 dispatches every body and Finish route from an explicitly staged canonical request, but does not synthesize that request from raw classifier state, iterate successive coordinates, or formalize the complete raw formula builder, refinement and packaged reduction.",
-          "lastReviewedDate": "2026-09-04"
+          "justification": "Many literal raw-machine prefixes are checked; M208 replaces further fixed-slot control extension with one all-input polynomial schedule-count controller, M209 adds the first uniform arbitrary-coordinate raw routing layer, M210 adds the all-coordinate semantic post-header decoder and checked raw-remainder extraction, M211 adds a fixed all-dividend positive-width raw quotient/remainder machine, M212 joins those exact interfaces through all-coordinate executable orchestration, M213 closes the physical M209-to-M211 tape handoff, M214 classifies every in-range quotient on preserved tape, M215 derives and launches every canonical selected token, M216 recursively composes all verifier-derived post-header opportunities to the complete encoded formula, M217 replaces the value-level selector-to-appender handoff with one fixed physical five-request dispatcher, M218 composes that dispatcher across every canonical coordinate, M219 physically derives the unique Finish request, M220 composes the full suffix-preserving classifier pipeline, M221 writes the exact Finish request cell after that complete classifier, M222 crosses the derived blank-free classifier prefix to a sentinel, M223 reflects M217 and executes the full-classifier Finish endpoint, M224 derives and executes the first populated separator route through one fixed 814-rule composition, M225 generalizes physical execution to every coordinate in the complete clause-token body rectangle through one fixed 807-rule composition with the canonical request explicitly staged on protected tape, M226 joins all physical classifier terminals at one continuation state with a fixed 720-rule wrapper, M227 sends every body and Finish route through one fixed 816-rule staged-request relay and mirrored-dispatch composition, and M228 removes the staged request cell, derives the unique Finish request, and marks every body route at an explicit pending boundary in one fixed 823-rule composition. The status correctly keeps body and padding request synthesis, successive-coordinate composition, one repeated schedule loop, and the full refined builder false.",
+          "remainingLimitation": "M228 derives and dispatches the unique Finish request without staging it, but every body coordinate still stops at a pending marker; body-token and padding request synthesis, successive-coordinate iteration, and the complete raw formula builder, refinement and packaged reduction remain open.",
+          "lastReviewedDate": "2026-09-05"
         },
         {
           "id": "reductions-report-locked-nand-linkage",
@@ -418,6 +419,7 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinOneStepShortNonhaltingFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinExternalInputSizePolynomialFormalized", "expected": true },
             { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch" },
+            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split" },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAuditPassed", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAuditedDeclarationCount", "expected": 65 },
@@ -435,12 +437,35 @@
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExactWorkTraceFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchCompiledRawMachineFormalized", "expected": true },
             { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true }
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAuditPassed", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAuditedDeclarationCount", "expected": 91 },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedRouteRelayRuleCount", "expected": 20 },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedClassifierRelayMachineRuleCount", "expected": 749 },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedConditionalDispatcherRuleCount", "expected": 65 },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedComposedMachineRuleCount", "expected": 823 },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAllPostHeaderCoordinatesFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCanonicalRequestStagedOnProtectedTape", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPhysicalBodyFinishRouteDerived", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyPendingMarkerFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFinishRequestDerivedFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyRequestSynthesisFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPaddingRequestSynthesisFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRawRequestSynthesisFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitSuccessiveConfigurationsFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRepeatedBuilderLoopFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalFinishPrefixFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalBodyPrefixFormalized", "expected": false },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactWorkTraceFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCompiledRawMachineFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitOneStepShortNonhaltingFormalized", "expected": true },
+            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExternalInputSizePolynomialFormalized", "expected": true }
           ],
           "awardedAtCoordinate": null,
-          "justification": "M208 earns a uniform all-position control scaffold, M209 the fixed-table arbitrary-coordinate outer router, M210 exact all-coordinate semantic decoding, M211 the fixed raw quotient/remainder kernel, M212 the executable composed launch, M213 the fixed literal divider tape bridge, M214 the shielded physical body-versus-Finish classifier, M215 canonical all-coordinate selected-token launch, M216 complete verifier-derived semantic schedule iteration, M217 one fixed physical five-request dispatcher, M218 exact recursive composition across every canonical coordinate, M219 the first literal Finish request branch, M220 one fixed 711-rule all-coordinate classifier pipeline, M221 one fixed 721-rule full-classifier-to-Finish-request-cell composition, M222 one fixed 740-rule Finish-workspace orientation composition, M223 one fixed 813-rule reflected Finish-dispatch composition, M224 one fixed 814-rule first populated separator-dispatch composition, M225 one fixed 807-rule all-body staged-request classifier/relay/reflected-dispatch composition, M226 one fixed 720-rule all-route classifier terminal join, and M227 one fixed 816-rule all-route staged-request relay and mirrored-dispatch composition. M227 reaches every exact next canonical body or Finish prefix from an explicitly staged request. The checked status still records raw request synthesis, successive-coordinate composition, a repeated builder loop, complete refined builder, and packaged polynomial reduction as false.",
-          "remainingLimitation": "M227 dispatches every post-header body and Finish route from a canonical request staged behind the protected sentinel, but raw request synthesis, successive-coordinate composition, a repeated builder loop, builder RawRefinement and the packaged reduction remain absent.",
-          "lastReviewedDate": "2026-09-04"
+          "justification": "M208 earns a uniform all-position control scaffold, M209 the fixed-table arbitrary-coordinate outer router, M210 exact all-coordinate semantic decoding, M211 the fixed raw quotient/remainder kernel, M212 the executable composed launch, M213 the fixed literal divider tape bridge, M214 the shielded physical body-versus-Finish classifier, M215 canonical all-coordinate selected-token launch, M216 complete verifier-derived semantic schedule iteration, M217 one fixed physical five-request dispatcher, M218 exact recursive composition across every canonical coordinate, M219 the first literal Finish request branch, M220 one fixed 711-rule all-coordinate classifier pipeline, M221 one fixed 721-rule full-classifier-to-Finish-request-cell composition, M222 one fixed 740-rule Finish-workspace orientation composition, M223 one fixed 813-rule reflected Finish-dispatch composition, M224 one fixed 814-rule first populated separator-dispatch composition, M225 one fixed 807-rule all-body staged-request classifier/relay/reflected-dispatch composition, M226 one fixed 720-rule all-route classifier terminal join, M227 one fixed 816-rule all-route staged-request relay and mirrored-dispatch composition, and M228 one fixed 823-rule no-staged-request body-pending/derived-Finish composition. M228 derives and dispatches Finish from the classifier terminal but intentionally stops every body route before request synthesis. The checked status still records body and padding request synthesis, successive-coordinate composition, a repeated builder loop, complete refined builder, and packaged polynomial reduction as false.",
+          "remainingLimitation": "M228 removes the staged request and closes the unique Finish branch, but body-token and padding request synthesis, successive-coordinate composition, a repeated builder loop, builder RawRefinement and the packaged reduction remain absent.",
+          "lastReviewedDate": "2026-09-05"
         },
         {
           "id": "reductions-concrete-np-hardness",
@@ -1629,6 +1654,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M227 unifies the complete physical classifier route domain with the reflected optional-token dispatcher in one fixed machine. For every verifier-derived post-header coordinate, including every body coordinate and the unique Finish coordinate, M226's terminal-joined classifier reaches a blank-free body-or-Finish prefix while preserving a canonical optional-token request explicitly staged behind a protected blank sentinel. A fixed 14-rule relay validates all five request values and feeds M217's reflected fixed 64-rule dispatcher. The collision-free 816-rule composition reaches the exact next canonical emitted prefix with exact work, compiled execution, one-step-short nonhalting and a source-size polynomial bound kernel checked. It does not synthesize the request from raw classifier state, connect successive configurations, implement one repeated physical builder loop, prove builder RawRefinement or package the PolynomialReduction. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 203 of 205, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-228",
+      "formalArtefactCoverage": {
+        "earnedRows": 204,
+        "totalRows": 206
+      },
+      "riskWeightedProofCompletionPercent": 35,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M228 removes M227's staged optional-token request cell while preserving one uniform theorem over the complete verifier-derived post-header schedule. M226's terminal-joined classifier now drives a fixed 20-rule physical split: every body terminal produces a collision-free non-request pending marker, while the unique Finish terminal produces the canonical Finish request and executes a fixed 65-rule conditional reflected dispatcher to the exact next emitted prefix. The collision-free 823-rule composition has exact work, compiled execution, one-step-short nonhalting and a source-size polynomial bound kernel checked. Every body-token and padding request remains unsynthesized, body routes intentionally halt at that boundary, and successive configurations, one repeated loop, builder RawRefinement and the packaged PolynomialReduction remain open. Concrete NP-hardness transport, CNFSAT in P and all residual, PCCMin, ZeroSlack and root obligations are unchanged. Therefore no fixed checkpoint or global gate closes. Formal artefact coverage becomes 204 of 206, the score remains 35 percent, and the uncertainty range remains 20 to 40 percent."
     }
   ],
   "nonClaims": [

@@ -82,6 +82,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-physical-classifier-terminal-join0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch0.test.mjs',
+  'audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',

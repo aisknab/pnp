@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-04-227`, 203 of 205
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-228`, 204 of 206
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M227 |
+| Track | Available | Earned at M228 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M227 risk-weighted proof completion estimate is therefore 35 percent, with
+The M228 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -560,6 +560,17 @@ builder `RawRefinement`, and packaged `PolynomialReduction` remain open. No
 fixed checkpoint or global gate closes. Coverage becomes 203 of 205 while the
 score remains 35 percent, the uncertainty range remains 20 to 40 percent, and
 all five gates remain open. No retrospective score was invented.
+
+M228 removes the staged request cell and derives the unique `Finish` request
+from the physical classifier terminal. The fixed 823-rule composition marks
+every body coordinate at an explicit non-request pending boundary and dispatches
+`Finish` to the exact next prefix with exact work, compiled, one-step-short,
+and source-size polynomial evidence. Body-token and padding request synthesis,
+successive physical configurations, the repeated loop, builder
+`RawRefinement`, and the packaged `PolynomialReduction` remain open. No fixed
+checkpoint or global gate closes. Coverage becomes 204 of 206 while the score
+remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
+five gates remain open. No retrospective score was invented.
 
 ## Changing the score
 

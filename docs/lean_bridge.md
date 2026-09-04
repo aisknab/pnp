@@ -2283,6 +2283,21 @@ coverage is 203 of 205 current scoped publication rows earned; the risk-weighted
 estimate remains 35 percent, and zero of five global gates are closed. See
 [lean_cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch.md](./lean_cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch.md).
 
+M228 removes M227's staged request cell while retaining one theorem over the
+complete post-header schedule. M226's terminal-joined classifier now drives a
+fixed 20-rule physical split: every body route reaches a collision-free
+non-request pending marker, while the unique `Finish` route writes the canonical
+`Finish` request and runs a fixed 65-rule conditional reflected dispatcher to
+the exact next canonical prefix. The collision-free 823-rule composition has
+exact work, six-for-one compiled, one-step-short, and source-size polynomial
+evidence. Body-token and padding request synthesis, successive-coordinate
+composition, the repeated builder loop, builder `RawRefinement`, and the
+packaged reduction remain open. Formal artefact coverage is 204 of 206 current
+scoped publication rows earned; the risk-weighted estimate remains 35 percent,
+its uncertainty range remains 20 to 40 percent, and zero of five global gates
+are closed. See
+[lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md](./lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md).
+
 ## Discharged by Lean so far
 
 ```text
@@ -2357,7 +2372,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Starting from M227's all-route staged-request dispatch, synthesize each request from raw classifier state, connect successive configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
+2. Starting from M228's all-route derived-Finish split, synthesize every body-token and padding request from the physical classifier state, connect successive configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.
