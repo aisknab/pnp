@@ -182,6 +182,25 @@ artefact coverage distinct from the risk-weighted proof-completion estimate.
 - Prefer the smallest targeted check that can reject the current change before
   a broad suite. Do not repeat an expensive green command merely for ceremony.
 
+### Verification ownership matrix
+
+| Change or boundary | Evidence to run | Evidence to reuse |
+| --- | --- | --- |
+| PNP proof or dependency change | Changed dependency chain, root, axiom/type inventory, relevant regressions and required core release checks | Checks whose source, inputs, toolchain and boundary are unchanged |
+| PNPLabs sync of a verified PNP commit | Exact source binding, mirrored bytes, publication contracts, links, downloads and site behavior | The core Lean build, theorem and axiom audits, and generated proof report |
+| PNPLabs presentation or documentation change | Affected site checks and required release checks | Unchanged proof and publication artifacts |
+| Verified PR and merge have the same tree | Required checks for the merge, clean checkout identity, source binding and release seals | Expensive checks of the identical tree and unchanged inputs, where the release policy permits |
+| Deployment and production | Mandatory launcher checks and independent verification of the exact production release | Prior proof compilation and unchanged development checks |
+
+Record the boundary a repeated check establishes. An unchanged check does not
+gain evidence merely by running again; a changed input or deployment environment
+can require a new check even when the source tree is identical.
+
+Reader-facing site copy and current summaries should omit current PDF page
+totals. Keep page counts in machine-readable integrity metadata where required,
+and preserve immutable historical descriptions. Milestone coverage, weighted
+proof progress and proof gates are the public progress measures.
+
 ### Proof-progress tracking policy
 
 The authoritative model is the versioned fixed-checkpoint ledger at

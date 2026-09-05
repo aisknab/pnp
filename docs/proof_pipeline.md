@@ -641,6 +641,18 @@ its uncertainty range remains 20 to 40 percent, and zero of five global gates
 are closed. See
 [lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md](lean_cook_levin_builder_physical_classifier_all_route_derived_finish_split.md).
 
+M229 reads the physical remainder retained by the complete classifier for
+every post-header body coordinate. A fixed scanner crosses the clause-count
+and exterior boundaries, skips consumed-dividend marks, and distinguishes
+zero from positive token coordinates by the actual tape symbol. The completed
+`Finish` endpoint is preserved. Exact work, compiled execution, one-step-short
+nonhalting, and a verifier-input-size polynomial bound are kernel checked.
+Clause occupancy, body-token and padding request synthesis, successive
+configurations, the repeated builder loop, builder `RawRefinement`, and the
+packaged `PolynomialReduction` remain open.
+Formal artefact coverage is 205 of 207 current scoped publication rows earned. The risk-weighted proof completion estimate remains 35 percent, with an uncertainty range of 20 to 40 percent. Global gates closed: 0 of 5.
+See [lean_cook_levin_builder_physical_classifier_all_route_body_remainder_split.md](lean_cook_levin_builder_physical_classifier_all_route_body_remainder_split.md).
+
 A deterministic target decider, the
 CNFSAT-in-P result, remaining NP-hardness transport, and `P = NP` remain
 unproved. See

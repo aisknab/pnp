@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-228`, 204 of 206
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229`, 205 of 207
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M228 |
+| Track | Available | Earned at M229 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 15 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **35** |
 
-The M228 risk-weighted proof completion estimate is therefore 35 percent, with
+The M229 risk-weighted proof completion estimate is therefore 35 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -571,6 +571,18 @@ successive physical configurations, the repeated loop, builder
 checkpoint or global gate closes. Coverage becomes 204 of 206 while the score
 remains 35 percent, the uncertainty range remains 20 to 40 percent, and all
 five gates remain open. No retrospective score was invented.
+
+M229 reads the physical remainder retained by the complete classifier for
+every post-header body coordinate. A fixed scanner crosses the clause-count
+and exterior boundaries, skips consumed-dividend marks, and distinguishes
+zero from positive token coordinates by the actual tape symbol. The completed
+`Finish` endpoint is preserved. Exact work, compiled execution, one-step-short
+nonhalting, and a verifier-input-size polynomial bound are kernel checked.
+Clause occupancy, body-token and padding request synthesis, successive
+configurations, the repeated builder loop, builder `RawRefinement`, and the
+packaged `PolynomialReduction` remain open.
+Formal artefact coverage is 205 of 207 current scoped publication rows earned. The risk-weighted proof completion estimate remains 35 percent, with an uncertainty range of 20 to 40 percent. Global gates closed: 0 of 5.
+No fixed checkpoint changed state; no retrospective score was invented.
 
 ## Changing the score
 

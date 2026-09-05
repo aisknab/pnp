@@ -3998,6 +3998,23 @@ evidence.
   successive configurations, finishing builder refinement, closing a fixed
   checkpoint or global gate, or proving `P = NP`.
 
+### M229 Cook-Levin all-route physical body-remainder split
+
+For every verifier-derived post-header coordinate, confirm that the fixed
+graph preserves Finish and reads the actual retained divider remainder on
+body routes. Zero and positive token coordinates must be distinguished by the
+terminal tape without a staged request or supplied correctness certificate.
+
+See [the construction and theorem boundary](lean_cook_levin_builder_physical_classifier_all_route_body_remainder_split.md).
+
+Check the exact trace, the one-step-short regression, the polynomial bound,
+and all 71 public axiom closures. A supplied route or remainder, a finite-only
+domain, a changed builder word, an early halt, or an unproved polynomial bound
+would be a material defect. So would claiming clause occupancy, body request
+synthesis, a repeated builder loop, or a global gate from this component.
+
+Formal artefact coverage is 205 of 207 current scoped publication rows earned. The risk-weighted proof completion estimate remains 35 percent, with an uncertainty range of 20 to 40 percent. Global gates closed: 0 of 5.
+
 ---
 ## Cross-claim completion checklist
 
