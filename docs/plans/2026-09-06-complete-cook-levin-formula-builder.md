@@ -167,6 +167,22 @@ The remaining constraint/occupancy test must also become physical execution.
 The complete selector, successor handoff and complete builder are still open.
 No additional publication row or weighted checkpoint is awarded for this phase.
 
+### Physical handoff constraint
+
+The reuse audit identified an important preservation boundary:
+`BuilderUnaryPolynomial.finalOutsideLeft` uses `overlayScratch`, which replaces
+an initial scratch span. Its preservation theorem covers the input and existing
+builder output, not every old scratch cell. Passing the retained coordinate
+records as arbitrary scratch would therefore lose required state.
+
+Before composing that evaluator with the classifier, either reserve and retain
+the source-derived clause width through the classifier, or physically relocate
+the required coordinate records beyond the overwrite span. Prove the actual
+tape equations and charge the allocation, relocation and recovery work. Use the
+existing mirrored-machine machinery where the builder workspace has reversed
+orientation. A host-created padding span, supplied width, externally rebuilt
+configuration or semantic record copy does not close this physical handoff.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
