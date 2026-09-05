@@ -183,6 +183,29 @@ existing mirrored-machine machinery where the builder workspace has reversed
 orientation. A host-created padding span, supplied width, externally rebuilt
 configuration or semantic record copy does not close this physical handoff.
 
+### Source-derived dimension registers
+
+`PNP.Concrete.CookLevinBuilderDimensionRegisters` now constructs the clause width
+before the coordinate records are created. It reuses the existing finite unary
+polynomial evaluator with a compound polynomial whose final value is the body
+counter and whose final three postorder registers are width, zero, and counter.
+The zero product does not erase the width computation: the literal register
+layout and the actual machine execution both retain it, with all construction
+work charged in the exact source-size polynomial.
+
+The paired regression was prepared before compilation. It distinguishes the
+compound register layout from the counter-only polynomial, preserves separators
+for empty registers, and pins the general execution, input/output preservation,
+and exact time contract. The module build, regression and ten-public-theorem
+axiom probe passed; the probe found only `propext` and `Quot.sound`, with one
+evaluation equality requiring no axioms.
+
+This closes dimension construction only. The next physical edge must retain and
+read these registers through the classifier and second-divider handoff, using
+actual tape equalities. No externally supplied dimensions, selector, repeated
+loop or packaged reduction is established by this component. The complete
+builder, publication coordinate and progress score remain unchanged.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
