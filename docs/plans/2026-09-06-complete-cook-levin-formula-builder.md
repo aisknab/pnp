@@ -206,6 +206,37 @@ actual tape equalities. No externally supplied dimensions, selector, repeated
 loop or packaged reduction is established by this component. The complete
 builder, publication coordinate and progress score remain unchanged.
 
+### Raw-input initialization handoff
+
+The next composition joins the complete header directly to dimension
+construction. This is necessary before using either as input-derived workspace:
+the classifier accepts a prepared entry tape, so its arbitrary-workspace theorem
+alone does not construct or connect that entry. Computing dimensions before the
+header would also require proving that the header preserves them.
+
+Construct one `WorkMachine` from the fixed verifier, prove its header submachine
+is independent of the input bitstring, and compose the existing actual header
+and dimension executions with the generic nine-symbol transition bridge. The
+intended `initialize_from_raw` endpoint starts at `rawInputWorkTape`, preserves
+the complete canonical header, contains the derived width/counter registers,
+and includes both phases and the connecting transition in its polynomial bound.
+Prepare raw-start, exact-handoff, fixed-machine, register-layout and full-bound
+regressions before compilation, together with every public axiom probe. This
+does not construct the classifier entry, select a clause or execute the body
+loop; those remain subsequent physical obligations of the same full-builder
+milestone. Do not award a publication row or checkpoint for initialization.
+
+The implementation at `PNP.Concrete.CookLevinBuilderInitialization` passed its
+changed-module build, all eight paired regression cases and all twelve public
+axiom probes. The input-independence equality requires no axioms; the other
+probes use only `propext` and `Quot.sound`. The final endpoint retains exactly
+the canonical unary header and the source-derived dimension layout, with no
+caller-supplied intermediate data. The bound includes the six raw transitions
+for the phase bridge. Neither existing dependency compilation nor a full suite
+was repeated for this component. The next required edge is a physical operation
+on these retained registers that produces the classifier entry and preserves
+the loop state; arbitrary-workspace preservation alone is not that operation.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
