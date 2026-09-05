@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { CheckProofProgress0 } from '../pcc-proof-progress0.mjs';
 
 import {
   explicitLeanDeclarationHeads0,
@@ -263,8 +264,8 @@ test('root, verification, publication, progress, and active docs publish M228',
     assert.match(activeDoc, /M228/u);
   }
   assert.ok(progressDoc.includes(`${earnedRows} of ${totalRows}`));
-  assert.match(progressDoc,
-    /risk-weighted proof completion estimate is therefore 35 percent/u);
+  assert.ok(progressDoc.replace(/\s+/gu, ' ').includes(
+    `risk-weighted proof completion estimate is therefore ${progress.proofCompletion.percent} percent`));
   assert.equal(inventorySource.includes(ENDPOINT), true);
   assert.equal(statusText, publicStatusText);
   assert.equal(inventoryText, publicInventoryText);
@@ -295,17 +296,17 @@ test('root, verification, publication, progress, and active docs publish M228',
   assert.equal(status[`${statusPrefix}CompiledRawMachineFormalized`], true);
   assert.equal(status[`${statusPrefix}OneStepShortNonhaltingFormalized`], true);
   assert.equal(status[`${statusPrefix}ExternalInputSizePolynomialFormalized`], true);
-  assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
 
   assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
   assert.equal(publishedMilestone?.earned, true);
-  assert.equal(builderCheckpoint?.status, 'open');
-  assert.ok(builderCheckpoint?.evidence.some((entry) =>
-    entry.kind === 'milestone-earned' && entry.id === MILESTONE));
   assert.deepEqual(review?.formalArtefactCoverage,
     { earnedRows: 204, totalRows: 206 });
   assert.equal(review?.riskWeightedProofCompletionPercent, 35);
   assert.equal(review?.scoreChanged, false);
+  assert.equal(review?.uncertaintyLowPercent, 20);
+  assert.equal(review?.uncertaintyHighPercent, 40);
+  assert.equal(review?.globalGatesClosed, 0);
+  assert.equal(review?.globalGatesAvailable, 5);
   assert.deepEqual(progress.formalArtefactCoverage, {
     label: 'formal artefact coverage',
     earnedRows,
@@ -314,20 +315,41 @@ test('root, verification, publication, progress, and active docs publish M228',
     isProofCompletionMetric: false,
     denominatorCanGrow: true,
   });
-  assert.equal(progress.proofCompletion.pointsEarned, 35);
   assert.equal(progress.proofCompletion.pointsAvailable, 100);
-  assert.equal(progress.proofCompletion.uncertaintyLowPercent, 20);
-  assert.equal(progress.proofCompletion.uncertaintyHighPercent, 40);
   assert.equal(progress.globalGates.length, 5);
-  assert.equal(progress.globalGates.every((gate) => gate.status === 'open'), true);
-  assert.deepEqual(progress.projectSpecificAxiomsRemaining, []);
-  assert.deepEqual(progress.rootTheorem, {
-    name: 'PNP.Main.p_eq_np',
-    present: false,
-    built: false,
-    axiomAuditPassed: false,
-  });
-  assert.deepEqual(progress.publicationGate, { passed: false });
+  const currentProgressInputs = {
+    root: ROOT,
+    ledgerOverride: progress,
+    statusOverride: status,
+    inventoryOverride: JSON.parse(inventoryText),
+  };
+  const currentProgress = await CheckProofProgress0(currentProgressInputs);
+  assert.equal(currentProgress.tag, 'accept', currentProgress.reason);
+  const staleProgress = structuredClone(progress);
+  staleProgress.proofCompletion.percent += 1;
+  assert.equal((await CheckProofProgress0({
+    ...currentProgressInputs, ledgerOverride: staleProgress,
+  })).tag, 'reject');
+
+  // These are the M228 baseline, not constraints on later earned checkpoints.
+  if (progress.asOfCoordinate === COORDINATE) {
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+    assert.equal(builderCheckpoint?.status, 'open');
+    assert.ok(builderCheckpoint?.evidence.some((entry) =>
+      entry.kind === 'milestone-earned' && entry.id === MILESTONE));
+    assert.equal(progress.proofCompletion.pointsEarned, 35);
+    assert.equal(progress.proofCompletion.uncertaintyLowPercent, 20);
+    assert.equal(progress.proofCompletion.uncertaintyHighPercent, 40);
+    assert.equal(progress.globalGates.every((gate) => gate.status === 'open'), true);
+    assert.deepEqual(progress.projectSpecificAxiomsRemaining, []);
+    assert.deepEqual(progress.rootTheorem, {
+      name: 'PNP.Main.p_eq_np',
+      present: false,
+      built: false,
+      axiomAuditPassed: false,
+    });
+    assert.deepEqual(progress.publicationGate, { passed: false });
+  }
 });
 
 test('hostile staging, route, trace, endpoint, and authority mutations fail',
