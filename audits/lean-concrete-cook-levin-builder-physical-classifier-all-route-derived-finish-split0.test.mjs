@@ -262,17 +262,15 @@ test('root, verification, publication, progress, and active docs publish M228',
     auditQuestions, progressDoc]) {
     assert.match(activeDoc, /M228/u);
   }
-  assert.match(progressDoc, /204 of 206/u);
+  assert.ok(progressDoc.includes(`${earnedRows} of ${totalRows}`));
   assert.match(progressDoc,
     /risk-weighted proof completion estimate is therefore 35 percent/u);
   assert.equal(inventorySource.includes(ENDPOINT), true);
   assert.equal(statusText, publicStatusText);
   assert.equal(inventoryText, publicInventoryText);
-  assert.equal(status.coordinate, COORDINATE);
-  assert.equal(publication.coordinate,
-    'PNP-FORMAL-PUBLICATION-MAP-2026-09-05-228');
-  assert.equal(progress.asOfCoordinate, COORDINATE);
-  assert.equal(reportText.includes(COORDINATE), true);
+  assert.equal(publication.coordinate, status.formalPublicationMapCoordinate);
+  assert.equal(progress.asOfCoordinate, status.coordinate);
+  assert.equal(reportText.includes(status.coordinate), true);
 
   assert.equal(status[`${statusPrefix}Formalized`], true);
   assert.equal(status[`${statusPrefix}AxiomAuditPassed`], true);

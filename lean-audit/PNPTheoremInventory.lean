@@ -293,6 +293,7 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.CookLevin.BuilderPhysicalClassifierTerminalJoin.cook_levin_builder_physical_classifier_terminal_join_checked_complete,
   `PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch_checked_complete,
   `PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteDerivedFinishSplit.cook_levin_builder_physical_classifier_all_route_derived_finish_split_checked_complete,
+  `PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteBodyRemainderSplit.cook_levin_builder_physical_classifier_all_route_body_remainder_split_checked_complete,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length,
@@ -3291,7 +3292,7 @@ private def inventory : CommandElabM Json := do
   return Json.mkObj [
     ("kind", toJson "PNPLeanTheoremInventory0"),
     ("version", toJson 0),
-    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-09-05-228"),
+    ("coordinate", toJson "PNP-LEAN-THEOREM-INVENTORY-2026-09-05-229"),
     ("leanToolchain", toJson "leanprover/lean4:v4.31.0"),
     ("rootModule", toJson "PNP"),
     ("environmentProbeComplete", toJson true),

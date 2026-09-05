@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-05-228",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-05-229",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.Concrete.BitString.decodePair_pair": "b54894853e84209d5bdf4d35b02e8e45bf9c77272a8f59868f08da3255cd0e29",
     "PNP.Concrete.CNFSourceParser.allInput_exact": "fabf09b239a30206fd954638cb4b6bcab14a01d8de061fd14256a533dba6c434",
@@ -3168,7 +3168,8 @@
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_body_staged_request_mirrored_dispatch_checked_complete": "8659e14e91dc68c48367f63c0531a29845c29700e9abfbbd7a211e0dad9ab4b4",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierTerminalJoin.cook_levin_builder_physical_classifier_terminal_join_checked_complete": "9942e24e311a740e4f3fa4c4662a4d2c8809ee3cfd17a252aa3e2fb79a1eeeb0",
     "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.cook_levin_builder_physical_classifier_all_route_staged_request_mirrored_dispatch_checked_complete": "f8323850eefda8fb9f731c4be6af9f85f797744e9b90c79539316bab48c11871",
-    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteDerivedFinishSplit.cook_levin_builder_physical_classifier_all_route_derived_finish_split_checked_complete": "20e0743e1b3e03452e458c24f0ef41584b837cbc6534186d9c42c7906e63f8c1"
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteDerivedFinishSplit.cook_levin_builder_physical_classifier_all_route_derived_finish_split_checked_complete": "20e0743e1b3e03452e458c24f0ef41584b837cbc6534186d9c42c7906e63f8c1",
+    "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteBodyRemainderSplit.cook_levin_builder_physical_classifier_all_route_body_remainder_split_checked_complete": "5cb01b3ff8e154613151d8d131f576ce86bdc33e2d24d355793a3ca55ce7208f"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3186,7 +3187,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "16983103ff21ae11a9a2ba873fa81cca48789066ac765f598866615a8685566a",
+  "milestoneSourceClosureSha256": "9baa336a49724c0d61e2f13351419b6dddcb5e3262cd3a26848a6ca6496aa377",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8446,6 +8447,16 @@
       ],
       "scope": "For every concrete verifier problem and every coordinate in its complete post-header schedule, M228 runs M226's terminal-joined classifier without a staged request cell. A fixed 20-rule relay reads the physical body-or-Finish terminal, crosses the exact blank-free classifier prefix, writes a collision-free body-pending marker for every body route, and writes the canonical Finish request only for the unique Finish route. A fixed 65-rule conditional reflected dispatcher rejects the body-pending marker and sends Finish to the exact next canonical emitted prefix. The collision-free 823-rule composition has exact work, six-for-one compiled, one-step-short and source-input-size polynomial evidence. All 91 public declarations are axiom-audited: 50 have empty closure, 18 use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice.",
       "title": "All-route derived-Finish physical request split"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split",
+      "nonClaim": "This milestone reads the physical body remainder but leaves clause occupancy and body-token and padding request synthesis open. Both body outcomes remain incomplete terminal configurations, distinguished by tape content. It does not connect successive schedule configurations, implement the repeated builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP.",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.BuilderPhysicalClassifierAllRouteBodyRemainderSplit.cook_levin_builder_physical_classifier_all_route_body_remainder_split_checked_complete"
+      ],
+      "scope": "For every concrete verifier problem and every coordinate in its complete post-header schedule, M229 runs M228 without a staged request, route, remainder or success certificate. It preserves the completed Finish endpoint and sends every body route through one fixed 36-rule physical scanner. The scanner crosses the retained clause-count and exterior boundaries, skips consumed-dividend marks, and distinguishes zero from positive remainder by the actual separator or unit symbol. The physical remainder equals the canonical body token coordinate. The collision-free 895-rule graph has exact work, six-for-one compiled execution, one-step-short nonhalting, and a verifier-input-size polynomial bound. All 71 public declarations are axiom-audited: 39 have empty closure, nine use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice.",
+      "title": "All-route physical body-remainder split"
     }
   ],
   "version": 0

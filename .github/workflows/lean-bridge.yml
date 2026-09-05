@@ -2138,6 +2138,30 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 23
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean
 
+      - name: Check Cook-Levin physical body-remainder contracts
+        run: node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs
+
+      - name: Print Cook-Levin all-route physical body-remainder-split axiom closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllRouteBodyRemainderSplit\.")" -eq 71
+          normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
+          if [ -n "$unexpected" ]; then
+            printf '%s\n' "$unexpected" >&2
+            echo 'Unexpected Cook-Levin all-route physical body-remainder-split axiom closure.' >&2
+            exit 1
+          fi
+          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|PNP\.(CheckPCCPackexp|GeneratePCCPack|LockedNANDThreshold|ResidualBandExactMinimization)'; then
+            echo 'Cook-Levin all-route physical body-remainder split reached a forbidden project or choice axiom.' >&2
+            exit 1
+          fi
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 39
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 23
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplit.lean
+
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"
