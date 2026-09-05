@@ -125,6 +125,27 @@ If a general phase fails, keep the milestone in progress and record the exact
 remaining obligation. Do not replace it with another fixed-slot result, a
 supplied-data theorem, an axiom, `sorry`, `admit`, or a weakened endpoint.
 
+### Component evidence, 2026-09-06
+
+`PNP.Concrete.CookLevinClauseOccupancy` now projects the occupancy of every
+canonical clause-schedule coordinate from the source-derived constraint decoder
+and the existing exact local clause-count theorem. It does not materialize a
+clause merely to determine whether its slot is populated. The general equality
+with the canonical schedule includes padded slots and the out-of-range boundary.
+An empty clause remains a populated slot, distinct from padding.
+
+The module build, paired regression file
+`lean-regression/PNPConcreteCookLevinClauseOccupancy.lean`, and six-public-theorem
+axiom probe passed. The probe reported only `propext` and, for the complete
+schedule projection, `Quot.sound`; no classical choice or project axioms.
+Regressions were prepared with the source before its first build and include
+empty clauses, both single-clause constructors, pair-count boundaries, repeated
+variables, padding and the general complete-schedule equality.
+
+This is a selector specification component, not its physical implementation or
+a polynomial execution theorem. The complete builder remains unearned, and the
+publication coordinate, evidence coverage and risk-weighted score are unchanged.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
