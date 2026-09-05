@@ -1,6 +1,6 @@
 # M230 plan: complete all-input Cook-Levin formula builder
 
-Status: planned and not earned. The current published mathematical coordinate
+Status: in progress and not earned. The current published mathematical coordinate
 remains M229. This work may span several implementation and verification phases;
 none of the component phases alone earns the complete-builder checkpoint.
 
@@ -145,6 +145,27 @@ variables, padding and the general complete-schedule equality.
 This is a selector specification component, not its physical implementation or
 a polynomial execution theorem. The complete builder remains unearned, and the
 publication coordinate, evidence coverage and risk-weighted score are unchanged.
+
+`PNP.Concrete.CookLevinClauseOccupancyDivision` now connects the selector to
+quotient/remainder coordinates for every rectangle size and to the existing
+fixed divider's actual execution for every canonical clause coordinate. Its
+shielded execution preserves arbitrary surrounding tape data, retains the
+six-raw-transition simulation, and satisfies a polynomial bound in source input
+length for this division stage. It reuses the existing decoder, divider and
+shielded-tape proofs rather than constructing another machine.
+
+The changed module, paired division regression and all ten public-declaration
+axiom probes passed. Two polynomial evaluation equalities use no axioms; the
+other declarations use only `propext` and `Quot.sound`. The regression includes
+zero-width/count rectangles, exact row boundaries, the final out-of-range
+coordinate, and an exterior containing divider symbols that would contaminate
+an unshielded reader. No existing green proof layer was rebuilt unnecessarily.
+
+The next required physical edge is constructing this second divider's input tape
+from the retained builder endpoint, including the source-derived clause width.
+The remaining constraint/occupancy test must also become physical execution.
+The complete selector, successor handoff and complete builder are still open.
+No additional publication row or weighted checkpoint is awarded for this phase.
 
 ## Source and expectation preflight
 
