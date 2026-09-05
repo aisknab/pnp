@@ -276,6 +276,30 @@ are outputs of the generators and verifiers. Do not preselect them. Regenerate
 after the source has stabilized, then record the values that the tools actually
 produce.
 
+### Source and expectation changes are one changeset
+
+- Before changing a producer, list each affected contract, its test/fixture and
+  workflow consumers, and the cheapest positive and negative check. Record this
+  in the existing milestone plan or review notes; do not wait for a broad failure
+  to discover consumers. Include schema fields, names, diagnostics, claim flags,
+  generated values, helper maps, shell assertions, and current public copy.
+- Update the producer and every affected expectation in the same patch. Derive
+  current values and name mappings from canonical data where possible; preserve
+  independent theorem, security, historical, and hostile-mutation invariants.
+- When a publication validator changes, reconcile all of the latest-milestone
+  mutation cases together: release flags and fingerprints, status flags and
+  claims, inventory axioms, and publication-map claims and fingerprints. Keep
+  diagnostic categories stable; do not weaken a rejection test to hide drift.
+- Run those focused positive and negative cases before the complete suite or
+  expensive cross-repository audit. A publication sync is not preflight-ready
+  until its latest-milestone mutation test passes. If a broad run reveals a stale
+  expectation, audit the entire consumer family before another broad attempt.
+- For core proof changes, prepare the intended theorem/type, axiom-closure and
+  claim-boundary regression expectations with the proof source. Update inventory
+  name sets and generator inputs before compilation; derive hashes and emitted
+  counts only from the successful compiled evidence, then reconcile downstream
+  consumers before their checks. Never invent compiled evidence in advance.
+
 ### Reconcile expected values before expensive verification
 
 When a source or generator change predictably changes a count, page total,
