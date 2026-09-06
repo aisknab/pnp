@@ -6965,6 +6965,7 @@ theorem rule_source_lt_acceptState (newerCount : Nat) (rule : WorkRule)
     rule.sourceState < (machine newerCount).acceptState := by
   have hBounds := rulesFrom_source_bounds
     (base := 0) (specs := stateSpecs newerCount) (rule := rule) hMem
+  change rule.sourceState < (stateSpecs newerCount).length
   simpa only [Nat.zero_add] using hBounds.2
 
 theorem machine_startState (newerCount : Nat) :
