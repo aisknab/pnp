@@ -968,34 +968,78 @@ publication work remain deferred until the intended builder interface is
 complete. Publish/defer: defer. No publication row, checkpoint, proof estimate
 or coverage changed; meaningful verified progress notifications continue.
 
-### Region-operand assembly preflight
+### Verified source-bound region operand assembly
 
-The next general execution contract starts at the actual source-coordinate
-register word and physically appends all five lengths plus the computed
-constraint coordinate. Its fixed seven stages allocate acceptance 1, copy
-preservation/control/initial-tail, increment the initial-tail by three, copy
-shape, and copy the original constraint index across exactly five new registers.
-A two-transition unary increment composes with the existing delimiter and copy
-machines. No supplied region, selected constraint or correctness certificate is
-permitted as a substitute for these operations.
+Source component: `9a65cab0eaed831d05362760ae0b5e790c119875`.
+[The literal operand assembly](../../lean/PNP/Concrete/CookLevinBuilderConstraintRegionAssembly.lean)
+now runs all seven stages: acceptance 1, preservation copy, control copy,
+initial-tail copy, its three literal increments, shape copy and the original
+computed constraint-index copy. The two-transition increment preserves arbitrary
+older registers/workspace and consumes exactly one overwritten exterior cell.
+Acceptance allocation costs five work steps; three increments cost eight,
+including both internal bridges.
 
-Prepare the exact reversed frame, arbitrary workspace and exterior-tail
-preservation, literal constant and one-step-short negative cases, complete
-compiled execution, finite-control uniqueness and source-span cost tests with
-the source. The endpoint must append
-`[1, preservation, control, initial, shape, constraintIndex]`, consume exactly
-`constraintCount + constraintIndex + 6` exterior cells and charge all five copies,
-both internal increment bridges and six assembly bridges. Connect this to the
-existing guarded source body exactly once.
+The general assembly appends
+`[1, preservation, control, 3+initialTail, shape, constraintIndex]`.
+Its reverse faces the dispatcher as the coordinate followed by the five lengths
+in canonical schedule order. The lengths sum to constraintCount; the appended
+frame has six delimiters and sum `constraintCount + constraintIndex`. The
+arbitrary exterior tail is preserved after exactly
+`constraintCount + constraintIndex + 6` physically overwritten cells. No
+semantic host operation discards a tape cell or supplies a region result.
 
-The proposed bound is a final register span of `11*S + 17` and assembly cost
-at most `5*Q(10*S + 16) + 19`, where `Q(b) = 4*(b+1)^2 + 9*(b+1) + 5`.
-These are targets, not compiled evidence. The body bound must also charge the
-previous coordinate computation and its single new bridge. Run only this new
-target, its prepared regressions and all public theorem axiom probes; reuse
-unchanged component tests. Physical dispatch and subsequent decoding/emission,
-Finish and the full builder remain open. Publish/defer: defer, without changing
-the current coverage, score or publication gate.
+The guarded source-body theorem executes the previously verified coordinate
+computation exactly once, then this assembly with its single additional bridge.
+It derives the final coordinate's validity from the existing body guard. The
+source input/output workspace and all original registers remain present.
+
+The proved final register span is at most `11*S + 17`. Assembly costs at most
+`5*Q(10*S + 16) + 19`, where `Q(b) = 4*(b+1)^2 + 9*(b+1) + 5`.
+This charges all five copies, literal writes and every internal and assembly
+bridge. Raw execution is six transitions per work step. The full body bound
+also includes the prior source-coordinate bound and six raw transitions for
+its bridge. These are actual component bounds, not complete-builder runtime
+or checkpoint credit.
+
+[All 50 prepared regressions](../../lean-regression/PNPConcreteCookLevinBuilderConstraintRegionAssembly.lean)
+passed on their first execution, including literal positive runs, short-run and
+invalid-start negatives, arbitrary frames/exterior tails, both exact composed
+execution interfaces and their source-size bounds. All 30 public theorem axiom
+closures use only the permitted foundations: five are axiom-free, two use only
+`propext`, and twenty-three use `propext` and `Quot.sound`. The permanent
+target reached its terminal success marker. Initial proof-normalization errors
+were fixed without changing machines, statements or prepared expectations.
+
+Keep simplification around large composed machines narrow: name exact frame
+length equalities and unfold only the current wrapper. Unfolding the full frame
+definitions through a composed machine can reach the elaborator's recursion
+limit despite low resource use. Do not raise limits or change the machine to
+solve a normalization problem. Use `List.replicate_succ'` for a prepended unary
+unit and normalize the empty reverse after that orientation is fixed.
+
+Next implement actual region selection, rather than another operand wrapper.
+First inspect the existing arbitrary-coordinate comparator in
+[the general header router](../../lean/PNP/Concrete/CookLevinBuilderArbitrarySlotHeaderRouter.lean)
+and any already-proved framed variants. It handles arbitrary natural coordinates
+and boundaries, including zero, but its viewed endpoint fixes its outer markers;
+it must not be assumed to preserve this assembly's workspace without proof.
+Its less branch retains the matched local coordinate. Equality advances with
+zero remainder. Its greater branch retains a `remainingCoordinate` that needs
+one added unit to recover the next-region residual; do not lose that unit.
+
+Prove every marker/frame adapter, actual comparison/subtraction continuation,
+selected region/local-coordinate output and polynomial cost. Cover zero-length
+regions, exact boundaries, the accepting singleton and out-of-range rejection.
+Reuse the established semantic decoder equality; it cannot replace missing
+machine execution. Source-bit/constraint decoding, local clause counts, token
+emission, Finish, explicit blank-padding invariants and the full loop/reduction
+remain open.
+
+Prepare those producer/endpoint/negative/cost/axiom contracts together before
+targeted checks. No unchanged region-register or coordinate suite was repeated.
+Full root/inventory/publication work remains deferred until the intended builder
+interface is complete. Publish/defer: defer. The proof estimate remains 35%,
+uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5.
 
 ## Source and expectation preflight
 
