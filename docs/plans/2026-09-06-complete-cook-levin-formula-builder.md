@@ -406,6 +406,30 @@ inner tape, actual table runs, all-input initialization handoff and complete
 phase bounds. Retain the no-project-axiom/no-classical-choice audit. This remains
 an M230 component with no milestone row or weighted credit; defer publication.
 
+Implemented in
+[BuilderRegisterAccess](../../lean/PNP/Concrete/CookLevinBuilderRegisterAccess.lean)
+and [BuilderOperandRegisters](../../lean/PNP/Concrete/CookLevinBuilderOperandRegisters.lean).
+The permanent leaf build, all 43 paired regressions and all 32 public-theorem
+axiom probes passed at source commit 76156ef0bb76777f92e5e20c76b9d3651ce0362c.
+Seven closures are axiom-free, one uses only propext, and 24 use only propext
+and Quot.sound. No project axiom or classical choice enters these interfaces.
+
+The register views and fixed offsets now agree with the initializer's actual
+postorder word. For every fixed verifier and operand kind, one literal machine
+starts from raw input, constructs the canonical header and registers, then scans
+and copies the selected value. The endpoint remains at the new scratch end.
+The complete source-size bound includes initialization, the scan, allocation,
+copying and both phase bridges. General access also preserves arbitrary existing
+output and admits the cursor balance invariant for later iterations.
+
+Next combine the required copies with adjusted fixed offsets and convert their
+actual tape to the shielded divider entry. Reuse the existing scratch-end position
+for subsequent copies where possible, rather than needlessly scanning from the
+input again. Prove the exact divider layout and later cleanup/return handoff;
+do not infer them from a prepared-entry theorem. Constraint-family selection,
+emission and the full loop remain open. No row, checkpoint or gate is earned,
+and PNPLabs publication stays deferred.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
