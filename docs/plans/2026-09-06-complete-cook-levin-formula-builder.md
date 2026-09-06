@@ -4,6 +4,15 @@ Status: in progress and not earned. The current published mathematical coordinat
 remains M229. This work may span several implementation and verification phases;
 none of the component phases alone earns the complete-builder checkpoint.
 
+Publication decision: **defer** PNPLabs work during the intermediate components.
+They do not yet establish the complete all-input construction or close its fixed
+weighted checkpoint. Continue verified submilestone notifications independently.
+Reassess publication when the complete construction and packaged polynomial
+reduction are earned, or sooner if an existing public claim needs correction.
+A warranted publication will batch pending earned results from the latest exact
+verified core merge into one source-pinned site audit and release. Until then,
+retain the coherent M229 published snapshot and its existing progress values.
+
 ## Starting evidence and selection
 
 The verified starting point is core merge
@@ -236,6 +245,45 @@ for the phase bridge. Neither existing dependency compilation nor a full suite
 was repeated for this component. The next required edge is a physical operation
 on these retained registers that produces the classifier entry and preserves
 the loop state; arbitrary-workspace preservation alone is not that operation.
+
+### Balanced physical cursor
+
+Use the retained suffix `[width, 0, N]` as `[width, index, remaining]`, initially
+with index zero and remaining `N`. For arbitrary index and positive remaining,
+one physical separator/unit swap changes `[width, index, remaining + 1]` to
+`[width, index + 1, remaining]`. The sum and tape span stay fixed. This avoids
+moving the whole workspace or externally reconstructing the next configuration.
+
+The intended fixed machine must scan from the input head to the active scratch
+end, locate the index/remaining separator, perform the swap, and return to the
+input head. An exhausted counter must return unchanged through a distinct
+endpoint. Prove exact execution for arbitrary valid register prefixes, indices,
+remaining counts and exterior data, then discharge the prefix conditions from
+the initializer's constructed scratch word and charge the complete scan cost.
+Prepare regression cases for zero, one and multiple remaining units, nonzero
+indices, preserved exterior/input data, malformed scratch and the full generic
+endpoint before compilation. This is the loop's coordinate update, not clause
+selection or emission; do not skip processing index zero by treating an initial
+advance as a completed body iteration. No checkpoint or publication row is earned.
+
+The general cursor table is now checked in
+`PNP.Concrete.CookLevin.BuilderBalancedCursor`. Its 18 rules give exact positive
+and exhausted runs for arbitrary valid register prefixes, indices, counters and
+exterior data. The positive compiled run is charged at six raw steps per work
+step; the bound is linear in the complete register span. The accepting and
+exhausted endpoints have no outgoing rules, and no duplicate rule queries exist.
+This is still a workspace-relative controller: the source-derived initializer
+handoff and its encoded-input-size bound remain to be connected. It neither
+selects nor emits a clause and is not the complete construction.
+
+Verification: the permanent leaf build, all 14 paired regression examples, and
+all 11 public-declaration axiom probes pass. Four declarations are axiom-free,
+one uses only `propext`, and six use only `propext` and `Quot.sound`; none uses a
+project axiom or `Classical.choice`. The paired fixtures were prepared before the
+first compile. The axiom audit caught a tactic-introduced choice dependency in
+the conjunction expressing balanced span; constructing its two conjuncts before
+arithmetic removed that dependency without changing the statement or weakening
+the audit. No broad proof suite or website cycle was run for this component.
 
 ## Source and expectation preflight
 
