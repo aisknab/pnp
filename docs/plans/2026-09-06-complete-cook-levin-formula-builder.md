@@ -430,6 +430,51 @@ do not infer them from a prepared-entry theorem. Constraint-family selection,
 emission and the full loop remain open. No row, checkpoint or gate is earned,
 and PNPLabs publication stays deferred.
 
+### Source-derived four-register divider assembly
+
+The next source-to-selector edge appends the clause count, an empty boundary
+register, the cursor index and the token width, in that order. The empty register
+is allocated by a two-step machine; it is not copied from an index assumed to
+be zero. After copying the clause count, reuse the scratch-end position. The
+index copier crosses three newer registers, and the token-width copier crosses
+its original fixed offset plus three. These control parameters depend only on
+the verifier, not on input values or caller-supplied operand data.
+
+Implemented in
+[BuilderDividerOperands](../../lean/PNP/Concrete/CookLevinBuilderDividerOperands.lean)
+with its paired
+[regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderDividerOperands.lean).
+The permanent module build, all 24 regressions and all 17 public-theorem axiom
+probes passed at source commit 2fc44c607033f902fa7327e3894c0fbb13d17055.
+Three closures are axiom-free, one uses only propext, and 13 use only propext
+and Quot.sound. No project axiom or classical choice enters this component.
+
+For every source problem, fromRaw_workRunExact connects raw input through
+canonical-header and register initialization to all four appended registers.
+The more general workRunExact also accepts an arbitrary balanced cursor and
+existing output. The endpoint preserves the original register word and inside
+tape, and drops exactly clauseCount + index + tokenWidth + 4 cells from the
+exterior tail. It does not assume that this remaining tail is empty.
+
+The source-size polynomial includes the input-to-end scan, every allocation and
+copy, and all physical bridges. If S is the original register span and
+Q(x) = 4(x + 1)^2 + 9(x + 1) + 5, assembly costs at most
+S + 4 + Q(S) + 5 + 2Q(3S + 3) work steps. Compilation charges six raw transitions
+per work step; the raw-input composition also charges initialization and its
+bridge. Tests pin zero and nonzero registers, marker-like preserved surroundings,
+malformed delimiter entry, the distinct source-derived operands, fixed offsets,
+exact endpoints and complete phase bounds. They were prepared with the source.
+After a regression-only formatting correction, the unchanged successful module
+build was reused rather than repeated.
+
+Next convert this actual word into the mirrored divider entry and its two
+protective boundaries. Prove the needed exterior/blank-tail property from
+initialization before applying a divider theorem requiring an empty expansion
+side. Do not discard explicit tail cells or assume a cleanup/return handoff.
+Divider execution, constraint-family selection, body emission, scratch recovery
+and the full loop remain open. This is an internal M230 component, not an earned
+milestone row or weighted checkpoint. Keep PNPLabs publication deferred.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
