@@ -380,6 +380,32 @@ restore the cursor after selection. The current facade alone does not derive
 operands from raw input, execute a complete body iteration or earn M230. Keep
 publication deferred and the current progress ledger unchanged.
 
+### Source-connected operand access
+
+Connect a fixed outward scan to the preserved-register copier, charging the
+real transition between them. Derive the token-width and clause-count offsets
+from the already materialized eager postorder values; the cursor index is the
+penultimate register. The first divisor has nodeCount(widthPolynomial) + 6
+newer registers, the clause count has nodeCount(tokenPolynomial) +
+nodeCount(widthPolynomial) + 6, and the index has one. These are fixed control
+parameters for a verifier, not new values supplied at runtime.
+
+Prove the exact source cursor tape matches each selected register view. Compose
+initialization and access as one actual finite machine from raw input, preserving
+the canonical header and original register data while appending the selected
+value. Include every initialization, traversal, allocation, copy and phase-bridge
+step in the source-size polynomial bound. This stops at the new scratch end:
+it does not yet construct the shielded divider layout, recover scratch, emit a
+body token or complete the loop.
+
+Prepare both source modules, 18 register-access regressions,
+25 source-operand regressions and all 32 public-theorem axiom
+probes before compilation. Pin the distinct first divisor and clause-count
+interfaces, fixed offsets, zero registers, malformed scan rejection, preserved
+inner tape, actual table runs, all-input initialization handoff and complete
+phase bounds. Retain the no-project-axiom/no-classical-choice audit. This remains
+an M230 component with no milestone row or weighted credit; defer publication.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
