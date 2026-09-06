@@ -574,6 +574,46 @@ still open: proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage
 205/207 and global gates 0/5 remain unchanged. Keep PNPLabs publication deferred
 and continue meaningful verified-submilestone notifications.
 
+### Source-derived body/Finish classification (in progress)
+
+The next legacy-anchored builder edge reuses the existing post-divider sidecar
+copy and unary comparator after the actual source-derived division. A fixed
+243-rule tail contains the reflected 180-rule copy bridge, the reflected 54-rule
+comparator and one serial transition table. Compose it with the verified
+source-to-divider machine; no caller supplies its entry tape or selected route.
+
+The planned BuilderSourceClassifier.workRunExact contract is, for every source
+problem, natural cursor index/remaining count and existing token output:
+
+~~~lean
+workRunExact? (machine problem.verifier) (workSteps problem index remaining)
+    (initialConfiguration problem index remaining output) =
+  some (finalConfiguration problem index remaining output)
+~~~
+
+The endpoint must preserve the divider ledger, original registers, input and
+output. For every index below bodySlotCount, RouteAgreement must identify the
+canonical body clause/token coordinates or the unique Finish route. The reused
+comparator's accept state means body; its reject state means Finish only under
+that in-range condition. A larger quotient also reaches reject and must not be
+misreported as Finish. fromRaw_workRunExact must include the complete canonical
+initialization at coordinate zero.
+
+If S is the source-derived retained register span, the classifier bridge size
+is at most 4S + 2 and the quotient is at most S. In addition to the already
+verified source-to-divider bound, charge at most
+6(20(4S + 2)^2 + 6(S + 1)^2 + 2) raw transitions for copying, comparison and
+both serial bridges. The raw-input composition also charges initialization and
+its bridge. This remains a phase bound, not the complete-builder runtime.
+
+Prepare the source, generic execution/state/tape/bound contracts, literal body,
+Finish and zero-count runs, an out-of-range non-Finish regression, and all
+public-theorem axiom probes together before the first targeted build. Keep
+the no-project-axiom/no-classical-choice closure requirement. Clause-occupancy
+execution, body-token selection/emission, scratch recovery including blank
+padding, the complete loop and packaged reduction remain downstream. No row,
+weighted checkpoint or gate is awarded, and publication stays deferred.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
