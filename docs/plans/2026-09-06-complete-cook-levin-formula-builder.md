@@ -803,34 +803,60 @@ distinct from out-of-range failure. The finite control must depend only on the
 fixed verifier, and its polynomial bound must charge the actual normalization,
 decoding, comparison and dispatch traces.
 
-The next physical handoff is
-[coordinate-register restoration](../../lean/PNP/Concrete/CookLevinBuilderDividerCoordinateRegisters.lean),
-with its
-[paired expectations](../../lean-regression/PNPConcreteCookLevinBuilderDividerCoordinateRegisters.lean).
-Its general target is an exact literal run from every mirrored-divider view
-to ordinary registers [sidecarCount, 0, consumed, remainder, width, quotient],
-preserving the source workspace and the outer tail after consuming two blanks.
-The two blank conditions include implicit blanks for an empty tail; later
-explicit padding is tracked by tail.drop 2, not identified with an empty list.
+The generic
+[coordinate-register handoff](../../lean/PNP/Concrete/CookLevinBuilderDividerCoordinateRegisters.lean)
+and its
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderDividerCoordinateRegisters.lean)
+are verified at source commit 1a70540dc9814d7ddeab2cd6844cc9a6e65d618c,
+tree 953cda12e946f94fc344d43b216c380fb532f758.
 
-The planned fixed 41-rule machine scans to the remainder boundary, shifts the
-finite prefix left with one carried symbol to insert a genuine separator,
-allocates the new outer end, normalizes marks and rewinds. Neither the quotient
-nor the remainder is recombined or supplied by a caller. The intended exact
-cost is 3 * quotient + 4 * width + 4 * remainder + 2 * consumed +
+The fixed 41-rule machine inserts a real separator, preserves consumed cells and
+remainder separately, retains the quotient, and restores the ordinary word
+[sidecarCount, 0, consumed, remainder, width, quotient]. Its exact trace preserves
+arbitrary source workspace and tail.drop 2 after consuming two outer blank cells.
+Empty tails supply implicit blanks; explicit padding and arbitrary exterior
+beyond the two cells are covered without identifying different tape lists.
+
+The exact cost is 3 * quotient + 4 * width + 4 * remainder + 2 * consumed +
 2 * sidecarCount + 19 work steps, at most 15S + 19 when the five magnitudes fit S.
-The prepared expectations cover zero/nonzero consumed segments, zero/nonzero
-remainder, distinct quotient/remainder registers, marker-rich preserved
-workspace, implicit and explicit outer blanks, both insufficient-blank failures,
-one-step-short rejection, malformed boundaries, finite control and compiled cost.
-The standalone handoff is not yet a source-bound selector or an earned milestone.
+The permanent target, 31 prepared regressions and all 11 public theorem axiom
+probes passed with a terminal zero result. Six public theorems are axiom-free,
+two use propext only and three use propext and Quot.sound. No project-specific
+axiom or Classical.choice occurs. Syntax and induction-normalization fixes
+did not change the machine, theorem contracts or regression expectations.
 
-Bind its initial tape to the actual second-divider endpoint next, derive its
-magnitudes and cost bounds from the existing source trace, then use the general
-occupancy interface. Recover the token remainder from retained source data with
-an actual proved construction when emission requires it. Do not silently
-discard a needed remainder while recombining consumed markers. Later loop
-cleanup must retain the same explicit blank-padding invariant.
+### Source-bound coordinate handoff (in progress)
+
+[Source](../../lean/PNP/Concrete/CookLevinBuilderClauseCoordinateRegisters.lean) and
+[paired expectations](../../lean-regression/PNPConcreteCookLevinBuilderClauseCoordinateRegisters.lean)
+bind the generic handoff to the actual second-divider endpoint. The intended
+body trace starts at cursorTape, reuses the already-verified body division once,
+and restores the computed constraint/local-clause coordinates. It retains the
+actual body guard quotient < clauseCount; Finish is not silently sent through
+an accept-only serial bridge.
+
+The intended endpoint is the original retained registers followed by
+[clauseCount, 0, index, tokenWidth, quotient, clauseCount, 0,
+constraintIndex * clauseWidth, clauseIndex, clauseWidth, constraintIndex].
+All five normalizer magnitudes must be derived from the source span, not supplied
+as bounds. The resulting register word should fit 9S + 11 cells, with the
+workspace excluded and preserved. The body raw-time bound adds 6(15S + 20) to
+the existing source division bound, charging the serial bridge.
+
+Reuse constraintSlot_div_mod and formulaSlot_eq_schedule to prove the semantic
+meaning of these actual computed coordinates. That equation does not execute
+formulaConstraintSlotDirect. General physical decoding across shape, initial,
+control, preservation and accepting regions, local clause-count comparison,
+emission, Finish and the complete loop remain open. Recover the token remainder
+from retained source data with an actual proved construction when needed.
+
+Prepare source projection, exact initial/final tape, guarded work/raw trace,
+canonical occupancy meaning, source magnitude, eleven-register suffix,
+footprint, complete component cost and finite-control expectations with this
+source. Reuse the generic handoff evidence; do not rerun its regressions or the
+unchanged earlier division suite. No publication or weighted credit is earned
+by this component alone.
+
 
 Prepare the new theorem/type, exact tape, all route-family and padding cases,
 negative handoff, axiom and compiled-cost expectations with the source.
