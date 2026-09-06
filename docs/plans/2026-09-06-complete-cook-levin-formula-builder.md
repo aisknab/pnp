@@ -475,6 +475,42 @@ Divider execution, constraint-family selection, body emission, scratch recovery
 and the full loop remain open. This is an internal M230 component, not an earned
 milestone row or weighted checkpoint. Keep PNPLabs publication deferred.
 
+### Derived divider expansion footprint
+
+The operand assembly's exterior is now derived from initialization rather than
+assumed empty. The header and conservative variable-count polynomials have
+different expression associations in paired mode, so equality of their root
+values would not establish equality of eager scratch footprints. Bound the
+actual header footprint by twice the variable-count footprint. The retained
+dimension-width subtree contains two complete variable-count evaluations, and
+the source-input register footprint also dominates the input framer's leftover
+packed cells.
+
+Implemented in
+[BuilderDividerFootprint](../../lean/PNP/Concrete/CookLevinBuilderDividerFootprint.lean)
+with its paired
+[regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderDividerFootprint.lean).
+The permanent module build, all 20 regressions and all 12 public-theorem axiom
+probes passed at source commit e5842a7726f856fa1df3e9b47636dbf46e46305f.
+Every closure uses only propext and Quot.sound; there are no project axioms
+or classical choice.
+
+The exact header-exterior length is the maximum of its scratch span plus one
+and the old framer-exterior length. The new preparation span covers that maximum.
+Consequently preservedTail_eq_nil proves the actual initializer tail is empty,
+and operandFinal_left_eq_nil and fromRawFinal_left_eq_nil establish the empty
+expansion side at the already verified operand-assembly endpoints. These are
+unconditional source-derived theorems, not premises added to the machine
+contract or host-side removal of tape cells. No operational program or runtime
+bound changed.
+
+The remaining handoff must still convert the actual copied registers into the
+mirrored divider entry with two protective boundaries and execute the divider.
+Later cleanup must prove its own cursor/tail invariant; the initialization result
+does not silently justify dropping blank padding after an arbitrary later run.
+Body selection, emission and the full loop/reduction remain open. No milestone
+row, weighted checkpoint or global gate is earned; keep publication deferred.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
