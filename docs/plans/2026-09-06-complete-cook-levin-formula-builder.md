@@ -705,7 +705,7 @@ bound plus 6(11S + 14); it includes the extra serial bridge and six raw
 transitions per work step. This is a bound for this component, not a claim
 that the complete formula builder or all of PCCMin is implemented.
 
-### Next: source-derived second division operands
+### Source-derived second division operands (in progress)
 
 The [clause-count polynomial](../../lean/PNP/Concrete/CookLevinFormulaSize.lean)
 has the factorization constraints * (1 + variables * variables). The right
@@ -729,6 +729,32 @@ divider. Prove each actual handoff, preservation and copy/scan cost, preparing
 the paired regressions first. Derive the second quotient and remainder from
 the body guard and the source clause-count product; the preserved sidecar is
 still clauseCount, not constraintCount, so do not give it the wrong bound.
+
+Implementation and verification preflight:
+the new source-derived preparation starts on the actual restoration endpoint,
+with no caller-supplied divisor, quotient or tape. Its exact intended contract is:
+
+~~~lean
+workRunExact? (machine problem.verifier) (workSteps problem index remaining)
+  (initialConfiguration problem index remaining output) =
+  some (finalConfiguration problem index remaining output)
+~~~
+
+The body composition separately requires the actual guard
+index / tokenWidth < clauseCount and must not launch from Finish/reject.
+The proposed source-span bound is 4 + 2Q(7S + 8) work steps for preparation,
+where Q(x) = 4(x + 1)^2 + 9(x + 1) + 5; it includes the empty register and
+both serial bridges. The complete restored register word should fit 8S + 9
+cells, excluding the preserved input/output workspace. The compiled and body
+bounds must charge six raw transitions per work step and the outer bridge.
+
+Prepare the source-width/value/position, exact offset, actual quotient-copy
+endpoint, wrong-offset, one-step-short, token-width-confusion, source-workspace,
+body-guard, compiled-cost and encoded-register-size regressions with the source.
+Run the new permanent module, its paired regression file and every public
+theorem axiom probe; do not rerun the unchanged restoration or core/site suite.
+These bounds and contracts remain pending until the terminal targeted result
+is green.
 
 The second division, occupancy execution, body emission, Finish integration,
 later blank-padding cleanup/loop and complete reduction remain open.
