@@ -639,6 +639,9 @@ remain unchanged.
 
 ### Literal classifier-register restoration (verified component)
 
+[Source](../../lean/PNP/Concrete/CookLevinBuilderClassifierRegisterRestore.lean) and
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderClassifierRegisterRestore.lean).
+
 The nineteen-rule literal normalizer is verified at source commit
 44d6382f3f53381a29664cb970e47d1c9bf69fcb, tree
 6d751948fda0b2932733f037941b2e41870182d3. Its actual machine scans left to the
@@ -665,35 +668,73 @@ runs, compiled runs and the linear bound. The initial proof-only fixes used the
 pinned library's constructive replicate-suffix lemma and an explicit start-state
 projection; no machine, theorem contract or test expectation was weakened.
 
-### Source-bound register restoration (in progress)
+### Source-bound register restoration (verified component)
 
-Bind the normalizer to the tape actually produced by the source classifier.
-Prove that every comparator outcome retains both original magnitudes, extract
-the existing tape view from that result, and reconstruct the original index by
-the proved quotient/remainder identity. No caller supplies a prepared tape,
-correctness certificate or chosen route.
+[Source](../../lean/PNP/Concrete/CookLevinBuilderSourceRegisterRestore.lean) and
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderSourceRegisterRestore.lean)
+are verified at source commit 5278be635b557d57aa64920d6ee95753bcb1103f,
+tree 662d29ed68db4cfc76c855d150d60bcea5a72e31.
 
-The intended source endpoint is the unchanged live source workspace with
+The normalizer is now bound to the tape actually produced by the source
+classifier. A constructive induction proves that every comparator outcome
+retains both original magnitudes. Its exact tape view and the existing division
+identity restore the original index without a supplied tape, correctness
+certificate or selected route.
+
+The resulting ordinary word is the unchanged live source workspace with
 retainedValues ++ [clauseCount, 0, index, tokenWidth, quotient, clauseCount].
-Prepare both the exact standalone restoration trace on that produced tape and
-the actual serial body machine. Its precise continuation guard is
-index / tokenWidth < clauseCount; the non-body classifier endpoint stays
-separate. A serial WorkMachineChain launches on accept, not reject, so do not
-claim this body composition also executes Finish.
+The exact standalone restoration trace covers every comparison outcome.
+The composed body machine starts at the actual source cursor and continues
+under the precise guard index / tokenWidth < clauseCount. The non-body
+classifier endpoint is separately proved to reject. This does not claim that
+a serial accept-only bridge also executes Finish.
 
-Prepare comparator-magnitude, exact body/equal/greater/zero tape handoff,
-source-workspace, compiled-run, branch-separation and source-size regressions
-with the implementation. Derive the restoration bound 11S + 13 from the
-existing source-span theorem, and charge the new serial bridge separately in
-the body bound. Audit every public theorem. Reuse the unchanged generic
-normalizer and classifier evidence; run only the new permanent target and its
-paired regression/axiom boundary.
+The permanent module build, 39 prepared regression examples and all 20 public
+theorem axiom probes passed with terminal zero status. One theorem is
+axiom-free, seven use propext only and twelve use propext and Quot.sound.
+No project-specific axiom or Classical.choice occurs in these closures.
+The tests cover comparator magnitudes, actual body/equal/greater/zero endpoint
+tapes, source-workspace preservation, exact work and compiled runs, branch
+separation, and source-size bounds. Their expectations passed unchanged;
+the proof-only fixes supplied a constructive conjunction and an explicit
+configuration projection without unfolding the full composed machine.
 
-The source-derived second divisor, occupancy execution, body emission, later
-cleanup/loop and complete reduction remain open. Neither component earns a
-publication row, weighted checkpoint or site update. Proof estimate 35%,
-uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5
-remain unchanged.
+The restoration bound is at most 11S + 13 work steps, where S is the previously
+proved source-register span. The body bound is the existing classifier raw
+bound plus 6(11S + 14); it includes the extra serial bridge and six raw
+transitions per work step. This is a bound for this component, not a claim
+that the complete formula builder or all of PCCMin is implemented.
+
+### Next: source-derived second division operands
+
+The [clause-count polynomial](../../lean/PNP/Concrete/CookLevinFormulaSize.lean)
+has the factorization constraints * (1 + variables * variables). The right
+factor is already materialized in the retained postorder registers and equals
+the [scheduled clause width](../../lean/PNP/Concrete/CookLevinFormulaSchedule.lean)
+formulaClauseSlotsPerConstraint. Derive its exact selection and positive value
+from those source definitions; do not supply a divisor or copy tokenWidth again.
+
+Use the last restored clauseCount as the second divider sidecar, allocate the
+zero register, copy the live quotient across those two registers, then copy the
+source-derived clause width. The reviewed layout predicts seven plus the token
+and dimension polynomial node counts after that width root in the original
+register word, then eight extra registers before the final copy. Prove the
+selection and fixed offset before using them as machine-control parameters.
+
+The intended endpoint is
+retainedValues ++ [clauseCount, 0, index, tokenWidth, quotient] ++
+[clauseCount, 0, quotient, clauseWidth].
+This permits reuse of the verified divider-layout converter and mirrored
+divider. Prove each actual handoff, preservation and copy/scan cost, preparing
+the paired regressions first. Derive the second quotient and remainder from
+the body guard and the source clause-count product; the preserved sidecar is
+still clauseCount, not constraintCount, so do not give it the wrong bound.
+
+The second division, occupancy execution, body emission, Finish integration,
+later blank-padding cleanup/loop and complete reduction remain open.
+Neither verified component earns a publication row, weighted checkpoint or
+site update. Proof estimate 35%, uncertainty 20% to 40%, formal artefact
+coverage 205/207 and global gates 0/5 remain unchanged.
 
 ## Source and expectation preflight
 
