@@ -364,6 +364,22 @@ arithmetic engine. This remains an internal operand-preparation component: sourc
 register offsets, entry traversal, exact divider layout, cleanup and return to the
 cursor are still required. It earns neither a row nor a weighted checkpoint.
 
+The facade is implemented in
+PNP.Concrete.CookLevin.BuilderUnaryPolynomial.RegisterCopy. The permanent module
+build, all 18 paired regressions and all 11 public-theorem axiom probes passed
+at source commit 3ed17a12c7f3d6c67c973dad915bc3b9ebdc2a66. One closure is axiom-free;
+the other ten use only propext and Quot.sound. The tests exercise actual table
+runs as well as the uniform theorem and polynomial contract. No existing copy
+proof, mathematical statement or test contract was weakened. Completed proof
+runs were reused when reconciling the disposable evidence wrapper.
+
+Next derive the exact retained register offsets from the initializer's eager
+postorder evaluation, traverse from the source cursor to the active end, and
+compose the copier with that actual tape. Then construct the divider layout and
+restore the cursor after selection. The current facade alone does not derive
+operands from raw input, execute a complete body iteration or earn M230. Keep
+publication deferred and the current progress ledger unchanged.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
