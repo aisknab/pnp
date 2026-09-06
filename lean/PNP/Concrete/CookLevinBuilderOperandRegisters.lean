@@ -51,10 +51,10 @@ theorem prefixWord_values (counter width : NatPolynomial) (input : Nat) :
         registerWord (prefixValues counter width input) ++ registerWord [0, counter.eval input] := by
     simp [scratchWord, BuilderDimensionRegisters.preparationPolynomial,
       registerValues, prefixValues, NatPolynomial.eval_mul, NatPolynomial.eval_constant,
-      registerWord_append, List.append_assoc]
+      registerWord_append, registerWord, List.append_assoc]
   have hTail : (registerWord [0, counter.eval input]).length = counter.eval input + 2 := by
     simp [registerWord_length] <;> omega
-  unfold BuilderCursorSource.prefixWord
+  dsimp only [BuilderCursorSource.prefixWord]
   rw [hWord, List.length_append, hTail, Nat.add_sub_cancel]
   exact List.take_left
 
@@ -71,7 +71,7 @@ theorem cursorWord_values {language : Language} (problem : VerifierTableauProble
   unfold BuilderCursorSource.registerPrefix
   rw [prefixWord_values]
   simp only [retainedValues, BuilderBalancedCursor.word, registerWord_append, registerWord,
-    List.append_nil, List.append_assoc]
+    List.append_nil]
 
 private def middleValues {language : Language} (problem : VerifierTableauProblem language) :
     List Nat :=
