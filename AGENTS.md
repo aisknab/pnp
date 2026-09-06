@@ -154,8 +154,40 @@ them as product code.
 
 ## Cross-Repository Publication And Deployment
 
-Every formal milestone published through both this repository and PNPLabs must
-pass a full PNPLabs publication-surface audit. This is a release invariant, not
+### Publication cadence: major milestones and batched updates
+
+Continue verifying and merging core milestones without a website cycle between
+smaller results. The agent owns the publish/defer decision. Publish a PNPLabs
+update when at least one of these materially changes the public project status:
+
+- A fixed risk-weighted checkpoint changes state.
+- A global proof gate, eligible root theorem or publication gate changes state.
+- A substantial end-to-end general capability changes the current bottom line,
+  such as a complete all-input construction, rather than another local step.
+- A previously published claim requires correction, qualification or revocation.
+
+A local lemma, finite fixture, cursor step, conditional sidecar, added evidence
+row, test improvement, refactor or accumulated milestone count alone is not a
+site-publication trigger. Do not impose an arbitrary every-N-milestones cadence.
+A major capability does not receive weighted credit unless a fixed checkpoint
+was actually earned under the canonical progress policy.
+
+Record publish/defer and its short rationale in the existing milestone plan or
+release notes. Use the core ledger/history to identify pending earned milestones;
+do not create a competing progress ledger. When publication is warranted, batch
+all pending earned results into one sync from the latest exact verified core
+merge, then perform one complete publication-surface audit and release cycle.
+While deferring, preserve the coherent published source pin, as-of coordinate and
+progress values; validate that release against its pin, not a newer unpublished
+core HEAD. Do not mix newer figures into an older published snapshot.
+
+Keep meaningful core milestone and verified submilestone notifications independent
+of website cadence. Instructions-only repository changes do not by themselves
+trigger site regeneration or deployment. Correct misleading public claims promptly
+even when there is no new positive milestone.
+
+Every publication batch across this repository and PNPLabs must pass a full
+PNPLabs publication-surface audit. This is a release invariant, not
 the mathematical subject or direction of the selected core milestone. Reconcile
 the homepage (including its current bottom line), formal status and complete
 milestone ledger, FAQ and progress-model explanation, updates page, feed,
