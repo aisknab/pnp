@@ -968,6 +968,35 @@ publication work remain deferred until the intended builder interface is
 complete. Publish/defer: defer. No publication row, checkpoint, proof estimate
 or coverage changed; meaningful verified progress notifications continue.
 
+### Region-operand assembly preflight
+
+The next general execution contract starts at the actual source-coordinate
+register word and physically appends all five lengths plus the computed
+constraint coordinate. Its fixed seven stages allocate acceptance 1, copy
+preservation/control/initial-tail, increment the initial-tail by three, copy
+shape, and copy the original constraint index across exactly five new registers.
+A two-transition unary increment composes with the existing delimiter and copy
+machines. No supplied region, selected constraint or correctness certificate is
+permitted as a substitute for these operations.
+
+Prepare the exact reversed frame, arbitrary workspace and exterior-tail
+preservation, literal constant and one-step-short negative cases, complete
+compiled execution, finite-control uniqueness and source-span cost tests with
+the source. The endpoint must append
+`[1, preservation, control, initial, shape, constraintIndex]`, consume exactly
+`constraintCount + constraintIndex + 6` exterior cells and charge all five copies,
+both internal increment bridges and six assembly bridges. Connect this to the
+existing guarded source body exactly once.
+
+The proposed bound is a final register span of `11*S + 17` and assembly cost
+at most `5*Q(10*S + 16) + 19`, where `Q(b) = 4*(b+1)^2 + 9*(b+1) + 5`.
+These are targets, not compiled evidence. The body bound must also charge the
+previous coordinate computation and its single new bridge. Run only this new
+target, its prepared regressions and all public theorem axiom probes; reuse
+unchanged component tests. Physical dispatch and subsequent decoding/emission,
+Finish and the full builder remain open. Publish/defer: defer, without changing
+the current coverage, score or publication gate.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
