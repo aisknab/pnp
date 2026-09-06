@@ -637,6 +637,42 @@ or gate is awarded, and publication stays deferred. Proof estimate 35%,
 uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5
 remain unchanged.
 
+### Literal classifier-register restoration (in progress)
+
+The next source-to-occupancy edge restores the actual comparator/divider prefix
+to ordinary unary registers while retaining the computed quotient. Do not
+recompute the quotient or replace the tape by a host-generated specification.
+A nineteen-rule machine scans left to the current scratch end, normalizes count,
+quotient and consumed-dividend markers, converts the three temporary boundaries
+and old count-sidecar end to register separators, then returns to the current end.
+
+The generic tape view has unmarked/marked count and quotient lengths, the first
+divider's consumed/remainder/width lengths, and the preserved sidecar count.
+These describe tape cells; they are not correctness certificates or parameters
+used to generate the machine. The intended exact contract is:
+
+~~~lean
+workRunExact? machine (workSteps view) (initialConfiguration view workspace tail) =
+  some (finalConfiguration view workspace tail)
+~~~
+
+The output register values must be
+[sidecarCount, 0, remainder + consumed, width, quotientRest + quotientMarked,
+countRest + countMarked]. Preserve arbitrary workspace and outer tail exactly,
+including explicit blank padding. The proposed exact work cost is countRest
+plus twice the sum of the five nonempty register magnitudes, plus thirteen;
+when those magnitudes are at most S, the cost is at most 11S + 13.
+
+Prepare the finite-control, exact-value, body/equal/greater/zero, preserved-tail,
+malformed-marker, one-step-short, generic run and compiled-cost regressions with
+the source, plus probes for all public theorems. First verify the literal
+normalizer; then derive its view from the actual classifier result and bind its
+ordinary output to the live source register word. Body/Finish branching must
+remain explicit: a serial WorkMachineChain launches on accept, not on reject.
+The source-derived second divisor, occupancy execution, body emission, later
+cleanup/loop and complete reduction remain open. This is not an earned row,
+weighted checkpoint or site-publication trigger.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
