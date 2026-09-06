@@ -1145,6 +1145,65 @@ unearned. No publication row, score, gate or public bottom-line transition is
 claimed. Proof estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage:
 205/207; global gates closed: 0/5. No website or generated-report cycle is needed.
 
+## Verified component: physical residual-field restoration
+
+`BuilderRegionResidualRegisters` implements one fixed 42-rule normalizer for
+arbitrary physical field lengths: boundary-rest `a`, boundary-marked `b`,
+coordinate-rest `c` and coordinate-marked `d`. It inserts a real separator by
+shifting the outer prefix into one explicitly blank exterior cell, normalizes
+marks to unary units, restores the inner delimiter and rewinds. The actual run
+returns `endTape [d, c, a+b] workspace (tail.drop 1)` and preserves the arbitrary
+protected workspace without traversing it.
+
+Its finite control toggles for every marked cell. The compiled theorem binds
+the descriptive view to every actual mirrored canonical comparator result:
+less/equal contain `p+p` marks and halt in the even state; greater contains
+`p+(p+1)` marks and halts in the odd state. This derives the greater/equal
+distinction from physical transitions, not a supplied verdict or certificate.
+
+The exact charged work is `5*a + 4*b + 4*c + 2*d + 13`, with sixfold raw-machine
+compilation. When every field is at most `B`, work is at most `15*B+13` and raw
+time at most `90*B+78`. This component bound is not yet a composed source-input
+polynomial theorem for the residual handoff or complete builder.
+
+Evidence: the permanent Lake target built successfully; all 35 prepared
+regressions and all 14 public-declaration axiom closures passed in one terminal
+zero-status run. Five public declarations are axiom-free, two use only
+`propext`, and seven use only `propext` and `Quot.sound`. No project-specific
+axiom or `Classical.choice` is present. The regressions include universal
+work/raw/exterior contracts and literal zero, equal, less, greater with zero or
+positive unmarked remainder, arbitrary-field, protected-workspace, missing-blank,
+malformed and short/overrun checks.
+
+Initial feedback corrected proof scripts and Lean record layout only: a reserved
+local identifier, explicit Boolean negation, scan-definition unfolding, repeated
+unit orientation and a constructive list-concatenation induction. All 42 machine
+rules, public theorem statements, exact costs and 35 regression assertions were
+preserved. All regression assertions passed on their first actual execution.
+Unchanged verified dependency checks and broad core/site suites were not repeated.
+
+## Next implementation: actual residual copy and branch handoff
+
+Compose the normalizer with fixed-offset register copies. On the selected less
+route, copy the marked-coordinate register (offset two) to recover the local
+coordinate. On the non-selected route, copy the unmarked-coordinate register
+(offset one), then increment it only when the physically computed parity is odd.
+Equality must produce zero; greater must produce its unmarked remainder plus one.
+
+Use the existing finite program graph to connect actual accept/reject endpoints;
+do not supply the selected branch, residual value or a correctness certificate.
+Preserve the original source register frame and charge every bridge, copy and
+increment. The fixed four added scratch registers keep later region offsets
+compile-time constants. Prove the source-derived comparison handoff and the
+complete encoded-source-size bound before calling this a working residual phase.
+
+The general five-region dispatcher, local decoding, clause occupancy, emission,
+Finish, blank-padding and complete-loop/reduction obligations remain open. This
+continues the same canonical formula construction, not a new mathematical route.
+M230 and its fixed complete-builder checkpoint remain unearned; publication is
+deferred. Proof estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage:
+205/207; global gates closed: 0/5.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
