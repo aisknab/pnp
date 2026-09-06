@@ -89,8 +89,13 @@ private theorem scan_left (scanned tail right : List WorkSymbol)
       intro item hItem
       exact hSymbols item (List.mem_cons_of_mem symbol hItem)
     have hStep : workStep? seekMachine
-        { state := 2, tape := { left := rest ++ scratchEndSymbol :: tail,
-          head := symbol, right := right } } =
+        { state := 2
+          tape := {
+            left := rest ++ scratchEndSymbol :: tail
+            head := symbol
+            right := right
+          }
+        } =
       some { state := 2, tape := leftFocus (rest ++ scratchEndSymbol :: tail)
         (symbol :: right) } := by
       rcases hSymbol with hSymbol | hSymbol <;> subst symbol <;> rfl
