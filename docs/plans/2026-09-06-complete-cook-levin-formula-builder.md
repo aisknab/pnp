@@ -344,6 +344,26 @@ and evaluator register-copy phases are relevant reuse candidates; their supplied
 entry layouts alone do not prove this new source-derived preparation. Charge
 all traversal and copying, and keep operand construction distinct from execution.
 
+### Preserved-register copy interface
+
+Expose a small facade over the unary evaluator's already proved separator/copy
+phases. One finite table depends only on the number of intervening registers;
+it appends the selected unary value while restoring that source and preserving
+every intervening register, the older word and all inside tape. Allocation
+consumes exactly source-value-plus-one exterior cells. The theorem must account
+for that changed span rather than falsely promise preservation of overwritten
+scratch. Its exact time polynomial and uniform quadratic bound must include
+allocation and every outward, return, copy and restore scan.
+
+Prepare the facade, 18 paired regression examples and all 11 public-theorem axiom
+probes together. Tests cover zero and nonzero registers, intervening zero-valued
+registers, marker-like preserved surroundings, the exact consumed tail, malformed
+entry rejection, deterministic literal rules, general endpoint and exact/bounded
+time contracts. Reuse the existing copy proof rather than implementing another
+arithmetic engine. This remains an internal operand-preparation component: source
+register offsets, entry traversal, exact divider layout, cleanup and return to the
+cursor are still required. It earns neither a row nor a weighted checkpoint.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first

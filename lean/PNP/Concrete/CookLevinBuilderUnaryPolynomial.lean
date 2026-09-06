@@ -6921,6 +6921,158 @@ theorem workTimePolynomial_eval (polynomial : NatPolynomial)
   rw [← scratchWord_length]
   rfl
 
+/-! ### Reusable preserved-register copying
+
+This facade reuses the evaluator's existing literal separator and copy phases.
+Its control table depends on the number of intervening registers, not their
+values. It appends one copied register, restores the source and preserves the
+older word and the entire inside tape. Allocating the new register consumes
+exactly its span from the exterior tail. This is a scratch-local operation,
+not a source-input-to-classifier handoff or a complete formula builder.
+-/
+
+namespace RegisterCopy
+
+/-- Finite control size for a chosen number of newer registers. -/
+def stateCount (newerCount : Nat) : Nat := newerCount + 10
+
+private def stateSpecs (newerCount : Nat) : List StateSpec :=
+  separatorSpecs 0 2 (stateCount newerCount + 1) ++
+    copySpecs (newerCount + 1) 2 (stateCount newerCount)
+      (stateCount newerCount + 1)
+
+private theorem stateSpecs_length (newerCount : Nat) :
+    (stateSpecs newerCount).length = stateCount newerCount := by
+  simp [stateSpecs, stateCount, copyStateCount] <;> omega
+
+/-- A finite, value-independent copier for a fixed register offset. -/
+def machine (newerCount : Nat) : WorkMachine :=
+  closedSpecMachine (stateSpecs newerCount)
+
+theorem rules_length (newerCount : Nat) :
+    (machine newerCount).rules.length = 9 * stateCount newerCount := by
+  change (rulesFrom 0 (stateSpecs newerCount)).length = _
+  rw [rulesFrom_length, stateSpecs_length]
+
+theorem rules_pairwise_query_distinct (newerCount : Nat) :
+    (machine newerCount).rules.Pairwise (fun left right =>
+      (left.sourceState, left.readSymbol) ≠
+        (right.sourceState, right.readSymbol)) :=
+  rulesFrom_pairwise_query_distinct 0 (stateSpecs newerCount)
+
+theorem rule_source_lt_acceptState (newerCount : Nat) (rule : WorkRule)
+    (hMem : rule ∈ (machine newerCount).rules) :
+    rule.sourceState < (machine newerCount).acceptState := by
+  have hBounds := rulesFrom_source_bounds
+    (base := 0) (specs := stateSpecs newerCount) (rule := rule) hMem
+  simpa only [Nat.zero_add] using hBounds.2
+
+theorem machine_startState (newerCount : Nat) :
+    (machine newerCount).startState = 0 := rfl
+
+theorem machine_acceptState (newerCount : Nat) :
+    (machine newerCount).acceptState = stateCount newerCount :=
+  stateSpecs_length newerCount
+
+theorem machine_rejectState (newerCount : Nat) :
+    (machine newerCount).rejectState = stateCount newerCount + 1 := by
+  change (stateSpecs newerCount).length + 1 = _
+  rw [stateSpecs_length]
+
+theorem machine_acceptState_ne_rejectState (newerCount : Nat) :
+    (machine newerCount).acceptState ≠ (machine newerCount).rejectState := by
+  rw [machine_acceptState, machine_rejectState]
+  omega
+
+/-- Start at the active end of the physically present register word. -/
+def initialConfiguration (older inside outsideTail : List WorkSymbol)
+    (sourceValue : Nat) (newer : List Nat) : WorkConfiguration :=
+  endConfiguration 0 outsideTail
+    (older ++ registerWord ([sourceValue] ++ newer)) inside
+
+/-- Source, intervening registers and inside tape survive without modification. -/
+def finalConfiguration (older inside outsideTail : List WorkSymbol)
+    (sourceValue : Nat) (newer : List Nat) : WorkConfiguration :=
+  endConfiguration (stateCount newer.length)
+    (outsideTail.drop (sourceValue + 1))
+    (older ++ registerWord ([sourceValue] ++ newer ++ [sourceValue])) inside
+
+/-- Includes allocation of the destination separator and every copy scan. -/
+def steps (newer : List Nat) (sourceValue : Nat) : Nat :=
+  2 + copySteps newer 0 sourceValue
+
+theorem workRunExact (older inside outsideTail : List WorkSymbol)
+    (sourceValue : Nat) (newer : List Nat) :
+    workRunExact? (machine newer.length) (steps newer sourceValue)
+        (initialConfiguration older inside outsideTail sourceValue newer) =
+      some (finalConfiguration older inside outsideTail sourceValue newer) := by
+  let next := stateCount newer.length
+  let dead := next + 1
+  let initialWord := older ++ registerWord ([sourceValue] ++ newer)
+  let afterWord := initialWord ++ [separatorSymbol]
+  let finalWord := older ++ registerWord ([sourceValue] ++ newer ++ [sourceValue])
+  have hSeparator := separator_exact 0 2 dead []
+    (copySpecs (newer.length + 1) 2 next dead)
+    outsideTail initialWord inside rfl
+  have hCopy := copy_exact 2 next dead (separatorSpecs 0 2 dead) []
+    older inside (outsideTail.drop 1) sourceValue 0 newer rfl
+  have hFirst :
+      workRunExact? (machine newer.length) 2
+          (initialConfiguration older inside outsideTail sourceValue newer) =
+        some (endConfiguration 2 (outsideTail.drop 1) afterWord inside) := by
+    simpa only [machine, stateSpecs, initialConfiguration, next, dead,
+      initialWord, afterWord, List.nil_append] using hSeparator
+  have hSecond :
+      workRunExact? (machine newer.length) (copySteps newer 0 sourceValue)
+          (endConfiguration 2 (outsideTail.drop 1) afterWord inside) =
+        some (finalConfiguration older inside outsideTail sourceValue newer) := by
+    simpa [machine, stateSpecs, finalConfiguration, next, dead,
+      initialWord, afterWord, finalWord, registerWord, List.append_assoc,
+      List.drop_drop, Nat.add_comm] using hCopy
+  exact workRunExact_compose_for (machine newer.length) 2
+    (copySteps newer 0 sourceValue)
+    (initialConfiguration older inside outsideTail sourceValue newer)
+    (endConfiguration 2 (outsideTail.drop 1) afterWord inside)
+    (finalConfiguration older inside outsideTail sourceValue newer)
+    hFirst hSecond
+
+theorem steps_closed (newer : List Nat) (sourceValue : Nat) :
+    let span := newer.length + 1 + newer.sum
+    steps newer sourceValue =
+      2 * span * sourceValue + 2 * sourceValue * sourceValue +
+        7 * sourceValue + 2 * span + 5 := by
+  simp only [steps, copySteps_closed, Nat.add_zero]
+  omega
+
+/-- Exact work-time polynomial when the retained values are polynomial inputs. -/
+def timePolynomial (newer : List NatPolynomial) (sourceValue : NatPolynomial) :
+    NatPolynomial :=
+  .add (.constant 2) (copyPolynomial newer (.constant 0) sourceValue)
+
+theorem timePolynomial_eval (newer : List NatPolynomial)
+    (sourceValue : NatPolynomial) (input : Nat) :
+    (timePolynomial newer sourceValue).eval input =
+      steps (newer.map (fun value => value.eval input)) (sourceValue.eval input) := by
+  simp only [timePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant,
+    copyPolynomial_eval, steps]
+
+/-- Uniform bound also applies to non-polynomial cursor values below a bound. -/
+theorem steps_le (newer : List Nat) (sourceValue bound : Nat)
+    (hSource : sourceValue ≤ bound) (hNewer : newer.length + newer.sum ≤ bound) :
+    steps newer sourceValue ≤
+      4 * (bound + 1) * (bound + 1) + 9 * (bound + 1) + 5 := by
+  rw [steps_closed]
+  have hSpan : newer.length + 1 + newer.sum ≤ bound + 1 := by omega
+  have hSource' : sourceValue ≤ bound + 1 := by omega
+  have hProduct := Nat.mul_le_mul (Nat.mul_le_mul_left 2 hSpan) hSource'
+  have hSquare := Nat.mul_le_mul (Nat.mul_le_mul_left 2 hSource') hSource'
+  have hLinear := Nat.mul_le_mul_left 7 hSource'
+  have hSpanLinear := Nat.mul_le_mul_left 2 hSpan
+  simp only [Nat.mul_assoc] at hProduct hSquare ⊢
+  omega
+
+end RegisterCopy
+
 end BuilderUnaryPolynomial
 
 end CookLevin
