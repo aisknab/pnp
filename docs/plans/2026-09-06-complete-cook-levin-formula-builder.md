@@ -744,39 +744,86 @@ workspace. Both internal serial bridges, empty-register allocation, every copy
 scan, the outer body bridge and six raw transitions per work step are charged.
 This is a component bound, not completion of the formula builder or PCCMin.
 
-### Source-bound clause division (in progress)
+### Source-bound clause division (verified component)
 
-Use the existing fixed divider-layout converter and mirrored raw divider as
-one constant tail machine. Prove its exact run on
-endTape (older ++ [clauseCount, 0, quotient, clauseWidth]) inside [],
-then bind that input to the already-verified operand endpoint. Derive positive
-clauseWidth from its source definition. Reuse the actual prepared body machine
-so no operand preparation is executed twice.
+[Source](../../lean/PNP/Concrete/CookLevinBuilderClauseDividerExecution.lean) and
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderClauseDividerExecution.lean)
+are verified at source commit f1b7a9e2af750236a80c2ebd71dfbb903906cfc3,
+tree 6d58e56c765983e1e44e45b7815d30586a99cd88.
 
-The intended exact source and guarded body traces produce the second quotient
-and remainder on the physical tape. Prove that the quotient markers count the
-constraint index, that the residual units give the local-clause index, and that
-both reconstruct the first quotient and original body index. Derive the
-constraint-index bound from the body guard and
-clauseCount = constraintCount * clauseWidth; the preserved sidecar is still
-clauseCount and must not be mislabeled as constraintCount.
+The fixed 119-rule tail composes the existing divider-layout converter and
+mirrored raw divider. Its generic exact trace starts at
+endTape (older ++ [clauseCount, 0, quotient, clauseWidth]) inside [].
+The source handoff identifies this with the actual operand endpoint and derives
+positive clauseWidth from its definition. The complete guarded body composition
+starts at the source cursor and executes operand preparation exactly once.
 
-Prepare generic positive-divisor, zero-divisor rejection, one-step-short,
-concrete quotient/remainder, unchanged-workspace, source handoff, guarded body,
-coordinate-range/reconstruction, finite-control and compiled-cost regressions
-with this source. The intended tail bound is
-4S + 8 + 20(2S + 1)^2 work steps, when its three magnitudes fit S.
-Each source composition adds its own one-step bridge and the previously
-verified preparation/body cost. Audit every public theorem and run only this
-new permanent target and its paired tests; unchanged earlier evidence is reused.
+The final tape holds constraintIndex = quotient / clauseWidth in quotient marks
+and clauseIndex = quotient % clauseWidth in residual units, preserving the older
+registers and input/output workspace behind the two scratch boundaries.
+The local clause index is strictly below formulaClauseSlotsPerConstraint.
+Under the body guard, the constraint index is strictly below
+formulaConstraintSlotCount. The two coordinates reconstruct quotient, and
+( constraintIndex * clauseWidth + clauseIndex ) * tokenWidth +
+index % tokenWidth = index. The preserved sidecar is still clauseCount,
+not constraintCount.
 
-Clause occupancy, body emission, Finish integration, later blank-padding
-cleanup/loop and the complete reduction remain open. Later normalization must
-retain or extract all live clause/token coordinates; it must not silently
-discard a needed remainder or treat explicit cleared blank cells as an empty
-outer tail.
+The permanent module, all 38 prepared regressions and all 28 public theorem
+axiom probes passed on the first run with terminal zero status. Three public
+theorems are axiom-free, eight use propext only and seventeen use propext and
+Quot.sound. No project-specific axiom or Classical.choice occurs. The unchanged
+regression expectations cover exact generic quotient/remainder cells, positive
+and zero-dividend cases, zero-divisor and one-step-short rejection, arbitrary
+workspace preservation, source handoff, guarded body execution, both coordinate
+ranges, reconstruction, fixed control and compiled source-size bounds.
 
-Neither component earns a publication row, weighted checkpoint or site update.
+When clauseCount, quotient and clauseWidth fit the established source span S,
+the tail takes at most 4S + 8 + 20(2S + 1)^2 work steps.
+The source and body bounds include their respective previously verified
+preparation, one serial bridge and six raw transitions per work step.
+These are component bounds, not a complete formula-builder runtime theorem.
+
+### Next: source-derived general clause selection
+
+Reuse the existing general
+[occupancy contract](../../lean/PNP/Concrete/CookLevinClauseOccupancy.lean) and
+[division interface](../../lean/PNP/Concrete/CookLevinClauseOccupancyDivision.lean).
+The source-bound coordinate theorem should connect
+ClauseOccupancy.constraintSlot at the two actual computed coordinates to
+(formulaClauseSchedule[quotient]?).map Option.isSome under the body guard,
+using constraintSlot_div_mod and formulaSlot_eq_schedule. This is semantic
+handoff evidence only; it does not execute the remaining selector.
+
+Close the physical dependency edge from this source-derived endpoint to the
+general formulaConstraintSlotDirect decoder and local clause-count comparison,
+for every in-range constraint and local clause index. Derive the selected
+constraint and occupancy from the original source workspace; do not accept them
+or their correctness as supplied data. Keep padded empty opportunities
+distinct from out-of-range failure. The finite control must depend only on the
+fixed verifier, and its polynomial bound must charge the actual normalization,
+decoding, comparison and dispatch traces.
+
+Before normalization, record an exact live-coordinate invariant. Preserve or
+extract the second remainder and both needed quotient coordinates. Recover the
+token remainder from retained source data with an actual proved construction;
+do not silently discard a needed remainder while recombining consumed markers.
+Later loop cleanup must handle explicit blank padding with a proved invariant
+or transport, not identify cleared cells with a structurally empty outer tail.
+
+Prepare the new theorem/type, exact tape, all route-family and padding cases,
+negative handoff, axiom and compiled-cost expectations with the source.
+Run only the changed target, its paired regressions and public theorem audit.
+Reuse the established semantic and division evidence instead of rebuilding it
+as a substitute for the missing physical selector.
+
+Clause selection, body emission, Finish integration, later blank-padding
+cleanup/loop and the complete reduction remain open. Publish/defer: defer.
+These verified components do not materially change the public bottom line or
+earn a publication row or weighted checkpoint. Completing the entire all-input
+builder and packaged reduction would meet the major-publication threshold;
+another local component alone does not. Meaningful submilestone notifications
+continue independently.
+
 Proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and
 global gates 0/5 remain unchanged.
 
