@@ -912,28 +912,61 @@ continue independently.
 Proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and
 global gates 0/5 remain unchanged.
 
-### Ordered region-register preflight
+### Verified ordered region-register access
 
-The next source/expectation changeset derives all five schedule lengths from the
-four relevant retained polynomial subtrees. The fixed polynomial postorder is
-not the schedule order. In particular, the initial region needs three added
-opportunities and acceptance needs one; copying the old constant four as either
-length would be wrong. The source-level descriptor must agree with the existing
-direct decoder, including its nested option distinction for padding.
+Source component: `476c491ff17cfea4ce2b26efc9a9b696b5d07b77`.
+[The source-derived region register layer](../../lean/PNP/Concrete/CookLevinBuilderConstraintRegionRegisters.lean)
+now identifies all four required retained polynomial terms. Its ordered
+five-region descriptor agrees with the existing direct decoder for arbitrary
+inputs, including both input modes and the nested option distinction between
+padding and out-of-range. The lengths sum to constraintCount, not clauseCount.
 
-Prepare the general register projections, fixed verifier-dependent offsets,
-physical copy endpoint, arbitrary preserved workspace/frame, exact exterior
-consumption and quadratic source-span bounds with their paired regressions.
-The copied term is read from the actual post-division register word; no supplied
-divisor, constraint or region-correctness premise is accepted. Follow this with
-literal constant adjustment/assembly and the physical five-region dispatcher.
-A per-region register-access helper is not that dispatcher.
+The physical copy machine reads a selected term from the actual post-division
+register word and appends its value. Its offset depends only on verifier syntax,
+term kind and a fixed number of additional registers. Original registers,
+additional frame data and input/output workspace survive. The exact exterior
+tail is dropped only by the physically overwritten value-plus-separator length;
+the source endpoint with no additional registers is explicitly connected.
 
-First validation: only the new permanent target, its prepared regression file
-and all of its public theorem axiom closures. Reuse the already-verified source
-coordinate handoff and copier; do not repeat their unchanged suites. Keep the
-full root/inventory/publication expectations deferred until the intended builder
-interface is complete. Publish/defer: defer, with no score or coverage change.
+The initial term still needs its literal +3 adjustment and acceptance its literal
+1. This is source operand access, not a physical region selector. No supplied
+region-correctness certificate or selected constraint replaces the dispatcher.
+
+[All 31 prepared regressions](../../lean-regression/PNPConcreteCookLevinBuilderConstraintRegionRegisters.lean)
+passed on their first execution. All 16 public theorem axiom closures contain
+only the permitted foundations: two are axiom-free, two use only `propext`,
+and twelve use `propext` and `Quot.sound`. Four initial proof-normalization
+errors were corrected without changing definitions, statements or prepared
+expectations. The permanent target reached its terminal success marker.
+Unchanged copier and coordinate suites were not rerun.
+
+The copy cost is bounded by `4 * (B + 1)^2 + 9 * (B + 1) + 5`, where
+`B = 9*S + 11 + appended.length + appended.sum` and `S` is the original
+source-span polynomial. The exact compiled execution charges six raw
+transitions per work step. These are component costs, not a complete-builder
+runtime claim.
+
+Next construct the literal adjusted lengths and assemble them for physical
+dispatch. An end-focused ordinary register layout can append
+`[1, preservation, control, initial, shape, constraintIndex]`; reading inward
+then meets the constraint coordinate and the five lengths in schedule order.
+Use the proved source-term offsets with each fixed additional-register count.
+The original constraint coordinate remains in the preserved source word and
+must be physically copied, not supplied. Account for the constant +3, literal
+acceptance 1, every chain bridge, extra delimiter, and consumed exterior cell.
+
+Then prove one literal dispatcher over every valid coordinate, including empty
+regions and exact boundaries, deriving the selected region and local coordinate
+through actual comparisons/subtractions. Reuse the semantic decoder equality;
+do not replace missing execution with a semantic wrapper. Source-bit/constraint
+decoding, local clause counts, token emission, Finish, explicit blank-padding
+invariants and the full builder/reduction remain open.
+
+Prepare source, exact endpoint, negative boundary, compiled-cost and axiom
+expectations together before the next targeted check. Full root/inventory and
+publication work remain deferred until the intended builder interface is
+complete. Publish/defer: defer. No publication row, checkpoint, proof estimate
+or coverage changed; meaningful verified progress notifications continue.
 
 ## Source and expectation preflight
 
