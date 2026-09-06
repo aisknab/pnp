@@ -912,6 +912,29 @@ continue independently.
 Proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and
 global gates 0/5 remain unchanged.
 
+### Ordered region-register preflight
+
+The next source/expectation changeset derives all five schedule lengths from the
+four relevant retained polynomial subtrees. The fixed polynomial postorder is
+not the schedule order. In particular, the initial region needs three added
+opportunities and acceptance needs one; copying the old constant four as either
+length would be wrong. The source-level descriptor must agree with the existing
+direct decoder, including its nested option distinction for padding.
+
+Prepare the general register projections, fixed verifier-dependent offsets,
+physical copy endpoint, arbitrary preserved workspace/frame, exact exterior
+consumption and quadratic source-span bounds with their paired regressions.
+The copied term is read from the actual post-division register word; no supplied
+divisor, constraint or region-correctness premise is accepted. Follow this with
+literal constant adjustment/assembly and the physical five-region dispatcher.
+A per-region register-access helper is not that dispatcher.
+
+First validation: only the new permanent target, its prepared regression file
+and all of its public theorem axiom closures. Reuse the already-verified source
+coordinate handoff and copier; do not repeat their unchanged suites. Keep the
+full root/inventory/publication expectations deferred until the intended builder
+interface is complete. Publish/defer: defer, with no score or coverage change.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
