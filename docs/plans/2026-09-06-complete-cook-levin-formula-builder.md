@@ -285,6 +285,45 @@ the conjunction expressing balanced span; constructing its two conjuncts before
 arithmetic removed that dependency without changing the statement or weakening
 the audit. No broad proof suite or website cycle was run for this component.
 
+### Source-derived cursor handoff and bound
+
+Next derive a canonical register prefix as a slice of the scratch word already
+constructed from the input. Prove its exact zero-index/full-counter layout and
+valid symbols without a chosen or supplied prefix. Identify the initializer's
+actual final tape with that cursor entry and canonical header. Preserve arbitrary
+existing output in the generic positive/exhausted cursor runs, so the operation
+remains usable after a body-emission step.
+
+For every index and remaining counter whose sum is the source-derived body count,
+prove that register span stays equal to the complete constructed scratch span.
+Bound the full compiled scan by the fixed polynomial twelve times that span plus
+36. Prepare the source module, all 15 paired regression examples, and all 13
+public-declaration axiom expectations before the first compilation. Retain the
+no-project-axiom/no-classical-choice boundary. This names existing physical cells;
+it adds no host oracle, selector or supplied tape. It does not process slot zero,
+emit a clause or close the complete loop. Publication and weighted credit remain
+deferred under the plan's major-milestone rule.
+
+Implemented in PNP.Concrete.CookLevin.BuilderCursorSource. The prefix is a
+computable take of already constructed scratch cells; its exact layout and valid
+symbols are derived, not premises supplied to the endpoint. The initializer's
+actual final tape equals the zero-index/full-counter cursor tape with the
+canonical header. Positive and exhausted runs preserve arbitrary current output
+and the logical input. The balance invariant relates every later register span
+to the original source-derived scratch span, yielding the stated encoded-input
+polynomial bound for the complete compiled scan.
+
+The permanent leaf built on the first attempt with all 15 paired regressions and
+all 13 public-declaration axiom probes green. Four closures use only propext and
+nine use only propext plus Quot.sound; none uses a project axiom or Classical.choice.
+The strict axiom and regression expectations were prepared with the source.
+No broad proof or publication suite was repeated. This closes the initializer
+register-layout-to-cursor edge, not the classifier operand construction or full
+body iteration. Next physically derive the selector/divider operands from these
+retained registers, execute every constraint-family/token branch, and compose
+selection, output update and cursor advance without skipping coordinate zero.
+No milestone row or weighted checkpoint is earned by this component.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
