@@ -96,8 +96,10 @@ private theorem scan_left (scanned tail right : List WorkSymbol)
             right := right
           }
         } =
-      some { state := 2, tape := leftFocus (rest ++ scratchEndSymbol :: tail)
-        (symbol :: right) } := by
+      some {
+        state := 2
+        tape := leftFocus (rest ++ scratchEndSymbol :: tail) (symbol :: right)
+      } := by
       rcases hSymbol with hSymbol | hSymbol <;> subst symbol <;> rfl
     simp only [List.length_cons, List.cons_append, leftFocus, workRunExact?]
     rw [hStep]
