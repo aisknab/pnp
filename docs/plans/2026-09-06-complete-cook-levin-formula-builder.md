@@ -637,41 +637,63 @@ or gate is awarded, and publication stays deferred. Proof estimate 35%,
 uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5
 remain unchanged.
 
-### Literal classifier-register restoration (in progress)
+### Literal classifier-register restoration (verified component)
 
-The next source-to-occupancy edge restores the actual comparator/divider prefix
-to ordinary unary registers while retaining the computed quotient. Do not
-recompute the quotient or replace the tape by a host-generated specification.
-A nineteen-rule machine scans left to the current scratch end, normalizes count,
-quotient and consumed-dividend markers, converts the three temporary boundaries
-and old count-sidecar end to register separators, then returns to the current end.
+The nineteen-rule literal normalizer is verified at source commit
+44d6382f3f53381a29664cb970e47d1c9bf69fcb, tree
+6d751948fda0b2932733f037941b2e41870182d3. Its actual machine scans left to the
+current scratch end, normalizes count, quotient and consumed-dividend markers,
+converts the three temporary boundaries and old sidecar end to register
+separators, then returns to the current end.
 
-The generic tape view has unmarked/marked count and quotient lengths, the first
-divider's consumed/remainder/width lengths, and the preserved sidecar count.
-These describe tape cells; they are not correctness certificates or parameters
-used to generate the machine. The intended exact contract is:
-
-~~~lean
-workRunExact? machine (workSteps view) (initialConfiguration view workspace tail) =
-  some (finalConfiguration view workspace tail)
-~~~
-
-The output register values must be
+The generic tape view describes existing cells; it is not a correctness
+certificate or a parameter used to generate machine control. The kernel-checked
+exact trace produces the ordinary register word
 [sidecarCount, 0, remainder + consumed, width, quotientRest + quotientMarked,
-countRest + countMarked]. Preserve arbitrary workspace and outer tail exactly,
-including explicit blank padding. The proposed exact work cost is countRest
-plus twice the sum of the five nonempty register magnitudes, plus thirteen;
-when those magnitudes are at most S, the cost is at most 11S + 13.
+countRest + countMarked], preserving arbitrary workspace and outer tail,
+including explicit blank padding. All scans and delimiter transitions are
+charged: countRest plus twice the sum of the five reconstructed magnitudes,
+plus thirteen. Five magnitudes bounded by S give at most 11S + 13 work steps.
 
-Prepare the finite-control, exact-value, body/equal/greater/zero, preserved-tail,
-malformed-marker, one-step-short, generic run and compiled-cost regressions with
-the source, plus probes for all public theorems. First verify the literal
-normalizer; then derive its view from the actual classifier result and bind its
-ordinary output to the live source register word. Body/Finish branching must
-remain explicit: a serial WorkMachineChain launches on accept, not on reject.
+The permanent module build, 23 paired regression examples and all nine public
+theorem axiom probes passed with a terminal zero result. Six public theorems
+are axiom-free and three use only propext and Quot.sound. No project-specific
+axiom or Classical.choice occurs in these closures. Tests cover the fixed
+control table, exact values, body/equal/greater/zero inputs, malformed markers,
+one-step-short rejection, arbitrary workspace/tail preservation, exact generic
+runs, compiled runs and the linear bound. The initial proof-only fixes used the
+pinned library's constructive replicate-suffix lemma and an explicit start-state
+projection; no machine, theorem contract or test expectation was weakened.
+
+### Source-bound register restoration (in progress)
+
+Bind the normalizer to the tape actually produced by the source classifier.
+Prove that every comparator outcome retains both original magnitudes, extract
+the existing tape view from that result, and reconstruct the original index by
+the proved quotient/remainder identity. No caller supplies a prepared tape,
+correctness certificate or chosen route.
+
+The intended source endpoint is the unchanged live source workspace with
+retainedValues ++ [clauseCount, 0, index, tokenWidth, quotient, clauseCount].
+Prepare both the exact standalone restoration trace on that produced tape and
+the actual serial body machine. Its precise continuation guard is
+index / tokenWidth < clauseCount; the non-body classifier endpoint stays
+separate. A serial WorkMachineChain launches on accept, not reject, so do not
+claim this body composition also executes Finish.
+
+Prepare comparator-magnitude, exact body/equal/greater/zero tape handoff,
+source-workspace, compiled-run, branch-separation and source-size regressions
+with the implementation. Derive the restoration bound 11S + 13 from the
+existing source-span theorem, and charge the new serial bridge separately in
+the body bound. Audit every public theorem. Reuse the unchanged generic
+normalizer and classifier evidence; run only the new permanent target and its
+paired regression/axiom boundary.
+
 The source-derived second divisor, occupancy execution, body emission, later
-cleanup/loop and complete reduction remain open. This is not an earned row,
-weighted checkpoint or site-publication trigger.
+cleanup/loop and complete reduction remain open. Neither component earns a
+publication row, weighted checkpoint or site update. Proof estimate 35%,
+uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5
+remain unchanged.
 
 ## Source and expectation preflight
 
