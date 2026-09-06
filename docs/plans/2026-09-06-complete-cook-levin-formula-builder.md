@@ -324,6 +324,26 @@ retained registers, execute every constraint-family/token branch, and compose
 selection, output update and cursor advance without skipping coordinate zero.
 No milestone row or weighted checkpoint is earned by this component.
 
+### Divider operand preparation review
+
+The first physical classifier divides the post-header token index by
+problem.formulaTokensPerClause. The later occupancy division uses
+problem.formulaClauseSlotsPerConstraint; these are different operands. The
+existing retained width register is the latter, and must not be substituted for
+the former. The classifier also requires problem.formulaClauseSlotCount in its
+protected sidecar.
+
+The already evaluated bodySlotCountPolynomial is exactly the product of
+formulaClauseCountPolynomial and formulaClauseTokenPolynomial, plus one.
+Its retained postorder registers therefore include both the first divisor and
+the total clause count. Before adding any evaluation, derive their precise
+register offsets and reuse those values. Build a literal copier/operand preparer
+that preserves the cursor, source input and emitted output, then matches the
+exact shielded divider/classifier entry. The existing tape-bridge copy phases
+and evaluator register-copy phases are relevant reuse candidates; their supplied
+entry layouts alone do not prove this new source-derived preparation. Charge
+all traversal and copying, and keep operand construction distinct from execution.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
