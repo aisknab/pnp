@@ -705,62 +705,80 @@ bound plus 6(11S + 14); it includes the extra serial bridge and six raw
 transitions per work step. This is a bound for this component, not a claim
 that the complete formula builder or all of PCCMin is implemented.
 
-### Source-derived second division operands (in progress)
+### Source-derived second division operands (verified component)
 
-The [clause-count polynomial](../../lean/PNP/Concrete/CookLevinFormulaSize.lean)
-has the factorization constraints * (1 + variables * variables). The right
-factor is already materialized in the retained postorder registers and equals
-the [scheduled clause width](../../lean/PNP/Concrete/CookLevinFormulaSchedule.lean)
-formulaClauseSlotsPerConstraint. Derive its exact selection and positive value
-from those source definitions; do not supply a divisor or copy tokenWidth again.
+[Source](../../lean/PNP/Concrete/CookLevinBuilderClauseDividerOperands.lean) and
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderClauseDividerOperands.lean)
+are verified at source commit d67e5f20a41483154bbb907a2be63398048f851a,
+tree 37da9dbf857930fcf74908ccda38b010a8fa9bce.
 
-Use the last restored clauseCount as the second divider sidecar, allocate the
-zero register, copy the live quotient across those two registers, then copy the
-source-derived clause width. The reviewed layout predicts seven plus the token
-and dimension polynomial node counts after that width root in the original
-register word, then eight extra registers before the final copy. Prove the
-selection and fixed offset before using them as machine-control parameters.
+The retained clause-count polynomial factors as constraints * (1 + variables^2).
+The new selection theorem locates that already-compiled positive right factor,
+equal to formulaClauseSlotsPerConstraint, in the original postorder registers.
+Its original offset is the token and dimension node counts plus seven. After
+the six restored registers, allocated zero and copied quotient, the final
+copy offset is those node counts plus fifteen. These are proved projections
+of source-defined register positions, not guessed control parameters.
 
-The intended endpoint is
+The actual machine preserves the final clauseCount sidecar, allocates zero,
+copies the live first quotient across two newer registers, then copies the
+source clause width. Its ordinary endpoint is
 retainedValues ++ [clauseCount, 0, index, tokenWidth, quotient] ++
 [clauseCount, 0, quotient, clauseWidth].
-This permits reuse of the verified divider-layout converter and mirrored
-divider. Prove each actual handoff, preservation and copy/scan cost, preparing
-the paired regressions first. Derive the second quotient and remainder from
-the body guard and the source clause-count product; the preserved sidecar is
-still clauseCount, not constraintCount, so do not give it the wrong bound.
+The guarded body composition executes that preparation exactly once from the
+actual source cursor. It does not launch from a rejecting Finish endpoint.
 
-Implementation and verification preflight:
-the new source-derived preparation starts on the actual restoration endpoint,
-with no caller-supplied divisor, quotient or tape. Its exact intended contract is:
+The permanent module, all 41 prepared regressions and all 33 public theorem
+axiom probes passed with terminal zero status. Five public theorems are
+axiom-free, five use propext only and twenty-three use propext and Quot.sound.
+No project-specific axiom or Classical.choice occurs. The two proof-only
+offset fixes used definitional equalities; all test expectations passed
+unchanged. Regression boundaries include wrong-offset rejection, one-step-short
+rejection, distinction from tokenWidth, arbitrary workspace preservation,
+source-derived values/offsets, compiled body execution and source-size bounds.
 
-~~~lean
-workRunExact? (machine problem.verifier) (workSteps problem index remaining)
-  (initialConfiguration problem index remaining output) =
-  some (finalConfiguration problem index remaining output)
-~~~
+For original source-register span S, preparation takes at most
+4 + 2Q(7S + 8) work steps, Q(x) = 4(x + 1)^2 + 9(x + 1) + 5.
+The new register word fits 8S + 9 cells, excluding the preserved input/output
+workspace. Both internal serial bridges, empty-register allocation, every copy
+scan, the outer body bridge and six raw transitions per work step are charged.
+This is a component bound, not completion of the formula builder or PCCMin.
 
-The body composition separately requires the actual guard
-index / tokenWidth < clauseCount and must not launch from Finish/reject.
-The proposed source-span bound is 4 + 2Q(7S + 8) work steps for preparation,
-where Q(x) = 4(x + 1)^2 + 9(x + 1) + 5; it includes the empty register and
-both serial bridges. The complete restored register word should fit 8S + 9
-cells, excluding the preserved input/output workspace. The compiled and body
-bounds must charge six raw transitions per work step and the outer bridge.
+### Source-bound clause division (in progress)
 
-Prepare the source-width/value/position, exact offset, actual quotient-copy
-endpoint, wrong-offset, one-step-short, token-width-confusion, source-workspace,
-body-guard, compiled-cost and encoded-register-size regressions with the source.
-Run the new permanent module, its paired regression file and every public
-theorem axiom probe; do not rerun the unchanged restoration or core/site suite.
-These bounds and contracts remain pending until the terminal targeted result
-is green.
+Use the existing fixed divider-layout converter and mirrored raw divider as
+one constant tail machine. Prove its exact run on
+endTape (older ++ [clauseCount, 0, quotient, clauseWidth]) inside [],
+then bind that input to the already-verified operand endpoint. Derive positive
+clauseWidth from its source definition. Reuse the actual prepared body machine
+so no operand preparation is executed twice.
 
-The second division, occupancy execution, body emission, Finish integration,
-later blank-padding cleanup/loop and complete reduction remain open.
-Neither verified component earns a publication row, weighted checkpoint or
-site update. Proof estimate 35%, uncertainty 20% to 40%, formal artefact
-coverage 205/207 and global gates 0/5 remain unchanged.
+The intended exact source and guarded body traces produce the second quotient
+and remainder on the physical tape. Prove that the quotient markers count the
+constraint index, that the residual units give the local-clause index, and that
+both reconstruct the first quotient and original body index. Derive the
+constraint-index bound from the body guard and
+clauseCount = constraintCount * clauseWidth; the preserved sidecar is still
+clauseCount and must not be mislabeled as constraintCount.
+
+Prepare generic positive-divisor, zero-divisor rejection, one-step-short,
+concrete quotient/remainder, unchanged-workspace, source handoff, guarded body,
+coordinate-range/reconstruction, finite-control and compiled-cost regressions
+with this source. The intended tail bound is
+4S + 8 + 20(2S + 1)^2 work steps, when its three magnitudes fit S.
+Each source composition adds its own one-step bridge and the previously
+verified preparation/body cost. Audit every public theorem and run only this
+new permanent target and its paired tests; unchanged earlier evidence is reused.
+
+Clause occupancy, body emission, Finish integration, later blank-padding
+cleanup/loop and the complete reduction remain open. Later normalization must
+retain or extract all live clause/token coordinates; it must not silently
+discard a needed remainder or treat explicit cleared blank cells as an empty
+outer tail.
+
+Neither component earns a publication row, weighted checkpoint or site update.
+Proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and
+global gates 0/5 remain unchanged.
 
 ## Source and expectation preflight
 
