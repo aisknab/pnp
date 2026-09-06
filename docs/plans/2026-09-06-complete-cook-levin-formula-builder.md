@@ -574,16 +574,25 @@ still open: proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage
 205/207 and global gates 0/5 remain unchanged. Keep PNPLabs publication deferred
 and continue meaningful verified-submilestone notifications.
 
-### Source-derived body/Finish classification (in progress)
+### Source-derived body/Finish classification
 
-The next legacy-anchored builder edge reuses the existing post-divider sidecar
+The source-to-classifier edge now reuses the existing post-divider sidecar
 copy and unary comparator after the actual source-derived division. A fixed
 243-rule tail contains the reflected 180-rule copy bridge, the reflected 54-rule
-comparator and one serial transition table. Compose it with the verified
+comparator and one serial transition table. It is composed with the verified
 source-to-divider machine; no caller supplies its entry tape or selected route.
 
-The planned BuilderSourceClassifier.workRunExact contract is, for every source
-problem, natural cursor index/remaining count and existing token output:
+Implemented in
+[BuilderSourceClassifier](../../lean/PNP/Concrete/CookLevinBuilderSourceClassifier.lean)
+with its paired
+[regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderSourceClassifier.lean).
+The permanent module build, all 31 regressions and all 19 public-theorem axiom
+probes passed at source commit 2e316eb7472f1d8bc980c4c5d684869fd1b6cf09.
+Three closures are axiom-free, three use only propext, and 13 use only propext
+and Quot.sound. No project axiom or classical choice enters this component.
+
+The workRunExact contract holds for every source problem, natural cursor
+index/remaining count and existing token output:
 
 ~~~lean
 workRunExact? (machine problem.verifier) (workSteps problem index remaining)
@@ -591,28 +600,42 @@ workRunExact? (machine problem.verifier) (workSteps problem index remaining)
   some (finalConfiguration problem index remaining output)
 ~~~
 
-The endpoint must preserve the divider ledger, original registers, input and
-output. For every index below bodySlotCount, RouteAgreement must identify the
+The endpoint preserves the divider ledger, original registers, input and
+output. For every index below bodySlotCount, RouteAgreement identifies the
 canonical body clause/token coordinates or the unique Finish route. The reused
 comparator's accept state means body; its reject state means Finish only under
-that in-range condition. A larger quotient also reaches reject and must not be
-misreported as Finish. fromRaw_workRunExact must include the complete canonical
-initialization at coordinate zero.
+that in-range condition. A larger quotient also reaches reject and is not
+misreported as Finish. fromRaw_workRunExact includes the complete canonical
+initialization at coordinate zero; fromRaw_routeAgreement classifies that actual
+first opportunity rather than skipping it.
 
 If S is the source-derived retained register span, the classifier bridge size
 is at most 4S + 2 and the quotient is at most S. In addition to the already
-verified source-to-divider bound, charge at most
-6(20(4S + 2)^2 + 6(S + 1)^2 + 2) raw transitions for copying, comparison and
-both serial bridges. The raw-input composition also charges initialization and
-its bridge. This remains a phase bound, not the complete-builder runtime.
+verified source-to-divider bound, copying, comparison and both serial bridges
+cost at most 6(20(4S + 2)^2 + 6(S + 1)^2 + 2) raw transitions. The raw-input
+composition also charges initialization and its bridge. This remains a phase
+bound, not the complete-builder runtime.
 
-Prepare the source, generic execution/state/tape/bound contracts, literal body,
-Finish and zero-count runs, an out-of-range non-Finish regression, and all
-public-theorem axiom probes together before the first targeted build. Keep
-the no-project-axiom/no-classical-choice closure requirement. Clause-occupancy
-execution, body-token selection/emission, scratch recovery including blank
-padding, the complete loop and packaged reduction remain downstream. No row,
-weighted checkpoint or gate is awarded, and publication stays deferred.
+The source, complete generic execution/state/tape/bound contracts, literal
+body/Finish/zero-count runs, out-of-range non-Finish regression and complete
+public-theorem probe set were prepared together. The first targeted compile
+found two missing explicit operand-specification rewrites in the route proof.
+Those equalities were added without changing the machine, intended theorem or
+test expectations; the targeted build, regression and axiom phases then passed.
+No unchanged earlier component suite, full core build or site audit was repeated.
+
+Next derive the selected clause-occupancy construction from this actual body
+endpoint. The first quotient is the clause index; the second divisor is
+formulaClauseSlotsPerConstraint, not formulaTokensPerClause. Preserve or copy
+the live quotient and obtain the second divisor from the actual retained source
+registers. Do not replace this handoff by a caller-prepared divider tape, selected
+constraint or semantic occupancy function. Body-token selection/emission,
+scratch recovery including explicit blank padding, the complete loop and
+packaged reduction remain downstream. The initialization-only empty-tail proof
+does not justify discarding later cleared cells. No row, weighted checkpoint
+or gate is awarded, and publication stays deferred. Proof estimate 35%,
+uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5
+remain unchanged.
 
 ## Source and expectation preflight
 
