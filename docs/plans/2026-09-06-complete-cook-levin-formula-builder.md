@@ -1014,8 +1014,9 @@ Keep simplification around large composed machines narrow: name exact frame
 length equalities and unfold only the current wrapper. Unfolding the full frame
 definitions through a composed machine can reach the elaborator's recursion
 limit despite low resource use. Do not raise limits or change the machine to
-solve a normalization problem. Use `List.replicate_succ'` for a prepended unary
-unit and normalize the empty reverse after that orientation is fixed.
+solve a normalization problem. Keep replication orientation explicit:
+`List.replicate_succ` prepends and `List.replicate_succ'` appends. Normalize
+the empty reverse after choosing the required orientation.
 
 Next implement actual region selection, rather than another operand wrapper.
 First inspect the existing arbitrary-coordinate comparator in
@@ -1090,6 +1091,59 @@ Publish/defer: defer. This is a verified component of the unearned M230 builder,
 not a new publication row or weighted checkpoint. The proof estimate remains
 35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates
 0/5. No website, inventory, status or report regeneration is warranted yet.
+
+## Verified source-derived comparison operands
+
+The [operand module](../../lean/PNP/Concrete/CookLevinBuilderRegionComparisonOperands.lean)
+now copies the actual computed coordinate and selected boundary from ordinary
+registers, then executes the protected comparison. For a fixed newer-register
+offset, the input word is
+`older ++ [boundary] ++ newer ++ [coordinate]`. Two existing register-copy
+machines append `[coordinate, boundary]` without changing that original word
+or the arbitrary protected workspace. Their control offsets are fixed, not
+programs selected from input data. Copying alone supports arbitrary exterior
+tails; the composed comparison explicitly starts with an empty exterior tail.
+
+The source-bound entry starts at the existing source cursor and executes the
+complete body assembly once. It proves that the resulting word physically
+contains `constraintIndex` and the shape-region length at the required places,
+then performs both copies and the comparison. Its exact work-machine and
+sixfold compiled raw-machine runs are proved under the existing body guard.
+Acceptance is equivalent to the computed index being below the shape-region
+length; rejection is equivalent to the opposite weak inequality. Original
+registers, source input and accumulated output remain protected.
+
+The cost includes both copy runs, their bridge, the comparison bridge and the
+complete existing comparator. If both operands and the encoded newer-register
+span are bounded by `B`, the two-copy cost is at most `2*Q(3*B+2)+1`, where
+`Q(x) = 4*(x+1)*(x+1)+9*(x+1)+5`. The comparison's established bound is then
+charged in full. The source entry derives both operand bounds from the existing
+encoded-source-span polynomial and the balanced body cursor; its raw polynomial
+also charges the assembly and every bridge. This is not a complete-builder
+runtime theorem.
+
+The [focused regression](../../lean-regression/PNPConcreteCookLevinBuilderRegionComparisonOperands.lean)
+passed all 37 prepared contracts. All 28 public theorem closures passed:
+two are axiom-free, four use only `propext`, and 22 use `propext` and `Quot.sound`.
+No project-specific axiom or `Classical.choice` occurs. Initial elaboration
+corrections only exposed wrapper equalities and used schematic composition
+lemmas; no machine, public statement, regression expectation or resource limit
+was changed. The permanent module was rebuilt before the imported checks.
+The exact successful source and regression hashes are reused for this
+documentation-only integration, without repeating their proof checks.
+
+Next restore the actual comparator tape and continue the general five-region
+dispatcher. Equality must yield zero residual; the greater case must recover
+its extra marked coordinate unit. Both cases currently share the rejecting
+control state, so their tape distinction must be handled by actual rules.
+No selected region or residual-correctness certificate may be supplied.
+Local decoding, clause occupancy, emission, Finish, blank-padding invariants
+and the full loop/reduction remain open.
+
+Publish/defer: defer. M230 and its fixed complete-builder checkpoint remain
+unearned. No publication row, score, gate or public bottom-line transition is
+claimed. Proof estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage:
+205/207; global gates closed: 0/5. No website or generated-report cycle is needed.
 
 ## Source and expectation preflight
 
