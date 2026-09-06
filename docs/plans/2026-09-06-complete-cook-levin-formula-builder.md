@@ -803,12 +803,34 @@ distinct from out-of-range failure. The finite control must depend only on the
 fixed verifier, and its polynomial bound must charge the actual normalization,
 decoding, comparison and dispatch traces.
 
-Before normalization, record an exact live-coordinate invariant. Preserve or
-extract the second remainder and both needed quotient coordinates. Recover the
-token remainder from retained source data with an actual proved construction;
-do not silently discard a needed remainder while recombining consumed markers.
-Later loop cleanup must handle explicit blank padding with a proved invariant
-or transport, not identify cleared cells with a structurally empty outer tail.
+The next physical handoff is
+[coordinate-register restoration](../../lean/PNP/Concrete/CookLevinBuilderDividerCoordinateRegisters.lean),
+with its
+[paired expectations](../../lean-regression/PNPConcreteCookLevinBuilderDividerCoordinateRegisters.lean).
+Its general target is an exact literal run from every mirrored-divider view
+to ordinary registers [sidecarCount, 0, consumed, remainder, width, quotient],
+preserving the source workspace and the outer tail after consuming two blanks.
+The two blank conditions include implicit blanks for an empty tail; later
+explicit padding is tracked by tail.drop 2, not identified with an empty list.
+
+The planned fixed 41-rule machine scans to the remainder boundary, shifts the
+finite prefix left with one carried symbol to insert a genuine separator,
+allocates the new outer end, normalizes marks and rewinds. Neither the quotient
+nor the remainder is recombined or supplied by a caller. The intended exact
+cost is 3 * quotient + 4 * width + 4 * remainder + 2 * consumed +
+2 * sidecarCount + 19 work steps, at most 15S + 19 when the five magnitudes fit S.
+The prepared expectations cover zero/nonzero consumed segments, zero/nonzero
+remainder, distinct quotient/remainder registers, marker-rich preserved
+workspace, implicit and explicit outer blanks, both insufficient-blank failures,
+one-step-short rejection, malformed boundaries, finite control and compiled cost.
+The standalone handoff is not yet a source-bound selector or an earned milestone.
+
+Bind its initial tape to the actual second-divider endpoint next, derive its
+magnitudes and cost bounds from the existing source trace, then use the general
+occupancy interface. Recover the token remainder from retained source data with
+an actual proved construction when emission requires it. Do not silently
+discard a needed remainder while recombining consumed markers. Later loop
+cleanup must retain the same explicit blank-padding invariant.
 
 Prepare the new theorem/type, exact tape, all route-family and padding cases,
 negative handoff, axiom and compiled-cost expectations with the source.
