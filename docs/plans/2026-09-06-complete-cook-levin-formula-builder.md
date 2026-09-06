@@ -504,12 +504,75 @@ unconditional source-derived theorems, not premises added to the machine
 contract or host-side removal of tape cells. No operational program or runtime
 bound changed.
 
-The remaining handoff must still convert the actual copied registers into the
-mirrored divider entry with two protective boundaries and execute the divider.
-Later cleanup must prove its own cursor/tail invariant; the initialization result
+The source-to-divider handoff is discharged by the components below. Later
+cleanup must still prove its own cursor/tail invariant; the initialization result
 does not silently justify dropping blank padding after an arbitrary later run.
 Body selection, emission and the full loop/reduction remain open. No milestone
 row, weighted checkpoint or global gate is earned; keep publication deferred.
+
+### Literal copied-operand divider layout
+
+Implemented in
+[BuilderDividerLayout](../../lean/PNP/Concrete/CookLevinBuilderDividerLayout.lean)
+with its paired
+[regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderDividerLayout.lean).
+An eleven-rule machine scans the appended token width, index and clause count,
+rewrites three copied delimiters, and stops at the reflected dividend's first
+cell. It leaves two protective boundaries, the clause-count sidecar and the
+complete original workspace intact. The generic trace handles zero registers
+and arbitrary preserved inside/exterior tape; malformed boundary slots reject.
+
+The permanent leaf build, all 17 regressions and all nine public-theorem axiom
+probes passed at source commit 6dbeeb23c146bc96f152cc40b2322853c088a768.
+Five closures are axiom-free, one uses only propext and three use only propext
+and Quot.sound. The exact work cost is W + I + 2C + 7. When the three copied
+values are at most S, this is at most 4S + 7. Compilation charges six raw
+transitions per work step. The source and complete expectation/probe set were
+prepared together; the first targeted run passed without fixture corrections.
+
+### Source-derived body-coordinate divider execution
+
+Implemented in
+[BuilderDividerSourceExecution](../../lean/PNP/Concrete/CookLevinBuilderDividerSourceExecution.lean)
+with its paired
+[regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderDividerSourceExecution.lean).
+The exact operand endpoint, the derived empty expansion tail and the converter
+now produce the actual reflected shielded-divider entry. Reuse the existing
+literal divider and generic spatial-reflection theorem; do not create another
+divider or infer a prepared-entry premise. Positivity of the token width is
+derived from the source formula, not supplied by the caller.
+
+The permanent leaf build, all 27 regressions and all 21 public-theorem axiom
+probes passed at source commit 0c936a6c8cc7a817c2f91ec54c22e91b67523d3a.
+One closure is axiom-free, six use only propext and 14 use only propext and
+Quot.sound. No project axiom or classical choice enters either new component.
+The import chain for the reused mirror was rebuilt because its dependency had
+changed; no unchanged complete core suite or PNPLabs verification was repeated.
+
+The general workRunExact connects the source-derived cursor tape to the actual
+quotient I / W and remainder I % W, preserving the count sidecar, original
+registers, input and previously emitted output behind two boundaries.
+fromRaw_workRunExact additionally runs canonical initialization from every raw
+source input and enters body coordinate zero. It does not skip the first body
+slot or claim that the later loop has already been connected.
+
+Under the cursor balance invariant, all three operands are bounded by the
+source-derived polynomial register span S. The divider costs at most
+20(I + W + 1)^2, hence at most 20(2S + 1)^2. In addition to the already verified
+operand-assembly raw bound, conversion, division and both bridges cost at most
+6(4S + 9 + 20(2S + 1)^2) raw transitions. The raw-input theorem also charges the
+complete initialization and its bridge. These are complete phase bounds,
+not yet a runtime theorem for the complete formula builder.
+
+Next connect this actual quotient/remainder endpoint to body/Finish
+classification and the source-derived clause-occupancy decoder. Continue with
+selected body-token construction and emission, scratch recovery including blank
+padding, and the full cursor loop before packaging the reduction. Do not
+substitute a supplied selected clause, request, prepared tape or cleanup
+certificate for any of these physical handoffs. The full-builder checkpoint is
+still open: proof estimate 35%, uncertainty 20% to 40%, formal artefact coverage
+205/207 and global gates 0/5 remain unchanged. Keep PNPLabs publication deferred
+and continue meaningful verified-submilestone notifications.
 
 ## Source and expectation preflight
 
