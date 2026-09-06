@@ -1041,6 +1041,56 @@ Full root/inventory/publication work remains deferred until the intended builder
 interface is complete. Publish/defer: defer. The proof estimate remains 35%,
 uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates 0/5.
 
+## Verified physical register-pair comparison
+
+The [pair-comparison module](../../lean/PNP/Concrete/CookLevinBuilderRegionPairComparison.lean)
+now executes the existing arbitrary-Nat comparator on two disposable ordinary
+unary registers. A five-rule adapter scans the copied boundary and coordinate,
+changes their inner delimiter into the protective boundary, and turns back into
+the pair. Spatial reflection reuses the existing exterior-shielded comparator
+theorem; it does not add another comparison implementation or assume that
+unproved framing holds. The composed literal machine has 68 rules.
+
+The input is the actual ordinary register layout
+`endTape (older ++ [coordinate, boundary]) workspace []`. Its empty outer tape
+is explicit, not an arbitrary-exterior claim. Every older register and every
+arbitrary workspace cell remains behind the boundary. Exact execution accepts
+if and only if `coordinate < boundary`, and rejects if and only if
+`boundary <= coordinate`. Zero operands and equality are covered without extra
+premises. The final tape is exactly the mirrored canonical comparison result:
+the greater branch retains one additional marked coordinate unit, so its
+unmarked remainder is one less than the residual needed for the next region.
+
+The adapter costs `boundary + coordinate + 3` work steps. Composition charges
+one bridge and every step of the existing comparator. For both copied operands
+at most `B`, the full comparison costs at most
+`2*B + 4 + 6*(B+1)*(B+1)` work steps, with exact sixfold raw-machine compilation.
+This is a bound for this physical comparison, not for the complete builder.
+
+The [focused regression](../../lean-regression/PNPConcreteCookLevinBuilderRegionPairComparison.lean)
+checks 31 universal, literal-tape, zero/equality, greater-residual, malformed,
+short-run, framing, control and cost contracts. All 17 public theorem closures
+passed: seven are axiom-free, two use only `propext`, and eight use `propext` and
+`Quot.sound`. No project-specific axiom or `Classical.choice` occurs. Assertions
+were prepared with the source; subsequent corrections changed proof scripts
+and record formatting, not the machine, theorem statements or expected results.
+The permanent module was built before imported regressions and axiom probes.
+Its successful compilation was reused after the regression-format-only edit;
+no unchanged assembly or earlier component suite was repeated.
+
+Next, physically copy the computed coordinate and required region length from
+the assembled source frame into this pair, then restore the comparison result
+and continue through the general five-region dispatcher. Equality must advance
+with residual zero; the greater branch must recover the extra marked unit.
+Neither a selected region nor a residual-correctness certificate may be supplied
+as a premise. Local decoding, occupancy, emission, Finish, explicit blank-padding
+invariants and the complete loop/reduction remain open.
+
+Publish/defer: defer. This is a verified component of the unearned M230 builder,
+not a new publication row or weighted checkpoint. The proof estimate remains
+35%, uncertainty 20% to 40%, formal artefact coverage 205/207 and global gates
+0/5. No website, inventory, status or report regeneration is warranted yet.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
