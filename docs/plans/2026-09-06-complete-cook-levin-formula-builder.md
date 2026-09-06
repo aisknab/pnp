@@ -788,7 +788,7 @@ These are component bounds, not a complete formula-builder runtime theorem.
 Reuse the existing general
 [occupancy contract](../../lean/PNP/Concrete/CookLevinClauseOccupancy.lean) and
 [division interface](../../lean/PNP/Concrete/CookLevinClauseOccupancyDivision.lean).
-The source-bound coordinate theorem should connect
+The verified coordinates_match_schedule theorem connects
 ClauseOccupancy.constraintSlot at the two actual computed coordinates to
 (formulaClauseSchedule[quotient]?).map Option.isSome under the body guard,
 using constraintSlot_div_mod and formulaSlot_eq_schedule. This is semantic
@@ -825,37 +825,74 @@ two use propext only and three use propext and Quot.sound. No project-specific
 axiom or Classical.choice occurs. Syntax and induction-normalization fixes
 did not change the machine, theorem contracts or regression expectations.
 
-### Source-bound coordinate handoff (in progress)
+### Source-bound coordinate handoff (verified component)
 
 [Source](../../lean/PNP/Concrete/CookLevinBuilderClauseCoordinateRegisters.lean) and
-[paired expectations](../../lean-regression/PNPConcreteCookLevinBuilderClauseCoordinateRegisters.lean)
-bind the generic handoff to the actual second-divider endpoint. The intended
-body trace starts at cursorTape, reuses the already-verified body division once,
-and restores the computed constraint/local-clause coordinates. It retains the
-actual body guard quotient < clauseCount; Finish is not silently sent through
-an accept-only serial bridge.
+[paired regressions](../../lean-regression/PNPConcreteCookLevinBuilderClauseCoordinateRegisters.lean)
+are verified at source commit 47e160fba8b4a73c5178e116293f77c570aa6e89,
+tree 3e70feaa5696979e8c94922a7c8d7eacfcd69730.
 
-The intended endpoint is the original retained registers followed by
+The generic handoff is bound to the actual second-divider endpoint. The complete
+guarded body trace starts at cursorTape, computes the body divisions once, and
+restores the actual constraint/local-clause coordinates. Its endpoint is the
+original retained registers followed by
 [clauseCount, 0, index, tokenWidth, quotient, clauseCount, 0,
 constraintIndex * clauseWidth, clauseIndex, clauseWidth, constraintIndex].
-All five normalizer magnitudes must be derived from the source span, not supplied
-as bounds. The resulting register word should fit 9S + 11 cells, with the
-workspace excluded and preserved. The body raw-time bound adds 6(15S + 20) to
-the existing source division bound, charging the serial bridge.
+It requires the actual body guard quotient < clauseCount; this does not claim
+that a rejecting Finish endpoint executes an accept-only bridge.
 
-Reuse constraintSlot_div_mod and formulaSlot_eq_schedule to prove the semantic
-meaning of these actual computed coordinates. That equation does not execute
-formulaConstraintSlotDirect. General physical decoding across shape, initial,
-control, preservation and accepting regions, local clause-count comparison,
-emission, Finish and the complete loop remain open. Recover the token remainder
-from retained source data with an actual proved construction when needed.
+All five normalizer magnitudes are derived from the established source span.
+The restored register word fits 9S + 11 cells, excluding and preserving the
+original source workspace. The complete component raw-time bound is the
+previous source body-division bound plus 6(15S + 20), including the serial bridge.
+The semantic occupancy equation follows from the existing constraintSlot_div_mod
+and formulaSlot_eq_schedule theorems applied to the actual computed coordinates.
+It is not execution of formulaConstraintSlotDirect.
 
-Prepare source projection, exact initial/final tape, guarded work/raw trace,
-canonical occupancy meaning, source magnitude, eleven-register suffix,
-footprint, complete component cost and finite-control expectations with this
-source. Reuse the generic handoff evidence; do not rerun its regressions or the
-unchanged earlier division suite. No publication or weighted credit is earned
-by this component alone.
+The permanent target, all 22 prepared regressions and all 16 public theorem
+axiom probes passed on the first run with terminal zero status. One public
+theorem is axiom-free, five use propext only and ten use propext and Quot.sound.
+No project-specific axiom or Classical.choice occurs. The original expectations
+passed unchanged, covering source projections, exact handoffs, guarded work/raw
+execution, canonical occupancy meaning, source bounds, the eleven-register
+suffix, footprint, runtime and composed finite control. The unchanged generic
+handoff regressions and earlier division suites were not rerun.
+
+### Next: general source-derived constraint-region dispatch
+
+Follow the semantic order in the
+[complete direct decoder](../../lean/PNP/Concrete/CookLevinFormulaCursor.lean):
+shape, initial, control, preservation, accepting. For source-derived time, tape,
+state, fuel and certificate bounds, the ordered region lengths are
+
+1. time * (tape + 2);
+2. 3 + 2 * ((certificate + 1) * tape);
+3. 9 * ((fuel * tape) * states);
+4. 3 * ((fuel * tape) * tape);
+5. 1.
+
+Do not infer this order from the
+[constraint-size polynomial](../../lean/PNP/Concrete/CookLevinFormulaSize.lean).
+Its syntax groups shape, control, preservation, the constant 4, then the
+certificate/tape term. The constant 4 combines the initial three opportunities
+with final acceptance; the whole initial-region length is not an existing
+standalone subtree. Derive its ordered source descriptor, register selections
+and required arithmetic construction explicitly. Prove that the five lengths
+sum to constraintCount, not the different clauseCount sidecar.
+
+Then prove one physical dispatcher theorem for every valid constraint index
+across all five regions. Derive its selected region and local coordinate from
+the source registers; do not supply a region, constraint or correctness
+certificate. Record exact output, workspace/padding, branch and polynomial-cost
+contracts with their tests before compilation. Preserve padded empty cases and
+both verifier input modes. No additional fixed-position fixture substitutes for
+this general dependency edge.
+
+Local constraint decoding and clause-count comparison, literal emission,
+Finish and the complete loop remain open. Recover the token remainder from
+retained source data with an actual proved construction when emission needs it.
+Publish/defer: defer; neither verified handoff alone earns a publication row or
+weighted checkpoint, or materially changes the published bottom line.
 
 
 Prepare the new theorem/type, exact tape, all route-family and padding cases,
