@@ -246,6 +246,52 @@ proofs; implement the genuinely missing general physical list construction.
 Prepare variable-order, zero/boundary, decode, source-linkage, tape-preservation,
 runtime and axiom regressions before the corresponding builds.
 
+### Physical variable-length range construction
+
+Implement one fixed `BuilderRegisterDescendingRange.machine` taking an actual
+written count and exclusive upper index. Its complete output must be the
+descending consecutive list of exactly that many indices, followed by no
+unaccounted duplicate. Its input invariant is `count ≤ upper`, not a supplied
+list, runtime verdict, or control table. The public exact-run theorem must
+quantify over every count, upper value, retained frame and interior tape.
+
+Mark the written counter boundary once. Each loop consumes one physical counter
+unit, decrements the newest working register, copies that fixed-offset register,
+and returns through the same finite control graph. On exhaustion restore the
+entire counter and its delimiter, then erase the redundant newest working copy.
+Prove exact work/raw execution, canonical descending order, all graph bridges,
+preserved retained input, explicit cleared cells, and a polynomial bound for
+the entire growing list and runtime. Bind count and upper to the source-derived
+shape fields afterwards. Counter-control kernels are dependency components,
+not publication rows or completion of this range/list contract.
+
+The fixed control kernels are now verified in
+[`CookLevinBuilderRegisterCountdownControl.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterCountdownControl.lean).
+Eight literal initialization transitions mark the written counter immediately
+before the newest working register. The seventeen-transition consumer scans an
+arbitrarily long newer register word, marks exactly one remaining counter unit
+on its accepting branch, and on exhaustion restores every spent unit and the
+original delimiter before rejecting. Both branches return to the same active
+end marker and preserve arbitrary interior/exterior tape. A two-transition
+decrement physically removes one positive unary unit and leaves its erased cell
+explicitly blank; the zero case cannot pass as a successful decrement.
+
+All 35 prepared regressions and all 17 public-theorem axiom audits passed.
+The audited closures use only `propext`, `Quot.sound`, or no axioms.
+The exact counter traces include zero-length newer words, the last positive
+unit and complete restoration. The scan times are linear in the marked counter
+and actual growing register-word span. Reserved-identifier, record-layout,
+case-pattern and tape-normalization corrections changed no transition table,
+execution statement or regression expectation.
+
+Next compose these kernels with the unchanged newest-register copier and final
+eraser in one fixed five-node graph. Prove the entire countdown by induction on
+the physically represented remaining count, including every back-edge and the
+final duplicate erasure. Then establish the exact descending list and aggregate
+polynomial source-size bounds before binding it to the complete shape family.
+The control-kernel evidence is not evidence that this loop already exists.
+M230 remains open, and no publication row or weighted checkpoint changes.
+
 ## Implementation phases
 
 1. **Reuse audit and physical selection.** Locate and reuse existing general
