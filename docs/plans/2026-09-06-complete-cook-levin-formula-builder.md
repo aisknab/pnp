@@ -1585,39 +1585,111 @@ fixed those scripts without changing the machine, theorem statements or
 prepared assertions, and without increasing resource or heartbeat limits.
 No unchanged broad core or website suite was repeated.
 
-## Next implementation: canonical local constraint payloads
+## Representation contract: canonical local constraint payloads
 
-Use the physically written regional coordinates to construct the canonical
-local-constraint data needed by clause occupancy and literal selection.
-The authoritative interfaces are the existing
-`VerifierTableauProblem.shapeConstraintSlotDirect`,
-`initialConstraintSlotDirect`, `controlConstraintSlotDirect`,
-`preservationConstraintSlotDirect` and the accepting singleton, composed by
-`BuilderConstraintRegionSource.slotForCoordinate`.
-Its checked `slotForCoordinate_eq` identifies the exact
-`problem.formulaConstraintSlotDirect` specification.
+The next dependency edge of the same legacy SAT-transport / complete
+Cook-Levin construction is an unambiguous payload that the physical regional
+constructors will write. Define that interface before building the writer.
 
-Define the executable register/payload representation before implementation,
-and prove that decoding what the machine actually writes equals that existing
-canonical local constraint at `constraintIndex problem index`.
-Preserve both option layers: an absent coordinate is not an in-range padded
-empty constraint. Derive all widths, literal indices, transition choices and
-mode-dependent input symbols from the source/verified physical frame.
-Do not supply a constraint, input answer, branch verdict, result map or
-correctness certificate, and do not call the semantic direct decoder at
-runtime. Reuse branch control and arithmetic evidence without rerunning the
-original source assembly.
+Use delimiter-separated unary registers, in reversed reader order so the
+finite tag is nearest the active end marker. Reader-order forms are:
 
-Cover the unbounded families: shape rows, initial state/head and input-only
-or paired symbol opportunities, control transitions, preservation positions
-including padded diagonal cases, and the final accepting requirement.
-A fixed row, transition, token or input fixture cannot replace that general
-interface. Initial and accepting empty radix lists alone do not implement
-their constraints. Check literal/payload size and full execution costs,
-including input-dependent reads, before using the result in the loop.
+- `[0]`: absent coordinate.
+- `[1]`: an in-range padded empty constraint.
+- `[2, sign, index]`: required literal.
+- `[3, count, conclusionSign, conclusionIndex, premiseSign, premiseIndex, ...]`:
+  implication, preserving the ordered list of all premises.
+- `[4, count, variableIndex, ...]`: exactly-one constraint, preserving the
+  ordered list of all variables.
 
-The existing `ClauseOccupancy.localSlot`, `paddedSlot` and `blockSlot`
-remain semantic specifications, not executed occupancy tests. Physical clause
+Signs are exactly zero or one, indices must be strictly below the canonical
+formula width, and list counts must match the entire payload. Reject unknown
+tags, missing fields, trailing fields, odd literal pairs and invalid members.
+Parse failure is a separate outer option, not either kind of empty slot.
+
+The universal contract is `decode width (values slot) = some slot` for
+every `Option (Option (LocalConstraint width))`, with injectivity, tag
+placement and unary-space bounds. The source-specialized specification must
+decode to `problem.formulaConstraintSlotDirect coordinate` at every
+coordinate and agree with `BuilderConstraintRegionSource.slotForCoordinate`.
+Derive its list-size premise from the existing canonical schedule theorem,
+not from a caller-supplied size or correctness certificate. Bound the actual
+unary register word, not just the number of registers, by one polynomial
+in encoded source size.
+
+Prepare source and regressions together: every constructor, arbitrary
+literal/variable lists, exact signed/list order, both option layers, hostile
+tags/signs/counts/widths, source equality and space bounds. Build only the
+new permanent module, then audit every public theorem closure and run the
+focused regression. Unchanged source-routing, root and website suites do not
+establish a new boundary here. Root/inventory/publication registration waits
+for the complete M230 capability.
+
+This interface is not physical construction. In particular,
+`canonicalValues` is an endpoint specification only, never an executable
+call to the host-side semantic decoder. A successful codec/space theorem
+does not prove the writer's runtime or earn the complete-builder checkpoint.
+
+## Verified interface: canonical local constraint payloads
+
+[CookLevinBuilderLocalConstraintPayload.lean](../../lean/PNP/Concrete/CookLevinBuilderLocalConstraintPayload.lean)
+establishes the universal representation and size contract for the next
+physical writer. The parser preserves both slot option layers, and its
+separate outer result distinguishes malformed data from an absent or padded
+opportunity. Exact signs, indices, list order and list counts survive the
+roundtrip. Injectivity prevents two different constraints or slot states
+from sharing a payload.
+
+The tag is proved to be the final logical register, nearest the active
+end marker. For a canonical variable bound `B`, the representation has
+at most `2 * B + 10` registers, each at most `2 * B + 4`. Consequently
+the complete delimiter-separated unary word has at most
+`(2 * B + 10) * (2 * B + 5)` cells. The source-specialized theorem
+derives `B` and constraint boundedness from the existing canonical
+formula schedule and gives one polynomial in encoded input length for
+every constraint coordinate. It does not take a supplied size certificate.
+
+All 52 prepared [regression examples](../../lean-regression/PNPConcreteCookLevinBuilderLocalConstraintPayload.lean)
+pass on their first execution. Besides the universal roundtrips and bounds,
+they independently check signed/order fixtures and reject unknown tags,
+extra or missing fields, invalid signs, odd literal pairs, inconsistent
+counts and out-of-width indices. All 20 public theorem closures pass:
+one is axiom-free, four use only `propext`, and fifteen use
+`propext` with `Quot.sound`. None uses a project-specific axiom,
+`Classical.choice` or `sorryAx`.
+
+Two earlier source attempts exposed a reserved binder name and explicit
+option reduction, map-argument and list-membership grouping issues. The
+corrections preserved the representation, parser behavior, mathematical
+statements and all prepared regression expectations. The successful
+permanent target, complete public closure audit and regression run reached
+a terminal zero result. No unchanged broad core or website suite was repeated.
+
+This remains an interface, not a physical writer. `canonicalValues`
+specifies the required result using the semantic slot definition; no finite
+machine is permitted to call that semantic function at runtime. Constructing
+and timing that result from the actual source/radix frame remains the next
+obligation, with no score, row or full-builder credit for this interface.
+
+## Next implementation: physical canonical constraint construction
+
+Construct the payload from the physically written regional coordinates and
+actual source. Preserve the canonical shape, initial, control, preservation
+and accepting constraints and both option layers. Derive all widths, literal
+indices, transition choices and mode-dependent input symbols from the
+verified frame; do not supply a constraint, input answer, branch verdict,
+result map or correctness certificate. Reuse actual branch control without
+rerunning the original source assembly.
+
+Cover the unbounded families, including input-only and paired initial symbol
+opportunities and padded preservation diagonals. Initial and accepting empty
+radix lists do not construct their constraints. The source frame places input
+before the right marker, tally and prior output: a bounded source reader must
+stop at that marker and preserve output, not charge an arbitrary output prefix
+as automatically source-size bounded.
+
+The physical writer must prove that decoding what it actually writes equals
+the canonical slot, with its complete execution cost. Physical clause
 occupancy, token emission, scratch recovery, Finish, explicitly cleared padding
 and the complete loop/packaged reduction remain downstream obligations.
 
