@@ -2435,3 +2435,100 @@ PCCMin exactness and total polynomial/certificate bounds, deterministic CNFSAT
 membership in P, required final model linkage and the exact eligible root theorem
 remain separate obligations. Publication stays fail-closed until its own exact
 root/type/fingerprint/axiom requirements pass.
+
+### Control-family implementation contracts
+
+The active transition work retains the canonical three-premise implication and
+all three conclusions. The coordinate contract covers every transition step,
+tape position, verifier state, read symbol and conclusion slot, not a finite
+fixture. The runtime action is the fixed verifier's actual `localAction`:
+halting states and missing rules stutter, left motion saturates at zero, and
+right motion stays put at the final tape cell.
+
+Compile the finite action table from the verifier alone. Its runtime selector
+must read the actual source-derived state/symbol index, preserve the original
+register frame and both tape tails, and write the selected action fields without
+a supplied lookup answer. Empty or out-of-range lookups must reject with an
+unchanged tape. A fixed table is allowed here because the verifier, not the
+source input, determines its entire state space; the input-dependent formula,
+positions and time coordinates must never be compiled into a control table.
+
+Prepare universal coordinate, payload-order/decoder, action-selection,
+wrong-index rejection, exterior-preservation, exact-run and polynomial-bound
+regressions alongside their producers. Audit the complete new public theorem
+interfaces. Reuse unchanged dependency evidence; no existing publication or
+inventory producer changes until the full M230 integration. The final control
+payload, movement calculation, clause emitter, loop and packaged reduction
+remain required even after the coordinate and action-selection components pass.
+
+### Verified control coordinates and physical source-derived actions
+
+The complete control rectangle is now reconstructed in
+[`CookLevinBuilderControlCoordinates.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlCoordinates.lean).
+Every valid step, position, verifier state, read symbol and one of the three
+conclusions maps to the unchanged canonical direct slot. The written radix
+packet determines all five coordinates. The payload specification has the
+original three premises in their exact order and signs, the selected canonical
+conclusion, and the existing implication tag; its decoder returns that slot.
+
+[`CookLevinBuilderRegisterTable.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterTable.lean)
+compiles an arbitrary fixed finite table. A physical unary test selects each
+row; a match writes its constants, and failure proceeds to the next fixed key.
+The exact run covers every actual key, including an empty table, an empty
+successful row, a key below the first entry and an oversized key. Rejection
+leaves the entire tape unchanged; successful allocation drops exactly the
+selected register-word span from the exterior. The complete lookup has a
+fixed-table runtime ceiling and an output-span polynomial. It is not permission
+to generate an input-sized table as finite program syntax.
+
+[`CookLevinBuilderControlActionSource.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlActionSource.lean)
+binds that compiler to the actual verifier. `rowValues_input_independent`
+proves that the empty-input carrier used to construct the finite table has
+the same action fields as every source input. Its proof covers halting-state
+stuttering, missing-rule stuttering and the actual selected rule; the carrier
+is not a restriction to an empty-input fixture.
+
+The source expression reads the state and read-symbol radix fields and writes
+`[state, 3, state * 3, symbol, state * 3 + symbol]`. The fixed lookup then
+writes target state, write-symbol code and movement code. The complete machine
+depends only on the verifier. Its exact work/raw execution requires the actual
+control-region premise, not a supplied state, action, verdict or payload.
+The original source/radix frame and arbitrary interior are retained; the final
+exterior drops precisely the key-expression span plus the selected action span.
+Encoded-input polynomial bounds cover expression work, the entire lookup,
+their chain bridge and the complete retained output.
+
+The three components passed 93 regression contracts: 33 coordinate, 31 fixed
+lookup and 29 source-action checks. All 50 public-theorem axiom audits passed:
+six closures use no axioms, four use only `propext`, and forty use only
+`propext` and `Quot.sound`. No project-specific axiom or
+`Classical.choice` occurs. Proof-script fixes resolved scalar reassociation,
+endpoint/conditional normalization and elimination of proof-indexed transition
+matches without changing the finite machines or intended theorem statements.
+Two fixture notation fixes narrowed imported names and normalized a true
+conditional; no expected execution result or mathematical assertion changed.
+Successful unchanged build and axiom phases were reused, including the fixed
+table's build after its regression-only import correction.
+
+### Next control-family dependency
+
+Use the derived action fields to compute the canonical moved position
+physically. Prove the complete stay/left/right dispatcher for every position,
+including saturated subtraction at zero and a right move at the last tape
+cell. The code must read the written movement code; neither the branch nor the
+moved position may be supplied as a runtime answer.
+
+Then derive next time and all four literal indices from the same source/action
+frame, select the actual conclusion digit, and assemble the complete three-
+premise implication payload. Preserve one fixed register-count interface and
+account for every cleared or allocated exterior cell across all branches.
+Prepare generic boundary, literal-order, source-link, exact-run and polynomial-
+bound regressions before compilation. The existing `movePosition` and
+`controlConstraints` remain the canonical specification.
+
+M230 and `reductions-complete-cook-levin-builder` remain open. The complete
+control payload, initial and accepting families, canonical clause emission,
+full physical successor, main loop and packaged reduction are still required.
+No publication row or weighted checkpoint was earned by these components.
+PNPLabs publication remains deferred; the published M229 coordinate and all
+progress values remain unchanged.
