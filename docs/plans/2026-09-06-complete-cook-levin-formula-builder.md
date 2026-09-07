@@ -176,17 +176,75 @@ polynomial bound in operand magnitude. Reuse this exact component evidence by
 digest. These bounds still need composition with the encoded-source field bounds
 at the preservation entry; this paragraph does not award full-builder credit.
 
-Next, physically copy the written head/other-position fields, execute the
-verified equality/cleanup graph, and choose the one-register padding payload
-exactly when the positions are equal. The off-diagonal branch must execute the
-verified implication machine. Prove the combined source-derived runtime,
-canonical payload, preserved frame and encoded-source polynomial bounds.
-Semantic equality may specify the result but must not act as a runtime oracle.
+The complete source-bound preservation payload kernel is now verified in
+[`CookLevinBuilderPreservationPayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderPreservationPayload.lean).
+Its fixed four-node graph physically copies the two written position fields,
+runs the equality/erasure kernel, and executes literal padding on the diagonal
+or the canonical implication constructor off it. Neither the program nor its
+initial tape accepts a supplied constraint, equality verdict or literal index.
+The all-coordinate work/raw theorem charges the pair copy, comparison, selected
+branch and every graph bridge. The final payload equals the unchanged direct
+preservation slot and decodes exactly, while preserving the source frame and
+arbitrary interior data. Its encoded-source polynomial bounds include both the
+final register word and the explicitly cleared exterior cells.
 
-This integration is not yet complete. Runtime diagonal dispatch, other canonical
-families, clause occupancy/emission, recovery, Finish, the full loop and the
-packaged polynomial reduction remain required. No publication row or weighted
-checkpoint changes during these components.
+All 41 prepared regressions passed, including both unequal cases, zero-but-less,
+padding versus absence, canonical decoding and exact tape accounting. All 19
+public theorem closures use only `propext` and `Quot.sound`. A dependency
+probe isolated an implicit `Classical.propDecidable` helper in a conjunction
+bound; splitting that goal into two arithmetic proofs removed it without
+changing any theorem statement, machine or regression assertion. Two padding
+assertions needed explicit formula-width annotations, not weaker expectations.
+The successful source build and axiom phases were reused by immutable source
+identity for the final regression-only check.
+
+This completes the preservation payload boundary, not M230. Other canonical
+families, family dispatch, clause occupancy/emission, recovery, Finish, the full
+loop and the packaged polynomial reduction remain required. No publication row
+or fixed weighted checkpoint changes. PNPLabs publication remains deferred.
+
+## Next general shape-family integration
+
+The next load-bearing edge is the complete one-hot row-shape payload family,
+using `shapeConstraintSlotDirect` in
+[`CookLevinFormulaCursor.lean`](../../lean/PNP/Concrete/CookLevinFormulaCursor.lean)
+and the unchanged `rowShapeProgram` in
+[`CookLevinTableauCNF.lean`](../../lean/PNP/Concrete/CookLevinTableauCNF.lean).
+It inherits the same pinned manuscript and final complexity-transport anchor.
+This family exposes the remaining variable-length payload construction, rather
+than another fixed schedule position.
+
+For every source-selected shape coordinate, decode the written row quotient and
+the radix-`(tapeWidth + 2)` digit. Preserve canonical row order: all
+`tapeWidth` symbol-shape constraints first, then the one head-shape constraint
+and one state-shape constraint. Materialize the complete `exactlyOne` variable
+list from the written source fields. The head list has source-dependent width;
+the state list covers every finite state; each symbol list has the canonical
+three symbols. The payload must use the existing reversed
+`[4, variableCount] ++ variableIndices` format.
+
+The intended source-bound payload contract is:
+
+```lean
+theorem BuilderShapePayload.payload_canonical
+    {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining : Nat)
+    (hRegion : BuilderConstraintRegionSource.selectedRegion problem index = some .shape) :
+    BuilderShapePayload.payloadValues problem index remaining =
+      BuilderLocalConstraintPayload.values
+        (problem.shapeConstraintSlotDirect
+          (BuilderConstraintRegionSource.localCoordinate problem index .shape))
+```
+
+This target must accompany exact work/raw execution of one finite
+`BuilderShapePayload.machine verifier`, no source-input-dependent control
+table, exact retained-frame handoffs, and polynomial bounds in encoded source
+size for the complete variable list, scratch and execution. A semantic list,
+host-generated index array, supplied length/verdict, or a sequence of fixed
+widths does not close it. Reuse existing canonical semantics and arithmetic
+proofs; implement the genuinely missing general physical list construction.
+Prepare variable-order, zero/boundary, decode, source-linkage, tape-preservation,
+runtime and axiom regressions before the corresponding builds.
 
 ## Implementation phases
 
