@@ -1241,21 +1241,83 @@ decidability proof when negating a conjunction: explicitly constructing each
 conjunct in the two arithmetic helpers removed the dependency. The final audit
 ran before the final regression pass. No broad core or site suite was repeated.
 
-## Next implementation: source-bound complete region dispatch
+## Verified component: source-derived residual selection
 
-Compose the existing fixed-offset operand preparation with this complete
-selection graph. Prove the general ordinary-register interface first, then bind
-the actual source assembly once; do not rerun source assembly for each comparison
-or supply a residual value. Instantiate the charged bound with the already
-derived source-span polynomial, including preparation and every bridge.
+[`BuilderRegionResidualOperands`](../../lean/PNP/Concrete/CookLevinBuilderRegionResidualOperands.lean)
+now composes the two actual register-copy operations with the complete residual
+selector. For each fixed offset, the input word is
+`older ++ [boundary] ++ newer ++ [coordinate]`, where `newer.length = offset`.
+The resulting machine has `9*offset + 818` rules, distinct rule queries and no
+rules at either halting state. All offsets and program tables are independent of
+input values; neither a verdict nor a residual certificate is supplied.
 
-Use the preserved original region-length frame and returned latest coordinate to
-continue the complete five-region dispatcher. Derive every fixed register offset
-from that layout, including the four scratch registers appended by each previous
-comparison; do not add another fixed-slot milestone or supplied selected region.
-The full dispatcher must handle zero lengths, equality, selection and rejection
-from actual runs. Local decoding, clause occupancy, emission, Finish, explicit
-cleared blank-padding and the complete loop/reduction remain downstream.
+For arbitrary natural operands and protected workspace, the exact run preserves
+that complete original frame and appends four ordinary scratch registers.
+The last register equals the original coordinate when it is below the boundary,
+and its natural subtraction by the boundary otherwise. Acceptance and rejection
+are equivalent to those respective inequalities. The returned coordinate never
+increases, and the scratch registers' unary length-plus-sum is at most
+`4 + 4*B` when both operands are bounded by `B`. This also bounds data that
+later region-copy operations must traverse.
+
+The source entry starts at the actual builder cursor, executes
+`BuilderConstraintRegionAssembly.bodyMachine` once, and then runs preparation
+and residual selection for the shape-region boundary. It reuses the existing
+body guard for the exact execution theorem. The balanced cursor supplies the
+encoded-source-span bounds; the complete builder loop must still establish
+these physical invariants for every source input.
+
+Writing `Q(x) = 4*(x+1)*(x+1)+9*(x+1)+5` and `S(B)` for the preceding
+selector's proved work bound, the general work bound is
+`2*Q(3*B+2)+2+S(B)`. This charges both copies and all bridges as well as
+comparison, restoration, copy and increment. The raw run costs exactly six
+times the work steps. The source polynomial additionally charges the complete
+assembly and its bridge, without executing the assembly a second time.
+
+The [paired regression](../../lean-regression/PNPConcreteCookLevinBuilderRegionResidualOperands.lean)
+passes all 50 contracts. All 31 public-declaration axiom closures pass: four are
+axiom-free, six use only `propext`, and 21 use only `propext` and
+`Quot.sound`. No project-specific axiom or `Classical.choice` occurs.
+Coverage includes general work/raw execution, actual final tape and coordinate,
+both outcomes, protected registers/workspace, zero/equal/less/greater runs,
+nonzero offsets, wrong offsets, short/overrun and malformed staging, control
+separation and source-encoded runtime and scratch bounds.
+
+Initial compilation exposed a namespace qualification error; qualifying the
+namespace and reusing the already proved tape projection resolved it without
+changing the machine or theorem statements. One negative fixture had assumed
+that a total symbol table stopped before taking its explicit malformed-input
+transition. Inspection of `separatorSpecs` and `deadAction` showed that the
+first step preserves the tape and enters the copier's dead state; the second
+step has no rule. The corrected regression asserts both facts. All valid-input
+outputs and exact costs remained unchanged. The successful source build and
+axiom evidence were byte-bound and reused for that regression-only correction.
+The terminal verification result is successful; no broad core or site suite
+was repeated.
+
+## Next implementation: complete five-region dispatch
+
+Use the preserved source-derived frame
+`[1, preservation, control, initial, shape, coordinate]` and the returned
+latest coordinate to build the complete five-region dispatcher. Derive fixed
+offsets from the actual appended register lists: each failed comparison keeps
+the old coordinate and appends four scratch registers. The expected offsets
+are zero, five, ten, fifteen and twenty; prove these layout equalities before
+using them in execution or runtime arguments.
+
+Preserve which region was selected. A shared accepting state alone loses that
+information. Prefer connecting each successful branch directly to its own
+decoder continuation; if the component returns a common endpoint instead,
+write its finite region tag by actual literal rules, not by supplying an
+external classification. The existing delimiter and increment machines can
+write such tags without inspecting a certificate or rerunning source assembly.
+
+Charge the intermediate scratch spans with the new bound and use the
+non-increasing residual theorem for successive comparisons. The source entry
+must assemble once and enter the whole fixed dispatcher. Handle zero lengths,
+equality, every selected region and the out-of-range rejection by actual runs.
+Local decoding, clause occupancy, emission, Finish, explicitly cleared padding
+and the complete loop/reduction remain necessary downstream obligations.
 
 This continues the same canonical formula construction. M230 and its fixed
 complete-builder checkpoint remain unearned; publication is deferred. Proof
