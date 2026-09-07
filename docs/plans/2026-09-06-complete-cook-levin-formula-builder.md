@@ -1880,6 +1880,115 @@ Risk-weighted proof completion estimate: 35%; uncertainty: 20% to 40%;
 formal artefact coverage: 205/207; global gates closed: 0/5.
 No publication row or score was added; PNPLabs publication remains deferred.
 
+## Source-derived literal argument construction contract
+
+Continue the same pinned Final SAT decision / Accepted package implies P=NP
+dependency: literal indices must be computed from the builder's actual written
+data before the canonical constraint and formula can be emitted.
+
+The next physical component must pack a fixed list of constant/register
+references without reevaluating source polynomials. Compile the list using the
+proved one-register constant/argument cases of the expression compiler.
+Its universal `BuilderRegisterPack.workRunExact` endpoint must preserve the
+original environment, retained registers and arbitrary inside/exterior data,
+append exactly the selected values, and charge every copy and chain join.
+Prepare order-sensitive literal executions, repeated references, constants,
+zero/empty cases, preserved scratch and complete time/space expectations with
+the source before testing.
+
+Then bind fixed argument references to the actual
+`BuilderRegionRadixSource.finalValues` frame. Source dimensions come from
+structural addresses in the already evaluated clause-count polynomial.
+Certificate width is zero for input-only mode and the copied certificate bound
+for paired mode. Regional digits come from their six-register result packets;
+the final quotient and any retained loop-counter registers must also have
+proved physical addresses. The source-frame length and all offsets depend
+only on the verifier, branch schema and structural register counts.
+
+A fixed eight-reference plan must physically append its eight derived values
+and compose with the selected fixed literal-index expression. The intended
+`BuilderLiteralArgumentSource.workRunExact` and raw refinement start from
+the existing radix frame plus retained registers; neither an environment nor
+a supplied literal answer is an endpoint premise. Prove source-size bounds
+from the existing radix-span theorem and the actual retained-context bound.
+The plan is finite program syntax, not a runtime decoder or a correctness
+certificate.
+
+This closes argument materialization, not canonical branch selection. The
+complete writer must still derive the required plans and counters for every
+canonical constraint family, wire the branch continuation into the existing
+uniform graph, and prove the exact decoded payload. Initial input requests,
+bounded family iteration, transition selection, occupancy/emission, scratch
+recovery, Finish, cleared padding and the full loop/reduction remain open.
+Do not award a row, weighted point or M230 merely for this component.
+
+Run changed leaves and their axiom probes before focused regressions; reuse
+the unchanged arithmetic/expression/radix evidence. Reconcile root, inventory
+and publication contracts only at the complete M230 integration boundary.
+PNPLabs publication remains deferred; the coherent M229 snapshot is unchanged.
+
+## Verified: source-derived argument packing and literal execution
+
+[The fixed register packer](../../lean/PNP/Concrete/CookLevinBuilderRegisterPack.lean)
+now compiles constant/register references into consecutive fields using the
+existing one-register expression cases. It preserves the complete original
+environment, retained registers and arbitrary inside/exterior data. Its exact
+work/raw endpoints account for every copy, constant write and chain handoff,
+including the final identity endpoint. The polynomial bounds cover both the
+complete execution and the surviving unary register span.
+
+[The source-bound argument constructor](../../lean/PNP/Concrete/CookLevinBuilderLiteralArgumentSource.lean)
+connects that packer to the actual
+`BuilderRegionRadixSource.finalValues` frame. Structural source addresses
+select time count, tape width, state count, certificate bound and fuel from
+the already evaluated clause-count polynomial. Certificate width is written
+as zero in input-only mode and copied in paired mode. Regional digits are
+read from the proper six-field division packets; the final quotient and
+retained counter references have separate proved physical addresses.
+
+The eight-field output always begins with the actual `T, W, S, C).
+A fixed plan contains only four coordinate references and cannot replace those
+source dimensions. Its references may select existing source fields, packet
+digits, the final quotient, retained registers or fixed syntax constants.
+`environment_values` and `field_eval` prove that these references read the
+actual written frame. `pack_workRunExact` appends the eight derived values;
+`workRunExact` and `run_compile_exact` then execute the selected literal
+expression from that physical endpoint. No environment or literal answer is
+supplied as an execution premise. `final_index_register` identifies the
+last written result, and `source_polynomial_bounds` includes packing plus
+the literal computation and their join. It derives the source-frame bound
+from the existing radix theorem and retains the actual counter-span bound
+as an explicit caller obligation.
+
+All
+[35 packer regressions](../../lean-regression/PNPConcreteCookLevinBuilderRegisterPack.lean)
+and
+[52 source-binding regressions](../../lean-regression/PNPConcreteCookLevinBuilderLiteralArgumentSource.lean)
+passed. The packer's ten and constructor's eighteen public theorem closures
+use at most `propext` and `Quot.sound`, with no project-specific axiom or
+`Classical.choice`. The original prepared assertions cover both certificate
+modes, control/preservation packet order, empty-radix branches, retained
+counters, exact physical endpoints and complete bounds. A reserved binder
+and an unspecified rewrite input needed elaboration corrections; no machine,
+theorem statement or regression assertion was weakened. Existing green
+arithmetic, expression, packer and literal-index evidence was reused by
+exact source/test digests, with changed imports rebuilt before axiom probes.
+
+This does not establish that every chosen plan is a valid canonical request.
+The complete writer must derive the required coordinate plans and bounded
+counters for every canonical family, prove their type/range and layout-index
+linkage, and wire these continuations into the existing uniform branch graph.
+Initial source-index derivation, transition selection, exact payload assembly,
+occupancy/emission, scratch recovery, Finish, cleared padding and the complete
+formula loop/reduction remain open. The four-reference plan is finite program
+syntax, never a caller-supplied correctness certificate.
+
+M230 and `reductions-complete-cook-levin-builder` remain unearned.
+Risk-weighted proof completion estimate: 35%; uncertainty: 20% to 40%;
+formal artefact coverage: 205/207; global gates closed: 0/5.
+No publication row or score was added. PNPLabs publication remains deferred
+until the complete capability changes the public bottom line.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
