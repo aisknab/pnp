@@ -7074,6 +7074,263 @@ theorem steps_le (newer : List Nat) (sourceValue bound : Nat)
 
 end RegisterCopy
 
+/-! ### Preserved-register constants and binary arithmetic
+
+These interfaces expose the evaluator's already-proved literal phases for
+runtime coordinate arithmetic. Values are read from the existing registers;
+only the operator and number of intervening registers determine binary control.
+A constant is part of the fixed program, not an input-dependent supplied result.
+All inside cells and retained operands survive; the appended register consumes
+its exact unary span from the exterior tail.
+-/
+
+namespace RegisterConstant
+
+def stateCount (value : Nat) : Nat := constantOperationStateCount value
+
+private def stateSpecs (value : Nat) : List StateSpec :=
+  constantOperationSpecs value 0 (stateCount value) (stateCount value + 1)
+
+private theorem stateSpecs_length (value : Nat) :
+    (stateSpecs value).length = stateCount value := by
+  exact constantOperationSpecs_length _ _ _ _
+
+def machine (value : Nat) : WorkMachine := closedSpecMachine (stateSpecs value)
+
+def steps (value : Nat) : Nat := 2 + 2 * value
+
+theorem rules_length (value : Nat) :
+    (machine value).rules.length = 9 * stateCount value := by
+  change (rulesFrom 0 (stateSpecs value)).length = _
+  rw [rulesFrom_length, stateSpecs_length]
+
+theorem rules_pairwise_query_distinct (value : Nat) :
+    (machine value).rules.Pairwise (fun left right => (left.sourceState, left.readSymbol) ≠ (right.sourceState, right.readSymbol)) :=
+  rulesFrom_pairwise_query_distinct 0 (stateSpecs value)
+
+theorem rule_source_lt_acceptState (value : Nat) (rule : WorkRule)
+    (hMem : rule ∈ (machine value).rules) :
+    rule.sourceState < (machine value).acceptState := by
+  have h := rulesFrom_source_bounds (base := 0) (specs := stateSpecs value) (rule := rule) hMem
+  simpa only [machine, closedSpecMachine, specMachine, Nat.zero_add] using h.2
+
+theorem machine_acceptState (value : Nat) :
+    (machine value).acceptState = stateCount value := stateSpecs_length value
+
+theorem machine_rejectState (value : Nat) :
+    (machine value).rejectState = stateCount value + 1 := by
+  change (stateSpecs value).length + 1 = _
+  rw [stateSpecs_length]
+
+theorem machine_acceptState_ne_rejectState (value : Nat) :
+    (machine value).acceptState ≠ (machine value).rejectState := by
+  rw [machine_acceptState, machine_rejectState]
+  omega
+
+def initialConfiguration (value : Nat) (existing : List Nat)
+    (inside outsideTail : List WorkSymbol) : WorkConfiguration :=
+  endConfiguration 0 outsideTail (registerWord existing) inside
+
+def finalConfiguration (value : Nat) (existing : List Nat)
+    (inside outsideTail : List WorkSymbol) : WorkConfiguration :=
+  endConfiguration (stateCount value) (outsideTail.drop (value + 1))
+    (registerWord (existing ++ [value])) inside
+
+theorem workRunExact (value : Nat) (existing : List Nat)
+    (inside outsideTail : List WorkSymbol) :
+    workRunExact? (machine value) (steps value)
+      (initialConfiguration value existing inside outsideTail) =
+      some (finalConfiguration value existing inside outsideTail) := by
+  have h := constantOperation_exact value 0 (stateCount value) (stateCount value + 1)
+    [] [] outsideTail (registerWord existing) inside rfl (by
+      simp only [stateCount, Nat.zero_add])
+  simpa only [machine, stateSpecs, steps, initialConfiguration, finalConfiguration,
+    appendManyStateCount, List.nil_append, List.append_nil,
+    registerWord_append, registerWord] using h
+
+theorem run_compile_exact (value : Nat) (existing : List Nat)
+    (inside outsideTail : List WorkSymbol) :
+    run (compileWorkMachine (machine value)) (6 * steps value)
+      (encodeWorkConfiguration (initialConfiguration value existing inside outsideTail)) =
+      encodeWorkConfiguration (finalConfiguration value existing inside outsideTail) :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _ (workRunExact value existing inside outsideTail)
+
+end RegisterConstant
+
+namespace RegisterBinary
+
+inductive Operator where
+  | add | mul
+  deriving DecidableEq, Repr
+
+def value : Operator → Nat → Nat → Nat
+  | .add, left, right => left + right
+  | .mul, left, right => left * right
+
+def stateCount : Operator → Nat → Nat
+  | .add, betweenCount => addOperationStateCount (betweenCount + 1)
+  | .mul, betweenCount => mulOperationStateCount (betweenCount + 1)
+
+private def stateSpecs (operator : Operator) (betweenCount : Nat) : List StateSpec :=
+  match operator with
+  | .add => addOperationSpecs (betweenCount + 1) 0
+      (stateCount operator betweenCount) (stateCount operator betweenCount + 1)
+  | .mul => mulOperationSpecs (betweenCount + 1) 0
+      (stateCount operator betweenCount) (stateCount operator betweenCount + 1)
+
+private theorem stateSpecs_length (operator : Operator) (betweenCount : Nat) :
+    (stateSpecs operator betweenCount).length = stateCount operator betweenCount := by
+  cases operator <;> simp only [stateSpecs, addOperationSpecs_length, mulOperationSpecs_length, stateCount]
+
+def machine (operator : Operator) (betweenCount : Nat) : WorkMachine :=
+  closedSpecMachine (stateSpecs operator betweenCount)
+
+theorem rules_length (operator : Operator) (betweenCount : Nat) :
+    (machine operator betweenCount).rules.length = 9 * stateCount operator betweenCount := by
+  change (rulesFrom 0 (stateSpecs operator betweenCount)).length = _
+  rw [rulesFrom_length, stateSpecs_length]
+
+theorem rules_pairwise_query_distinct (operator : Operator) (betweenCount : Nat) :
+    (machine operator betweenCount).rules.Pairwise (fun left right => (left.sourceState, left.readSymbol) ≠ (right.sourceState, right.readSymbol)) :=
+  rulesFrom_pairwise_query_distinct 0 (stateSpecs operator betweenCount)
+
+theorem rule_source_lt_acceptState (operator : Operator) (betweenCount : Nat) (rule : WorkRule)
+    (hMem : rule ∈ (machine operator betweenCount).rules) :
+    rule.sourceState < (machine operator betweenCount).acceptState := by
+  have h := rulesFrom_source_bounds (base := 0) (specs := stateSpecs operator betweenCount)
+    (rule := rule) hMem
+  simpa only [machine, closedSpecMachine, specMachine, Nat.zero_add] using h.2
+
+theorem machine_acceptState (operator : Operator) (betweenCount : Nat) :
+    (machine operator betweenCount).acceptState = stateCount operator betweenCount :=
+  stateSpecs_length operator betweenCount
+
+theorem machine_rejectState (operator : Operator) (betweenCount : Nat) :
+    (machine operator betweenCount).rejectState = stateCount operator betweenCount + 1 := by
+  change (stateSpecs operator betweenCount).length + 1 = _
+  rw [stateSpecs_length]
+
+theorem machine_acceptState_ne_rejectState (operator : Operator) (betweenCount : Nat) :
+    (machine operator betweenCount).acceptState ≠ (machine operator betweenCount).rejectState := by
+  rw [machine_acceptState, machine_rejectState]
+  omega
+
+def initialConfiguration (older between : List Nat) (left right : Nat)
+    (inside outsideTail : List WorkSymbol) : WorkConfiguration :=
+  endConfiguration 0 outsideTail (registerWord (older ++ [left] ++ between ++ [right])) inside
+
+def finalConfiguration (operator : Operator) (older between : List Nat) (left right : Nat)
+    (inside outsideTail : List WorkSymbol) : WorkConfiguration :=
+  endConfiguration (stateCount operator between.length)
+    (outsideTail.drop (value operator left right + 1))
+    (registerWord (older ++ [left] ++ between ++ [right, value operator left right])) inside
+
+def steps : Operator → List Nat → Nat → Nat → Nat
+  | .add, between, left, right => addOperationSteps (between ++ [right]) left right
+  | .mul, between, left, right => mulOperationSteps between left right
+
+theorem workRunExact (operator : Operator) (older between : List Nat) (left right : Nat)
+    (inside outsideTail : List WorkSymbol) :
+    workRunExact? (machine operator between.length) (steps operator between left right)
+      (initialConfiguration older between left right inside outsideTail) =
+      some (finalConfiguration operator older between left right inside outsideTail) := by
+  have hLength : (between ++ [right]).length = between.length + 1 := by
+    simp only [List.length_append, List.length_cons, List.length_nil]
+  cases operator with
+  | add =>
+      have h := addOperation_exact (between.length + 1) 0 (stateCount .add between.length)
+        (stateCount .add between.length + 1) [] [] older [] between left right
+        inside outsideTail rfl hLength
+      simpa only [machine, stateSpecs, steps, value, initialConfiguration, finalConfiguration,
+        List.nil_append, List.append_nil] using h
+  | mul =>
+      have h := mulOperation_exact (between.length + 1) 0 (stateCount .mul between.length)
+        (stateCount .mul between.length + 1) [] [] older [] between left right
+        inside outsideTail rfl hLength
+      simpa only [machine, stateSpecs, steps, value, initialConfiguration, finalConfiguration,
+        List.nil_append, List.append_nil] using h
+
+theorem run_compile_exact (operator : Operator) (older between : List Nat) (left right : Nat)
+    (inside outsideTail : List WorkSymbol) :
+    run (compileWorkMachine (machine operator between.length)) (6 * steps operator between left right)
+      (encodeWorkConfiguration (initialConfiguration older between left right inside outsideTail)) =
+      encodeWorkConfiguration (finalConfiguration operator older between left right inside outsideTail) :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _ (workRunExact operator older between left right inside outsideTail)
+
+private theorem copySteps_le_bound (intermediate : List Nat) (destination source bound : Nat)
+    (hBase : intermediate.length + 1 + intermediate.sum + destination ≤ bound)
+    (hSource : source ≤ bound) :
+    copySteps intermediate destination source ≤ 4 * bound * bound + 9 * bound + 3 := by
+  rw [copySteps_closed]
+  have hProduct := Nat.mul_le_mul (Nat.mul_le_mul_left 2 hBase) hSource
+  have hSquare := Nat.mul_le_mul (Nat.mul_le_mul_left 2 hSource) hSource
+  have hLinear := Nat.mul_le_mul_left 7 hSource
+  have hBaseLinear := Nat.mul_le_mul_left 2 hBase
+  simp only [Nat.mul_assoc] at hProduct hSquare ⊢
+  omega
+
+/-- One majorant covers every register value below the materialized operand span. -/
+def workBound : Operator → Nat → Nat
+  | .add, bound => 2 + 2 * (4 * bound * bound + 9 * bound + 3)
+  | .mul, bound => 2 + (bound * (2 * bound + bound * bound + 7 * bound + 7) +
+      (bound * bound + 2 * bound + 1) * bound * bound +
+        2 * bound + 2 * bound * bound + 2 * bound + 3)
+
+theorem steps_le (operator : Operator) (between : List Nat) (left right bound : Nat)
+    (hSpan : (registerWord ([left] ++ between ++ [right])).length ≤ bound) :
+    steps operator between left right ≤ workBound operator bound := by
+  rw [registerWord_length] at hSpan
+  simp only [List.length_append, List.length_cons, List.length_nil,
+    List.sum_append, List.sum_cons, List.sum_nil, Nat.add_zero] at hSpan
+  have hLeft : left ≤ bound := by omega
+  have hRight : right ≤ bound := by omega
+  have hBase : between.length + 2 + between.sum + right ≤ bound := by omega
+  cases operator with
+  | add =>
+      have hFirst := copySteps_le_bound (between ++ [right]) 0 left bound (by
+        simp only [List.length_append, List.length_cons, List.length_nil,
+          List.sum_append, List.sum_cons, List.sum_nil]
+        omega) hLeft
+      have hSecond := copySteps_le_bound [] left right bound (by
+        simp only [List.length_nil, List.sum_nil]
+        omega) hRight
+      simp only [steps, addOperationSteps, workBound, Nat.two_mul]
+      omega
+  | mul =>
+      have hSquare := Nat.mul_le_mul hRight hRight
+      have hLinear := Nat.mul_le_mul_left 7 hRight
+      have hBaseLinear := Nat.mul_le_mul_left 2 hBase
+      have hInside : 2 * (between.length + 2 + between.sum + right) +
+          right * right + 7 * right + 7 ≤ 2 * bound + bound * bound + 7 * bound + 7 := by omega
+      have hFirst := Nat.mul_le_mul hLeft hInside
+      have hDoubleRight := Nat.mul_le_mul_left 2 hRight
+      have hStepSquare : right * right + 2 * right + 1 ≤ bound * bound + 2 * bound + 1 := by omega
+      have hSecond := Nat.mul_le_mul (Nat.mul_le_mul hStepSquare hLeft) hLeft
+      have hProduct := Nat.mul_le_mul (Nat.mul_le_mul_left 2 hLeft) hRight
+      have hLeftLinear := Nat.mul_le_mul_left 2 hLeft
+      simp only [steps, mulOperationSteps, multiplySteps_closed, workBound]
+      omega
+
+def resultBound : Operator → Nat → Nat
+  | .add, bound => 2 * bound
+  | .mul, bound => bound * bound
+
+theorem value_le (operator : Operator) (left right bound : Nat)
+    (hLeft : left ≤ bound) (hRight : right ≤ bound) :
+    value operator left right ≤ resultBound operator bound := by
+  cases operator with
+  | add => simp only [value, resultBound]; omega
+  | mul => exact Nat.mul_le_mul hLeft hRight
+
+theorem register_span_added (operator : Operator) (older between : List Nat) (left right : Nat) :
+    (registerWord (older ++ [left] ++ between ++ [right, value operator left right])).length =
+      (registerWord (older ++ [left] ++ between ++ [right])).length + value operator left right + 1 := by
+  simp only [registerWord_length, List.length_append, List.length_cons, List.length_nil,
+    List.sum_append, List.sum_cons, List.sum_nil, Nat.add_zero]
+  omega
+
+end RegisterBinary
+
 end BuilderUnaryPolynomial
 
 end CookLevin

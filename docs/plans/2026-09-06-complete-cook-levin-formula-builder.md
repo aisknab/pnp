@@ -1773,6 +1773,113 @@ is deferred because the full end-to-end construction is not yet complete.
 Risk-weighted proof completion estimate: 35%; uncertainty: 20% to 40%;
 formal artefact coverage: 205/207; global gates closed: 0/5.
 
+## Runtime coordinate arithmetic contract
+
+The next canonical-constraint dependency needs literal indices formed from
+already materialized dimensions and runtime regional coordinates. Continue
+the same legacy Final SAT decision / concrete Cook-Levin reduction anchor.
+Reuse the existing unary evaluator's proved constant, addition and
+multiplication phases rather than rebuilding their scans.
+
+Expose preserved-register arithmetic with a finite operator/offset-dependent
+table, universal exact work/raw execution, unchanged operands and inside tape,
+exact exterior allocation and bounds in the actual operand-register span.
+A constant is fixed program syntax; binary operand values must be read from
+the tape and must not be compiled into a source-dependent machine.
+
+Then structurally compile expressions over a fixed-size register environment.
+The AST contains constants, statically addressed arguments, addition and
+multiplication. The intended universal endpoint
+`BuilderRegisterExpression.workRunExact` starts from the original environment
+plus retained scratch, appends the postorder values with the correct root
+value, and preserves the entire original frame. The machine depends only on
+the AST and structural register counts, never on the environment's values.
+Prove the complete execution cost and actual unary-space bounds by polynomial
+majorants, including copies, intermediate arithmetic and every chain join.
+Environment presence/count is a physical layout invariant, not a supplied
+value or correctness certificate.
+
+Use this compiler for the canonical symbol, head, state, certificate-bit and
+certificate-length layout formulas. Derive their argument frames from the
+existing source and regional registers before claiming a canonical writer.
+The full constraint payload still needs bounded family loops, fixed verifier
+transition selection, derived input requests and payload assembly; all
+occupancy, emission, scratch recovery, Finish and complete-builder obligations
+remain downstream.
+
+Prepare universal arithmetic/compiler work and raw refinements, positive
+and negative literal execution fixtures, nontrivial operand order, zero
+products, arbitrary retained data, static control shape, exact allocation and
+complete time/space expectations with the sources. Build changed dependencies
+before imported axiom probes, then run focused regressions. Reconcile root,
+inventory, publication and generated contracts only once the complete M230
+target stabilizes. No weighted checkpoint, row or site-publication credit is
+awarded merely for these arithmetic components.
+
+## Verified: preserved arithmetic and canonical literal-index kernels
+
+The preserved-register constant/addition/multiplication interface is now
+proved in
+[the unary evaluator](../../lean/PNP/Concrete/CookLevinBuilderUnaryPolynomial.lean).
+It reuses the existing phase rules and proofs. Binary operands come from
+the tape; the operator and structural separation determine the finite table.
+Exact work/raw execution preserves both operands, intermediate registers
+and arbitrary inside data. Allocation is exactly the result plus its
+separator. Bounds include every copy and multiplication step and use the
+actual unary operand span, not merely the number of registers.
+
+[The fixed expression compiler](../../lean/PNP/Concrete/CookLevinBuilderRegisterExpression.lean)
+now proves `BuilderRegisterExpression.workRunExact` and its raw refinement
+for every expression over a fixed-size environment. The entire original
+frame survives; the postorder values are appended, with the evaluated root
+as the last register. Its complete time and surviving-space majorants include
+argument copies, intermediate results and both joins at each binary node.
+The machine depends on expression syntax and structural offsets, never on
+runtime register values. An initial encoded-span polynomial yields the
+complete expression execution and output-span polynomials.
+
+[The literal-index kernels](../../lean/PNP/Concrete/CookLevinBuilderLiteralIndexExpression.lean)
+apply that compiler to all five canonical families: symbol, head, state,
+certificate bit and certificate length. Every typed request satisfies
+`eval_eq_index`, `workRunExact` and `run_compile_exact` for the unchanged
+canonical layout. The materialized environment has the fixed order
+`[T, W, S, C, time, position, state, symbolCode]`; existing layout bounds
+give its complete unary span, including separators, at most
+`8 + 8 * layout.variableCount`. The source-size theorem derives this
+bound from the verifier's formula-variable-count polynomial. One fixed
+polynomial pair bounds all five kernels, independent of runtime kind or
+coordinates; the retained-context bound remains an explicit caller obligation.
+
+The prepared
+[36 arithmetic](../../lean-regression/PNPConcreteCookLevinBuilderRegisterArithmetic.lean),
+[33 compiler](../../lean-regression/PNPConcreteCookLevinBuilderRegisterExpression.lean)
+and
+[42 literal-index](../../lean-regression/PNPConcreteCookLevinBuilderLiteralIndexExpression.lean)
+regressions passed. All 19 new arithmetic theorem closures plus four reused
+primitive endpoints, all 16 compiler closures and all 12 literal-index
+closures were audited. They use at most `propext` and `Quot.sound`, with
+no project-specific axiom or `Classical.choice`. Compiler/list-layout
+proof corrections and a constructor-shadowing binder correction did not
+weaken the intended statements or prepared regression assertions. Each
+unchanged green component was reused by exact source and regression digests.
+
+These are register arithmetic kernels, not a completed canonical writer.
+Typed requests specify the expected layout index; they neither materialize
+the eight argument registers nor select a runtime branch. The next physical
+construction must derive those registers from the already written source
+dimensions and regional coordinates, and connect its actual output to this
+environment. Initial-row requests must likewise derive their source index
+before using the verified indexed reader. Bounded family iteration, fixed
+verifier transition selection, payload assembly, clause occupancy, token
+emission, scratch recovery, Finish and cleared padding still precede the
+complete formula loop and packaged reduction. No supplied request, constraint,
+input answer or correctness certificate may replace that construction.
+
+M230 and `reductions-complete-cook-levin-builder` remain unearned.
+Risk-weighted proof completion estimate: 35%; uncertainty: 20% to 40%;
+formal artefact coverage: 205/207; global gates closed: 0/5.
+No publication row or score was added; PNPLabs publication remains deferred.
+
 ## Source and expectation preflight
 
 Prepare each producer change and its consumers together, before its first
