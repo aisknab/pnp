@@ -99,6 +99,55 @@ The reduction's correctness should reuse
 the output equality. This preserves the existing CNFSAT language and concrete
 complexity model.
 
+## Active preservation-family integration
+
+The next dependency edge is the exact canonical preservation payload at every
+source-selected regional coordinate, not a fixed schedule slot. Decode the
+existing written radix packet into typed time, head position, other position
+and symbol coordinates; prove the unchanged direct slot is padding exactly on
+the diagonal and the canonical two-premise implication off it. Derive all three
+literal indices, including next time, from those physical fields. The final
+constructor must pack the existing lossless payload and select padding by an
+actual comparison, not by a supplied constraint or verdict.
+
+Prepare universal regressions for coordinate reconstruction and bounds, exact
+literal order/signs, diagonal padding, payload decoding, source-field linkage,
+physical execution, and encoded-source polynomial bounds before the corresponding
+proof build. Audit every new public theorem's dependency closure. Reuse unchanged
+source/radix/expression/argument evidence; run the changed dependency target,
+its axiom probe and its focused regressions before broader integration.
+
+Verified components now establish the all-coordinate reconstruction and exact
+canonical slot equality, including the diagonal padding case, with typed bounds
+and the lossless payload specification in
+[`CookLevinBuilderPreservationCoordinates.lean`](../../lean/PNP/Concrete/CookLevinBuilderPreservationCoordinates.lean).
+[`CookLevinBuilderPreservationLiteralSources.lean`](../../lean/PNP/Concrete/CookLevinBuilderPreservationLiteralSources.lean)
+binds all three canonical literal plans to the written source/radix fields and
+physically computes next time before executing the conclusion-literal kernel.
+That chained machine has exact work/raw execution, preserved workspace, the
+canonical final index, control-safety proofs and source-size polynomial
+register-span/runtime bounds. The payload specification itself is not claimed
+as a physical payload constructor.
+
+The prepared component regressions passed: 27 canonical-coordinate checks and
+39 source/literal checks, with all 40 public theorem closures restricted to
+`propext` and `Quot.sound` (or no axioms). No project axiom or
+`Classical.choice` occurs. Failed proof-script attempts did not change theorem
+statements, the machine, or the prepared regression expectations. The successful
+unchanged component evidence is reused by source hash; full root, inventory and
+release evidence remains due at complete M230 integration.
+
+Next, chain the current-head, current-symbol and next-symbol computations and
+pack their exact retained roots into the existing eight-register implication
+payload. Execute the diagonal comparison and select the one-register padding
+payload on equal positions. These actual payload/dispatch steps remain open;
+the semantic equality above must not be used as a runtime oracle.
+
+This integration is not yet complete. Runtime diagonal dispatch, other canonical
+families, clause occupancy/emission, recovery, Finish, the full loop and the
+packaged polynomial reduction remain required. No publication row or weighted
+checkpoint changes during these components.
+
 ## Implementation phases
 
 1. **Reuse audit and physical selection.** Locate and reuse existing general
