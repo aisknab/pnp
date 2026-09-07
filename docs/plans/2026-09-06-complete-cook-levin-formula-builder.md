@@ -156,13 +156,32 @@ machine or test expectation. The component build, axiom audit and regression
 run reached terminal success; unchanged predecessor evidence was reused by
 source digest. This is component evidence, not the complete-builder checkpoint.
 
-Next, execute the comparison of the written head and other-position fields,
-restore the source frame, and choose the one-register padding payload exactly
-when the positions are equal. The off-diagonal branch must execute the verified
-implication machine. Semantic equality may specify the result but must not act
-as a runtime oracle. Reuse the existing physical comparator where possible,
-account for erased scratch cells explicitly, and prove both branches and their
-encoded-source bounds before claiming the complete preservation-family kernel.
+The runtime comparison and scratch-recovery components are now verified.
+[`CookLevinBuilderRegisterErase.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterErase.lean)
+uses three literal transitions per single-register eraser and composes a
+structurally fixed count of them. It physically blanks all removed cells,
+preserves arbitrary interior and exterior data, and charges every bridge.
+[`CookLevinBuilderRegisterEquality.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterEquality.lean)
+composes the existing residual comparator, a zero test only on the not-less
+branch, and four-register erasure. Its exact work/raw execution accepts exactly
+equal operands and rejects exactly unequal operands while restoring the original
+retained frame. The zero-but-less case is explicitly a rejecting regression;
+a zero residual is not treated as an equality verdict on the less-than branch.
+
+All 23 erasure and 27 equality regressions passed. Their 30 public theorem
+closures contain no project axiom or `Classical.choice`; they use only
+`propext`, `Quot.sound`, or no axioms. The erasure bound is linear in actual
+removed register span, and the whole comparison/cleanup runtime has an explicit
+polynomial bound in operand magnitude. Reuse this exact component evidence by
+digest. These bounds still need composition with the encoded-source field bounds
+at the preservation entry; this paragraph does not award full-builder credit.
+
+Next, physically copy the written head/other-position fields, execute the
+verified equality/cleanup graph, and choose the one-register padding payload
+exactly when the positions are equal. The off-diagonal branch must execute the
+verified implication machine. Prove the combined source-derived runtime,
+canonical payload, preserved frame and encoded-source polynomial bounds.
+Semantic equality may specify the result but must not act as a runtime oracle.
 
 This integration is not yet complete. Runtime diagonal dispatch, other canonical
 families, clause occupancy/emission, recovery, Finish, the full loop and the
