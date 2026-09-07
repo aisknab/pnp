@@ -1456,28 +1456,77 @@ namespace qualification in its proof. Its assertion and the machine were
 unchanged. The final regression run verified source-byte continuity and
 reused those completed checks; no broad core or website suite was repeated.
 
-## Next implementation: source-derived region-local decoding
+## Verified implementation: source-derived radix branch entries
 
-Connect the actual selected region tape to this shared arithmetic. Physically
-derive or copy each required radix from the retained source frame, prove its
-positivity and encoded-source bound, and construct the appropriate fixed
-entry layout. Do not reassemble the source, accept supplied widths/results,
-or hide a semantic decoder call inside the finite machine.
+[CookLevinBuilderPolynomialRegisterCopies.lean](../../lean/PNP/Concrete/CookLevinBuilderPolynomialRegisterCopies.lean)
+gives typed structural addresses into the polynomial postorder already
+materialized by initialization. Its finite copy-list compiler preserves the
+entire original register frame and protected workspace. The polynomial syntax
+and address list determine control; no input value selects a table or supplies
+a result. General execution, raw refinement and fixed-program polynomial
+time/register-span bounds apply to arbitrary polynomials and addresses.
 
-Starting from this actual selected tape, consume the physically written tag
-and local coordinate and derive the canonical region-local constraint data.
-Keep the existing direct decoder solely as the specification. The finite
-control must implement the coordinate arithmetic and input-dependent reads,
-preserve the source/output workspace, and distinguish a valid padded slot
-from an absent one. Prove the all-coordinate work/raw execution and total
-encoded-source polynomial bound, including the retained scratch and every
-handoff. Do not substitute a supplied constraint, branch verdict or correctness
-certificate, and do not promote a fixed slot to a complete decoder.
+[CookLevinBuilderRegionRadixSource.lean](../../lean/PNP/Concrete/CookLevinBuilderRegionRadixSource.lean)
+uses these addresses to read the actual stored tape width, shape width,
+state count and literal three. Their exact connection to the concrete
+tableau dimensions and positivity is proved without supplied width premises.
+The canonical least-significant-first radix lists are:
 
-Local decoding, clause occupancy, emission, scratch recovery, Finish,
-explicitly cleared padding and the complete loop/packaged reduction remain
-necessary downstream obligations. Register only the complete M230 capability
-in the publication inventory once its full obligation is discharged.
+- Shape: `[W + 2]`.
+- Control: `[3, 3, states, W]`.
+- Preservation: `[3, W, W]`.
+
+Each branch entry physically copies the reversed radix list, then copies
+the local coordinate from immediately before the retained region tag.
+It executes the checked mixed-radix machine from that exact prepared frame.
+The universal `source_workRunExact` starts on the actual
+`BuilderConstraintRegionSource.finalConfiguration` tape under its
+selected-region equality. It does not rerun source assembly or selection,
+nor accept an independently supplied width, coordinate, quotient or result.
+The complete original source, selected tag and workspace survive; the actual
+written packets and final quotient reconstruct the local coordinate.
+
+Under the existing body, cursor-balance and selected-region invariants,
+the entry has a proved polynomial bound in encoded source length. Put
+`B = 31 * sourceSpan(input.length) + 42`.
+The source-copy span bound advances by `2 * B + 1` for each fixed address,
+and the coordinate copy is charged before applying the radix execution bound.
+The exact work count and its sixfold raw refinement include every field copy,
+coordinate copy, division/restoration and control handoff. The final register
+span is bounded as well; arbitrary existing output prefixes are preserved,
+not misrepresented as newly generated bounded output. These bounds are for
+fixed region schemas, not a runtime-variable split count.
+
+All 62 prewritten [regression examples](../../lean-regression/PNPConcreteCookLevinBuilderRegionRadixSource.lean)
+pass. They cover universal structural addressing, complete copying, source
+handoff, branch execution/refinement, schema order and positivity, preservation,
+written-coordinate reconstruction, time/space bounds and control separation.
+All 58 public theorem closures pass: eight are axiom-free, thirteen use only
+`propext`, and thirty-seven use `propext` with `Quot.sound`.
+None uses a project-specific axiom, `Classical.choice` or `sorryAx`.
+Initial failures were copy-layer proof normalization and state-projection
+issues. Correcting those scripts did not change the machine definitions,
+public theorem statements or prepared regression expectations. The region
+entry module and all regressions passed their first execution after that
+dependency compiled. No unchanged broad core or website suite was repeated.
+
+## Next implementation: uniform runtime region-entry dispatch
+
+Wire these branch entry programs through fixed control that reads the actual
+selected tag, or through the corresponding already-proved runtime graph nodes.
+Do not compute the semantic selected region and use it to generate a different
+program per input. Reuse the one source assembly and one selection; preserve
+their frame and charge the new control handoffs. Prove one all-input work/raw
+execution theorem and a single source-size polynomial bound for the resulting
+uniform region-entry machine.
+
+Branch arithmetic is not complete constraint construction. The initial and
+accepting regions' empty radix lists do not implement their constraints.
+Local constraint construction, input-dependent reads, clause occupancy,
+emission, scratch recovery, Finish, explicitly cleared padding and the complete
+loop/packaged reduction remain necessary downstream obligations. Preserve the
+absent-versus-padded option distinction, and do not supply a constraint, branch
+verdict or correctness certificate in place of runtime work.
 
 M230 and its fixed complete-builder checkpoint remain unearned. Publication
 is deferred because the full end-to-end construction is not yet complete.
