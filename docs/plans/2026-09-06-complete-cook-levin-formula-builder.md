@@ -2532,3 +2532,122 @@ full physical successor, main loop and packaged reduction are still required.
 No publication row or weighted checkpoint was earned by these components.
 PNPLabs publication remains deferred; the published M229 coordinate and all
 progress values remain unchanged.
+
+## Active control movement: exact exterior boundary
+
+The next implementation closes the physical head-movement dependency of the
+same legacy Final SAT decision / SAT NP-completeness reconstruction above.
+Its unbounded interface reads the source-derived movement code and position,
+implements stay, saturated predecessor and the right-edge clamp for every
+valid tape position, and leaves one fixed retained-register count.
+
+Before wiring in comparison, establish that the existing disposable-pair
+comparator preserves its outer end marker. A generic exact-trace framing
+theorem must derive preservation of arbitrary exterior data from the finite
+rule table and the starting boundary, not from a supplied footprint or an
+empty-exterior assumption. Reuse the unchanged comparator trace and cost.
+Any newly allocated restoration cell must be physically reserved or blanked,
+charged, and reflected in the exact exterior suffix.
+
+The comparison/cleanup interface must return the actual strict-less verdict
+while restoring the older source registers on both branches. The movement
+graph must select its branch by reading the written movement code. It must
+not accept the moved position or comparison verdict as supplied data.
+The final control implication still needs next time, all four literal indices,
+the actual conclusion selector and the complete canonical payload.
+
+Prepare exact generic run, raw-compilation, nonblank-exterior, boundary-safety,
+zero/last-cell, branch-outcome, register-count and encoded-size polynomial
+regressions together with the source. Audit every new public theorem; reject
+project axioms and choice. Unchanged source-action, preservation and shape
+evidence is reused. No source statements or test expectations are weakened,
+and no progress, publication or immutable historical data changes.
+
+## Verified control-movement comparison and recovery boundary
+
+The exact arbitrary-exterior comparison boundary is now implemented in
+[`WorkMachineLeftBoundary.lean`](../../lean/PNP/Concrete/WorkMachineLeftBoundary.lean)
+and
+[`CookLevinBuilderRegisterPairExterior.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterPairExterior.lean).
+The first theorem transports an existing exact trace across a protected left
+boundary, deriving safety at every step from the finite rule table. The second
+checks that rule condition for the unchanged disposable-pair comparator and
+connects its terminal tape to the existing restoration view. It preserves the
+entire arbitrary exterior suffix without identifying it with blank cells.
+The original comparator, its verdict and its execution bound are unchanged.
+
+[`CookLevinBuilderRegisterLessThan.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterLessThan.lean)
+now implements one fixed six-node comparison/recovery graph for every pair of
+natural-number operands and arbitrary interior/exterior data. Its reserve
+machine increments and decrements the newest operand in five work transitions:
+the operand is restored, one exterior cell is prepared, and the untouched
+exterior is exactly its original tail after that cell. The graph then executes
+the existing comparator, restores its actual marked result and erases the three
+disposable registers. The comparison verdict is carried by physical control,
+not by a supplied premise or a host-side choice.
+
+For input `endTape (older ++ [coordinate, boundary]) inside outside`, both
+outcomes return the exact tape
+
+```lean
+endTape older inside
+  (List.replicate (coordinate + boundary + 3) WorkSymbol.blank ++ outside.drop 1)
+```
+
+Acceptance is equivalent to `coordinate < boundary`; rejection is equivalent
+to `boundary ≤ coordinate`. Equal operands, the zero cases and a right-move
+candidate at the last cell are covered by the generic contracts. All original
+older registers and the interior are retained. The allocated exterior cell and
+every cleared cell are accounted for explicitly. Exact raw execution charges
+six raw transitions per work transition, and the quadratic polynomial bound
+includes reservation, comparison, restoration, erasure and every graph bridge.
+
+All 51 prepared regression contracts passed: 20 boundary/comparator and 31
+comparison/recovery checks. All 27 public-theorem axiom audits passed: five
+closures use no axioms, six use only `propext`, and sixteen use only
+`propext` and `Quot.sound`. No project axiom or `Classical.choice` occurs.
+Proof-script corrections addressed finite Boolean reflection, graph-entry
+normalization and Lean record notation without changing the machines, intended
+theorem statements or expected outcomes. When only regression notation changed,
+the successful build and axiom phases were reused against their exact source
+trees; failed whole runs were not reported as green.
+
+### Next exact control-head contract
+
+The next machine must read `[width, position, moveCode move]` from tape and
+append exactly one moved-position register while retaining those inputs.
+Its intended universal execution interface is:
+
+```lean
+workRunExact? machine (workSteps width position move)
+  (workStartConfiguration machine
+    (endTape (older ++ [width, position, moveCode move]) inside outside)) =
+  some {
+    state := machine.acceptState
+    tape := endTape
+      (older ++ [width, position, moveCode move, moved width position move])
+      inside (finalOutside width position move outside) }
+```
+
+Here `moved` is position for stay, `position - 1` for left, and
+`if position + 1 < width then position + 1 else position` for right.
+The planned fixed dispatcher tests the written movement code, copies the
+position, and physically tests zero before a left decrement. The right branch
+increments the copied position, copies that candidate and the actual width,
+executes the now-verified strict comparison, and decrements the candidate only
+on the non-less branch. Invalid direction codes must reject, not silently
+select a default move.
+
+Bind this generic machine to the existing eight source-derived action registers:
+copy the source width and position plus retained movement field seven, then
+append the moved position. The combined retained count is fixed, and the
+canonical `VerifierTableauProblem.movePosition` equality must hold for every
+valid position. Next time, all four literal indices, the actual conclusion
+digit and the complete three-premise implication remain required afterwards.
+
+This component does not yet implement that complete movement dispatcher, the
+control payload, remaining constraint families, clause emission, full successor,
+loop or packaged reduction. M230 and `reductions-complete-cook-levin-builder`
+remain open. Formal artefact coverage stays 205/207; the risk-weighted proof
+estimate stays 35% with uncertainty 20% to 40%; global gates closed stay 0/5.
+PNPLabs publication remains deferred at its coherent M229 source pin.
