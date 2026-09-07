@@ -350,15 +350,70 @@ no machine behavior or assertion. A redundant regression tactic was removed afte
 Lean had already solved the original assertion; the final regression-only run
 reused the exact unchanged green source build and axiom audit.
 
-Next derive count and exclusive upper from the actual written shape coordinates.
-Prove the canonical finite-index list equality for every symbol, head and state
-shape constraint, not merely another fixed row. Use the required row order:
-all tape-position symbol constraints, then head, then state. Bind the complete
-payload to `shapeConstraintSlotDirect` at
-`BuilderConstraintRegionSource.localCoordinate problem index .shape` under
-the actual selected-region premise. Prove the fixed source-field preparation,
-exact work/raw handoffs, preserved frame, canonical decoder result and total
-encoded-source polynomial bounds together.
+### All-input shape coordinates and physical branch construction
+
+The canonical coordinate linkage is verified in
+[`CookLevinBuilderShapeCoordinates.lean`](../../lean/PNP/Concrete/CookLevinBuilderShapeCoordinates.lean).
+For every selected shape slot, the source quotient is the time and the remainder
+selects a symbol row, the head row or the state row. The uniform finite-index
+identity proves that the descending range is exactly the reversed canonical
+variable list, including empty lists. Actual dimensions derive the range bound;
+no variable list, count correctness certificate or supplied upper bound is
+an execution premise.
+
+All 33 prepared regression contracts and 25 public-theorem axiom audits passed.
+Their closures use only `propext`, `Quot.sound`, or no axioms. Input-size
+notation, layout-projection and list-association corrections changed no theorem
+statement or test expectation. The dependency's already verified complete
+counter/range payload evidence was reused without rerunning its regressions.
+
+The physical branch construction is now verified in
+[`CookLevinBuilderShapeBranchPayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderShapeBranchPayload.lean).
+It uses each fixed arithmetic expression's postorder output: the final addition of a base and a one-register count leaf
+already writes `[count, upper]` consecutively. The expression is compiled directly
+against the actual source/radix register frame, then composed with the complete
+range payload machine. This avoids an extra environment pack or copying routine.
+The source dimensions and row coordinates are read at fixed source addresses;
+the verifier and retained-frame register count determine the program, not the
+input length or values.
+
+The branch contracts were prepared before the first check. They require exact
+source-field execution, the complete payload run and raw-machine refinement,
+source-coordinate/base/count/upper identities, canonical decoding, retained
+frame and exterior accounting, total encoded-source polynomial bounds and
+deterministic control. The branch regression keeps the classification premise
+explicit and rejects using the symbol-branch premise for a head coordinate.
+All 28 branch regression contracts and 22 public-theorem axiom audits passed;
+every branch theorem closure uses only `propext` and `Quot.sound`.
+Chain-state normalization, explicit constructor elimination and a corrected
+existing control-lemma name changed no program or theorem statement. The
+unchanged coordinate build, 33 regressions and 25 axiom audits were reused.
+
+The exact branch run includes source-field preparation, the graph bridge and
+the entire payload constructor. It preserves the original source/radix frame,
+retained registers and arbitrary interior data. Its polynomial bound includes
+all source arithmetic, scratch, payload registers, raw steps and the explicitly
+cleared exterior; no prepared count or supplied field-size bound substitutes
+for the source calculation.
+
+Runtime selection among the three fixed branch programs is still a separate
+obligation. Proving a branch under the correct classification premise must not
+be reported as a complete source-to-payload dispatcher. The subsequent fixed
+graph must physically test the source row against the head/state boundaries,
+derive the chosen branch and preserve the same source frame.
+
+The immediate handoff obligation is now explicit: equality erases its comparison
+operands and leaves a cleared blank exterior. The current complete range/payload
+run contract starts with an empty exterior. Before composing dispatch, extend
+that execution contract to arbitrary exterior data and recover the existing
+empty-exterior theorems as special cases. Do not silently equate a finite list
+of blank cells with the empty list. The generic decrement, copy and erase
+kernels already expose exterior preservation/allocation; derive the full loop's
+exterior equation from them without changing program control.
+
+Then use those generalized contracts in the three existing source-bound branch
+programs and assemble the physical selector. This is one finite dependency path
+to the full shape-family dispatcher, not another fixed-coordinate milestone.
 
 The source-bound shape payload, remaining families, main loop and packaged
 reduction remain open. M230 is not earned; the fixed complete-builder checkpoint
