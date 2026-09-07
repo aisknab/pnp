@@ -1295,29 +1295,68 @@ axiom evidence were byte-bound and reused for that regression-only correction.
 The terminal verification result is successful; no broad core or site suite
 was repeated.
 
-## Next implementation: complete five-region dispatch
+## Verified component: complete five-region register dispatch (2026-09-07)
 
-Use the preserved source-derived frame
-`[1, preservation, control, initial, shape, coordinate]` and the returned
-latest coordinate to build the complete five-region dispatcher. Derive fixed
-offsets from the actual appended register lists: each failed comparison keeps
-the old coordinate and appends four scratch registers. The expected offsets
-are zero, five, ten, fifteen and twenty; prove these layout equalities before
-using them in execution or runtime arguments.
+[CookLevinBuilderConstraintRegionDispatch.lean](../../lean/PNP/Concrete/CookLevinBuilderConstraintRegionDispatch.lean)
+now implements one fixed ten-node, 5,080-rule dispatcher. The input register
+frame contains five arbitrary natural lengths and an arbitrary coordinate.
+Those data never construct its control table or supply a classification
+certificate. Five actual comparisons use the proved fixed offsets zero, five,
+ten, fifteen and twenty. Each rejected comparison leaves the original registers
+intact and appends the next residual coordinate. Each successful comparison
+runs its own literal tag writer, built from delimiter/increment transitions,
+and returns both the selected region tag and its local coordinate.
 
-Preserve which region was selected. A shared accepting state alone loses that
-information. Prefer connecting each successful branch directly to its own
-decoder continuation; if the component returns a common endpoint instead,
-write its finite region tag by actual literal rules, not by supplying an
-external classification. The existing delimiter and increment machines can
-write such tags without inspecting a certificate or rerunning source assembly.
+The universal `workRunExact` theorem covers the complete dispatcher, not a
+prefix or selected instance. `run_compile_exact` transports it to the compiled
+raw machine at six raw transitions per work transition. The proved verdict is
+acceptance exactly below the sum of the five lengths and rejection otherwise;
+equality therefore proceeds to the following region. A selected local
+coordinate is strictly below its own region length. The final tape contains
+the original frame followed only by the recorded scratch fields and tag.
+Empty regions, including five empty regions, require no added premise.
 
-Charge the intermediate scratch spans with the new bound and use the
-non-increasing residual theorem for successive comparisons. The source entry
-must assemble once and enter the whole fixed dispatcher. Handle zero lengths,
-equality, every selected region and the out-of-range rejection by actual runs.
-Local decoding, clause occupancy, emission, Finish, explicitly cleared padding
-and the complete loop/reduction remain necessary downstream obligations.
+The runtime argument charges all intermediate scratch scans. If the initial
+coordinate and all five lengths are at most `B`, every later newer-register
+span is at most `24*B + 20`. The whole run is bounded by
+`5 * BuilderRegionResidualOperands.workBound (24*B + 20) + 20`.
+Its raw polynomial includes all five selector bridges and the literal tag
+writer/bridge. This is a polynomial in an operand bound; deriving that bound
+from the actual source input remains part of the source linkage below.
+
+The prepared
+[regression module](../../lean-regression/PNPConcreteCookLevinBuilderConstraintRegionDispatch.lean)
+passes all 53 examples, including independent expected fuels and output words
+for every selected region, exact boundaries, zero-length chains, the all-empty
+rejection, arbitrary workspace preservation and malformed-input rejection.
+All 36 public theorem closures pass the strict audit: ten are axiom-free, four
+use only `propext`, and 22 use `propext` and `Quot.sound`. None uses a
+project-specific axiom, `Classical.choice` or a proof placeholder.
+
+Focused verification succeeded at source/regression tree
+`08ff19bd1e57c746d20b79ca586d2635761c1172`. Two local proof-normalization
+corrections left the control table and intended statements unchanged.
+Regression record-layout syntax was corrected without changing expected costs
+or tapes. One literal negative lookup over the fixed 5,080-rule table uses a
+fixture-local recursion-depth option; source options and resource limits were
+not raised. The source build and axiom audit were byte-bound and reused for
+the regression-only correction. No broad core or site suite was repeated.
+
+## Next implementation: source-bound whole-region selection
+
+Connect the actual source-derived assembly once to this complete dispatcher.
+Use its canonical frame
+`[1, preservation, control, initial, shape, coordinate]`, with the five region
+lengths derived from the verifier/input and the coordinate derived from the
+actual cursor. Prove the assembled-frame equality, the complete work/raw run,
+the body-guard consequence that selection accepts, and a total encoded-source
+polynomial bound that includes assembly and the new handoff bridge. Do not
+replace source assembly by a supplied register frame or repeat it per region.
+
+Then connect the physically retained region tag and local coordinate to the
+canonical region-local decoder. Local decoding, clause occupancy, emission,
+scratch recovery, Finish, explicitly cleared padding and the complete
+loop/reduction remain necessary downstream obligations.
 
 This continues the same canonical formula construction. M230 and its fixed
 complete-builder checkpoint remain unearned; publication is deferred. Proof
