@@ -137,11 +137,32 @@ statements, the machine, or the prepared regression expectations. The successful
 unchanged component evidence is reused by source hash; full root, inventory and
 release evidence remains due at complete M230 integration.
 
-Next, chain the current-head, current-symbol and next-symbol computations and
-pack their exact retained roots into the existing eight-register implication
-payload. Execute the diagonal comparison and select the one-register padding
-payload on equal positions. These actual payload/dispatch steps remain open;
-the semantic equality above must not be used as a runtime oracle.
+The physical implication branch is now verified in
+[`CookLevinBuilderPreservationImplicationPayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderPreservationImplicationPayload.lean).
+It runs the conclusion machine first, then the current-head and current-symbol
+kernels, with retained-register counts derived from expression node counts.
+A fixed eight-field packer copies the computed roots in canonical payload order
+without recomputing them. The end-to-end work/raw theorem preserves arbitrary
+workspace and accounts for the exact exterior cells consumed. Its payload
+decodes to the canonical implication, and to the direct slot off the diagonal;
+the prepared regression expressly rejects treating that candidate as padding.
+Full retained-frame span and raw execution time have encoded-source polynomial
+bounds, and all control-safety contracts are checked.
+
+All 39 prepared implication-payload regressions passed. All 24 public theorem
+closures use only `propext` and `Quot.sound`, with no project axiom or
+`Classical.choice`. A record-layout syntax correction changed no statement,
+machine or test expectation. The component build, axiom audit and regression
+run reached terminal success; unchanged predecessor evidence was reused by
+source digest. This is component evidence, not the complete-builder checkpoint.
+
+Next, execute the comparison of the written head and other-position fields,
+restore the source frame, and choose the one-register padding payload exactly
+when the positions are equal. The off-diagonal branch must execute the verified
+implication machine. Semantic equality may specify the result but must not act
+as a runtime oracle. Reuse the existing physical comparator where possible,
+account for erased scratch cells explicitly, and prove both branches and their
+encoded-source bounds before claiming the complete preservation-family kernel.
 
 This integration is not yet complete. Runtime diagonal dispatch, other canonical
 families, clause occupancy/emission, recovery, Finish, the full loop and the
