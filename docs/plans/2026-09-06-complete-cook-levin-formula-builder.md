@@ -1671,6 +1671,80 @@ machine is permitted to call that semantic function at runtime. Constructing
 and timing that result from the actual source/radix frame remains the next
 obligation, with no score, row or full-builder credit for this interface.
 
+## Physical input-reader contract
+
+The initial-row constraints in both verifier input modes require bits from
+the actual source. For the same legacy SAT-transport / complete-builder
+dependency, implement one fixed machine with no source-dependent program
+generation. Its entry is the existing scratch-end tape with an arbitrary
+requested index in the nearest unary register.
+
+Use temporary marks to pair consumed index units with skipped input cells.
+Return 0 for an absent bit, 1 for false and 2 for true, in one appended
+unary register. Restore the original index, every older register and every
+visited input cell. Preserve the source boundary, tally and arbitrary previous
+output; stop at the source terminator without scanning output. Include the
+focused blank cell of the empty input and arbitrary pre-existing exterior
+garbage, charging the cells overwritten by the new result register.
+
+The intended universal endpoint is `BuilderIndexedInputRead.workRunExact`:
+for all older registers, indices, inputs, outputs and exterior tails, actual
+execution ends at `endTape (older ++ [index, resultCode input[index]?])`,
+with unchanged `inside input output` and only the allocated result cells
+dropped from the exterior tail. Prove raw refinement, exact scan/restore
+costs, polynomial work in the materialized register span and index, and the
+constant added register-space bound. No index bound or supplied bit answer
+is a premise of exact execution; source-size bounds for the physical index
+must be derived when this primitive is connected to regional construction.
+
+Prepare the source with tests for the universal work/raw runs, every result
+code, empty source, boundary/out-of-range reads, order-sensitive inputs,
+arbitrary output and garbage preservation, independent literal table traces,
+cost formulas, complete time/space bounds and invalid entry markers. Build
+the permanent reader first, audit every public theorem closure, then run
+the focused regression. Reuse unchanged source/payload/routing evidence.
+
+This reader is a physical dependency of canonical initial constraints, not
+a completed constraint writer, formula loop or reduction. Do not award
+M230, a publication row or weighted progress credit for this primitive alone.
+
+### Verified input-reader implementation
+
+The fixed 162-rule machine in
+[`CookLevinBuilderIndexedInputRead.lean`](../../lean/PNP/Concrete/CookLevinBuilderIndexedInputRead.lean)
+now proves the intended universal execution and six-step raw refinement.
+It reads the requested source position, restores all index/source marks and
+appends the result code. Empty and past-end reads return absence without
+crossing into the tally or arbitrary prior output. The exact allocated
+exterior span is `resultCode + 1`, so the new register adds at most three
+cells. No requested-index bound or supplied bit answer is required for
+the execution theorem.
+
+The complete work bound is
+`(index + 1) * (2 * olderSpan + 6 * index + 12)`.
+If the materialized older-register span and index are both bounded by
+`B(input.length)`, raw execution is bounded by
+`6 * (B(input.length) + 1) * (8 * B(input.length) + 12)`.
+This conditional source-size bound does not supply those bounds for a future
+caller: regional construction must derive them from its actual written data.
+
+All 17 public theorem axiom closures passed: two are axiom-free, two use
+only `propext`, and thirteen use only `propext` and `Quot.sound`.
+The
+[46 focused regressions](../../lean-regression/PNPConcreteCookLevinBuilderIndexedInputRead.lean)
+passed, including independent literal rule-table executions, order-sensitive
+reads, empty and out-of-range sources, arbitrary output/exterior preservation,
+exact costs, polynomial bounds, result-space growth and invalid entry markers.
+Three unreachable function-equality branches needed explicit constructive
+contradictions to avoid an incidental `Classical.choice` dependency. Source
+proof and record-layout corrections did not change the machine, intended
+theorem statements or regression assertions. The syntax-only regression fix
+reused the unchanged successful source build and full public axiom audit.
+
+The reader is now available for physical initial-row construction; it does
+not itself derive a regional request, build a canonical payload, or complete
+the formula loop. M230 and the complete-builder checkpoint remain unearned.
+
 ## Next implementation: physical canonical constraint construction
 
 Construct the payload from the physically written regional coordinates and
@@ -1683,10 +1757,11 @@ rerunning the original source assembly.
 
 Cover the unbounded families, including input-only and paired initial symbol
 opportunities and padded preservation diagonals. Initial and accepting empty
-radix lists do not construct their constraints. The source frame places input
-before the right marker, tally and prior output: a bounded source reader must
-stop at that marker and preserve output, not charge an arbitrary output prefix
-as automatically source-size bounded.
+radix lists do not construct their constraints. Derive and copy source indices
+from those regional opportunities, then use the verified indexed reader.
+Its complete execution preserves prior output without scanning it; retain that
+boundary and derive the caller's actual register-span and index bounds.
+Do not charge an arbitrary output prefix as automatically source-size bounded.
 
 The physical writer must prove that decoding what it actually writes equals
 the canonical slot, with its complete execution cost. Physical clause
