@@ -1510,15 +1510,55 @@ public theorem statements or prepared regression expectations. The region
 entry module and all regressions passed their first execution after that
 dependency compiled. No unchanged broad core or website suite was repeated.
 
+## Verified implementation: tape-preserving runtime tag comparison
+
+[CookLevinBuilderUnaryTagMatch.lean](../../lean/PNP/Concrete/CookLevinBuilderUnaryTagMatch.lean)
+provides the general literal tag test needed by the runtime branch graph.
+Its finite table depends only on the expected tag. For arbitrary actual tags,
+older registers, protected workspace and exterior tape tail, the machine
+reads the unary register physically and restores the entire tape and original
+focus on both outcomes. It accepts exactly equal tags and rejects unequal
+tags; it never generates a program from the actual tag or a semantic decoder.
+
+The exact work count is `2 * min actual expected + 3`, bounded by
+`2 * expected + 3`. An oversized tag therefore cannot force an unbounded
+scan. The raw refinement costs six transitions per work step. Deterministic
+rule queries and separated, rule-free accept/reject endpoints are checked.
+An invalid entry marker enters a dead state rather than accepting.
+
+All 25 prepared [regression examples](../../lean-regression/PNPConcreteCookLevinBuilderUnaryTagMatch.lean)
+pass on their first execution. These include universal work/raw execution,
+both tape-preserving outcomes, finite control contracts, the cost bound,
+literal tags zero through four, shorter and oversized tags, nonempty
+surrounding tape, missing markers and malformed unary input.
+All 11 public theorem closures use only `propext` and `Quot.sound`;
+none uses a project-specific axiom, `Classical.choice` or `sorryAx`.
+Source development corrected record layout and proof normalization, replaced
+an unavailable list-lemma name with a constructive induction, and made its
+zero-add rewrite explicit. No machine behavior, public execution contract or
+prepared regression assertion was weakened. The terminal targeted run passed;
+no unchanged broad core or website suite was repeated.
+
 ## Next implementation: uniform runtime region-entry dispatch
 
-Wire these branch entry programs through fixed control that reads the actual
-selected tag, or through the corresponding already-proved runtime graph nodes.
-Do not compute the semantic selected region and use it to generate a different
-program per input. Reuse the one source assembly and one selection; preserve
-their frame and charge the new control handoffs. Prove one all-input work/raw
-execution theorem and a single source-size polynomial bound for the resulting
-uniform region-entry machine.
+Wire the existing radix-entry programs through one fixed finite graph:
+five literal tag checks and their five fixed region-entry nodes. Each failed
+comparison must preserve the selected source frame before the next check.
+Connect a successful check directly to that region's entry. Reject a tag
+outside the five-region schema without selecting an entry. Do not compute
+the semantic selected region and use it to generate a different program per
+input. Reuse the one source assembly and one region selection.
+
+Prove one universal execution theorem for `machine problem.verifier` from
+the original `BuilderCursorSource.cursorTape`, using only the existing body
+guard, not a supplied branch verdict. Derive the selected-region equality
+from that guard. Prove raw refinement and one polynomial bound in encoded
+source length under the existing cursor-balance invariant. Charge source
+assembly/selection, every tag test, graph bridge and selected entry.
+A planned conservative bound can sum the five existing entry polynomials:
+the tag checks with their bridges cost at most 40 work steps, plus the
+source handoff and final entry bridge. This constant bound still requires
+the graph execution proof; it is not claimed by the standalone tag test.
 
 Branch arithmetic is not complete constraint construction. The initial and
 accepting regions' empty radix lists do not implement their constraints.
