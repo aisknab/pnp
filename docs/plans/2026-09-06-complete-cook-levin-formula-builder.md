@@ -1342,26 +1342,83 @@ fixture-local recursion-depth option; source options and resource limits were
 not raised. The source build and axiom audit were byte-bound and reused for
 the regression-only correction. No broad core or site suite was repeated.
 
-## Next implementation: source-bound whole-region selection
+## Verified implementation: source-bound whole-region selection
 
-Connect the actual source-derived assembly once to this complete dispatcher.
-Use its canonical frame
-`[1, preservation, control, initial, shape, coordinate]`, with the five region
-lengths derived from the verifier/input and the coordinate derived from the
-actual cursor. Prove the assembled-frame equality, the complete work/raw run,
-the body-guard consequence that selection accepts, and a total encoded-source
-polynomial bound that includes assembly and the new handoff bridge. Do not
-replace source assembly by a supplied register frame or repeat it per region.
+[CookLevinBuilderConstraintRegionSource.lean](../../lean/PNP/Concrete/CookLevinBuilderConstraintRegionSource.lean)
+connects the actual source assembly once to the complete fixed dispatcher.
+The canonical frame
+`[1, preservation, control, initial, shape, coordinate]` is derived from
+the verifier/input and actual cursor, not supplied to the machine by a caller.
+This closes the source-to-whole-region-selection dependency within the same
+canonical manuscript formula construction.
 
-Then connect the physically retained region tag and local coordinate to the
-canonical region-local decoder. Local decoding, clause occupancy, emission,
-scratch recovery, Finish, explicitly cleared padding and the complete
-loop/reduction remain necessary downstream obligations.
+The universal `workRunExact` starts at
+`BuilderCursorSource.cursorTape problem index remaining output` under the
+existing body guard `quotient problem index < count problem`. It performs
+the complete assembly and dispatcher, including their handoff, for every
+verifier tableau problem, cursor index, remaining budget and output prefix.
+It accepts no supplied region, frame, decoder result or correctness certificate.
+The resulting tape preserves the assembled frame and protected workspace,
+appends the physically computed local coordinate and literal region tag, and
+has empty outer tape. The actual body guard proves that a region is selected,
+that its local coordinate lies within that region, and that execution accepts.
 
-This continues the same canonical formula construction. M230 and its fixed
-complete-builder checkpoint remain unearned; publication is deferred. Proof
-estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage: 205/207;
-global gates closed: 0/5.
+The semantic interpretation of the written pair is exactly
+`formulaConstraintSlotDirect`. The theorem preserves both option layers:
+an out-of-range `none` is not a padded empty constraint `some none`.
+This is a specification theorem, not execution of the local decoder; the
+finite machine never evaluates the semantic decoder as a shortcut.
+
+Under the existing cursor-balance invariant, put
+`B = (sourceSpan verifier).eval input.length`. The source-derived bounds are:
+
+- Raw steps are bounded by the complete assembly polynomial, plus six raw
+  transitions for the handoff, plus the complete dispatcher's polynomial at
+  the source span. No region reassembles the source.
+- All appended selection scratch registers, including every rejected
+  predecessor and the literal tag, occupy at most `20 * B + 25` symbols.
+- The entire retained register word occupies at most `31 * B + 42` symbols.
+  This does not claim a bound on an arbitrarily supplied output prefix or
+  the still-incomplete formula-builder output.
+
+The [regression module](../../lean-regression/PNPConcreteCookLevinBuilderConstraintRegionSource.lean)
+was prepared with the source before its first compile. All 34 examples pass:
+universal exact work/raw execution, source and tape linkage, actual body-guard
+acceptance, source-size bounds, control separation, canonical slot equality,
+and the absent-versus-padded distinction. All 27 public theorem closures pass:
+four use no axioms, eight use only `propext`, and fifteen use
+`propext` with `Quot.sound`; none uses a project-specific axiom,
+`Classical.choice` or `sorryAx`.
+
+The first compile exposed only proof-elaboration issues: concrete chain
+normalization and a split on the outer option match instead of the numeric
+guards. An abstract chain lemma and explicit guard cases fixed those scripts.
+The machine, public statements and prepared regression expectations were not
+changed. The final permanent target, axiom audit and regressions reached their
+terminal zero result. Unchanged dispatcher evidence was reused; no broad core
+or website suite was repeated.
+
+## Next implementation: executable region-local decoding
+
+Starting from this actual selected tape, consume the physically written tag
+and local coordinate and derive the canonical region-local constraint data.
+Keep the existing direct decoder solely as the specification. The finite
+control must implement the coordinate arithmetic and input-dependent reads,
+preserve the source/output workspace, and distinguish a valid padded slot
+from an absent one. Prove the all-coordinate work/raw execution and total
+encoded-source polynomial bound, including the retained scratch and every
+handoff. Do not substitute a supplied constraint, branch verdict or correctness
+certificate, and do not promote a fixed slot to a complete decoder.
+
+Local decoding, clause occupancy, emission, scratch recovery, Finish,
+explicitly cleared padding and the complete loop/packaged reduction remain
+necessary downstream obligations. Register only the complete M230 capability
+in the publication inventory once its full obligation is discharged.
+
+M230 and its fixed complete-builder checkpoint remain unearned. Publication
+is deferred because the full end-to-end construction is not yet complete.
+Risk-weighted proof completion estimate: 35%; uncertainty: 20% to 40%;
+formal artefact coverage: 205/207; global gates closed: 0/5.
 
 ## Source and expectation preflight
 
