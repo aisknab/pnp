@@ -396,11 +396,10 @@ all source arithmetic, scratch, payload registers, raw steps and the explicitly
 cleared exterior; no prepared count or supplied field-size bound substitutes
 for the source calculation.
 
-Runtime selection among the three fixed branch programs is still a separate
-obligation. Proving a branch under the correct classification premise must not
-be reported as a complete source-to-payload dispatcher. The subsequent fixed
-graph must physically test the source row against the head/state boundaries,
-derive the chosen branch and preserve the same source frame.
+Those branch-specific contracts require the correct classification premise.
+They were not themselves a complete source-to-payload dispatcher. The physical
+selector below now derives that classification by actual machine outcomes while
+preserving the same source frame.
 
 ### Exact exterior handoff through the complete shape branches
 
@@ -435,24 +434,68 @@ allowed the remaining regression checks to reuse those successful phases.
 The old regression expectations, finite programs and exact step functions
 were checked unchanged.
 
-Next assemble the physical selector using one comparison of the actual source
-row with tape width. The existing residual comparison already distinguishes
-the less-than outcome; a zero test of its resulting coordinate separates equal
-from greater. These outcomes select symbol, head and state respectively.
-The valid shape-row bound derives that a greater row is exactly width plus one,
-so a second comparison and an extra width-plus-one expression are unnecessary.
-Each path must erase the four comparison scratch registers and pass its exact
-cleared exterior into the corresponding generalized source-bound branch.
+### Complete physical shape-family payload
 
-This selector is still to be implemented and verified. Its canonical theorem
-must derive the branch from actual machine outcomes rather than accept a
-classification premise. Charge every comparison, zero test, cleanup, payload
-step and graph bridge, and prove the combined encoded-input polynomial bound.
-This is one finite dependency path to the full shape-family dispatcher, not
-another fixed-coordinate milestone.
+The full family is now verified in
+[`CookLevinBuilderShapePayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderShapePayload.lean).
+One fixed nine-node graph, determined only by the verifier, copies the actual
+row and tape-width registers. The residual comparison selects symbol on its
+less-than endpoint; its non-less endpoint performs a zero test to distinguish
+head from state. Each path erases all four comparison scratch registers and
+passes the exact cleared exterior into its complete source-bound branch.
 
-The source-bound shape payload, remaining families, main loop and packaged
-reduction remain open. M230 is not earned; the fixed complete-builder checkpoint
+`selectedKind_canonical` binds those outcomes to the canonical source row.
+`workRunExact` and `run_compile_exact` cover the entire physical selection and
+payload run. `canonical_workRunExact` requires only the actual selected-region
+premise, not a caller-supplied branch, count, payload or classification verdict.
+The result contains the canonical complete reversed exactly-one payload, and
+its decoder theorem preserves the original slot interface. The original
+source/radix frame and arbitrary interior data remain intact.
+
+The exact step count reuses the comparison/zero/erase cost already proved for
+the equality dispatcher, then adds actual pair preparation, selected payload
+work and their two graph bridges. No second comparison or width-plus-one
+expression is needed. The total encoded-input polynomial bounds include all
+of this work, the retained/scratch registers, complete payload and explicit
+exterior. Taking the sum of the three fixed branch bounds gives one bound
+independent of the runtime branch.
+
+All 47 prepared regression contracts and 21 public-theorem axiom audits passed.
+Every public closure uses only `propext` and `Quot.sound`. Explicit endpoint,
+residual-coordinate, machine-alias and tape-projection normalization resolved
+the initial build errors without changing the finite program, theorem types
+or prepared test assertions. Only the failed new target was rebuilt; the
+unchanged dependency evidence was reused.
+
+### Next dependency: complete control-family payload
+
+The next high-value reuse target is the complete control-transition family,
+not one fixed rule, state or schedule position. Its canonical source is
+`VerifierTableauProblem.controlConstraintSlotDirect` and the three
+`controlConstraints` conclusions: next state, moved head and written symbol.
+The existing radix packet has radices `[3, 3, stateBound, tapeWidth]`;
+its digits select conclusion kind, read symbol, current state and position,
+and its final quotient is the transition step.
+
+Bind every valid coordinate to that exact canonical slot, then derive all
+premise and conclusion literal indices from the actual source fields and the
+fixed verifier's transition function. Compile any required finite rule lookup
+from the verifier; do not supply the action, moved position, literal, payload
+or correctness certificate at runtime. Reuse the existing source-field,
+literal-expression, complete implication-payload and finite-graph machinery
+where their interfaces match. Prove exact tape execution, cleanup, canonical
+decode and complete encoded-input polynomial bounds together.
+
+The intended family endpoint has the same shape as the verified preservation
+and shape endpoints: `canonical_workRunExact problem index remaining inside
+hRegion`, with `hRegion` selecting `.control` and no supplied transition
+verdict. Prepare all-coordinate, all-three-conclusion, symbol/state lookup,
+head-movement boundary, exact payload order, execution and polynomial-bound
+regressions before compilation. This remains part of the existing M230
+manuscript-to-concrete-CNFSAT dependency, not a new scored milestone.
+
+The initial, control and accepting payload families, canonical clause emission,
+full physical successor, main loop and packaged reduction remain open. M230 is not earned; the fixed complete-builder checkpoint
 remains open. No publication row or weighted score changes, and PNPLabs
 publication remains deferred until the selected major integration is earned.
 
