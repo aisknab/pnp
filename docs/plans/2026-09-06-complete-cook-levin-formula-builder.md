@@ -284,13 +284,53 @@ and actual growing register-word span. Reserved-identifier, record-layout,
 case-pattern and tape-normalization corrections changed no transition table,
 execution statement or regression expectation.
 
-Next compose these kernels with the unchanged newest-register copier and final
-eraser in one fixed five-node graph. Prove the entire countdown by induction on
-the physically represented remaining count, including every back-edge and the
-final duplicate erasure. Then establish the exact descending list and aggregate
-polynomial source-size bounds before binding it to the complete shape family.
-The control-kernel evidence is not evidence that this loop already exists.
-M230 remains open, and no publication row or weighted checkpoint changes.
+The complete descending-range loop is now verified in
+[`CookLevinBuilderRegisterDescendingRange.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterDescendingRange.lean).
+One fixed five-node graph handles every physically written count and exclusive
+upper bound with `count ≤ upper`. It emits exactly `count` registers, whose
+index-`i` value is `upper - (i + 1)`, restores the original counter, preserves
+the retained frame and arbitrary interior data, and erases the redundant working
+register even when the count is zero. The exact work/raw theorem charges every
+loop back-edge and the final exit.
+
+For a common bound `B` on count, upper value and retained-register span, the
+complete raw runtime is at most `180 * (B + 1)^3`; the final register word plus
+explicitly cleared exterior cells has span at most `4 * (B + 1)^2`.
+The polynomial-syntax theorem composes these bounds with any proved encoded-input
+field bound. Actual shape-source linkage remains required; the bound premises
+are not asserted to be derived from the source by this generic range kernel.
+
+All 35 prepared regressions and 17 public-theorem axiom audits passed.
+The closures use only `propext`, `Quot.sound`, or no axioms. A compiled
+dependency probe located `Classical.byContradiction` in the impossible
+positive-count/zero-value case; explicitly deriving `False` from the numeric
+entry invariant removed it without changing the theorem or machine. An overly
+broad regression-proof unfold was narrowed while retaining the exact bridge-count
+assertion. The final regression-only run reused the unchanged green source build
+and axiom evidence by immutable tree and source identity.
+
+### Next complete range-payload metadata and source binding
+
+The canonical reversed `exactlyOne` payload still needs the physically written
+count and tag after the variable-length range: `descending ++ [count, 4]`.
+Do not copy the buried count with a register offset or program size selected by
+the runtime list length.
+
+Use a static counter-restoration variant that can retain its unique boundary
+marker after the range pass, while preserving the existing ordinary-delimiter
+contracts. Compose the complete range with a second fixed counter pass: allocate
+a zero accumulator, consume the original counter one unit at a time and increment
+the newest accumulator. On exhaustion restore the counter and ordinary delimiter,
+then append the constant tag. Prove exact metadata, both loop traces, zero cases,
+all bridges, cleanup and aggregate polynomial bounds; do not replace this with a
+supplied count or list. Update the changed source and full relevant regression
+contracts together before rebuilding their dependency chain.
+
+After that generic payload is complete, derive count and upper from the actual
+written shape coordinates and prove canonical symbol/head/state list equality
+in the required row order. The full shape payload, other families, main loop and
+packaged reduction remain open. M230 is not earned, no publication row or fixed
+weighted checkpoint changes, and PNPLabs publication remains deferred.
 
 ## Implementation phases
 
