@@ -1182,27 +1182,85 @@ rules, public theorem statements, exact costs and 35 regression assertions were
 preserved. All regression assertions passed on their first actual execution.
 Unchanged verified dependency checks and broad core/site suites were not repeated.
 
-## Next implementation: actual residual copy and branch handoff
+## Verified component: actual residual copy and branch handoff
 
-Compose the normalizer with fixed-offset register copies. On the selected less
-route, copy the marked-coordinate register (offset two) to recover the local
-coordinate. On the non-selected route, copy the unmarked-coordinate register
-(offset one), then increment it only when the physically computed parity is odd.
-Equality must produce zero; greater must produce its unmarked remainder plus one.
+`BuilderRegionResidualSelection` materializes one fixed seven-node, 602-rule
+graph. Its entry runs the actual disposable-pair comparator. The selected branch
+restores the physical fields then copies register offset two. The non-selected
+branch restores them, copies offset one, and increments only on the physically
+computed odd-parity outcome. Unexpected local failures lead to the dead endpoint.
+All node names, programs and successors are independent of input values.
 
-Use the existing finite program graph to connect actual accept/reject endpoints;
-do not supply the selected branch, residual value or a correctness certificate.
-Preserve the original source register frame and charge every bridge, copy and
-increment. The fixed four added scratch registers keep later region offsets
-compile-time constants. Prove the source-derived comparison handoff and the
-complete encoded-source-size bound before calling this a working residual phase.
+| Node | Program | Accept successor | Reject successor |
+| --- | --- | --- | --- |
+| Compare | Existing pair comparator | Restore selected | Restore residual |
+| Restore selected | Field normalizer | Copy selected | Dead |
+| Restore residual | Field normalizer | Copy zero | Copy remainder |
+| Copy selected | Register copy, offset two | Selected endpoint | Dead |
+| Copy zero | Register copy, offset one | Residual endpoint | Dead |
+| Copy remainder | Register copy, offset one | Increment | Dead |
+| Increment | Existing literal increment | Residual endpoint | Dead |
 
-The general five-region dispatcher, local decoding, clause occupancy, emission,
-Finish, blank-padding and complete-loop/reduction obligations remain open. This
-continues the same canonical formula construction, not a new mathematical route.
-M230 and its fixed complete-builder checkpoint remain unearned; publication is
-deferred. Proof estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage:
-205/207; global gates closed: 0/5.
+For every natural coordinate and boundary, arbitrary original register list and
+protected workspace, the exact run starts at
+`endTape (older ++ [coordinate, boundary]) workspace []` and returns the
+unchanged `older` frame plus four ordinary scratch registers. The last register
+equals `if coordinate < boundary then coordinate else coordinate - boundary`;
+the recovered boundary register equals the original boundary. The accepting
+endpoint is reached exactly when the coordinate lies below the boundary; the
+rejecting endpoint exactly when the boundary is at most the coordinate.
+
+All physical scans, copies, increments and graph bridges are charged. Less/equal
+traverse three bridges; greater traverses four plus the increment's two steps.
+For coordinates and boundaries at most `B`, the proved work bound is
+
+```text
+17*B + 23 + 6*(B+1)*(B+1) + 4*(2*B+3)*(2*B+3) + 9*(2*B+3) + 5
+```
+
+The compiled raw run has exactly six times the work steps, with a matching
+`NatPolynomial` bound. This is an operand-bound theorem, not yet the full
+source-encoded-size theorem for preparation, region dispatch and formula emission.
+Graph well-formedness, distinct local queries and absence of rules at both local
+halting states are proved, not supplied as caller premises. Neither a branch
+verdict nor a residual-correctness certificate is supplied to the machine.
+
+The permanent target built, all 38 prepared regressions passed, and all 19 public
+theorem axiom closures passed in one terminal zero-status verification. Five
+public declarations are axiom-free, two use only `propext`, and twelve use only
+`propext` and `Quot.sound`. No project-specific axiom or `Classical.choice`
+remains. The regressions cover universal exact work/raw/result/control/exterior
+contracts, literal zero/equal/less/greater cases, retained workspace, one-step-short
+and overrun boundaries, malformed input, and the polynomial bound.
+
+The machine, public statements and all expected results were unchanged throughout
+feedback. Structural length lemmas avoided expanding the entire graph to count
+rules. A bounded evaluator-depth setting allowed kernel-checked literal lookup
+through its 602 rules. The axiom audit caught an `omega`-generated classical
+decidability proof when negating a conjunction: explicitly constructing each
+conjunct in the two arithmetic helpers removed the dependency. The final audit
+ran before the final regression pass. No broad core or site suite was repeated.
+
+## Next implementation: source-bound complete region dispatch
+
+Compose the existing fixed-offset operand preparation with this complete
+selection graph. Prove the general ordinary-register interface first, then bind
+the actual source assembly once; do not rerun source assembly for each comparison
+or supply a residual value. Instantiate the charged bound with the already
+derived source-span polynomial, including preparation and every bridge.
+
+Use the preserved original region-length frame and returned latest coordinate to
+continue the complete five-region dispatcher. Derive every fixed register offset
+from that layout, including the four scratch registers appended by each previous
+comparison; do not add another fixed-slot milestone or supplied selected region.
+The full dispatcher must handle zero lengths, equality, selection and rejection
+from actual runs. Local decoding, clause occupancy, emission, Finish, explicit
+cleared blank-padding and the complete loop/reduction remain downstream.
+
+This continues the same canonical formula construction. M230 and its fixed
+complete-builder checkpoint remain unearned; publication is deferred. Proof
+estimate: 35%; uncertainty: 20% to 40%; formal artefact coverage: 205/207;
+global gates closed: 0/5.
 
 ## Source and expectation preflight
 
