@@ -1539,34 +1539,87 @@ zero-add rewrite explicit. No machine behavior, public execution contract or
 prepared regression assertion was weakened. The terminal targeted run passed;
 no unchanged broad core or website suite was repeated.
 
-## Next implementation: uniform runtime region-entry dispatch
+## Verified implementation: uniform runtime region-entry dispatch
 
-Wire the existing radix-entry programs through one fixed finite graph:
-five literal tag checks and their five fixed region-entry nodes. Each failed
-comparison must preserve the selected source frame before the next check.
-Connect a successful check directly to that region's entry. Reject a tag
-outside the five-region schema without selecting an entry. Do not compute
-the semantic selected region and use it to generate a different program per
-input. Reuse the one source assembly and one region selection.
+[CookLevinBuilderRegionRadixDispatch.lean](../../lean/PNP/Concrete/CookLevinBuilderRegionRadixDispatch.lean)
+connects the five fixed tag checks to the five fixed source-derived radix
+entries. The verifier determines the ten-node graph once. The actual tag is
+read from tape; neither a semantic selected region nor a supplied branch
+verdict constructs or chooses a runtime program. Failed comparisons preserve
+the full selected frame before the next check.
 
-Prove one universal execution theorem for `machine problem.verifier` from
-the original `BuilderCursorSource.cursorTape`, using only the existing body
-guard, not a supplied branch verdict. Derive the selected-region equality
-from that guard. Prove raw refinement and one polynomial bound in encoded
-source length under the existing cursor-balance invariant. Charge source
-assembly/selection, every tag test, graph bridge and selected entry.
-A planned conservative bound can sum the five existing entry polynomials:
-the tag checks with their bridges cost at most 40 work steps, plus the
-source handoff and final entry bridge. This constant bound still requires
-the graph execution proof; it is not claimed by the standalone tag test.
+The universal `dispatch_workRunExact` enters the matching radix program from
+its actual selected frame. `reject_invalid_tag` rejects every unary tag at
+least five in exactly 40 work steps, preserving older registers, protected
+workspace and both tape tails. The five successful checking paths, including
+their bridges, cost 4, 10, 18, 28 and 40 work steps respectively. The entry
+execution and its final bridge are additionally charged.
 
-Branch arithmetic is not complete constraint construction. The initial and
-accepting regions' empty radix lists do not implement their constraints.
-Local constraint construction, input-dependent reads, clause occupancy,
-emission, scratch recovery, Finish, explicitly cleared padding and the complete
-loop/packaged reduction remain necessary downstream obligations. Preserve the
-absent-versus-padded option distinction, and do not supply a constraint, branch
-verdict or correctness certificate in place of runtime work.
+The source-facing `workRunExact` starts at the original
+`BuilderCursorSource.cursorTape`. It runs the existing source assembly and
+region selection exactly once, then executes the fixed tag/entry graph.
+The existing body guard derives the selected-region equality; there is no
+extra caller-supplied region or branch-correctness premise. Raw refinement
+includes every work step. The original source and workspace survive, and the
+actual written radix packets and quotient reconstruct the local coordinate.
+
+Under the existing body and cursor-balance invariants, `rawTimeBound_le`
+bounds this entire execution by one polynomial in encoded source length.
+It combines the source polynomial, the five fixed entry polynomials, and
+252 raw transitions for all new tag/control bridges. The separate
+`final_register_span_le` bounds generated register space by one polynomial
+as well. Arbitrary previous output is preserved in the workspace, not
+misrepresented as newly produced bounded output.
+
+All 45 prepared [regression examples](../../lean-regression/PNPConcreteCookLevinBuilderRegionRadixDispatch.lean)
+pass on their first execution. They check the fixed graph/entry connections,
+all five route costs, general matching and out-of-schema execution, source
+handoff, exact work/raw runs, preservation, reconstruction, complete time and
+register-span bounds, and deterministic separated endpoints.
+All 27 public theorem closures pass: five are axiom-free, five use only
+`propext`, and seventeen use `propext` with `Quot.sound`.
+None uses a project-specific axiom, `Classical.choice` or `sorryAx`.
+The first source attempt exposed fixed-name, node-reference and arithmetic
+index-normalization issues. Explicit mapped-name and path-step equalities
+fixed those scripts without changing the machine, theorem statements or
+prepared assertions, and without increasing resource or heartbeat limits.
+No unchanged broad core or website suite was repeated.
+
+## Next implementation: canonical local constraint payloads
+
+Use the physically written regional coordinates to construct the canonical
+local-constraint data needed by clause occupancy and literal selection.
+The authoritative interfaces are the existing
+`VerifierTableauProblem.shapeConstraintSlotDirect`,
+`initialConstraintSlotDirect`, `controlConstraintSlotDirect`,
+`preservationConstraintSlotDirect` and the accepting singleton, composed by
+`BuilderConstraintRegionSource.slotForCoordinate`.
+Its checked `slotForCoordinate_eq` identifies the exact
+`problem.formulaConstraintSlotDirect` specification.
+
+Define the executable register/payload representation before implementation,
+and prove that decoding what the machine actually writes equals that existing
+canonical local constraint at `constraintIndex problem index`.
+Preserve both option layers: an absent coordinate is not an in-range padded
+empty constraint. Derive all widths, literal indices, transition choices and
+mode-dependent input symbols from the source/verified physical frame.
+Do not supply a constraint, input answer, branch verdict, result map or
+correctness certificate, and do not call the semantic direct decoder at
+runtime. Reuse branch control and arithmetic evidence without rerunning the
+original source assembly.
+
+Cover the unbounded families: shape rows, initial state/head and input-only
+or paired symbol opportunities, control transitions, preservation positions
+including padded diagonal cases, and the final accepting requirement.
+A fixed row, transition, token or input fixture cannot replace that general
+interface. Initial and accepting empty radix lists alone do not implement
+their constraints. Check literal/payload size and full execution costs,
+including input-dependent reads, before using the result in the loop.
+
+The existing `ClauseOccupancy.localSlot`, `paddedSlot` and `blockSlot`
+remain semantic specifications, not executed occupancy tests. Physical clause
+occupancy, token emission, scratch recovery, Finish, explicitly cleared padding
+and the complete loop/packaged reduction remain downstream obligations.
 
 M230 and its fixed complete-builder checkpoint remain unearned. Publication
 is deferred because the full end-to-end construction is not yet complete.
