@@ -166,4 +166,73 @@ example (delimiter : WorkSymbol) :
 example (delimiter : WorkSymbol) : (machineWith delimiter).acceptState ≠ (machineWith delimiter).rejectState :=
   acceptWith_ne_rejectState delimiter
 
+-- Arbitrary pre-existing exterior is preserved except for exactly charged allocation.
+example (count upper : Nat) (outside : List WorkSymbol) :
+    exteriorFrom count upper outside =
+      List.replicate (upper - count + 1) .blank ++ outside.drop (values upper count).sum := rfl
+example (upper : Nat) (outside : List WorkSymbol) :
+    exteriorFrom 0 upper outside = List.replicate (upper + 1) .blank ++ outside := by
+  simp only [exteriorFrom, values, List.sum_nil, List.drop_zero, Nat.sub_zero]
+example (outside : List WorkSymbol) : exteriorFrom 1 1 outside = [.blank] ++ outside := rfl
+example (outside : List WorkSymbol) : exteriorFrom 3 5 outside = List.replicate 3 .blank ++ outside.drop 9 := rfl
+example :
+    exteriorFrom 3 5 (List.replicate 10 unitSymbol ++ [scratchEndSymbol]) =
+      List.replicate 3 .blank ++ [unitSymbol, scratchEndSymbol] := rfl
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    finalTapeWithOutside delimiter count upper older inside [] = finalTapeWith delimiter count upper older inside :=
+  finalTapeWithOutside_nil delimiter count upper older inside
+example (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
+    finalTapeWithOutside separatorSymbol count upper older inside outside =
+      endTape (older ++ [count] ++ values upper count) inside (exteriorFrom count upper outside) :=
+  finalTapeWithOutside_separator count upper older inside outside
+example (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
+    finalTapeWithOutside BuilderRegisterCountdownControl.counterMarker count upper older inside outside =
+      BuilderRegisterCountdownControl.markedTape 0 count (values upper count)
+        ((registerWord older).reverse ++ inside) (exteriorFrom count upper outside) :=
+  finalTapeWithOutside_marker count upper older inside outside
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    workRunExact? (machineWith delimiter) (workSteps count upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside outside)) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWithOutside delimiter count upper older inside outside } :=
+  workRunExactWithOutside delimiter count upper older inside outside hCount
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    run (compileWorkMachine (machineWith delimiter)) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside outside))) =
+      encodeWorkConfiguration {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWithOutside delimiter count upper older inside outside } :=
+  run_compile_exactWithOutside delimiter count upper older inside outside hCount
+example (delimiter : WorkSymbol) (upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (machineWith delimiter) (workSteps 0 upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [0, upper]) inside outside)) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWithOutside delimiter 0 upper older inside outside } :=
+  workRunExactWithOutside delimiter 0 upper older inside outside (Nat.zero_le _)
+example (count upper : Nat) (outside : List WorkSymbol) :
+    (exteriorFrom count upper outside).length ≤ upper - count + 1 + outside.length :=
+  exteriorFrom_length_le count upper outside
+example (delimiter : WorkSymbol) (count upper bound : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound) (hUpper : upper ≤ bound) (hOlder : (registerWord older).length ≤ bound) :
+    (registerWord (older ++ [count] ++ values upper count)).length +
+        (finalTapeWithOutside delimiter count upper older inside outside).left.length ≤
+      4 * ((bound + 1) * (bound + 1)) + outside.length :=
+  output_span_withOutside_le delimiter count upper bound older inside outside hCount hUpper hOlder
+example (delimiter : WorkSymbol) (bound outsideBound : NatPolynomial) (inputLength count upper : Nat)
+    (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound.eval inputLength) (hUpper : upper ≤ bound.eval inputLength)
+    (hOlder : (registerWord older).length ≤ bound.eval inputLength)
+    (hOutside : outside.length ≤ outsideBound.eval inputLength) :
+    (registerWord (older ++ [count] ++ values upper count)).length +
+        (finalTapeWithOutside delimiter count upper older inside outside).left.length ≤
+      (NatPolynomial.add (spanPolynomial bound) outsideBound).eval inputLength ∧
+    6 * workSteps count upper ≤ (rawTimePolynomial bound).eval inputLength :=
+  source_polynomial_boundsWithOutside delimiter bound outsideBound inputLength count upper older inside outside
+    hCount hUpper hOlder hOutside
+
 end PNP.Concrete.CookLevin.BuilderRegisterDescendingRange.Regression

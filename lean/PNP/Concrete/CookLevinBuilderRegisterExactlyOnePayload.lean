@@ -173,6 +173,18 @@ def finalTape (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) 
   endTape (older ++ [count] ++ payloadValues count upper) inside
     ((List.replicate (upper - count + 1) .blank).drop (count + 6))
 
+def exteriorFrom (count upper : Nat) (outside : List WorkSymbol) : List WorkSymbol :=
+  (BuilderRegisterDescendingRange.exteriorFrom count upper outside).drop (count + 6)
+
+def finalTapeWithOutside (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) : WorkTape :=
+  endTape (older ++ [count] ++ payloadValues count upper) inside (exteriorFrom count upper outside)
+
+theorem finalTapeWithOutside_nil (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    finalTapeWithOutside count upper older inside [] = finalTape count upper older inside := by
+  simp only [finalTapeWithOutside, exteriorFrom, BuilderRegisterDescendingRange.exteriorFrom,
+    List.drop_nil, List.append_nil, finalTape]
+
 def finalConfiguration (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) : WorkConfiguration :=
   { state := machine.acceptState
     tape := finalTape count upper older inside }
@@ -257,20 +269,24 @@ private theorem loop_path (spent remaining value : Nat) (emitted older : List Na
         omega
       simpa only [loopSteps, loopFinalTape, hCounter, hValue, hDrop] using hTakePath
 
-/-- Full range, physically copied count and tag, with both complete finite loops. -/
-theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
-    workRunExact? machine (workSteps count upper) (initialConfiguration count upper older inside) =
-      some (finalConfiguration count upper older inside) := by
+/-- Full range and metadata preserve arbitrary exterior after exactly charged allocation. -/
+theorem workRunExactWithOutside (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    workRunExact? machine (workSteps count upper)
+      (workStartConfiguration machine (endTape (older ++ [count, upper]) inside outside)) =
+      some {
+        state := machine.acceptState
+        tape := finalTapeWithOutside count upper older inside outside } := by
   let emitted := BuilderRegisterDescendingRange.values upper count
-  let outside := List.replicate (upper - count + 1) WorkSymbol.blank
+  let rangeOutside := BuilderRegisterDescendingRange.exteriorFrom count upper outside
   have hRange : LocalAcceptRun rangeNode (BuilderRegisterDescendingRange.workSteps count upper)
-      (endTape (older ++ [count, upper]) inside [])
-      (markedTape 0 count emitted ((registerWord older).reverse ++ inside) outside) := by
-    have h := BuilderRegisterDescendingRange.workRunExactWith counterMarker count upper older inside hCount
-    simpa only [LocalAcceptRun, rangeNode, workStartConfiguration, BuilderRegisterDescendingRange.finalTapeWith_marker,
-      emitted, outside] using h
-  have hZero := zero_trace count emitted ((registerWord older).reverse ++ inside) outside
-  have hLoop := loop_path 0 count 0 emitted older inside (outside.drop 1)
+      (endTape (older ++ [count, upper]) inside outside)
+      (markedTape 0 count emitted ((registerWord older).reverse ++ inside) rangeOutside) := by
+    have h := BuilderRegisterDescendingRange.workRunExactWithOutside counterMarker count upper older inside outside hCount
+    simpa only [LocalAcceptRun, rangeNode, workStartConfiguration,
+      BuilderRegisterDescendingRange.finalTapeWithOutside_marker, emitted, rangeOutside] using h
+  have hZero := zero_trace count emitted ((registerWord older).reverse ++ inside) rangeOutside
+  have hLoop := loop_path 0 count 0 emitted older inside (rangeOutside.drop 1)
   have hZeroPath := AcceptPath.step zeroNode .accept _ _ _ _ _ zero_mem hZero hLoop
   have hPath := AcceptPath.step rangeNode .accept _ _ _ _ _ range_mem hRange hZeroPath
   have hRun := WorkMachineProgramPath.runExact graph _ _ _ _ _ graph_wellFormed hPath
@@ -280,13 +296,31 @@ theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkS
   have hFinal (tape : WorkTape) :
       WorkMachineProgramGraph.endpointConfiguration .accept tape =
         { state := machine.acceptState, tape := tape } := by rfl
-  have hDrop : (outside.drop 1).drop (count + 5) = outside.drop (count + 6) := by
+  have hDrop : (rangeOutside.drop 1).drop (count + 5) = rangeOutside.drop (count + 6) := by
     rw [List.drop_drop]
     congr 1
     omega
   rw [hInitial, hFinal] at hRun
-  simpa only [machine, workSteps, initialConfiguration, finalConfiguration, finalTape,
-    payloadValues, loopFinalTape, Nat.zero_add, hDrop, emitted, outside, List.append_assoc] using hRun
+  simpa only [machine, workSteps, finalTapeWithOutside, exteriorFrom,
+    payloadValues, loopFinalTape, Nat.zero_add, hDrop, emitted, rangeOutside, List.append_assoc] using hRun
+
+/-- The original empty-exterior contract is retained unchanged. -/
+theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? machine (workSteps count upper) (initialConfiguration count upper older inside) =
+      some (finalConfiguration count upper older inside) := by
+  simpa only [initialConfiguration, finalConfiguration, finalTapeWithOutside_nil] using
+    workRunExactWithOutside count upper older inside [] hCount
+
+theorem run_compile_exactWithOutside (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    run (compileWorkMachine machine) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration machine (endTape (older ++ [count, upper]) inside outside))) =
+      encodeWorkConfiguration {
+        state := machine.acceptState
+        tape := finalTapeWithOutside count upper older inside outside } :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (workRunExactWithOutside count upper older inside outside hCount)
 
 theorem run_compile_exact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
     run (compileWorkMachine machine) (6 * workSteps count upper)
@@ -408,6 +442,43 @@ theorem source_polynomial_bounds (bound : NatPolynomial) (inputLength count uppe
   · simpa only [spanPolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add] using hSpan
   · simpa only [rawTimePolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add,
       ← Nat.mul_assoc] using hTime
+
+theorem exteriorFrom_length_le (count upper : Nat) (outside : List WorkSymbol) :
+    (exteriorFrom count upper outside).length ≤
+      ((List.replicate (upper - count + 1) WorkSymbol.blank).drop (count + 6)).length + outside.length := by
+  simp only [exteriorFrom, BuilderRegisterDescendingRange.exteriorFrom, List.length_drop,
+    List.length_append, List.length_replicate]
+  omega
+
+theorem output_span_withOutside_le (count upper bound : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound) (hUpper : upper ≤ bound) (hOlder : (registerWord older).length ≤ bound) :
+    (registerWord (older ++ [count] ++ payloadValues count upper)).length +
+        (finalTapeWithOutside count upper older inside outside).left.length ≤
+      10 * ((bound + 1) * (bound + 1)) + outside.length := by
+  have hOld := output_span_le count upper bound older inside hCount hUpper hOlder
+  have hOutside := exteriorFrom_length_le count upper outside
+  rw [final_exterior] at hOld
+  change (registerWord (older ++ [count] ++ payloadValues count upper)).length +
+    (exteriorFrom count upper outside).length ≤ _
+  omega
+
+theorem source_polynomial_boundsWithOutside (bound outsideBound : NatPolynomial)
+    (inputLength count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound.eval inputLength) (hUpper : upper ≤ bound.eval inputLength)
+    (hOlder : (registerWord older).length ≤ bound.eval inputLength)
+    (hOutside : outside.length ≤ outsideBound.eval inputLength) :
+    (registerWord (older ++ [count] ++ payloadValues count upper)).length +
+        (finalTapeWithOutside count upper older inside outside).left.length ≤
+      (NatPolynomial.add (spanPolynomial bound) outsideBound).eval inputLength ∧
+    6 * workSteps count upper ≤ (rawTimePolynomial bound).eval inputLength := by
+  have hSpace := output_span_withOutside_le count upper (bound.eval inputLength)
+    older inside outside hCount hUpper hOlder
+  have hTime := (source_polynomial_bounds bound inputLength count upper older inside hCount hUpper hOlder).2
+  constructor
+  · simp only [NatPolynomial.eval_add, spanPolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant]
+    omega
+  · exact hTime
 
 theorem rules_pairwise_query_distinct : machine.rules.Pairwise WorkMachineChain.QueryDistinct :=
   WorkMachineProgramGraph.rules_pairwise graph graph_wellFormed

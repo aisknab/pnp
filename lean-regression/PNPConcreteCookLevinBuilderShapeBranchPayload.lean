@@ -199,4 +199,84 @@ example {language : Language} (problem : VerifierTableauProblem language)
   have hImpossible : Kind.head = Kind.symbol := hKind.symm.trans h
   cases hImpossible
 
+-- The generalized entry retains real exterior cells from prior comparison cleanup.
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) :
+    fieldsWrittenSpan problem index remaining afterCount after branch =
+      (registerWord (BuilderRegisterExpression.values (expression problem.verifier afterCount branch)
+        (BuilderLiteralArgumentSource.environment problem index remaining .shape afterCount after))).length := rfl
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (outside : List WorkSymbol) :
+    exteriorWithOutside problem index remaining afterCount after branch outside =
+      BuilderRegisterExactlyOnePayload.exteriorFrom (countValue problem branch) (upperValue problem index branch)
+        (outside.drop (fieldsWrittenSpan problem index remaining afterCount after branch)) := rfl
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (inside : List WorkSymbol) :
+    initialConfigurationWithOutside problem index remaining afterCount after branch inside [] =
+      initialConfiguration problem index remaining afterCount after branch inside :=
+  initialConfigurationWithOutside_nil problem index remaining afterCount after branch inside
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (inside : List WorkSymbol) :
+    finalConfigurationWithOutside problem index remaining afterCount after branch inside [] =
+      finalConfiguration problem index remaining afterCount after branch inside :=
+  finalConfigurationWithOutside_nil problem index remaining afterCount after branch inside
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount) :
+    workRunExact? (machine problem.verifier afterCount branch)
+      (workSteps problem index remaining afterCount after branch)
+      (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside) =
+      some (finalConfigurationWithOutside problem index remaining afterCount after branch inside outside) :=
+  workRunExactWithOutside problem index remaining afterCount after branch inside outside hAfter
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount) :
+    run (compileWorkMachine (machine problem.verifier afterCount branch))
+      (6 * workSteps problem index remaining afterCount after branch)
+      (encodeWorkConfiguration
+        (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside)) =
+      encodeWorkConfiguration
+        (finalConfigurationWithOutside problem index remaining afterCount after branch inside outside) :=
+  run_compile_exactWithOutside problem index remaining afterCount after branch inside outside hAfter
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount)
+    (hRegion : BuilderConstraintRegionSource.selectedRegion problem index = some .shape)
+    (hBranch : BuilderShapeCoordinates.kind (BuilderShapeCoordinates.ofSource problem index hRegion) = branch) :
+    workRunExact? (machine problem.verifier afterCount branch)
+      (workSteps problem index remaining afterCount after branch)
+      (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside) =
+      some {
+        state := (machine problem.verifier afterCount branch).acceptState
+        tape := endTape (scratchValues problem index remaining afterCount after branch ++
+          [countValue problem branch] ++ BuilderLocalConstraintPayload.values
+            (problem.shapeConstraintSlotDirect (BuilderConstraintRegionSource.localCoordinate problem index .shape)))
+          inside (exteriorWithOutside problem index remaining afterCount after branch outside) } :=
+  canonical_workRunExactWithOutside problem index remaining afterCount after branch inside outside hAfter hRegion hBranch
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (inside outside : List WorkSymbol) :
+    (finalConfigurationWithOutside problem index remaining afterCount after branch inside outside).tape.right =
+      (registerWord (finalValues problem index remaining afterCount after branch)).reverse ++ inside := rfl
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (outside : List WorkSymbol) :
+    (exteriorWithOutside problem index remaining afterCount after branch outside).length ≤
+      (exterior problem index branch).length + outside.length :=
+  exteriorWithOutside_length_le problem index remaining afterCount after branch outside
+example {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (retainedBound outsideBound : NatPolynomial) (outside : List WorkSymbol)
+    (hAfter : after.length = afterCount)
+    (hBody : BuilderClauseDividerOperands.quotient problem index < BuilderDividerOperands.count problem)
+    (hBalance : index + remaining = BuilderFullScheduleCursorController.bodySlotCount problem)
+    (hRegion : BuilderConstraintRegionSource.selectedRegion problem index = some .shape)
+    (hRetained : (registerWord after).length ≤ retainedBound.eval problem.input.length)
+    (hOutside : outside.length ≤ outsideBound.eval problem.input.length) :
+    (registerWord (finalValues problem index remaining afterCount after branch)).length +
+        (finalConfigurationWithOutside problem index remaining afterCount after branch [] outside).tape.left.length ≤
+      (NatPolynomial.add (spanPolynomial problem.verifier afterCount branch retainedBound) outsideBound).eval problem.input.length ∧
+    6 * workSteps problem index remaining afterCount after branch ≤
+      (rawTimePolynomial problem.verifier afterCount branch retainedBound).eval problem.input.length :=
+  source_polynomial_boundsWithOutside problem index remaining afterCount after branch retainedBound outsideBound outside
+    hAfter hBody hBalance hRegion hRetained hOutside
+
 end PNP.Concrete.CookLevin.BuilderShapeBranchPayload.Regression

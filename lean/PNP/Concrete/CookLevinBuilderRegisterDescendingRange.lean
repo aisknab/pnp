@@ -193,6 +193,35 @@ theorem finalTapeWith_marker (count upper : Nat) (older : List Nat) (inside : Li
         (List.replicate (upper - count + 1) .blank) :=
   BuilderRegisterCountdownControl.restoredTapeWith_marker _ _ _ _
 
+/-- Cleared working register followed by exactly the unallocated original exterior. -/
+def exteriorFrom (count upper : Nat) (outside : List WorkSymbol) : List WorkSymbol :=
+  List.replicate (upper - count + 1) .blank ++ outside.drop (values upper count).sum
+
+def finalTapeWithOutside (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) : WorkTape :=
+  restoredTapeWith delimiter count (values upper count) ((registerWord older).reverse ++ inside)
+    (exteriorFrom count upper outside)
+
+theorem finalTapeWithOutside_nil (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside : List WorkSymbol) :
+    finalTapeWithOutside delimiter count upper older inside [] = finalTapeWith delimiter count upper older inside := by
+  simp only [finalTapeWithOutside, finalTapeWith, exteriorFrom, List.drop_nil, List.append_nil]
+
+theorem finalTapeWithOutside_separator (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) :
+    finalTapeWithOutside separatorSymbol count upper older inside outside =
+      endTape (older ++ [count] ++ values upper count) inside (exteriorFrom count upper outside) := by
+  simpa only [finalTapeWithOutside, BuilderRegisterCountdownControl.restoredTapeWith_separator,
+    BuilderRegisterCountdownControl.restoredTape_eq_endTape, List.append_assoc,
+    List.cons_append, List.nil_append]
+
+theorem finalTapeWithOutside_marker (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) :
+    finalTapeWithOutside counterMarker count upper older inside outside =
+      markedTape 0 count (values upper count) ((registerWord older).reverse ++ inside)
+        (exteriorFrom count upper outside) :=
+  BuilderRegisterCountdownControl.restoredTapeWith_marker _ _ _ _
+
 def finalConfiguration (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) : WorkConfiguration :=
   { state := machine.acceptState
     tape := finalTape count upper older inside }
@@ -212,26 +241,26 @@ private theorem decrement_trace (spent remaining value : Nat) (emitted : List Na
     List.reverse_cons, List.reverse_replicate, List.reverse_nil, List.cons_append,
     List.nil_append, List.append_assoc] using h
 
-private theorem copy_trace (spent remaining value : Nat) (emitted : List Nat) (inside : List WorkSymbol) :
+private theorem copy_trace (spent remaining value : Nat) (emitted : List Nat) (inside outside : List WorkSymbol) :
     LocalAcceptRun copyNode (RegisterCopy.steps [] value)
-      (markedTape spent remaining (emitted ++ [value]) inside [.blank])
-      (markedTape spent remaining ((emitted ++ [value]) ++ [value]) inside []) := by
+      (markedTape spent remaining (emitted ++ [value]) inside (.blank :: outside))
+      (markedTape spent remaining ((emitted ++ [value]) ++ [value]) inside (outside.drop value)) := by
   let oldWord := counterWord spent remaining ++ registerWord emitted
-  have h := RegisterCopy.workRunExact oldWord inside [.blank] value []
+  have h := RegisterCopy.workRunExact oldWord inside (.blank :: outside) value []
   change workRunExact? (RegisterCopy.machine 0) (RegisterCopy.steps [] value)
     {
       state := 0
       tape := {
-        left := [WorkSymbol.blank]
+        left := WorkSymbol.blank :: outside
         head := scratchEndSymbol
         right := (oldWord ++ registerWord [value]).reverse ++ inside } } =
     some {
       state := RegisterCopy.stateCount 0
       tape := {
-        left := ([WorkSymbol.blank] : List WorkSymbol).drop (value + 1)
+        left := (WorkSymbol.blank :: outside).drop (value + 1)
         head := scratchEndSymbol
         right := (oldWord ++ registerWord [value, value]).reverse ++ inside } } at h
-  have hOutside : ([WorkSymbol.blank] : List WorkSymbol).drop (value + 1) = [] := by cases value <;> rfl
+  have hOutside : (WorkSymbol.blank :: outside).drop (value + 1) = outside.drop value := rfl
   simpa only [LocalAcceptRun, copyNode, workStartConfiguration,
     RegisterCopy.machine_startState, RegisterCopy.machine_acceptState,
     markedTape, oldWord, counterWord, hOutside, registerWord_append,
@@ -239,33 +268,33 @@ private theorem copy_trace (spent remaining value : Nat) (emitted : List Nat) (i
     List.reverse_replicate, List.reverse_nil, List.cons_append, List.append_assoc] using h
 
 private def loopFinalTape (delimiter : WorkSymbol) (spent remaining value : Nat)
-    (emitted older : List Nat) (inside : List WorkSymbol) : WorkTape :=
+    (emitted older : List Nat) (inside outside : List WorkSymbol) : WorkTape :=
   restoredTapeWith delimiter (spent + remaining) (emitted ++ values value remaining)
     ((registerWord older).reverse ++ inside)
-    (List.replicate (value - remaining + 1) .blank)
+    (List.replicate (value - remaining + 1) .blank ++ outside.drop (values value remaining).sum)
 
-private theorem loop_path (delimiter : WorkSymbol) (spent remaining value : Nat) (emitted older : List Nat) (inside : List WorkSymbol)
+private theorem loop_path (delimiter : WorkSymbol) (spent remaining value : Nat) (emitted older : List Nat) (inside outside : List WorkSymbol)
     (hRemaining : remaining ≤ value) :
     AcceptPath (graphWith delimiter) (.node (consumeNodeWith delimiter).reference) .accept (loopSteps spent remaining emitted value)
-      (markedTape spent remaining (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
-      (loopFinalTape delimiter spent remaining value emitted older inside) := by
-  induction remaining generalizing spent value emitted with
+      (markedTape spent remaining (emitted ++ [value]) ((registerWord older).reverse ++ inside) outside)
+      (loopFinalTape delimiter spent remaining value emitted older inside outside) := by
+  induction remaining generalizing spent value emitted outside with
   | zero =>
       have hExit : LocalRejectRun (consumeNodeWith delimiter) (exhaustedSteps spent (emitted ++ [value]))
-          (markedTape spent 0 (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
-          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) []) :=
+          (markedTape spent 0 (emitted ++ [value]) ((registerWord older).reverse ++ inside) outside)
+          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) outside) :=
         BuilderRegisterCountdownControl.exhaustedWith_workRunExact delimiter spent (emitted ++ [value])
-          ((registerWord older).reverse ++ inside) []
+          ((registerWord older).reverse ++ inside) outside
       have hErase : LocalAcceptRun eraseNode (value + 2)
-          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
-          (loopFinalTape delimiter spent 0 value emitted older inside) := by
+          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) outside)
+          (loopFinalTape delimiter spent 0 value emitted older inside outside) := by
         have h := BuilderRegisterErase.one_workRunExact emitted value
-          (List.replicate spent unitSymbol ++ delimiter :: ((registerWord older).reverse ++ inside)) []
+          (List.replicate spent unitSymbol ++ delimiter :: ((registerWord older).reverse ++ inside)) outside
         simpa only [LocalAcceptRun, eraseNode, workStartConfiguration, loopFinalTape,
           restoredTapeWith, endTape, values, Nat.add_zero, Nat.sub_zero, List.append_nil,
-          List.append_assoc] using h
+          List.append_assoc, List.sum_nil, List.drop_zero] using h
       have hFinish := AcceptPath.step eraseNode .accept (value + 2) 0 _ _ _ (erase_mem delimiter) hErase
-        (AcceptPath.terminal .accept (loopFinalTape delimiter spent 0 value emitted older inside))
+        (AcceptPath.terminal .accept (loopFinalTape delimiter spent 0 value emitted older inside outside))
       simpa only [loopSteps, Nat.add_zero] using
         AcceptPath.stepReject (consumeNodeWith delimiter) .accept _ _ _ _ _ (consume_mem delimiter) hExit hFinish
   | succ remaining ih =>
@@ -273,36 +302,39 @@ private theorem loop_path (delimiter : WorkSymbol) (spent remaining value : Nat)
       | zero => exact False.elim (by omega)
       | succ value =>
           have hTake : LocalAcceptRun (consumeNodeWith delimiter) (consumeSteps spent (remaining + 1) (emitted ++ [value + 1]))
-              (markedTape spent (remaining + 1) (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) [])
-              (markedTape (spent + 1) remaining (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) []) := by
+              (markedTape spent (remaining + 1) (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) outside)
+              (markedTape (spent + 1) remaining (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) outside) := by
             exact BuilderRegisterCountdownControl.consumeWith_workRunExact delimiter spent remaining (emitted ++ [value + 1])
-              ((registerWord older).reverse ++ inside) []
-          have hDec := decrement_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside) []
-          have hCopy := copy_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside)
-          have hTail := ih (spent := spent + 1) (value := value) (emitted := emitted ++ [value]) (by omega)
+              ((registerWord older).reverse ++ inside) outside
+          have hDec := decrement_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside) outside
+          have hCopy := copy_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside) outside
+          have hTail := ih (spent := spent + 1) (value := value) (emitted := emitted ++ [value]) (outside := outside.drop value) (by omega)
           have hCopyPath := AcceptPath.step copyNode .accept _ _ _ _ _ (copy_mem delimiter) hCopy hTail
           have hDecPath := AcceptPath.step decrementNode .accept _ _ _ _ _ (decrement_mem delimiter) hDec hCopyPath
           have hTakePath := AcceptPath.step (consumeNodeWith delimiter) .accept _ _ _ _ _ (consume_mem delimiter) hTake hDecPath
           have hCounter : spent + 1 + remaining = spent + (remaining + 1) := by omega
           have hResidual : value + 1 - (remaining + 1) = value - remaining := by omega
-          simpa only [loopSteps, loopFinalTape, values, Nat.add_sub_cancel, hCounter, hResidual,
+          have hDrop : (outside.drop value).drop (values value remaining).sum =
+              outside.drop (values (value + 1) (remaining + 1)).sum := by
+            simp only [List.drop_drop, values, Nat.add_sub_cancel, List.sum_cons, Nat.add_comm]
+          simpa only [loopSteps, loopFinalTape, hDrop, values, Nat.add_sub_cancel, hCounter, hResidual,
             List.append_assoc, List.cons_append, List.nil_append] using hTakePath
 
 /-- One fixed finite program, every count and upper bound, exact list and cleanup. -/
-theorem workRunExactWith (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
-    (inside : List WorkSymbol) (hCount : count ≤ upper) :
+theorem workRunExactWithOutside (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) (hCount : count ≤ upper) :
     workRunExact? (machineWith delimiter) (workSteps count upper)
-      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside [])) =
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside outside)) =
       some {
         state := (machineWith delimiter).acceptState
-        tape := finalTapeWith delimiter count upper older inside } := by
+        tape := finalTapeWithOutside delimiter count upper older inside outside } := by
   have hMark : LocalAcceptRun markNode (initializeSteps count upper)
-      (endTape (older ++ [count, upper]) inside [])
-      (markedTape 0 count [upper] ((registerWord older).reverse ++ inside) []) := by
-    have h := BuilderRegisterCountdownControl.initialize_workRunExact count upper ((registerWord older).reverse ++ inside) []
+      (endTape (older ++ [count, upper]) inside outside)
+      (markedTape 0 count [upper] ((registerWord older).reverse ++ inside) outside) := by
+    have h := BuilderRegisterCountdownControl.initialize_workRunExact count upper ((registerWord older).reverse ++ inside) outside
     simpa only [LocalAcceptRun, markNode, workStartConfiguration,
       BuilderRegisterCountdownControl.restoredTape_eq_endTape] using h
-  have hTail := loop_path delimiter 0 count upper [] older inside hCount
+  have hTail := loop_path delimiter 0 count upper [] older inside outside hCount
   have hPath := AcceptPath.step markNode .accept _ _ _ _ _ (mark_mem delimiter) hMark hTail
   have hRun := WorkMachineProgramPath.runExact (graphWith delimiter) _ _ _ _ _ (graphWith_wellFormed delimiter) hPath
   have hInitial (tape : WorkTape) :
@@ -312,8 +344,29 @@ theorem workRunExactWith (delimiter : WorkSymbol) (count upper : Nat) (older : L
       WorkMachineProgramGraph.endpointConfiguration .accept tape =
         { state := (machineWith delimiter).acceptState, tape := tape } := by rfl
   rw [hInitial, hFinal] at hRun
-  simpa only [machineWith, workSteps, finalTapeWith, loopFinalTape,
+  simpa only [machineWith, workSteps, finalTapeWithOutside, exteriorFrom, loopFinalTape,
     Nat.zero_add, List.nil_append, List.append_nil] using hRun
+
+theorem workRunExactWith (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? (machineWith delimiter) (workSteps count upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside [])) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter count upper older inside } := by
+  simpa only [finalTapeWithOutside_nil] using
+    workRunExactWithOutside delimiter count upper older inside [] hCount
+
+theorem run_compile_exactWithOutside (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol) (hCount : count ≤ upper) :
+    run (compileWorkMachine (machineWith delimiter)) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside outside))) =
+      encodeWorkConfiguration {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWithOutside delimiter count upper older inside outside } :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (workRunExactWithOutside delimiter count upper older inside outside hCount)
 
 theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
     workRunExact? machine (workSteps count upper) (initialConfiguration count upper older inside) =
@@ -461,6 +514,41 @@ theorem source_polynomial_bounds (bound : NatPolynomial) (inputLength count uppe
   · simpa only [spanPolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add] using hSpan
   · simpa only [rawTimePolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add,
       ← Nat.mul_assoc] using hTime
+
+theorem exteriorFrom_length_le (count upper : Nat) (outside : List WorkSymbol) :
+    (exteriorFrom count upper outside).length ≤ upper - count + 1 + outside.length := by
+  simp only [exteriorFrom, List.length_append, List.length_replicate, List.length_drop]
+  omega
+
+theorem output_span_withOutside_le (delimiter : WorkSymbol) (count upper bound : Nat)
+    (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound) (hUpper : upper ≤ bound) (hOlder : (registerWord older).length ≤ bound) :
+    (registerWord (older ++ [count] ++ values upper count)).length +
+        (finalTapeWithOutside delimiter count upper older inside outside).left.length ≤
+      4 * ((bound + 1) * (bound + 1)) + outside.length := by
+  have hOld := output_span_le count upper bound older inside hCount hUpper hOlder
+  have hOutside := exteriorFrom_length_le count upper outside
+  simp only [final_exterior, List.length_replicate] at hOld
+  change (registerWord (older ++ [count] ++ values upper count)).length +
+    (exteriorFrom count upper outside).length ≤ _
+  omega
+
+theorem source_polynomial_boundsWithOutside (delimiter : WorkSymbol) (bound outsideBound : NatPolynomial)
+    (inputLength count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound.eval inputLength) (hUpper : upper ≤ bound.eval inputLength)
+    (hOlder : (registerWord older).length ≤ bound.eval inputLength)
+    (hOutside : outside.length ≤ outsideBound.eval inputLength) :
+    (registerWord (older ++ [count] ++ values upper count)).length +
+        (finalTapeWithOutside delimiter count upper older inside outside).left.length ≤
+      (NatPolynomial.add (spanPolynomial bound) outsideBound).eval inputLength ∧
+    6 * workSteps count upper ≤ (rawTimePolynomial bound).eval inputLength := by
+  have hSpace := output_span_withOutside_le delimiter count upper (bound.eval inputLength)
+    older inside outside hCount hUpper hOlder
+  have hTime := (source_polynomial_bounds bound inputLength count upper older inside hCount hUpper hOlder).2
+  constructor
+  · simp only [NatPolynomial.eval_add, spanPolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant]
+    omega
+  · exact hTime
 
 theorem rulesWith_pairwise_query_distinct (delimiter : WorkSymbol) :
     (machineWith delimiter).rules.Pairwise WorkMachineChain.QueryDistinct :=

@@ -120,4 +120,61 @@ example : WorkMachineChain.NoRuleAtAccept machine := noRuleAtAccept
 example : WorkMachineProgramGraph.NoRuleAt machine machine.rejectState := noRuleAtReject
 example : machine.acceptState ≠ machine.rejectState := acceptState_ne_rejectState
 
+-- The second pass consumes count+6 cells after the range's exact exterior allocation.
+example (count upper : Nat) (outside : List WorkSymbol) :
+    exteriorFrom count upper outside =
+      (List.replicate (upper - count + 1) WorkSymbol.blank ++
+        outside.drop (BuilderRegisterDescendingRange.values upper count).sum).drop (count + 6) := rfl
+example (outside : List WorkSymbol) : exteriorFrom 0 0 outside = outside.drop 5 := rfl
+example (outside : List WorkSymbol) : exteriorFrom 0 10 outside = List.replicate 5 .blank ++ outside := rfl
+example :
+    exteriorFrom 3 5 (List.replicate 16 unitSymbol ++ [scratchEndSymbol]) =
+      [unitSymbol, scratchEndSymbol] := rfl
+example (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    finalTapeWithOutside count upper older inside [] = finalTape count upper older inside :=
+  finalTapeWithOutside_nil count upper older inside
+example (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? machine (workSteps count upper)
+      (workStartConfiguration machine (endTape (older ++ [count, upper]) inside outside)) =
+      some {
+        state := machine.acceptState
+        tape := finalTapeWithOutside count upper older inside outside } :=
+  workRunExactWithOutside count upper older inside outside hCount
+example (count upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) (hCount : count ≤ upper) :
+    run (compileWorkMachine machine) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration machine (endTape (older ++ [count, upper]) inside outside))) =
+      encodeWorkConfiguration {
+        state := machine.acceptState
+        tape := finalTapeWithOutside count upper older inside outside } :=
+  run_compile_exactWithOutside count upper older inside outside hCount
+example (upper : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? machine (workSteps 0 upper)
+      (workStartConfiguration machine (endTape (older ++ [0, upper]) inside outside)) =
+      some {
+        state := machine.acceptState
+        tape := finalTapeWithOutside 0 upper older inside outside } :=
+  workRunExactWithOutside 0 upper older inside outside (Nat.zero_le _)
+example (count upper : Nat) (outside : List WorkSymbol) :
+    (exteriorFrom count upper outside).length ≤
+      ((List.replicate (upper - count + 1) WorkSymbol.blank).drop (count + 6)).length + outside.length :=
+  exteriorFrom_length_le count upper outside
+example (count upper bound : Nat) (older : List Nat) (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound) (hUpper : upper ≤ bound) (hOlder : (registerWord older).length ≤ bound) :
+    (registerWord (older ++ [count] ++ payloadValues count upper)).length +
+        (finalTapeWithOutside count upper older inside outside).left.length ≤
+      10 * ((bound + 1) * (bound + 1)) + outside.length :=
+  output_span_withOutside_le count upper bound older inside outside hCount hUpper hOlder
+example (bound outsideBound : NatPolynomial) (inputLength count upper : Nat) (older : List Nat)
+    (inside outside : List WorkSymbol)
+    (hCount : count ≤ bound.eval inputLength) (hUpper : upper ≤ bound.eval inputLength)
+    (hOlder : (registerWord older).length ≤ bound.eval inputLength)
+    (hOutside : outside.length ≤ outsideBound.eval inputLength) :
+    (registerWord (older ++ [count] ++ payloadValues count upper)).length +
+        (finalTapeWithOutside count upper older inside outside).left.length ≤
+      (NatPolynomial.add (spanPolynomial bound) outsideBound).eval inputLength ∧
+    6 * workSteps count upper ≤ (rawTimePolynomial bound).eval inputLength :=
+  source_polynomial_boundsWithOutside bound outsideBound inputLength count upper older inside outside
+    hCount hUpper hOlder hOutside
+
 end PNP.Concrete.CookLevin.BuilderRegisterExactlyOnePayload.Regression

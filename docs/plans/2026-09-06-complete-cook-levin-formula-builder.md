@@ -402,18 +402,54 @@ be reported as a complete source-to-payload dispatcher. The subsequent fixed
 graph must physically test the source row against the head/state boundaries,
 derive the chosen branch and preserve the same source frame.
 
-The immediate handoff obligation is now explicit: equality erases its comparison
-operands and leaves a cleared blank exterior. The current complete range/payload
-run contract starts with an empty exterior. Before composing dispatch, extend
-that execution contract to arbitrary exterior data and recover the existing
-empty-exterior theorems as special cases. Do not silently equate a finite list
-of blank cells with the empty list. The generic decrement, copy and erase
-kernels already expose exterior preservation/allocation; derive the full loop's
-exterior equation from them without changing program control.
+### Exact exterior handoff through the complete shape branches
 
-Then use those generalized contracts in the three existing source-bound branch
-programs and assemble the physical selector. This is one finite dependency path
-to the full shape-family dispatcher, not another fixed-coordinate milestone.
+The handoff obligation is now verified without changing finite-machine control
+or exact step counts. The range, complete metadata constructor and three
+source-bound shape branches all accept arbitrary exterior data. Their original
+empty-exterior contracts remain specializations with unchanged theorem types.
+
+For an initial exterior `outside`, the range's final exterior is exactly
+`replicate (upper - count + 1) blank ++ outside.drop (values upper count).sum`.
+The second metadata pass then drops `count + 6` cells. This records both
+newly cleared cells and allocation from the pre-existing exterior; it does not
+identify a finite blank list with an empty list. The shape branch additionally
+charges the exact register-word span written by its source-field expression
+before applying the complete payload handoff.
+
+The generic output-span bounds become `4 * (B + 1)^2 + outside.length`
+for the range and `10 * (B + 1)^2 + outside.length` for the complete payload.
+The source-bound branch composes its existing encoded-input polynomial with
+a bound on the incoming exterior. The runtime polynomials are unchanged.
+These bounds account for the cleanup left by a preceding comparison without
+adding a supplied execution or branch-selection certificate.
+
+The affected chain passed 183 regression contracts: 62 range, 50 complete
+payload, 33 source-coordinate and 38 source-bound branch contracts. All 110
+public-theorem axiom audits passed, with closures limited to `propext`,
+`Quot.sound`, or no axioms. Two first-pass regression failures were confined
+to record layout and an ambiguous blank-symbol type. Their successful source
+build and axiom phases were preserved separately; the whole failed runs were
+not recorded as green. After notation-only corrections, exact-source guards
+allowed the remaining regression checks to reuse those successful phases.
+The old regression expectations, finite programs and exact step functions
+were checked unchanged.
+
+Next assemble the physical selector using one comparison of the actual source
+row with tape width. The existing residual comparison already distinguishes
+the less-than outcome; a zero test of its resulting coordinate separates equal
+from greater. These outcomes select symbol, head and state respectively.
+The valid shape-row bound derives that a greater row is exactly width plus one,
+so a second comparison and an extra width-plus-one expression are unnecessary.
+Each path must erase the four comparison scratch registers and pass its exact
+cleared exterior into the corresponding generalized source-bound branch.
+
+This selector is still to be implemented and verified. Its canonical theorem
+must derive the branch from actual machine outcomes rather than accept a
+classification premise. Charge every comparison, zero test, cleanup, payload
+step and graph bridge, and prove the combined encoded-input polynomial bound.
+This is one finite dependency path to the full shape-family dispatcher, not
+another fixed-coordinate milestone.
 
 The source-bound shape payload, remaining families, main loop and packaged
 reduction remain open. M230 is not earned; the fixed complete-builder checkpoint

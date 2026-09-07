@@ -201,6 +201,42 @@ def finalConfiguration {language : Language} (problem : VerifierTableauProblem l
   { state := (machine problem.verifier afterCount branch).acceptState
     tape := endTape (finalValues problem index remaining afterCount after branch) inside (exterior problem index branch) }
 
+def fieldsWrittenSpan {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) : Nat :=
+  (registerWord (BuilderRegisterExpression.values (expression problem.verifier afterCount branch)
+    (BuilderLiteralArgumentSource.environment problem index remaining .shape afterCount after))).length
+
+def exteriorWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (outside : List WorkSymbol) : List WorkSymbol :=
+  BuilderRegisterExactlyOnePayload.exteriorFrom (countValue problem branch) (upperValue problem index branch)
+    (outside.drop (fieldsWrittenSpan problem index remaining afterCount after branch))
+
+def initialConfigurationWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) : WorkConfiguration :=
+  workStartConfiguration (machine problem.verifier afterCount branch)
+    (endTape (BuilderLiteralArgumentSource.inputValues problem index remaining .shape after) inside outside)
+
+def finalConfigurationWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) : WorkConfiguration :=
+  { state := (machine problem.verifier afterCount branch).acceptState
+    tape := endTape (finalValues problem index remaining afterCount after branch) inside
+      (exteriorWithOutside problem index remaining afterCount after branch outside) }
+
+theorem initialConfigurationWithOutside_nil {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (inside : List WorkSymbol) :
+    initialConfigurationWithOutside problem index remaining afterCount after branch inside [] =
+      initialConfiguration problem index remaining afterCount after branch inside := rfl
+
+theorem finalConfigurationWithOutside_nil {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (inside : List WorkSymbol) :
+    finalConfigurationWithOutside problem index remaining afterCount after branch inside [] =
+      finalConfiguration problem index remaining afterCount after branch inside := by
+  simp only [finalConfigurationWithOutside, exteriorWithOutside,
+    BuilderRegisterExactlyOnePayload.exteriorFrom, BuilderRegisterDescendingRange.exteriorFrom,
+    List.drop_nil, List.append_nil, finalConfiguration, exterior]
+
 private theorem chain_run (first second : WorkMachine) (firstSteps secondSteps : Nat)
     (initial middle final : WorkTape)
     (hFirst : workRunExact? first firstSteps (workStartConfiguration first initial) =
@@ -212,6 +248,24 @@ private theorem chain_run (first second : WorkMachine) (firstSteps secondSteps :
       some { state := (WorkMachineChain.machine first second).acceptState, tape := final } :=
   WorkMachineChain.workRunExact first second firstSteps secondSteps _ _ _ hFirst rfl hSecond
 
+theorem workRunExactWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount) :
+    workRunExact? (machine problem.verifier afterCount branch)
+      (workSteps problem index remaining afterCount after branch)
+      (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside) =
+      some (finalConfigurationWithOutside problem index remaining afterCount after branch inside outside) := by
+  have hFields := fields_workRunExact problem index remaining afterCount after branch inside outside hAfter
+  have hPayload := BuilderRegisterExactlyOnePayload.workRunExactWithOutside (countValue problem branch)
+    (upperValue problem index branch) (scratchValues problem index remaining afterCount after branch) inside
+    (outside.drop (fieldsWrittenSpan problem index remaining afterCount after branch))
+    (count_le_upper problem index branch)
+  simp only [BuilderRegisterExactlyOnePayload.finalTapeWithOutside] at hPayload
+  have h := chain_run (fieldsMachine problem.verifier afterCount branch)
+    BuilderRegisterExactlyOnePayload.machine _ _ _ _ _ hFields hPayload
+  simpa only [machine, workSteps, initialConfigurationWithOutside, finalConfigurationWithOutside,
+    finalValues, exteriorWithOutside, fieldsWrittenSpan] using h
+
 theorem workRunExact {language : Language} (problem : VerifierTableauProblem language)
     (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
     (inside : List WorkSymbol) (hAfter : after.length = afterCount) :
@@ -219,16 +273,20 @@ theorem workRunExact {language : Language} (problem : VerifierTableauProblem lan
       (workSteps problem index remaining afterCount after branch)
       (initialConfiguration problem index remaining afterCount after branch inside) =
       some (finalConfiguration problem index remaining afterCount after branch inside) := by
-  have hFields := fields_workRunExact problem index remaining afterCount after branch inside [] hAfter
-  simp only [List.drop_nil] at hFields
-  have hPayload := BuilderRegisterExactlyOnePayload.workRunExact (countValue problem branch)
-    (upperValue problem index branch) (scratchValues problem index remaining afterCount after branch) inside
-    (count_le_upper problem index branch)
-  simp only [BuilderRegisterExactlyOnePayload.initialConfiguration,
-    BuilderRegisterExactlyOnePayload.finalConfiguration, BuilderRegisterExactlyOnePayload.finalTape] at hPayload
-  have h := chain_run (fieldsMachine problem.verifier afterCount branch)
-    BuilderRegisterExactlyOnePayload.machine _ _ _ _ _ hFields hPayload
-  simpa only [machine, workSteps, initialConfiguration, finalConfiguration, finalValues, exterior] using h
+  simpa only [initialConfigurationWithOutside_nil, finalConfigurationWithOutside_nil] using
+    workRunExactWithOutside problem index remaining afterCount after branch inside [] hAfter
+
+theorem run_compile_exactWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount) :
+    run (compileWorkMachine (machine problem.verifier afterCount branch))
+      (6 * workSteps problem index remaining afterCount after branch)
+      (encodeWorkConfiguration
+        (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside)) =
+      encodeWorkConfiguration
+        (finalConfigurationWithOutside problem index remaining afterCount after branch inside outside) :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (workRunExactWithOutside problem index remaining afterCount after branch inside outside hAfter)
 
 theorem run_compile_exact {language : Language} (problem : VerifierTableauProblem language)
     (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
@@ -315,6 +373,24 @@ theorem canonical_workRunExact {language : Language} (problem : VerifierTableauP
   have h := workRunExact problem index remaining afterCount after branch inside hAfter
   simpa only [finalConfiguration, canonical_final_values problem index remaining afterCount after hRegion branch hBranch] using h
 
+theorem canonical_workRunExactWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (inside outside : List WorkSymbol) (hAfter : after.length = afterCount)
+    (hRegion : BuilderConstraintRegionSource.selectedRegion problem index = some .shape)
+    (hBranch : BuilderShapeCoordinates.kind (BuilderShapeCoordinates.ofSource problem index hRegion) = branch) :
+    workRunExact? (machine problem.verifier afterCount branch)
+      (workSteps problem index remaining afterCount after branch)
+      (initialConfigurationWithOutside problem index remaining afterCount after branch inside outside) =
+      some {
+        state := (machine problem.verifier afterCount branch).acceptState
+        tape := endTape (scratchValues problem index remaining afterCount after branch ++
+          [countValue problem branch] ++ BuilderLocalConstraintPayload.values
+            (problem.shapeConstraintSlotDirect (BuilderConstraintRegionSource.localCoordinate problem index .shape)))
+          inside (exteriorWithOutside problem index remaining afterCount after branch outside) } := by
+  have h := workRunExactWithOutside problem index remaining afterCount after branch inside outside hAfter
+  simpa only [finalConfigurationWithOutside,
+    canonical_final_values problem index remaining afterCount after hRegion branch hBranch] using h
+
 def fieldsSpanPolynomial {language : Language} (verifier : PolynomialTimeVerifier language)
     (afterCount : Nat) (branch : Kind) (retainedBound : NatPolynomial) : NatPolynomial :=
   BuilderRegisterExpression.spanPolynomial (expression verifier afterCount branch)
@@ -396,6 +472,47 @@ theorem source_polynomial_bounds {language : Language} (problem : VerifierTablea
     have hPayloadTime := hPayload.2
     simp only [workSteps, rawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
     omega
+
+theorem exteriorWithOutside_length_le {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind) (outside : List WorkSymbol) :
+    (exteriorWithOutside problem index remaining afterCount after branch outside).length ≤
+      (exterior problem index branch).length + outside.length := by
+  have h := BuilderRegisterExactlyOnePayload.exteriorFrom_length_le (countValue problem branch)
+    (upperValue problem index branch)
+    (outside.drop (fieldsWrittenSpan problem index remaining afterCount after branch))
+  simp only [List.length_drop] at h
+  change (BuilderRegisterExactlyOnePayload.exteriorFrom (countValue problem branch) (upperValue problem index branch)
+    (outside.drop (fieldsWrittenSpan problem index remaining afterCount after branch))).length ≤ _
+  unfold exterior
+  simp only [List.length_drop]
+  omega
+
+theorem source_polynomial_boundsWithOutside {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining afterCount : Nat) (after : List Nat) (branch : Kind)
+    (retainedBound outsideBound : NatPolynomial) (outside : List WorkSymbol)
+    (hAfter : after.length = afterCount)
+    (hBody : BuilderClauseDividerOperands.quotient problem index < BuilderDividerOperands.count problem)
+    (hBalance : index + remaining = BuilderFullScheduleCursorController.bodySlotCount problem)
+    (hRegion : BuilderConstraintRegionSource.selectedRegion problem index = some .shape)
+    (hRetained : (registerWord after).length ≤ retainedBound.eval problem.input.length)
+    (hOutside : outside.length ≤ outsideBound.eval problem.input.length) :
+    (registerWord (finalValues problem index remaining afterCount after branch)).length +
+        (finalConfigurationWithOutside problem index remaining afterCount after branch [] outside).tape.left.length ≤
+      (NatPolynomial.add (spanPolynomial problem.verifier afterCount branch retainedBound) outsideBound).eval problem.input.length ∧
+    6 * workSteps problem index remaining afterCount after branch ≤
+      (rawTimePolynomial problem.verifier afterCount branch retainedBound).eval problem.input.length := by
+  have hOld := source_polynomial_bounds problem index remaining afterCount after branch retainedBound
+    hAfter hBody hBalance hRegion hRetained
+  have hExterior := exteriorWithOutside_length_le problem index remaining afterCount after branch outside
+  constructor
+  · have hSpace := hOld.1
+    change (registerWord (finalValues problem index remaining afterCount after branch)).length +
+      (exterior problem index branch).length ≤ _ at hSpace
+    change (registerWord (finalValues problem index remaining afterCount after branch)).length +
+      (exteriorWithOutside problem index remaining afterCount after branch outside).length ≤ _
+    rw [NatPolynomial.eval_add]
+    omega
+  · exact hOld.2
 
 theorem rules_pairwise_query_distinct {language : Language} (verifier : PolynomialTimeVerifier language)
     (afterCount : Nat) (branch : Kind) :
