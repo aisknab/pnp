@@ -1398,7 +1398,71 @@ changed. The final permanent target, axiom audit and regressions reached their
 terminal zero result. Unchanged dispatcher evidence was reused; no broad core
 or website suite was repeated.
 
-## Next implementation: executable region-local decoding
+## Verified implementation: register-preserving mixed-radix execution
+
+[CookLevinBuilderRegionCoordinateDivision.lean](../../lean/PNP/Concrete/CookLevinBuilderRegionCoordinateDivision.lean)
+and
+[CookLevinBuilderRegionRadixDecoder.lean](../../lean/PNP/Concrete/CookLevinBuilderRegionRadixDecoder.lean)
+provide the shared executable coordinate arithmetic for the canonical
+rectangular regions. They implement general data-dependent division, not
+another fixed coordinate or supplied quotient/remainder.
+
+The single-split machine starts on
+`older ++ [width] ++ newer ++ [coordinate]`.
+Only the register offset is fixed in its finite control. It physically
+allocates two zero registers, copies the coordinate and width, executes the
+existing literal divider, and restores the result to ordinary registers.
+Its universal exact work/raw execution theorem covers every coordinate,
+positive width and older/newer register frame with the specified offset.
+It preserves that entire frame and the protected workspace and appends
+`[0, 0, consumed, remainder, width, quotient]`, ending with empty outer tape.
+The written quotient/remainder satisfy reconstruction, the strict remainder
+bound and the existing canonical rectangle interpretation, including its
+out-of-range guard.
+
+The mixed-radix compiler fixes only the split count and initial offset.
+All radices remain input data; the physical initial order is
+`older ++ radices.reverse ++ newer ++ [coordinate]`.
+After each actual split, seven retained fields separate the next radix from
+the new quotient, so the recursive finite-control offset advances by seven.
+The general execution theorem covers every positive radix list of that
+fixed length, preserves the original frame, and appends one six-register
+packet per split. Reading the actual packets and final quotient reconstructs
+the original coordinate. Semantic readout functions specify the written
+data; the machine does not call them to manufacture a result.
+
+All allocations, copies, divider/restoration steps and chain handoffs are
+charged in the exact work count and its sixfold raw-machine refinement.
+For coordinate, width and newer-register span bounded by `B`, the single
+split has a quadratic work bound and adds at most `3 * B + 6` register
+symbols. The repeated machine has a proved `NatPolynomial` bound for each
+fixed split count; the recursive size bound advances to `5 * B + 7`.
+When the initial coordinate and every radix are bounded by `B`, the actual
+appended register span is bounded by `splitCount * (3 * B + 6)`.
+This is not a claim of a joint polynomial bound in a runtime-variable
+split count, nor a completed source-to-formula execution bound.
+
+The [regression module](../../lean-regression/PNPConcreteCookLevinBuilderRegionRadixDecoder.lean)
+was prepared with the source. All 64 examples pass, covering universal
+execution/refinement, complete frame preservation, written-result readout,
+arithmetic and size bounds, control separation, zero splits, invalid width,
+rectangle boundaries and the literal malformed-entry transition.
+All 43 public theorem closures pass: two are axiom-free, fourteen use only
+`propext`, and twenty-seven use `propext` with `Quot.sound`.
+None uses a project-specific axiom, `Classical.choice` or `sorryAx`.
+
+After the source and axiom audit passed, one regression required explicit
+namespace qualification in its proof. Its assertion and the machine were
+unchanged. The final regression run verified source-byte continuity and
+reused those completed checks; no broad core or website suite was repeated.
+
+## Next implementation: source-derived region-local decoding
+
+Connect the actual selected region tape to this shared arithmetic. Physically
+derive or copy each required radix from the retained source frame, prove its
+positivity and encoded-source bound, and construct the appropriate fixed
+entry layout. Do not reassemble the source, accept supplied widths/results,
+or hide a semantic decoder call inside the finite machine.
 
 Starting from this actual selected tape, consume the physically written tag
 and local coordinate and derive the canonical region-local constraint data.
