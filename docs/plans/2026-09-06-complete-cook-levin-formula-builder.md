@@ -300,7 +300,7 @@ The polynomial-syntax theorem composes these bounds with any proved encoded-inpu
 field bound. Actual shape-source linkage remains required; the bound premises
 are not asserted to be derived from the source by this generic range kernel.
 
-All 35 prepared regressions and 17 public-theorem axiom audits passed.
+At that integration, all 35 prepared regressions and 17 public-theorem axiom audits passed.
 The closures use only `propext`, `Quot.sound`, or no axioms. A compiled
 dependency probe located `Classical.byContradiction` in the impossible
 positive-count/zero-value case; explicitly deriving `False` from the numeric
@@ -309,28 +309,61 @@ broad regression-proof unfold was narrowed while retaining the exact bridge-coun
 assertion. The final regression-only run reused the unchanged green source build
 and axiom evidence by immutable tree and source identity.
 
-### Next complete range-payload metadata and source binding
+### Complete range-payload metadata; next source binding
 
-The canonical reversed `exactlyOne` payload still needs the physically written
-count and tag after the variable-length range: `descending ++ [count, 4]`.
-Do not copy the buried count with a register offset or program size selected by
-the runtime list length.
+The full two-pass constructor is now verified in
+[`CookLevinBuilderRegisterExactlyOnePayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterExactlyOnePayload.lean).
+One fixed graph reads the original `[count, upper]` registers, constructs the
+entire descending range, copies the original count by a second physical counter
+pass, and appends the constant tag. It leaves the retained frame followed by
+`[count] ++ descending ++ [count, 4]`; the first count is restored scratch,
+and the last count/tag belong to the reversed `exactlyOne` payload.
 
-Use a static counter-restoration variant that can retain its unique boundary
-marker after the range pass, while preserving the existing ordinary-delimiter
-contracts. Compose the complete range with a second fixed counter pass: allocate
-a zero accumulator, consume the original counter one unit at a time and increment
-the newest accumulator. On exhaustion restore the counter and ordinary delimiter,
-then append the constant tag. Prove exact metadata, both loop traces, zero cases,
-all bridges, cleanup and aggregate polynomial bounds; do not replace this with a
-supplied count or list. Update the changed source and full relevant regression
-contracts together before rebuilding their dependency chain.
+The counter and range kernels now admit a static output delimiter. Their original
+ordinary-delimiter machines and complete run contracts remain specializations,
+and the retained-marker variant permits another pass without an input-dependent
+register offset. The second pass allocates a zero accumulator, consumes one
+original counter unit per iteration, increments the accumulator with a fixed
+ten-rule machine, then restores the counter and ordinary delimiter. The initial
+range still erases its redundant working register. No list, count verdict,
+dynamic program size or caller-supplied execution certificate is substituted.
 
-After that generic payload is complete, derive count and upper from the actual
-written shape coordinates and prove canonical symbol/head/state list equality
-in the required row order. The full shape payload, other families, main loop and
-packaged reduction remain open. M230 is not earned, no publication row or fixed
-weighted checkpoint changes, and PNPLabs publication remains deferred.
+`BuilderRegisterExactlyOnePayload.workRunExact` and `run_compile_exact`
+cover every count and upper bound satisfying `count ≤ upper`, arbitrary retained
+register frames and interior data, both complete loops and every graph bridge.
+They prove the exact remaining exterior:
+`(replicate (upper - count + 1) blank).drop (count + 6)`.
+The zero-count case writes the complete `[0, 4]` metadata and removes the original
+working upper register.
+
+For a common bound `B` on count, upper and retained-register span, complete raw
+runtime is at most `360 * (B + 1)^3`; final register-word and explicit exterior
+span together are at most `10 * (B + 1)^2`. The polynomial-syntax theorem composes
+these bounds with a proved encoded-input field bound. Deriving those fields from
+the actual shape source is still required.
+
+All 135 prepared regressions and 67 public-theorem axiom audits passed across the
+changed counter/range contracts and the new complete payload constructor.
+Closures use only `propext`, `Quot.sound`, or no axioms. Finite-symbol elimination,
+empty-list normalization and exact tape-handoff normalization corrections changed
+no machine behavior or assertion. A redundant regression tactic was removed after
+Lean had already solved the original assertion; the final regression-only run
+reused the exact unchanged green source build and axiom audit.
+
+Next derive count and exclusive upper from the actual written shape coordinates.
+Prove the canonical finite-index list equality for every symbol, head and state
+shape constraint, not merely another fixed row. Use the required row order:
+all tape-position symbol constraints, then head, then state. Bind the complete
+payload to `shapeConstraintSlotDirect` at
+`BuilderConstraintRegionSource.localCoordinate problem index .shape` under
+the actual selected-region premise. Prove the fixed source-field preparation,
+exact work/raw handoffs, preserved frame, canonical decoder result and total
+encoded-source polynomial bounds together.
+
+The source-bound shape payload, remaining families, main loop and packaged
+reduction remain open. M230 is not earned; the fixed complete-builder checkpoint
+remains open. No publication row or weighted score changes, and PNPLabs
+publication remains deferred until the selected major integration is earned.
 
 ## Implementation phases
 

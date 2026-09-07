@@ -17,7 +17,7 @@ open BuilderUnaryPolynomial
 open BuilderDividerOperands (endTape)
 open BuilderRegisterCountdownControl
   (markCounterMachine consume decrement markedTape restoredTape counterMarker spentSymbol
-    initializeSteps consumeSteps exhaustedSteps)
+    initializeSteps consumeSteps exhaustedSteps consumeWith restoredTapeWith)
 open WorkMachineProgramGraph (Node NodeRef Graph)
 open WorkMachineProgramPath (LocalAcceptRun LocalRejectRun AcceptPath)
 
@@ -80,11 +80,13 @@ def decrementNode : Node :=
     onAccept := .node copyNode.reference
     onReject := .dead }
 
-def consumeNode : Node :=
+def consumeNodeWith (delimiter : WorkSymbol) : Node :=
   { name := 1
-    program := consume
+    program := consumeWith delimiter
     onAccept := .node decrementNode.reference
     onReject := .node eraseNode.reference }
+
+def consumeNode : Node := consumeNodeWith separatorSymbol
 
 def markNode : Node :=
   { name := 0
@@ -92,17 +94,20 @@ def markNode : Node :=
     onAccept := .node consumeNode.reference
     onReject := .dead }
 
-def graph : Graph :=
-  { nodes := [markNode, consumeNode, decrementNode, copyNode, eraseNode]
+def graphWith (delimiter : WorkSymbol) : Graph :=
+  { nodes := [markNode, consumeNodeWith delimiter, decrementNode, copyNode, eraseNode]
     entry := markNode.reference }
 
-def machine : WorkMachine := WorkMachineProgramGraph.machine graph
+def graph : Graph := graphWith separatorSymbol
 
-private theorem mark_mem : markNode ∈ graph.nodes := List.Mem.head _
-private theorem consume_mem : consumeNode ∈ graph.nodes := List.Mem.tail _ (List.Mem.head _)
-private theorem decrement_mem : decrementNode ∈ graph.nodes := List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _))
-private theorem copy_mem : copyNode ∈ graph.nodes := List.Mem.tail _ (List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _)))
-private theorem erase_mem : eraseNode ∈ graph.nodes :=
+def machineWith (delimiter : WorkSymbol) : WorkMachine := WorkMachineProgramGraph.machine (graphWith delimiter)
+def machine : WorkMachine := machineWith separatorSymbol
+
+private theorem mark_mem (delimiter : WorkSymbol) : markNode ∈ (graphWith delimiter).nodes := List.Mem.head _
+private theorem consume_mem (delimiter : WorkSymbol) : consumeNodeWith delimiter ∈ (graphWith delimiter).nodes := List.Mem.tail _ (List.Mem.head _)
+private theorem decrement_mem (delimiter : WorkSymbol) : decrementNode ∈ (graphWith delimiter).nodes := List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _))
+private theorem copy_mem (delimiter : WorkSymbol) : copyNode ∈ (graphWith delimiter).nodes := List.Mem.tail _ (List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _)))
+private theorem erase_mem (delimiter : WorkSymbol) : eraseNode ∈ (graphWith delimiter).nodes :=
   List.Mem.tail _ (List.Mem.tail _ (List.Mem.tail _ (List.Mem.tail _ (List.Mem.head _))))
 
 private def Good (program : WorkMachine) : Prop :=
@@ -126,29 +131,31 @@ private theorem erase_good : Good BuilderRegisterErase.oneMachine :=
   ⟨BuilderRegisterErase.one_rules_pairwise_query_distinct, BuilderRegisterErase.one_noRuleAtAccept,
     BuilderRegisterErase.one_noRuleAtReject, BuilderRegisterErase.one_acceptState_ne_rejectState⟩
 
-theorem graph_wellFormed : graph.WellFormed := by
-  have hNames : (graph.nodes.map Node.name).Pairwise (fun left right : Nat => left ≠ right) := by
+theorem graphWith_wellFormed (delimiter : WorkSymbol) : (graphWith delimiter).WellFormed := by
+  have hNames : ((graphWith delimiter).nodes.map Node.name).Pairwise (fun left right : Nat => left ≠ right) := by
     change ([0, 1, 2, 3, 4] : List Nat).Pairwise (fun left right => left ≠ right)
     decide
   refine ⟨?_, ?_, ?_, ?_⟩
   · simpa only [List.pairwise_map] using hNames
   · intro node hMem
-    simp only [graph, List.mem_cons, List.not_mem_nil, or_false] at hMem
+    simp only [graphWith, List.mem_cons, List.not_mem_nil, or_false] at hMem
     rcases hMem with rfl | rfl | rfl | rfl | rfl
     · exact BuilderRegisterCountdownControl.initialize_control
-    · exact BuilderRegisterCountdownControl.consume_control
+    · exact BuilderRegisterCountdownControl.consumeWith_control delimiter
     · exact BuilderRegisterCountdownControl.decrement_control
     · exact copy_good
     · exact erase_good
-  · exact ⟨markNode, mark_mem, rfl, rfl⟩
+  · exact ⟨markNode, mark_mem delimiter, rfl, rfl⟩
   · intro node hMem
-    simp only [graph, List.mem_cons, List.not_mem_nil, or_false] at hMem
+    simp only [graphWith, List.mem_cons, List.not_mem_nil, or_false] at hMem
     rcases hMem with rfl | rfl | rfl | rfl | rfl
-    · exact ⟨⟨consumeNode, consume_mem, rfl, rfl⟩, True.intro⟩
-    · exact ⟨⟨decrementNode, decrement_mem, rfl, rfl⟩, ⟨eraseNode, erase_mem, rfl, rfl⟩⟩
-    · exact ⟨⟨copyNode, copy_mem, rfl, rfl⟩, True.intro⟩
-    · exact ⟨⟨consumeNode, consume_mem, rfl, rfl⟩, True.intro⟩
+    · exact ⟨⟨consumeNodeWith delimiter, consume_mem delimiter, rfl, rfl⟩, True.intro⟩
+    · exact ⟨⟨decrementNode, decrement_mem delimiter, rfl, rfl⟩, ⟨eraseNode, erase_mem delimiter, rfl, rfl⟩⟩
+    · exact ⟨⟨copyNode, copy_mem delimiter, rfl, rfl⟩, True.intro⟩
+    · exact ⟨⟨consumeNodeWith delimiter, consume_mem delimiter, rfl, rfl⟩, True.intro⟩
     · exact ⟨True.intro, True.intro⟩
+
+theorem graph_wellFormed : graph.WellFormed := graphWith_wellFormed separatorSymbol
 
 /-- Every transition between local kernels, including the loop back-edge, is charged. -/
 def loopSteps : Nat → Nat → List Nat → Nat → Nat
@@ -168,6 +175,23 @@ def initialConfiguration (count upper : Nat) (older : List Nat) (inside : List W
 def finalTape (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) : WorkTape :=
   endTape (older ++ [count] ++ values upper count) inside
     (List.replicate (upper - count + 1) .blank)
+
+def finalTapeWith (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside : List WorkSymbol) : WorkTape :=
+  restoredTapeWith delimiter count (values upper count) ((registerWord older).reverse ++ inside)
+    (List.replicate (upper - count + 1) .blank)
+
+theorem finalTapeWith_separator (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    finalTapeWith separatorSymbol count upper older inside = finalTape count upper older inside := by
+  simpa only [finalTapeWith, BuilderRegisterCountdownControl.restoredTapeWith_separator,
+    BuilderRegisterCountdownControl.restoredTape_eq_endTape, finalTape, List.append_assoc,
+    List.cons_append, List.nil_append]
+
+theorem finalTapeWith_marker (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    finalTapeWith counterMarker count upper older inside =
+      markedTape 0 count (values upper count) ((registerWord older).reverse ++ inside)
+        (List.replicate (upper - count + 1) .blank) :=
+  BuilderRegisterCountdownControl.restoredTapeWith_marker _ _ _ _
 
 def finalConfiguration (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) : WorkConfiguration :=
   { state := machine.acceptState
@@ -214,77 +238,98 @@ private theorem copy_trace (spent remaining value : Nat) (emitted : List Nat) (i
     registerWord, List.append_nil, List.nil_append, List.reverse_append, List.reverse_cons,
     List.reverse_replicate, List.reverse_nil, List.cons_append, List.append_assoc] using h
 
-private def loopFinalTape (spent remaining value : Nat) (emitted older : List Nat) (inside : List WorkSymbol) : WorkTape :=
-  endTape (older ++ [spent + remaining] ++ emitted ++ values value remaining) inside
+private def loopFinalTape (delimiter : WorkSymbol) (spent remaining value : Nat)
+    (emitted older : List Nat) (inside : List WorkSymbol) : WorkTape :=
+  restoredTapeWith delimiter (spent + remaining) (emitted ++ values value remaining)
+    ((registerWord older).reverse ++ inside)
     (List.replicate (value - remaining + 1) .blank)
 
-private theorem loop_path (spent remaining value : Nat) (emitted older : List Nat) (inside : List WorkSymbol)
+private theorem loop_path (delimiter : WorkSymbol) (spent remaining value : Nat) (emitted older : List Nat) (inside : List WorkSymbol)
     (hRemaining : remaining ≤ value) :
-    AcceptPath graph (.node consumeNode.reference) .accept (loopSteps spent remaining emitted value)
+    AcceptPath (graphWith delimiter) (.node (consumeNodeWith delimiter).reference) .accept (loopSteps spent remaining emitted value)
       (markedTape spent remaining (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
-      (loopFinalTape spent remaining value emitted older inside) := by
+      (loopFinalTape delimiter spent remaining value emitted older inside) := by
   induction remaining generalizing spent value emitted with
   | zero =>
-      have hExit : LocalRejectRun consumeNode (exhaustedSteps spent (emitted ++ [value]))
+      have hExit : LocalRejectRun (consumeNodeWith delimiter) (exhaustedSteps spent (emitted ++ [value]))
           (markedTape spent 0 (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
-          (endTape ((older ++ [spent] ++ emitted) ++ [value]) inside []) := by
-        have h := BuilderRegisterCountdownControl.exhausted_workRunExact spent (emitted ++ [value])
+          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) []) :=
+        BuilderRegisterCountdownControl.exhaustedWith_workRunExact delimiter spent (emitted ++ [value])
           ((registerWord older).reverse ++ inside) []
-        simpa only [LocalRejectRun, consumeNode, workStartConfiguration,
-          BuilderRegisterCountdownControl.restoredTape_eq_endTape, List.append_assoc,
-          List.cons_append, List.nil_append] using h
       have hErase : LocalAcceptRun eraseNode (value + 2)
-          (endTape ((older ++ [spent] ++ emitted) ++ [value]) inside [])
-          (loopFinalTape spent 0 value emitted older inside) := by
-        have h := BuilderRegisterErase.one_workRunExact (older ++ [spent] ++ emitted) value inside []
+          (restoredTapeWith delimiter spent (emitted ++ [value]) ((registerWord older).reverse ++ inside) [])
+          (loopFinalTape delimiter spent 0 value emitted older inside) := by
+        have h := BuilderRegisterErase.one_workRunExact emitted value
+          (List.replicate spent unitSymbol ++ delimiter :: ((registerWord older).reverse ++ inside)) []
         simpa only [LocalAcceptRun, eraseNode, workStartConfiguration, loopFinalTape,
-          values, Nat.add_zero, Nat.sub_zero, List.append_nil] using h
-      have hFinish := AcceptPath.step eraseNode .accept (value + 2) 0 _ _ _ erase_mem hErase
-        (AcceptPath.terminal .accept (loopFinalTape spent 0 value emitted older inside))
+          restoredTapeWith, endTape, values, Nat.add_zero, Nat.sub_zero, List.append_nil,
+          List.append_assoc] using h
+      have hFinish := AcceptPath.step eraseNode .accept (value + 2) 0 _ _ _ (erase_mem delimiter) hErase
+        (AcceptPath.terminal .accept (loopFinalTape delimiter spent 0 value emitted older inside))
       simpa only [loopSteps, Nat.add_zero] using
-        AcceptPath.stepReject consumeNode .accept _ _ _ _ _ consume_mem hExit hFinish
+        AcceptPath.stepReject (consumeNodeWith delimiter) .accept _ _ _ _ _ (consume_mem delimiter) hExit hFinish
   | succ remaining ih =>
       cases value with
       | zero => exact False.elim (by omega)
       | succ value =>
-          have hTake : LocalAcceptRun consumeNode (consumeSteps spent (remaining + 1) (emitted ++ [value + 1]))
+          have hTake : LocalAcceptRun (consumeNodeWith delimiter) (consumeSteps spent (remaining + 1) (emitted ++ [value + 1]))
               (markedTape spent (remaining + 1) (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) [])
               (markedTape (spent + 1) remaining (emitted ++ [value + 1]) ((registerWord older).reverse ++ inside) []) := by
-            exact BuilderRegisterCountdownControl.consume_workRunExact spent remaining (emitted ++ [value + 1])
+            exact BuilderRegisterCountdownControl.consumeWith_workRunExact delimiter spent remaining (emitted ++ [value + 1])
               ((registerWord older).reverse ++ inside) []
           have hDec := decrement_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside) []
           have hCopy := copy_trace (spent + 1) remaining value emitted ((registerWord older).reverse ++ inside)
           have hTail := ih (spent := spent + 1) (value := value) (emitted := emitted ++ [value]) (by omega)
-          have hCopyPath := AcceptPath.step copyNode .accept _ _ _ _ _ copy_mem hCopy hTail
-          have hDecPath := AcceptPath.step decrementNode .accept _ _ _ _ _ decrement_mem hDec hCopyPath
-          have hTakePath := AcceptPath.step consumeNode .accept _ _ _ _ _ consume_mem hTake hDecPath
+          have hCopyPath := AcceptPath.step copyNode .accept _ _ _ _ _ (copy_mem delimiter) hCopy hTail
+          have hDecPath := AcceptPath.step decrementNode .accept _ _ _ _ _ (decrement_mem delimiter) hDec hCopyPath
+          have hTakePath := AcceptPath.step (consumeNodeWith delimiter) .accept _ _ _ _ _ (consume_mem delimiter) hTake hDecPath
           have hCounter : spent + 1 + remaining = spent + (remaining + 1) := by omega
           have hResidual : value + 1 - (remaining + 1) = value - remaining := by omega
           simpa only [loopSteps, loopFinalTape, values, Nat.add_sub_cancel, hCounter, hResidual,
             List.append_assoc, List.cons_append, List.nil_append] using hTakePath
 
 /-- One fixed finite program, every count and upper bound, exact list and cleanup. -/
-theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
-    workRunExact? machine (workSteps count upper) (initialConfiguration count upper older inside) =
-      some (finalConfiguration count upper older inside) := by
+theorem workRunExactWith (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? (machineWith delimiter) (workSteps count upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside [])) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter count upper older inside } := by
   have hMark : LocalAcceptRun markNode (initializeSteps count upper)
       (endTape (older ++ [count, upper]) inside [])
       (markedTape 0 count [upper] ((registerWord older).reverse ++ inside) []) := by
     have h := BuilderRegisterCountdownControl.initialize_workRunExact count upper ((registerWord older).reverse ++ inside) []
     simpa only [LocalAcceptRun, markNode, workStartConfiguration,
       BuilderRegisterCountdownControl.restoredTape_eq_endTape] using h
-  have hTail := loop_path 0 count upper [] older inside hCount
-  have hPath := AcceptPath.step markNode .accept _ _ _ _ _ mark_mem hMark hTail
-  have hRun := WorkMachineProgramPath.runExact graph _ _ _ _ _ graph_wellFormed hPath
+  have hTail := loop_path delimiter 0 count upper [] older inside hCount
+  have hPath := AcceptPath.step markNode .accept _ _ _ _ _ (mark_mem delimiter) hMark hTail
+  have hRun := WorkMachineProgramPath.runExact (graphWith delimiter) _ _ _ _ _ (graphWith_wellFormed delimiter) hPath
   have hInitial (tape : WorkTape) :
       WorkMachineProgramGraph.endpointConfiguration (.node markNode.reference) tape =
-        workStartConfiguration machine tape := by rfl
+        workStartConfiguration (machineWith delimiter) tape := by rfl
   have hFinal (tape : WorkTape) :
       WorkMachineProgramGraph.endpointConfiguration .accept tape =
-        { state := machine.acceptState, tape := tape } := by rfl
+        { state := (machineWith delimiter).acceptState, tape := tape } := by rfl
   rw [hInitial, hFinal] at hRun
-  simpa only [machine, workSteps, initialConfiguration, finalConfiguration, finalTape, loopFinalTape,
+  simpa only [machineWith, workSteps, finalTapeWith, loopFinalTape,
     Nat.zero_add, List.nil_append, List.append_nil] using hRun
+
+theorem workRunExact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? machine (workSteps count upper) (initialConfiguration count upper older inside) =
+      some (finalConfiguration count upper older inside) := by
+  simpa only [machine, initialConfiguration, finalConfiguration, finalTapeWith_separator] using
+    workRunExactWith separatorSymbol count upper older inside hCount
+
+theorem run_compile_exactWith (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat)
+    (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    run (compileWorkMachine (machineWith delimiter)) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside []))) =
+      encodeWorkConfiguration {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter count upper older inside } :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _ (workRunExactWith delimiter count upper older inside hCount)
 
 theorem run_compile_exact (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
     run (compileWorkMachine machine) (6 * workSteps count upper)
@@ -416,6 +461,22 @@ theorem source_polynomial_bounds (bound : NatPolynomial) (inputLength count uppe
   · simpa only [spanPolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add] using hSpan
   · simpa only [rawTimePolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_constant, NatPolynomial.eval_add,
       ← Nat.mul_assoc] using hTime
+
+theorem rulesWith_pairwise_query_distinct (delimiter : WorkSymbol) :
+    (machineWith delimiter).rules.Pairwise WorkMachineChain.QueryDistinct :=
+  WorkMachineProgramGraph.rules_pairwise (graphWith delimiter) (graphWith_wellFormed delimiter)
+
+theorem noRuleWithAtAccept (delimiter : WorkSymbol) : WorkMachineChain.NoRuleAtAccept (machineWith delimiter) :=
+  WorkMachineProgramGraph.noRuleAt_globalAccept (graphWith delimiter)
+
+theorem noRuleWithAtReject (delimiter : WorkSymbol) :
+    WorkMachineProgramGraph.NoRuleAt (machineWith delimiter) (machineWith delimiter).rejectState :=
+  WorkMachineProgramGraph.noRuleAt_globalReject (graphWith delimiter)
+
+theorem acceptWith_ne_rejectState (delimiter : WorkSymbol) :
+    (machineWith delimiter).acceptState ≠ (machineWith delimiter).rejectState := by
+  change (0 : Nat) ≠ 1
+  decide
 
 theorem rules_pairwise_query_distinct : machine.rules.Pairwise WorkMachineChain.QueryDistinct :=
   WorkMachineProgramGraph.rules_pairwise graph graph_wellFormed

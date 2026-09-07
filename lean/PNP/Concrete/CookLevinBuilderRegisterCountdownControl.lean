@@ -3,7 +3,7 @@ Copyright (c) 2026 PNP Labs.
 
 Fixed finite control for the input-dependent descending-register loop.
 A marked unary counter is consumed one unit at a time without moving its
-boundary; exhaustion restores its original cells and delimiter exactly.
+boundary; exhaustion restores its original cells with a fixed output delimiter.
 The payload word may grow arbitrarily. It never changes the control table.
 These kernels do not by themselves construct the full shape payload.
 -/
@@ -36,8 +36,8 @@ def markCounterMachine : WorkMachine :=
     acceptState := 4
     rejectState := 5 }
 
-/-- Accept consumes one unit; reject restores the exhausted counter. -/
-def consume : WorkMachine :=
+/-- The restored delimiter is a static program parameter, never input data. -/
+def consumeWith (delimiter : WorkSymbol) : WorkMachine :=
   { rules :=
       [rule 0 1 scratchEndSymbol scratchEndSymbol .right,
        rule 1 1 unitSymbol unitSymbol .right,
@@ -52,13 +52,16 @@ def consume : WorkMachine :=
        rule 3 3 separatorSymbol separatorSymbol .left,
        rule 3 6 scratchEndSymbol scratchEndSymbol .stay,
        rule 4 4 spentSymbol unitSymbol .right,
-       rule 4 5 counterMarker separatorSymbol .left,
+       rule 4 5 counterMarker delimiter .left,
        rule 5 5 unitSymbol unitSymbol .left,
        rule 5 5 separatorSymbol separatorSymbol .left,
        rule 5 7 scratchEndSymbol scratchEndSymbol .stay]
     startState := 0
     acceptState := 6
     rejectState := 7 }
+
+/-- The original consumer restores an ordinary register delimiter. -/
+def consume : WorkMachine := consumeWith separatorSymbol
 
 /-- Remove one physically present unary unit, leaving its cell explicitly blank. -/
 def decrement : WorkMachine :=
@@ -76,10 +79,22 @@ def markedTape (spent remaining : Nat) (newer : List Nat) (inside outside : List
     right := (registerWord newer).reverse ++ List.replicate remaining unitSymbol ++
       List.replicate spent spentSymbol ++ counterMarker :: inside }
 
+def restoredTapeWith (delimiter : WorkSymbol) (count : Nat) (newer : List Nat) (inside outside : List WorkSymbol) : WorkTape :=
+  { left := outside
+    head := scratchEndSymbol
+    right := (registerWord newer).reverse ++ List.replicate count unitSymbol ++ delimiter :: inside }
+
 def restoredTape (count : Nat) (newer : List Nat) (inside outside : List WorkSymbol) : WorkTape :=
   { left := outside
     head := scratchEndSymbol
     right := (registerWord newer).reverse ++ List.replicate count unitSymbol ++ separatorSymbol :: inside }
+
+theorem restoredTapeWith_separator (count : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    restoredTapeWith separatorSymbol count newer inside outside = restoredTape count newer inside outside := rfl
+
+theorem restoredTapeWith_marker (count : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    restoredTapeWith counterMarker count newer inside outside = markedTape 0 count newer inside outside := by
+  simp only [restoredTapeWith, markedTape, List.replicate_zero, List.append_nil]
 
 def initializeSteps (count value : Nat) : Nat := 2 * (count + value) + 5
 def consumeSteps (spent remaining : Nat) (newer : List Nat) : Nat :=
@@ -266,22 +281,22 @@ theorem initialize_workRunExact (count value : Nat) (inside outside : List WorkS
   rw [hLength] at hAll
   exact hAll
 
-theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
-    workRunExact? consume (consumeSteps spent (remaining + 1) newer)
-      (workStartConfiguration consume (markedTape spent (remaining + 1) newer inside outside)) =
+theorem consumeWith_workRunExact (delimiter : WorkSymbol) (spent remaining : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith delimiter) (consumeSteps spent (remaining + 1) newer)
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent (remaining + 1) newer inside outside)) =
       some {
-      state := consume.acceptState
+      state := (consumeWith delimiter).acceptState
       tape := markedTape (spent + 1) remaining newer inside outside } := by
   let word := registerWord newer
   let scanned := word.reverse ++ List.replicate (remaining + 1) unitSymbol ++ List.replicate spent spentSymbol
   let back := List.replicate remaining unitSymbol ++ word
-  have hStart : workRunExact? consume 1
-      (workStartConfiguration consume (markedTape spent (remaining + 1) newer inside outside)) =
+  have hStart : workRunExact? (consumeWith delimiter) 1
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent (remaining + 1) newer inside outside)) =
       some {
       state := 1
       tape := rightFocus (scratchEndSymbol :: outside) (scanned ++ counterMarker :: inside) } := by
     apply one_step
-    change workStep? consume
+    change workStep? (consumeWith delimiter)
       {
       state := 0
       tape := {
@@ -289,7 +304,7 @@ theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside 
           head := scratchEndSymbol
           right := scanned ++ counterMarker :: inside } } = _
     cases scanned ++ counterMarker :: inside <;> rfl
-  have hScan := scan_right consume 1 id scanned (counterMarker :: inside) (scratchEndSymbol :: outside) (by
+  have hScan := scan_right (consumeWith delimiter) 1 id scanned (counterMarker :: inside) (scratchEndSymbol :: outside) (by
     intro symbol h left right
     simp only [scanned, List.mem_append, List.mem_reverse] at h
     rcases h with (h | h) | h
@@ -300,7 +315,7 @@ theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside 
     · have hSymbol := List.eq_of_mem_replicate h
       subst symbol
       cases right <;> rfl)
-  have hMarker : workRunExact? consume 1
+  have hMarker : workRunExact? (consumeWith delimiter) 1
       {
       state := 1
       tape := rightFocus ((scanned.map id).reverse ++ scratchEndSymbol :: outside) (counterMarker :: inside) } =
@@ -312,13 +327,13 @@ theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside 
     simp only [List.map_id, scanned, back, List.reverse_append, List.reverse_replicate,
       List.reverse_reverse, List.append_assoc, List.cons_append]
     cases spent <;> rfl
-  have hSpent := scan_left consume 2 id (List.replicate spent spentSymbol)
+  have hSpent := scan_left (consumeWith delimiter) 2 id (List.replicate spent spentSymbol)
     (unitSymbol :: (back ++ scratchEndSymbol :: outside)) (counterMarker :: inside) (by
       intro symbol h left right
       have hSymbol := List.eq_of_mem_replicate h
       subst symbol
       cases left <;> rfl)
-  have hTake : workRunExact? consume 1
+  have hTake : workRunExact? (consumeWith delimiter) 1
       {
       state := 2
       tape := leftFocus (unitSymbol :: (back ++ scratchEndSymbol :: outside))
@@ -330,18 +345,18 @@ theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside 
     apply one_step
     simp only [List.map_id, List.reverse_replicate, List.replicate_succ, List.cons_append]
     cases back ++ scratchEndSymbol :: outside <;> rfl
-  have hBack := scan_left consume 3 id back (scratchEndSymbol :: outside)
+  have hBack := scan_left (consumeWith delimiter) 3 id back (scratchEndSymbol :: outside)
     (List.replicate (spent + 1) spentSymbol ++ counterMarker :: inside) (by
       intro symbol h left right
       rcases unit_word_symbols remaining newer symbol h with hSymbol | hSymbol <;>
         subst symbol <;> cases left <;> rfl)
-  have hStop : workRunExact? consume 1
+  have hStop : workRunExact? (consumeWith delimiter) 1
       {
       state := 3
       tape := leftFocus (scratchEndSymbol :: outside)
         ((back.map id).reverse ++ (List.replicate (spent + 1) spentSymbol ++ counterMarker :: inside)) } =
       some {
-      state := consume.acceptState
+      state := (consumeWith delimiter).acceptState
       tape := markedTape (spent + 1) remaining newer inside outside } := by
     apply one_step
     simp only [List.map_id, back, word, List.reverse_append, List.reverse_replicate, markedTape, List.append_assoc]
@@ -355,23 +370,23 @@ theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside 
   rw [hLength] at hAll
   exact hAll
 
-theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
-    workRunExact? consume (exhaustedSteps spent newer)
-      (workStartConfiguration consume (markedTape spent 0 newer inside outside)) =
+theorem exhaustedWith_workRunExact (delimiter : WorkSymbol) (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith delimiter) (exhaustedSteps spent newer)
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent 0 newer inside outside)) =
       some {
-      state := consume.rejectState
-      tape := restoredTape spent newer inside outside } := by
+      state := (consumeWith delimiter).rejectState
+      tape := restoredTapeWith delimiter spent newer inside outside } := by
   let word := registerWord newer
   let scanned := word.reverse ++ List.replicate spent spentSymbol
   let after := word ++ scratchEndSymbol :: outside
-  have hStart : workRunExact? consume 1
-      (workStartConfiguration consume (markedTape spent 0 newer inside outside)) =
+  have hStart : workRunExact? (consumeWith delimiter) 1
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent 0 newer inside outside)) =
       some {
       state := 1
       tape := rightFocus (scratchEndSymbol :: outside) (scanned ++ counterMarker :: inside) } := by
     apply one_step
     simp only [markedTape, List.replicate_zero, List.nil_append, List.append_nil]
-    change workStep? consume
+    change workStep? (consumeWith delimiter)
       {
       state := 0
       tape := {
@@ -379,7 +394,7 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
           head := scratchEndSymbol
           right := scanned ++ counterMarker :: inside } } = _
     cases scanned ++ counterMarker :: inside <;> rfl
-  have hScan := scan_right consume 1 id scanned (counterMarker :: inside) (scratchEndSymbol :: outside) (by
+  have hScan := scan_right (consumeWith delimiter) 1 id scanned (counterMarker :: inside) (scratchEndSymbol :: outside) (by
     intro symbol h left right
     simp only [scanned, List.mem_append, List.mem_reverse] at h
     rcases h with h | h
@@ -387,7 +402,7 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
     · have hSymbol := List.eq_of_mem_replicate h
       subst symbol
       cases right <;> rfl)
-  have hMarker : workRunExact? consume 1
+  have hMarker : workRunExact? (consumeWith delimiter) 1
       {
       state := 1
       tape := rightFocus ((scanned.map id).reverse ++ scratchEndSymbol :: outside) (counterMarker :: inside) } =
@@ -398,12 +413,12 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
     simp only [List.map_id, scanned, after, List.reverse_append, List.reverse_replicate,
       List.reverse_reverse, List.append_assoc]
     cases List.replicate spent spentSymbol ++ after <;> rfl
-  have hSpent := scan_left consume 2 id (List.replicate spent spentSymbol) after (counterMarker :: inside) (by
+  have hSpent := scan_left (consumeWith delimiter) 2 id (List.replicate spent spentSymbol) after (counterMarker :: inside) (by
     intro symbol h left right
     have hSymbol := List.eq_of_mem_replicate h
     subst symbol
     cases left <;> rfl)
-  have hEmpty : workRunExact? consume 1
+  have hEmpty : workRunExact? (consumeWith delimiter) 1
       {
       state := 2
       tape := leftFocus after
@@ -414,13 +429,13 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
     apply one_step
     simp only [List.map_id, List.reverse_replicate]
     cases newer <;> cases spent <;> rfl
-  have hRestore := scan_right consume 4 (fun _ => unitSymbol) (List.replicate spent spentSymbol)
+  have hRestore := scan_right (consumeWith delimiter) 4 (fun _ => unitSymbol) (List.replicate spent spentSymbol)
     (counterMarker :: inside) after (by
       intro symbol h left right
       have hSymbol := List.eq_of_mem_replicate h
       subst symbol
       cases right <;> rfl)
-  have hUnmark : workRunExact? consume 1
+  have hUnmark : workRunExact? (consumeWith delimiter) 1
       {
       state := 4
       tape := rightFocus
@@ -428,25 +443,25 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
       some {
       state := 5
       tape := leftFocus
-        ((List.replicate spent unitSymbol ++ word) ++ scratchEndSymbol :: outside) (separatorSymbol :: inside) } := by
+        ((List.replicate spent unitSymbol ++ word) ++ scratchEndSymbol :: outside) (delimiter :: inside) } := by
     apply one_step
     simp only [List.map_replicate, List.reverse_replicate, after, List.append_assoc]
     cases List.replicate spent unitSymbol ++ (word ++ scratchEndSymbol :: outside) <;> rfl
-  have hBack := scan_left consume 5 id (List.replicate spent unitSymbol ++ word)
-    (scratchEndSymbol :: outside) (separatorSymbol :: inside) (by
+  have hBack := scan_left (consumeWith delimiter) 5 id (List.replicate spent unitSymbol ++ word)
+    (scratchEndSymbol :: outside) (delimiter :: inside) (by
       intro symbol h left right
       rcases unit_word_symbols spent newer symbol h with hSymbol | hSymbol <;>
         subst symbol <;> cases left <;> rfl)
-  have hStop : workRunExact? consume 1
+  have hStop : workRunExact? (consumeWith delimiter) 1
       {
       state := 5
       tape := leftFocus (scratchEndSymbol :: outside)
-        (((List.replicate spent unitSymbol ++ word).map id).reverse ++ separatorSymbol :: inside) } =
+        (((List.replicate spent unitSymbol ++ word).map id).reverse ++ delimiter :: inside) } =
       some {
-      state := consume.rejectState
-      tape := restoredTape spent newer inside outside } := by
+      state := (consumeWith delimiter).rejectState
+      tape := restoredTapeWith delimiter spent newer inside outside } := by
     apply one_step
-    simp only [List.map_id, List.reverse_append, List.reverse_replicate, word, restoredTape, List.append_assoc]
+    simp only [List.map_id, List.reverse_append, List.reverse_replicate, word, restoredTapeWith, List.append_assoc]
     rfl
   have hAll := compose (compose (compose (compose (compose (compose hStart hScan) hMarker) hSpent) hEmpty) hRestore)
     (compose hUnmark (compose hBack hStop))
@@ -457,6 +472,22 @@ theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside 
     omega
   rw [hLength] at hAll
   exact hAll
+
+theorem consume_workRunExact (spent remaining : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? consume (consumeSteps spent (remaining + 1) newer)
+      (workStartConfiguration consume (markedTape spent (remaining + 1) newer inside outside)) =
+      some {
+      state := consume.acceptState
+      tape := markedTape (spent + 1) remaining newer inside outside } :=
+  consumeWith_workRunExact separatorSymbol spent remaining newer inside outside
+
+theorem exhausted_workRunExact (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? consume (exhaustedSteps spent newer)
+      (workStartConfiguration consume (markedTape spent 0 newer inside outside)) =
+      some {
+      state := consume.rejectState
+      tape := restoredTape spent newer inside outside } :=
+  exhaustedWith_workRunExact separatorSymbol spent newer inside outside
 
 theorem decrement_workRunExact (value : Nat) (older inside outside : List WorkSymbol) :
     workRunExact? decrement 2
@@ -519,6 +550,49 @@ theorem exhaustedSteps_le (spent bound : Nat) (newer : List Nat)
     exhaustedSteps spent newer ≤ 6 * bound + 5 := by
   unfold exhaustedSteps
   omega
+
+theorem consumeWith_run_compile_exact (delimiter : WorkSymbol) (spent remaining : Nat)
+    (newer : List Nat) (inside outside : List WorkSymbol) :
+    run (compileWorkMachine (consumeWith delimiter)) (6 * consumeSteps spent (remaining + 1) newer)
+      (encodeWorkConfiguration
+        (workStartConfiguration (consumeWith delimiter) (markedTape spent (remaining + 1) newer inside outside))) =
+      encodeWorkConfiguration {
+        state := (consumeWith delimiter).acceptState
+        tape := markedTape (spent + 1) remaining newer inside outside } :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (consumeWith_workRunExact delimiter spent remaining newer inside outside)
+
+theorem exhaustedWith_run_compile_exact (delimiter : WorkSymbol) (spent : Nat)
+    (newer : List Nat) (inside outside : List WorkSymbol) :
+    run (compileWorkMachine (consumeWith delimiter)) (6 * exhaustedSteps spent newer)
+      (encodeWorkConfiguration
+        (workStartConfiguration (consumeWith delimiter) (markedTape spent 0 newer inside outside))) =
+      encodeWorkConfiguration {
+        state := (consumeWith delimiter).rejectState
+        tape := restoredTapeWith delimiter spent newer inside outside } :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (exhaustedWith_workRunExact delimiter spent newer inside outside)
+
+theorem consumeWith_rules_length (delimiter : WorkSymbol) : (consumeWith delimiter).rules.length = 17 := rfl
+
+theorem consumeWith_control (delimiter : WorkSymbol) :
+    (consumeWith delimiter).rules.Pairwise WorkMachineChain.QueryDistinct ∧
+    WorkMachineProgramGraph.NoRuleAt (consumeWith delimiter) (consumeWith delimiter).acceptState ∧
+    WorkMachineProgramGraph.NoRuleAt (consumeWith delimiter) (consumeWith delimiter).rejectState ∧
+    (consumeWith delimiter).acceptState ≠ (consumeWith delimiter).rejectState := by
+  rcases delimiter with ⟨first, second⟩
+  cases first <;> cases second
+  all_goals
+    constructor
+    · unfold WorkMachineChain.QueryDistinct
+      decide
+    constructor
+    · intro item h
+      decide +revert
+    constructor
+    · intro item h
+      decide +revert
+    · decide
 
 theorem initialize_rules_length : markCounterMachine.rules.length = 8 := rfl
 theorem consume_rules_length : consume.rules.length = 17 := rfl

@@ -145,4 +145,66 @@ example : markCounterMachine.acceptState ≠ markCounterMachine.rejectState := i
 example : consume.acceptState ≠ consume.rejectState := consume_control.2.2.2
 example : decrement.acceptState ≠ decrement.rejectState := decrement_control.2.2.2
 
+-- Static exit variants share the original step budget and finite control size.
+example : consume = consumeWith separatorSymbol := rfl
+example (delimiter : WorkSymbol) : (consumeWith delimiter).rules.length = 17 :=
+  consumeWith_rules_length delimiter
+example (delimiter : WorkSymbol) (spent remaining : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith delimiter) (consumeSteps spent (remaining + 1) newer)
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent (remaining + 1) newer inside outside)) =
+      some {
+        state := (consumeWith delimiter).acceptState
+        tape := markedTape (spent + 1) remaining newer inside outside } :=
+  consumeWith_workRunExact delimiter spent remaining newer inside outside
+example (delimiter : WorkSymbol) (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith delimiter) (exhaustedSteps spent newer)
+      (workStartConfiguration (consumeWith delimiter) (markedTape spent 0 newer inside outside)) =
+      some {
+        state := (consumeWith delimiter).rejectState
+        tape := restoredTapeWith delimiter spent newer inside outside } :=
+  exhaustedWith_workRunExact delimiter spent newer inside outside
+example (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith counterMarker) (exhaustedSteps spent newer)
+      (workStartConfiguration (consumeWith counterMarker) (markedTape spent 0 newer inside outside)) =
+      some {
+        state := (consumeWith counterMarker).rejectState
+        tape := markedTape 0 spent newer inside outside } := by
+  simpa only [restoredTapeWith_marker] using exhaustedWith_workRunExact counterMarker spent newer inside outside
+example (delimiter : WorkSymbol) (inside outside : List WorkSymbol) :
+    workRunExact? (consumeWith delimiter) (exhaustedSteps 0 [])
+      (workStartConfiguration (consumeWith delimiter) (markedTape 0 0 [] inside outside)) =
+      some {
+        state := (consumeWith delimiter).rejectState
+        tape := restoredTapeWith delimiter 0 [] inside outside } :=
+  exhaustedWith_workRunExact delimiter 0 [] inside outside
+example (delimiter : WorkSymbol) (spent remaining : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    run (compileWorkMachine (consumeWith delimiter)) (6 * consumeSteps spent (remaining + 1) newer)
+      (encodeWorkConfiguration
+        (workStartConfiguration (consumeWith delimiter) (markedTape spent (remaining + 1) newer inside outside))) =
+      encodeWorkConfiguration {
+        state := (consumeWith delimiter).acceptState
+        tape := markedTape (spent + 1) remaining newer inside outside } :=
+  consumeWith_run_compile_exact delimiter spent remaining newer inside outside
+example (delimiter : WorkSymbol) (spent : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    run (compileWorkMachine (consumeWith delimiter)) (6 * exhaustedSteps spent newer)
+      (encodeWorkConfiguration
+        (workStartConfiguration (consumeWith delimiter) (markedTape spent 0 newer inside outside))) =
+      encodeWorkConfiguration {
+        state := (consumeWith delimiter).rejectState
+        tape := restoredTapeWith delimiter spent newer inside outside } :=
+  exhaustedWith_run_compile_exact delimiter spent newer inside outside
+example (count : Nat) (newer : List Nat) (inside outside : List WorkSymbol) :
+    restoredTapeWith counterMarker count newer inside outside = markedTape 0 count newer inside outside :=
+  restoredTapeWith_marker count newer inside outside
+example (delimiter : WorkSymbol) : (consumeWith delimiter).rules.Pairwise WorkMachineChain.QueryDistinct :=
+  (consumeWith_control delimiter).1
+example (delimiter : WorkSymbol) :
+    WorkMachineProgramGraph.NoRuleAt (consumeWith delimiter) (consumeWith delimiter).acceptState :=
+  (consumeWith_control delimiter).2.1
+example (delimiter : WorkSymbol) :
+    WorkMachineProgramGraph.NoRuleAt (consumeWith delimiter) (consumeWith delimiter).rejectState :=
+  (consumeWith_control delimiter).2.2.1
+example (delimiter : WorkSymbol) : (consumeWith delimiter).acceptState ≠ (consumeWith delimiter).rejectState :=
+  (consumeWith_control delimiter).2.2.2
+
 end PNP.Concrete.CookLevin.BuilderRegisterCountdownControl.Regression

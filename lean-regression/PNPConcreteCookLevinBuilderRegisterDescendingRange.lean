@@ -116,4 +116,54 @@ example : WorkMachineChain.NoRuleAtAccept machine := noRuleAtAccept
 example : WorkMachineProgramGraph.NoRuleAt machine machine.rejectState := noRuleAtReject
 example : machine.acceptState ≠ machine.rejectState := acceptState_ne_rejectState
 
+-- Retain the marker for the following fixed metadata pass; never select a runtime-sized graph.
+example : machine = machineWith separatorSymbol := rfl
+example (delimiter : WorkSymbol) : (graphWith delimiter).nodes.length = 5 := rfl
+example (delimiter : WorkSymbol) : (graphWith delimiter).WellFormed := graphWith_wellFormed delimiter
+example (delimiter : WorkSymbol) : copyNode.onAccept = .node (consumeNodeWith delimiter).reference := rfl
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    workRunExact? (machineWith delimiter) (workSteps count upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside [])) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter count upper older inside } :=
+  workRunExactWith delimiter count upper older inside hCount
+example (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) (hCount : count ≤ upper) :
+    workRunExact? (machineWith BuilderRegisterCountdownControl.counterMarker) (workSteps count upper)
+      (workStartConfiguration (machineWith BuilderRegisterCountdownControl.counterMarker)
+        (endTape (older ++ [count, upper]) inside [])) =
+      some {
+        state := (machineWith BuilderRegisterCountdownControl.counterMarker).acceptState
+        tape := BuilderRegisterCountdownControl.markedTape 0 count (values upper count)
+          ((registerWord older).reverse ++ inside) (List.replicate (upper - count + 1) .blank) } := by
+  simpa only [finalTapeWith_marker] using
+    workRunExactWith BuilderRegisterCountdownControl.counterMarker count upper older inside hCount
+example (delimiter : WorkSymbol) (upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    workRunExact? (machineWith delimiter) (workSteps 0 upper)
+      (workStartConfiguration (machineWith delimiter) (endTape (older ++ [0, upper]) inside [])) =
+      some {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter 0 upper older inside } :=
+  workRunExactWith delimiter 0 upper older inside (Nat.zero_le _)
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside : List WorkSymbol)
+    (hCount : count ≤ upper) :
+    run (compileWorkMachine (machineWith delimiter)) (6 * workSteps count upper)
+      (encodeWorkConfiguration
+        (workStartConfiguration (machineWith delimiter) (endTape (older ++ [count, upper]) inside []))) =
+      encodeWorkConfiguration {
+        state := (machineWith delimiter).acceptState
+        tape := finalTapeWith delimiter count upper older inside } :=
+  run_compile_exactWith delimiter count upper older inside hCount
+example (delimiter : WorkSymbol) (count upper : Nat) (older : List Nat) (inside : List WorkSymbol) :
+    (finalTapeWith delimiter count upper older inside).left = List.replicate (upper - count + 1) .blank := rfl
+example (delimiter : WorkSymbol) : (machineWith delimiter).rules.Pairwise WorkMachineChain.QueryDistinct :=
+  rulesWith_pairwise_query_distinct delimiter
+example (delimiter : WorkSymbol) : WorkMachineChain.NoRuleAtAccept (machineWith delimiter) := noRuleWithAtAccept delimiter
+example (delimiter : WorkSymbol) :
+    WorkMachineProgramGraph.NoRuleAt (machineWith delimiter) (machineWith delimiter).rejectState :=
+  noRuleWithAtReject delimiter
+example (delimiter : WorkSymbol) : (machineWith delimiter).acceptState ≠ (machineWith delimiter).rejectState :=
+  acceptWith_ne_rejectState delimiter
+
 end PNP.Concrete.CookLevin.BuilderRegisterDescendingRange.Regression
