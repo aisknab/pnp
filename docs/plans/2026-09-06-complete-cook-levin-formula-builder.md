@@ -3994,3 +3994,90 @@ remains 35%, with uncertainty 20% to 40%; global gates closed remain 0/5.
 The eligible root theorem is absent and the publication gate remains false.
 No fixed weighted checkpoint changed. PNPLabs publication remains deferred at
 its coherent M229 source pin.
+
+### Active physical cell metadata handoff
+
+The next physical dependency in the unchanged manuscript SAT-transport route is
+a uniform writer-facing suffix after the complete cell decoder. Implement one
+fixed graph over an actual seven-register input: input length, fuel, selected
+length, row width, remaining-row count, interval start and row coordinate.
+The program must preserve arbitrary older registers and inside/source/output
+tape and append the first five metadata values followed by the canonical
+decoded position and within-cell offset.
+
+The existing decoder has three finite return layouts. A branch-aware wrapper
+will compare the actual input registers to select the appropriate fixed return
+copy layout and reuse the unchanged complete decoder. Its polynomial bound must
+charge these routing comparisons, every copy, the full decoder and all graph
+bridges. It must not use a runtime history length as a static program parameter
+or accept a supplied branch/coordinate answer as an execution premise.
+
+Prepare all three branch-boundary and metadata-order regressions with the
+source. The intended universal interfaces are exact work/raw execution, the
+uniform seven-register canonical suffix, fresh-frontier and workspace
+preservation, deterministic control and whole-wrapper bounds from the actual
+encoded incoming register span. Audit every public theorem; reuse the unchanged
+decoder, comparison and packer evidence.
+
+Connecting the actual source-row preparation to this handoff and then dispatching
+the complete initial-family payload writer remains explicit downstream work.
+The wrapper alone earns no checkpoint, publication row or M230 completion claim.
+No existing decoder, canonical formula, progress ledger or published source pin
+is to be changed by this component.
+
+### Verified physical cell metadata handoff
+
+The permanent
+[`CookLevinBuilderInitialCellHandoff`](../../lean/PNP/Concrete/CookLevinBuilderInitialCellHandoff.lean)
+target now provides one fixed fourteen-node program for all metadata values,
+interval starts, certificate lengths and row coordinates. Its actual incoming
+seven registers hold input length, fuel, selected length, row width,
+remaining-row count, interval start and row coordinate.
+
+The graph compares the actual coordinate against the interval start and upper
+boundary to select one of three fixed return layouts. It physically prepares the
+decoder's arguments, runs the unchanged complete decoder, and copies the five
+metadata registers followed by the canonical position and within-cell offset.
+Every successful return has the same seven-register suffix. There is no
+caller-supplied branch answer or runtime-sized static register offset.
+
+The exact work/raw execution theorems preserve arbitrary older registers and
+inside/source/output tape and leave a fresh outer frontier. The complete wrapper
+bound includes its routing comparisons, argument and result copies, the full
+decoder and at most eight outer graph bridges. Reusing the decoder does not
+hide that additional runtime. The bound is in the actual encoded incoming
+register span, not an uncharged semantic reference computation.
+
+All 53 prepared regressions in
+[`PNPConcreteCookLevinBuilderInitialCellHandoff`](../../lean-regression/PNPConcreteCookLevinBuilderInitialCellHandoff.lean)
+pass, including both interval boundaries, zero certificate length, all three
+fixed copy layouts, metadata order, wrong-field/offset expectations, complete
+work/raw execution and the whole-wrapper polynomial bound. All 21 public theorem
+axiom audits pass: four are axiom-free, seven use only `propext`, and ten
+use only `propext` and `Quot.sound`. No `Classical.choice`,
+project-specific assumption or incomplete proof enters those closures.
+
+The initial targeted attempts exposed association and alias normalization
+mismatches at tape and bound handoffs. Explicit proof normalization repaired
+them without changing the machine, theorem statements, bound polynomials or
+prepared regression expectations. The final target, audit and regression run
+reached terminal success. The existing decoder source and its successful
+verification evidence were unchanged and reused.
+
+### Next dependency: source-bound uniform initial-cell frame
+
+Connect the actual source-row preparation to the verified metadata handoff.
+The existing row result supplies input length, fuel, selected length, expanded
+row width and remaining-row count; preserve those actual fields alongside the
+computed interval start and row coordinate. Prove the complete source-packet
+run leaves the uniform seven-register payload-facing suffix, including prefix
+and exhausted-family routing, and bind its resource bound to encoded source
+input size. Then wire physical request dispatch, indexed source reads, literal
+kernels and the complete initial payload specification.
+
+The physical initial/accepting writers and complete formula/reduction wiring
+remain open. M230 is not earned. Formal artefact coverage remains 205/207;
+risk-weighted proof estimate remains 35%, with uncertainty 20% to 40%;
+global gates closed remain 0/5. The eligible root theorem is absent and the
+publication gate remains false. No fixed checkpoint changed. PNPLabs
+publication remains deferred at its coherent M229 source pin.
