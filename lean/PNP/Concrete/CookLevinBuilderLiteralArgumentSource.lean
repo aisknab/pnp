@@ -20,12 +20,25 @@ open BuilderDividerOperands (endTape)
 open BuilderConstraintRegionRegisters (Region)
 open BuilderPolynomialRegisterCopies (Address)
 
+private def inputLeafAddress (mode : InputMode) (certificate fuel : NatPolynomial) :
+    Address (tapeWidthPolynomial mode certificate fuel) :=
+  .addLeft (.addLeft (match mode with
+    | .inputOnly => .root .variable
+    | .paired => .addLeft (.addLeft (.mulRight (.root .variable)))))
+
+private theorem inputLeafAddress_selected (mode : InputMode) (certificate fuel : NatPolynomial) :
+    (inputLeafAddress mode certificate fuel).selected = .variable := by
+  cases mode <;> rfl
+
 inductive SourceField where
-  | timeCount | tapeWidth | stateCount | certificateWidth | fuel
+  | timeCount | tapeWidth | stateCount | certificateWidth | fuel | inputLength
   deriving DecidableEq, Repr
 
 def sourceAddress {language : Language} (verifier : PolynomialTimeVerifier language) :
     SourceField → Address (formulaClauseCountPolynomial verifier)
+  | .inputLength => .mulLeft (.addLeft (.addLeft (.addLeft (.addLeft
+      (.mulRight (.addLeft (inputLeafAddress (inputModeOfVerifier verifier.program.inputMode)
+        verifier.certificateBound (formulaFuelPolynomial verifier))))))))
   | .timeCount => .mulLeft (.addLeft (.addLeft (.addLeft (.addLeft (.mulLeft (.root _))))))
   | .tapeWidth => BuilderRegionRadixSource.fieldAddress verifier .tapeWidth
   | .stateCount => BuilderRegionRadixSource.fieldAddress verifier .states
@@ -34,6 +47,7 @@ def sourceAddress {language : Language} (verifier : PolynomialTimeVerifier langu
 
 def sourcePolynomial {language : Language} (verifier : PolynomialTimeVerifier language) :
     SourceField → NatPolynomial
+  | .inputLength => .variable
   | .timeCount => formulaTimeCountPolynomial verifier
   | .tapeWidth => formulaTapeWidthPolynomial verifier
   | .stateCount => formulaStateCountPolynomial verifier
@@ -42,9 +56,11 @@ def sourcePolynomial {language : Language} (verifier : PolynomialTimeVerifier la
 
 theorem sourceAddress_selected {language : Language} (verifier : PolynomialTimeVerifier language)
     (field : SourceField) : (sourceAddress verifier field).selected = sourcePolynomial verifier field := by
-  cases field <;> rfl
+  cases field <;> try rfl
+  exact inputLeafAddress_selected _ _ _
 
 def sourceValue {language : Language} (problem : VerifierTableauProblem language) : SourceField → Nat
+  | .inputLength => problem.input.length
   | .timeCount => problem.dimensions.timeCount
   | .tapeWidth => problem.dimensions.tapeWidth problem.tableauInputMode
   | .stateCount => problem.dimensions.stateBound
@@ -308,6 +324,8 @@ theorem field_eval {language : Language} (problem : VerifierTableauProblem langu
   | retained retainedIndex => exact retained_read problem index remaining region afterCount after retainedIndex
   | source sourceField =>
       cases sourceField with
+      | inputLength =>
+          exact source_read problem index remaining region afterCount after .inputLength
       | timeCount =>
           exact (source_read problem index remaining region afterCount after .timeCount).trans
             problem.formulaTimeCountPolynomial_eval

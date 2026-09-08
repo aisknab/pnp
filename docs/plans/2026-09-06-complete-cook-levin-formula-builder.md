@@ -3792,3 +3792,124 @@ coverage remains 205/207; risk-weighted proof estimate remains 35%,
 with uncertainty 20% to 40%; global gates closed remain 0/5.
 No fixed checkpoint changed. PNPLabs publication remains deferred at
 the coherent M229 source pin.
+
+### Source-derived paired-cell selection and decoder integration
+
+Continue the pinned **Final SAT decision / Accepted package implies P=NP**
+reconstruction, closing the dependency from the actual written initial-region
+packet to the canonical paired-cell coordinate. The current initial region
+contains two fixed state/head constraints, then the paired length constraint;
+cell rows therefore start at coordinate three. Preserve that order exactly.
+
+Extend the existing literal source-field interface with a structural address
+for the original input-length leaf in both verifier input modes. Read it from
+the already materialized polynomial registers, not from a caller-supplied
+environment or a second evaluation. Update its source-field regression contract
+with the producer. Existing source fields and literal dimensions must not change.
+
+Implement one verifier-dependent finite program that, for every paired-mode
+source packet and initial-region coordinate, physically computes the certificate
+row budget, packs source input length/fuel/tape width, compares against the
+three-constraint prefix, and uses the computed residual for the complete
+metadata-carrying row loop. Prefix entries and exhausted row families must
+reject this cell branch. A found row must feed an actual register expression for
+the certificate interval start and the existing complete cell decoder.
+
+The machine must depend only on the verifier, never on the runtime coordinate,
+selected length, history size, or a supplied path/correctness certificate.
+Prove exact work/raw execution, source/workspace preservation, a fresh final
+frontier, canonical selected length/position/offset, and complete-component
+encoded-size polynomial bounds. The paired input-mode premise is the static
+branch boundary, not a supplied runtime selection result.
+
+Prepare the new physical execution, prefix/padding rejection, canonical mapping,
+raw-refinement, control and polynomial tests with the source. Audit all new public
+theorems and the affected source-field interface. Rebuild only the changed target
+dependency chain and affected regressions; reuse the unchanged row-loop/decoder
+evidence. Complete initial/accepting payloads, full formula-loop wiring and the
+packaged reduction remain downstream. M230 is not earned, no fixed progress
+checkpoint or publication row changes, and PNPLabs publication stays deferred.
+
+### Verified source-derived paired initial-cell coordinates
+
+The permanent
+[`CookLevinBuilderInitialPairedCellSource`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedCellSource.lean)
+target now reads the actual initial-region packet and computes the canonical
+paired-cell position and within-cell offset. Its finite nine-node program
+depends only on the verifier. No runtime coordinate, selected length, history
+size or caller-supplied route answer determines its control.
+
+The existing
+[`CookLevinBuilderLiteralArgumentSource`](../../lean/PNP/Concrete/CookLevinBuilderLiteralArgumentSource.lean)
+interface now includes the original input length. Its structural address selects
+a variable leaf in the already written formula-bound polynomial registers in
+both verifier input modes. Existing source fields are unchanged; the source
+packet is neither replaced with supplied values nor reevaluated.
+
+For the paired branch, an actual register expression computes the certificate
+row budget. A physical pack copies input length, uniform fuel and tape width
+together with the initial coordinate and budget. The program compares the
+coordinate against three: the initial state, head and length constraints are
+not cell rows. It rejects those prefix entries and passes the computed residual
+to the complete metadata-carrying row selector.
+
+Every row is selected by the actual finite program. An exhausted family rejects
+the cell branch, including canonical paired-cell padding. A found row supplies
+its uniform six-register suffix to the interval-start expression and the
+complete three-branch physical cell decoder. The final two registers contain
+the exact canonical position and within-cell offset. Earlier source metadata
+and scratch remain explicitly preserved; arbitrary inside/source/output tape
+data is unchanged and the final outer frontier is empty.
+
+The public `workRunExact` and `run_compile_exact` theorems cover every
+source packet coordinate under the static paired-mode branch condition.
+The execution theorem has no supplied selection, history, or correctness
+certificate premise. `found_output` identifies the canonical final pair;
+`decoded_bounds` derives its valid tape position and within-cell offset from
+the actual tableau geometry. Prefix rejection and exhausted-family rejection
+have separate regression contracts.
+
+The component-wide `packet_polynomial_bounds` theorem accounts for the
+source-budget expression, metadata pack, prefix comparison, complete row
+search, interval-start computation, decoder pack and full decoder execution.
+It includes all retained workspace and at most nine outer graph bridges.
+`source_polynomial_bounds` binds the result to polynomial encoded-source
+input size using the existing source-coordinate invariants. This is not the
+global runtime gate or the complete formula-builder theorem.
+
+All 45 prepared contracts in
+[`PNPConcreteCookLevinBuilderInitialPairedCellSource`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedCellSource.lean)
+pass, including exact execution, source-derived metadata, prefix/padding
+rejection, wrong-field expectations, canonical output, control, raw refinement
+and complete-component bounds. All 26 public theorem axiom audits pass:
+six are axiom-free, two use only `propext`, and eighteen use only
+`propext` and `Quot.sound`. No `Classical.choice`, project-specific
+assumption or incomplete proof enters those closures.
+
+The affected source-field interface separately passed all 58 regressions in
+[`PNPConcreteCookLevinBuilderLiteralArgumentSource`](../../lean-regression/PNPConcreteCookLevinBuilderLiteralArgumentSource.lean)
+and five selected public axiom audits: one axiom-free and four using only
+`propext` and `Quot.sound`. Those successful source hashes were reused by
+the final integration run. The source and expected outputs were prepared
+together; fixes to graph-field syntax, private helper duplication, structural
+addresses and explicit execution-state normalization did not relax a theorem,
+bound or test expectation. Both final targeted runs reached terminal success.
+
+### Next dependency: complete initial-constraint payloads
+
+Reconstruct the complete canonical initial family: fixed state/head constraints,
+paired length selection, all paired initial cells and the input-only initial
+cells. Connect the physically derived position/offset to the exact fixed-bit,
+source-bit and certificate-bit literal requests and existing generic payload
+machinery. Preserve the selected length and source metadata through the finite
+decoder branches wherever the payload handoff requires them; do not turn a
+runtime history length into a static register-copy offset.
+
+This coordinate program does not yet emit the complete initial constraints.
+The initial payloads, accepting family, formula emission and recovery/successor
+wiring, and the packaged all-input polynomial reduction remain open. M230 is
+not earned. Formal artefact coverage remains 205/207; risk-weighted proof
+estimate remains 35%, with uncertainty 20% to 40%; global gates closed remain
+0/5. The root theorem is absent and the publication gate remains false.
+No fixed checkpoint changed. PNPLabs publication remains deferred at the
+coherent M229 source pin.

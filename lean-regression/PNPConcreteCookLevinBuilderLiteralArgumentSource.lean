@@ -55,6 +55,23 @@ example : (sourceAddress problem.verifier .tapeWidth).selected = formulaTapeWidt
 example : (sourceAddress problem.verifier .stateCount).selected = formulaStateCountPolynomial problem.verifier := rfl
 example : (sourceAddress problem.verifier .certificateWidth).selected = problem.verifier.certificateBound := rfl
 example : (sourceAddress problem.verifier .fuel).selected = formulaFuelPolynomial problem.verifier := rfl
+example : (sourceAddress problem.verifier .inputLength).selected = .variable :=
+  sourceAddress_selected problem.verifier .inputLength
+example : sourcePolynomial problem.verifier .inputLength = .variable := rfl
+example : sourceValue problem .inputLength = problem.input.length := rfl
+example (index remaining : Nat) (region : Region) (afterCount : Nat) (after : List Nat) :
+    (field problem.verifier region afterCount (.source .inputLength)).eval
+      (environment problem index remaining region afterCount after) = problem.input.length :=
+  field_eval problem index remaining region afterCount after (.source .inputLength)
+example (index remaining : Nat) (region : Region) (afterCount : Nat) (after : List Nat) :
+    (field problem.verifier region afterCount (.source .inputLength)).eval
+      (environment problem index remaining region afterCount after) ≠ problem.input.length + 1 := by
+  rw [field_eval]
+  change problem.input.length ≠ problem.input.length + 1
+  omega
+example (index : Nat) :
+    referenceValue problem index .initial [] (.source .inputLength : Reference .initial 0) =
+      problem.input.length := rfl
 
 example (index remaining : Nat) (region : Region) :
     (BuilderRegionRadixSource.finalValues problem index remaining region).length =
