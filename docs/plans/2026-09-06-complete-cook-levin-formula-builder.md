@@ -3084,3 +3084,107 @@ and packaged reduction. M230 is not earned and
 coverage remains 205/207; the risk-weighted proof estimate remains 35%,
 with uncertainty 20% to 40%; global gates closed remain 0/5.
 PNPLabs publication remains deferred at the coherent M229 pin.
+
+### Within-row selector implementation contract
+
+Continue the same pinned manuscript/Cook--Levin initial-tableau dependency,
+without substituting a rectangular schedule. The new unbounded arithmetic
+decoder will return `(position, withinCell)` from the actual row offset.
+Its universal contract is `position < W`,
+`withinCell < intervalWidth A L position`, and
+`j = position + min L (position - A) + withinCell` whenever
+`A + L <= W` and `j < W + L`. The source-facing function derives the
+containment premise from the actual paired tableau dimensions.
+
+The exact consumer is `problem.pairedCellsForLengthSlotDirect`, followed
+by `problem.pairedCellsSlotDirect` through the verified length cursor.
+Prove pointwise equality for every coordinate, including exhaustion, by
+matching the existing `DirectSlot.flatFinite` prefix. No selected cell,
+width table, source bit, family or correctness certificate is supplied to
+the source-facing selection function.
+
+Prepare the producer and regression contracts together in
+`CookLevinBuilderInitialCellSelection.lean` and its matching regression.
+Test zero width/length, both interval joins, both certificate polarities,
+the final cell, exhaustion and arbitrary source-specialized theorem types.
+Audit every public theorem after building its permanent Lake target.
+Reuse the unchanged initial-coordinate and length-selection evidence.
+This dependency addition does not change a generated publication contract,
+inventory name set, status, weighted checkpoint or public site pin; complete
+M230 integration must still update the root and all release consumers.
+Physical row/cell selection, initial literal production and the remaining
+whole-builder obligations above stay open until independently proved.
+
+### Verified canonical paired-cell coordinate selection
+
+[`CookLevinBuilderInitialCellSelection.lean`](../../lean/PNP/Concrete/CookLevinBuilderInitialCellSelection.lean)
+now proves the planned within-row inverse for every contained certificate
+interval and every valid row coordinate. It derives a bounded cell, a
+within-cell offset and the exact preceding-span equation. The generic
+prefix lemma connects that arithmetic result to the existing compressed
+`DirectSlot.flatFinite` order, including the exhausted tail.
+
+The source-facing `selectedCell` derives interval containment from the
+actual paired tableau dimensions. `selectedInitialCell` composes it with
+the verified length cursor, deriving certificate length, cell position
+and within-cell offset from a single paired-cell coordinate. Its lookup
+is pointwise equal to `problem.pairedCellsSlotDirect`, and absence is
+equivalent to exhausting `problem.pairedCellsWidthDirect`. There is no
+supplied row, selected cell, width table, source bit or correctness premise
+in that selection function.
+
+All 44 prepared contracts in
+[`PNPConcreteCookLevinBuilderInitialCellSelection.lean`](../../lean-regression/PNPConcreteCookLevinBuilderInitialCellSelection.lean)
+pass, including zero width/length, both interval joins, both slots of
+certificate cells, the final cell, exhaustion, wrong rectangular offsets
+and arbitrary source-facing theorem types. All 11 public-theorem axiom
+audits pass with only `propext` and `Quot.sound`; no project axiom or
+`Classical.choice` occurs. A comment-delimiter fix and finite-index,
+induction and reflexive-goal proof corrections preserved the intended
+definitions, statements and regression expectations. A runner-only failed
+preflight launched no Lean work; the final complete target run passed.
+The exact unchanged cell-coordinate and length-selection evidence was
+reused rather than rerun.
+
+### Physical row-loop residual boundary: inspected next interfaces
+
+The next implementation must return a usable residual, not just the
+existing `BuilderRegisterLessThan` verdict: that helper restores and then
+erases all three comparator registers. Its lower-level
+`BuilderRegionResidualRegisters.ofComparison_restoredValues` instead
+returns these exact ordinary registers:
+
+- Less: `[coordinate, 0, boundary]`.
+- Equal: `[boundary, 0, boundary]`.
+- Greater: `[boundary + 1, coordinate - boundary - 1, boundary]`.
+
+These shapes follow the actual comparator result with initial processed
+count zero; they still need the corresponding derived arithmetic lemma
+and a physical residual-return adapter. In the greater case, the second
+register alone is one below the required residual.
+
+`BuilderRegisterPack` appends selected copies and preserves its original
+frame; it does not compact away the restored registers. Do not assume
+otherwise when specifying the row loop. A fixed branch graph can recover
+the comparator tape, append boundary plus the appropriate residual copy,
+and increment that copy only on the actual greater branch. Its proposed
+output is `older ++ restoredValues ++ [boundary, nextCoordinate]`, where
+`nextCoordinate = coordinate` for the accepting less branch and
+`coordinate - boundary` for the non-less continuation. Derive that result
+from the actual comparator; do not accept a caller-supplied verdict.
+
+Before implementation, finalize the adapter's exact exterior allocation,
+work-step count and source-polynomial bounds using the existing reserve,
+copy, increment and recovery theorems. Explicitly account for the three
+retained scratch registers in each row iteration, the remaining-row
+decrement and the selected-length/current-width increments. Either clean
+them physically or carry a proved bounded history and recover it later;
+a copying packer is not an eraser. The entire row selector must still be
+one fixed finite graph, not an input-dependent unrolling.
+
+The arithmetic decoder and its tests do not establish that physical
+adapter, the row loop, initial literal production or polynomial execution
+of the complete construction. M230 is not earned. Formal artefact coverage
+remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
+20% to 40%; global gates closed remain 0/5. No weighted checkpoint changed.
+PNPLabs publication remains deferred at the coherent M229 pin.
