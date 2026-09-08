@@ -4388,3 +4388,127 @@ proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
 remain 0/5. The eligible root theorem is absent and the publication gate remains
 false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
 coherent M229 source pin.
+
+### Active actual-input request resolution and source binding
+
+Under the same **Final SAT decision** / **Accepted package implies P=NP**
+legacy anchor, close the source-request-to-symbol edge required by the
+canonical initial-family writer. A source request must read the actual input
+tape, not accept a bit or a supplied semantic answer.
+
+Reuse the existing non-destructive `BuilderUnaryTagMatch` for fixed request
+tags and the verified `BuilderIndexedInputRead` for the source branch only.
+One fixed resolver must preserve the nine request fields and append the
+canonical symbol code: blank 0, false 1, true 2. Certificate offset zero uses
+the positive/one conclusion; offset one uses the negative/zero conclusion.
+The generic component covers every typed request and natural offset, while
+the source selection supplies the canonical within-cell bounds.
+
+Derive exact work and compiled raw runs on the actual `inside input output`
+tape, including arbitrary prior output. Restore all source marks and registers;
+do not scan into the tally or prior output after the source terminator.
+Charge all tag tests, copies, the actual indexed scan, retained history and
+outer bridges in one encoded-register polynomial bound. Derive index and older
+workspace bounds from the materialized input frame.
+
+Then compose the unchanged verified `BuilderInitialPairedCellSource` with
+this resolver in a source-bound resolution stage. This reuses the existing
+source machine; it is not a duplicate source extractor or alternative route.
+The complete source-bound theorem must construct the request from the selected
+row and decoded cell, match its actual nine-field suffix, resolve the source
+bit physically and return ten source-derived fields. No request, bit, branch
+answer or independent size certificate belongs to that source-level theorem.
+Keep source-prefix and exhausted-family rejection unchanged.
+
+Prepare the resolver's 46 regressions and 32 public axiom probes with its
+source. After that targeted boundary passes, reuse its exact evidence during
+source composition; do not repeat the independent reader, tag matcher, request
+dispatcher or source-selection suites. Add the source-composition execution,
+layout, rejection, canonical symbol and encoded-source bounds tests before
+building that target. Commit the integrated boundary only after both stages
+and the current documentation/status/diff checks pass.
+
+Literal kernels, canonical payload packing, the complete initial and accepting
+families, formula-loop wiring and the packaged polynomial reduction remain
+downstream. M230 is not earned; no checkpoint, publication row or progress
+credit is awarded. PNPLabs publication remains deferred.
+
+### Prepared source-to-resolution integration contract
+
+The resolver now has successful exact-target, regression and compiled axiom
+evidence. Preserve those verified bytes while adding the two-node composition:
+the unchanged source machine physically creates the nine-field request, and
+the resolver appends its canonical symbol using the actual source input.
+
+Prepare 43 source-composition regressions and 26 exact public axiom probes before
+building. Check the actual source tape, arbitrary prior output, nine-to-ten-field
+boundary, computed source history, canonical request derivation, complete exact
+work/raw runs, prefix and exhaustion rejection, fixed graph transitions, all
+symbol branches, and both packet and encoded-source polynomial bounds.
+Reuse the unchanged resolver and source-selection suites. The next required
+construction is the canonical literal/payload writer; M230 remains unearned.
+
+### Verified source-to-symbol request resolution
+
+The fixed
+[`CookLevinBuilderInitialRequestResolution`](../../lean/PNP/Concrete/CookLevinBuilderInitialRequestResolution.lean)
+program now resolves every typed initial-cell request physically. Its thirteen
+fixed graph nodes preserve all nine request fields and append the canonical
+symbol code: blank 0, false 1 or true 2. The source branch uses the actual indexed
+input reader, including out-of-range blank behavior; no source bit is supplied.
+Certificate offset zero and offset one retain their distinct conclusions.
+Both the source tape and arbitrary prior output are restored.
+
+The new
+[`CookLevinBuilderInitialPairedCellResolution`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedCellResolution.lean)
+is a two-node composition of the unchanged verified source machine and that
+resolver. Its execution theorem has no supplied request, bit, history, branch
+answer or independent size certificate. The computable history cut is justified
+by the source machine's actual canonical nine-field suffix. Every successful
+cell selection now ends with the ten source-derived request-and-symbol fields.
+The existing non-cell prefix and exhausted-family branches still reject; this
+component does not pretend they are completed writer cases.
+
+Exact work and compiled raw execution theorems cover the complete source-to-read
+chain. Register-size bounds include all retained history, tag tests, field
+copies, indexed input scanning and both composition bridges. The encoded-source
+bound derives the initial packet size under the unchanged paired-mode, body,
+cursor-balance and selected-region invariants.
+
+All 46 resolver regressions in
+[`PNPConcreteCookLevinBuilderInitialRequestResolution`](../../lean-regression/PNPConcreteCookLevinBuilderInitialRequestResolution.lean)
+and all 43 composition regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedCellResolution`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedCellResolution.lean)
+pass. The resolver's 32 public axiom probes comprise four axiom-free theorems,
+ten using only `propext`, and eighteen using only `propext` and `Quot.sound`.
+The composition's 26 probes comprise one using only `propext` and twenty-five
+using only `propext` and `Quot.sound`. None uses `Classical.choice`, a
+project-specific axiom or an incomplete proof.
+
+Earlier failed attempts exposed proof normalization, one reserved identifier
+and unnecessary whole-machine unfolding in endpoint comparisons. The repairs
+changed proof terms only, not the machine, theorem statements, polynomial
+budgets or prepared regression expectations. Successful terminal target,
+axiom and regression runs supply the evidence; failed attempts do not.
+
+The complete expectation sets were prepared before their target builds.
+Composition reused the byte-identical resolver and source-selection evidence;
+the independent reader, tag matcher, dispatcher, handoff and row suites were
+not rerun. Documentation/status verification reuses both successful source
+hashes rather than rebuilding Lean.
+
+### Next dependency: canonical initial-cell literal and payload writing
+
+Use the ten actually materialized fields to construct the length, symbol and
+certificate-bit literal indices with the existing arithmetic kernels. Pack the
+unchanged canonical guarded and bit-guarded initial-cell payloads, retaining
+the distinct certificate signs. Derive all dimensions and indices from the
+source packet; do not supply semantic answers or correctness certificates.
+Then finish initial-prefix, input-only, paired-family and accepting writers,
+formula-loop emission/recovery and the packaged all-input polynomial reduction.
+
+M230 is not earned. Formal artefact coverage remains 205/207; risk-weighted
+proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
+remain 0/5. The eligible root theorem is absent and the publication gate remains
+false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
+coherent M229 source pin.
