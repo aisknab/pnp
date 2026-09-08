@@ -5393,3 +5393,115 @@ Canonical token emission, exact recovery/successor, Finish and the complete
 all-input polynomial builder/reduction remain downstream. Full root, inventory,
 publication, workflow and exact release verification remain due at complete M230
 integration; these internal components do not replace those release gates.
+
+### Active all-family payload occupancy contract
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+dependency from the verified physical source-coordinate handoff to complete
+payload-driven clause occupancy. Do not replace the obligation with a tag test
+or an assumed list count.
+
+Build one finite graph independent of input, payload length, literal values and
+local clause coordinate. Starting at `endTape (older ++ values slot ++ [j])`,
+copy the actual payload tag from its fixed offset, test it, and erase only the
+temporary copy. Absent coordinates reach a distinct dead endpoint; padded empty
+opportunities reject occupancy. Requirements and implications are occupied
+exactly at local coordinate zero. For exactly-one payloads, copy the physically
+written list count past the tag and local coordinate, then execute the existing
+general arithmetic occupancy program. Both occupied and unoccupied outcomes
+must preserve the original payload and coordinate, with exact computed scratch
+history and cleared/allocated exterior cells.
+
+The generic theorem quantifies every canonical nested-option payload, every
+local coordinate and arbitrary older/interior/exterior data. Compose it with
+the source-coordinate program so that the source theorem supplies no payload,
+tag, count, coordinate, occupancy verdict or correctness certificate. Prove
+its endpoint matches the actual canonical formula-clause occupancy projection,
+including the absent-versus-padding distinction.
+
+Prepare exact graph/endpoint, canonical-layout, boundary, empty exactly-one list,
+work/raw, axiom and source-encoded polynomial regression contracts with the
+source. Charge copied tags, all rejected tests, erasure, copied counts, arithmetic,
+comparison and every graph bridge. Reuse unchanged copy, erase, tag, arithmetic
+occupancy and source-coordinate evidence; only the new dependency chain and
+affected regressions are development checks.
+
+Emission, exact recovery and successor, Finish and the full polynomial
+all-input loop/reduction remain downstream. This internal dependency earns no
+publication row or fixed checkpoint by itself. M230 remains unearned, and
+PNPLabs publication remains deferred on its coherent M229 source pin.
+
+### Verified source-derived clause occupancy
+
+The pinned **Final SAT decision** / **Accepted package implies P=NP** dependency
+now has a physical source-to-occupancy execution theorem. This is an internal
+part of the complete builder, not an earned M230 or a finished reduction.
+
+[Payload-driven occupancy](../../lean/PNP/Concrete/CookLevinBuilderPayloadClauseOccupancy.lean)
+uses one fixed thirteen-node graph for every canonical payload and every local
+clause coordinate. It copies the actual tag, tests all preceding alternatives,
+and erases the temporary tag copy. Absent and padded coordinates remain distinct.
+Requirements and implications accept occupancy exactly at zero. Exactly-one
+payloads supply their physically written list count to the general arithmetic
+test, including the empty-list case; no pairs or clauses are enumerated.
+The original payload and coordinate survive, with an exact scratch history and
+computed exterior. Work-machine and raw compiled execution, deterministic
+control, terminal safety, and polynomial final-span/runtime bounds are proved.
+
+All 49 prepared payload regressions passed, including absent-versus-padding,
+empty lists, repeated variables, last occupied and first unoccupied indices,
+all tag paths, preserved tape interiors and uniform polynomial contracts.
+All 16 public payload axiom probes passed: four are axiom-free, five use only
+`propext`, and seven use only `propext` and `Quot.sound`.
+[The regression](../../lean-regression/PNPConcreteCookLevinBuilderPayloadClauseOccupancy.lean)
+checks the general statements as well as small boundary fixtures.
+
+[Source-derived occupancy](../../lean/PNP/Concrete/CookLevinBuilderSourceClauseOccupancy.lean)
+composes the already verified source-coordinate execution with that fixed
+dispatcher. The machine depends on the verifier, not a runtime family, payload,
+tag, local coordinate, list count or supplied correctness certificate.
+`workRun_observes_schedule` proves that execution from the actual source cursor
+observes precisely the canonical formula-clause schedule at its decoded source
+coordinate. The existing in-body hypothesis identifies that coordinate; it does
+not supply an occupancy verdict. Exact tape preservation and compiled execution
+are retained. Polynomial time and final register/exterior span follow from the
+existing source bound, the new dispatch bound, and the composition bridge.
+
+All 24 prepared source-occupancy regressions passed.
+All 16 public source-occupancy axiom probes passed using only `propext` and
+`Quot.sound`. Neither new dependency closure uses `Classical.choice` or a
+project-specific axiom.
+[The source regression](../../lean-regression/PNPConcreteCookLevinBuilderSourceClauseOccupancy.lean)
+requires actual source-derived operands and complete-schedule observation, not
+an externally chosen payload or a finite-case substitute.
+
+Verification reused the exact green copy, erasure, tag, arithmetic-occupancy and
+source-coordinate evidence. Only the new dependency targets and affected
+regressions were checked. Payload source compilation and axiom evidence were
+reused after a regression-only identifier correction; the final wrapper checked
+the unchanged source identity and passed all prepared regressions. Earlier
+non-green elaboration and launch attempts are not milestone evidence.
+No root build, inventory regeneration, website proof rebuild or historical
+replay was repeated for this internal addition. Final root/dependency/audit and
+publication checks remain due at full M230 integration.
+
+Formal artefact coverage remains **205 of 207 current scoped rows earned**.
+The risk-weighted proof completion estimate remains **35%**, with uncertainty
+**20% to 40%**. Global gates closed remain **0 of 5**, project-specific axioms
+remaining **0**, the eligible root `PNP.Main.p_eq_np` absent and publication
+false. No publication row, global gate or weighted checkpoint changed.
+M230 is not earned; PNPLabs publication remains deferred on coherent M229.
+
+### Next dependency: general payload-to-clause emission and recovery
+
+Occupancy is now derived from the source, but it does not emit the selected
+clause. Continue the same manuscript dependency with a finite program that
+reads the preserved canonical payload and local coordinate and emits exactly
+the selected clause tokens. Requirements, arbitrary implication lists and both
+exactly-one clause forms must use uniform list/pair selection and polynomial
+encoded-size execution, not another fixed list or selected clause fixture.
+Account for the occupancy scratch history in the real handoff. Preserve source
+and existing output, recover scratch exactly, then connect the complete
+successor and Finish and prove the all-input polynomial loop and reduction.
+Do not replace an unproved general step with supplied data, an added premise,
+a project axiom or extra milestone credit.
