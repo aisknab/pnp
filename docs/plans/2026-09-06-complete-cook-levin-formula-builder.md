@@ -2651,3 +2651,105 @@ loop or packaged reduction. M230 and `reductions-complete-cook-levin-builder`
 remain open. Formal artefact coverage stays 205/207; the risk-weighted proof
 estimate stays 35% with uncertainty 20% to 40%; global gates closed stay 0/5.
 PNPLabs publication remains deferred at its coherent M229 source pin.
+
+## Verified source-derived control-head movement
+
+The control-clause dependency now has a complete physical movement operation,
+not another fixed position or schedule prefix. The legacy anchor remains the
+Cook-Levin local transition implication and its canonical bounded head update
+in `VerifierTableauProblem.movePosition`. This retires the movement edge of
+the current control-payload plan; it does not retire the full formula-builder
+checkpoint.
+
+[`CookLevinBuilderRegisterHeadMove.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterHeadMove.lean)
+implements one fixed thirteen-node graph for every natural width and position.
+Its runtime input is `[width, position, moveCode move]`; its output retains
+those three registers and appends the computed position. Stay copies the
+position. Left tests zero before decrementing. Right increments a copied
+candidate, compares it with the actual width, restores the original frame, and
+decrements only when the candidate is not strictly inside the width. The
+general result equals the canonical bounded head operation at every
+`Fin width` position. Invalid movement codes reject with the full input tape
+unchanged; they do not silently select a default move.
+
+The theorem accounts for arbitrary older registers and arbitrary interior and
+exterior tape data. The right-path comparison exterior is exactly
+
+```lean
+List.replicate (position + width + 4) WorkSymbol.blank ++
+  outside.drop (2 * position + width + 6)
+```
+
+and a clamped right move adds one cleared cell. The other paths account for
+their copied and cleared cells explicitly. Exact raw execution includes every
+graph bridge and six raw transitions per work transition. The retained-space
+and complete runtime bounds are polynomial in a bound on the encoded input
+register frame, not merely a termination argument.
+
+[`CookLevinBuilderControlHeadSource.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlHeadSource.lean)
+binds that operation to the existing source-derived control action. Its program
+depends only on the verifier. It executes the transition lookup, copies the
+source width and position and retained movement field seven, and then runs the
+fixed movement graph. The execution specification uses the source coordinate
+to identify the intended action; no action or moved position is supplied to
+the executable machine. The control-region premise establishes valid slot
+membership rather than a caller-supplied movement verdict.
+
+The combined result keeps twelve retained registers: the existing eight action
+registers, the three copied movement operands, and the moved position. The
+final frame equality, canonical moved-position equality, exact work/raw runs
+and polynomial runtime and retained-space bounds all hold for every valid
+source-derived control slot. The composed bounds are in the original encoded
+source-input length and charge action lookup, copying, movement and both
+composition bridges.
+
+All 67 prepared regression contracts passed:
+[`PNPConcreteCookLevinBuilderRegisterHeadMove.lean`](../../lean-regression/PNPConcreteCookLevinBuilderRegisterHeadMove.lean)
+contains 41, and
+[`PNPConcreteCookLevinBuilderControlHeadSource.lean`](../../lean-regression/PNPConcreteCookLevinBuilderControlHeadSource.lean)
+contains 26. The checks pin the universal execution interfaces, edge behavior,
+invalid-code rejection, canonical source binding, preserved frame, exact
+exterior and polynomial bounds. All 42 public-theorem axiom audits passed:
+five closures use no axioms, three use only `propext`, and thirty-four use only
+`propext` and `Quot.sound`. No project axiom or `Classical.choice` occurs.
+The source-binding implementation and its prepared regressions passed on the
+first compilation. Initial dispatcher proof-script corrections changed no
+machine, theorem statement or expected outcome.
+
+The unchanged comparison/action dependencies were reused at their exact
+verified source identities. After the dispatcher passed, its 41 regressions
+and 23 axiom audits were not repeated for the source-binding-only addition.
+The complete milestone still requires its root, inventory, publication and
+release verification after the remaining construction is implemented.
+
+### Next complete control-payload contract
+
+Starting with these twelve source-derived retained registers, physically derive
+next time and all four literal indices. The original current state, read symbol
+and position remain in the radix frame; action fields five and six contain
+target state and write symbol, and retained field eleven contains the verified
+moved position. The actual conclusion digit must select the state, head or
+symbol conclusion at next time through runtime control.
+
+For every valid control slot, the complete branch must write the canonical
+three-premise implication payload:
+
+```text
+[readIndex, 1, headIndex, 1, stateIndex, 1, conclusionIndex, 1, 3, 3]
+```
+
+Prove this against `BuilderControlCoordinates.candidate_payload` and
+`source_slot`, retaining exact frame/exterior accounting and an encoded-input
+polynomial bound. A caller-supplied conclusion, selected branch, action,
+literal index or correctness certificate is not an implementation of this
+contract. This must be one all-slot construction covering every conclusion
+kind, not a sequence of new fixed-coordinate milestones.
+
+Next time, all four literal indices, the complete implication payload,
+remaining constraint families, clause emission, full successor, loop and
+packaged reduction remain open. M230 is not earned, and
+`reductions-complete-cook-levin-builder` remains open. Formal artefact coverage
+stays 205/207; the risk-weighted proof estimate stays 35% with uncertainty 20%
+to 40%; global gates closed stay 0/5. PNPLabs publication remains deferred:
+this is a verified dependency component, while the coherent public snapshot
+remains pinned to M229.
