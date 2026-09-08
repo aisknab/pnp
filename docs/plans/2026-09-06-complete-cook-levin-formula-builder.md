@@ -2753,3 +2753,112 @@ stays 205/207; the risk-weighted proof estimate stays 35% with uncertainty 20%
 to 40%; global gates closed stay 0/5. PNPLabs publication remains deferred:
 this is a verified dependency component, while the coherent public snapshot
 remains pinned to M229.
+
+## Verified source literals and static control-implication branches
+
+The next-time and literal-index dependencies of the legacy Cook-Levin
+transition implication now have source-derived executable implementations.
+The unbounded domain is every valid control slot for every source input,
+rather than another fixed circuit, position or schedule prefix.
+
+[`CookLevinBuilderControlLiteralSources.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlLiteralSources.lean)
+extends the verified action/head construction with physical next-time
+arithmetic. It writes the current time, one and their sum after the twelve
+existing retained registers, producing fifteen source-derived registers.
+Next time is therefore at retained position fourteen. All three premise roles
+and all three possible conclusion roles have fixed source-reference plans:
+
+- Current state uses current time and the decoded state.
+- Current head uses current time and the decoded position.
+- Current read symbol uses current time, position and read code.
+- Next state uses the computed next time and action target field five.
+- Next head uses the computed next time and moved-position field eleven.
+- Next write symbol uses next time, the original position and action field six.
+
+One universal environment/index theorem covers all six roles and arbitrary
+later scratch registers. The canonical request is an execution specification;
+the machine receives neither a request nor a literal index as a supplied
+answer. Each first-literal program physically executes the complete
+action/head/time preparation and the existing source-fed index machine.
+Exact work and raw execution, retained-register counts, exact exterior
+accounting and polynomial bounds in original encoded input length are checked.
+
+[`CookLevinBuilderControlImplicationPayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlImplicationPayload.lean)
+implements all three static conclusion branches. Each branch computes the
+conclusion index and the three premise indices, retains their roots at
+positions derived from the expression-node counts, and physically copies the
+canonical ten-register payload:
+
+```text
+[readIndex, 1, headIndex, 1, stateIndex, 1, conclusionIndex, 1, 3, 3]
+```
+
+The output decodes to the exact control constraint with that static conclusion
+kind. When the branch's code equals the source conclusion digit, the decoded
+output equals `controlConstraintSlotDirect` at the actual source coordinate.
+That equality is a branch-selection interface, not a supplied premise closing
+the still-open runtime dispatcher. The final payload is exposed on the tape
+with the previous source and scratch frame intact. The exterior formula
+accounts for the head-movement cleanup and every subsequent written register.
+Complete branch runtime and retained-space bounds include all four index
+constructions, packing and composition bridges.
+
+All 66 prepared regression contracts passed:
+[`PNPConcreteCookLevinBuilderControlLiteralSources.lean`](../../lean-regression/PNPConcreteCookLevinBuilderControlLiteralSources.lean)
+contains 37 and
+[`PNPConcreteCookLevinBuilderControlImplicationPayload.lean`](../../lean-regression/PNPConcreteCookLevinBuilderControlImplicationPayload.lean)
+contains 29. They cover all source roles and static conclusion kinds, canonical
+root retention, exact execution, payload decoding and polynomial bounds.
+A negative length contract prevents replacing the control payload with the
+old eight-register preservation shape. All 48 public-theorem axiom audits passed: two closures use no axioms
+and forty-six use only `propext` and `Quot.sound`. No project axiom or
+`Classical.choice` occurs in the final verified closures.
+
+The strict audit caught a classical dependency introduced by proving a
+conjunction of arithmetic bounds in one tactic invocation. Constructing the
+conjunction explicitly and proving each inequality separately removed that
+dependency without changing any mathematical statement, machine or expected
+outcome. Explicit intermediate tape contracts also avoided unfolding composed
+machine internals during elaboration. Failed or audit-rejected runs are not
+verification evidence. The unchanged source-literal build, 37 regressions and
+27 axiom audits were reused while checking the assembler addition.
+
+### Next source-driven conclusion dispatcher
+
+Implement one fixed graph that reads the actual conclusion digit from the
+existing control radix frame and executes the matching verified branch. No
+caller-selected conclusion or branch-correctness certificate may enter the
+public execution interface. The intended program is:
+
+1. Copy radix digit zero into one disposable register.
+2. Test the written tag against zero, one and two.
+3. On each matching path, erase that disposable register and restore the exact
+   original source frame before executing the corresponding static branch.
+4. Reject unmatched tags; never silently select a default branch.
+5. Use the observed successful tag test to prove the branch-selection equality,
+   then derive the exact canonical source-slot payload without an additional
+   selection premise.
+
+The existing `BuilderRegisterErase.one_workRunExact` takes `tag + 2` work
+transitions and returns the exact exterior
+
+```lean
+List.replicate (tag + 1) WorkSymbol.blank ++ outside.drop (tag + 1)
+```
+
+after the preceding tag copy. Thus neither a tag register nor an unaccounted
+scratch cell may remain at the branch entry. The source tag is a decoded
+`Fin 3` value. The planned three tag tests, erasure and graph bridges have a
+constant bound; copying and the selected full branch retain their existing
+encoded-input polynomial bounds. Prove the graph, physical execution, source
+selection, canonical payload, exact exterior and uniform polynomial bounds
+together, with regression and axiom expectations prepared before compilation.
+
+The runtime dispatcher, remaining constraint families, clause emission, full
+successor, loop and packaged reduction remain required. The complete control
+family is not yet earned, M230 is not earned, and
+`reductions-complete-cook-levin-builder` remains open. Formal artefact coverage
+stays 205/207; the risk-weighted proof estimate stays 35% with uncertainty 20%
+to 40%; global gates closed stay 0/5. PNPLabs publication remains deferred at
+the coherent M229 source pin until a major complete capability or other
+publication trigger is actually verified.
