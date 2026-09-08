@@ -3913,3 +3913,84 @@ estimate remains 35%, with uncertainty 20% to 40%; global gates closed remain
 0/5. The root theorem is absent and the publication gate remains false.
 No fixed checkpoint changed. PNPLabs publication remains deferred at the
 coherent M229 source pin.
+
+### Active complete initial-family payload contract
+
+The next dependency is the canonical payload specification for every initial
+coordinate, grounded in the same manuscript SAT-transport anchor and unchanged
+formula schedule. Derive source-bit requests from the actual input, both
+certificate signs and symbol conclusions from the within-cell offset, and the
+selected row/cell from the existing all-coordinate selectors. Preserve the two
+initial require constraints, the complete paired length exactly-one list, all
+input-only and paired cells, padding and absence.
+
+The intended public boundary is universal:
+`BuilderInitialConstraintPayload.values problem coordinate` must equal
+`BuilderLocalConstraintPayload.values (problem.initialConstraintSlotDirect coordinate)`
+and the encoded payload must decode to that exact slot. The producer uses explicit
+register layouts and actual indexed input reads; it must not simply call the
+canonical constraint decoder and claim that as a physical construction.
+
+Prepare positive and hostile regression expectations for tags, literal order,
+both certificate signs, true/false/absent source reads, both input modes, fixed
+prefixes, exhausted families and out-of-range schedule coordinates before the
+target build. Audit every public theorem closure and reuse unchanged selector,
+source-reader and payload-codec evidence. No existing theorem, fixture,
+inventory, progress ledger, workflow or published source pin should change in
+this internal component.
+
+This specification is not a physical payload writer. Metadata handoff through
+the decoder, runtime request dispatch, actual literal-index construction,
+payload packing, accepting constraints and complete formula/reduction wiring
+remain downstream obligations. M230 remains open and receives no new checkpoint,
+publication row or public-site update from the specification alone.
+
+### Verified complete initial-family payload specification
+
+The permanent
+[`CookLevinBuilderInitialConstraintPayload`](../../lean/PNP/Concrete/CookLevinBuilderInitialConstraintPayload.lean)
+target now gives the exact logical-register payload for every initial-region
+coordinate. `values_canonical` identifies that payload with the unchanged direct
+slot, `values_schedule` identifies it with the canonical scheduled initial
+constraints, and `decode_values` recovers the exact slot without conflating
+absence with padding. These are universal statements, not fixed-coordinate
+fixtures or results over supplied constraint lists.
+
+The explicit register layouts cover the state/head require constraints, the
+complete paired length exactly-one list, one-premise blank/fixed/source-bit
+implications and both two-premise certificate implications. Source requests use
+the actual indexed input; the blank/false/true symbol code agrees with the
+existing physical indexed reader. A true certificate premise concludes symbol
+one, while its negated premise concludes symbol zero. The canonical row and
+cell selectors provide the paired coordinates. Input-only cells, exhausted
+families and coordinates outside the padded schedule have separate contracts.
+
+All 39 prepared regressions in
+[`PNPConcreteCookLevinBuilderInitialConstraintPayload`](../../lean-regression/PNPConcreteCookLevinBuilderInitialConstraintPayload.lean)
+pass, including independent hostile literal-order, sign, count and tag checks.
+All 22 public theorem axiom audits pass: seven are axiom-free, four use only
+`propext`, and eleven use only `propext` and `Quot.sound`. No
+`Classical.choice`, project-specific assumption or incomplete proof enters
+those closures. The first targeted attempt required source-read and cell-match
+normalization repairs; the producer, theorem statements and prepared regression
+expectations were unchanged. The final target, audit and regression run reached
+terminal success.
+
+### Next dependency: physical initial-payload handoff
+
+Use the complete contract above as the writer's expected output. Preserve the
+actual source metadata and selected row through the cell decoder's three finite
+exits, with a uniform payload-facing suffix. Any copy offset must come from the
+fixed branch layout, never from an unbounded runtime history length. Then connect
+physical request dispatch, the existing indexed source reader, literal-index
+kernels and canonical payload packers. Reuse the proved all-coordinate selectors
+and input-reader execution rather than substituting supplied answers.
+
+The new contract is a semantic specification, not an executable payload writer.
+The initial/accepting writers, complete formula emission and recovery/successor
+wiring, and packaged all-input polynomial reduction remain open. M230 is not
+earned. Formal artefact coverage remains 205/207; risk-weighted proof estimate
+remains 35%, with uncertainty 20% to 40%; global gates closed remain 0/5.
+The eligible root theorem is absent and the publication gate remains false.
+No fixed weighted checkpoint changed. PNPLabs publication remains deferred at
+its coherent M229 source pin.
