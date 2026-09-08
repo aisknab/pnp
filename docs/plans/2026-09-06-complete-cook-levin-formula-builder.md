@@ -4081,3 +4081,100 @@ risk-weighted proof estimate remains 35%, with uncertainty 20% to 40%;
 global gates closed remain 0/5. The eligible root theorem is absent and the
 publication gate remains false. No fixed checkpoint changed. PNPLabs
 publication remains deferred at its coherent M229 source pin.
+
+### Active source-bound metadata-handoff contract
+
+Continue the same manuscript-anchored M230 complete-builder dependency above.
+Integrate the verified cell handoff into the existing
+`BuilderInitialPairedCellSource` producer. Its first seven outer stages already
+derive the source metadata, reject the three non-cell prefix coordinates, select
+the actual row, and compute the interval start. Upgrade the last argument pack
+and decoder stage together; do not introduce a second source-machine variant.
+
+The actual fifteen-register row/start frame must supply fields
+`[0, 1, 2, 3, 5, 14, 4]`: input length, fuel, selected length, expanded row width,
+remaining-row count, interval start and local row offset. One fixed nine-node
+outer graph, depending only on the verifier, must run the complete handoff and
+leave a uniform suffix containing the first five metadata fields and the
+canonical position/within-cell pair. Prove that the remaining count is the
+certificate limit minus selected length, and that the selected length recovers
+the certificate limit together with that count.
+
+The exact `workRunExact` and `run_compile_exact` statements retain only the
+paired-mode execution premise, not a supplied selection or branch answer.
+`final_uniform_suffix` must cover every computed result; prefix and exhausted
+cell-family paths remain rejecting. Upgrade `packet_polynomial_bounds` and
+`source_polynomial_bounds` to charge the new seven-field pack, complete metadata
+handoff and every outer bridge, with the final bound in encoded source input
+size under the existing genuine source-coordinate invariants.
+
+Consumer review found only the dedicated paired-cell regression and this plan;
+no root, inventory, generated status or workflow consumer imports this pending
+component. Update the producer, complete expected output layout, positive and
+wrong-field cases, universal suffix and axiom-name probes in one patch before
+compilation. Rebuild the changed permanent source target and run its prepared
+regressions and public axiom audits. Reuse the unchanged decoder, row carry and
+standalone handoff evidence; no complete proof suite or site audit is warranted
+for this internal component. Full M230 release audits remain due at integration.
+
+Physical request dispatch, indexed source reads, literal kernels, complete
+initial/accepting writers and formula/reduction wiring remain downstream.
+M230 is not earned; no progress checkpoint or publication value changes.
+
+### Verified source-bound cell metadata handoff
+
+The existing
+[`CookLevinBuilderInitialPairedCellSource`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedCellSource.lean)
+target now integrates the complete metadata-preserving handoff. Its first seven
+outer stages are unchanged; the final physical pack reads the seven reviewed
+fields from the actual fifteen-register row/start frame, and the final node runs
+the verified handoff. The outer graph still has nine nodes and depends only on
+the verifier, not on any runtime length, position, history size or branch answer.
+
+Every successful source-packet run leaves the uniform writer-facing suffix:
+input length, fuel, selected certificate length, expanded row width, remaining
+length count, canonical cell position and within-cell offset. The remaining
+count is the certificate limit minus selected length; for every selected length,
+adding the two recovers the actual certificate limit. No replacement source
+metadata, preselected row or supplied decoder answer is an execution premise.
+
+The complete work/raw run still covers the three rejected non-cell prefix
+coordinates, exhausted cell-family routing and all successful source-selected
+rows. The exact final-tape and fresh-frontier results are preserved. The revised
+packet and encoded-source polynomial theorems charge the seven-field copy, all
+handoff routing and decoder work, retained history and the nine outer bridges.
+The source-size theorem uses the existing genuine body, cursor-balance and
+region invariants; it does not assume a polynomial bound for an unimplemented
+reference construction.
+
+All 52 prepared regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedCellSource`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedCellSource.lean)
+pass, including the updated complete output layout, wrong-field rejection,
+actual metadata recovery, universal suffix, complete execution and source-size
+bound. All 33 public theorem axiom audits pass: six are axiom-free, eight use
+only `propext`, and nineteen use only `propext` and `Quot.sound`.
+No `Classical.choice`, project-specific assumption or incomplete proof enters
+those closures. The first targeted run reached terminal success with the
+producer and revised regression expectations prepared together.
+
+Only the changed source-machine target and its consumers were checked.
+The unchanged standalone handoff, decoder and upstream row infrastructure were
+reused; their independent targeted suites were not repeated. Earlier evidence
+records describe the previous coordinate-only return layout, while this result
+establishes the current metadata-preserving source integration.
+
+### Next dependency: physical initial-cell request dispatch
+
+Use the actual seven-register suffix to implement the complete paired initial
+cell request classifier: blank cells, fixed bits, source-bit requests and
+certificate-bit requests. Preserve the necessary source metadata and canonical
+position/within-cell coordinate while deriving each request and its index by
+physical comparisons and arithmetic. Then connect the indexed source reader,
+literal-index kernels and canonical initial payload packers. The complete
+initial/accepting writers and formula/reduction wiring remain open.
+
+M230 is not earned. Formal artefact coverage remains 205/207; risk-weighted
+proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
+remain 0/5. The eligible root theorem is absent and the publication gate remains
+false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
+coherent M229 source pin.

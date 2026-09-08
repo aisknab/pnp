@@ -3,13 +3,15 @@ Copyright (c) 2026 PNP Labs.
 
 Actual paired initial-region packet to canonical row and cell coordinates.
 The finite program reads source metadata, removes the three non-cell prefix
-entries, runs the complete row selector, and executes the physical cell decoder.
+entries, runs the complete row selector, and executes the metadata-preserving
+physical cell handoff. Every successful run leaves one uniform seven-register
+suffix derived from the actual source and selected row.
 No runtime length, offset, family, history size or branch answer builds control.
 Complete initial payloads and full formula-loop integration remain downstream.
 -/
 
 import PNP.Concrete.CookLevinBuilderLiteralArgumentSource
-import PNP.Concrete.CookLevinBuilderInitialCellDecoder
+import PNP.Concrete.CookLevinBuilderInitialCellHandoff
 import PNP.Concrete.CookLevinBuilderInitialRowCarry
 
 namespace PNP.Concrete.CookLevin.BuilderInitialPairedCellSource
@@ -106,8 +108,21 @@ def startValues {language : Language} (problem : VerifierTableauProblem language
    problem.uniformFuel + 2 * problem.input.length, length,
    problem.uniformFuel + 2 * problem.input.length + length, 2, startValue problem length]
 
+def metadata {language : Language} (problem : VerifierTableauProblem language)
+    (length : Nat) : BuilderInitialCellHandoff.Metadata :=
+  {inputLength := problem.input.length, fuel := problem.uniformFuel, length := length,
+   rowWidth := problem.dimensions.tapeWidth problem.tableauInputMode + length,
+   remaining := rowCount problem - (length + 1)}
+
+def payloadFrame {language : Language} (problem : VerifierTableauProblem language)
+    (length offset : Nat) : List Nat :=
+  BuilderInitialCellHandoff.carriedValues (metadata problem length) (startValue problem length) offset
+
+/-- The final pack reads the actual fifteen-register row/start frame. -/
 def decoderFields : List (BuilderRegisterPack.Field 15) :=
-  [.argument ⟨14, by decide⟩, .argument ⟨2, by decide⟩, .argument ⟨4, by decide⟩]
+  [.argument ⟨0, by decide⟩, .argument ⟨1, by decide⟩, .argument ⟨2, by decide⟩,
+   .argument ⟨3, by decide⟩, .argument ⟨5, by decide⟩, .argument ⟨14, by decide⟩,
+   .argument ⟨4, by decide⟩]
 
 def decoderFrame {language : Language} (problem : VerifierTableauProblem language)
     (length offset : Nat) : List Nat :=
@@ -167,9 +182,39 @@ private theorem start_values {language : Language} (problem : VerifierTableauPro
     BuilderRegisterExpression.values startExpression (view (selectedFrame problem length offset)) =
       startValues problem length := rfl
 
-private theorem decoder_values {language : Language} (problem : VerifierTableauProblem language) (length offset : Nat) :
+theorem decoder_values {language : Language} (problem : VerifierTableauProblem language) (length offset : Nat) :
     BuilderRegisterPack.values decoderFields (view (decoderFrame problem length offset)) =
-      BuilderInitialCellDecoder.inputValues (startValue problem length) length offset := rfl
+      BuilderInitialCellHandoff.frame (metadata problem length) (startValue problem length) offset := rfl
+
+theorem payloadFrame_length {language : Language} (problem : VerifierTableauProblem language)
+    (length offset : Nat) : (payloadFrame problem length offset).length = 7 := rfl
+
+theorem payloadFrame_values {language : Language} (problem : VerifierTableauProblem language)
+    (length offset : Nat) :
+    payloadFrame problem length offset =
+      [problem.input.length, problem.uniformFuel, length,
+       problem.dimensions.tapeWidth problem.tableauInputMode + length,
+       rowCount problem - (length + 1),
+       (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).1,
+       (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).2] := rfl
+
+theorem metadata_values {language : Language} (problem : VerifierTableauProblem language) (length : Nat) :
+    (metadata problem length).values =
+      [problem.input.length, problem.uniformFuel, length,
+       problem.dimensions.tapeWidth problem.tableauInputMode + length,
+       problem.certificateLimit - length] := by
+  have hRemaining : rowCount problem - (length + 1) = problem.certificateLimit - length := by
+    unfold rowCount
+    omega
+  simp only [metadata, BuilderInitialCellHandoff.Metadata.values, hRemaining]
+
+theorem metadata_certificate_limit {language : Language} (problem : VerifierTableauProblem language)
+    (length : Fin (problem.certificateLimit + 1)) :
+    length.val + (metadata problem length.val).remaining = problem.certificateLimit := by
+  have hLength := length.isLt
+  change length.val + (rowCount problem - (length.val + 1)) = problem.certificateLimit
+  unfold rowCount
+  omega
 
 theorem row_found_suffix {language : Language} (problem : VerifierTableauProblem language) (index : Nat)
     (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
@@ -195,14 +240,14 @@ def tailValues {language : Language} (problem : VerifierTableauProblem language)
   match selection problem index with
   | none => []
   | some found => startValues problem found.1.val ++
-      BuilderInitialCellDecoder.outputValues (startValue problem found.1.val) found.1.val found.2
+      BuilderInitialCellHandoff.outputValues (metadata problem found.1.val) (startValue problem found.1.val) found.2
 
 def finalValues {language : Language} (problem : VerifierTableauProblem language) (index remaining : Nat) : List Nat :=
   prefixBase problem index remaining ++
     if coordinate problem index < 3 then [] else rowFinish problem index ++ tailValues problem index
 
 def decoderNode : Node :=
-  {name := 8, program := BuilderInitialCellDecoder.machine, onAccept := .accept, onReject := .dead}
+  {name := 8, program := BuilderInitialCellHandoff.machine, onAccept := .accept, onReject := .dead}
 
 def decoderPrepareNode : Node :=
   {name := 7, program := BuilderRegisterPack.machine decoderFields 0, onAccept := .node decoderNode.reference, onReject := .dead}
@@ -290,9 +335,9 @@ private theorem comparison_good : Good BuilderRegisterCompareResidual.machine :=
 private theorem row_good : Good BuilderInitialRowCarry.machine :=
   ⟨BuilderInitialRowCarry.rules_pairwise_query_distinct, BuilderInitialRowCarry.noRuleAtAccept,
     BuilderInitialRowCarry.noRuleAtReject, BuilderInitialRowCarry.acceptState_ne_rejectState⟩
-private theorem decoder_good : Good BuilderInitialCellDecoder.machine :=
-  ⟨BuilderInitialCellDecoder.rules_pairwise_query_distinct, BuilderInitialCellDecoder.noRuleAtAccept,
-    BuilderInitialCellDecoder.noRuleAtReject, BuilderInitialCellDecoder.acceptState_ne_rejectState⟩
+private theorem decoder_good : Good BuilderInitialCellHandoff.machine :=
+  ⟨BuilderInitialCellHandoff.rules_pairwise_query_distinct, BuilderInitialCellHandoff.noRuleAtAccept,
+    BuilderInitialCellHandoff.noRuleAtReject, BuilderInitialCellHandoff.acceptState_ne_rejectState⟩
 
 theorem graph_wellFormed {language : Language} (verifier : PolynomialTimeVerifier language) :
     (graph verifier).WellFormed := by
@@ -431,7 +476,7 @@ def decoderPrepareSteps {language : Language} (problem : VerifierTableauProblem 
 def decodeSteps {language : Language} (problem : VerifierTableauProblem language) (length offset : Nat) : Nat :=
   startSteps problem length offset + 1 +
     (decoderPrepareSteps problem length offset + 1 +
-      (BuilderInitialCellDecoder.workSteps (startValue problem length) length offset + 1))
+      (BuilderInitialCellHandoff.workSteps (metadata problem length) (startValue problem length) offset + 1))
 def selectedSteps {language : Language} (problem : VerifierTableauProblem language) (index : Nat) : Nat :=
   match selection problem index with
   | none => 0
@@ -487,10 +532,10 @@ private theorem decoder_path {language : Language} (problem : VerifierTableauPro
     AcceptPath (graph problem.verifier) (.node startNode.reference) .accept (decodeSteps problem length offset)
       (endTape (older ++ selectedFrame problem length offset) inside [])
       (endTape (older ++ selectedFrame problem length offset ++ startValues problem length ++
-        BuilderInitialCellDecoder.outputValues (startValue problem length) length offset) inside []) := by
-  have hDecoder := BuilderInitialCellDecoder.workRunExact (startValue problem length) length offset
+        BuilderInitialCellHandoff.outputValues (metadata problem length) (startValue problem length) offset) inside []) := by
+  have hDecoder := BuilderInitialCellHandoff.workRunExact (metadata problem length) (startValue problem length) offset
     (older ++ decoderFrame problem length offset) inside
-  simp only [BuilderInitialCellDecoder.initialConfiguration, BuilderInitialCellDecoder.finalConfiguration,
+  simp only [BuilderInitialCellHandoff.initialConfiguration, BuilderInitialCellHandoff.finalConfiguration,
     List.append_assoc] at hDecoder
   have hD := AcceptPath.step decoderNode .accept _ 0 _ _ _ (decoder_mem problem.verifier) hDecoder (.terminal .accept _)
   have hPack := pack_run decoderFields (decoderFrame problem length offset) older inside rfl
@@ -689,12 +734,41 @@ theorem found_output {language : Language} (problem : VerifierTableauProblem lan
     (hFound : selection problem index = some (length, offset)) :
     finalValues problem index remaining =
       prefixBase problem index remaining ++ rowFinish problem index ++ startValues problem length.val ++
-        BuilderInitialCellDecoder.outputPrefix (startValue problem length.val) length.val offset ++
-        [(BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).1,
-         (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).2] := by
-  simp only [finalValues, if_neg hPrefix, tailValues, hFound]
-  rw [BuilderInitialCellDecoder.canonical_output]
-  simp only [List.append_assoc]
+        BuilderInitialCellHandoff.resultFrame
+          (BuilderInitialCellHandoff.selectedBranch (metadata problem length.val) (startValue problem length.val) offset)
+          (metadata problem length.val) (startValue problem length.val) offset ++
+        payloadFrame problem length.val offset := by
+  simp only [finalValues, if_neg hPrefix, tailValues, hFound,
+    BuilderInitialCellHandoff.outputValues, payloadFrame, List.append_assoc]
+
+theorem found_suffix {language : Language} (problem : VerifierTableauProblem language) (index remaining : Nat)
+    (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
+    (hPrefix : ¬ coordinate problem index < 3)
+    (hFound : selection problem index = some (length, offset)) :
+    ∃ history : List Nat, finalValues problem index remaining = history ++ payloadFrame problem length.val offset := by
+  exact ⟨_, found_output problem index remaining length offset hPrefix hFound⟩
+
+/-- Every actual successful selection returns the same source-bound seven fields. -/
+theorem final_uniform_suffix {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining : Nat) :
+    match decodedCoordinate problem index with
+    | none => True
+    | some (length, position, offset) =>
+        ∃ history : List Nat, finalValues problem index remaining =
+          history ++ [problem.input.length, problem.uniformFuel, length,
+            problem.dimensions.tapeWidth problem.tableauInputMode + length,
+            rowCount problem - (length + 1), position, offset] := by
+  unfold decodedCoordinate
+  by_cases hPrefix : coordinate problem index < 3
+  · simp only [if_pos hPrefix]
+  · rw [if_neg hPrefix]
+    cases hFound : selection problem index with
+    | none => trivial
+    | some found =>
+        rcases found with ⟨length, offset⟩
+        simp only [Option.map_some]
+        obtain ⟨history, hOutput⟩ := found_suffix problem index remaining length offset hPrefix hFound
+        exact ⟨history, by simpa only [payloadFrame_values] using hOutput⟩
 
 theorem decoded_bounds {language : Language} (problem : VerifierTableauProblem language) (index : Nat)
     (hMode : problem.tableauInputMode = .paired)
@@ -742,7 +816,7 @@ def startSpan {language : Language} (verifier : PolynomialTimeVerifier language)
 def decoderPackedSpan {language : Language} (verifier : PolynomialTimeVerifier language) (bound : NatPolynomial) : NatPolynomial :=
   BuilderRegisterPack.spanPolynomial decoderFields (startSpan verifier bound)
 def decodedSpan {language : Language} (verifier : PolynomialTimeVerifier language) (bound : NatPolynomial) : NatPolynomial :=
-  BuilderInitialCellDecoder.spanPolynomial (decoderPackedSpan verifier bound)
+  BuilderInitialCellHandoff.spanPolynomial (decoderPackedSpan verifier bound)
 
 def spanPolynomial {language : Language} (verifier : PolynomialTimeVerifier language) (bound : NatPolynomial) : NatPolynomial :=
   .add (prefixSpan verifier bound) (.add (rowSpan verifier bound) (decodedSpan verifier bound))
@@ -755,9 +829,9 @@ def rawTimePolynomial {language : Language} (verifier : PolynomialTimeVerifier l
     (.add (BuilderInitialRowCarry.rawTimePolynomial (rowPackedSpan verifier bound))
     (.add (BuilderRegisterExpression.rawTimePolynomial startExpression (rowSpan verifier bound))
     (.add (BuilderRegisterPack.rawTimePolynomial decoderFields (startSpan verifier bound))
-    (.add (BuilderInitialCellDecoder.rawTimePolynomial (decoderPackedSpan verifier bound)) (.constant 54)))))))))
+    (.add (BuilderInitialCellHandoff.rawTimePolynomial (decoderPackedSpan verifier bound)) (.constant 54)))))))))
 
-/-- Every visited node, including complete row search and decoder history, is bounded. -/
+/-- Complete source selection, metadata handoff, decoder history and all bridges are charged. -/
 theorem packet_polynomial_bounds {language : Language} (problem : VerifierTableauProblem language)
     (index remaining : Nat) (bound : NatPolynomial) (inputSize : Nat)
     (hMode : problem.tableauInputMode = .paired)
@@ -831,8 +905,9 @@ theorem packet_polynomial_bounds {language : Language} (problem : VerifierTablea
           (prefixBase problem index remaining ++ history) (startSpan problem.verifier bound) inputSize rfl (by
             simpa only [decoderFrame, startSpan, List.append_assoc] using hStart.1)
         rw [decoder_values] at hDecoderPack
-        have hDecoder := BuilderInitialCellDecoder.source_polynomial_bounds (startValue problem length.val)
-          length.val offset (prefixBase problem index remaining ++ history ++ decoderFrame problem length.val offset)
+        have hDecoder := BuilderInitialCellHandoff.source_polynomial_bounds (metadata problem length.val)
+          (startValue problem length.val) offset
+          (prefixBase problem index remaining ++ history ++ decoderFrame problem length.val offset)
           (decoderPackedSpan problem.verifier bound) inputSize hDecoderPack.1
         constructor
         · have hFinal : (registerWord (finalValues problem index remaining)).length ≤

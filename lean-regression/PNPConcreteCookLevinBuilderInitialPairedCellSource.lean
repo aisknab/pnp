@@ -2,8 +2,9 @@
 Copyright (c) 2026 PNP Labs.
 The physical paired-cell branch reads the actual source packet. The three
 prefix constraints, finite-family exhaustion, carried metadata and decoded
-coordinate are distinct boundaries. No supplied selection premise belongs to
-the complete execution theorem.
+coordinate are distinct boundaries. The final seven fields must come from the
+actual source and selected row, including the remaining-length count.
+No supplied selection premise belongs to the complete execution theorem.
 -/
 import PNP.Concrete.CookLevinBuilderInitialPairedCellSource
 
@@ -27,11 +28,11 @@ example (n fuel length width offset remaining : Nat) :
 example : BuilderRegisterExpression.nodeCount startExpression = 9 := rfl
 example : prefixFields.length = 2 := rfl
 example : rowFields.length = 6 := rfl
-example : decoderFields.length = 3 := rfl
+example : decoderFields.length = 7 := rfl
 example : BuilderRegisterPack.values decoderFields
-    (data [7, 11, 2, 33, 19, 2, 11, 2, 7, 14, 25, 2, 27, 2, 29]) = [29, 2, 19] := by decide
+    (data [7, 11, 2, 33, 19, 2, 11, 2, 7, 14, 25, 2, 27, 2, 29]) = [7, 11, 2, 33, 2, 29, 19] := by decide
 example : BuilderRegisterPack.values decoderFields
-    (data [7, 11, 2, 33, 19, 2, 11, 2, 7, 14, 25, 2, 27, 2, 29]) ≠ [19, 2, 29] := by decide
+    (data [7, 11, 2, 33, 19, 2, 11, 2, 7, 14, 25, 2, 27, 2, 29]) ≠ [7, 11, 2, 33, 19, 29, 2] := by decide
 
 section Source
 variable {language : Language} (problem : VerifierTableauProblem language)
@@ -100,9 +101,10 @@ example (index remaining : Nat) (length : Fin (problem.certificateLimit + 1)) (o
     (hFound : selection problem index = some (length, offset)) :
     finalValues problem index remaining =
       prefixBase problem index remaining ++ rowFinish problem index ++ startValues problem length.val ++
-        BuilderInitialCellDecoder.outputPrefix (startValue problem length.val) length.val offset ++
-        [(BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).1,
-         (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).2] :=
+        BuilderInitialCellHandoff.resultFrame
+          (BuilderInitialCellHandoff.selectedBranch (metadata problem length.val) (startValue problem length.val) offset)
+          (metadata problem length.val) (startValue problem length.val) offset ++
+        payloadFrame problem length.val offset :=
   found_output problem index remaining length offset hPrefix hFound
 example (index : Nat) (hMode : problem.tableauInputMode = .paired)
     (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
@@ -143,6 +145,42 @@ example (index remaining : Nat) (hMode : problem.tableauInputMode = .paired)
       6 * workSteps problem index remaining ≤
         (rawTimePolynomial problem.verifier (sourceBound problem.verifier)).eval problem.input.length :=
   source_polynomial_bounds problem index remaining hMode hBody hBalance hRegion
+
+example (length offset : Nat) :
+    BuilderRegisterPack.values decoderFields
+      (fun i : Fin 15 => (decoderFrame problem length offset)[i.val]?.getD 0) =
+      BuilderInitialCellHandoff.frame (metadata problem length) (startValue problem length) offset :=
+  decoder_values problem length offset
+example (length : Nat) : (metadata problem length).values =
+    [problem.input.length, problem.uniformFuel, length,
+     problem.dimensions.tapeWidth problem.tableauInputMode + length,
+     problem.certificateLimit - length] := metadata_values problem length
+example (length : Fin (problem.certificateLimit + 1)) :
+    length.val + (metadata problem length.val).remaining = problem.certificateLimit :=
+  metadata_certificate_limit problem length
+example (length offset : Nat) : (payloadFrame problem length offset).length = 7 :=
+  payloadFrame_length problem length offset
+example (length offset : Nat) : payloadFrame problem length offset =
+    [problem.input.length, problem.uniformFuel, length,
+     problem.dimensions.tapeWidth problem.tableauInputMode + length,
+     rowCount problem - (length + 1),
+     (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).1,
+     (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).2] :=
+  payloadFrame_values problem length offset
+example (index remaining : Nat) (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
+    (hPrefix : ¬ coordinate problem index < 3)
+    (hFound : selection problem index = some (length, offset)) :
+    ∃ history : List Nat, finalValues problem index remaining = history ++ payloadFrame problem length.val offset :=
+  found_suffix problem index remaining length offset hPrefix hFound
+example (index remaining : Nat) :
+    match decodedCoordinate problem index with
+    | none => True
+    | some (length, position, offset) =>
+        ∃ history : List Nat, finalValues problem index remaining =
+          history ++ [problem.input.length, problem.uniformFuel, length,
+            problem.dimensions.tapeWidth problem.tableauInputMode + length,
+            rowCount problem - (length + 1), position, offset] :=
+  final_uniform_suffix problem index remaining
 
 end Source
 end PNP.Concrete.CookLevin.BuilderInitialPairedCellSource.Regression
