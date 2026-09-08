@@ -4512,3 +4512,151 @@ proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
 remain 0/5. The eligible root theorem is absent and the publication gate remains
 false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
 coherent M229 source pin.
+
+### Active canonical paired-cell literal and payload construction
+
+Continue the **Final SAT decision** / **Accepted package implies P=NP**
+dependency: construct the exact initial-cell constraint from the source-derived
+request-and-symbol fields, then expose it to the complete formula emitter.
+
+The input is the actual ten-register resolution suffix. Recover the original
+certificate bound as selected length plus remaining lengths; derive time count
+as fuel plus one and the paired global tape width from input length, certificate
+bound and fuel. The selected row's slot count is not that global tape width.
+The fixed verifier supplies only its source-independent raw-machine state bound.
+
+Specialize the existing canonical literal-expression syntax by structural
+expression substitution over those ten fields. Prove substitution preserves
+evaluation; do not introduce alternative variable numbering. Compute length,
+symbol and certificate-bit indices with the existing physical expression
+compiler, charging scratch, field copies, arithmetic and every graph bridge.
+A noncertificate branch may compute an unused natural bit index, but only the
+certificate branch may claim a bounded certificate-bit literal.
+
+Use physical kind and offset tests to write the existing guarded payload
+`[lengthIndex, 1, symbolIndex, 1, 1, 3]` or bit-guarded payload
+`[bitIndex, sign, lengthIndex, 1, symbolIndex, 1, 2, 3]`.
+Preserve positive/negative certificate signs and their distinct symbols.
+
+The generic exact execution theorem covers every written numeric frame;
+the source-level theorem must compose the unchanged source-resolution machine
+and derive its frame, request, symbol and size bounds itself. For each selected
+cell, prove that the final suffix is the exact payload returned by the unchanged
+`BuilderInitialConstraintPayload.pairedCellValues`. Obtain the one/two-slot
+offset bound from the canonical selection theorem. No dimension environment,
+input bit, literal index, constraint, history or correctness certificate may be
+supplied to the source-level theorem. Preserve prefix/exhaustion rejection.
+
+Prepare exact layout, canonical-index, source-binding, branch/sign, execution,
+polynomial-size/runtime and negative regressions with the source before each
+targeted build. Probe every added public theorem's compiled axiom closure.
+Reuse unchanged resolution and upstream evidence. Commit the integrated
+source-to-payload boundary after both stages and documentation/status checks,
+not merely a standalone literal evaluator.
+
+Complete initial-prefix, input-only and accepting families, formula-loop
+emission/recovery, and the packaged all-input reduction remain downstream.
+M230 is not earned and no fixed checkpoint or publication row is awarded.
+PNPLabs publication remains deferred at the coherent M229 coordinate.
+
+Prepared literal-stage expectations: 54 focused regressions and 31 public
+compiled-axiom probes. These cover numeric layouts, both signs, source symbol
+resolution, unchanged canonical indices, exact physical execution and complete
+encoded-size bounds. The following source-composition stage has its own contract;
+no literal-only result is an integrated source-to-payload milestone.
+
+### Prepared source-to-payload integration
+
+The added source stage composes the existing source resolver with the literal
+writer in a fixed two-node graph. Its input is the original source packet,
+actual source bits and prior output; its run accepts exactly a selected cell
+and preserves prefix/exhaustion rejection. The ten-field frame and history cut
+are derived from the actual resolver result.
+
+The theorem `BuilderInitialPairedCellPayload.source_canonical_payload` must
+connect exact physical execution directly to the unchanged canonical
+`pairedCellValues`. Position and request-offset bounds come from the source
+selection theorem, not an added correctness premise. Packet and actual
+encoded-input polynomial theorems must charge both stages, retained scratch
+and every outer join.
+
+Prepared expectations: 39 composition regressions and 25 public compiled-axiom
+probes, in addition to the literal writer's 54 regressions and 31 probes.
+The next commit must include both stages after their exact contracts pass.
+No standalone stage is a published milestone; the initial-prefix, input-only
+and accepting families, complete emission/recovery loop and packaged
+all-input reduction remain required for M230.
+
+### Verified source-derived canonical paired-cell payloads
+
+The fixed
+[`CookLevinBuilderInitialPairedLiteralPayload`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedLiteralPayload.lean)
+program now physically builds canonical literal indices and writes the complete
+initial-cell payload from the ten resolution registers. The original certificate
+bound is recovered as selected length plus remaining lengths, time count is fuel
+plus one, and global tape width comes from the unchanged paired-layout formula.
+The row's slot count is not substituted for global tape width. Structural
+expression substitution preserves the existing literal kernel's numbering.
+
+Three compiled expressions compute the length, symbol and certificate-bit
+indices. Fixed tag/offset tests select the ordinary guarded or signed
+bit-guarded payload. The two certificate branches preserve both their distinct
+signs and symbols. The generic numeric frame theorem does not claim that every
+numeric frame denotes a valid literal: canonical index and payload theorems
+separately establish that meaning for source-derived requests.
+
+The new
+[`CookLevinBuilderInitialPairedCellPayload`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedCellPayload.lean)
+composes actual source selection and symbol resolution with that writer.
+Its `source_canonical_payload` theorem ties the exact physical run directly to
+the unchanged `BuilderInitialConstraintPayload.pairedCellValues`.
+The bounded position and one/two-slot offset come from actual source selection.
+No source bit, dimension environment, literal index, payload, history or
+correctness certificate is supplied to the execution theorem.
+
+The source tape and arbitrary prior output are preserved. Non-cell prefix and
+exhausted-family cases still reject at this component boundary. Exact work and
+compiled raw execution theorems cover the whole source-to-payload chain.
+Polynomial bounds charge source selection, actual reads, all arithmetic and
+retained scratch, payload copies, tag scans and every composition bridge.
+The actual encoded-input bound uses the unchanged body, cursor-balance,
+paired-mode and selected-region invariants.
+
+All 54 literal-writer regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedLiteralPayload`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedLiteralPayload.lean)
+and all 39 source-composition regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedCellPayload`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedCellPayload.lean)
+pass. The 31 literal-writer axiom probes comprise two axiom-free theorems,
+five using only `propext`, and twenty-four using only `propext` and `Quot.sound`.
+The composition's 25 probes comprise one using only `propext` and twenty-four
+using only `propext` and `Quot.sound`. No new theorem depends on
+`Classical.choice`, a project-specific axiom or an incomplete proof.
+
+The prepared contracts caught syntax, explicit layout typing and register-list
+normalization issues. An independent empty-input numeric fixture initially
+omitted the head-variable block: the unchanged canonical formula gives
+`1*3*3 + 1*3 + 1*0 = 12`, not 9. Its expected value was corrected from that
+formula without changing proof code. The final fixture run reused the separately
+completed exact-source build and axiom commands after checking their identities;
+the failed wrapper was not treated as a successful run. The composed stage
+then passed its complete target, axiom and regression run.
+
+All source-to-symbol and upstream evidence remained byte-identical and was
+reused. Documentation/status checks do not rebuild Lean. Full root, inventory,
+publication, CI and exact-merge verification remain due at complete M230
+integration.
+
+### Next dependency: complete initial families and formula emission
+
+Finish the variable-length certificate-length choice and required head/state
+prefix, the input-only initial cells and accepting family. Connect those
+canonical payloads to the full schedule emitter, erase/recover retained scratch,
+prove exact complete encoded-formula output, and package the uniformly
+polynomial all-input reduction. Do not replace these obligations with another
+fixed instance or a supplied semantic answer.
+
+M230 is not earned. Formal artefact coverage remains 205/207; risk-weighted
+proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
+remain 0/5. The eligible root theorem is absent and the publication gate remains
+false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
+coherent M229 source pin.
