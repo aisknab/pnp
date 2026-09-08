@@ -2862,3 +2862,92 @@ stays 205/207; the risk-weighted proof estimate stays 35% with uncertainty 20%
 to 40%; global gates closed stay 0/5. PNPLabs publication remains deferred at
 the coherent M229 source pin until a major complete capability or other
 publication trigger is actually verified.
+
+## Verified runtime control-family payload construction
+
+The control-family dependency of the legacy SAT-transport reconstruction now
+has a complete physical payload constructor at the source-derived control
+radix-frame entry.
+[`CookLevinBuilderControlPayload.lean`](../../lean/PNP/Concrete/CookLevinBuilderControlPayload.lean)
+fixes one ten-node graph from the verifier alone. It copies source conclusion
+digit zero, tests tags zero, one and two, erases that disposable register, and
+executes the matching verified state, head or symbol implication branch.
+An invalid written tag rejects without invoking any payload branch.
+
+The universal work/raw execution and canonical decoding interfaces take no
+caller-selected conclusion, action, literal index or selection certificate.
+The source coordinate itself derives the equality previously required by the
+static branch interface. The constructed ten-register payload decodes to
+`problem.controlConstraintSlotDirect` at the actual local coordinate.
+The exact final tape retains the source/scratch frame and accounts for the
+erased tag's exterior before the selected branch allocates its own registers.
+
+All tests and graph bridges, tag erasure and the final branch bridge contribute
+at most 25 work transitions beyond the source-tag copy and selected complete
+payload construction. Raw execution multiplies work by six. The universal
+source-size theorem includes the tag-copy polynomial, all branch-construction
+costs and the constant overhead. The final register span is polynomial in
+the original encoded input length; a branch result is not supplied as an
+unpriced answer.
+
+The prepared
+[`PNPConcreteCookLevinBuilderControlPayload.lean`](../../lean-regression/PNPConcreteCookLevinBuilderControlPayload.lean)
+regression has 34 passing contracts, including source-only selection,
+all three kinds, exact cleanup, canonical source-slot equality, compiled
+execution, invalid-tag rejection and encoded-input polynomial bounds.
+All 24 public-theorem axiom audits passed: two are axiom-free and twenty-two
+use only `propext` and `Quot.sound`. No project axiom or `Classical.choice`
+appears. The first build's proof-normalisation errors were corrected without
+changing machine definitions, intended theorem statements or test outcomes.
+Only the changed dispatcher dependency was rebuilt; the already verified
+literal, static implication, head-movement and source-action evidence was
+reused. Failed runs are not verification evidence.
+
+### Next complete initial-row family contract
+
+Continue the same all-input construction, not a sequence of initial fixed-slot
+fixtures. The remaining initial family is defined by
+`VerifierTableauProblem.initialConstraintSlotDirect` in
+[`CookLevinFormulaCursor.lean`](../../lean/PNP/Concrete/CookLevinFormulaCursor.lean).
+Its two initial state/head constraints precede the padded mode-dependent
+symbol program. The initial region has no radix factors, so its retained
+quotient is still the entire local coordinate, not a decoded cell answer.
+
+The intended `BuilderInitialPayload.machine verifier` must start from
+`BuilderRegionRadixSource.finalValues problem index remaining .initial`,
+derive every branch/index from that frame and the actual source, and write a
+payload whose decode is exactly `some (problem.initialConstraintSlotDirect
+(BuilderConstraintRegionSource.localCoordinate problem index .initial))`.
+Its public exact-execution interface must not require a selected cell,
+certificate length, source bit, slot, payload or correctness certificate.
+
+Cover both input modes and all valid initial coordinates:
+
+- Input-only cells derive their actual initial symbol, using the verified
+  indexed reader where needed and preserving blank/input boundaries.
+- Paired mode begins with the certificate-length exactly-one constraint.
+  Subsequent blocks are the canonical flattened one- or two-constraint cell
+  programs for every permitted length and tape position. Derive the variable
+  block widths and offsets; a rectangular replacement is not equivalent by
+  definition and must not silently change the formula or slot order.
+- Blank/fixed cells produce length-conditional implications. Certificate cells
+  produce both signed-bit implications in their existing order.
+- Preserve the distinction between in-range padding and an absent coordinate.
+
+Prove a complete coordinate-selection abstraction for these variable-width
+blocks and connect it to literal machine operations. Bind reader requests to
+source-derived indices and charge their actual retained span. Reuse the
+reader's source/output restoration theorem: arbitrary prior output is
+preserved without being assumed source-size bounded or scanned gratuitously.
+Prepare universal type, axiom, hostile-padding and source-order expectations
+with the implementation. Do not replace a failed general derivation by a
+supplied cell-selection premise or another fixed initial slot.
+
+The initial and accepting constructors, whole-region payload wiring, clause
+occupancy/emission, scratch recovery, full successor, loop and packaged
+reduction remain open. M230 is not earned and the fixed
+`reductions-complete-cook-levin-builder` checkpoint remains open.
+Formal artefact coverage remains 205/207. The risk-weighted proof estimate
+remains 35%, with uncertainty 20% to 40%; global gates closed remain 0/5.
+PNPLabs publication remains deferred at the coherent M229 pin: completing
+one regional payload entry is not the full all-input formula builder.
