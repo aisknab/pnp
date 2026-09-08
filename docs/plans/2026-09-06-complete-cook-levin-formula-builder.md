@@ -5181,3 +5181,92 @@ row, global gate, root status or public source pin. Risk-weighted proof
 completion remains 35%, uncertainty 20–40%; formal artefact coverage remains
 205/207 and global gates remain 0/5 closed. PNPLabs publication remains deferred
 until the complete major capability and its required audits are earned.
+
+### Active general exactly-one clause-occupancy execution
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+transport edge through physical clause occupancy. The canonical exactly-one
+constraint emits one at-least-one clause and one exclusion clause per distinct
+pair of list positions. Its existing `LocalConstraint.pairCount` recurrence
+counts those positions, including repeated variable values.
+
+For every runtime list length `count` and local clause coordinate `index`,
+prove `2 * LocalConstraint.pairCount count + count = count * count` and hence
+`index < 1 + LocalConstraint.pairCount count ↔
+  2 * index + count < count * count + 2`.
+Implement the latter test with the existing physical expression compiler,
+argument packing and strict comparator. This avoids enumerating clauses,
+materializing pairs, division and subtraction. Empty exactly-one lists still
+have a populated empty clause at coordinate zero.
+
+The finite program must not depend on either runtime number. Its exact theorem
+runs from `endTape (older ++ [index, count]) inside outside` and returns the
+correct accept/reject state, original registers, explicitly computed arithmetic
+history and accounted exterior. Derive a uniform polynomial work/space bound
+from the encoded register-span bound, including each preparation and graph
+bridge and every cleared comparator cell. Preserve arbitrary surrounding data.
+
+Prepare semantic boundaries, exact work/raw, preserved-frame, rejection,
+control-safety and polynomial regression contracts before compilation; audit
+all new public theorem axiom closures. Reuse the unchanged arithmetic and
+comparator evidence. This is an internal general execution dependency, not a
+new milestone or publication row.
+
+The actual source payload supplies the list count, while the body divisions
+supply the local clause coordinate. Their physical operand handoff and unified
+payload-tag dispatch remain explicit next obligations: no source-entry theorem
+is claimed merely from this two-register interface. Canonical token emission,
+scratch recovery, the full cursor loop and packaged polynomial reduction also
+remain open. M230, public status and PNPLabs publication remain unchanged.
+
+### Verified general exactly-one clause-occupancy execution
+
+[BuilderExactlyOneClauseOccupancy](../../lean/PNP/Concrete/CookLevinBuilderExactlyOneClauseOccupancy.lean)
+now implements the canonical exactly-one occupancy test as one finite program
+independent of both runtime operands. Its exact execution theorem reads the
+actual local-clause index and list-count registers, computes both arithmetic
+operands, packs them and runs the existing strict comparator.
+
+The constructive identity `2 * pairCount count + count = count * count`
+proves that occupancy is exactly `2 * index + count < count * count + 2`.
+This does not enumerate pairs, materialize clauses, divide or subtract.
+The canonical occupancy theorem applies to arbitrary variable lists, including
+repeated variable values. At count zero, index zero is an occupied empty clause;
+the next index is padding.
+
+Both outcomes preserve the original registers and arbitrary surrounding
+workspace. The arithmetic history remains explicit, and the theorem accounts
+for every allocated and cleared exterior cell instead of silently erasing it.
+The polynomial bounds cover the surviving registers and exterior as well as
+both expressions, argument copies, comparison, restoration and all three
+serial bridges. Source-bound operand extraction remains a separate obligation.
+
+All 32 prepared regressions passed in the
+[paired regression file](../../lean-regression/PNPConcreteCookLevinBuilderExactlyOneClauseOccupancy.lean).
+All 14 public theorem axiom probes passed: one is axiom-free and thirteen use
+only `propext` and `Quot.sound`. No `Classical.choice` or project-specific
+axiom remains in those closures. The final target, audit and regression wrapper
+reached terminal zero status. Existing expression, packing and comparator
+regression suites were not repeated.
+
+An earlier attempt stopped on composition and polynomial-alias elaboration.
+The next build succeeded, but its axiom audit correctly rejected a convenience
+iff proof that introduced classical choice. Explicit constructive implications
+removed that dependency; the theorem statements and all prepared regression
+expectations stayed unchanged. Neither failed wrapper is successful evidence.
+
+### Next dependency: source-derived occupancy operands
+
+Physically extract the local clause coordinate from the retained source
+division frame and the list count from the canonical payload. Route the actual
+payload tag to the requirement/implication, exactly-one and padded cases.
+Do not supply either an occupancy answer or a clause-count certificate.
+Keep the growing arithmetic/payload history distinct from the original cursor
+frame and account for it during recovery.
+
+After that handoff, connect canonical token emission, exact scratch recovery
+and successor cursor, Finish, the complete loop and the packaged all-input
+polynomial reduction. M230 is not earned. This component changes no checkpoint,
+publication row, gate or source pin. Risk-weighted proof completion remains
+35%, uncertainty 20–40%; formal artefact coverage remains 205/207 and global
+gates remain 0/5 closed. PNPLabs publication remains deferred.
