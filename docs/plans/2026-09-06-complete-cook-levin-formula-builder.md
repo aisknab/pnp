@@ -3667,3 +3667,128 @@ reduction remain open. M230 is not earned. Formal artefact coverage
 remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
 20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
 PNPLabs publication remains deferred at the coherent M229 source pin.
+
+### Source-metadata carry across complete row selection
+
+Continue the same pinned **Final SAT decision / Accepted package implies
+P=NP** reconstruction. The complete cell decoder now exists, but the
+original input length and uniform fuel sit behind variable retained row
+history. The existing register copier has a fixed program-level offset;
+do not pass the runtime history length as a machine-construction parameter.
+
+Implement `CookLevinBuilderInitialRowCarry` as a fixed finite outer
+countdown loop on the newest actual frame
+`[inputLength, fuel, selectedLength, rowWidth, coordinate, remaining]`.
+Reuse `BuilderInitialRowLoop.machine` for one physical row attempt.
+A fixed pack physically supplies its literal one-attempt budget. When
+that inner machine rejects, copy its computed next length, width and
+residual together with the unchanged source fields and decremented
+outer budget into the next fixed-size frame. When it accepts, append
+the complete current metadata frame as a uniform final suffix.
+Decrement the outer budget before preparation, and account for its
+exposed blank cell: the next real pack must consume that frontier cell.
+
+Prove exact work/raw execution for every natural row budget and
+coordinate, including zero-width rows and exhaustion, while preserving
+arbitrary older registers and inside/source/output data. Both source
+fields must remain actual copied register values through every loop
+iteration. Prove that the accept/reject result equals the canonical
+row selection and that a found position yields a newest six-register
+suffix with the original input length/fuel, selected length, selected
+width, within-row offset and unexamined-row budget. Prove the exact
+retained history, an empty final outer frontier, and polynomial bounds
+for complete-loop raw time and retained encoded register span.
+
+Prepare all boundary, metadata-preservation, selection/exhaustion,
+history/suffix, raw-refinement, control and polynomial regression
+contracts before the first target check. Reuse the unchanged single-row
+machine and decoder evidence. This is a source-preserving workspace
+handoff, not a substitute formula or a supplied correctness certificate.
+Physically preparing the initial metadata frame from the source packet,
+connecting it to the decoder and complete initial/accepting payloads,
+and closing the full formula loop and packaged reduction remain due.
+M230 is not earned and no weighted checkpoint or publication row changes.
+
+### Verified complete source-metadata-carrying row loop
+
+The permanent target
+[`CookLevinBuilderInitialRowCarry`](../../lean/PNP/Concrete/CookLevinBuilderInitialRowCarry.lean)
+now provides one fixed six-node outer loop on the actual newest
+`[inputLength, fuel, length, width, coordinate, remaining]` frame.
+It uses the existing `BuilderInitialRowLoop.machine` with a physically
+packed literal one-attempt budget. The outer count controls every
+iteration, while the inner machine computes the real row comparison
+and, on failure, the next length, width and residual.
+
+Both source fields are copied from the current physical frame into
+each successor frame. No input-dependent history length is passed to
+a machine constructor or treated as a static register offset. On a
+found row, the program appends a uniform six-register result frame;
+on exhaustion, the terminal countdown frame is already present.
+The unbounded row-selection result is unchanged.
+
+The public `workRunExact` and `run_compile_exact` theorems establish
+exact execution for all natural budgets and coordinates. The
+`final_accept_iff` and `final_reject_iff` theorems match canonical
+`BuilderInitialLengthSelection.locate`, including zero-width rows
+and exhausted families. For a selected position and offset,
+`found_suffix` identifies the exact newest frame:
+
+```text
+[inputLength, fuel, length + position, width + position,
+ offset, remaining - (position + 1)]
+```
+
+The remaining field counts unexamined rows. Both original source fields
+are retained as actual copied values, not reintroduced as supplied
+metadata after the loop. Arbitrary older registers and arbitrary
+inside/source/output data are preserved.
+
+The outer budget is decremented before preparation. The real pack
+consumes the blank cell exposed by that decrement, and the inner
+attempt and carry pack leave a fresh frontier. `final_frontier`
+proves the final outer tail is exactly empty on success and exhaustion;
+no nonempty tail is silently equated with an empty one. Retained
+comparison and carry history is represented explicitly.
+
+For incoming encoded register-span bound `B`,
+`source_polynomial_bounds` proves total output span at most
+`B + (B + 1) * (30 * B + 38)` and a polynomial bound for complete-loop
+raw time. The runtime accounts for every zero test, decrement,
+preparation, inner attempt, metadata/result copy and graph bridge.
+Only fixed-size newest frames are accessed during each iteration.
+
+All 46 prepared contracts in
+[`PNPConcreteCookLevinBuilderInitialRowCarry`](../../lean-regression/PNPConcreteCookLevinBuilderInitialRowCarry.lean)
+pass: generic and concrete selection/exhaustion, zero-width cases,
+unchanged metadata, exact history and result suffixes, rejected wrong
+field expectations, tape/frontier preservation, raw refinement,
+control properties and whole-loop polynomial bounds. All 19
+public-theorem axiom audits pass: seven are axiom-free, two use only
+`propext`, and ten use only `propext` and `Quot.sound`. No
+`Classical.choice` or project-specific assumption enters the closure.
+
+The final permanent-target build, public axiom probe and complete
+prepared regression file reached terminal success. Earlier
+true/false and frame-alias normalization fixes changed no machine,
+theorem claim, bound or expected output. Reuse the unchanged successful
+source/regression evidence while documenting the result.
+
+### Next dependency: source-packet preparation and decoder handoff
+
+Verify the exact written source-packet addresses for input length,
+uniform fuel, certificate limit and row width. Physically construct
+the initial metadata frame once, before variable row history exists.
+Connect its uniform found suffix to a fixed expression computing
+`certificateStart inputLength selectedLength fuel`, then pack and run
+the complete three-branch cell decoder. Preserve the actual source,
+remaining workspace and exact canonical coordinate interface throughout.
+
+This result does not yet prove that initial source-packet preparation
+or decoder integration. Complete initial/accepting payloads, formula
+emission and recovery/successor wiring, and the packaged all-input
+polynomial reduction remain open. M230 is not earned. Formal artefact
+coverage remains 205/207; risk-weighted proof estimate remains 35%,
+with uncertainty 20% to 40%; global gates closed remain 0/5.
+No fixed checkpoint changed. PNPLabs publication remains deferred at
+the coherent M229 source pin.
