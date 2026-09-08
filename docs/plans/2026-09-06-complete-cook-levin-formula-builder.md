@@ -5064,3 +5064,120 @@ The risk-weighted proof completion estimate remains **35%**, uncertainty
 **20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
 the publication gate is false. No fixed checkpoint changed. PNPLabs
 publication remains deferred at its coherent M229 source pin.
+
+### Active source-driven whole-family payload dispatch
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+dependency by joining all five payload families, their actual radix-entry
+programs and the existing source-derived region selector into one finite
+program. Preserve the canonical shape, initial, control, preservation and
+accepting slot order. This is the next direct composition edge toward the
+complete all-input polynomial builder, not another finite schedule prefix.
+
+Use the region tag already written at the physical source-dispatch frontier.
+Test it in place, route to the matching radix decoder and payload constructor,
+and reject an invalid tag. Do not supply a region, conclusion, equality verdict,
+row, source bit, canonical payload or correctness certificate to the unified
+source execution interface. The machine syntax may depend on the verifier,
+never on the input, cursor coordinate or a mathematical branch answer.
+
+First give the five verified branch-entry programs one exact interface, including
+their actual final values, computed payload history, canonical whole-formula
+slot and exterior. Then wire those entries behind the source-derived tag tests.
+For every actual body cursor, the intended theorem has the form
+`workRunExact? (machine problem.verifier) (workSteps problem index remaining hBody)
+  (initialConfiguration problem index remaining output) =
+  some (finalConfiguration problem index remaining output hBody)`.
+Its canonical final tape must end in the payload for
+`problem.formulaConstraintSlotDirect
+  (BuilderClauseDividerExecution.constraintIndex problem index)`.
+The body-range proof is the existing cursor invariant, not a selection oracle.
+
+Charge region assembly, tag tests, radix decoding, all selected payload work,
+retained registers, exterior and every composition bridge to explicit
+encoded-input-size polynomial bounds. Preserve actual length/shape/control/
+preservation exterior contracts; do not identify a blank exterior with an
+erased one. Preserve both option layers for padding versus an absent slot.
+
+Prepare all five-family source, canonical, invalid-tag, exact work/raw,
+control-safety and bound regression contracts with the new modules before
+compilation. Probe every new public theorem's axiom closure. Reuse unchanged
+family and source/radix evidence instead of rerunning their suites; validate
+changed documentation links and exact scope after the new sources stabilize.
+
+Clause occupancy, token emission, scratch recovery, the full cursor loop and
+the packaged all-input polynomial reduction remain downstream. No component
+alone earns M230 or its fixed checkpoint. Public status, source pins and
+PNPLabs publication remain unchanged pending that complete integration.
+
+### Verified source-driven whole-family payload construction
+
+The complete five-region payload dispatch component is now kernel checked.
+[BuilderFamilyPayload](../../lean/PNP/Concrete/CookLevinBuilderFamilyPayload.lean)
+gives the shape, initial, control, preservation and accepting radix/payload
+entries one exact interface.
+[BuilderSourcePayload](../../lean/PNP/Concrete/CookLevinBuilderSourcePayload.lean)
+runs the existing source selector from the actual body cursor, reads its
+physically written region tag and executes the matching family entry.
+
+The main execution theorem quantifies over every problem, body cursor and
+existing output. It derives the selected region from that cursor; its machine
+depends only on the verifier. No caller supplies a region, conclusion, row,
+equality verdict, source bit, literal, payload or correctness certificate.
+The canonical endpoint is the payload of the exact whole-formula constraint
+slot selected by the clause-divider coordinate, preceded by the computed
+history. Both option layers remain distinct for padding and an absent slot.
+
+The finite source graph has eleven nodes: the source selector, five in-place
+tag tests and five family entries. The tag tests preserve the selected source
+frame and take at most forty work steps. An invalid tag at the tag-test entry
+rejects without entering a payload family and preserves the older frame and
+workspace; this is not a claim about arbitrary invalid source-entry tapes.
+The accepted body run has exact work-machine and compiled raw-machine
+execution theorems, canonical payload decoding and explicit final-tape and
+control-safety contracts.
+
+Polynomial bounds charge the source selector, tag tests, radix and payload
+programs, all composition bridges, retained registers and actual exterior.
+The common interface additionally proves the previously missing control
+exterior estimate from the constructed head-move and scratch-drop operations.
+It does not equate a blank exterior with erased scratch. The source-level
+bounds apply to every valid body cursor with the existing cursor-balance
+invariant, uniformly in encoded input length.
+
+The prepared
+[family regressions](../../lean-regression/PNPConcreteCookLevinBuilderFamilyPayload.lean)
+and
+[source regressions](../../lean-regression/PNPConcreteCookLevinBuilderSourcePayload.lean)
+exercise all five entries, source-derived dispatch, canonical and option
+contracts, exact work/raw execution, invalid-tag rejection, safety and
+polynomial bounds. All 68 prepared regressions passed: 28 for the common
+family interface and 40 for the unified source program.
+All 34 public theorem axiom probes passed: one is axiom-free, one uses only
+`propext`, and thirty-two use only `propext` and `Quot.sound`.
+None uses `Classical.choice` or a project-specific axiom.
+
+The first common-interface run exposed an accepting-branch alias elaboration
+mismatch. Making the existing definitions explicit repaired it without
+changing the theorem or its expected result; that failed attempt is not green
+evidence. The final common-interface wrapper and subsequent source wrapper
+both reached terminal zero status. The source wrapper reused the exact
+verified common-interface evidence rather than repeating its regressions.
+The final documentation and scope check likewise reuses both unchanged
+source results; no full root build or publication suite is claimed here.
+
+### Next dependency: source-driven clause emission and scratch recovery
+
+Connect the canonical source-produced payload to clause occupancy and token
+emission at the actual formula cursor, recover all computed history and
+exterior, and prove the body transition returns the exact next cursor tape.
+Then close the complete cursor loop and packaged all-input polynomial builder
+and reduction. Preserve the manuscript's canonical clause and literal order;
+a supplied occupancy answer, emission certificate or cleanup oracle cannot
+replace executable derivation.
+
+M230 is not earned. This component changes no fixed checkpoint, publication
+row, global gate, root status or public source pin. Risk-weighted proof
+completion remains 35%, uncertainty 20–40%; formal artefact coverage remains
+205/207 and global gates remain 0/5 closed. PNPLabs publication remains deferred
+until the complete major capability and its required audits are earned.
