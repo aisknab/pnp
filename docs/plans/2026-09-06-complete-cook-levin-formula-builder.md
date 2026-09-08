@@ -2951,3 +2951,136 @@ Formal artefact coverage remains 205/207. The risk-weighted proof estimate
 remains 35%, with uncertainty 20% to 40%; global gates closed remain 0/5.
 PNPLabs publication remains deferred at the coherent M229 pin: completing
 one regional payload entry is not the full all-input formula builder.
+
+### Initial-cell arithmetic and compressed-width implementation contract
+
+Before implementing the physical initial-row dispatcher, derive arithmetic
+cell requests in `BuilderInitialCellCoordinates`. This closes the concrete
+cell-location and variable-block-width dependency named above. It is not an
+alternative formula, a supplied-data completion result or a runtime claim.
+
+For every input, allowed certificate length, center and tape position,
+resolve the arithmetic request to exactly the existing `initialCellAtCoordinate`
+over `pairedInitialCells` or `inputOnlyInitialCells`. A source-bit request
+contains only an index; its semantic resolution is not permission for a
+finite machine to receive the bit as an answer. Prove that every paired
+source-bit request lies within the actual source length.
+
+Preserve the existing two length-prefixed frames. The certificate-variable
+interval starts at `center + 2 * input.length + length + 2` and has exactly
+`length` cells. Derive each cell's one/two-constraint width from this interval.
+For an arbitrary clipped tape window, prove the exact width sum
+`count + min length (count - start)`, including empty/outside intervals.
+Then derive the paired model's interval coverage from the actual dimensions,
+so every canonical length row has width `tapeWidth + length`.
+
+Prepare universal resolution, field-order, delimiter, empty/boundary,
+clipped-interval, source-index, exact-width and axiom-closure regressions with
+the source. The physical length/cell selector, indexed-reader handoff,
+literal/payload writer and full initial-row execution remain required; the
+coordinate result alone does not earn M230 or change either public metric.
+
+### Derived paired length-row selector contract
+
+Use the proved `tapeWidth + length` row width to implement
+`BuilderInitialLengthSelection.locate count width coordinate`.
+Compare the residual coordinate with the current width; when it does not fit,
+subtract that width, increment the width and consume one remaining row.
+Return the derived row and residual offset, or absence after all rows are
+exhausted. Do not accept a precomputed width table or selected length.
+
+Prove equivalence to the canonical `DirectSlot.flatFinite` lookup over
+widths `width + row`, including zero-width and out-of-range cases. Every
+returned offset must fit its row and reconstruct the original coordinate
+from the exact preceding-row span. Absence must be equivalent to passing
+the complete span. Derive the source-specialized equality with
+`problem.pairedCellsSlotDirect` from the compiled exact row-width theorem.
+
+The arithmetic comparison count is at most the permitted number of lengths;
+the total span has a polynomial numeric bound in row count and tape width.
+Neither fact is a raw finite-machine execution theorem. The physical cursor
+must still implement and charge comparison, residual subtraction, row-count
+decrement, width/index increment and all bridges, retaining its source frame.
+Keep that distinction in tests, progress reporting and subsequent wiring.
+
+### Verified initial-cell arithmetic and paired length selection
+
+[`CookLevinBuilderInitialCellCoordinates.lean`](../../lean/PNP/Concrete/CookLevinBuilderInitialCellCoordinates.lean)
+now derives every initial-cell request from arithmetic coordinates, preserving
+both length prefixes, their delimiters, source-bit order, certificate-variable
+indices, left blank cells and past-end blanks. Universal resolution equals
+the existing canonical initial-cell definitions in both input modes.
+Every paired source-bit request is proved to lie within the actual input.
+
+The one/two-constraint cell width equals the indicator of the exact
+certificate-variable interval. Its clipped sum is
+`count + min length (count - start)`. The actual paired tape dimensions
+contain the complete interval, yielding exactly `tapeWidth + length`
+constraints for each canonical length row. No width table is supplied.
+
+[`CookLevinBuilderInitialLengthSelection.lean`](../../lean/PNP/Concrete/CookLevinBuilderInitialLengthSelection.lean)
+uses those widths in one arithmetic cursor: test the residual coordinate,
+or subtract the current width, increment it and consume another row.
+Its derived row/offset reproduces `DirectSlot.flatFinite` and the exact
+`problem.pairedCellsSlotDirect` order. A successful result has an in-row
+offset, an exact preceding-span equation and a complete-span bound.
+Absence is equivalent to exhausting the canonical span, including zero-width
+and out-of-range cases. Arithmetic row comparisons are bounded by
+`certificateLimit + 1`; total span has the stated numeric polynomial bound.
+These are specification and loop-invariant results, not a claim that the
+physical selector has been implemented or has polynomial raw runtime.
+
+All 73 prepared regression contracts passed: 42 in
+[`PNPConcreteCookLevinBuilderInitialCellCoordinates.lean`](../../lean-regression/PNPConcreteCookLevinBuilderInitialCellCoordinates.lean)
+and 31 in
+[`PNPConcreteCookLevinBuilderInitialLengthSelection.lean`](../../lean-regression/PNPConcreteCookLevinBuilderInitialLengthSelection.lean).
+All 35 public-theorem axiom audits passed: four use only `propext` and
+thirty-one use only `propext` and `Quot.sound`. No project axiom or
+`Classical.choice` occurs. Proof-normalisation, conditional-rewrite and
+constructor-bridge fixes preserved the definitions, theorem statements and
+regression outcomes. The length-selector check reused the exact verified
+cell-coordinate source, its 42 regressions and 22 axiom audits.
+
+### Next exact cell offset and physical selector boundary
+
+For a selected paired row, let `W` be tape width, `L` the derived
+certificate length, `A = center + 2 * input.length + L + 2`, and `j`
+the derived row offset. The proved model gives `A + L <= W` and
+`j < W + L`. Derive the canonical position and within-cell offset by:
+
+- `j < A`: position `j`, within-cell offset zero.
+- `A <= j < A + 2 * L`: position `A + (j - A) / 2`,
+  within-cell offset `(j - A) % 2`.
+- Otherwise: position `j - L`, within-cell offset zero.
+
+Prove equality to the existing flattened cell program, not a rectangular
+replacement. Include zero-length, first/last certificate bit and both
+transition boundaries. Derive all bounds from the selected row and actual
+model, not from a supplied cell-selection certificate.
+
+Then realize the row cursor with physical retained registers for remaining
+rows, selected-length counter, current width and residual coordinate.
+Maintain `remainingRows + length = certificateLimit + 1`,
+`currentWidth = W + length`, and the proved original-coordinate/prefix-span
+equation. The loop must decrease remaining rows even if a width were zero.
+Implement and charge every comparison, subtraction/restoration, decrement,
+increment, scratch allocation and graph bridge. Reuse existing comparison
+and recovery interfaces, but do not mistake their restored operands or
+discarded temporary registers for an updated residual result.
+
+Exhaustion of paired cells inside a valid padded initial region must produce
+the canonical empty-slot payload, not silently become an invalid-coordinate
+claim. After physical row/cell selection, bind the verified indexed reader
+to the actual source and derive required state, head, symbol, certificate-bit
+and certificate-length literal indices. Any new index-expression cases must
+update their complete test/producer/consumer contracts in the same change.
+The one-hot length prefix and two leading state/head requirements remain
+part of the complete initial family.
+
+Physical initial-row construction remains open, as do accepting payloads,
+whole-region wiring, occupancy/emission, scratch recovery, successor, loop
+and packaged reduction. M230 is not earned and
+`reductions-complete-cook-levin-builder` remains open. Formal artefact
+coverage remains 205/207; the risk-weighted proof estimate remains 35%,
+with uncertainty 20% to 40%; global gates closed remain 0/5.
+PNPLabs publication remains deferred at the coherent M229 pin.
