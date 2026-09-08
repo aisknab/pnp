@@ -4284,3 +4284,107 @@ proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
 remain 0/5. The eligible root theorem is absent and the publication gate remains
 false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
 coherent M229 source pin.
+
+### Active source-to-request integration contract
+
+The next dependency edge under the same **Final SAT decision** /
+**Accepted package implies P=NP** legacy anchor is the complete physical
+source packet to canonical paired-cell request. Upgrade the existing
+`BuilderInitialPairedCellSource` in place; do not introduce a parallel source
+machine or substitute a supplied route answer.
+
+Append the verified fixed request dispatcher to the actual metadata handoff.
+The ten-node source program must derive every successful request from the
+source-selected row and cell. The seven-field handoff frame remains an
+intermediate interface, while the final nine-field frame adds the request kind
+and argument. Rejected prefix constraints and exhausted cell-family positions
+remain distinct from successful blank, fixed-bit, source-index and
+certificate-index requests.
+
+Required theorem boundary: for every paired problem, body index, remainder and
+inside tape, `workRunExact` and `run_compile_exact` execute that complete
+physical chain. No length, branch, request or correct output is supplied.
+`final_uniform_suffix` must describe all nine fields; `found_canonical_suffix`
+must identify the unchanged canonical `pairedRequest` for every selected
+length and offset. Certificate request indices must remain below the original
+source certificate limit.
+
+The packet and encoded-source polynomial bounds must include the dispatcher,
+its retained history and the tenth outer bridge. Obtain its input bound from
+the actual handoff output rather than a new independent size premise. Preserve
+the genuine source body, cursor-balance and selected-region invariants.
+
+Consumer audit: the source module is consumed only by its dedicated regression
+and this plan. Update graph size/transitions, complete output layout, final
+suffix, request interpretation and polynomial execution expectations together.
+Keep the intermediate seven-field metadata tests; add a negative test that
+distinguishes that frame from the final request frame. The prepared contract has
+64 regressions and 38 public theorem axiom probes. Rebuild only the changed
+source-machine target and its consumers; reuse the exact verified dispatcher,
+handoff, decoder and row primitives without repeating their independent suites.
+
+After this boundary passes, connect actual indexed source reads and canonical
+literal/payload writing, then finish the initial and accepting families and the
+complete formula/reduction loop. M230 remains unearned. No new checkpoint,
+publication row or progress credit is assigned. PNPLabs remains deferred.
+
+### Verified source-bound canonical request execution
+
+The existing
+[`CookLevinBuilderInitialPairedCellSource`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedCellSource.lean)
+target now runs the complete paired request dispatcher after its actual
+metadata-preserving cell handoff. This is one ten-node source program, not a
+second source-machine variant. Neither a branch answer nor a request kind,
+index, source bit or history length is supplied to its execution theorem.
+
+Every successful source-packet run has a uniform nine-field suffix: input
+length, fuel, selected certificate length, row width, remaining lengths,
+decoded cell position, within-cell offset, request kind and request argument.
+The intermediate seven-field metadata frame is still present and separately
+specified. The two additional fields are physically computed through the
+verified seven-segment dispatcher, not appended as semantic advice.
+
+The final request agrees with the unchanged canonical `pairedRequest` for
+every selected certificate length and cell coordinate. Certificate request
+indices are below the original source certificate limit. The source machine
+still rejects the three non-cell prefix constraints and exhausted paired-cell
+family coordinates; those are downstream writer branches rather than
+successful requests manufactured by this component.
+
+The exact work and compiled raw runs now include source extraction, row
+selection, cell decoding, metadata handoff and request dispatch. The complete
+source-size polynomial bounds charge the new dispatcher, all retained
+workspace and every one of the ten outer graph bridges. The dispatcher input
+bound is derived from the actual handoff output under the unchanged source
+body, cursor-balance and region invariants.
+
+All 64 prepared regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedCellSource`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedCellSource.lean)
+pass, including complete output layout, physical dispatch transitions,
+canonical request meaning, certificate-index safety, the distinction between
+intermediate and final frames, universal execution and source-size bounds.
+All 38 public theorem axiom audits pass: eight are axiom-free, eight use only
+`propext`, and twenty-two use only `propext` and `Quot.sound`. No
+`Classical.choice`, project-specific assumption or incomplete proof enters
+those closures. The first targeted run reached terminal success.
+
+The source producer, graph/output expectations, new regression boundaries and
+axiom-name probe were prepared together. Only the changed source target and its
+consumers were rerun. The byte-identical request dispatcher, handoff, decoder
+and upstream row evidence were reused; documentation did not trigger a second
+Lean build.
+
+### Next dependency: indexed request resolution and canonical payload writing
+
+Resolve source-index requests with the existing physical indexed reader; do
+not provide a bit as a premise. Feed the actual metadata/request fields into
+the literal kernels and unchanged canonical payload packers. Complete
+initial-prefix, initial input-only, paired-family and accepting writers, then
+connect formula emission, recovery/successor wiring and the packaged all-input
+polynomial reduction.
+
+M230 is not earned. Formal artefact coverage remains 205/207; risk-weighted
+proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
+remain 0/5. The eligible root theorem is absent and the publication gate remains
+false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
+coherent M229 source pin.

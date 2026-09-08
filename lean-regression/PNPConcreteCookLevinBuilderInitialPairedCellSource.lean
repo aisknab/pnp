@@ -2,8 +2,9 @@
 Copyright (c) 2026 PNP Labs.
 The physical paired-cell branch reads the actual source packet. The three
 prefix constraints, finite-family exhaustion, carried metadata and decoded
-coordinate are distinct boundaries. The final seven fields must come from the
-actual source and selected row, including the remaining-length count.
+coordinate are distinct boundaries. All nine final fields must come from the
+actual source, selected row and physical request dispatch, including the
+remaining-length count and canonical request kind/index.
 No supplied selection premise belongs to the complete execution theorem.
 -/
 import PNP.Concrete.CookLevinBuilderInitialPairedCellSource
@@ -37,7 +38,7 @@ example : BuilderRegisterPack.values decoderFields
 section Source
 variable {language : Language} (problem : VerifierTableauProblem language)
 
-example : (graph problem.verifier).nodes.length = 9 := graph_nodes_length problem.verifier
+example : (graph problem.verifier).nodes.length = 10 := graph_nodes_length problem.verifier
 example : (graph problem.verifier).WellFormed := graph_wellFormed problem.verifier
 example : (budgetValues problem).length = 3 := budgetValues_length problem
 example (index : Nat) : (preparedFrame problem index).length = 6 := preparedFrame_length problem index
@@ -101,10 +102,7 @@ example (index remaining : Nat) (length : Fin (problem.certificateLimit + 1)) (o
     (hFound : selection problem index = some (length, offset)) :
     finalValues problem index remaining =
       prefixBase problem index remaining ++ rowFinish problem index ++ startValues problem length.val ++
-        BuilderInitialCellHandoff.resultFrame
-          (BuilderInitialCellHandoff.selectedBranch (metadata problem length.val) (startValue problem length.val) offset)
-          (metadata problem length.val) (startValue problem length.val) offset ++
-        payloadFrame problem length.val offset :=
+        handoffHistory problem length.val offset ++ requestOutput problem length.val offset :=
   found_output problem index remaining length offset hPrefix hFound
 example (index : Nat) (hMode : problem.tableauInputMode = .paired)
     (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
@@ -170,7 +168,7 @@ example (length offset : Nat) : payloadFrame problem length offset =
 example (index remaining : Nat) (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
     (hPrefix : ¬ coordinate problem index < 3)
     (hFound : selection problem index = some (length, offset)) :
-    ∃ history : List Nat, finalValues problem index remaining = history ++ payloadFrame problem length.val offset :=
+    ∃ history : List Nat, finalValues problem index remaining = history ++ requestFrame problem length.val offset :=
   found_suffix problem index remaining length offset hPrefix hFound
 example (index remaining : Nat) :
     match decodedCoordinate problem index with
@@ -179,8 +177,60 @@ example (index remaining : Nat) :
         ∃ history : List Nat, finalValues problem index remaining =
           history ++ [problem.input.length, problem.uniformFuel, length,
             problem.dimensions.tapeWidth problem.tableauInputMode + length,
-            rowCount problem - (length + 1), position, offset] :=
+            rowCount problem - (length + 1), position, offset,
+            (BuilderInitialPairedRequest.requestCode (metadata problem length) position).1,
+            (BuilderInitialPairedRequest.requestCode (metadata problem length) position).2] :=
   final_uniform_suffix problem index remaining
+
+example : decoderNode.onAccept = .node requestNode.reference := rfl
+example : requestNode.onAccept = .accept := rfl
+example : requestNode.onReject = .dead := rfl
+example : requestNode.program = BuilderInitialPairedRequest.machine := rfl
+example (length offset : Nat) : payloadFrame problem length offset =
+    BuilderInitialPairedRequest.inputValues (metadata problem length)
+      (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).1
+      (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).2 := rfl
+example (length offset : Nat) : (requestFrame problem length offset).length = 9 :=
+  requestFrame_length problem length offset
+example (length offset : Nat) : requestFrame problem length offset =
+    [problem.input.length, problem.uniformFuel, length,
+     problem.dimensions.tapeWidth problem.tableauInputMode + length,
+     rowCount problem - (length + 1),
+     (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).1,
+     (BuilderInitialCellSelection.cellCoordinate (startValue problem length) length offset).2,
+     (requestCode problem length offset).1, (requestCode problem length offset).2] :=
+  requestFrame_values problem length offset
+example (length offset : Nat) : requestFrame problem length offset ≠ payloadFrame problem length offset := by
+  intro h
+  have hLengths := congrArg List.length h
+  rw [requestFrame_length, payloadFrame_length] at hLengths
+  omega
+example (length : Fin (problem.certificateLimit + 1)) (offset : Nat) :
+    requestCode problem length.val offset =
+      BuilderInitialPairedRequest.encodeRequest
+        (BuilderInitialCellCoordinates.pairedRequest problem.input.length length problem.uniformFuel
+          (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).1) :=
+  request_canonical problem length offset
+example (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
+    (hCertificate : (requestCode problem length.val offset).1 = 3) :
+    (requestCode problem length.val offset).2 < problem.certificateLimit :=
+  request_certificate_index_bound problem length offset hCertificate
+example (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
+    (hZero : problem.certificateLimit = 0) : (requestCode problem length.val offset).1 ≠ 3 := by
+  intro hCertificate
+  have hBound := request_certificate_index_bound problem length offset hCertificate
+  omega
+example (index remaining : Nat) (length : Fin (problem.certificateLimit + 1)) (offset : Nat)
+    (hPrefix : ¬ coordinate problem index < 3)
+    (hFound : selection problem index = some (length, offset)) :
+    ∃ history : List Nat, finalValues problem index remaining =
+      history ++ BuilderInitialPairedRequest.requestValues (metadata problem length.val)
+        (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).1
+        (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).2
+        (BuilderInitialPairedRequest.encodeRequest
+          (BuilderInitialCellCoordinates.pairedRequest problem.input.length length problem.uniformFuel
+            (BuilderInitialCellSelection.cellCoordinate (startValue problem length.val) length.val offset).1)) :=
+  found_canonical_suffix problem index remaining length offset hPrefix hFound
 
 end Source
 end PNP.Concrete.CookLevin.BuilderInitialPairedCellSource.Regression
