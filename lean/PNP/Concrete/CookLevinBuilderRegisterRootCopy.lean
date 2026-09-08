@@ -540,4 +540,23 @@ theorem source_polynomial_bounds (before : List Nat) (value : Nat) (after : List
   · simp only [rawTimePolynomial, NatPolynomial.eval_mul, NatPolynomial.eval_add, NatPolynomial.eval_constant]
     exact Nat.mul_le_mul_left 6 hTime
 
+
+/-- Reuse the existing root locator as a boundary-marking stage. -/
+theorem mark_workRunExact (beforeCount : Nat) (before : List Nat) (value : Nat) (after : List Nat)
+    (inside outside : List WorkSymbol) (hLength : before.length = beforeCount) :
+    workRunExact? (markProgram beforeCount) (markSteps before value after)
+      (workStartConfiguration (markProgram beforeCount)
+        (endTape (before ++ [value] ++ after) (leftMarker :: inside) outside)) =
+      some {state := (markProgram beforeCount).acceptState,
+            tape := markedTape 0 value after ((registerWord before).reverse ++ leftMarker :: inside) outside} := by
+  subst beforeCount
+  exact mark_program_run before value after inside outside
+
+theorem mark_control (beforeCount : Nat) :
+    (markProgram beforeCount).rules.Pairwise WorkMachineChain.QueryDistinct ∧
+    WorkMachineChain.NoRuleAtAccept (markProgram beforeCount) ∧
+    WorkMachineProgramGraph.NoRuleAt (markProgram beforeCount) (markProgram beforeCount).rejectState ∧
+    (markProgram beforeCount).acceptState ≠ (markProgram beforeCount).rejectState :=
+  mark_program_good beforeCount
+
 end PNP.Concrete.CookLevin.BuilderRegisterRootCopy

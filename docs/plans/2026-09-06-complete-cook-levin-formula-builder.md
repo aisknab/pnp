@@ -5505,3 +5505,145 @@ and existing output, recover scratch exactly, then connect the complete
 successor and Finish and prove the all-input polynomial loop and reduction.
 Do not replace an unproved general step with supplied data, an added premise,
 a project axiom or extra milestone credit.
+
+### Active uniform literal-token selection contract
+
+Continue **Final SAT decision** / **Accepted package implies P=NP** through the
+unchanged canonical token schedule. The existing body loop emits one optional
+token per coordinate; do not replace it with a different whole-clause schedule.
+The verified physical token appender is reused after its request is derived.
+
+The next shared physical selector must handle every sign, variable index and
+token position of a literal, not a fixed unary prefix. Use one fixed finite
+program starting at `endTape (older ++ [signValue positive, value, position])`.
+Position zero reads a copied physical sign; a positive position copies and
+decrements the actual position and compares it with the actual variable index.
+The comparator's derived residual distinguishes the terminating false token from
+out-of-range padding. Restore the temporary sign copy, preserve the original
+three-register frame and arbitrary tape interior, and account for the exact
+comparison scratch and exterior cells. Program control must not depend on the
+runtime sign, variable value, position or a supplied token verdict.
+
+The intended universal theorem observes actual work-machine execution as
+`DirectToken.literalSlot {positive := positive, variableIndex := value} position`,
+with exact raw compilation and encoded-input polynomial time/span bounds.
+Prepare uniform execution/type/axiom/safety regressions and independent sign,
+zero-index, last-unary, terminator and first-padding examples before compiling.
+Tests must preserve their intended semantics through elaboration corrections.
+Reuse the unchanged copy, tag, decrement, erasure and residual-comparator
+evidence; no full core or website proof suite is needed for this development
+boundary.
+
+This selector is a necessary dependency of general clause-token selection, not
+its replacement. Arbitrary implication-list traversal, exactly-one pair/list
+selection, extraction of the actual token coordinate, source-bound request
+construction, exact scratch recovery, successor, Finish and the complete
+all-input polynomial builder/reduction remain required. Do not declare M230,
+a publication row or a fixed checkpoint earned for this component. Keep the
+coherent published M229 status and PNPLabs source pin unchanged.
+
+### Active uniform scratch-recovery contract
+
+The arbitrary-length source and comparison histories must be removed before
+returning to the balanced cursor. Preserve the unchanged canonical schedule and
+its input/output interior. Reuse the existing fixed inner-boundary locator:
+expose its already-proved marking execution and control interface without
+changing its machine or proof. A new fixed eraser then clears from the scratch
+end back to that marked boundary, not for a caller-supplied history length.
+
+For every retained register list `before` with verifier-fixed length, every
+first discarded value and every arbitrary remaining register list, prove exact
+work/raw execution from the ordinary end tape to `endTape before`, preserving
+the original interior and replacing exactly the discarded word with exterior
+blank cells. Charge the locator and every erasure transition. Derive a uniform
+polynomial time bound from the original encoded span; recovery may not enlarge
+that register/exterior span. Cover empty retained prefixes, zero discarded
+values, empty tails, arbitrary long tails, exact symbols, control safety and
+axiom closure in the prepared regressions.
+
+This is the complete generic recovery dependency, not another fixed scratch
+count. Its later source binding must derive the retained cursor boundary from
+the existing source-prefix theorems and preserve the computed token result
+through finite control. Keep the 36 verified literal-selector regressions and
+its unchanged-source axiom evidence; check the newly exposed root interface and
+new eraser/locator chain. Source-bound request construction, arbitrary clause
+lists and pair selection, successor, Finish and the complete builder remain
+required. M230 and all public progress/gate/source-pin fields remain unchanged.
+
+### Verified uniform literal selection and scratch recovery
+
+The manuscript's **Final SAT decision** / **Accepted package implies P=NP**
+dependency now has two further general physical components. Neither is a
+complete builder or an earned M230.
+
+[Literal-token selection](../../lean/PNP/Concrete/CookLevinBuilderLiteralTokenSelector.lean)
+uses one fixed ten-node graph for every sign, variable index and token position.
+At position zero it reads the actual sign register. At every positive position
+it copies and decrements the actual position, copies the actual variable index,
+and compares the resulting unary coordinate. It distinguishes true tokens,
+terminating false tokens and padding, not merely a finite literal prefix.
+`workRun_observes_literal` identifies the executed result with
+`DirectToken.literalSlot`. The original sign, index and position registers and
+arbitrary tape interior survive. The exact comparison history, exterior,
+compiled execution and polynomial time/final-span bounds are proved.
+
+All 36 prepared literal-selector regressions passed.
+All 16 public literal-selector axiom probes passed: four are axiom-free, three
+use only `propext`, and nine use only `propext` and `Quot.sound`.
+[The regression](../../lean-regression/PNPConcreteCookLevinBuilderLiteralTokenSelector.lean)
+covers both signs, zero and positive indices, the first and final tokens,
+padding, the original frame and the universal execution/polynomial interfaces.
+
+[Root-bounded scratch recovery](../../lean/PNP/Concrete/CookLevinBuilderRegisterRootErase.lean)
+reuses the existing root locator and a fixed four-rule eraser. The locator marks
+the separator after a verifier-fixed retained register prefix. The eraser then
+clears to that actual marker without receiving the discarded history's length.
+The theorem covers every retained list of that fixed length, every first
+discarded value and every arbitrary remaining register list. Zero values,
+empty tails and empty retained prefixes are included. Exact work and raw
+compiled execution restore `endTape before`, preserve the entire interior,
+and replace exactly the discarded register word with exterior blank cells.
+The complete locator/eraser chain takes at most `4 * bound + 7` work steps
+when the original register word has length at most `bound`. The sum of
+retained-register and exterior lengths is preserved exactly.
+
+The [existing locator module](../../lean/PNP/Concrete/CookLevinBuilderRegisterRootCopy.lean)
+only gained public wrappers for its already-proved marking execution and
+control interface; its machine and original proofs were not changed.
+All 32 affected locator regressions and all 28 new recovery regressions passed.
+All 28 public locator/recovery axiom probes passed: five are axiom-free and
+23 use only `propext` and `Quot.sound`. Neither component's dependency closure
+uses `Classical.choice` or a project-specific axiom.
+The [locator regression](../../lean-regression/PNPConcreteCookLevinBuilderRegisterRootCopy.lean)
+and [recovery regression](../../lean-regression/PNPConcreteCookLevinBuilderRegisterRootErase.lean)
+require exact tape results, unbounded histories, terminal safety, deterministic
+control and polynomial execution rather than a caller-supplied erasure count.
+
+The final targeted wrappers completed successfully. The literal selector's
+unchanged source, regression and dependency evidence was reused during recovery
+verification. The changed locator export and new recovery module were checked
+in dependency order. Earlier non-green elaboration attempts are not evidence;
+the list-rewrite correction changed no statement, machine or regression
+expectation. No root rebuild, complete proof suite, inventory regeneration,
+historical replay or website proof build was duplicated for these components.
+Those final integration boundaries remain due for complete M230.
+
+Formal artefact coverage remains **205 of 207 current scoped rows earned**.
+The risk-weighted proof completion estimate remains **35%**, with uncertainty
+**20% to 40%**. Global gates closed remain **0 of 5**, project-specific axioms
+remaining **0**, the eligible root `PNP.Main.p_eq_np` absent and publication
+false. No publication row, global gate or weighted checkpoint changed.
+M230 is not earned; PNPLabs publication remains deferred on coherent M229.
+
+### Next dependency: uniform list/pair selection and source-bound token requests
+
+Connect the literal primitive to arbitrary implication lists and both
+exactly-one clause forms, including ordered exclusion-pair selection. Derive
+the actual token position and payload from the source cursor; a supplied
+literal, list, pair, token or correctness premise is not the final interface.
+Preserve the selected token/padding result in finite control while recovering
+the variable-length history to the real retained cursor prefix. Do not erase
+the payload prematurely and recompute it. Then connect physical request
+dispatch, successor and Finish and prove the complete all-input polynomial
+loop and reduction. Keep the canonical clause/token schedule unchanged and
+stop at an unproved general boundary rather than substituting a finite fixture.

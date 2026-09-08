@@ -95,3 +95,19 @@ example (before : List Nat) (value : Nat) (after : List Nat) (outside : List Wor
         (spanPolynomial bound).eval inputLength ∧
       6 * workSteps before value after ≤ (rawTimePolynomial bound).eval inputLength :=
   source_polynomial_bounds before value after outside bound inputLength hSpan
+
+-- Boundary marking is shared with general scratch recovery.
+example (beforeCount : Nat) (before : List Nat) (value : Nat) (after : List Nat)
+    (inside outside : List WorkSymbol) (hLength : before.length = beforeCount) :
+    workRunExact? (markProgram beforeCount) (markSteps before value after)
+      (workStartConfiguration (markProgram beforeCount)
+        (endTape (before ++ [value] ++ after) (PipelineTape.leftMarker :: inside) outside)) =
+      some {state := (markProgram beforeCount).acceptState,
+            tape := BuilderRegisterCountdownControl.markedTape 0 value after
+              ((registerWord before).reverse ++ PipelineTape.leftMarker :: inside) outside} :=
+  mark_workRunExact beforeCount before value after inside outside hLength
+example (beforeCount : Nat) :
+    (markProgram beforeCount).rules.Pairwise WorkMachineChain.QueryDistinct ∧
+    WorkMachineChain.NoRuleAtAccept (markProgram beforeCount) ∧
+    WorkMachineProgramGraph.NoRuleAt (markProgram beforeCount) (markProgram beforeCount).rejectState ∧
+    (markProgram beforeCount).acceptState ≠ (markProgram beforeCount).rejectState := mark_control beforeCount
