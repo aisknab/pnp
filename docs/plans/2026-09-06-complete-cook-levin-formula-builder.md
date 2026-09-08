@@ -4178,3 +4178,109 @@ proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
 remain 0/5. The eligible root theorem is absent and the publication gate remains
 false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
 coherent M229 source pin.
+
+### Active complete paired-cell request-dispatch contract
+
+Continue the same M230 manuscript-to-concrete-Cook-Levin dependency. Implement
+one fixed physical dispatcher for the unchanged `pairedRequest` encoding, not
+another finite position fixture or a semantic classifier standing in for a
+machine. Its input is the verified seven-register metadata/cell frame.
+
+The actual comparisons walk widths `[fuel, inputLength, 1, inputLength,
+selectedLength, 1, selectedLength]`. On a miss, the existing compare/residual
+primitive must derive the remaining offset and physically carry it to the next
+segment. On a hit, emit blank, fixed true, fixed false, source index or
+certificate index as appropriate. Empty input or certificate segments have
+zero width and must be skipped correctly; both zero-length delimiter cells
+remain present. The static table has seven entries for every source input.
+
+The output suffix must contain all seven original metadata/cell fields followed
+by a request kind and argument: blank `[0,0]`, fixed bit `[1,bit]`, source
+request `[2,index]`, or certificate request `[3,index]`. A source request is
+an index for the existing indexed reader, never a supplied source bit. Preserve
+arbitrary older registers and inside/source/output data and leave a fresh outer
+frontier. Prove exact work and compiled raw execution without supplied branch,
+route or lookup premises, and prove the request equals the canonical paired
+request for every position and selected certificate length.
+
+Compile the fixed table through nested finite branch graphs. Prove execution
+and bounds structurally over that static table, with physical copies and every
+branch bridge charged. The complete incoming encoded-register-span bound must
+also cover retained history and the final nine-field request suffix. Do not
+present this bound as a source-packet binding before the source integration is
+actually proved.
+
+Prepare the source, all field-order and encoding-boundary expectations,
+zero-length cases, universal canonical/execution statements, and public axiom
+probe set together. Run only the new permanent target and its dedicated
+regressions/axiom audit, then source-bound documentation checks. Reuse the
+unchanged comparison, metadata handoff and source-row evidence; full root,
+inventory, publication and exact-merge audits remain due at M230 integration.
+
+Then connect the dispatcher to the actual source machine, indexed input reader,
+literal kernels and canonical payload packers. Complete initial/accepting
+writers and the full formula/reduction loop remain open. M230 is not earned;
+no fixed checkpoint, progress value or PNPLabs publication changes.
+
+### Verified complete physical paired-cell request dispatch
+
+The permanent
+[`CookLevinBuilderInitialPairedRequest`](../../lean/PNP/Concrete/CookLevinBuilderInitialPairedRequest.lean)
+target now implements the complete paired-cell request dispatcher. One fixed
+seven-entry table covers the leading blank region, input unary prefix,
+delimiter, actual source indices, certificate-length unary prefix, delimiter
+and certificate indices, followed by the trailing blank region. Zero-width
+segments are skipped while the two delimiter cells remain present.
+
+The program physically compares the current residual offset with the next
+segment width. A miss copies the derived remainder and all seven original
+metadata/cell fields into the next stage. A hit copies those original fields
+followed by the request kind and argument. Every return has a uniform
+nine-register suffix: blank `[0,0]`, fixed bit `[1,bit]`, source index
+`[2,index]`, or certificate index `[3,index]`. A source index is not a
+supplied input bit.
+
+The exact work/raw execution proof is structural over the static segment table.
+No runtime input, certificate length, coordinate, route answer or history size
+constructs the program. All requests agree with the unchanged canonical
+`pairedRequest` for every position and selected length; certificate request
+indices satisfy the required finite width. Arbitrary older registers and
+inside/source/output tape are preserved, and the outer frontier is fresh.
+
+The complete polynomial bound charges every comparison, metadata/result copy,
+retained register and nested graph bridge. It bounds the actual encoded incoming
+register span and the final nine-field suffix. Binding that input span to the
+full source packet belongs to the next integration; no complete source-to-reader
+or initial-payload run is claimed by this standalone dispatcher.
+
+All 66 prepared regressions in
+[`PNPConcreteCookLevinBuilderInitialPairedRequest`](../../lean-regression/PNPConcreteCookLevinBuilderInitialPairedRequest.lean)
+pass. They cover every segment boundary, empty input, zero certificate length,
+both zero-length delimiters, residual rather than absolute indices, wrong-field
+rejection, metadata retention, universal canonical/execution statements and
+polynomial bounds. All 26 public theorem axiom audits pass: nine are axiom-free,
+six use only `propext`, and eleven use only `propext` and `Quot.sound`.
+No `Classical.choice`, project-specific assumption or incomplete proof enters
+those closures.
+
+The earlier targeted attempts exposed proof-script record layout, an explicit
+suffix witness, Boolean/subtraction normalization and outer-graph inference.
+The repairs changed no machine, bound polynomial, theorem obligation or prepared
+regression result. The final permanent target, audit and regression run reached
+terminal success. Existing comparison and handoff sources and their independent
+successful suites were unchanged and reused.
+
+### Next dependency: source-to-request and physical payload wiring
+
+Connect the verified source machine's uniform seven-field cell result to this
+complete dispatcher. Prove the full actual source-packet run leaves the canonical
+nine-field request suffix and charge the new stage in its encoded-source
+polynomial bound. Then bind source requests to the existing indexed reader and
+connect literal kernels and canonical payload packers. Complete initial/accepting
+writers and the full formula/reduction loop remain open.
+
+M230 is not earned. Formal artefact coverage remains 205/207; risk-weighted
+proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
+remain 0/5. The eligible root theorem is absent and the publication gate remains
+false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
+coherent M229 source pin.
