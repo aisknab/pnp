@@ -4853,3 +4853,108 @@ The risk-weighted proof completion estimate remains **35%**, uncertainty
 **20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
 the publication gate is false. No fixed checkpoint changed. PNPLabs
 publication remains deferred at its coherent M229 source pin.
+
+### Active source-derived input-only initial-cell payloads
+
+Continue the **Final SAT decision** / **Accepted package implies P=NP**
+dependency by constructing the remaining input-only initial-cell family.
+The unbounded object is every source-selected initial cell of an arbitrary
+encoded input, not a fixed position, bit fixture or supplied request.
+
+Use one fixed runtime graph. Copy input length, fuel, tape width and the actual
+initial-region coordinate from the source packet. Compare against the two
+state/head prefix entries, then the actual width and center. Reject prefix
+entries for the separate boundary dispatcher; write the canonical empty
+opportunity for padding; otherwise derive a blank or source-bit request and
+reuse the existing actual indexed-input resolver. Physically compute the
+initial symbol index from the derived position and resolved symbol code, then
+pack its required-literal sign and tag. Blank cells and padded opportunities
+must remain different outputs.
+
+The exact source theorem must run this fixed graph from the source packet and
+original input, preserve prior output, and identify the unchanged canonical
+initial constraint and whole-formula slot for every valid input-only cell.
+No runtime coordinate, width answer, source bit, request, family or comparison
+certificate may be supplied as proof authority. Charge every copy, comparison,
+read, index operation, retained register and graph bridge to an encoded-size
+polynomial. Runtime frame lemmas are implementation interfaces, not substitutes
+for the source-bound theorem.
+
+Prepare independent prefix/width/center, absent/false/true source-bit,
+padding-versus-blank, literal numbering, polarity/tag, exact execution,
+source binding, control safety and polynomial-bound regressions before the
+targeted run. Probe every new public theorem's compiled axiom closure. Reuse
+unchanged comparator, request-resolver, source-field and register evidence.
+
+Initial-family dispatch, full region dispatch, clause emission, scratch
+recovery and the packaged all-input polynomial reduction remain downstream.
+M230 is not earned; no score, publication row, global gate or public source pin
+changes. PNPLabs remains deferred at the coherent M229 publication.
+
+### Verified source-derived input-only initial-cell payloads
+
+The [input-only runtime](../../lean/PNP/Concrete/CookLevinBuilderInitialInputOnlyPayload.lean)
+and [source composition](../../lean/PNP/Concrete/CookLevinBuilderInitialInputOnlySource.lean)
+now construct the complete remaining input-only initial-cell family. A fixed
+twelve-node graph handles arbitrary runtime coordinates: remove the two
+state/head prefix entries, compare the position with the actual tape width,
+compare valid positions with the source center, derive the blank/source request,
+reuse the existing actual indexed-input resolver, compute the initial symbol
+index and pack the required-literal payload.
+
+Prefix coordinates are rejected for the separate boundary dispatcher. In-region
+padding writes the canonical empty opportunity `[1]`; a blank tape cell writes
+a real required symbol literal, not padding or an absent `[0]` slot. The machine
+covers positions before, within and beyond the source input. Source bit values
+are read from the actual preserved input and are never supplied as premises.
+The twelve-node syntax is independent of input length, position, width and bit.
+
+The source composition physically copies input length, fuel, tape width and
+the initial-region coordinate from the existing source/radix packet. Its
+uniform theorem relates the actual physical endpoint to the unchanged
+whole-formula constraint slot in input-only mode, including padding. It derives
+the capacity bound from authoritative region selection, proves canonical
+literal identity and decoding, and computes its retained history rather than
+accepting a supplied family, environment, source bit, literal or index answer.
+
+Exact work-machine and raw execution preserve the original input, prior output
+and source frame. The empty exterior frontier is explicit. Full
+encoded-input-size polynomial bounds charge source-field copies, all physical
+comparisons and reads, index arithmetic, retained scratch, payload writes and
+every graph bridge. Runtime frame lemmas are backed by the source-level theorem;
+they are not substitutes for that theorem.
+
+All 80 prepared regressions passed:
+51 [runtime regressions](../../lean-regression/PNPConcreteCookLevinBuilderInitialInputOnlyPayload.lean)
+and 29 [source regressions](../../lean-regression/PNPConcreteCookLevinBuilderInitialInputOnlySource.lean).
+They include independent prefix/width/center and false/true/absent-input cases,
+padding-versus-blank, canonical numbering, polarity/tag/order negatives,
+source binding, whole-formula slots, actual execution and full size/runtime
+contracts. All 54 public theorem axiom probes passed: four are axiom-free,
+20 use only `propext`, and 30 use only `propext` and `Quot.sound`.
+No classical choice or project-specific proof authority entered the closures.
+
+Targeted development corrected explicit tape/projection rewrites and terminal
+state proofs without changing theorem statements or expected payloads. One
+temporary runner stopped in checksum preflight; its transcription error was
+fixed before source compilation. Each final verification wrapper reached its
+own terminal zero status. The source integration reused the exact green
+runtime target and did not rerun its 51 regressions or 35 axiom probes.
+Unchanged reader, request, comparison, source-field and register evidence was
+also reused.
+
+#### Next dependency: complete initial-family dispatch
+
+Both initial-cell modes and the three boundary requirements now have
+source-derived payload writers; the paired length clause was verified earlier.
+Connect them with source-preserving initial-family dispatch, including paired
+padding and explicit scratch/exterior handling, then complete the five-region
+dispatcher, clause emission and scratch recovery, and package the all-input
+polynomial reduction. Full M230 root/inventory/publication/release checks remain
+due at that integration boundary.
+
+**M230 is not earned.** Formal artefact coverage remains **205/207**.
+The risk-weighted proof completion estimate remains **35%**, uncertainty
+**20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
+the publication gate is false. No fixed checkpoint changed. PNPLabs
+publication remains deferred at its coherent M229 source pin.
