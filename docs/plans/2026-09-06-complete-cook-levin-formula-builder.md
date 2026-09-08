@@ -4958,3 +4958,109 @@ The risk-weighted proof completion estimate remains **35%**, uncertainty
 **20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
 the publication gate is false. No fixed checkpoint changed. PNPLabs
 publication remains deferred at its coherent M229 source pin.
+
+### Active complete initial-family dispatch
+
+Continue the **Final SAT decision** / **Accepted package implies P=NP**
+dependency by joining all verified initial payload writers into one fixed,
+source-driven family program. The unbounded target is every initial-region
+opportunity for every encoded input, in both verifier input modes, including
+state, head, paired length, actual cells and padded opportunities.
+
+The initial source/radix packet already ends in its local coordinate: the
+initial family has no radix splits. Prove that physical suffix and run the
+existing unary tag tests directly on it. Select state at zero, head at one,
+paired length at two, and the appropriate complete cell writer thereafter.
+Do not copy/erase a disposable coordinate or supply a branch answer. Only the
+verifier's fixed input mode determines which cell program enters the graph.
+
+For paired cells, connect the physically selected row/cell/payload to the
+unchanged canonical initial slot. Convert exhausted in-region paired padding
+to the empty opportunity `[1]`; do not silently equate padding, a blank-cell
+requirement, an absent slot or a global failure. Derive row/cell selection and
+all canonical bounds from the existing source selection theorems.
+
+The exact source theorem must run the fixed graph from the actual source
+packet and original input to the canonical initial/whole-formula payload,
+with no caller-supplied role, bit, request, row, family, history or index.
+Prove every direct tag test preserves the input frame. Preserve prior output
+and describe the final exterior exactly: the paired length writer can leave
+an explicit blank exterior, which must not be replaced by an empty list.
+Provide encoded-input-size bounds for all branch work, retained scratch,
+exterior space, padding writes, tag tests and composition bridges.
+
+Prepare mode/prefix and canonical branch regressions before compilation,
+including paired exhaustion and the length exterior. Check the complete
+source theorem, decoding, exact work/raw runs, control safety and polynomial
+bounds; audit every new public theorem. Reuse unchanged leaf evidence without
+rerunning the input-only, paired-cell, boundary or length regression suites.
+
+Five-region dispatch, clause emission, scratch recovery and the packaged
+all-input polynomial reduction remain downstream. M230 is not earned; no
+fixed checkpoint, progress score, publication row, gate, root or public source
+pin changes. PNPLabs publication remains deferred at the coherent M229 pin.
+
+### Verified complete initial-family dispatch
+
+The [initial-family program](../../lean/PNP/Concrete/CookLevinBuilderInitialPayload.lean)
+now constructs every initial-family payload from the actual source/radix packet
+in both verifier input modes. Its fixed nine-node graph tests the existing
+coordinate directly, preserving the physical packet, source input and prior
+output. It selects state at zero, head at one, paired length at two, and the
+complete appropriate cell writer thereafter. The fixed verifier mode selects
+the cell program; no runtime role, row, bit, request or literal is supplied.
+
+The paired route connects the actual selected length, cell and payload to the
+canonical initial slot. Exhausted in-region paired rows produce the empty
+opportunity `[1]`, not an absent `[0]` slot, a blank-cell requirement or a
+global failure. Both input modes therefore include every in-region padding
+opportunity as well as every substantive initial constraint. The constructor
+computes its retained history; there is no supplied suffix witness in the
+source execution interface.
+
+The canonical source theorem reaches the unchanged whole-formula payload for
+the actual source-derived constraint index. It proves initial-slot agreement,
+decoding and exact work-machine and compiled raw execution. Direct tag tests
+preserve arbitrary workspace and exterior tails. Complete-family execution
+starts with an empty exterior, preserves the original input and prior output,
+and retains the length writer's explicitly described blank exterior rather than
+claiming that it has been erased. Other selected branches finish with an empty
+exterior.
+
+Uniform encoded-input-size polynomial bounds include all selected leaf work,
+padding, retained registers, remaining exterior, tests and graph bridges.
+The three bounded tag tests and their bridges cost at most 18 work steps;
+the compiled bound accounts for their 108 raw steps. These are complete
+source-size bounds, not finite termination or a caller-provided capacity claim.
+
+All 43 prepared [regressions](../../lean-regression/PNPConcreteCookLevinBuilderInitialPayload.lean)
+passed. They cover both-mode branch selection, unbounded cell coordinates,
+physical tag preservation, paired exhaustion and padding distinctions, exact
+runs, canonical slots, source binding, exterior contracts, control safety and
+polynomial bounds. All 34 public theorem axiom probes passed: three are
+axiom-free, three use only `propext`, and 28 use only `propext` and
+`Quot.sound`. No classical choice or project-specific axiom entered the
+new theorem closures.
+
+Targeted development corrected the verifier/tableau input-mode projection,
+proof normalization, explicit suffix witnesses and bridge arithmetic without
+weakening the theorem statements. Regression-only syntax corrections left the
+verified proof source unchanged; the final wrapper reused its exact compiled
+target and axiom transcript and reached terminal zero status after all 43
+regressions passed. The unchanged boundary, length, paired-cell and input-only
+suites were not rerun.
+
+#### Next dependency: whole-family dispatch and emission
+
+The entire initial family is now source-derived, alongside the previously
+verified payload components. Continue through the five-region dispatcher,
+clause emission and scratch recovery, then package the all-input polynomial
+Cook-Levin builder and reduction. The remaining composition must preserve each
+family's real scratch/exterior contract. Full M230 root, inventory,
+publication and release verification remain due at that integration boundary.
+
+**M230 is not earned.** Formal artefact coverage remains **205/207**.
+The risk-weighted proof completion estimate remains **35%**, uncertainty
+**20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
+the publication gate is false. No fixed checkpoint changed. PNPLabs
+publication remains deferred at its coherent M229 source pin.
