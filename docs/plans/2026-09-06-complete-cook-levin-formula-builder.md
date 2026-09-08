@@ -4757,3 +4757,99 @@ The risk-weighted proof completion estimate remains **35%**, with uncertainty
 **20% to 40%**; global gates remain **0/5**. The eligible root theorem is absent
 and the publication gate is false. No fixed checkpoint changed. PNPLabs
 publication remains deferred at its coherent M229 source pin.
+
+### Active source-derived initial and accepting boundary payloads
+
+Continue the **Final SAT decision** / **Accepted package implies P=NP**
+dependency by constructing the canonical initial-state, initial-head and final
+accepting-state requirements from the actual source/radix packet. These are the
+three fixed semantic boundaries of every tableau, uniformly over all encoded
+inputs and both verifier input modes; they are not additional finite schedule
+fixtures or separately earned milestones.
+
+Use one fixed branch syntax for the three roles. The verifier determines its
+raw start/accept states, while the existing source fields determine dimensions
+and the runtime fuel/head/final-time value. Physically copy the eight literal
+arguments, run the existing canonical state/head kernel, and pack the actual
+written index with the required-literal sign and payload tag. Do not provide
+an index, fuel value, environment, literal or correctness answer from the caller.
+
+Required theorems identify each argument environment with the canonical typed
+request; prove the resulting payload is the unchanged canonical initial or
+accepting constraint; and prove exact work/raw execution with preservation of
+the actual source frame, original input, prior output and explicit exterior
+allocation. The accepting-region theorem must identify its unique current slot
+from authoritative region selection, not a supplied local-coordinate answer.
+Provide encoded-input-size polynomial bounds for all literal work, retained
+scratch, payload copies and every composition bridge.
+
+Prepare independent literal numbering, polarity/tag, both-mode, source binding,
+accepting-slot, exact execution, exterior, size/runtime and control-safety
+regressions before compilation. Probe every new public theorem's compiled
+axiom closure. Reuse unchanged source-literal and register-pack evidence; the
+previous length and paired-cell proof suites do not need another run.
+
+The complete accepting payload family closes at this component boundary.
+Selection among all initial branches, input-only cells, full constraint
+dispatch/emission/recovery and the packaged all-input reduction remain open.
+M230 is not earned and no weighted checkpoint, publication row, status
+coordinate or public source pin changes. PNPLabs remains deferred until the
+major complete-builder publication boundary.
+
+### Verified source-derived boundary payloads
+
+The [boundary writer](../../lean/PNP/Concrete/CookLevinBuilderBoundaryPayload.lean)
+now constructs all three canonical boundary requirements: the initial state,
+initial head position and final accepting state. Each fixed branch reads the
+actual source/radix packet, copies the eight canonical literal arguments,
+computes the state/head index using the existing kernel, and packs that written
+index with the required-literal polarity and tag. Verifier compilation fixes
+the raw start/accept states; runtime fuel and dimensions remain source fields.
+
+The universal proofs cover both verifier input modes. Argument environments
+match the typed canonical requests, and every payload decodes to the unchanged
+required constraint. The accepting-region theorem derives its unique local
+coordinate from authoritative region selection and identifies the exact
+whole-formula slot. It does not ask the caller for a final time, state index,
+local coordinate, literal answer or correctness certificate.
+
+Exact work-machine and raw compilation theorems preserve the actual source
+frame, original input and prior output. Exterior allocation is explicit for
+arbitrary exterior data, including the empty case. Encoded-input-size
+polynomial bounds include source-to-literal work, scratch, payload copies and
+all composition bridges; a separate exterior-bound theorem charges any
+pre-existing outside space without repeating the source computation.
+
+All 47 [boundary regressions](../../lean-regression/PNPConcreteCookLevinBuilderBoundaryPayload.lean)
+passed. They cover independent block numbering, zero certificate width/fuel,
+polarity/tag/order negatives, variable bounds, actual-source execution,
+accepting-slot linkage, exterior behavior, control safety and complete branch
+size/runtime bounds. All 28 public theorem axiom probes passed: one is
+axiom-free, three use only `propext`, and 24 use only `propext` and
+`Quot.sound`. None uses classical choice or project-specific proof authority.
+
+Verification reused unchanged source-literal, register-pack, length-writer and
+paired-cell evidence. The initial source attempt corrected the defining
+coordinate namespace and an implicit list-lemma argument in source and tests
+together. The successful target build and axiom commands were retained after
+two decoder fixtures required direct equality proofs instead of a missing
+decidable-equality instance. Their expected payloads did not change. The final
+regression wrapper bound the exact unchanged successful commands, passed every
+fixture and reached its own terminal zero status; failed wrappers are not
+claimed as green verification.
+
+#### Next dependency: input-only cells and complete family routing
+
+The canonical accepting payload family and initial state/head branch writers
+are complete at the source-packet boundary. The next missing initial family is
+the input-only cell writer, using actual source bits and canonical position
+bounds. Then connect all initial branches, full five-region payload dispatch,
+clause emission and scratch recovery, and package the all-input polynomial
+reduction. M230 root/inventory/publication/release verification remains due at
+that complete integration boundary.
+
+**M230 is not earned.** Formal artefact coverage remains **205/207**.
+The risk-weighted proof completion estimate remains **35%**, uncertainty
+**20% to 40%**, and global gates **0/5**. The eligible root theorem is absent;
+the publication gate is false. No fixed checkpoint changed. PNPLabs
+publication remains deferred at its coherent M229 source pin.
