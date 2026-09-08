@@ -4660,3 +4660,100 @@ proof estimate remains 35%, with uncertainty 20% to 40%; global gates closed
 remain 0/5. The eligible root theorem is absent and the publication gate remains
 false. No fixed checkpoint changed. PNPLabs publication remains deferred at its
 coherent M229 source pin.
+
+### Active arbitrary-width certificate-length clause
+
+Continue the **Final SAT decision** / **Accepted package implies P=NP**
+dependency by physically constructing the complete initial exactly-one clause
+over every possible certificate length. This is an arbitrary-width family,
+including certificate bound zero, not another fixed list or schedule fixture.
+
+Reuse the existing source-to-literal machine with its fixed zero-coordinate
+certificate-length plan. It physically derives the canonical length-block base
+from the actual initial-region source packet. Read the certificate width from
+the written dimension fields, compute `count = C + 1` and the exclusive
+`upper = base + count`, and feed those actual registers into the existing
+complete exactly-one payload machine. Reuse its range loop, payload tag and
+runtime theorem; do not rebuild control from a runtime count or supply an
+index list.
+
+The required source theorem must prove one exact physical run from the original
+source/radix packet to a suffix equal to
+`BuilderInitialConstraintPayload.lengthValues`. Prove the descending range is
+exactly the reversed canonical `pairedLengthVariables` map. Source bits, prior
+output and any tracked exterior are preserved according to the existing tape
+contract. In particular, keep and charge the exactly-one writer's remaining
+blank exterior rather than silently identifying it with an empty list.
+
+No base, count, upper bound, list, branch answer or correctness certificate may
+be supplied to the source-level run. The fixed verifier and source packet must
+derive them. Bounds must include source field copies, canonical literal
+arithmetic, count/upper arithmetic, retained history, variable-length payload,
+blank exterior and every composition bridge, uniformly in encoded input size.
+
+Prepare canonical-range, zero-width, order/tag, physical execution, source
+binding, polynomial-size/runtime, control-safety and negative regressions before
+the targeted build. Probe every new public theorem's compiled axiom closure.
+Reuse exact unchanged source-to-literal, range, exactly-one and paired-cell
+evidence; do not repeat their full suites. Commit only after the complete
+source-bound clause and its documentation/status checks pass.
+
+This does not yet select all initial branches or emit the whole formula.
+Required head/state prefix, input-only initial cells, accepting-family payloads,
+complete dispatch/emission/recovery and the packaged all-input reduction remain
+open. M230 remains unearned; no fixed checkpoint, publication row, public source
+pin or PNPLabs release changes at this component boundary.
+
+### Verified source-derived arbitrary-width certificate-length clause
+
+The [source-bound length writer](../../lean/PNP/Concrete/CookLevinBuilderInitialLengthPayload.lean)
+now physically constructs the complete initial certificate-length exactly-one
+payload. Its machine is fixed by the verifier: the source packet supplies the
+actual dimension fields, the existing literal kernel computes the canonical
+length-block base, fixed arithmetic derives the count and exclusive upper bound,
+and the existing range/payload loop writes every required variable and tag.
+
+The universal result covers every certificate width, including zero. The
+descending list is proved equal to the reversed canonical
+`pairedLengthVariables` map, and the resulting payload decodes to the existing
+initial constraint at coordinate two. This coordinate identifies one complete
+unbounded family, not a new fixed-slot milestone. No caller supplies the base,
+count, upper bound, variable list, input bits, result or correctness certificate.
+
+The exact work-machine run and raw compilation theorem start from the actual
+source/radix packet and preserve the original input and prior output. The
+encoded-input-size polynomial theorem charges the source-to-literal work,
+field copies, arithmetic, retained scratch, entire variable-length payload,
+all three graph bridges and the remaining blank exterior. The exterior is
+explicit in the endpoint and size bound; it is not assumed empty.
+
+All 42 [length-writer regressions](../../lean-regression/PNPConcreteCookLevinBuilderInitialLengthPayload.lean)
+passed, including canonical numbering, zero-width, order/tag negatives,
+physical source binding, decoder equality, control safety and polynomial
+bounds. All 29 public theorem axiom probes passed: one is axiom-free, two use
+only `propext`, and 26 use only `propext` and `Quot.sound`. None uses
+classical choice or project-specific proof authority.
+
+Verification reused the unchanged source-to-literal, descending-range and
+exactly-one machines and the already verified paired-cell source composition.
+Initial source attempts required explicit arithmetic/state normalization and a
+narrow rewrite to avoid expanding the bound expression. The successful target
+and axiom commands were retained after one regression proof exceeded recursive
+list-reduction depth; rewriting the same list lengths fixed that fixture
+without changing its expected values. The final regression wrapper bound those
+exact unchanged successful commands and reached its own zero exit status.
+Failed overall wrappers are not represented as successful verification.
+
+#### Next dependency: complete initial and accepting families
+
+Continue with source-derived initial state/head requirements, input-only cells
+and accepting constraints. Then complete family dispatch, canonical clause
+emission, recovery and the all-input polynomial reduction. The exact M230
+dependency/root build, full axiom inventory, publication checks and release
+verification remain due when those obligations are integrated.
+
+**M230 is not earned.** Formal artefact coverage remains **205/207**.
+The risk-weighted proof completion estimate remains **35%**, with uncertainty
+**20% to 40%**; global gates remain **0/5**. The eligible root theorem is absent
+and the publication gate is false. No fixed checkpoint changed. PNPLabs
+publication remains deferred at its coherent M229 source pin.
