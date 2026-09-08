@@ -5270,3 +5270,126 @@ polynomial reduction. M230 is not earned. This component changes no checkpoint,
 publication row, gate or source pin. Risk-weighted proof completion remains
 35%, uncertainty 20–40%; formal artefact coverage remains 205/207 and global
 gates remain 0/5 closed. PNPLabs publication remains deferred.
+
+### Active source-root clause-coordinate handoff
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+dependency through the actual source-to-occupancy operand handoff. The verified
+source payload retains the original division frame below input-dependent
+arithmetic and payload history. An end-relative copier whose control depends on
+that history length is not a uniform source-derived construction.
+
+Locate the selected register from the stable inner source boundary, using only
+a compile-time root ordinal. Mark its real delimiter, then reuse the existing
+marked-counter consumer and increment primitive to append a copy and restore
+the original value. The number and values of newer registers may vary freely.
+Do not enumerate source values or generate a control table from the input.
+
+The generic exact interface must cover every list of older and newer registers,
+every selected value, arbitrary interior data and arbitrary exterior:
+`workRunExact? (machine beforeCount) (workSteps before value after)
+  (initialConfiguration beforeCount before value after inside outside) =
+  some (finalConfiguration beforeCount before value after inside outside)`,
+with the structural layout equality `before.length = beforeCount`.
+Its final register word is exactly
+`before ++ [value] ++ after ++ [value]`; the exterior is
+`outside.drop (value + 1)`. Restore the selected delimiter and all consumed
+unary cells. Charge root seeking, fixed-ordinal traversal, marking, destination
+allocation, every counter iteration, restoration and composition bridge.
+
+Bind the root ordinal to the actual retained clause-divider coordinate.
+Prove the canonical payload preserves that source prefix, then copy the actual
+local clause coordinate through its variable-length history. In an exactly-one
+branch, copy the count from the physically written payload header with the
+existing constant-offset copier, producing the verified occupancy program's
+two operand registers. Route the other payload tags without supplying an
+occupancy verdict, source coordinate, count or correctness certificate.
+
+Prepare the exact tape, restored-value, source-layout, work/raw, safety and
+polynomial regression expectations with the source, before compilation. Reuse
+unchanged counter, increment, constant, payload and occupancy evidence; validate
+only the new dependency chain and its affected contracts during development.
+Full root, inventory and publication integration remains due for complete M230.
+
+Canonical token emission, recovery and successor, Finish and the complete
+polynomial loop/reduction remain downstream. These are internal general
+dependencies, not additional publication rows or fixed checkpoint credit.
+M230 remains unearned, and PNPLabs publication stays deferred with its coherent
+M229 source pin and progress values unchanged.
+
+### Verified source-root clause-coordinate handoff
+
+The fixed-ordinal [register copier](../../lean/PNP/Concrete/CookLevinBuilderRegisterRootCopy.lean)
+locates the actual register from the stable inner source boundary, marks its
+delimiter, copies it with the existing marked-counter/increment loop, and restores
+the original value and delimiter. Arbitrarily many newer registers, arbitrary
+values, interior data and pre-existing exterior cells are covered. Its control
+depends on the root ordinal only, never on input-dependent history length.
+
+The exact final word is `before ++ [value] ++ after ++ [value]`; the exterior is
+`outside.drop (value + 1)`. The proved work bound for original register span at
+most `S` is `S * (6 * S + 9) + 13 * S + 18`; compilation costs exactly six raw
+steps per work step. Its register-plus-exterior bound explicitly includes every
+allocated cell rather than assuming an empty exterior.
+All 30 prepared copier regressions passed in the
+[focused regression](../../lean-regression/PNPConcreteCookLevinBuilderRegisterRootCopy.lean).
+All 11 public copier axiom probes passed: one is axiom-free and ten use only
+`propext` and `Quot.sound`.
+
+The [source-coordinate program](../../lean/PNP/Concrete/CookLevinBuilderSourceClauseCoordinate.lean)
+proves that every canonical payload family preserves the actual clause-divider
+frame. This includes the paired initial-input route's computed nine-field and
+ten-field packet cuts: both cuts preserve the source prefix. The locator ordinal
+is derived from the fixed verifier's two polynomial register layouts plus eleven
+fields, with an exact proof of the preceding-register count.
+
+The source program starts at the real cursor, computes the complete canonical
+payload, then retrieves and appends the actual local clause coordinate through
+the resulting variable-length history. Its execution theorem supplies no chosen
+family, clause coordinate, payload, root ordinal, list count or correctness
+certificate. The main source contract retains only the existing valid-body guard.
+The final tape keeps the canonical payload unchanged and appends the actual
+`clauseIndex`; source-span and raw-time polynomials account for the complete
+payload construction, copy, exterior allocation and composition bridge.
+All 32 prepared source-handoff regressions passed in the
+[focused regression](../../lean-regression/PNPConcreteCookLevinBuilderSourceClauseCoordinate.lean).
+All 16 public source-handoff axiom probes passed: one uses only `propext` and
+fifteen use only `propext` and `Quot.sound`.
+
+The targeted wrappers reached their own terminal zero status after source,
+axiom and regression phases. Initial attempts diagnosed record-layout syntax,
+private proof normalization and a request-packet alias; the final checks retain
+the originally prepared theorem statements and regression expectations. No
+`Classical.choice`, project-specific axiom, admitted theorem or new correctness
+premise was introduced. Previously verified source-payload, register and
+occupancy checks were reused unchanged; no complete Lean build or website audit
+was repeated for these internal components.
+
+**M230 is not earned.** These results close the physical source-coordinate
+handoff, not the entire occupancy dispatcher or complete formula builder.
+No fixed checkpoint, publication row, global gate, root theorem, axiom status,
+publication gate or published source pin changed. Formal artefact coverage remains
+**205 of 207 current scoped rows earned**; the risk-weighted proof estimate is
+**35%**, uncertainty **20% to 40%**, with **0 of 5 global gates closed**.
+PNPLabs publication remains deferred on its coherent M229 snapshot.
+
+### Next dependency: complete payload-driven clause occupancy
+
+Use the physically written payload tag to dispatch absent/padding,
+requirement/implication and exactly-one cases. The general exactly-one program
+must receive the copied source clause coordinate and the actual canonical
+payload count, not caller-supplied operands. Reuse the fixed-offset register
+copier and existing literal single-register eraser to inspect a copied tag and
+restore the frame; account for the resulting cleared exterior cells.
+
+Compose that dispatcher with the verified source-coordinate program and prove
+that its endpoint equals the canonical formula-clause schedule's occupancy
+projection. Preserve the distinction between an absent coordinate and an
+in-range padded opportunity at the semantic interface. Do not claim occupancy
+for a tag test alone. Prepare tag, boundary, empty-list, source-handoff, endpoint,
+axiom and polynomial expectations before compilation.
+
+Canonical token emission, exact recovery/successor, Finish and the complete
+all-input polynomial builder/reduction remain downstream. Full root, inventory,
+publication, workflow and exact release verification remain due at complete M230
+integration; these internal components do not replace those release gates.
