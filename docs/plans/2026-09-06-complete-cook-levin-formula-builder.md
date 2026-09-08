@@ -3430,3 +3430,118 @@ reduction remain open. M230 is not earned. Formal artefact coverage
 remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
 20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
 PNPLabs publication remains deferred at the coherent M229 source pin.
+
+### Physical halving reuse contract for the within-row decoder
+
+Continue the same pinned **Final SAT decision / Accepted package implies
+P=NP** transport. The paired-cell decoder's middle interval requires a
+physical quotient and remainder modulo two. Reuse the existing fixed
+`BuilderClauseDividerExecution.divisionMachine` and
+`BuilderDividerCoordinateRegisters.machine`; do not reimplement their
+already verified division and restoration traces.
+
+The reuse boundary is the builder's fresh outer frontier. The existing
+divider theorem takes an empty outer tail, while preserving arbitrary
+older registers and inside/source/output data. Prove
+`BuilderInitialRowLoop.finishOutside remaining length width coordinate [] = []`
+and the corresponding final-tape projection in the new adapter. This
+derives the row-loop handoff instead of silently treating arbitrary
+nonempty exterior data as blank. Do not claim a general nonempty-tail
+divider transport that has not been proved.
+
+Implement `CookLevinBuilderRegisterHalve` as one fixed composition:
+pack `[0, 0, value, 2]` from the actual newest value, divide, restore the
+six ordinary result registers, then append their quotient and remainder.
+The program must not depend on the value, quotient, remainder or branch
+answer. For every natural value, arbitrary older registers and arbitrary
+inside data, prove exact execution from
+`endTape (older ++ [value]) inside []`, the exact retained output word,
+a fresh final frontier, raw refinement and encoded-register-span
+polynomial runtime/output bounds. Both division operands are physically
+constructed; positivity is the literal divisor two, not a supplied premise.
+
+Prepare the generic execution, canonical quotient/remainder, retained
+scratch, zero/even/odd, source-frontier handoff, control and polynomial
+regressions with the source. Audit every public theorem after the
+permanent target build. Keep the row-loop source and its successful
+verification unchanged. The complete three-branch cell decoder,
+source-metadata/history recovery, initial and accepting payloads, full
+formula loop and packaged reduction remain open. This internal component
+does not earn M230, a weighted checkpoint or a PNPLabs publication.
+
+### Verified fixed halving adapter at the builder frontier
+
+The permanent target
+[`CookLevinBuilderRegisterHalve`](../../lean/PNP/Concrete/CookLevinBuilderRegisterHalve.lean)
+now composes the existing physical divider and restorer with two fixed
+register packs. For every natural input value, it physically constructs
+`[0, 0, value, 2]`, divides by the literal positive divisor two, restores
+ordinary registers, and appends the computed quotient and remainder.
+The fixed program receives neither value-dependent control nor supplied
+quotient/remainder data.
+
+The exact retained output word is:
+
+```text
+[value, 0, 0, (value / 2) * 2, value % 2, 2, value / 2,
+ value / 2, value % 2]
+```
+
+The last two fields are the quotient and remainder. The output has nine
+registers and exact encoded span `3 * value + 11`; the intermediate
+scratch is represented rather than silently discarded. Arbitrary older
+ordinary registers and arbitrary inside/source/output data are preserved.
+
+The public `row_loop_frontier` and `row_loop_final_frontier` theorems
+derive the empty outer frontier from every execution description of the
+existing initial-row loop, including exhaustion and zero-width cases.
+`division_restore_handoff` proves the exact divider-to-restorer tape
+identity. This makes the fresh-frontier reuse boundary explicit:
+`workRunExact` starts from `endTape (older ++ [value]) inside []` and
+`final_frontier` proves that the resulting outer frontier remains empty.
+No arbitrary nonempty-tail divider transport is claimed.
+
+The adapter's `workRunExact`, `run_compile_exact`, final-tape,
+control-disjointness and terminal-state theorems all build. For an
+incoming encoded register-span bound `B`, `source_polynomial_bounds`
+proves output span at most `3 * B + 8` and a polynomial raw-time bound
+accounting for preparation, division, restoration, result packing and
+all three composition bridges. The bound reuses the existing divider
+execution theorem; no uncounted search or supplied runtime certificate
+is introduced.
+
+All 38 prepared contracts in
+[`PNPConcreteCookLevinBuilderRegisterHalve`](../../lean-regression/PNPConcreteCookLevinBuilderRegisterHalve.lean)
+pass: generic and concrete zero/even/odd execution, retained scratch,
+quotient/remainder reconstruction, negative field expectations,
+source-frontier handoff, arbitrary older/inside preservation, exact
+output span, compiled refinement, polynomial bounds and fixed-control
+contracts. All 22 public-theorem axiom audits pass: seven are axiom-free,
+five use only `propext`, and ten use only `propext` and `Quot.sound`.
+No `Classical.choice` or project-specific assumption enters the closure.
+
+The permanent target, public axiom probe and complete prepared regression
+file passed in one terminal successful targeted run. Reuse that exact
+source/toolchain/boundary evidence while documenting this result; the
+unchanged row loop and underlying division components do not need
+separate duplicate builds.
+
+### Next dependency: complete three-branch cell decoding
+
+Compose the existing comparison/residual adapter, fixed register
+operations and this halving adapter into one physical implementation of
+the canonical before-interval, paired-interval and after-interval cell
+coordinate cases. Prove exact input-derived branch selection,
+position/offset fields, tape preservation and encoded-span polynomial
+bounds. Retain the actual frontier invariant through each handoff.
+
+The decoder must then be connected to the proved terminal row suffix
+and source-derived certificate interval. Source metadata hidden behind
+variable row history still requires actual machine-level recovery;
+do not replace that obligation with a supplied family, branch answer
+or correctness certificate. Initial and accepting payload production,
+the full formula loop and the packaged all-input polynomial reduction
+remain open. M230 is not earned. Formal artefact coverage remains
+205/207; risk-weighted proof estimate remains 35%, with uncertainty
+20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
+PNPLabs publication remains deferred at the coherent M229 source pin.
