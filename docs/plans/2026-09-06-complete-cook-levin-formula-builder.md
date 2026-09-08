@@ -3188,3 +3188,127 @@ of the complete construction. M230 is not earned. Formal artefact coverage
 remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
 20% to 40%; global gates closed remain 0/5. No weighted checkpoint changed.
 PNPLabs publication remains deferred at the coherent M229 pin.
+
+### Physical comparison/residual-return implementation contract
+
+Continue the same M230 all-input initial-row cursor dependency. Implement
+`CookLevinBuilderRegisterCompareResidual` as one fixed eight-node graph:
+reserve, compare, less/non-less recovery, three fixed packing branches and
+the greater-only increment. Its machine must not depend on the coordinate,
+boundary, comparator result or an execution certificate.
+
+For every natural coordinate and boundary, arbitrary older registers and
+arbitrary inside/exterior tape data, prove an exact `workRunExact?` trace
+from `endTape (older ++ [coordinate, boundary]) inside outside`.
+The result must retain the actual three recovered registers and append
+`[boundary, nextCoordinate]`, where `nextCoordinate` is the original
+coordinate for the less branch and `coordinate - boundary` otherwise.
+Accept means strict less; reject is the non-less continuation, not an
+invalid-input claim. Derive both from the actual comparator.
+
+The exact exterior is
+`outside.drop (boundary + nextCoordinate + 3)`: one restoration cell,
+two appended register delimiters, their unary contents and any required
+greater-branch increment. Include each graph transition in the work-step
+count and derive the six-step raw refinement from the exact work trace.
+Prove encoded-source-polynomial final span and runtime from the actual
+input register-span bound. In particular, neither a finite trace nor a
+standalone arithmetic subtraction supplies the physical result.
+
+Prepare tests for zero operands, less/equal/greater, the greater-by-one
+correction, preserved older/source/exterior data, exact graph control,
+the generic execution/refinement types and polynomial-bound contracts.
+Audit all public theorems after the permanent target build. Reuse unchanged
+arithmetic-selector and primitive evidence. No generated status, inventory
+or website values change for this internal dependency; full M230 root and
+release integration remain due. The bounded row loop, physical cell
+decoder, initial payloads and the complete packaged reduction remain open.
+
+### Verified fixed physical comparison and residual return
+
+[`CookLevinBuilderRegisterCompareResidual.lean`](../../lean/PNP/Concrete/CookLevinBuilderRegisterCompareResidual.lean)
+implements the planned single eight-node graph. It reserves the restoration
+cell, runs the actual comparator, recovers the three ordinary registers,
+packs the appropriate fixed references and increments the copied residual
+only on the actual greater branch. The public `workRunExact` theorem
+covers every natural coordinate/boundary and arbitrary older registers,
+inside data and exterior suffix. No verdict or execution certificate is
+supplied. Acceptance is exactly strict less; rejection is the non-less
+continuation.
+
+The final tape retains the three restored registers and appends the
+boundary plus the original coordinate when less, or the exact subtraction
+otherwise. Its exterior is exactly
+`outside.drop (boundary + nextCoordinate + 3)`.
+The source-derived boundary and residual identities, fixed control,
+six-step raw refinement and polynomial final-span/runtime bounds all
+compile. The span bound includes the retained recovery scratch; the
+runtime bound includes packing, the correction and every graph bridge.
+These bounds concern this primitive, not the complete formula builder.
+
+All 39 prepared contracts in
+[`PNPConcreteCookLevinBuilderRegisterCompareResidual.lean`](../../lean-regression/PNPConcreteCookLevinBuilderRegisterCompareResidual.lean)
+pass, including zero operands, all three branches, greater by one, exact
+retained registers, arbitrary inside/exterior data and a concrete exterior
+sentinel. All 19 public-theorem axiom audits pass: four are axiom-free, two
+use only `propext`, and thirteen use only `propext` and `Quot.sound`.
+No project axiom or `Classical.choice` occurs. Record-layout and constant
+proof-normalisation corrections preserved the machine and theorem types.
+The long-exterior regression needed typed intermediate equalities rather
+than deeper definitional reduction; its expected output was unchanged.
+The final regression pass reused the identical successful permanent target
+and axiom transcript. No unchanged selector proof was rerun.
+
+### Next bounded row loop: concrete four-register layout
+
+Use the ordinary newest frame `[length, width, residual, remainingRows]`
+rather than placing the countdown underneath newly generated fields.
+The existing `BuilderUnaryTagMatch.machine 0` tests that newest register
+and preserves the tape; the existing decrement handles its positive case.
+This avoids a new marked-counter representation or a scan across a
+non-register marker when copying source fields.
+
+At the loop head, maintain the remaining-row/length, width and original
+coordinate/prefix-span invariants already specified above. For one attempt:
+
+1. Test the newest remaining count. Zero means canonical row exhaustion.
+   Otherwise decrement it physically before preparing the comparison.
+2. From `[L, W, j, R - 1]`, append copies `[j, W]` using fixed
+   arity-four references. Feed those two copies to the verified residual
+   adapter. The result is nine retained registers: the original four,
+   the adapter's three recovered registers, then `[W, nextCoordinate]`.
+3. On strict less, return the found row. Its length and within-row offset
+   remain at fixed addresses in that nine-register suffix. The already
+   decremented count belongs to the attempt phase, not the loop-head
+   invariant.
+4. On non-less, append the next newest frame
+   `[L + 1, W + 1, j - W, R - 1]` and loop. Starting from the nine
+   registers above, the four physical copy offsets are 8, 2, 2 and 8,
+   with a physical increment immediately after the first two copies.
+   These offsets count newer registers at the moment of each copy.
+
+Thus a continuing iteration retains nine history registers and installs
+one new four-register frame. Do not call a packer an eraser. Define that
+history and the exterior transformation recursively, prove exact
+execution by induction on the physically decreasing remaining count, and
+derive polynomial bounds for the whole history and loop before accepting
+the selector. Explicitly charge the zero test, decrement, comparison
+preparation, residual adapter, four copies, two increments and all bridges.
+A zero-width row still consumes one remaining count.
+
+The source-facing initial case is `length = 0`,
+`width = tapeWidth`, `remainingRows = certificateLimit + 1`.
+Bind the loop result to `BuilderInitialLengthSelection.locate` and
+`selectedLength`, using the actual source-derived registers. Derive
+exhaustion and successful selection rather than supplying either one.
+The fixed graph must be independent of the number of rows, and its
+retained history must subsequently be recovered in the initial-payload
+integration.
+
+The complete row loop, physical within-row decoder, initial and accepting
+payloads, whole-region wiring, emission/recovery/successor loop and
+packaged reduction remain open. M230 is not earned. Formal artefact
+coverage remains 205/207; the risk-weighted proof estimate remains 35%,
+with uncertainty 20% to 40%; global gates closed remain 0/5.
+No fixed checkpoint changed. PNPLabs publication remains deferred at the
+coherent M229 source pin.
