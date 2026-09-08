@@ -3312,3 +3312,121 @@ coverage remains 205/207; the risk-weighted proof estimate remains 35%,
 with uncertainty 20% to 40%; global gates closed remain 0/5.
 No fixed checkpoint changed. PNPLabs publication remains deferred at the
 coherent M229 source pin.
+
+### Bounded physical row-loop implementation contract
+
+Continue the initial-row selection dependency of M230's pinned **Final SAT
+decision / Accepted package implies P=NP** transport, without changing the
+canonical formula or adding a selection premise. Implement
+`CookLevinBuilderInitialRowLoop` as one fixed five-node cyclic graph:
+zero-test, decrement, comparison-operand packing, comparison/residual return,
+and a fixed six-operation continuation. The continuation copies offsets
+8, 2, 2 and 8, incrementing the first two copies; it does not depend on
+the number or values of rows.
+
+For every remaining count, current length, current width and coordinate,
+arbitrary older registers and inside/exterior data, prove exact
+`workRunExact?` execution from the ordinary newest frame
+`[length, width, coordinate, remaining]`. Derive the entire retained history
+and exterior transformation recursively from the actual comparison, and
+derive the six-step raw-machine refinement. Prove that acceptance/exhaustion
+matches `BuilderInitialLengthSelection.locate`, including zero counts,
+zero-width rows and coordinates beyond the whole family. Bind the
+source-facing initial case to the canonical `selectedLength`; successful
+row/offset data must be physically present, not merely named by the semantic
+specification.
+
+Charge every test, decrement, copy, increment, comparison and bridge.
+Derive a polynomial bound for the complete surviving history and the whole
+loop from the encoded input-register span. The row counter decreases
+physically even for a zero-width row. Do not infer polynomial time merely
+from termination or use a supplied bound table or execution certificate.
+
+Prepare the generic theorem/type and exact tape/control regressions with
+the source, including first-row, later-row, exhaustion, zero-width,
+greater-correction and arbitrary exterior preservation cases. Run the
+permanent target before public-theorem axiom extraction and the focused
+regression. Reuse unchanged primitive evidence. Complete M230 root,
+inventory, release and exact-merge checks remain due at integration.
+The physical within-row decoder, initial/accepting payloads, full formula
+loop and packaged reduction remain open. No status, weighted checkpoint or
+PNPLabs publication change is earned by this component alone.
+
+### Verified bounded physical initial-row loop
+
+[`CookLevinBuilderInitialRowLoop.lean`](../../lean/PNP/Concrete/CookLevinBuilderInitialRowLoop.lean)
+now implements the fixed five-node cyclic graph. It tests and physically
+decrements the newest remaining-row register, prepares actual coordinate
+and width copies, runs the verified comparison/residual adapter, then
+either accepts or installs the next four-register frame. Its continuation
+uses exactly the planned copy offsets and two physical increments. Neither
+the number of rows nor a supplied branch result generates the program.
+
+The general `workRunExact` theorem derives the complete trace for every
+count, current length, width and coordinate, arbitrary older registers,
+inside data and exterior suffix. It includes zero-width rows, which still
+consume one remaining count. `run_compile_exact` establishes the literal
+six-step raw refinement. `finishValues` and `finishOutside` account for
+the entire retained comparison history and exact exterior transformation;
+the loop does not pretend that copying erases its inputs.
+
+Acceptance and exhaustion agree with
+`BuilderInitialLengthSelection.locate`, and the source-facing interfaces
+bind those outcomes to `selectedLength` and the canonical paired-family
+width. `found_suffix` proves that the selected length and offset are
+physically present at the first and last positions of the final
+nine-register suffix, with exactly seven intervening registers. They are
+not merely names for an externally supplied semantic answer.
+
+The encoded-register-span bound covers the complete retained history.
+For an incoming span bounded by the polynomial `B`, the final span is at
+most `B + (B + 1) * (9 * B + 13)`. The whole-loop raw runtime is bounded
+by a fixed per-attempt polynomial times `B + 1`. The proof charges every
+test, decrement, operand copy, comparator/restorer step, continuation copy,
+increment and bridge. It uses a physically decreasing counter and
+source-span-derived bounds, not finite termination as a substitute for
+polynomial runtime. These are bounds for this complete row-loop component,
+not for the still-unfinished formula builder or PCCMin construction.
+
+All 42 prepared contracts in
+[`PNPConcreteCookLevinBuilderInitialRowLoop.lean`](../../lean-regression/PNPConcreteCookLevinBuilderInitialRowLoop.lean)
+pass: fixed control/copy addresses, first and later rows, exact threshold
+exhaustion, zero widths, greater-branch correction, retained history,
+exterior sentinels, generic execution/refinement, physical result suffix,
+canonical source binding and polynomial bounds. All 27 public-theorem
+axiom audits pass: four are axiom-free, six use only `propext`, and
+seventeen use only `propext` and `Quot.sound`. No project axiom or
+`Classical.choice` occurs. Tape/list normalization, field-identity and
+arithmetic-rewrite fixes preserved the machine, theorem statements and
+expected outputs. The final regression pass corrected only its namespace
+import and reused the identical successful permanent target and axiom
+transcript.
+
+### Next dependency: physical within-row decoding and history recovery
+
+Implement the already specified general
+`BuilderInitialCellSelection.cellCoordinate` on physically present
+certificate-start, selected-length and within-row-coordinate registers.
+Use a fixed first comparison against the certificate start, then a fixed
+comparison of the residual against twice the selected length. In the
+paired interval, physically derive quotient and remainder modulo two;
+outside it, derive the ordinary cell position and zero offset. Preserve
+the exact canonical ordering and prove the result/encoded-size contracts
+for arbitrary inputs. Do not generate a machine from a selected cell,
+quotient, residual or branch verdict.
+
+Bind the interval start and row-width data to the actual source model.
+Before wiring the decoder into the initial payload, resolve access to
+older source metadata and recovery across the variable retained row
+history. The final suffix has fixed addresses, but the original source
+frame does not acquire a fixed copy offset merely because its contents
+were preserved. Include explicit history handling and its cost; retain
+the complete row-loop evidence instead of recompiling it during unchanged
+downstream checks.
+
+The physical within-row decoder, complete initial and accepting payloads,
+whole-region wiring, emission/recovery/successor loop and packaged
+reduction remain open. M230 is not earned. Formal artefact coverage
+remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
+20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
+PNPLabs publication remains deferred at the coherent M229 source pin.
