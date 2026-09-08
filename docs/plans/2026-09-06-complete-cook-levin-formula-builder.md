@@ -3545,3 +3545,125 @@ remain open. M230 is not earned. Formal artefact coverage remains
 205/207; risk-weighted proof estimate remains 35%, with uncertainty
 20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
 PNPLabs publication remains deferred at the coherent M229 source pin.
+
+### Complete physical cell-decoder contract
+
+Continue the pinned **Final SAT decision / Accepted package implies
+P=NP** dependency by implementing the complete canonical within-row map
+`BuilderInitialCellSelection.cellCoordinate start length coordinate`.
+Use one fixed finite graph, independent of every input and branch answer,
+on the actual newest register frame `[start, length, coordinate]`.
+
+Compare the actual coordinate with the start. The before-interval branch
+must append `[coordinate, 0]`. Otherwise physically construct
+`length + length` and compare the recovered coordinate-minus-start
+with it. The paired branch must use the verified halving adapter and
+physical addition to append
+`[start + (coordinate - start) / 2, (coordinate - start) % 2]`.
+The after-interval branch must reconstruct `coordinate - length`
+by adding start, length and the second comparison residual, then append
+offset zero. Both comparisons and every arithmetic operation belong to
+the executable graph; none receives a supplied branch certificate.
+
+For every natural start, length and coordinate, arbitrary older ordinary
+registers and arbitrary inside/source/output tape data, prove:
+`workRunExact? machine (workSteps start length coordinate)
+  (initialConfiguration start length coordinate older inside) =
+  some (finalConfiguration start length coordinate older inside)`.
+The input has the previously derived fresh outer frontier. Prove exact
+output and retained scratch, a preserved empty frontier, canonical final
+position/offset, compiled raw refinement, fixed-control properties and
+encoded-register-span polynomial bounds for the entire three-branch
+execution, including all graph bridges.
+
+Prepare generic, zero-width, interval-endpoint, odd/even, retained-tape,
+wrong-coordinate rejection and polynomial/control regression contracts
+before the first target check. Audit every public theorem after building
+the permanent target; reuse unchanged divider and row-loop evidence.
+This closes the complete cell-arithmetic machine dependency, not the
+source-metadata/history derivation. Connecting the actual source-derived
+interval and terminal row suffix, initial/accepting payload production,
+full formula emission loop and packaged all-input polynomial reduction
+remain required. M230 and its weighted checkpoint remain open; no
+publication, evidence-row or proof-score credit is awarded here.
+
+### Verified complete three-branch physical cell decoder
+
+The permanent target
+[`CookLevinBuilderInitialCellDecoder`](../../lean/PNP/Concrete/CookLevinBuilderInitialCellDecoder.lean)
+now implements the entire canonical within-row position/offset map as one
+fixed eleven-node graph. It reads the actual newest
+`[start, length, coordinate]` frame and executes both required comparisons;
+no runtime value determines its control graph or supplies a branch verdict.
+
+Before the paired interval, the machine appends `[coordinate, 0]`.
+Inside the interval, it physically constructs `length + length`,
+uses the recovered coordinate-minus-start, invokes the existing halving
+adapter, and physically adds start to the quotient. After the interval,
+it physically adds start, length and the second comparison's residual.
+The resulting last two registers equal
+`BuilderInitialCellSelection.cellCoordinate start length coordinate`
+for every natural start, length and coordinate, including zero-length
+intervals and both endpoints.
+
+The public `workRunExact` theorem proves actual execution of that fixed
+graph. `canonical_output` and `final_tape` identify the exact retained
+prefix followed by canonical position and offset. The three branch
+outputs contain ten, twenty-nine and twenty-three registers respectively;
+comparison recovery, expression postorder fields and divider scratch
+are all retained explicitly. Arbitrary older ordinary registers and
+arbitrary inside/source/output data are preserved. `final_frontier`
+proves the fresh outer frontier remains empty, and
+`run_compile_exact` proves the exact six-step raw refinement.
+
+The whole-decoder `source_polynomial_bounds` theorem composes the
+existing pack, expression, comparison and halving bounds from the
+actual incoming encoded register span. It bounds all retained output
+and every visited operation, with at most eight graph bridges. The
+bound is uniform over all natural register values, not a collection
+of fixed cursor cases. `decoded_bounds` retains the original canonical
+cell bounds and prefix reconstruction under the existing interval
+and in-row hypotheses.
+
+All 47 prepared contracts in
+[`PNPConcreteCookLevinBuilderInitialCellDecoder`](../../lean-regression/PNPConcreteCookLevinBuilderInitialCellDecoder.lean)
+pass. They cover generic execution and raw refinement, all three
+branches, zero-length intervals, start/end equality, odd/even paired
+coordinates, exact retained data, rejected wrong output expectations,
+source-side tape preservation, canonical bounds, polynomial bounds and
+fixed-control properties. All 17 public-theorem axiom audits pass:
+six are axiom-free and eleven use only `propext` and `Quot.sound`.
+No `Classical.choice` or project-specific assumption enters the closure.
+
+The final permanent-target build, all public axiom probes and complete
+prepared regression file reached one terminal successful result.
+Earlier syntax and list/graph/polynomial normalization corrections did
+not change the machine, theorem claims or expected outputs. Reuse the
+exact successful source and regression evidence while documenting this
+result; do not repeat the unchanged underlying component builds.
+
+### Next dependency: source-derived decoder frame and history recovery
+
+Connect this decoder to the actual terminal suffix proved by
+`BuilderInitialRowLoop.found_suffix`. Recover selected certificate
+length and within-row coordinate physically. Derive the interval start
+from the source specialization already used by
+`BuilderInitialCellSelection.selectedCell`:
+
+```text
+certificateStart problem.input.length length.val problem.uniformFuel
+```
+
+The original source input length and uniform fuel must be accessed
+behind the variable retained row history by a proved machine operation,
+or carried forward by an explicitly proved source-preserving handoff.
+Do not treat arithmetic knowledge of those values as physical access,
+and do not replace their derivation with supplied metadata, a family,
+a branch verdict or a correctness certificate.
+
+Initial and accepting payload production, complete formula emission
+and recovery/successor wiring, and the packaged all-input polynomial
+reduction remain open. M230 is not earned. Formal artefact coverage
+remains 205/207; risk-weighted proof estimate remains 35%, with uncertainty
+20% to 40%; global gates closed remain 0/5. No fixed checkpoint changed.
+PNPLabs publication remains deferred at the coherent M229 source pin.
