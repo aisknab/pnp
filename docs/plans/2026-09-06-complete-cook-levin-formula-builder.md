@@ -5757,3 +5757,112 @@ cursor, preserve the selected token/padding result through recovery, and connect
 request dispatch, successor and Finish. Complete the all-input polynomial
 builder/reduction and its remaining root, audit and publication boundaries
 before claiming M230 or the fixed builder checkpoint.
+
+### Next internal component: canonical payload field selection
+
+Legacy anchor remains **Final SAT decision** / **Accepted package implies P=NP**:
+the complete formula builder must physically read each runtime literal and
+ordered-pair variable from the canonical constraint payload. The verified indexer
+alone does not compute the physical field address.
+
+Implement one fixed-schema affine field reader. Its stride, field offset and
+number of newer registers are structural constants; the selected ordinal, list
+length and payload values remain runtime data. Compile the address expression
+from the actual ordinal, including every register the expression itself creates,
+then invoke the existing general runtime indexer. Preserve the original payload,
+ordinal, arbitrary newer values and tape interior. Charge expression evaluation,
+the chain join, selection, copying and exterior allocation.
+
+The intended general execution theorem has only the layout equality and valid
+field-index bound as entry-domain premises; it appends exactly the selected
+payload entry. Specialize it to every valid literal-list index (sign and variable
+fields) and every valid variable-list index, deriving field bounds from the
+canonical encodings. These are physical data-access theorems, not assumptions
+that a selected literal, pair, token or verdict is correct.
+
+Affected producer/consumer matrix: new field-reader definitions and execution,
+control and encoded-size polynomial theorems; a matching focused regression with
+general types, independent offset fixtures, frame/allocation checks and source
+bounds; a complete public theorem axiom-probe list; and this plan. Existing
+indexer, expression compiler and payload encoding stay byte-identical. No
+inventory, status, workflow, publication source or website value changes.
+
+Verify source/expectation name sets and whitespace first, then the new permanent
+Lake target, its public axiom closures and focused regression. Reuse unchanged
+component evidence rather than repeating old suites. Complete M230 integration
+still owes the root, full audits and release boundaries.
+
+Remaining downstream obligations are variable-width literal-token search,
+canonical ordered-pair coordinates, source-bound token position and request
+selection, result-preserving recovery, successor/Finish, and the complete
+all-input polynomial builder and reduction. M230 is not earned and publication
+remains deferred; no row, checkpoint, gate or score is awarded here.
+
+### Verified canonical payload field access
+
+The [field reader](../../lean/PNP/Concrete/CookLevinBuilderPayloadFieldCopy.lean)
+closes the runtime-ordinal-to-physical-field edge required by the pinned
+**Final SAT decision** / **Accepted package implies P=NP** reconstruction.
+One fixed-schema machine evaluates the affine address from the actual ordinal
+register, includes its own five expression registers and every newer register
+in the physical offset, and invokes the existing general runtime indexer.
+
+For every valid field coordinate, `workRunExact` and `run_compile_exact`
+append exactly that entry. The payload, original ordinal, older and newer
+registers, and arbitrary tape interior are preserved. The exact exterior
+allocation includes all five expression registers and the selected value.
+Runtime data does not determine the machine's control table.
+
+`workRun_literal_field` and `run_compile_literal_field` read the sign or
+variable index of every literal in an arbitrary canonical literal list.
+Their field bounds and values follow from the actual canonical encoding.
+`workRun_variable_field` and `run_compile_variable_field` likewise read
+every valid entry in the canonical variable list, providing the data-access
+operation required by ordered-pair selection. These interfaces do not accept
+a supplied selected literal, variable value, token or correctness verdict.
+
+The general, literal-list and variable-list `source_polynomial_bounds`
+interfaces charge expression evaluation, the chain join and indexed copying.
+Their span includes both the surviving register frame and remaining exterior.
+All three bounds are polynomials in an original encoded-span polynomial; the
+five-register calculation is a proved compiler output, not an assumed offset.
+
+All 34 prepared [regressions](../../lean-regression/PNPConcreteCookLevinBuilderPayloadFieldCopy.lean)
+passed. They cover general work/raw execution, arbitrary newer data, zero
+fields, independent address/allocation fixtures, literal polarity and indices,
+variable-list access, deterministic control, terminal separation and source
+polynomial bounds. All 24 public theorem axiom probes passed: seven are
+axiom-free, one uses only `propext`, and 16 use only `propext` and
+`Quot.sound`. No closure uses `Classical.choice` or a project-specific axiom.
+
+The whole targeted wrapper reached its final green marker and terminal zero
+status. The first source attempt exposed three proof-composition mismatches;
+the repair only made the chain handoff and literal lookup instantiations
+explicit. The intended theorem types and all regression expectations stayed
+unchanged. That non-green attempt is not verification evidence.
+
+The expression compiler, runtime indexer, canonical payload encoding and their
+existing regression evidence were unchanged and reused. No complete root
+build, inventory regeneration, historical replay or website proof suite was
+repeated for this internal component.
+
+Formal artefact coverage remains **205 of 207 current scoped rows earned**.
+The risk-weighted proof completion estimate remains **35%**, uncertainty
+**20% to 40%**. Global gates closed remain **0 of 5**, project-specific axioms
+remaining **0**, the eligible root `PNP.Main.p_eq_np` absent and publication
+false. No row, weighted checkpoint or global gate changed. M230 is not earned;
+PNPLabs publication remains deferred on the coherent M229 snapshot.
+
+### Next dependency: general literal-token search and ordered-pair coordinates
+
+Compose the field reader with the verified literal-token selector to search
+the actual variable-width list, and derive the canonical ordered exclusion
+pair coordinates before reading their variables. Account for accumulated
+scratch and preserve canonical clause order and polarity. The entry-domain
+index bound of a field reader is not a supplied global coverage certificate:
+derive it from the actual source-bound branch and list count.
+
+Then bind the original token position, payload and selected result to the source
+cursor, preserve the request through recovery, and close dispatch, successor
+and Finish. The complete all-input polynomial builder/reduction, root and
+publication audits remain required before earning M230 or its fixed checkpoint.
