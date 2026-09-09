@@ -7686,3 +7686,86 @@ polynomial reduction and final core/site verification remain downstream.
 M230 and its fixed checkpoint remain open. Defer PNPLabs publication. Coverage
 remains 205/207; risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
 The seven uneven major work packages remain a planning estimate, not an ETA.
+
+### Read both selected variables through the retained request
+
+The next pinned Cook-Levin exclusion-clause dependency is physical access to both
+selected source variables after the actual count/index lookup. The canonical
+readers assume their payload is adjacent to lookup history; the retained request
+adds its nine gap registers, clause index and token position. Account for that
+single fixed schema length in both runtime-computed addresses. Reuse the
+existing expression, comparison-residual, indexed-copy, pair-selection and
+blank-transport kernels unchanged. This is an all-list source interface, not
+another fixed circuit, schedule slot or roadmap-credit row.
+
+Derive the selected finite indices, terminal row environment and complete
+request-aware history inside the source theorem. Prove both physical reads and
+their combined canonical polynomial bound. Compose them with the actual-request
+pair-index machine in a fixed two-node graph whose invalid branch rejects before
+either reader executes. Transport the canonical reader run to the real
+blank-equivalent intermediate tape; bound the actual finite window with the
+existing real-transition growth theorem, not with an assumed empty exterior.
+
+The source theorem must provide the complete compiled run and both actual
+payload values, retaining the original source/request through the canonical
+frame. Charge every node bridge and reader phase to one original-input
+polynomial. Keep the positive-clause and blank-exterior input invariants
+explicit; the outer dispatcher must derive them. No caller-supplied pair,
+variable values, history, field address or successful execution may replace
+the source derivation.
+
+Prepare public signature regressions, independent address/schema, scratch,
+fail-closed routing and polynomial-composition contracts, and all public axiom
+probes before the targeted build. Reuse unchanged core dependency evidence.
+Only the new request-aware source chain and its new tests need execution now;
+do not run the full root, inventories or website suite for this internal
+integration.
+
+After this closes, finish the original-position binding, negative-clause token
+selection and actual-tag/index dispatch. Recovery, the complete builder loop,
+all-input formula equality, polynomial packaged reduction and final core/site
+verification remain downstream. M230 and its fixed checkpoint stay open.
+Defer PNPLabs publication. Coverage remains 205/207, risk-weighted estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
+
+### Verified complete request-aware pair-value lookup
+
+[`BuilderRequestedPairVariables`](../../lean/PNP/Concrete/CookLevinBuilderRequestedPairVariables.lean)
+now connects actual source/request lookup to both physical exclusion-variable
+reads. The request-aware addresses include the fixed request schema, whose
+length is proved from the original request fields. All variable counts, clause
+indices, selected pair indices, row environments, history and copied variable
+values are derived from the actual source; none is a replacement certificate
+supplied to the complete execution theorem.
+
+The fixed two-node outer graph first performs actual-request pair-index lookup.
+Valid ordinals continue to both source-variable reads. Out-of-range ordinals
+reject immediately without entering either reader. The canonical source-read
+theorem derives both finite indices and exact payload values, while the complete
+work and raw execution theorems transport that read to the real blank-equivalent
+intermediate tape. Original request retention follows through the canonical
+pair-result prefix; finite tape windows are not silently identified with an
+empty exterior.
+
+Both reader bounds and every node bridge are composed into one original-input
+raw-time polynomial. The materialized stored work-tape window is bounded
+separately using the real-transition growth theorem. The expression generator,
+comparison residual, runtime indexer, pair-selection and blank-transport kernels
+remain unchanged.
+
+All 68 regression contracts and 59 public-theorem axiom probes passed in the
+terminal verification run. Fourteen closures are axiom-free, eight use only
+`propext`, and 37 use `propext` and `Quot.sound`; none uses project axioms or
+`Classical.choice`. Independent regressions also pin the source-derived
+request length, both adjusted address formulas, scratch widths, invalid-branch
+routing and polynomial bridge costs. No full root or PNPLabs suite was repeated.
+
+Next physically bind the original token position, compose complete negative-clause
+token selection and finish actual-tag/index dispatch, including derivation of
+the positive-index and blank-exterior input invariants and absent-source
+distinction. Cleanup/root recovery, the full builder loop, all-input canonical
+formula equality, packaged polynomial reduction and final core/site verification
+remain downstream. M230 and its fixed checkpoint remain open. Defer PNPLabs
+publication. Coverage remains 205/207; risk-weighted estimate 35%, uncertainty
+20–40%; global gates 0/5. Seven uneven major work packages remain a planning
+estimate, not a percentage or ETA.
