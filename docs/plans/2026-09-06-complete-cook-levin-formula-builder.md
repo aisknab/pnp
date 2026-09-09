@@ -7162,3 +7162,110 @@ M230 is not earned and publication remains deferred on coherent M229: formal
 artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
 global gates 0/5 closed. Unchanged predecessor evidence was reused; no complete
 core or website rebuild was performed.
+
+### Guarded source-clause search integration plan
+
+Continue the pinned manuscript SAT NP-completeness and Final SAT decision
+dependency through the complete Cook-Levin builder checkpoint. The verified
+source-payload adapter reads every valid literal ordinal, but the enclosing
+machine must still derive that ordinal and its physical context from the actual
+source payload and clause-token request.
+
+Build the source-bound width comparison and guarded cyclic search, retaining the
+original payload and request. Each comparison reads the current actual variable
+index, constructs its index-plus-two literal width and compares the actual
+remaining token position. Its seventeen-register chunk has the same control
+layout as the existing list search, but its address-scratch values depend on one
+of the four fixed payload schemas. Generalize the execution contract of the
+existing fixed advance machine over arbitrary intermediate scratch contents of
+that length; do not replace its control table or assume the old literal-list
+address constants. A miss must physically copy/increment the ordinal,
+copy/decrement the positive remaining count and copy the actual residual.
+
+On a hit, the existing fixed fourteen-register eraser restores the pre-comparison
+loop frame, then the verified payload-literal adapter produces the canonical bit.
+This keeps source reading bound to physical registers and avoids copying a second
+complete canonical clause list. The source and request survive both branches.
+The implication loop counts its conclusion as the last literal: a physical
+remaining-count test selects that header field only at the final iteration,
+while earlier iterations read and negate the actual premises. Empty and exhausted
+loops retain the actual residual for finish versus padding; the clause wrapper
+also handles the leading separator.
+
+The complete source-search theorem must quantify over arbitrary source lists and
+every token position. Its execution proof must derive positive-count/index
+validity and the selected schema from the physical guard; it may not take a
+selected literal, selected ordinal, token, width verdict, branch certificate or
+caller-supplied completeness premise as executable input. The source-level
+dispatcher must ultimately derive its initial count and kind from the actual
+payload and source-bound request, including the separate existing negative-pair
+route for nonzero exactly-one clause indices.
+
+Prove exact work/raw execution, canonical result, deterministic stable outcomes,
+history/frame preservation and whole-search polynomial bounds. Charge the
+retained comparison chunks against one original-input envelope and the bounded
+number of literal visits; do not obtain a false polynomial claim by iterating a
+loose polynomial once per runtime loop iteration.
+
+Prepare the new comparison/advance/search source and its matching universal,
+independent arithmetic, boundary, sign/order and axiom contracts together.
+Verify targeted modules before the complete composed search and preserve
+unchanged predecessor evidence. No complete root, inventory, report or website
+cycle is warranted until the actual full-builder integration boundary is reached.
+Existing public status and immutable historical artifacts are unchanged.
+
+The larger source-to-token work package is still open until physical kind/count
+dispatch, clause search and all source-request bindings compose. Cleanup/root
+recovery, the complete controller loop, exact whole-formula output, total encoded
+polynomial bounds, the packaged reduction and final verification/publication remain
+downstream. M230 remains unearned; the rough seven-work-package estimate is
+unchanged. Publication is deferred on M229: formal artefact coverage 205/207;
+risk-weighted proof estimate 35%, uncertainty 20–40%; global gates 0/5 closed.
+
+### Verified source-bound comparison and hit continuation
+
+The guarded source-search integration now has three verified physical components.
+`BuilderPayloadSearchAdvance` reuses the existing fixed cursor machine over any
+fourteen-register intermediate scratch frame. It preserves the original registers,
+increments the actual ordinal, decrements the positive remaining count and copies
+the actual residual. Its 27 regressions and 17 public-theorem axiom probes passed.
+
+`BuilderPayloadSearchComparison` reads the actual variable index using each fixed
+source-payload layout, computes its index-plus-two width and compares the physical
+residual position. Its seventeen-register result fits the cursor without assuming
+the old canonical-list address constants. The retained chunk is bounded by the old
+chunk plus thirty cells, supporting one original-input envelope for the future
+loop. Its 40 regressions and 26 public-theorem axiom probes passed.
+
+`BuilderPayloadSearchHit` erases exactly the fourteen comparison scratch registers
+and restores the actual source/request/cursor frame before invoking the verified
+literal selector. Erasure conserves physical span: cleared registers become blank
+exterior rather than disappearing from the space accounting. Exact work/raw
+execution, canonical token equality, stable true/false/padding outcomes, retained
+frame preservation and polynomial bounds are verified. The
+`comparison_hit_workRunExact` theorem links the physical accepting comparison
+directly to the hit continuation. Its branch inequality is not an executable
+supplied verdict. All 24 regressions and 18 public-theorem axiom probes passed.
+
+Together these components have 91 passing regressions and 61 axiom probes:
+nine axiom-free, nine using only `propext`, and forty-three using `propext` and
+`Quot.sound`. No project axiom or `Classical.choice` occurs in these closures.
+Unchanged predecessor evidence was reused; no complete root, inventory, report
+or website rebuild was run for this internal integration.
+
+Next derive the loop's positive-count and final-conclusion branches from physical
+count guards, and compose the cyclic search over arbitrary source lists and token
+positions. For implications the remaining count includes the conclusion: one
+selects the conclusion header, and larger counts select negated premises. The
+entry dispatcher must still derive source kind and count from the actual payload.
+No caller-supplied ordinal, hit verdict or completeness certificate may replace
+these guards. Bound all retained iterations against one original-input envelope.
+
+The first larger source-to-token work package remains open. Cleanup/root recovery,
+the full controller loop, exact whole-formula output, total polynomial construction
+and packaged reduction, final core verification, and major publication/deployment
+remain downstream. The rough seven uneven work packages are not a time estimate.
+
+M230 and the complete-builder checkpoint remain unearned. Publication is deferred
+on coherent M229: formal artefact coverage 205/207; risk-weighted proof estimate
+35%, uncertainty 20–40%; global gates 0/5 closed.
