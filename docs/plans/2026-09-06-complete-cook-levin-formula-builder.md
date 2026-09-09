@@ -7544,3 +7544,68 @@ reduction and final core/publication verification remain downstream.
 M230 and the fixed complete-builder checkpoint remain open. Defer PNPLabs
 publication: formal artefact coverage 205/207; risk-weighted proof completion
 35%, uncertainty 20–40%; global gates 0/5. No progress credit or ETA is claimed.
+
+### Compose the physical body-clause route without supplied search data
+
+Join the verified physical input construction to the complete body-clause selector.
+The legacy Cook-Levin formula-emission dependency requires the request position
+and body count to be read or derived by the runtime machine, not supplied as a
+prepared search frame. For every actual source, original request and input span,
+construct one compiled execution selecting exactly the canonical encoded body
+clause token and retaining the original source/request prefix.
+
+Use the existing sequential-machine composition theorem, which permits arbitrary
+second-phase final states. Injective state renaming must preserve true, false,
+separator, finish and padding, including their distinct stable endpoints.
+Prove the complete original-input polynomial bound by adding both verified phase
+costs and the six-raw-step bridge; compose the final-space bounds once.
+
+Prepare exact public theorem contracts plus independent tests for all five
+observations, fixed machine composition and polynomial shape before the targeted
+compile. Audit every new public theorem closure. Reuse the unchanged preparation
+and clause-selector results; do not duplicate their standalone regression suites
+or run the full proof/website suite for this composition.
+
+This closes the physically prepared body route only. The outer program must
+still read the source tag and clause index, integrate negative pairs and retain
+the absent-versus-padding distinction. Cleanup/root recovery, the complete loop,
+exact whole-formula output, the packaged polynomial reduction and final core/site
+publication remain downstream. M230 and its fixed checkpoint remain open.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207; risk-weighted
+proof completion 35%, uncertainty 20–40%; global gates 0/5. The seven uneven major
+work packages remain a planning estimate, not a completion percentage or ETA.
+
+### Verified complete physical body-clause lookup
+
+[`BuilderPayloadBodyTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderPayloadBodyTokenLookup.lean)
+now joins actual-source input construction to complete body-clause selection.
+Its fixed source-family machine reads the original request/payload, derives the
+search frame, and selects the exact canonical token for every body position.
+No prepared count, replacement position, literal, token or execution certificate
+is supplied to its public execution theorem.
+
+Injective state renaming preserves all five stable outcomes: true, false,
+separator, finish and padding. The work and compiled raw execution theorems also
+retain the complete original source/request prefix and carry one original-input
+polynomial time/space bound. The sequential bridge costs exactly six raw steps;
+the two existing component bounds are composed without rebuilding their proofs.
+
+All 20 regression contracts and 12 public-theorem axiom probes passed. Two
+closures are axiom-free, one uses only `propext`, and nine use `propext` and
+`Quot.sound`; none uses project axioms or `Classical.choice`. Independent
+regressions check all five observations, fixed composition and polynomial shape.
+Exact unchanged preparation and clause-selector evidence was reused.
+
+The body branch is now physically complete from the source/request frame.
+Next finish actual-tag and clause-index dispatch, including negative-pair
+integration and the distinct absent-source outcome. The negative-pair integration
+must account for the retained request registers and derive any required fresh
+frontier; it cannot silently replace an existing exterior by an empty list.
+These are still within the open source-to-token package. Cleanup/root recovery,
+the full loop, exact whole-formula output, complete polynomial reduction and
+final core/site publication remain downstream.
+
+M230 and its fixed weighted checkpoint remain open. Defer PNPLabs publication.
+Formal artefact coverage remains 205/207; risk-weighted proof completion 35%,
+uncertainty 20–40%; global gates 0/5. The seven uneven major work packages remain
+a best-guess work breakdown, not an ETA or a percentage of proof completion.
