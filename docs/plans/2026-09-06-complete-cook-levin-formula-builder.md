@@ -8016,3 +8016,77 @@ reduction remain open. This guard is a necessary internal composition component,
 not the completed dispatcher or an earned M230 checkpoint. Defer PNPLabs
 publication. Formal artefact coverage remains 205/207; risk-weighted estimate
 35%, uncertainty 20–40%; global gates 0/5.
+
+### Actual source dispatch graph integration
+
+Instantiate the verified request-register guard at offset 11 for the physical
+source tag and offset 1 for the local clause index. Materialize all five tag
+tests and the three zero-index tests in one fixed graph. Its four token-program
+nodes are the already verified required, implication, positive-body and
+negative-clause machines, not placeholders or supplied runtime handlers.
+
+The exact next theorem starts from every canonical source/request register word
+and derives an execution to the selected real program entry. It must cover
+arbitrary source widths, local constraints, request values and blank exteriors.
+A missing source has a distinct sentinel entry; padding cannot reuse the valid
+false-token endpoint. Only an exactly-one source with a proved positive clause
+index may reach the negative-clause entry. The original request and inside
+tape must remain blank-equivalent throughout the physical guard chain.
+
+Use one unchanged original-register-span bound across all guards. Prove every
+local execution and graph bridge, with at most five tag tests and one index
+test, and bound the actual finite work-tape window separately by transition
+growth. Then use this derived dispatch execution to compose the chosen token
+run and its preserved endpoints. That latter token composition and the actual
+source-cursor adapter are not established merely by reaching a program entry.
+
+Prepare independent regressions for every semantic route, missing versus padded
+and false outcomes, exact original operands and offsets, the actual embedded
+program identities, literal branch edges and the complete polynomial bound.
+Audit all new public theorem closures. Reuse the exact verified register guard
+and token-program dependencies; do not rerun their unchanged verification.
+
+No publication, status or fixed checkpoint changes here. The original complete
+builder and packaged-reduction target remains mandatory. Defer PNPLabs work;
+formal artefact coverage 205/207, proof estimate 35% with 20–40% uncertainty,
+global gates 0/5, and M230 remains open.
+
+### Verified actual request dispatch to the token programs
+
+[`BuilderRequestDispatch`](../../lean/PNP/Concrete/CookLevinBuilderRequestDispatch.lean)
+now materializes one finite graph containing the existing required, implication,
+positive-body and negative-clause token machines. Its physical tests read the
+original source tag at offset 11 and clause index at offset 1. The execution
+theorem covers every canonical source/request frame and derives the selected
+program entry without a caller-supplied family, branch, positive-index premise
+or successful dispatch certificate.
+
+Missing sources reach their own sentinel entry, distinct from padding and the
+valid false-token endpoint. Required and implication sources use their body
+machine only at clause zero; later clauses are padding. Exactly-one sources
+use the positive body at zero and the negative-clause machine at every positive
+index. The exclusion invariant derives both the actual exactly-one family and
+the positive-index fact from the selected route.
+
+Every guard reads, compares and clears its own temporary copy. The full chain
+preserves the original request and inside tape up to blank equivalence. A single
+original-register-span bound covers the entire chain, including every bridge,
+with at most five tag tests and one index test. The actual finite work-tape
+window is bounded separately by proved transition growth; blank equivalence
+alone is not used as a space bound.
+
+All 37 regression contracts and 13 public-theorem axiom audits passed. Two
+closures are axiom-free, three use only `propext`, and eight use `propext` and
+`Quot.sound`; none uses project axioms or `Classical.choice`. Independent
+contracts cover all semantic routes, the real embedded token-program identities,
+physical offsets, literal branch edges, missing/false separation and complete
+cost accounting. The unchanged guard and token-program evidence was reused;
+no whole-root or website suite was rerun for this internal integration.
+
+This proves arrival at the correct real token program, not its complete
+post-dispatch execution. Next compose that selected run and its preserved token
+endpoints, then derive the request and blank-exterior invariants from the actual
+source cursor. Cleanup/root recovery, the full loop, exact all-input formula
+equality and the packaged polynomial reduction remain open. M230 and its fixed
+checkpoint remain open. Defer PNPLabs publication. Formal artefact coverage
+remains 205/207; proof estimate 35%, uncertainty 20–40%; global gates 0/5.
