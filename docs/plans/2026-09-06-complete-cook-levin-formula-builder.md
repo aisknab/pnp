@@ -7269,3 +7269,79 @@ remain downstream. The rough seven uneven work packages are not a time estimate.
 M230 and the complete-builder checkpoint remain unearned. Publication is deferred
 on coherent M229: formal artefact coverage 205/207; risk-weighted proof estimate
 35%, uncertainty 20–40%; global gates 0/5 closed.
+
+### Guarded arbitrary-source loop construction
+
+Continue the pinned manuscript SAT NP-completeness dependency through the actual
+source-to-token entry. The newly checked comparison, cursor and hit continuation
+must now be connected under physical guards over arbitrary source lists.
+
+First implement `BuilderPayloadConclusionGuard`, a fixed restoring count-one
+test. Its exact execution quantifies over every ordinal, remaining count, token
+position, retained register frame and tape exterior. Its accepting-state theorem
+must be equivalent to `count = 1`, and rejection to `count ≠ 1`. Together with
+the existing physical positive-count guard and `ordinal + count = length + 1`,
+this derives the final implication-conclusion ordinal or a valid premise index.
+The count is read, tested and restored; no branch bit is executable input.
+
+Then compose one cyclic search for each fixed source family: a requirement, an
+implication's negated premises followed by its conclusion, and an exactly-one
+positive clause. The loop must quantify over arbitrary source lists and every
+token position, derive its valid ordinal from the guarded count invariant, and
+retain the actual original source and request. For implications, only the physical
+last-count branch may use the conclusion header. All other nonempty iterations
+read the next actual premise and complement its sign. Runtime list lengths,
+variable indices, literal data and verdicts must never select the finite program.
+
+On each miss, append the checked comparison chunk, advance the physical frame,
+and prove the remaining count decreases. On a hit, use the checked restoring
+selection path. Exhaustion must preserve the actual residual for finish versus
+padding. Prove the full loop result equals the corresponding canonical literal
+body token, together with exact work/raw execution and one original-input
+polynomial space/time envelope. Do not iterate a loose polynomial per loop visit.
+
+The clause wrapper and payload/request-bound outer source dispatcher remain part
+of this same open source-to-token package. A count-one guard alone is not an earned
+roadmap milestone or publication trigger. M230 remains open; formal artefact
+coverage is 205/207, risk-weighted proof estimate 35% with uncertainty 20–40%,
+and global gates 0/5 closed. The rough seven uneven major work packages remain.
+
+### Verified complete source-body execution
+
+The arbitrary-source search now composes the physical count guards, actual
+source mapping, fixed seven-node control graph and complete body-loop induction.
+`BuilderPayloadConclusionGuard` passed 24 regressions and 16 axiom probes;
+`BuilderPayloadSearchSource` passed 17 and 10; and
+`BuilderPayloadSourceSearchControl` passed 39 and 29.
+
+`BuilderPayloadSourceSearch.workRun_observes_body` constructs a terminating
+execution from every actual constraint body, request and token position. It
+derives each adapter from the consumed prefix of that body, returns the exact
+canonical token outcome, and retains the original source/request prefix.
+Exhaustion leaves the final ordinal equal to the actual body length, the count
+zero, and the residual equal to the initial position minus the complete body
+width. `run_compile_observes_body` gives the same result in the raw finite
+machine with the exact sixfold simulation factor. Seven regressions and all
+three public-theorem axiom probes passed for this complete-body module.
+
+Together these four components passed 87 regressions and 58 axiom probes:
+24 axiom-free, five using only `propext`, and 29 using `propext` and
+`Quot.sound`. None of these theorem closures uses project axioms or
+`Classical.choice`. Unchanged predecessor checks were reused.
+
+Next prove a single original-input polynomial envelope for the full loop,
+not merely finite termination. Bound actual source indices from the encoded
+payload, retained history once per miss, and every leaf operation against the
+same envelope. Any bounded execution witness must be constructed internally;
+do not select one using a new assumption or a supplied runtime certificate.
+The clause wrapper and actual payload/request dispatcher still belong to this
+same open source-to-token work package. Cleanup/root recovery, full builder
+control, exact whole-formula output, complete polynomial reduction, final core
+verification and major publication/deployment remain downstream.
+
+M230 and the fixed complete-builder checkpoint remain unearned. Defer PNPLabs
+publication: this integration has not yet completed the source-to-token package
+or changed the published bottom line. Formal artefact coverage remains 205/207;
+risk-weighted proof completion remains 35%, uncertainty 20–40%; global gates
+remain 0/5 closed. The estimate is still seven uneven major work packages,
+including publication/deployment, and is not a time estimate.
