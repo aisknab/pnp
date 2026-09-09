@@ -6786,3 +6786,90 @@ due at complete M230 integration.
 M230 is not earned; publication remains deferred on the coherent M229 snapshot.
 Formal artefact coverage remains 205/207; risk-weighted proof estimate remains
 35%, uncertainty 20–40%; global gates remain 0/5 closed.
+
+### Complete exclusion-clause token selection at every physical position
+
+Continue the pinned-report SAT NP-completeness / Final SAT decision dependency
+toward the complete all-input Cook–Levin formula builder. Reuse the verified
+source-value readers, canonical literal-body selector, expression compiler,
+comparison residual and bounded register eraser. The required result is one
+fixed machine whose observed result equals the exact indexed canonical clause,
+including separator, both negative literals, finish and padding, for all source
+values and positions. No branch or token verdict is supplied as runtime advice.
+
+The input frame is the actual first value, eleven retained reader registers,
+second value and an actual clause-position register. Test zero for separator.
+Otherwise derive the finish position as firstValue + secondValue + 5 with a
+fixed expression, copy the physical position and compare these two operands.
+A position beyond that boundary is padding; the actual zero residual identifies
+finish. The remaining positive positions enter the literal body only after
+erasing all nine boundary scratch registers and decrementing the disposable
+position register. Preserve the original source payload and older root frame.
+
+Use a small boundary module for exact preparation/comparison and its source
+bounds, then compose the full token selector. Keep true, false, separator, finish
+and padding in five distinct finite-control outcomes. Separator and finish must
+be stable no-rule endpoints, not caller-selected token tags. Account for exact
+work/raw execution, all graph bridges, scratch erasure, the freed decrement cell,
+and total encoded-size polynomial bounds in one original input envelope.
+
+Prepare the theorem/type and axiom contracts with both modules and regressions.
+Include independent canonical encoding, sign, zero-variable, duplicate-variable,
+first/last body-token, exact finish, first padding and large-position cases, plus
+endpoint distinctness and no-rule checks. The affected consumers are only these
+new interfaces and their regressions; current status, inventory, package scripts
+and PNPLabs remain unchanged. Reuse verified dependency evidence and run only
+the changed chain and focused checks before any complete milestone release gates.
+
+Whole-source position binding, root recovery, output dispatch, cursor advancement,
+Finish and the final canonical formula/reduction theorem remain downstream.
+This selector alone does not earn M230 or the complete-builder checkpoint.
+Publication stays deferred on coherent M229: formal artefact coverage 205/207;
+risk-weighted proof estimate 35%, uncertainty 20–40%; global gates 0/5 closed.
+
+### Verified all-position exclusion-clause token selection
+
+The fixed eight-node clause selector is now kernel checked. It reads the actual
+retained first and second source values and physical clause position, derives
+the exact finish boundary, and returns the canonical token for every position:
+separator, true, false, finish, or padding. Separator and finish occupy distinct
+stable no-rule endpoints; no token or branch verdict is supplied to the program.
+
+The literal-body path erases the nine boundary scratch registers and decrements
+the disposable positive position before invoking the already verified actual-pair
+literal selector. The exact tape-span identity includes the erased cells and
+the freed decrement cell. The complete selector has checked raw execution and
+polynomial runtime/output-span bounds in one original-input envelope, including
+all graph bridges and all positions beyond the clause.
+
+New compiled interfaces:
+
+- `BuilderExclusionClauseBoundary.workRunExact`,
+  `residual_suffix`, and `source_polynomial_bounds`.
+- `BuilderExclusionClauseTokenSelector.workRunExact`,
+  `run_compile_exact`, `canonical_result`, and
+  `workRun_observes_encoding`.
+- `body_input_span`, `source_polynomial_bounds`, and
+  `uniform_polynomial_lookup` for the complete clause selector.
+- Explicit no-rule and distinct-state contracts for all five outcomes.
+
+All 86 regressions and 43 public axiom probes passed across the two new modules.
+Seven probes are axiom-free, four use only `propext`, and thirty-two use only
+`propext` and `Quot.sound`; none use project axioms or classical choice.
+Independent fixtures cover canonical full encoding, zero and duplicate source
+values, both literal boundaries, separator, finish, first padding and an oversized
+position. The generalized contracts cover every valid source value and position.
+
+Verification reused unchanged source-reader and literal-body evidence, then reused
+the checked boundary module while validating the full selector. No duplicate
+complete Lean suite, inventory extraction or publication cycle was run. Normal
+root, axiom/inventory, PR, merge and clean-reproduction gates remain due when the
+complete M230 theorem is ready.
+
+Next physically bind the preserved complete-source token request to this selector,
+then preserve its five outcomes through scratch cleanup and root recovery.
+Dispatch, cursor advancement, Finish, canonical all-input formula output and the
+complete polynomial reduction still remain. M230 is not earned; the complete
+builder checkpoint stays open and publication remains deferred. The coherent
+public baseline remains M229: formal artefact coverage 205/207; risk-weighted
+proof estimate 35%, uncertainty 20–40%; global gates 0/5 closed.
