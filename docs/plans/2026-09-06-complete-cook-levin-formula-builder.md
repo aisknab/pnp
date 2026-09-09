@@ -6709,3 +6709,80 @@ prove the full all-input canonical formula output and packaged polynomial
 reduction. M230 is not earned; publication remains deferred. The coherent M229
 snapshot stays at formal artefact coverage 205/207, risk-weighted proof estimate
 35% with uncertainty 20–40%, and global gates 0/5 closed.
+
+### Exact exclusion literal-body tokens from the retained source values
+
+Continue the same pinned-report SAT NP-completeness / Final SAT decision edge
+toward the complete all-input formula builder. Reuse the complete literal-list
+token locator rather than construct a second variable-width search procedure.
+This substep belongs to exact exclusion-clause emission; it does not close the
+whole token-emission integration step or earn M230.
+
+The physical reader result ends in the first value, eleven second-reader scratch
+registers and the second value. Once the token-position register is physically
+appended, a fixed fourteen-register pack can copy the actual values into the
+canonical two-negative-literal payload, followed by ordinal zero, literal count
+two and the requested body position. Derive this layout from the existing reader
+result; do not insert a position register into the source payload or change the
+already verified runtime reader addresses.
+
+Prove one fixed machine reads every literal-body position, including boundaries,
+zero-valued and duplicate variables, and padding after the body. Its observed
+result must equal the indexed canonical encoded literal list, not merely a
+semantically equivalent clause. Preserve true/false/padding as distinct states
+through composition and prove complete original-frame polynomial runtime and
+encoded-size bounds. The source-layout adapter must derive its scratch width
+from the compiled second reader; no token verdict or selected literal is
+provided to the runtime machine.
+
+Prepare generic theorem/type probes, axiom probes and independent encoding,
+negative-sign, boundary and layout regressions together with the source. Reuse
+unchanged pair readers, register pack and complete literal-list lookup evidence.
+Only the new proof module, its regression and this existing plan change; no
+status, inventory, package-script or website expectation changes are warranted.
+
+Separator and finish selection, physical source-position binding, cleanup/root
+recovery, dispatch, cursor advancement, Finish and the complete polynomial
+reduction remain downstream. Do not call the literal body the complete clause.
+M230 is not earned; publication remains deferred on coherent M229. Formal
+artefact coverage remains 205/207; proof estimate 35%, uncertainty 20–40%;
+global gates remain 0/5 closed.
+
+### Verified canonical exclusion literal-body tokens
+
+The fixed seven-field pack now copies both actual retained source values into
+the canonical two-negative-literal payload and feeds the complete literal-list
+locator. Every body position is covered, including the two negative signs,
+both variable-width unary encodings, zero-valued and duplicate variables, and
+padding beyond the body. True, false and padding remain distinct through the
+sequential machine composition.
+
+`BuilderExclusionPairLiteralTokens.workRun_observes_encoding` proves equality
+with the indexed canonical encoded literal list.
+`uniform_polynomial_lookup` gives the exact compiled run within a single
+original-frame polynomial bound. The accompanying size theorem includes the
+retained source frame, pack output, locator scratch and exterior tape.
+`reader_output_frame` and `reader_body_lookup` connect the existing second
+reader's exact output to this body lookup after a physical position register is
+appended. The eleven-register width is derived from the second reader, and no
+source-reader address or payload layout was changed.
+
+All 49 regressions and 25 public axiom probes passed. Four probes are axiom-free,
+five use only `propext`, and sixteen use `propext` and `Quot.sound`; none uses
+project axioms or classical choice. Source and regression contracts were
+prepared before compilation. The adapter corrections preserved every public
+theorem type and independent expectation. For composition, proving the small
+generic interface under abstract machine parameters avoided expanding the deep
+finite-state encoding; no recursion or resource limit was raised.
+
+Reuse unchanged pair-reader, pack and complete literal-list evidence. This
+result is literal-body lookup, not the complete clause: separator, finish and
+whole-source position binding remain open. Next classify the actual clause
+position against zero and the two-value-derived finish boundary, retain the
+five distinct token outcomes, and connect exact scratch cleanup to the body
+selector. Final root, inventory, clean-reproduction and release checks remain
+due at complete M230 integration.
+
+M230 is not earned; publication remains deferred on the coherent M229 snapshot.
+Formal artefact coverage remains 205/207; risk-weighted proof estimate remains
+35%, uncertainty 20–40%; global gates remain 0/5 closed.
