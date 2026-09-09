@@ -8090,3 +8090,80 @@ source cursor. Cleanup/root recovery, the full loop, exact all-input formula
 equality and the packaged polynomial reduction remain open. M230 and its fixed
 checkpoint remain open. Defer PNPLabs publication. Formal artefact coverage
 remains 205/207; proof estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Complete token execution through the actual request dispatcher
+
+Continue the pinned manuscript's all-input Cook-Levin builder dependency by
+composing the actual tag/index dispatch with the selected token program. The
+unbounded abstraction is every canonical optional source/request frame, over an
+arbitrary source width, local constraint, clause index and token position.
+
+The exact execution contract must derive a run of the unchanged dispatch
+machine to a stable result whose observation is the requested token in
+`constraint.emit` and `encodeClauseTokens` order. Outer absence means a missing
+source; inner absence means padding or an invalid token request. A valid false
+token must remain distinct from both. No supplied family, positive-index
+premise, selected variable pair, execution trace or correctness certificate
+belongs in the all-request theorem.
+
+Lift the already verified body/negative runs into their actual dispatch nodes,
+execute the final accept/reject bridge when required, and prove custom terminal
+states have no outgoing rule. Transport the complete canonical run to the
+actual blank-equivalent dispatch tape. Derive terminal stability from each
+selector's actual endpoint, not from an observation at an intermediate state.
+
+Charge dispatch, selection and the final bridge to one original-frame
+polynomial. Bound actual finite storage separately by transition growth.
+Prepare exact execution/terminal regression interfaces plus independent outcome,
+program identity, bridge and bound contracts before running targeted builds
+and axiom probes. Reuse verified dependencies without a whole-root or site
+verification cycle for this internal integration.
+
+This closes post-dispatch token execution only when those proofs pass. The
+real source-cursor request adapter, outcome-preserving cleanup/root recovery,
+full builder loop, all-input exact formula output and complete packaged
+polynomial reduction remain mandatory downstream obligations. M230 and its
+fixed checkpoint remain open. Defer PNPLabs publication; formal artefact
+coverage remains 205/207, proof estimate 35% with 20–40% uncertainty, gates 0/5.
+
+### Verified complete token execution from the actual request frame
+
+[`BuilderRequestTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderRequestTokenLookup.lean)
+now executes the unchanged actual dispatch graph through its selected body or
+negative-clause token program. The theorem covers every canonical optional
+source/request frame and returns exactly the requested token in the original
+local constraint's emitted-clause order and canonical clause-token encoding.
+
+The source family and positive clause index are derived internally. Valid and
+invalid negative-pair ordinals are both covered, as are every body position,
+separator, finish and out-of-range request. Missing sources remain distinct
+from padded sources and invalid token requests; a valid false token remains
+distinct from all of them. No branch, selected variables, prepared family,
+successful execution or correctness certificate is a caller premise.
+
+A local accept/reject endpoint takes its actual final graph bridge; custom
+separator, finish, padding and invalid-pair endpoints retain their distinct
+node states. The returned configuration has a proved no-outgoing-rule contract,
+not merely a matching observation at an intermediate state. The complete
+canonical run is transported to the actual blank-equivalent dispatcher tape.
+
+The raw-time polynomial charges dispatch, selection and the final bridge.
+The actual finite tape bound follows from the complete run's transition growth,
+not from blank equivalence alone. Both work-machine and compiled raw-machine
+execution contracts are available.
+
+All 33 regression contracts and 15 public-theorem axiom probes passed together.
+Two closures are axiom-free, two use only `propext`, and eleven use `propext`
+and `Quot.sound`; none uses project axioms or `Classical.choice`. A rejected
+earlier run exposed an arithmetic proof of a conjunction that introduced
+classical choice. Introducing each disequality explicitly before arithmetic
+removed that dependency without changing any theorem statement. Only the final
+clean-axiom run is accepted as evidence. Unchanged dispatcher and selector
+verification was reused; no whole-root or website suite was rerun.
+
+Next derive the canonical request and blank-exterior invariants from the actual
+source cursor. Outcome-preserving cleanup/root recovery, the full loop, exact
+all-input formula equality and the complete polynomial packaged reduction
+remain mandatory. M230 and its fixed checkpoint remain open. Defer PNPLabs
+publication. Formal artefact coverage remains 205/207; risk-weighted proof
+estimate 35%, uncertainty 20–40%; global gates 0/5.
