@@ -7942,3 +7942,77 @@ polynomial reduction and final core/site verification remain downstream. M230
 and its fixed checkpoint remain open. Defer PNPLabs publication. Formal artefact
 coverage remains 205/207; risk-weighted estimate 35%, uncertainty 20–40%;
 global gates 0/5.
+
+### Next dependency: actual request-tag and clause-index dispatch
+
+Continue the pinned manuscript's SAT NP-completeness construction and the
+all-input formula-builder target above. Both source-body and negative-clause
+token paths now exist. The remaining dependency is choosing their entry from
+the actual original request registers, without a supplied family or branch
+certificate. A missing source must remain distinct from an in-range padding
+opportunity; a positive clause index may enter pair lookup only for an
+exactly-one source.
+
+First compose physical fixed-offset register copy, unary comparison and
+temporary-register erasure. Prove both equal and unequal outcomes retain the
+entire original request and inside tape, with blank-equivalent scratch recovery
+and a polynomial bound in the original register span. This shared guard must
+work for arbitrary register values, offsets and finite register words; the
+dispatcher will instantiate only its fixed tag and clause-index offsets.
+
+Then materialize one finite dispatch graph whose literal edges choose the
+required, implication, positive-body or negative-pair token path. Its theorem
+must derive the branch and positive-index invariant from every actual canonical
+source/request frame, including missing and padded sources. Expose the exact
+chosen entry and blank-equivalent unchanged request, and account for each
+guard and graph bridge. Compose the already verified token paths using that
+derived execution, not a caller-supplied dispatch certificate. The later source
+adapter must discharge the request and blank-exterior invariants from the
+actual cursor; cleanup/root recovery and the complete builder loop remain open.
+
+Prepare type-signature, distinct-outcome, preservation, missing/padding,
+zero/positive-clause and input-polynomial regressions with these sources.
+Audit all new public theorem closures. Reuse unchanged tag-test, register-copy,
+erasure, graph, source-body and negative-clause evidence. Run only the affected
+dependency chain and focused regressions during this integration; no whole-root
+or website suite is appropriate before the whole builder is assembled.
+
+No current status, publication inventory, generated report, package script or
+workflow value changes at this boundary. M230 and its fixed checkpoint remain
+open. Defer PNPLabs publication. Formal artefact coverage remains 205/207;
+risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Verified preserving request-register tests
+
+[`BuilderRequestRegisterMatch`](../../lean/PNP/Concrete/CookLevinBuilderRequestRegisterMatch.lean)
+now provides a fixed-offset finite machine for the dispatcher's source-tag and
+clause-index tests. It reads the actual register through physical copy,
+compares the copied value and erases that temporary register on both equal and
+unequal outcomes. The program depends only on its fixed offset and comparison
+constant, never on the value read, a chosen branch or an execution certificate.
+
+The general theorem covers arbitrary finite original register words, values,
+offsets and inside/exterior tapes. Every original register and inside cell is
+retained. The exact cleared exterior is recorded rather than silently replaced
+with an empty list. A separate transport theorem applies the same execution to
+a real blank-equivalent workspace and proves the restored request remains
+blank-equivalent to its original canonical frame. It does not assume an empty
+actual exterior. Every copy scan, comparison, erasure and three internal graph
+bridges are included in the original-input polynomial time bound.
+
+All 20 regression contracts and 12 public-theorem axiom audits passed. Two
+closures are axiom-free, two use only `propext`, and eight use `propext` and
+`Quot.sound`; none uses project axioms or `Classical.choice`. Independent
+contracts check both comparison outcomes, exact retained registers and cleared
+scratch, the full step accounting and the polynomial envelopes. The successful
+source build and axiom audit were reused after a regression-only name
+qualification; no unchanged proof build or website suite was repeated.
+
+Next instantiate these tests at the actual source-tag and clause-index offsets
+and materialize their literal branches into the existing body and negative-pair
+machines. The dispatcher itself, its source-cursor adapter, cleanup/root
+recovery, complete loop, exact all-input formula output and packaged polynomial
+reduction remain open. This guard is a necessary internal composition component,
+not the completed dispatcher or an earned M230 checkpoint. Defer PNPLabs
+publication. Formal artefact coverage remains 205/207; risk-weighted estimate
+35%, uncertainty 20–40%; global gates 0/5.
