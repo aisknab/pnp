@@ -6206,3 +6206,134 @@ reduction, and final root/inventory/publication audits remain required.
 Formal artefact coverage remains 205/207; the risk-weighted proof estimate
 remains 35%, uncertainty 20–40%; global gates remain 0/5. No checkpoint or
 publication row is added, and publication remains deferred on coherent M229.
+
+### M230 complete literal-list lookup: restoring guard and fixed loop plan
+
+The legacy anchor remains the complete Cook–Levin formula construction and its
+canonical literal-list encoding. The next dependency is the all-list token
+locator, not another fixed literal index. Its external theorem must observe
+`DirectToken.boundedLiteralListSlot literals position` for every actual canonical
+list and overall token position, including empty lists and exhausted searches.
+
+Factor the search control into a four-node restoring count guard and a fixed
+four-node outer graph: guard, width comparison, hit selection, and advancement.
+The guard copies the actual remaining count, tests zero, and erases only the
+temporary copy on either branch. The outer graph sends zero to padding,
+positive counts to comparison, misses through advancement back to the guard,
+and hits through the actual sign/token selector. This refines the earlier
+six-node sketch without changing its interface or introducing input-dependent
+control. Charge every internal guard step and every outer graph transition.
+
+Prove the execution by induction on the remaining list, preserving the actual
+canonical payload, processed ordinal, remaining length, residual token position,
+and exactly 17 retained scratch registers per processed literal. Derive each
+indexed field-read premise from that invariant. Do not accept a selected literal,
+coverage certificate, or next-state data from a caller. Use one polynomial
+envelope in the original encoded input for the retained history and exterior;
+do not iterate per-step polynomial bounds and thereby grow their degree.
+
+Before compiling, prepare general guard execution, restoration, raw compilation,
+terminal separation and polynomial contracts, with independent zero/positive,
+scratch and boundary regressions and an exhaustive public axiom probe. Then
+prepare the corresponding complete-loop contracts before compiling that source.
+Reuse unchanged verified comparison, advancement and selection evidence.
+Neither the restoring guard nor a proof over supplied loop paths completes M230.
+Ordered-pair routing, source request recovery, dispatch, Finish, the all-input
+builder/reduction, and final root/inventory/publication audits remain downstream.
+Publication remains deferred; no row, checkpoint, score, or gate changes.
+
+### M230 all-list lookup execution contracts prepared
+
+The fixed outer graph now has a single back edge from physical advancement to
+the restoring guard. Its intended general execution proof inducts on the suffix
+of the actual canonical list, derives each field index from the processed prefix,
+and carries the exact retained history, tape exterior and charged work steps.
+The public entry has no caller-supplied ordinal, remaining count, selected literal
+or execution path: it starts at ordinal zero with the actual list length.
+
+Prepared contracts require exact work-machine execution, exact six-step raw
+compilation, canonical direct lookup and agreement with the actual encoded list
+for every overall position. Independent tests cover mixed literal widths, both
+signs, unary terminators, empty input and exhaustion after several misses.
+The complete original-input polynomial envelope is the next obligation after
+this execution layer; termination or finite fixtures alone earn no runtime credit.
+Keep public status unchanged and reuse the verified restoring guard and branches.
+
+### M230 original-input bounds for the complete literal-list lookup
+
+Before cost verification, prepare a single-envelope contract for the actual
+cyclic machine: the guard-entry span after k misses is at most
+B + k * (100B + 100), where B bounds the original encoded entry. The guard adds
+at most count + 1 exterior cells. Each comparison chunk has encoded length at
+most 50B + 60; comparison and advancement never increase the exterior. The new
+ordinal plus remaining count equals the old sum and the residual never grows,
+so the next three-register frame is no larger than the previous frame.
+
+Derive the actual literal-index bound from the canonical payload's encoded
+sum, not from the ambient type width or a caller-supplied per-literal bound.
+Every node input then fits the same quadratic envelope
+Q(B) = B + (B + 1) * (100B + 100). Sum the four already verified component
+raw-time polynomials at Q(B), add 18 for the three outer transitions, and
+multiply once by the at-most B + 1 loop passes. Bound the final span by
+Q(B) plus the hit selector's span polynomial at Q(B).
+
+The complete contract must combine this bound with the actual raw-machine
+execution and canonical token result for all lists and positions. Prepare
+general cost/execution regressions, independent envelope and empty-list cases,
+and all public axiom probes before compilation. No local prefix, finite
+termination theorem or repeated composition of loose span polynomials satisfies
+this contract. This remains one dependency of the open M230 builder milestone.
+
+### Verified complete literal-list lookup with original-input polynomial bounds
+
+The actual fixed cyclic lookup is now kernel checked. Its public
+`BuilderLiteralListSearch.workRunExact` and `run_compile_exact` theorems cover
+every canonical bounded-literal list and every overall token position, not a
+caller-selected literal index. The invariant derives each field-read index from
+the processed prefix, preserves the original payload and retained comparison
+history, and advances the actual ordinal, remaining count and residual position.
+Empty lists and exhausted searches reach the separate padding endpoint; hits
+observe the exact canonical literal token. The public
+`workRun_observes_encoding` theorem identifies the result with the corresponding
+lookup in the actual encoded literal list.
+
+`BuilderLiteralListSearchBounds.uniform_polynomial_lookup` combines the
+actual raw-machine run, the canonical result and one original-input polynomial
+runtime bound. Its companion `source_polynomial_bounds` also bounds the final
+encoded span. Every node input uses the same quadratic envelope
+Q(B) = B + (B + 1) * (100B + 100); the complete loop has at most B + 1 passes.
+The literal-value bound comes from the actual canonical payload's encoded sum.
+The proof charges each retained comparison chunk once, proves that the next
+counter frame does not grow, and includes every internal and outer transition.
+It does not iterate per-pass span polynomials, enumerate subsets, or accept a
+supplied route/selection certificate.
+
+The restoring guard passed all 28 regressions and all 16 public axiom probes.
+The complete lookup passed all 31 regressions and all 15 public axiom probes.
+The uniform-bound layer passed all 12 regressions and all 6 public axiom probes.
+All 71 regressions and 37 public axiom probes passed in terminal successful
+wrappers. The audited closures use only the allowed logical foundations:
+no project-specific axiom, `Classical.choice`, `sorry`, or `admit` was added.
+The complete execution and cost contracts were prepared before their builds,
+including independent mixed-width, sign, terminator, empty-list and exhaustion
+fixtures.
+
+Diagnostics were resolved at their actual boundary: the launch manifest needed
+the complete reviewed file set; the loop needed its explicit comparison import;
+a private node-program equality avoids expanding the composed advancement machine;
+the regression needs an explicit empty-list type and endpoint-configuration import;
+and arithmetic needs the processed ordinal normalized before treating function
+applications as atoms. The bound, theorem statements and premise boundary were
+not weakened. Unchanged guard, comparison, advancement, selection and complete
+execution evidence were reused for the later layers. No duplicate complete root
+build, inventory generation or PNPLabs Lean suite was run for these internal
+components; the final M230 integration audits remain mandatory.
+
+Next: reconcile the remaining ordered-pair coordinates, source-derived request
+routing and recovery, then compose dispatch, successor and Finish into the
+complete all-input formula builder and packaged reduction. The final root,
+inventory, source-bound status and publication audits remain required.
+M230 is not earned by this lookup dependency alone. Formal artefact coverage
+remains 205/207; the risk-weighted proof estimate remains 35%, uncertainty
+20–40%; global gates remain 0/5. No checkpoint or publication row is added,
+and publication remains deferred on coherent M229.
