@@ -6337,3 +6337,98 @@ M230 is not earned by this lookup dependency alone. Formal artefact coverage
 remains 205/207; the risk-weighted proof estimate remains 35%, uncertainty
 20–40%; global gates remain 0/5. No checkpoint or publication row is added,
 and publication remains deferred on coherent M229.
+
+### Ordered exclusion-pair selection: canonical order before physical binding
+
+Continue M230 at the exclusion clauses of each exactly-one constraint. The
+legacy anchor remains the pinned report's SAT NP-completeness dependency and
+its Final SAT decision / Accepted package implies P=NP boundary. This closes
+the coordinate-to-canonical-pair edge needed by the complete all-input
+Cook–Levin formula builder, not a new independent roadmap milestone.
+
+Use the existing increasing-width row selector through the reverse ordinal
+T(n) - 1 - q for valid exclusion slots, where T(n) is the canonical pair count.
+Invalid slots must map to its exhausted boundary T(n); truncated subtraction
+alone would incorrectly turn an invalid request into a hit. Decode a selected
+row k and offset t as the ordered pair (n - 2 - k, n - 1 - t). Prove the exact
+canonical descending-row clause order for every variable list, including empty
+and singleton lists, duplicate variables, all valid slots and every invalid
+ordinal. Do not replace clause equality by a permutation or satisfiability
+equivalence.
+
+The required source-level contract is
+`selectedPair_observes_canonical variables coordinate`: observing the derived
+indices in the actual variable list equals its canonical pair-exclusion clause
+lookup. Its exactly-one corollary uses the successor clause slot, preserving
+the preceding at-least-one clause. Reuse the existing fixed physical row loop
+and its complete execution/cost results; expose its actual terminal suffix so
+both pair fields can subsequently be read at fixed offsets. No selected pair,
+rank map, route certificate, pair list or runtime-sized control is supplied.
+
+Prepare the complete public axiom probe set and general/edge regression
+contracts before compilation. Test only the changed coordinate/binding layers;
+reuse unchanged row-loop and literal-list evidence. The physical preparation
+of the reverse ordinal from actual source registers, extraction of the two
+canonical variable fields, source request/recovery and final builder composition
+remain explicit downstream obligations. A prepared-frame execution theorem is
+not an end-to-end source execution or complete-runtime claim.
+
+No score, coverage row or global gate changes here: formal artefact coverage
+205/207; risk-weighted proof estimate 35%, uncertainty 20–40%; global gates
+0/5. Publication stays on coherent M229 until the complete capability is earned.
+
+### Verified canonical exclusion-pair mapping and physical row phase
+
+The general reverse-ordinal construction is now kernel checked for every list
+size and every pair-exclusion clause slot. `BuilderExclusionPairSelection`
+proves equality with the exact canonical ordered clause list, not merely
+permutation or satisfiability equivalence. Empty and singleton variable lists,
+duplicate variables and all out-of-range slots are covered. Invalid slots are
+sent to the exhausted coordinate rather than silently becoming the first hit
+through truncated subtraction. The exactly-one corollary retains the preceding
+at-least-one clause and selects exclusion clauses at successor slots.
+
+`BuilderExclusionPairRow` reuses the unchanged five-node row machine. Its
+`found_attempt` theorem identifies the complete actual terminal nine-register
+suffix after any number of row attempts. Fixed suffix offsets recover the
+physically decremented remaining count, selected width and residual offset;
+`observedPair_eq_selectedPair` proves that the resulting pair is the canonical
+one. The observation is gated by the actual terminal state, so an exhausted
+history is never decoded as a hit. Complete work/raw execution, tape preservation,
+control separation and canonical clause observation are proved.
+
+The `row_polynomial_bounds` and `uniform_polynomial_row_phase` theorems
+charge the complete row search and retained history using a quadratic
+prepared-frame envelope derived from the original count/ordinal frame's encoded
+size. These bounds cover the row phase only. They do not claim executable
+construction of the reverse-coordinate frame, variable-field reads or final
+source-token dispatch. No selected pair, pair list or execution certificate is
+supplied to the fixed row machine.
+
+All 63 regressions and 29 public axiom probes passed in terminal successful
+wrappers: 32/12 for the canonical coordinate layer and 31/17 for the physical
+row layer. Their closures use only the allowed logical foundations; no project
+axiom or classical choice was introduced. The fail-closed axiom probe caught
+an arithmetic tactic introducing classical choice over an equivalence; making
+the two implications explicit eliminated it without changing the statement.
+Other fixes reconciled recursive rewrite targets, existing declaration
+namespaces, regression imports and a let-valued theorem type, and explicit
+machine-state projection equalities. Source and regression contracts were
+kept synchronized. The unchanged successful source build and axiom probes were
+reused when only regression imports/type transcription changed.
+
+Next derive the reverse-coordinate frame physically from the actual registers.
+A concrete reuse path is to evaluate n*(n+1), use the existing fixed halving
+machine at its proved fresh frontier, and compare its quotient against n+q+1.
+A smaller quotient means an invalid pair slot; otherwise the actual residual
+is T(n)-1-q, including zero for the final pair. That valid branch derives n≥2,
+so packing the row frame and decrementing n is safe. This is an implementation
+direction, not a theorem already earned here. Its execution, frontier handoff,
+branch control and polynomial composition still need proof, followed by actual
+variable-field reads, source request/recovery and complete builder composition.
+
+M230 is not earned by this internal dependency. Final root, compiled inventory,
+status, clean reproduction and publication audits remain due at full integration.
+Formal artefact coverage remains 205/207; risk-weighted proof estimate remains
+35%, uncertainty 20–40%; global gates remain 0/5. No checkpoint or publication
+row changed, and publication remains deferred on coherent M229.
