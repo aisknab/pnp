@@ -6625,3 +6625,87 @@ publication audits remain due at full integration. Formal artefact coverage
 remains 205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%;
 global gates remain 0/5. No checkpoint or publication row changed, and
 publication remains deferred on coherent M229.
+
+### Physical second-variable read and complete pair-value lookup
+
+Continue the same M230 canonical formula-builder dependency and pinned-report
+SAT NP-completeness / Final SAT decision linkage. Reuse the verified first
+reader and its source-derived layout, both indices and strict row-offset bound.
+The next complete interface must physically retain both selected source values,
+not substitute a decoded natural-number pair for actual variable-field reads.
+
+After the first read, evaluate 10*selectedWidth + firstIndex + 45 with a fixed
+seven-node expression, retaining its six non-root scratch registers. Copy the
+actual row offset with a fixed argument expression at the resulting offset.
+The comparison's not-less branch is forced by the source-derived row bound;
+use its actual residual as the address passed to the runtime indexer. Account
+for the two source headers, 25 preparation registers, all nine-register row
+attempts, eight first-read registers and ten new registers before the address.
+The second phase appends eleven scratch registers and the actual second value.
+
+Prove exact preparation, second-read and composed pair-read work/raw executions,
+preserved payload/history and fresh-frontier handoffs. Compose their polynomial
+runtime and encoded-size bounds with the already verified count/ordinal lookup.
+The source-bound theorem must derive both field bounds and values from
+`BuilderExclusionPairFirstVariable.source_layout`. Its runtime machine must not
+take a selected index, history-length witness, payload value or correctness
+certificate as an extra input. Keep an explicit invalid-ordinal branch at the
+complete lookup boundary rather than interpreting a dead or exhausted frame as
+a selected pair.
+
+Prepare all public theorem/type and axiom-probe contracts and independent
+boundary regressions with the source. Include first/last pair ordinals, unequal
+variable values, duplicate source values, offset zero and the final offset in
+a row, exact scratch/address accounting and invalid empty/singleton/out-of-range
+requests. The consumers are the new second-reader/pair-value interface and
+later exclusion-token/request composition. No current status, inventory,
+publication-row, package-script or site consumer changes at this internal step.
+Reuse unchanged first-reader, lookup, expression, comparison and indexer evidence.
+
+Exact token emission, source request/recovery and final builder integration
+remain downstream. M230 is not earned. Final root, inventory, status, clean
+reproduction and publication checks remain due at full integration. Publication
+stays deferred on coherent M229: formal artefact coverage 205/207; risk-weighted
+proof estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Verified second-variable reader and complete source-pair value lookup
+
+The second physical reader now derives its address from the retained row
+environment, reads the actual second variable field, and preserves the first
+value and complete source/history frame. The source-derived strict offset bound
+forces the comparison's not-less branch. Its actual residual is
+9*selectedWidth + secondIndex + 45; no pair, value or address is supplied as
+runtime advice. The second phase retains eleven scratch registers and the
+second value, making twenty additional registers for both reads together.
+
+`BuilderExclusionPairSecondVariable.uniform_source_lookup` composes the actual
+count/ordinal lookup and both readers for every valid source ordinal, deriving
+the canonical pair and final values from the exactly-one payload. It includes
+complete original-source polynomial runtime and encoded-size bounds.
+`invalid_source_lookup` and `uniform_invalid_source_lookup` reject every
+out-of-range ordinal, including empty and singleton source lists, before either
+reader runs. The separate two-node lookup graph preserves that rejection at
+the global boundary instead of dropping it inside a valid-only chain.
+
+All 56 regressions and 36 public axiom probes passed on the final targeted run.
+Eight probes are axiom-free, five use only `propext`, and twenty-three use
+`propext` and `Quot.sound`; none uses project axioms or classical choice.
+The tests cover exact generic theorem types, source-derived layouts and values,
+polynomial bounds, both terminal outcomes and independent arithmetic/boundary
+fixtures. Earlier adapter failures were resolved with private configuration
+projection equalities and explicit local aliases; no public theorem statement,
+runtime program or regression expectation was weakened.
+
+The checked source and regression bytes are retained as verification evidence.
+Unchanged first-reader, count/ordinal lookup, expression, comparison and indexer
+checks are reused. Final root, complete inventory, clean-reproduction and release
+checks remain due when the complete M230 builder is ready; this targeted result
+does not replace them.
+
+Next bind exact negative-literal token lookup to the two actual values, preserving
+the requested token position and canonical clause markers. Then connect source
+requests, cleanup/recovery, token dispatch, cursor advancement and Finish, and
+prove the full all-input canonical formula output and packaged polynomial
+reduction. M230 is not earned; publication remains deferred. The coherent M229
+snapshot stays at formal artefact coverage 205/207, risk-weighted proof estimate
+35% with uncertainty 20–40%, and global gates 0/5 closed.
