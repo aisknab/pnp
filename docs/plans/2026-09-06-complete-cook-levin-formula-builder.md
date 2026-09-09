@@ -7413,3 +7413,68 @@ publication until the major capability changes the public bottom line. Formal
 artefact coverage remains 205/207; risk-weighted proof completion remains 35%,
 uncertainty 20–40%; global gates remain 0/5 closed. The working estimate remains
 seven uneven major work packages, including publication/deployment, not an ETA.
+
+### Complete actual-source body-clause lookup
+
+Continue the pinned manuscript SAT NP-completeness construction through the
+complete clause layer, not another fixed token position. Compose the verified
+actual-source body search with the canonical separator, finish and padding
+semantics already established by `BuilderLiteralClauseTokenSelector`.
+
+For every actual local constraint, request and clause-token position, construct
+the six-node source-family wrapper, derive its body execution internally and
+prove that its observed result is exactly
+`(encodeClauseTokens (BoundedClause.emit (BuilderPayloadSearchSource.body constraint)))[position]?`.
+Retain the original source/request prefix. Derive finish versus padding from the
+search's actual exhausted residual; never accept a supplied width verdict, token,
+literal, execution or correctness certificate as a public theorem premise.
+Carry the original encoded-input polynomial bound through the wrapper, charging
+at most 72 additional raw steps and preserving the source-search space bound.
+
+Prepare the graph well-formedness, stable terminal states, canonical observation,
+exact work/raw execution, retained-request and polynomial-bound contracts before
+the targeted build. Include independent empty-body separator/finish/padding
+regressions and fixed polynomial-shape checks. Audit every public theorem closure.
+Reuse unchanged actual-source search and canonical clause semantics; do not run
+the whole proof or website suite for this isolated composition.
+
+This completes only the source-body/first-clause route when verified. The outer
+actual source and clause-index dispatcher must still combine it with absent-source
+branches and the previously verified negative-pair route. Cleanup/root recovery,
+complete formula construction, exact output, the full polynomial reduction and
+final core/publication checks remain downstream. M230 and the fixed complete-builder
+checkpoint remain open; defer PNPLabs publication. Formal artefact coverage remains
+205/207; risk-weighted proof completion remains 35%, uncertainty 20–40%; global
+gates remain 0/5 closed. No milestone or weighted progress credit is claimed here.
+
+### Verified actual-source body-clause wrapper
+
+[`BuilderPayloadClauseTokenSelector`](../../lean/PNP/Concrete/CookLevinBuilderPayloadClauseTokenSelector.lean)
+now wraps the complete actual-source search with the canonical clause boundary
+semantics. Its fixed source-family graph handles separator, true/false literal
+bits, finish and padding. Finish versus padding is derived from the actual
+exhausted residual, including the empty positive-body clause.
+
+`workRun_polynomial_lookup` constructs the complete execution from the actual
+source, request and position. `uniform_polynomial_lookup` gives the compiled
+raw-machine execution, exact canonical encoded clause token, retained original
+source/request prefix, final-space bound and total polynomial runtime together.
+Neither public theorem accepts a supplied execution, literal, width verdict or
+correctness certificate. The wrapper adds at most 72 raw control steps to the
+verified body search and evaluates one source-search space polynomial.
+
+All 20 regression contracts and 15 public-theorem axiom probes passed. Three
+closures are axiom-free, one uses only `propext`, and eleven use `propext`
+and `Quot.sound`; none uses project axioms or `Classical.choice`. The tests
+include empty-body separator/finish/padding and fixed polynomial-shape checks.
+Unchanged search and canonical-clause evidence was reused.
+
+Next close the outer actual-source and clause-index dispatcher, combining this
+body-clause route with absent-source branches and the already verified
+negative-pair route. This is still part of the open source-to-token package.
+The full builder, exact complete formula output, packaged reduction and final
+core/publication verification remain downstream. M230 and its fixed weighted
+checkpoint remain open; defer PNPLabs publication. Formal artefact coverage
+remains 205/207; risk-weighted proof completion remains 35%, uncertainty 20–40%;
+global gates remain 0/5 closed. The seven-major-package estimate is unchanged
+and is not a time estimate.
