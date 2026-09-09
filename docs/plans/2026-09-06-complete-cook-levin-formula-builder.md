@@ -5866,3 +5866,103 @@ Then bind the original token position, payload and selected result to the source
 cursor, preserve the request through recovery, and close dispatch, successor
 and Finish. The complete all-input polynomial builder/reduction, root and
 publication audits remain required before earning M230 or its fixed checkpoint.
+
+### Physical indexed-literal selection within the general list search
+
+The next implementation phase connects the verified field reader to the
+three-outcome literal-token selector. This is the runtime data-access-to-token
+edge of the same pinned **Final SAT decision** / **Accepted package implies
+P=NP** reconstruction, not a replacement for the complete variable-width search.
+
+Use one finite machine with input registers consisting of the actual canonical
+literal-list payload followed by the runtime literal ordinal and token position.
+Read the variable field with one newer register, then the sign field with seven
+newer registers, deriving those offsets from the first stage's six-register
+output. Pack the actual sign, variable index and original position from their
+fixed structural locations. No selected literal, sign, variable or token verdict
+may be passed as a machine parameter or correctness premise.
+
+Prove exact work and compiled runs for every valid literal ordinal and every
+token position, including padding. Preserve all three selected outcomes through
+composition: a padding endpoint must not be treated as a false-bit endpoint.
+Prove the canonical observed literal token, preserved original registers,
+exact exterior effects and complete encoded-source polynomial bounds.
+
+Affected contracts are the new preparation/selection module, its complete public
+axiom list and focused regression, and this plan. Prepare general theorem-type,
+three-outcome, independent layout/allocation and polynomial expectations before
+the targeted build. Reuse unchanged field-reader, packer and selector evidence;
+do not rerun their suites or regenerate publication data.
+
+After this physical per-entry selector, derive the runtime ordinal and residual
+position for the complete variable-width list and the canonical ordered
+exclusion-pair coordinates. Bind these to the source cursor, preserve the request
+through recovery and close the complete loop. The valid ordinal is an entry
+domain, not a supplied global routing certificate. M230 remains unearned,
+publication deferred, and no row, checkpoint, gate or score changes here.
+
+### Verified physical indexed-literal token selection
+
+The [composed selector](../../lean/PNP/Concrete/CookLevinBuilderIndexedLiteralTokenSelector.lean)
+now reads both literal fields and the original token position from its actual
+register input. This advances the pinned **Final SAT decision** / **Accepted
+package implies P=NP** construction from field access to token observation.
+Neither a selected literal nor a sign, variable index or token verdict is
+supplied as proof authority.
+
+The first field read leaves six registers, so the second reads past seven
+newer registers including the preserved token position. A fixed pack copies
+fields 13, 7 and 1 of the resulting 14-register environment into the exact
+sign/value/position interface. These structural counts are proved from the
+actual producer outputs. They do not depend on the runtime list or ordinal.
+
+`prepare_workRunExact`, `workRunExact` and `run_compile_exact` apply to
+every valid ordinal in an arbitrary canonical literal list and every token
+position. The selected state observes precisely
+`DirectToken.literalSlot literals[index.val].emit position`.
+State-renaming injectivity preserves true, false and padding separately.
+The padding endpoint is proved rule-free rather than interpreted as a false bit.
+
+The input list, ordinal, original token position, older registers and arbitrary
+tape interior survive. Exact exterior effects include both field reads, argument
+packing and selector scratch. Preparation and complete-selection polynomial
+contracts charge every component and chain join, including the surviving frame
+and exterior in the encoded-source span bound.
+
+All 32 prepared [regressions](../../lean-regression/PNPConcreteCookLevinBuilderIndexedLiteralTokenSelector.lean)
+passed. They cover general preparation and selection, compiled execution,
+independent scratch/address fixtures, both signs, unary bits, zero-valued
+indices, terminators, padding, frame preservation, all terminal controls and
+complete polynomial bounds. All 20 public theorem axiom probes passed: six are
+axiom-free, two use only `propext`, and 12 use only `propext` and
+`Quot.sound`. There is no project-specific axiom or `Classical.choice`.
+
+The whole targeted wrapper finished with its green marker and terminal zero.
+Source verification required explicit applications of state-renaming injectivity.
+After source and axiom checks passed, the regression needed a complete record
+assertion and a namespace import; no expected result or theorem type was
+weakened. The final run byte-checked and reused that unchanged source/axiom
+evidence, then passed all regressions. Earlier non-green attempts are not
+component evidence. Existing field-reader, packer and selector suites, the full
+root/inventory boundary and website proof tests were not redundantly rerun.
+
+Formal artefact coverage remains **205 of 207 current scoped rows earned**.
+The risk-weighted proof completion estimate remains **35%**, uncertainty
+**20% to 40%**. Global gates closed remain **0 of 5**, project-specific axioms
+remaining **0**, the eligible root `PNP.Main.p_eq_np` absent and publication
+false. No row, checkpoint or gate changed. M230 is not earned and PNPLabs
+publication remains deferred on the coherent M229 snapshot.
+
+### Remaining list and source integration
+
+The new theorem reads an arbitrary indexed literal; it does not yet locate that
+literal from the overall variable-width token coordinate. Complete that runtime
+locator, including the empty/exhausted-list branch and residual token position,
+and derive the canonical ordered exclusion-pair coordinates. The ordinal bound
+must follow from the actual branch and list count, not a supplied coverage
+certificate. Preserve canonical order and polarity.
+
+Then derive source-bound coordinates, preserve the selected request through
+recovery and close dispatch, successor and Finish. Complete the all-input
+polynomial builder and packaged reduction, root/audit integration and release
+boundaries before earning M230 or the fixed complete-builder checkpoint.
