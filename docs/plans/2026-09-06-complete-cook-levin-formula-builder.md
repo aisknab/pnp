@@ -6873,3 +6873,91 @@ complete polynomial reduction still remain. M230 is not earned; the complete
 builder checkpoint stays open and publication remains deferred. The coherent
 public baseline remains M229: formal artefact coverage 205/207; risk-weighted
 proof estimate 35%, uncertainty 20–40%; global gates 0/5 closed.
+
+### Active source-bound token-request contract
+
+Continue the pinned-report SAT NP-completeness / Final SAT decision dependency.
+The complete clause selector is now verified, but its physical position must be
+bound to the original source cursor. Implement one verifier-fixed request machine
+from the real cursor, reusing the complete five-family payload and clause-coordinate
+pipeline. No payload, clause ordinal, token position or branch verdict is supplied.
+
+The preserved coordinate frame contains the original index, token width and first
+division quotient at fixed root ordinals. Copy those actual fields through the
+variable-length payload history. Reuse the quotient: multiply it by the width,
+compare that product with the original index, and prove that the actual comparison
+residual is the original index modulo the token width. Do not rerun the divider or
+erase and reconstruct the canonical payload.
+
+Append the physical request suffix `[clauseIndex, tokenPosition]`, retaining the
+existing payload and explicitly accounting for the fixed intervening scratch.
+The target source theorem starts at `BuilderCursorSource.cursorTape`, preserves
+the source/output interior, and ends with the canonical source payload plus a
+derived request whose position is `index % BuilderDividerOperands.width problem`.
+Only the existing body guard and balanced-cursor invariant may be premises.
+Prove exact work and raw execution, deterministic terminal control, the exact
+retained-frame/scratch layout, and polynomial runtime and full allocated-register
+plus exterior workspace bounds in the encoded original input length for every
+input and all five payload families. The arbitrary already-written output is
+preserved; bounding that accumulated output belongs to the complete builder.
+
+Prepare source/type, axiom-closure and independent arithmetic/layout regressions
+before compilation. The affected consumers are the new request interface and its
+regressions; do not change current status, theorem inventories or public claims
+for an incomplete builder. Reuse unchanged payload, coordinate and selector checks.
+Source-bound token dispatch, outcome-preserving root recovery, successor, Finish,
+canonical whole-formula output and the complete polynomial reduction remain
+downstream. This is part of source-request binding, not a reduction in the rough
+remaining-step count until that integration is complete.
+
+M230 remains unearned and publication is deferred on coherent M229: formal artefact
+coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%; global gates
+0/5 closed. No local component earns a publication row, gate or weighted checkpoint.
+
+### Verified canonical source-token request
+
+Implemented [the source-token request machine](../../lean/PNP/Concrete/CookLevinBuilderSourceTokenRequest.lean)
+and its [independent regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderSourceTokenRequest.lean).
+The verifier-fixed machine starts at the actual source cursor, runs the complete
+five-family payload pipeline, and retains its canonical payload. It reads the
+preserved index, token width and original division quotient using fixed root
+locators. It does not repeat the division or accept supplied request data.
+
+The eight fixed continuation phases copy the width and quotient, multiply them,
+copy the original index, copy the product into the correct operand position,
+compare, copy the actual clause index, and copy the derived token remainder.
+The restored-coordinate comparator keeps the coordinate on its less-than branch;
+it is not an absolute-difference operator. The machine therefore physically
+orders the final comparison as `index` against `width * quotient`. The proved
+division reconstruction puts it on the subtracting branch and makes its actual
+result exactly `index % width`, including the zero-remainder case.
+
+The terminal register frame is the retained source history, the canonical local
+constraint payload, nine explicitly accounted scratch registers, and the physical
+request `[(index / width) % clauseWidth, index % width]`. The original source/output
+interior is preserved. Exact work execution, raw compiled execution, deterministic
+terminal control and source-input polynomial runtime/allocated-workspace bounds
+are kernel checked for every input and all five payload families. These workspace
+bounds cover the complete materialized register word and exterior; they do not
+pretend to bound arbitrary already-written output without the later builder-loop
+invariant.
+
+All 50 regressions and 24 public axiom probes passed in a terminal zero-status
+targeted run. Four public declarations are axiom-free, two use only `propext`,
+and eighteen use `propext` plus `Quot.sound`. No project axiom or
+`Classical.choice` enters these theorem closures. The regression contract covers
+the source cursor, all fixed source fields, request and scratch layout, all eight
+continuation phases, exact execution, original-input polynomial bounds, and the
+comparator's strict/equal/zero arithmetic boundaries. Earlier unsuccessful
+adapter drafts are not verification evidence. Existing selector and payload
+evidence is reused; this is not another full core proof build or website cycle.
+
+Next consume this physically derived request through the token selectors and
+preserve the selected outcome through scratch cleanup and root recovery. The
+controller loop, accumulated-output bound, canonical all-input formula theorem,
+complete polynomial reduction, final release checks and major publication remain.
+The rough seven-work-package estimate is unchanged: this advances the first
+package but does not complete source-to-token binding. M230 is not earned and
+publication remains deferred. The coherent public baseline remains M229: formal
+artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
+global gates 0/5 closed.
