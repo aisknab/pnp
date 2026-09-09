@@ -7769,3 +7769,90 @@ remain downstream. M230 and its fixed checkpoint remain open. Defer PNPLabs
 publication. Coverage remains 205/207; risk-weighted estimate 35%, uncertainty
 20–40%; global gates 0/5. Seven uneven major work packages remain a planning
 estimate, not a percentage or ETA.
+
+### Next dependency: actual exclusion-position binding and selector preparation
+
+Continue the pinned manuscript's SAT NP-completeness construction and M230's
+all-input Cook-Levin formula-builder obligation. The next dependency edge is
+from the actual exactly-one source request to the complete negative-clause
+selector input. The selected pair values are already physically read; recover
+the original token position from the retained request and pack the two actual
+values and that actual position into the existing selector's fixed input frame.
+
+This is uniform over all variable lists, valid pair ordinals, token positions,
+retained source context and finite blank exteriors. The runtime address is
+derived from the complete source-derived row geometry, not supplied by a caller.
+The fixed register schema is an interface, not a new finite-instance milestone.
+Retain an explicit original-request prefix witness for downstream recovery.
+
+The complete execution theorem must start at the original source/request,
+derive both variable indices and values, recover the original position, and
+produce the selector frame in one fixed machine. It must preserve immediate
+rejection for invalid pair ordinals, transport canonical execution to the
+actual blank-equivalent tape, bound the canonical register word separately from
+the real finite work-tape window, and charge every bridge and preparation phase
+to one original-input polynomial. No supplied position, selected pair, source
+value, history, field address or successful execution may stand in for source
+derivation. Positive-clause and blank-exterior invariants remain explicit and
+must later be derived by the outer dispatcher.
+
+Expose the canonical span and invalid work-run evidence already established by
+the pair-value reader while preserving its existing public signatures. Add the
+new source module and exact signature regressions together. Independent tests
+pin the runtime address, fixed field schema, invalid-branch routing, retained
+context and each polynomial composition. Audit every public declaration in both
+changed modules. Build the new dependency chain before running the imported
+regressions and axiom probes; reuse unchanged dependency evidence. These internal
+modules do not change root claims, publication/inventory name sets, package
+scripts, workflows or current status values. No whole-root or website rerun is
+needed for this internal integration.
+
+Complete negative-clause token selection and actual-tag/index dispatch remain
+next, followed by cleanup/root recovery, the complete builder loop, all-input
+formula equality, polynomial packaged reduction and final core/site verification.
+M230 and its fixed checkpoint remain open. Defer PNPLabs publication until the
+major capability is earned. Formal artefact coverage remains 205/207;
+risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Verified actual exclusion-selector input preparation
+
+[`BuilderRequestedExclusionInput`](../../lean/PNP/Concrete/CookLevinBuilderRequestedExclusionInput.lean)
+now starts with the original exactly-one source/request and physically derives
+the complete negative-clause selector frame: both selected source-variable
+values and the original token position. The position reader computes its address
+from the complete source-derived row geometry and copies that field from the
+retained original request. A fixed register pack places those actual fields in
+the existing selector schema; the selector's eleven context registers are
+structural retained context, not an externally supplied correctness witness.
+
+The complete work and compiled raw execution theorems derive the pair indices,
+both values and the position from the original source. They explicitly retain
+the original request as a prefix of the new context. Invalid pair ordinals reject
+before entering position reading or packing. Canonical register-word size and
+the actual finite stored work-tape window are bounded separately, and every
+reader/packing phase and graph bridge is charged to one original-input
+polynomial. Blank-tail transport does not assume the real exterior is empty.
+
+[`BuilderRequestedPairVariables`](../../lean/PNP/Concrete/CookLevinBuilderRequestedPairVariables.lean)
+now exposes its already-proved canonical output-span bound and invalid work-run
+evidence for this composition. Its existing public signatures are preserved.
+The expression, indexing, register-packing, selector and blank-transport kernels
+are unchanged.
+
+All 121 regression contracts passed: 70 for the extended pair-value interface
+and 51 for exclusion input preparation. All 97 public-theorem axiom probes
+passed: 20 closures are axiom-free, 15 use only `propext`, and 62 use `propext`
+and `Quot.sound`. None uses project axioms or `Classical.choice`. The terminal
+successful wrapper combined the exact unchanged source build and axiom evidence
+with the final regression run after a test-only namespace repair. No duplicate
+Lean build, whole-root verification or website suite was performed for that
+repair. Independent contracts pin the address, packing schema, fail-closed
+routing and polynomial bridge costs.
+
+Next compose complete negative-clause token selection with this source-derived
+input, then finish actual-tag/index dispatch and derive its positive-index,
+blank-exterior and absent-source invariants. Cleanup/root recovery, the complete
+builder loop, all-input canonical formula equality, the packaged polynomial
+reduction and final core/site verification remain downstream. M230 and its fixed
+checkpoint remain open. Defer PNPLabs publication. Formal artefact coverage is
+205/207; risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.

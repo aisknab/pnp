@@ -384,6 +384,47 @@ example {width : Nat} (variables : List (Fin width)) (request : Request)
       BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input := by
   exact PNP.Concrete.CookLevin.BuilderRequestedPairVariables.uniform_invalid_source_lookup variables request older inside outside bound input hPositive hBlank hInvalid hSpan
 
+
+example {width : Nat} (variables : List (Fin width)) (request : Request)
+    (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hPositive : 0 < request.clauseIndex) (hBlank : BuilderRequestedPairLookup.BlankExterior outside)
+    (hValid : request.clauseIndex - 1 < LocalConstraint.pairCount variables.length)
+    (hSpan : (registerWord (BuilderRequestedPairLookup.initialValues variables request older)).length + outside.length ≤ bound.eval input) :
+    ∃ (first second : Fin variables.length) (firstWritten secondWritten : List Nat) (steps : Nat) (final : WorkConfiguration),
+      selectedPair variables.length (request.clauseIndex - 1) = some (first.val, second.val) ∧
+      firstWritten.length = 7 ∧ secondWritten.length = 11 ∧
+      workRunExact? machine steps
+        (workStartConfiguration machine (endTape (BuilderRequestedPairLookup.initialValues variables request older) inside outside)) = some final ∧
+      WorkConfiguration.BlankEquivalent final {
+        state := machine.acceptState
+        tape := endTape (lookupValues variables request older ++ firstWritten ++ [variables[first.val].val] ++
+          secondWritten ++ [variables[second.val].val]) inside []
+      } ∧
+      (registerWord (lookupValues variables request older ++ firstWritten ++ [variables[first.val].val] ++
+        secondWritten ++ [variables[second.val].val])).length ≤
+          (Second.pairSpanPolynomial (canonicalSpanPolynomial bound)).eval input ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input ∧
+      6 * steps ≤ (rawTimePolynomial bound).eval input := by
+  exact workRun_source_lookup_with_canonical_span variables request older inside outside bound input hPositive hBlank hValid hSpan
+
+example {width : Nat} (variables : List (Fin width)) (request : Request)
+    (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hPositive : 0 < request.clauseIndex) (hBlank : BuilderRequestedPairLookup.BlankExterior outside)
+    (hInvalid : LocalConstraint.pairCount variables.length ≤ request.clauseIndex - 1)
+    (hSpan : (registerWord (BuilderRequestedPairLookup.initialValues variables request older)).length + outside.length ≤ bound.eval input) :
+    ∃ steps final,
+      workRunExact? machine steps
+        (workStartConfiguration machine (endTape (BuilderRequestedPairLookup.initialValues variables request older) inside outside)) =
+        some final ∧
+      WorkConfiguration.BlankEquivalent final {
+        state := machine.rejectState
+        tape := endTape (lookupValues variables request older) inside []
+      } ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input ∧
+      6 * steps ≤ (rawTimePolynomial bound).eval input := by
+  exact workRun_invalid_source_lookup variables request older inside outside bound input hPositive hBlank hInvalid hSpan
+
+
 end PNP.Concrete.CookLevin.BuilderRequestedPairVariables
 
 open PNP PNP.Concrete PNP.Concrete.CookLevin
