@@ -6432,3 +6432,109 @@ status, clean reproduction and publication audits remain due at full integration
 Formal artefact coverage remains 205/207; risk-weighted proof estimate remains
 35%, uncertainty 20–40%; global gates remain 0/5. No checkpoint or publication
 row changed, and publication remains deferred on coherent M229.
+
+### Physical exclusion-pair lookup from written count and clause ordinal
+
+Continue the same M230 canonical formula-builder dependency, anchored in the
+pinned report's SAT NP-completeness linkage and Final SAT decision / Accepted
+package implies P=NP boundary. The next implementation must close reverse-frame
+preparation and the complete count/ordinal-to-pair lookup, not add another
+caller-supplied coordinate contract.
+
+The actual initial registers are [n, q]. Evaluate n*(n+1), physically halve it,
+and compare the written quotient against n+q+1. Prove that the quotient is
+T(n)+n and that the comparison's not-less outcome is equivalent to q<T(n).
+On that branch, the physically written residual equals T(n)-1-q and n≥2 is
+derived. Copy the actual count and residual into [0, 1, residual, n], decrement
+the top count and run the existing fixed row loop. The other comparison branch
+must reject the invalid ordinal, including every zero/singleton case, without
+an unsafe predecessor or a fabricated successful row.
+
+The complete work/raw execution and canonical-observation contract starts from
+`endTape (older ++ [variables.length, coordinate]) inside []` and selects
+exactly `(atMostOneBoundedClauses variables)[coordinate]?`. This is an explicit
+fresh-frontier input contract required by the existing halver; prove each
+intermediate frontier handoff. Do not claim an arbitrary exterior or manufacture
+a freshness premise later. All count, quotient, comparison, residual, row and
+history registers must come from the actual program execution.
+
+Prepare source/type, full public axiom-probe and regression contracts together
+for the arithmetic preparation and complete lookup layers. Include first/last
+valid slots, strict-versus-equal comparison, all invalid ordinals, empty and
+singleton counts, preserved older registers and the final canonical clause
+order. Bound the entire preparation-plus-row runtime and retained encoded size
+by composition of the existing fixed-phase polynomials, charging every bridge.
+Reuse the unchanged row selector, halver and register-expression machinery;
+do not add a generic divider, subtractor or second row-search implementation.
+
+The consumers are the new preparation/lookup regression and axiom contracts and
+the later source-payload/request composition; no current publication inventory,
+status generator, package script or site expectation changes in this internal
+step. Actual source-payload operand extraction, variable-field reads, token
+routing/recovery and final builder composition remain downstream. Complete root,
+inventory, reproduction and publication checks remain due at M230 integration.
+
+Publication stays deferred on coherent M229. Formal artefact coverage remains
+205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%; global
+gates remain 0/5. This internal work does not itself earn a checkpoint or row.
+
+### Verified complete polynomial pair lookup from count and clause ordinal
+
+`BuilderExclusionPairPreparation` now physically computes n*(n+1), halves
+that written result, constructs n+q+1 and compares the actual operands. Its
+kernel-checked quotient identity is T(n)+n. The actual comparator distinguishes
+all valid pair slots from invalid ones, including empty/singleton counts and
+arbitrarily out-of-range ordinals. On the valid branch its actual residual is
+the canonical reverse ordinal, and n≥2 is derived rather than supplied. Every
+fixed arithmetic phase has exact work/raw execution, frontier, control and
+original-encoded-input polynomial bounds.
+
+`BuilderExclusionPairLookup` composes arithmetic preparation, row-frame
+packing and safe decrement, and the existing row selector in one fixed
+three-node graph. Its actual input contains only the written count and clause
+ordinal after the preserved older registers, at the explicit fresh frontier.
+No selected pair, reverse coordinate, successful execution or validity
+certificate is supplied. Invalid requests terminate at the comparison branch;
+valid requests derive the canonical ordered pair from the actual final
+register suffix. `workRun_observes_canonical` proves exact equality with the
+pair selected from the canonical exclusion-clause list, for every variable
+list and clause ordinal.
+
+The precise decrement handoff was checked rather than assumed: decrement
+releases one blank cell outside the register frame. The pack execution contract
+now records that cell explicitly. `positive_row_frontier` proves that the
+first width-one row attempt consumes it, so the original end-to-end fresh
+input/output frontier is preserved without a new premise or cleanup routine.
+The complete endpoint contract rejects every invalid ordinal and does not
+interpret an exhausted history as a hit.
+
+`source_polynomial_bounds` and `uniform_polynomial_lookup` now include
+the full count/ordinal preparation, frame packing/decrement and row search,
+all internal and graph bridges, and retained history. These are fixed-phase
+polynomial compositions in the original encoded count/ordinal frame, not
+iteration of a bound through an unbounded number of phases. The result closes
+the previously explicit reverse-frame-preparation gap for this lookup.
+
+All 83 regressions and 44 public axiom probes passed in terminal successful
+wrappers: 46/24 for arithmetic preparation and 37/20 for the complete lookup.
+The allowed closures contain no project axiom or classical choice. Contracts
+were prepared with the source; the released-blank expectation and its general
+regression were corrected together before the next run. Other adapter fixes
+used the actual namespace, explicit divisor, record layout, named polynomial
+aliases and a typed chain-result handoff. The existing arithmetic, halver and
+row-machine evidence was reused; no duplicate complete root build or website
+proof suite was run.
+
+Next read the two actual variable fields from the materialized source payload.
+Keep that payload and history until token selection is complete. Derive reader
+offsets from the proved 25-register preparation history and nine-register row
+attempts, together with the actual payload schema and any new fixed scratch.
+The current lookup produces pair indices; it is not yet an executable
+variable-value read, literal-token emission, source-request binding or complete
+formula builder. Those steps, recovery and final composition remain open.
+
+M230 is not earned. Final root, inventory, status, clean reproduction and
+publication audits remain due at full integration. Formal artefact coverage
+remains 205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%;
+global gates remain 0/5. No checkpoint or publication row changed, and
+publication remains deferred on coherent M229.
