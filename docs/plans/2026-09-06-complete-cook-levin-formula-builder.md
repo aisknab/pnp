@@ -6961,3 +6961,99 @@ package but does not complete source-to-token binding. M230 is not earned and
 publication remains deferred. The coherent public baseline remains M229: formal
 artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
 global gates 0/5 closed.
+
+### Active complete literal-clause selector and source binding
+
+Continue the pinned-report SAT NP-completeness / Final SAT decision dependency.
+The next missing edge is complete literal-list lookup to complete canonical
+clause lookup for requirement, implication and the positive exactly-one clause.
+The existing complete exclusion-pair selector remains reusable for negative
+exactly-one clauses. The full M230 builder and reduction targets are unchanged.
+
+Implement `BuilderLiteralClauseTokenSelector` for every bounded literal list and
+every physical clause-token position, including empty clauses and positions past
+the end. A fixed wrapper tests the initial separator position, physically
+decrements a positive position, and enters the already verified complete list
+search. When that search exhausts the list, read its actual remaining position:
+zero means the clause's finishing marker, and a positive residual means padding.
+Do not supply or recompute a total body-width verdict to the executable machine.
+
+The target theorem observes exactly
+`(encodeClauseTokens (BoundedClause.emit literals))[position]?` after a proved
+raw execution from the actual encoded-list/count/position frame. Prove five
+distinct stable token outcomes, full work and compiled execution, and polynomial
+runtime plus complete register/exterior workspace bounds in the encoded entry
+span. Preserve the arbitrary source/output interior explicitly. Derive the
+exhausted frame and residual from the existing loop's induction, not from a
+caller-supplied selected literal, final position or completeness certificate.
+
+Prepare exact theorem/type, axiom-closure and independent grammar-boundary
+regressions alongside the implementation. Cover empty clauses, both signs,
+zero-valued variables, every body position, the exact finishing position and
+padding. The new source, its regression file and this plan are the immediate
+consumers. Reuse unchanged literal-list search, source-request and exclusion
+selector evidence; do not regenerate current inventories or public status for
+this unfinished integration.
+
+After the generic clause selector, connect each canonical payload kind and its
+physically derived clause/token request to the appropriate selector. That
+source-level connection, outcome-preserving scratch/root recovery, the full
+controller/loop, accumulated-output bound, exact canonical formula theorem and
+complete polynomial reduction remain required. A standalone clause selector does
+not finish source-to-token binding or reduce the rough seven-work-package count.
+
+M230 remains unearned and publication remains deferred on coherent M229: formal
+artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
+global gates 0/5 closed. No local component earns a weighted checkpoint or row.
+
+### Verified complete arbitrary-list clause selector
+
+Implemented [the complete literal-clause selector](../../lean/PNP/Concrete/CookLevinBuilderLiteralClauseTokenSelector.lean)
+and its [independent regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderLiteralClauseTokenSelector.lean).
+One six-node finite wrapper handles every bounded literal list and every physical
+clause-token position. It reads the initial position for the separator branch,
+physically decrements a positive position, and enters the already verified
+complete literal-list search. The search's actual exhausted suffix contains the
+remaining position after all literal widths have been consumed. A physical zero
+test on that suffix distinguishes the exact finish position from padding.
+
+The machine is not supplied a total clause width, selected literal, branch
+verdict, completion certificate or token. Width-based cases appear only in the
+proof-level specification. Requirements, implications and positive exactly-one
+clauses can use this general interface once their actual source payloads are
+adapted to its physical literal-list entry frame. The existing exclusion-pair
+selector remains available for negative exactly-one clauses.
+
+The wrapper has five pairwise distinct stable control outcomes: true bit, false
+bit, separator, finish and padding. Exposing exhaustion as a continuation changes
+only the search machine's declared endpoint. A generic successful-step transport
+explicitly accounts for the machine's halt check and proves that the relabelled
+endpoints cannot cut off an existing transition because those states have no
+rules. The final true-bit endpoint is likewise shown to be rule-free.
+
+Exact work and compiled raw execution, equality with every token of the unchanged
+canonical clause encoding, and polynomial runtime plus complete register/exterior
+workspace bounds are kernel checked. The decrement transfers one cell from the
+position register to blank exterior space, preserving the total entry span.
+The arbitrary source/output interior is preserved; bounding accumulated formula
+output still belongs to the complete builder-loop invariant.
+
+All 56 regressions and 24 public-theorem axiom probes passed in a terminal
+zero-status targeted run. Three public declarations are axiom-free, three use
+only `propext`, and eighteen use `propext` plus `Quot.sound`. No project axiom
+or `Classical.choice` enters these closures. The regressions cover the universal
+execution and bound contracts, independent literal grammar, both signs,
+zero-valued variables, empty clauses, every body position, exact finish and
+padding. Proof-adapter corrections and an explicit empty-clause type annotation
+did not weaken a theorem or test expectation. Unchanged predecessor evidence
+was reused; no complete core or website rebuild was performed.
+
+Next bind every canonical source payload kind and the already derived physical
+clause/token request to the appropriate complete selector. Outcome-preserving
+scratch cleanup and root recovery, the controller/loop, exact whole-formula output,
+whole-builder polynomial bounds and the packaged reduction remain downstream.
+This completes the generic clause-selector dependency, not the first complete
+source-to-token work package. The rough seven-work-package estimate is unchanged.
+M230 is not earned and publication remains deferred on coherent M229: formal
+artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
+global gates 0/5 closed.
