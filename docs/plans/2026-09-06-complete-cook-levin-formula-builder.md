@@ -7609,3 +7609,80 @@ M230 and its fixed weighted checkpoint remain open. Defer PNPLabs publication.
 Formal artefact coverage remains 205/207; risk-weighted proof completion 35%,
 uncertainty 20–40%; global gates 0/5. The seven uneven major work packages remain
 a best-guess work breakdown, not an ETA or a percentage of proof completion.
+
+### Derive negative-pair lookup inputs from the retained source/request
+
+The next dependency edge is the pinned manuscript's Cook-Levin exclusion-clause
+emission: its pair count and ordinal must come from the actual source, not a
+caller-prepared pair-search frame. For arbitrary exactly-one lists and positive
+clause indices, use one fixed machine to copy the payload count, copy the
+original clause index and decrement it, then enter the complete pair-index
+lookup. Keep the original source/request in the retained register prefix.
+The fixed offsets are layout geometry, not input-dependent control or another
+finite-instance milestone.
+
+Prove a real work and compiled execution for valid and out-of-range pair
+ordinals. Preserve the existing accept/reject semantics. Prior source builders
+can leave materialized blank scratch cells, and decrement itself releases one;
+transport the canonical lookup across blank-equivalent tapes rather than
+discarding that exterior. Separately prove that every actual transition can
+allocate at most one stored work cell, and charge the complete finite window
+and all phase/bridge steps to an original-input polynomial. Blank equivalence
+alone must never be treated as a space bound.
+
+The entry's input contract includes a positive clause index and an all-blank
+exterior. These are tape/branch invariants for the enclosing dispatcher to
+derive, not supplied pair, coverage, rank or execution certificates. Do not claim
+that this component already derives the outer tag/index branch, reads both
+selected variable fields through the retained request, or selects the complete
+negative-clause token. Those integrations remain next within the source-to-token
+package, followed by cleanup/root recovery, the complete loop, exact all-input
+formula output, the packaged reduction and final verification/publication.
+
+Prepare exact public execution and geometry contracts, independent static-layout,
+nonblank-rejection and polynomial-shape regressions, and all public axiom probes
+before compiling. Reuse unchanged pair-index and body-preparation dependencies;
+run only this new dependency chain and its new checks, not another full root or
+website build. M230 and its fixed weighted checkpoint remain open. Defer PNPLabs
+publication; coverage 205/207, risk-weighted estimate 35% with 20–40% uncertainty,
+and global gates 0/5 remain unchanged.
+
+### Verified actual-request pair-index entry and bounded blank transport
+
+[`BuilderRequestedPairLookup`](../../lean/PNP/Concrete/CookLevinBuilderRequestedPairLookup.lean)
+now runs the complete pair-index lookup from the actual exactly-one payload and
+retained request. Its fixed control copies the real variable count and original
+clause index, decrements that positive index, and handles both valid pairs and
+out-of-range ordinals. No replacement count, selected pair or supplied execution
+witness is an input to the compiled execution theorem.
+
+The preparation theorem allows arbitrary exterior cells. The combined lookup
+requires the exterior to represent blanks and transports the existing canonical
+execution to that actual tape; the decremented copy's released cell remains
+explicitly represented. Its final state is exactly characterized as accept or
+reject, and its final tape is blank-equivalent to the canonical pair-result frame
+retaining the original request. This equivalence is not an equality of finite
+tape windows. A follow-on reader must respect it or transport its canonical
+request-aware execution, rather than rewriting the actual exterior to empty.
+
+A separate general execution theorem proves that one real transition allocates
+at most one stored work-tape cell. It bounds the transported finite window
+(excluding the focused head cell) independently of blank equivalence. The
+complete raw-time bound includes both physical copies, decrement, pair lookup
+and sequential bridge, all charged to the original encoded-input span.
+
+All 24 regression contracts and 17 public-theorem axiom probes passed together.
+Two closures are axiom-free, five use only `propext`, and ten use `propext` and
+`Quot.sound`; none uses project axioms or `Classical.choice`. Regressions also
+check fixed copy offsets, original request retention, the released exterior
+blank, rejection of a nonblank exterior invariant and polynomial composition.
+Unchanged component builds were reused; no full root or website suite was run.
+
+Next derive the outer positive-index/blank-exterior invariants, read both selected
+variable fields through the retained request, and complete negative-clause token
+selection and actual-tag dispatch. The source-to-token package remains open;
+cleanup/root recovery, the complete loop, exact all-input formula, packaged
+polynomial reduction and final core/site verification remain downstream.
+M230 and its fixed checkpoint remain open. Defer PNPLabs publication. Coverage
+remains 205/207; risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
+The seven uneven major work packages remain a planning estimate, not an ETA.
