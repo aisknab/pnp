@@ -6082,3 +6082,127 @@ audits remain open. Public status is unchanged: formal artefact coverage
 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%; global gates
 0/5. No publication row or checkpoint changes; publication remains deferred
 on coherent M229.
+
+### Physical advancement for the complete literal-list locator
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+construction's complete all-input builder, using the general comparison just
+verified. This next interface advances the actual runtime search frame:
+`older ++ chunk ordinal (remaining + 1) position value` becomes that same
+retained frame followed by `[ordinal + 1, remaining, residual position value]`.
+The ordinary-register copier, incrementer, decrementer and final residual copy
+form one fixed machine. Only fixed structural offsets determine its control.
+
+Prove exact physical and compiled execution for all older data and all natural
+counter/position values, with the positive count represented by
+`remaining + 1`. The cyclic driver must obtain that positivity from the actual
+count guard, not request it as a correctness certificate. On the comparison's
+miss branch, derive the next position as `position - (value + 2)`.
+
+Charge all three physical copy scans, both arithmetic steps and all four chain
+joins. Prove preservation of older and comparison registers, the next history
+length, terminal/query contracts, exterior effects and source-polynomial time
+and workspace bounds. Derive copy-tail and scalar bounds from the encoded entry
+span; do not assume separately bounded intermediate data. Keep the original
+comparison and history definitions unchanged.
+
+Prepare independent equality/greater-boundary, final-item and exact-register
+fixtures and every general theorem/type and axiom contract in the same patch.
+The affected consumers are the new advancement regression and the later cyclic
+lookup module. Reuse unchanged frame/comparison and earlier component evidence.
+The hit selector, physical exhaustion guard, complete graph execution and global
+original-input bounds remain required before the list lookup is complete.
+
+No publication or scoring change: M230 is not earned, and publication remains
+deferred on coherent M229. The full formula builder, source-bound dispatch,
+canonical ordered-pair coordinates, recovery, successor/Finish and the final
+root/inventory/publication audits remain required.
+
+### Physical hit selection for the complete literal-list locator
+
+After the actual width comparison accepts, read the sign of that same literal
+through the 17-register comparison chunk and accumulated prior history. The
+fixed stride-19 field reader uses an after-count of 16; its six output registers
+extend the chunk to a 23-register environment. Fixed addresses 22, 8 and 2
+then pack sign, variable index and residual position for the existing selector.
+
+The exact interface must work for every actual canonical literal, valid ordinal,
+derived prior history and arbitrary count/position, older registers and tape
+data. Prove physical execution, raw compilation, the canonical token result
+and complete preparation/selection polynomial bounds. In addition, derive from
+`position < value + 2` that the final state is true or false rather than padding.
+The cyclic driver must establish that premise with its comparison; the selector
+must continue representing padding distinctly outside that domain.
+
+Reconcile the complete 23-field environment from its producers before testing.
+Prepare sign, equality-boundary, zero-variable, padding and actual-run contracts
+with the source, together with every public theorem's axiom probe. Reuse the
+byte-identical frame, advancement and previous selector verification.
+The count guard, cyclic graph, whole-list induction and global source-bound
+lookup remain separate obligations. This is internal M230 work; no publication
+row, weighted checkpoint, progress score or website release is earned here.
+
+### Verified miss advancement and hit selection
+
+The two physical search branches are now checked for arbitrary runtime data.
+
+**Miss advancement.** One fixed five-stage machine copies/increments the actual
+ordinal, copies/decrements the actual positive count, and copies the comparator's
+residual. Its exact output preserves the complete 17-register comparison chunk
+and appends the three next-loop scalars. The proof covers all older registers
+and arbitrary interior and exterior tape data. On a miss the new position is
+exactly the old position minus the current literal's full token width.
+
+All three copy scans, both arithmetic operations and all four composition joins
+are charged in the polynomial time bound. Scalar and copy-tail bounds come from
+the encoded entry span, not separately supplied intermediate bounds. The final
+residual copy consumes the blank cell released by decrementing, so advancement
+does not increase exterior length. The next history length is exactly
+17 times the next ordinal.
+
+**Hit selection.** The fixed stride-19 reader physically reads the same literal's
+sign through the retained comparison frame. The producer-derived 23-register
+environment has a checked exact correspondence to its packed sign, variable
+index and token-position arguments. Physical and compiled execution return the
+canonical literal token. The complete preparation and selection costs have
+source-polynomial bounds, with original data and all scratch accounted for.
+
+The terminal contract is explicit: when the actual width comparison establishes
+`position < value + 2`, the selector reaches its true or false state, never
+padding. Outside that domain, padding remains a distinct, rule-free third
+outcome. No caller-supplied token, sign, ordinal or completeness verdict generates
+the control, and the later cyclic graph must derive the hit premise itself.
+
+**Verification.** All 33 advancement regressions and all 21 public advancement
+axiom probes passed. All 31 hit-selection regressions and all 19 public
+hit-selection axiom probes passed. Every one of the 40 probes uses only the
+existing logical/kernel authorities `propext` and `Quot.sound` where needed.
+Both final targeted wrappers reached their own success marker and terminal zero
+exit. Unchanged comparison, history, field-reader and earlier selector evidence
+was reused; no full-root or website proof suite was repeated.
+
+The fail-closed axiom check initially detected `Classical.choice` in a scalar
+bound helper, through an auxiliary `Classical.propDecidable` proof. Splitting the
+conjoined arithmetic goal explicitly before `omega` removed that dependency;
+the complete public axiom list was then checked again. A record-environment
+rewrite was also normalized consistently before the final selector build.
+Neither fix changed a theorem statement, boundary expectation or claim.
+
+**Next: complete guarded lookup.** Join the count-copy/zero guard and its
+single-register cleanup to comparison, advancement and hit selection in one
+fixed cyclic graph. Induct over the actual remaining list, with the processed
+prefix, ordinal and accumulated history derived from execution. Handle empty
+and exhausted lists as padding. Prove equality with
+`DirectToken.boundedLiteralListSlot` for every original list and position.
+
+Use one original-input polynomial envelope for all iterations. The ordinal plus
+remaining count stays equal to the original list length; residual position never
+increases. Derive actual history and exterior growth and sum fixed node costs
+over the bounded number of iterations. Do not iterate a loose span polynomial.
+
+M230 is not earned. The complete lookup, canonical ordered-pair coordinates,
+source-bound dispatch and recovery, successor/Finish, full formula builder and
+reduction, and final root/inventory/publication audits remain required.
+Formal artefact coverage remains 205/207; the risk-weighted proof estimate
+remains 35%, uncertainty 20–40%; global gates remain 0/5. No checkpoint or
+publication row is added, and publication remains deferred on coherent M229.
