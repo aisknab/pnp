@@ -7057,3 +7057,108 @@ source-to-token work package. The rough seven-work-package estimate is unchanged
 M230 is not earned and publication remains deferred on coherent M229: formal
 artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
 global gates 0/5 closed.
+
+### Source-payload literal-token integration plan
+
+The dependency anchor remains the pinned manuscript's SAT NP-completeness and
+Final SAT decision construction, through the complete Cook-Levin builder
+checkpoint. The generic clause selector is now verified, but its canonical
+literal-list frame is not the actual source payload. This change closes the
+literal-reading edge of the source-to-token work package; it does not close that
+whole package or earn M230.
+
+Implement one fixed-schema literal-token adapter for every valid literal ordinal
+of a requirement, implication premise, implication conclusion and positive
+exactly-one clause. Read the original encoded payload with the existing indexed
+field reader. The machine depends only on the finite payload kind, never on the
+source list length, ordinal, selected literal, token or supplied correctness
+certificate. Its theorem domain describes the physical loop frame; the enclosing
+source dispatcher and loop must subsequently derive that frame and index validity.
+
+Preserve the original payload, its nine-register request gap, clause index and
+original token position. Preserve earlier loop history, whose length is seventeen
+registers per visited literal. Address the runtime ordinal with a fixed affine
+field offset. Read every implication premise in original order, negate its
+actual sign, and read the separately stored conclusion last. Positive exactly-one
+literals use the positive sign specified by the clause grammar. Do not construct
+another copy of the complete canonical clause list merely to reuse an interface.
+
+The main execution contract is universal over the source literal/list, every
+valid ordinal, the physical request and loop registers, arbitrary retained
+interior data and exterior workspace:
+
+```text
+workRunExact? (machine source.kind) (workSteps source ...)
+  (initialConfiguration source ...) = some (finalConfiguration source ...)
+observe (finalConfiguration source ...) =
+  DirectToken.literalSlot source.selectedLiteral.emit literalPosition
+```
+
+Prove exact work and compiled raw execution, deterministic and stable bit/padding
+outcomes, preservation of the source/request frame, and polynomial runtime plus
+register/exterior bounds in the encoded entry span. The arbitrary preserved
+interior is not falsely bounded by a local scratch theorem. End-to-end accumulated
+output size still belongs to the full builder invariant.
+
+Producer and expectation changes are one changeset: add the adapter and its
+universal theorem-type, canonical sign/order, boundary and axiom-closure regression
+contracts together. Build the exact new Lake target before the imported regression
+and focused axiom probes. Reuse the unchanged reader, list-selector and source
+request evidence; run only these targeted checks and documentation-link/diff
+checks for this internal integration. No status, public theorem-pin set, progress
+ledger, generated report, workflow fixture or website value changes at this
+intermediate step.
+
+Remaining downstream work is actual source-level dispatch and guarded clause
+search, outcome-preserving scratch cleanup/root recovery, the full controller
+loop, exact whole-formula output, whole-builder polynomial bounds and the packaged
+reduction, then final core verification/merge and a major publication batch.
+The rough seven-work-package estimate is unchanged. Publication is deferred on
+the coherent M229 baseline: formal artefact coverage 205/207; risk-weighted proof
+estimate 35%, uncertainty 20–40%; global gates 0/5 closed.
+
+### Verified source-payload literal-token adapter
+
+Implemented [the source-payload literal-token adapter](../../lean/PNP/Concrete/CookLevinBuilderPayloadLiteralTokenSelector.lean)
+and its [independent regression contracts](../../lean-regression/PNPConcreteCookLevinBuilderPayloadLiteralTokenSelector.lean).
+The finite machine for each of four fixed schemas reads the actual runtime
+ordinal and source payload fields. It covers every valid requirement literal,
+implication premise, implication conclusion and positive exactly-one literal,
+not a fixed list length or finite set of token positions.
+
+The canonical payload and original request remain on tape. Fixed affine field
+addresses account for the preserved request gap and seventeen registers per
+previously visited literal. Implication premises retain their original order and
+their actual signs are physically complemented. The separately stored conclusion
+is read from its original header only after the premises. Explicit canonical-order
+theorems tie those selections to the unchanged negated-premises-then-conclusion
+clause. Positive exactly-one signs come from the canonical clause grammar.
+
+A four-step finite machine complements the final Boolean unary register in place.
+The prepared sign, actual variable index and actual literal-relative position feed
+the existing scalar token selector. Exact work and compiled raw execution,
+canonical bit/padding results, deterministic stable endpoints, source/request-frame
+preservation and polynomial register/exterior plus runtime bounds are kernel
+checked. Arbitrary retained interior data is preserved; its accumulated output
+bound still belongs to the complete formula-builder invariant.
+
+All 59 regressions and 29 public-theorem axiom probes passed in a terminal
+zero-status targeted run. Two declarations are axiom-free, five use only
+`propext`, and twenty-two use `propext` plus `Quot.sound`. No project axiom or
+`Classical.choice` enters these closures. The regressions include universal
+execution and bound contracts, independent field offsets, both signs, zero
+variables, implication order, empty-premise conclusions, literal-token boundaries
+and exact retained physical frames. Compiler and regression-adapter corrections
+did not weaken the theorem statements or their intended expectations.
+
+This is the valid-ordinal literal-reading primitive, not a complete source-bound
+clause selector. Next compose it with the physical kind dispatch and guarded
+source-clause search so those components derive its frame and valid ordinal.
+Outcome-preserving scratch cleanup/root recovery, the full controller loop,
+exact whole-formula output, whole-builder polynomial bounds and the packaged
+reduction remain downstream. The rough seven-work-package estimate is unchanged.
+
+M230 is not earned and publication remains deferred on coherent M229: formal
+artefact coverage 205/207; risk-weighted proof estimate 35%, uncertainty 20–40%;
+global gates 0/5 closed. Unchanged predecessor evidence was reused; no complete
+core or website rebuild was performed.
