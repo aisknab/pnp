@@ -559,4 +559,32 @@ theorem mark_control (beforeCount : Nat) :
     (markProgram beforeCount).acceptState ≠ (markProgram beforeCount).rejectState :=
   mark_program_good beforeCount
 
+
+/-- The existing marked copier is shared with runtime-ordinal selection. -/
+theorem copy_workRunExact (value : Nat) (after : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? copyMachine (copySteps value after)
+      (workStartConfiguration copyMachine (markedTape 0 value after inside outside)) =
+      some {state := copyMachine.acceptState,
+            tape := restoredTape value (after ++ [value]) inside (outside.drop (value + 1))} :=
+  copy_run value after inside outside
+
+theorem copy_control :
+    copyMachine.rules.Pairwise WorkMachineChain.QueryDistinct ∧
+    WorkMachineChain.NoRuleAtAccept copyMachine ∧
+    WorkMachineProgramGraph.NoRuleAt copyMachine copyMachine.rejectState ∧
+    copyMachine.acceptState ≠ copyMachine.rejectState :=
+  ⟨WorkMachineProgramGraph.rules_pairwise copyGraph copy_graph_wellFormed,
+   WorkMachineProgramGraph.noRuleAt_globalAccept copyGraph,
+   WorkMachineProgramGraph.noRuleAt_globalReject copyGraph,
+   by change (0 : Nat) ≠ 1; decide⟩
+
+theorem copySteps_le (value : Nat) (after : List Nat) (bound : Nat)
+    (hValue : value ≤ bound) (hAfter : (registerWord after).length ≤ bound) :
+    copySteps value after ≤ bound * (6 * bound + 9) + 8 * bound + 11 := by
+  have hLoop := loopSteps_le 0 value 0 after bound (by omega) (by omega) hAfter
+  have hMul := Nat.mul_le_mul_right (6 * bound + 9) hValue
+  have hZero : RegisterConstant.steps 0 = 2 := rfl
+  simp only [copySteps, hZero]
+  omega
+
 end PNP.Concrete.CookLevin.BuilderRegisterRootCopy

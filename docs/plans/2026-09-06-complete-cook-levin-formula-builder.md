@@ -5647,3 +5647,113 @@ the payload prematurely and recompute it. Then connect physical request
 dispatch, successor and Finish and prove the complete all-input polynomial
 loop and reduction. Keep the canonical clause/token schedule unchanged and
 stop at an unproved general boundary rather than substituting a finite fixture.
+
+### Active arbitrary-register indexing contract
+
+Continue the pinned **Final SAT decision** / **Accepted package implies P=NP**
+dependency through the runtime list-access obligation required by arbitrary
+literal lists and ordered exclusion pairs. One fixed machine must read an
+ordinal physically written after a reader-ordered register list, locate the
+selected entry, copy its value, and restore the original list and ordinal.
+Neither the ordinal nor the input-dependent list length may determine the
+control table.
+
+For every `before`, selected `value`, `after`, older registers, and arbitrary
+interior/exterior, require exact work and raw compiled execution from
+`endTape (older ++ (before ++ [value] ++ after).reverse ++ [before.length])`
+to the same register sequence with `value` appended. Give the corresponding
+ordinary-list/valid-index interface, not just a chosen split fixture. The
+valid-index condition is the data-domain boundary; this primitive does not
+claim to classify invalid ordinals. The final source selector must derive its
+bounds from the actual payload and branch, not receive a correctness verdict.
+
+Reuse the existing marked-counter consumer and marked-register copier. Add a
+fixed moving candidate marker and charge initialization, each ordinal-consumer
+iteration, each physical pointer advance, exhaustion, marker restoration and
+copying. Prove polynomial work/raw time and final register/exterior span in the
+original encoded span, including zero values, an empty skipped prefix and
+arbitrary newer/older data. Preserve the literal selector and root recovery.
+
+Prepare general execution, source-bound polynomial, marker/control safety and
+boundary regression contracts with the source. Expose only the existing
+copier's necessary checked interface; do not change its machine or original
+proofs. Run new and affected targets/axiom probes/regressions in dependency
+order. Reuse unchanged prior component evidence, keep all public M229 fields
+and the complete-builder checkpoint unchanged, and defer PNPLabs publication.
+This is an internal M230 dependency, not an earned publication row or a
+substitute for full literal/pair selection, token request construction,
+source recovery, successor, Finish or the complete builder/reduction.
+
+### Verified runtime-indexed register-list access
+
+The pinned **Final SAT decision** / **Accepted package implies P=NP** dependency
+now has the runtime list-access primitive needed by arbitrary literal lists and
+ordered exclusion pairs. This remains an internal M230 dependency, not an earned
+complete builder or publication row.
+
+[Runtime-indexed copying](../../lean/PNP/Concrete/CookLevinBuilderRegisterIndexedCopy.lean)
+uses one fixed five-node graph. It reads the ordinal written on the tape,
+marks the current candidate, consumes ordinal units while advancing through the
+actual variable-width register data, restores the original ordinal and
+delimiters, and invokes the existing marked copier. Neither the selected index,
+the input list length nor a growing history determines the control table.
+
+`workRun_select_getElem` and `run_compile_select_getElem` state the ordinary
+list interface for every valid index. The original list, ordinal, older
+registers and arbitrary tape interior survive; the selected entry is appended
+and exactly its allocation is charged to the exterior. The split-list execution
+theorem supports the induction, but is not the only public selection contract.
+The valid-index data domain remains explicit: the primitive does not classify
+invalid ordinals. The complete source selector must derive that bound from its
+actual payload and branch, not receive a correctness verdict.
+
+The complete initialization, ordinal loop, pointer movement, exhaustion,
+restoration, copy and composition transitions are charged. `workSteps_le`
+provides a quadratic work bound in the original encoded register span; compiled
+execution uses six raw steps per work step. The final register/exterior span is
+at most `2 * bound + 1`. `selected_source_polynomial_bounds` carries both bounds
+through the ordinary-list/valid-index interface for any supplied polynomial
+bound on the original encoded source span.
+
+All 36 prepared indexed-copy regressions passed, covering general list access,
+both work and raw execution, zero values, empty skipped prefixes, arbitrary
+long skipped lists, exact exterior allocation, marker rejection cases,
+deterministic control and source polynomial bounds.
+[The regression](../../lean-regression/PNPConcreteCookLevinBuilderRegisterIndexedCopy.lean)
+retains concrete boundary fixtures only as tests of the general machine.
+
+The [existing marked copier](../../lean/PNP/Concrete/CookLevinBuilderRegisterRootCopy.lean)
+only gained execution, control and step-bound exports for its already-proved
+copy phase. Its machine and original proofs were unchanged.
+All 35 affected copier regressions passed.
+[The copier regression](../../lean-regression/PNPConcreteCookLevinBuilderRegisterRootCopy.lean)
+checks the newly exposed phase alongside the existing root-locator interface.
+All 44 public copier/indexed-copy axiom probes passed: seven are axiom-free,
+three use only `propext`, and 34 use only `propext` and `Quot.sound`. No closure
+uses `Classical.choice` or a project-specific axiom.
+
+The final targeted wrapper completed with zero exit status. After source
+compilation and axiom auditing succeeded, only regression declaration formatting
+needed correction. The final run byte-checked and reused that exact source and
+axiom evidence, then passed every prepared regression. Earlier non-green
+elaboration attempts are not evidence. No root rebuild, complete proof suite,
+inventory regeneration, historical replay or website proof build was repeated.
+
+Formal artefact coverage remains **205 of 207 current scoped rows earned**.
+The risk-weighted proof completion estimate remains **35%**, with uncertainty
+**20% to 40%**. Global gates closed remain **0 of 5**, project-specific axioms
+remaining **0**, the eligible root `PNP.Main.p_eq_np` absent and publication
+false. No publication row, global gate or weighted checkpoint changed.
+M230 is not earned; PNPLabs publication remains deferred on coherent M229.
+
+### Next dependency: physical literal-list and ordered-pair selection
+
+Use the fixed runtime indexer to read signs and variable indices from arbitrary
+canonical payload lists, deriving their physical offsets including accumulated
+scratch registers. Prove the complete variable-width literal-token search and
+the selected ordered exclusion pair; do not replace these with a fixed literal
+or pair coordinate. Bind the actual token position and selection to the source
+cursor, preserve the selected token/padding result through recovery, and connect
+request dispatch, successor and Finish. Complete the all-input polynomial
+builder/reduction and its remaining root, audit and publication boundaries
+before claiming M230 or the fixed builder checkpoint.

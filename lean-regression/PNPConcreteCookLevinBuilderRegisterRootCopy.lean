@@ -111,3 +111,17 @@ example (beforeCount : Nat) :
     WorkMachineChain.NoRuleAtAccept (markProgram beforeCount) ∧
     WorkMachineProgramGraph.NoRuleAt (markProgram beforeCount) (markProgram beforeCount).rejectState ∧
     (markProgram beforeCount).acceptState ≠ (markProgram beforeCount).rejectState := mark_control beforeCount
+
+-- Reuse the complete existing marked copy phase behind a runtime locator.
+example (value : Nat) (after : List Nat) (inside outside : List WorkSymbol) :
+    workRunExact? copyMachine (copySteps value after)
+      (workStartConfiguration copyMachine (BuilderRegisterCountdownControl.markedTape 0 value after inside outside)) =
+      some {state := copyMachine.acceptState,
+            tape := BuilderRegisterCountdownControl.restoredTape value (after ++ [value]) inside (outside.drop (value + 1))} :=
+  copy_workRunExact value after inside outside
+example : copyMachine.rules.Pairwise WorkMachineChain.QueryDistinct ∧
+    WorkMachineChain.NoRuleAtAccept copyMachine ∧ WorkMachineProgramGraph.NoRuleAt copyMachine copyMachine.rejectState ∧
+    copyMachine.acceptState ≠ copyMachine.rejectState := copy_control
+example (value : Nat) (after : List Nat) (bound : Nat)
+    (hValue : value ≤ bound) (hAfter : (registerWord after).length ≤ bound) :
+    copySteps value after ≤ bound * (6 * bound + 9) + 8 * bound + 11 := copySteps_le value after bound hValue hAfter
