@@ -6538,3 +6538,90 @@ publication audits remain due at full integration. Formal artefact coverage
 remains 205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%;
 global gates remain 0/5. No checkpoint or publication row changed, and
 publication remains deferred on coherent M229.
+
+### Actual variable reads from the retained exclusion-pair result
+
+Continue the same M230 canonical formula-builder dependency and pinned-report
+SAT NP-completeness / Final SAT decision linkage. The complete count/ordinal
+lookup is now proved. The next obligation is physical variable-value access from
+the materialized exactly-one payload, without substituting a supplied pair or
+discarding and reconstructing the payload.
+
+The source payload puts its count and tag after the reversed variable values.
+After a valid lookup, the last attempt has nine registers; its field 3 is the
+first index, field 7 is the selected width and field 8 is the row offset.
+Derive the retained history length from the actual row execution: the preparation
+has 25 registers and each attempted row has nine. Include the two payload-header
+registers and every new scratch register in the reader address.
+
+First compute 9*width + firstIndex + 33 with one fixed seven-node expression.
+Its six non-root scratch registers, the last nine row registers and the derived
+prior history place that address at the actual first variable. Use the existing
+runtime indexer to copy its value while preserving the complete payload/history.
+The public source-bound theorem must start at the actual lookup result for every
+valid clause ordinal, derive its own row witness and field bounds, and identify
+the selected canonical pair; an arbitrary supplied history theorem alone is not
+the integration result.
+
+Then derive the second field address physically, including the first read's
+eight retained registers. Its index is firstIndex + width - offset. Reuse the
+actual comparator residual for subtraction and the same runtime indexer. Prove
+that the comparator branch is determined by source-derived row bounds, charge
+all scratch and bridges, and retain both values for negative-literal token
+selection. Final source request/recovery and complete builder composition remain
+downstream; no finite-instance substitute or correctness certificate is allowed.
+
+Prepare each source/type, complete public axiom-probe list, independent boundary
+fixture and source-layout regression before its targeted build. Consumers are
+these new field-read modules and the subsequent token/request composition.
+No current inventory, publication row, status generator, package script or site
+expectation changes at this internal dependency. Reuse unchanged lookup,
+expression, indexed-copy and row evidence. Final root, inventory, reproduction
+and publication checks remain due when M230 is complete.
+
+Publication remains deferred on coherent M229. Formal artefact coverage remains
+205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%; global
+gates remain 0/5. No checkpoint credit is awarded for an incomplete builder.
+
+### Verified first variable read from the canonical pair-lookup result
+
+`BuilderExclusionPairFirstVariable` now uses one fixed seven-node expression
+and the existing runtime indexer to copy the first selected variable from the
+actual exactly-one payload. Its address is 9*selectedWidth + firstIndex + 33.
+The constant accounts for the two source headers, the preparation history and
+the expression's non-root scratch. The variable-length row history is derived
+from the actual lookup, not supplied as an independent correctness certificate.
+All original payload and history registers are preserved; the phase appends
+seven expression registers and the actual copied value.
+
+`source_layout` derives both canonical indices, the strict row-offset bound,
+the exact history length and the complete physical layout for every valid source
+clause ordinal. These facts are available to the second reader without another
+reconstruction of the row witness. `source_read` starts at the actual complete
+lookup result and identifies the copied source value. `uniform_source_lookup`
+composes the count/ordinal lookup and first read into a fixed machine, proves
+the exact raw execution, and charges the complete runtime and final encoded
+size in the original source-frame polynomial bound, including the chain bridge.
+
+All 33 regressions and 18 public axiom probes passed in the final terminal
+successful wrapper. The closures use only the allowed logical foundations.
+The axiom audit caught the arithmetic tactic invoking classical contradiction
+on an impossible existential goal; an explicit elimination to False removed
+that dependency without changing the statement or machine. Record-layout syntax
+and the temporary runner's regression-count assertion were reconciled before the
+successful run. Existing lookup, row, expression and indexed-copy evidence was
+reused; no complete root build or website proof suite was repeated.
+
+Next physically read the second selected variable and retain both source values
+for exclusion-clause token selection. Its address must account for the first
+read's eight retained registers and derive subtraction through the actual
+comparator residual. Source-request binding, token-preserving recovery,
+dispatch/successor/Finish and complete builder/reduction integration remain open.
+The estimate of roughly ten substantial remaining integration/release steps is
+provisional and does not redefine mathematical completion or award progress.
+
+M230 is not earned. Final root, inventory, status, clean reproduction and
+publication audits remain due at full integration. Formal artefact coverage
+remains 205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%;
+global gates remain 0/5. No checkpoint or publication row changed, and
+publication remains deferred on coherent M229.
