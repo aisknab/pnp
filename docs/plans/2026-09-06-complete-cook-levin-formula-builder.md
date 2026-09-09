@@ -5966,3 +5966,119 @@ Then derive source-bound coordinates, preserve the selected request through
 recovery and close dispatch, successor and Finish. Complete the all-input
 polynomial builder and packaged reduction, root/audit integration and release
 boundaries before earning M230 or the fixed complete-builder checkpoint.
+
+### Complete runtime variable-width literal-list lookup
+
+Continue the same pinned **Final SAT decision** / **Accepted package implies
+P=NP** construction. The required next general interface is a fixed machine
+whose observed result is `DirectToken.boundedLiteralListSlot literals position`
+for every canonical list and every overall token position, including empty and
+exhausted lists. The runtime may not receive a selected literal ordinal,
+residual position, coverage certificate or token verdict as proof authority.
+
+Use loop registers for ordinal, remaining literal count and residual position,
+starting at zero, the actual list length and the original token position.
+A physical count guard handles exhaustion before any field access. Read the
+actual variable index, construct its full literal width (index plus two), and
+compare the residual position with that width. The hit branch reads the actual
+sign and invokes the verified three-outcome selector. Its width premise is
+derived by the comparison and excludes the selector's padding case.
+
+On a miss, physically copy/increment the ordinal, copy/decrement the positive
+remaining count and copy the actual comparator residual. Prove that the complete
+discarded logical register chunk has exactly 17 fields, so an affine field reader
+with stride 19 accounts for both the accumulated history and the two-field
+canonical literal encoding. Derive these counts from all producer definitions;
+do not choose them independently of the completed iteration.
+
+Prepare the physical comparison and advancement interfaces, the hit selector,
+the fixed cyclic graph, the exact execution induction over the remaining list,
+and the original-source polynomial contracts. The original source/payload data
+and arbitrary tape interior remain intact; all scratch and exterior effects
+must be charged. Keep true, false and exhausted-list padding distinct.
+
+Prove one global workspace bound from the original encoded input span, the
+bounded scalar values and the number of list entries. Do not repeatedly compose
+a loose per-iteration span polynomial: its degree could grow with runtime list
+length even when the actual construction is polynomial. Apply fixed per-step
+time polynomials to the proved global span and sum them over at most the actual
+list length plus the final guard/selection phase.
+
+Affected contracts are the new search data/step and complete-loop modules,
+their general execution, bounds, terminal and canonical-result regressions,
+complete public axiom lists, and this plan. Reconcile definitions and all
+expectations before targeted compilation. Reuse unchanged component evidence;
+full M230 root, inventory and publication checks remain due at integration.
+
+The complete list lookup is still one dependency of M230, not the complete
+builder/reduction. Canonical ordered-pair coordinates, source-bound request
+selection, request-preserving recovery, dispatch/successor/Finish and the final
+builder and audit boundaries remain required. No publication row, weighted
+checkpoint or gate changes during this implementation. M230 is not earned;
+PNPLabs remains deferred on coherent M229.
+
+### Verified literal-search frame and physical width comparison
+
+Two general components of the same complete-list locator are now checked.
+Neither accepts a supplied literal-width verdict or a preselected result.
+
+**History and address frame.** The physical comparison chunk has exactly
+17 registers, derived from its actual producers: three loop scalars, six
+field-read registers, three width-expression registers and five restored
+comparison registers. A stride-19 reader accounts for both the retained
+history and the two-field literal encoding. For every valid literal ordinal,
+either field can be read through the derived history with exact physical and
+compiled execution, frame preservation and source-polynomial bounds.
+
+The exact chunk word length is
+`40 * ordinal + count + 2 * position + 5 * value + residual + 60`.
+The residual never exceeds the input position. Scalar bounds from the original
+input therefore give a linear per-chunk bound; the proved history envelope is
+quadratic in the original bound, not a polynomial whose degree grows with the
+iteration count. Applying that envelope to the complete cyclic execution still
+requires the loop to establish its history, scalar and exterior invariants.
+
+**Physical comparison.** One fixed machine reads the actual variable index,
+constructs index plus two as the full literal width, copies the actual residual
+position and width into disposable comparison operands, and runs the existing
+restoring comparator. Acceptance is exactly position less than width; rejection
+is exactly width at most position. The output retains the complete expected
+17-register chunk and a usable residual for the next iteration.
+
+The exact execution theorem covers every canonical list, valid current ordinal,
+derived-length prior history, count and position, and arbitrary older and
+interior/exterior tape data. Raw compilation, both terminal contracts,
+query-distinctness, no-rule terminal states and complete preparation/comparison
+polynomial bounds are checked. The comparison does not increase exterior length,
+and its actual additional history is charged separately for the later loop
+bound.
+
+**Verification.** All 28 prepared frame regressions and all 19 public frame
+axiom probes passed. All 30 comparison regressions and all 18 public comparison
+axiom probes passed. The 37 probes use only the existing logical/kernel
+authorities `propext` and `Quot.sound` where needed; none introduces
+`Classical.choice` or a project-specific axiom. Both targeted wrappers reached
+their own terminal zero exit and final success marker.
+
+The final comparison verification reused the byte-identical successful source
+build and axiom transcript after correcting four regression declarations that
+had accidentally included private proof bodies. General regression contracts
+must copy only complete theorem signatures, including record-valued targets;
+a one-line proof assignment must terminate the signature too. No theorem type
+or independent boundary expectation was weakened. Unchanged dependency and
+earlier selector tests were reused rather than repeated.
+
+**Remaining complete-list integration.** Physically advance the ordinal,
+decrement the actual positive remaining count and retain the produced residual.
+Compose the count guard, hit-only sign/token selection, miss advancement and
+empty/exhausted padding branch into one fixed cyclic graph. Prove exact
+execution over the whole remaining list and derive the required global bounds
+from the original input, rather than accepting a supplied search result.
+
+M230 is not earned. The complete literal locator, canonical ordered-pair
+coordinates, source-bound dispatch and request-preserving recovery, successor
+and Finish, complete builder/reduction and final root/inventory/publication
+audits remain open. Public status is unchanged: formal artefact coverage
+205/207; risk-weighted proof estimate 35%, uncertainty 20–40%; global gates
+0/5. No publication row or checkpoint changes; publication remains deferred
+on coherent M229.
