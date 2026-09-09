@@ -7478,3 +7478,69 @@ checkpoint remain open; defer PNPLabs publication. Formal artefact coverage
 remains 205/207; risk-weighted proof completion remains 35%, uncertainty 20–40%;
 global gates remain 0/5 closed. The seven-major-package estimate is unchanged
 and is not a time estimate.
+
+### Actual-source dispatcher: physical body-entry construction
+
+The next dispatcher edge must connect the actual request frame to the verified
+body-clause machine. The legacy Cook-Levin construction requires a uniform
+formula emitter, so a prepared body count or replacement position cannot be
+supplied as a runtime correctness premise.
+
+Implement a fixed program for each of the three source families. Write ordinal
+zero with a constant machine. For a requirement, write the literal count one;
+for an implication, copy the actual payload premise count and increment it to
+include the conclusion; for an exactly-one source, copy the actual variable
+count. Then copy the original request position behind the new ordinal/count.
+Prove that the resulting physical frame is exactly the input of
+`BuilderPayloadClauseTokenSelector` for every source, request and position.
+Retain the complete original source/request. Prove exact work and compiled raw
+execution, deterministic stable control, final-space and total polynomial
+runtime from the original encoded input span, without a supplied body count,
+position verdict, execution witness or correctness certificate.
+
+Prepare exact theorem-contract regressions and independent control/address and
+polynomial-shape expectations before compiling. Audit every public theorem
+closure. Reuse the unchanged source-body selector and leaf-machine evidence;
+do not rerun the whole proof or website suite for this local composition.
+
+This is a required physical adapter inside the outer dispatcher, not a
+replacement for that dispatcher or for the full builder. The outer program must
+still select the family from the actual tag, dispatch clause indices to body or
+negative pairs, and distinguish absent sources from padded opportunities.
+Cleanup/root recovery, the full loop, exact all-input output, complete polynomial
+reduction and core/publication verification remain open. M230 and its fixed
+weighted checkpoint remain unearned. Defer PNPLabs publication: artefact coverage
+205/207; risk-weighted proof estimate 35%, uncertainty 20–40%; global gates 0/5.
+The seven uneven remaining major work packages are unchanged, not an ETA.
+
+### Verified physical body-entry construction
+
+[`BuilderPayloadBodyPreparation`](../../lean/PNP/Concrete/CookLevinBuilderPayloadBodyPreparation.lean)
+now constructs the actual-source body-clause search input with fixed physical
+control. It writes ordinal zero, derives the complete body count from the payload
+(requirement one, implication premise count plus conclusion, or exactly-one
+variable count), and copies the original request position. Neither a replacement
+body count nor a selected token or execution certificate is an input.
+
+`uniform_body_preparation` proves the compiled raw execution reaches exactly
+the existing body-clause selector's input frame, together with an original-input
+polynomial runtime and final-space bound. The entire original source/request
+prefix is retained. Copy depths are fixed by the nine-register gap and actual
+request layout; data magnitudes do not construct the finite program.
+
+All 24 regression contracts and 19 public-theorem axiom probes passed. Three
+closures are axiom-free, four use only `propext`, and twelve use `propext`
+and `Quot.sound`; none uses project axioms or `Classical.choice`. The checks
+include independent fixed-control/address and polynomial-shape expectations.
+The unchanged body-clause lookup and primitive evidence were reused.
+
+Next compose this physical entry with body-clause selection while preserving
+all token and padding outcomes, then finish the actual-tag/clause-index dispatcher
+including the verified negative-pair route and absent-source distinctions.
+These remain within the first of seven uneven major work packages. Cleanup/root
+recovery, the full builder loop, exact all-input output, the packaged polynomial
+reduction and final core/publication verification remain downstream.
+
+M230 and the fixed complete-builder checkpoint remain open. Defer PNPLabs
+publication: formal artefact coverage 205/207; risk-weighted proof completion
+35%, uncertainty 20–40%; global gates 0/5. No progress credit or ETA is claimed.
