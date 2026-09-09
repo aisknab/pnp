@@ -22,6 +22,68 @@ open BuilderLiteralSearchFrame (residual)
 open WorkMachineProgramGraph (Endpoint endpointConfiguration)
 open WorkMachineProgramPath (AcceptPath LocalAcceptRun LocalRejectRun)
 
+/-- Data computed from an actual source ordinal for cost accounting only. It
+does not choose or construct the runtime machine. -/
+structure CostVisit where
+  hitSteps : Nat
+  hitValues : List Nat
+  hitOutside : List WorkSymbol
+  missSteps : Nat
+  nextPrior : List Nat
+  nextPosition : Nat
+  nextOutside : List WorkSymbol
+
+def costVisit {width : Nat} (constraint : LocalConstraint width) (request : Request) (older : List Nat)
+    (ordinal remaining : Nat) (prior : List Nat)
+    (hIndex : ordinal < (body constraint).length) (hPrior : prior.length = 17 * ordinal)
+    (position : Nat) (outside : List WorkSymbol) : CostVisit :=
+  let index : Fin (body constraint).length := ⟨ordinal,hIndex⟩
+  let source := atSource constraint index
+  let ctx := context constraint index request prior hPrior (remaining + 1) position
+  let value := source.originalLiteral.index.val
+  let visitChunk := BuilderPayloadSearchComparison.chunk source.kind ordinal (remaining + 1) position value
+  let middle := BuilderPayloadSearchComparison.cursorMiddle source.kind ordinal position value
+  let compared := BuilderPayloadSearchComparison.finalOutside source ctx (guardedOutside (remaining + 1) outside)
+  {hitSteps := guardSteps (remaining + 1) position +
+      (BuilderPayloadSearchComparison.workSteps source ctx + 1 + (BuilderPayloadSearchHit.workSteps source ctx + 1)),
+   hitValues := BuilderPayloadSearchHit.finalValues source ctx older,
+   hitOutside := BuilderPayloadSearchHit.finalOutside source ctx compared,
+   missSteps := guardSteps (remaining + 1) position +
+      (BuilderPayloadSearchComparison.workSteps source ctx + 1 +
+        (BuilderPayloadSearchAdvance.workSteps middle ordinal remaining (residual position value) + 1)),
+   nextPrior := prior ++ visitChunk, nextPosition := residual position value,
+   nextOutside := BuilderPayloadSearchAdvance.finalOutside ordinal remaining (residual position value) compared}
+
+/-- Internally produced cost evidence for the complete loop. The three cases
+overapproximate branch costs; they are not a correctness certificate or an
+additional runtime input. Every read still comes from an actual source ordinal. -/
+inductive CostTrace {width : Nat} (constraint : LocalConstraint width) (request : Request) (older : List Nat) :
+    Nat → Nat → List Nat → Nat → List WorkSymbol → Nat → List Nat → List WorkSymbol → Prop where
+  | empty (ordinal : Nat) (prior : List Nat) (position : Nat) (outside : List WorkSymbol) :
+      CostTrace constraint request older ordinal 0 prior position outside
+        (BuilderLiteralSearchGuard.workSteps 0 position + 1)
+        (initialValues constraint request older prior ordinal 0 position)
+        (BuilderLiteralSearchGuard.finalOutside 0 outside)
+  | hit (ordinal remaining : Nat) (prior : List Nat)
+      (hIndex : ordinal < (body constraint).length) (hPrior : prior.length = 17 * ordinal)
+      (position : Nat) (outside : List WorkSymbol) :
+      CostTrace constraint request older ordinal (remaining + 1) prior position outside
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).hitSteps
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).hitValues
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).hitOutside
+  | miss (ordinal remaining : Nat) (prior : List Nat)
+      (hIndex : ordinal < (body constraint).length) (hPrior : prior.length = 17 * ordinal)
+      (position : Nat) (outside : List WorkSymbol)
+      (tailSteps : Nat) (resultValues : List Nat) (resultOutside : List WorkSymbol)
+      (hTail : CostTrace constraint request older (ordinal + 1) remaining
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).nextPrior
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).nextPosition
+        (costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).nextOutside
+        tailSteps resultValues resultOutside) :
+      CostTrace constraint request older ordinal (remaining + 1) prior position outside
+        ((costVisit constraint request older ordinal remaining prior hIndex hPrior position outside).missSteps + tailSteps)
+        resultValues resultOutside
+
 private theorem append_index {width : Nat} (completed : List (BoundedLiteral width))
     (item : BoundedLiteral width) (rest : List (BoundedLiteral width)) :
     (completed ++ item :: rest)[completed.length]'(by
@@ -32,12 +94,13 @@ private theorem append_index {width : Nat} (completed : List (BoundedLiteral wid
 /-- Internal complete-list invariant. The outer theorem starts with the actual
 body, empty history and zero ordinal, rather than accepting this decomposition
 as a replacement source or a route certificate. -/
-theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
+theorem loop_path_traced {width : Nat} (remaining : List (BoundedLiteral width))
     (constraint : LocalConstraint width) (completed : List (BoundedLiteral width))
     (hList : body constraint = completed ++ remaining)
     (request : Request) (prior : List Nat) (hPrior : prior.length = 17 * completed.length)
     (position : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
     ∃ (steps : Nat) (resultValues : List Nat) (resultOutside : List WorkSymbol),
+      CostTrace constraint request older completed.length remaining.length prior position outside steps resultValues resultOutside ∧
       AcceptPath (graph (family constraint)) (.node (guardNode (family constraint)).reference)
         (BuilderLiteralListSearch.endpoint remaining position) steps
         (endTape (initialValues constraint request older prior completed.length remaining.length position) inside outside)
@@ -60,7 +123,8 @@ theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
       have hPath := AcceptPath.step (guardNode (family constraint)) .dead _ 0 _ _ _
         (guard_mem (family constraint)) hRun (.terminal .dead _)
       refine ⟨BuilderLiteralSearchGuard.workSteps 0 position + 1,
-        initialValues constraint request older prior completed.length 0 position, resultOutside, ?_, ?_, ?_⟩
+        initialValues constraint request older prior completed.length 0 position, resultOutside, ?_, ?_, ?_, ?_⟩
+      · exact CostTrace.empty completed.length prior position outside
       · simpa only [BuilderLiteralListSearch.endpoint, initialValues,
           BuilderLiteralSearchGuard.frame, List.length_nil, Nat.add_zero, resultOutside] using hPath
       · exact ⟨prior ++ [completed.length,0,position], by
@@ -135,7 +199,8 @@ theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
         refine ⟨guardSteps (rest.length + 1) position +
           (BuilderPayloadSearchComparison.workSteps source ctx + 1 +
             (BuilderPayloadSearchHit.workSteps source ctx + 1)), BuilderPayloadSearchHit.finalValues source ctx older,
-          BuilderPayloadSearchHit.finalOutside source ctx compared, ?_, ?_, ?_⟩
+          BuilderPayloadSearchHit.finalOutside source ctx compared, ?_, ?_, ?_, ?_⟩
+        · exact CostTrace.hit completed.length rest.length prior hIndex hPrior position outside
         · simpa only [BuilderLiteralListSearch.endpoint, if_pos hHit, List.length_cons, initialValues] using hWhole
         · obtain ⟨scratch, hScratch⟩ := BuilderPayloadSearchHit.original_frame_preserved source ctx older
           refine ⟨prior ++ [completed.length,rest.length + 1,position] ++ scratch, ?_⟩
@@ -170,10 +235,10 @@ theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
         have hNextPrior : (prior ++ visitChunk).length = 17 * (completed ++ [item]).length := by
           simpa only [List.length_append, List.length_cons, List.length_nil, visitChunk] using
             BuilderPayloadSearchComparison.history_step source.kind prior completed.length (rest.length + 1) position item.index.val hPrior
-        obtain ⟨tailSteps, resultValues, resultOutside, hTail, hRetained, hExhausted⟩ :=
+        obtain ⟨tailSteps, resultValues, resultOutside, hCostTail, hTail, hRetained, hExhausted⟩ :=
           ih (completed ++ [item]) hNextList (prior ++ visitChunk) hNextPrior
             (residual position item.index.val) nextOutside
-        simp only [List.length_append, List.length_cons, List.length_nil] at hTail
+        simp only [List.length_append, List.length_cons, List.length_nil, Nat.zero_add] at hTail hCostTail
         have hAdvanceInput : BuilderPayloadSearchAdvance.initialValues
             (baseValues constraint request older prior) middle completed.length rest.length (residual position item.index.val) =
             BuilderPayloadSearchComparison.finalValues source ctx older := by
@@ -216,7 +281,12 @@ theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
         refine ⟨guardSteps (rest.length + 1) position +
           (BuilderPayloadSearchComparison.workSteps source ctx + 1 +
             (BuilderPayloadSearchAdvance.workSteps middle completed.length rest.length (residual position item.index.val) + 1 + tailSteps)),
-          resultValues, resultOutside, ?_, hRetained, ?_⟩
+          resultValues, resultOutside, ?_, ?_, hRetained, ?_⟩
+        · have hValue' : (atSource constraint ⟨completed.length,hIndex⟩).originalLiteral.index.val = item.index.val := hValue
+          have hCost := CostTrace.miss (constraint := constraint) (request := request) (older := older)
+            completed.length rest.length prior hIndex hPrior position outside tailSteps resultValues resultOutside
+          simp only [costVisit, hValue'] at hCost
+          simpa only [Nat.add_assoc, List.length_cons, source, ctx, index, middle] using hCost hCostTail
         · simpa only [BuilderLiteralListSearch.endpoint, if_neg hHit, List.length_cons, initialValues] using hWhole
         · intro hDead
           simp only [BuilderLiteralListSearch.endpoint, if_neg hHit] at hDead
@@ -224,6 +294,25 @@ theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
           refine ⟨finalPrior, hLength, ?_⟩
           simpa only [DirectToken.boundedLiteralListWidth, DirectToken.boundedLiteralWidth,
             residual, if_neg hHit, Nat.sub_sub] using hValues
+
+theorem loop_path {width : Nat} (remaining : List (BoundedLiteral width))
+    (constraint : LocalConstraint width) (completed : List (BoundedLiteral width))
+    (hList : body constraint = completed ++ remaining)
+    (request : Request) (prior : List Nat) (hPrior : prior.length = 17 * completed.length)
+    (position : Nat) (older : List Nat) (inside outside : List WorkSymbol) :
+    ∃ (steps : Nat) (resultValues : List Nat) (resultOutside : List WorkSymbol),
+      AcceptPath (graph (family constraint)) (.node (guardNode (family constraint)).reference)
+        (BuilderLiteralListSearch.endpoint remaining position) steps
+        (endTape (initialValues constraint request older prior completed.length remaining.length position) inside outside)
+        (endTape resultValues inside resultOutside) ∧
+      (∃ scratch, resultValues = requestValues constraint request older ++ scratch) ∧
+      (BuilderLiteralListSearch.endpoint remaining position = .dead →
+        ∃ finalPrior, finalPrior.length = 17 * (body constraint).length ∧
+          resultValues = initialValues constraint request older finalPrior (body constraint).length 0
+            (position - DirectToken.boundedLiteralListWidth remaining)) := by
+  obtain ⟨steps, resultValues, resultOutside, _, hPath, hRetained, hExhausted⟩ :=
+    loop_path_traced remaining constraint completed hList request prior hPrior position older inside outside
+  exact ⟨steps, resultValues, resultOutside, hPath, hRetained, hExhausted⟩
 
 /-- An arbitrary actual source body has a terminating execution with its exact
 canonical token outcome and an intact original source/request prefix. This

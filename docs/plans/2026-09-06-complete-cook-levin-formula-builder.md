@@ -7345,3 +7345,71 @@ or changed the published bottom line. Formal artefact coverage remains 205/207;
 risk-weighted proof completion remains 35%, uncertainty 20–40%; global gates
 remain 0/5 closed. The estimate is still seven uneven major work packages,
 including publication/deployment, and is not a time estimate.
+
+### Uniform source-search polynomial bound
+
+Continue the pinned manuscript SAT NP-completeness construction through the
+complete source-body lookup. The execution theorem already covers every actual
+constraint body and token position; the next obligation is its total encoded-input
+polynomial time and retained-space bound.
+
+Extend the existing constructive loop proof with internal cost evidence for its
+empty, hit and miss cases. Preserve the existing execution, canonical-output,
+retention and exhaustion theorem interfaces. The cost evidence is produced by
+that proof, not supplied to the runtime machine or used as mathematical authority.
+Bound all visits against one original-input envelope: actual source indices from
+the encoded payload, constant-size history per miss, two restoring guards per
+nonempty visit, nonincreasing residuals, and a strictly decreasing remaining count.
+Sum fixed-kind leaf cost polynomials at the same envelope; do not iterate them.
+
+The changed producer is the loop proof's internally constructed witness. Its
+consumers are the existing exact work/raw theorem contracts and the new cost-trace
+and polynomial-bound regressions and axiom probes. Update these type/name
+expectations before each targeted check. The machine, source mapping, guards,
+comparison, cursor and hit implementations stay unchanged and reuse their exact
+successful evidence. No website, inventory or milestone-credit update is warranted
+until the complete source-to-token and full-builder boundaries are closed.
+
+### Verified single-envelope source-search bound
+
+The full source-body search now has a single original-input polynomial bound,
+in addition to the exact execution theorem. The trace extension in
+[`BuilderPayloadSourceSearch`](../../lean/PNP/Concrete/CookLevinBuilderPayloadSourceSearch.lean)
+constructs empty, hit and miss cost evidence inside the original execution
+proof. Its public canonical-token, retained-request and exhausted-frame
+contracts remain unchanged.
+
+[`BuilderPayloadSourceSearchEnvelope`](../../lean/PNP/Concrete/CookLevinBuilderPayloadSourceSearchEnvelope.lean)
+bounds actual source indices by their encoded payload, not by semantic width.
+It charges each newly retained history chunk once and evaluates every leaf
+cost polynomial at the same original-input envelope. The number of remaining
+entries strictly decreases; leaf polynomials are summed, never iterated.
+
+[`BuilderPayloadSourceSearchBounds`](../../lean/PNP/Concrete/CookLevinBuilderPayloadSourceSearchBounds.lean)
+proves the complete visit and trace bounds. Its `source_polynomial_bounds`
+and `run_compile_polynomial_bound` construct the full execution and give
+the exact canonical token, retained original request, exact exhausted residual,
+final-space bound and total raw-time bound together. No cost trace, selected
+literal, supplied execution or correctness certificate is a public premise.
+
+The trace, envelope and complete-bound components passed 8, 16 and 6 regression
+contracts respectively, and 4, 13 and 4 public-theorem axiom probes. The combined
+30 regressions and 21 axiom probes include two axiom-free results, one using
+only `propext`, and 18 using `propext` and `Quot.sound`. None uses project
+axioms or `Classical.choice`. The axiom audit caught a generated classical
+decision procedure in a scalar conjunction; explicit constructive conjunction
+proofs removed it without weakening the theorem. Exact unchanged predecessor
+evidence was reused rather than rebuilding the complete proof or website suite.
+
+Next connect the clause wrapper (leading separator, finish and padding) and
+actual source/request dispatcher, including absent-source branches and the
+already verified negative-pair route. These remain in the same open
+source-to-token package. Cleanup/root recovery, complete builder control,
+exact whole-formula output, the packaged polynomial reduction, final core
+verification and major publication/deployment remain downstream.
+
+M230 and the fixed complete-builder checkpoint remain unearned. Defer PNPLabs
+publication until the major capability changes the public bottom line. Formal
+artefact coverage remains 205/207; risk-weighted proof completion remains 35%,
+uncertainty 20–40%; global gates remain 0/5 closed. The working estimate remains
+seven uneven major work packages, including publication/deployment, not an ETA.
