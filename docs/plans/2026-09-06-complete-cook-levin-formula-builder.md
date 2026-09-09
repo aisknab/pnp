@@ -7856,3 +7856,89 @@ builder loop, all-input canonical formula equality, the packaged polynomial
 reduction and final core/site verification remain downstream. M230 and its fixed
 checkpoint remain open. Defer PNPLabs publication. Formal artefact coverage is
 205/207; risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Next dependency: complete actual-source negative-clause token lookup
+
+Continue the pinned manuscript's SAT NP-completeness construction and M230's
+all-input formula-builder target. The next dependency edge is from the complete
+actual exclusion-input preparation to the exact requested token of the
+canonical exactly-one clause. Compose the existing fixed selector with the
+source-derived two values and original position. Do not require a caller to
+provide a selected pair, clause, position, token, execution trace or correctness
+certificate.
+
+The source-level theorem must cover every positive clause index and every token
+position, including invalid pair ordinals, empty variable lists and positions
+past the clause. Use the existing exact pair-to-canonical-clause theorem to
+identify the actual requested clause, not merely an equisatisfiable replacement.
+Preserve true, false, separator, finish and padding as distinct stable outcomes.
+An invalid pair ordinal must stop before selector execution at a separate
+stable endpoint and must not be confused with a false token.
+
+Expose the valid branch's exact canonical final frame and retained original
+request context, transport selector execution to the real blank-equivalent
+intermediate tape, and retain separate canonical-register and actual finite
+work-tape bounds. The complete source theorem must charge preparation,
+selection and the one chain bridge to a polynomial of the original input span.
+The outer dispatcher still owns the positive-index and blank-exterior invariants.
+
+Prepare exact theorem-signature regressions and independent endpoint, invalid
+boundary, original-clause and polynomial-composition contracts with the source.
+Audit every new public theorem. Build the new source module before its imported
+regressions and axiom checks. Reuse the exact unchanged input-preparation,
+selector, chain and canonical pair-mapping evidence; do not rerun a whole-root
+or website suite for this internal source-to-token integration. No current
+publication or inventory name set, workflow, package script or proof claim
+changes at this boundary.
+
+After this closes, finish actual-tag/index dispatch and its caller invariants,
+then cleanup/root recovery, the complete builder loop, all-input exact formula
+output, the packaged polynomial reduction and final core/site verification.
+M230 and its fixed checkpoint remain open. Defer PNPLabs publication until the
+major formula-builder capability is earned. Formal artefact coverage remains
+205/207; risk-weighted estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Verified complete actual-source negative-clause token lookup
+
+[`BuilderRequestedExclusionTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderRequestedExclusionTokenLookup.lean)
+now composes the source-derived exclusion-input preparation with the complete
+clause-token selector. The full theorem covers every positive clause index and
+every token position, including out-of-range pair ordinals, empty variable lists
+and positions beyond a valid clause. No selected pair, source value, position,
+clause, token or successful execution is supplied to the source-level theorem.
+
+The exact pair-mapping theorem identifies the selected clause in the original
+exactly-one emission order. The resulting observation equals the requested
+encoded token of that canonical clause, not a merely equisatisfiable or
+permuted replacement. True, false, separator, finish and padding remain distinct
+stable outcomes. Invalid pair ordinals stop before selector execution at a
+separate stable endpoint, which cannot be confused with a false token.
+
+The valid branch exposes its exact canonical final selector frame and retained
+original-request context. The real execution is transported across the actual
+blank-equivalent intermediate tape without assuming its finite exterior is
+empty. Canonical register/exterior size and the actual finite stored work-tape
+window are bounded separately. Input preparation, selection and the one chain
+bridge are all charged to a polynomial of the original source span.
+
+All 33 regression contracts and 20 new public-theorem axiom checks passed in
+the terminal verification run. Two closures are axiom-free, three use only
+`propext`, and 15 use `propext` and `Quot.sound`; none uses project axioms or
+`Classical.choice`. Independent contracts cover all token meanings, separation
+of invalid requests from false tokens, empty and exhausted pair boundaries,
+canonical clause emission and the polynomial composition.
+
+Endpoint distinctness is proved using the injective, disjoint state namespaces.
+The finish-token fixture treats its control state symbolically to avoid eager
+evaluation of the complete closed conditional. Its expected result is unchanged.
+The already successful source build and axiom commands were reused while only
+that fixture's proof strategy changed; no duplicate Lean build, whole-root
+verification or website suite was run for those repairs.
+
+Next finish actual-tag/index dispatch and derive its positive-index,
+blank-exterior and absent-source caller invariants. Cleanup/root recovery,
+the complete builder loop, all-input canonical formula equality, packaged
+polynomial reduction and final core/site verification remain downstream. M230
+and its fixed checkpoint remain open. Defer PNPLabs publication. Formal artefact
+coverage remains 205/207; risk-weighted estimate 35%, uncertainty 20–40%;
+global gates 0/5.
