@@ -9061,3 +9061,69 @@ whole-construction original-input polynomial bounds, package the reduction,
 and pass the core and major-publication release gates. M230 is not earned.
 Defer PNPLabs publication. Formal artefact coverage remains 205/207,
 risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
+
+### Planned original-input to complete physical loop integration
+
+Legacy anchor and exact M230 target remain the complete formula construction
+specified above. Compose the existing physical initializer and the newly
+verified complete cursor loop as one finite work machine. Reuse the exact
+initializer-to-cursor tape handoff: no prepared workspace, header, branch,
+request or runtime correctness witness is a caller premise.
+
+The source theorem must quantify over every tableau problem and start from
+rawInputWorkTape of its original input. Specialize the positive balanced loop
+at index zero and the source-derived full body count, beginning with the
+initializer's exact unary header. Prove global acceptance and the complete
+recursive output on the exhausted cursor. Do not claim canonical formula
+equality before the schedule/output correspondence has been proved.
+
+Derive output length and the complete initializer-plus-loop raw cost from
+polynomials evaluated only at original input length. Include the physical
+initialization-to-loop bridge. Prepare exact-interface, raw-entry, finite
+composition, output-size and axiom contracts before building the new target.
+Reuse unchanged initializer and loop evidence. The eligible FunctionProgram
+input/output adapter, canonical encoded formula equality, reduction packaging,
+final core audits and publication remain mandatory; M230 stays open.
+Defer PNPLabs and keep the canonical progress metrics unchanged.
+
+### Verified original-input to complete physical loop integration
+
+[BuilderRawInputLoop](../../lean/PNP/Concrete/CookLevinBuilderRawInputLoop.lean)
+now composes the existing initializer and the complete physical cursor loop
+as one verifier-fixed finite work machine. The exact work theorem covers
+every tableau problem from rawInputWorkTape of its original input, with no
+prepared workspace, header, selected request, branch, execution or other
+caller precondition. The exact initializer tape handoff is reused, not
+reconstructed or supplied between phases.
+
+The initializer's source-derived body count is positive. Specializing the
+universal loop at index zero and that complete count starts it with the
+actual generated unary header. The composed machine reaches global accept,
+with a blank-equivalent exhausted cursor and the full recursive token output.
+The physical connection contributes one charged work transition.
+
+The token-count polynomial is formulaWidthPolynomial + 1 + bodyCountPolynomial.
+The complete raw execution bound is initializationRaw + 6 +
+bodyCountPolynomial * (loopStepPolynomial + 12 * tokenCountPolynomial),
+evaluated only at original input length. It includes initialization, the
+handoff, every repeated body operation, final emission and growing output.
+Compiled raw execution and the token-count bound are both checked. The raw
+theorem uses the explicitly encoded raw-work input; FunctionProgram's full
+external-input/output interface still must be connected and audited.
+
+All 15 prepared contracts and nine public axiom audits pass. Every closure
+uses only `propext` and `Quot.sound`; no project axiom or
+`Classical.choice` is required. The final combined check reached its own
+green marker and terminal zero exit. Explicit input-size normalization fixed
+the initial failed rewrite without altering theorem types, bounds or tests.
+Unchanged initializer, tape handoff and loop evidence was reused; no full
+core or PNPLabs suite was repeated.
+
+Next prove that the recursively generated token stream is exactly the
+canonical complete formula, close the FunctionProgram input/output and
+encoded-size interfaces, package the polynomial reduction, and pass the
+core and major-publication release gates. Do not claim the complete-builder
+checkpoint before those interfaces and audits are actually complete.
+M230 remains open. Defer PNPLabs publication. Formal artefact coverage is
+205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%,
+and global gates closed remain 0/5.
