@@ -8822,3 +8822,83 @@ open. Defer PNPLabs publication: this internal connection does not yet
 change the public bottom line or close a weighted checkpoint.
 Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
 with 20–40% uncertainty, and global gates 0/5.
+
+### Planned source-derived output and advancement body iteration
+
+Legacy anchor: the canonical manuscript's complete all-input Cook-Levin
+formula construction. Connect the recovered canonical observation to actual
+token emission and balanced advancement at every valid body coordinate.
+Reuse the shared general appender and balanced cursor; do not introduce
+another fixed-slot result or an input-supplied token certificate.
+
+The intended theorem takes only a tableau problem, index, remaining count,
+existing output and the original body/balance invariants, with remaining
+positive. It derives an optional request from actual lookup, executes
+lookup, recovery, optional emission and advancement, and returns the next
+cursor tape up to blank equivalence with exactly that optional token appended.
+A missing outer lookup must be ruled out from the source-domain theorem,
+not converted to padding or excluded by a caller premise.
+
+Charge every bridge, scan, recovery and advance. The work and compiled raw
+bounds must explicitly include the length of the already-written output;
+the first-token bound does not cover a growing prefix. Bound actual stored
+cells from the executed trace, not from equality of finite blank windows.
+The whole-loop proof must subsequently bound all output prefixes in encoded
+input size and sum the per-iteration costs.
+
+Prepare exact-type regressions for every public theorem, arbitrary-prefix
+padding/token behavior, the complete static entry map, missing versus
+padding, state-only observation, at-most-one-token growth and a general
+linear output-scan cost. Audit all new public axiom closures. Existing
+dependencies remain unchanged and their accepted evidence is reusable.
+Only the new dependency target and contracts need targeted verification.
+
+This body iteration does not close the full builder loop or terminal case.
+Exact full formula output, total polynomial bounds, the packaged reduction
+and all release gates remain open. About five uneven major packages remain.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207,
+risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
+
+### Verified source-derived output and advancement body iteration
+
+[BuilderCursorOutputAdvance](../../lean/PNP/Concrete/CookLevinBuilderCursorOutputAdvance.lean)
+now executes actual token lookup, physical scratch recovery, optional output
+emission and balanced cursor advancement in one finite machine. The selected
+request is derived from the actual source coordinate. The body-domain theorem
+rules out a missing outer lookup; padding remains a valid distinct result
+that emits nothing and still advances.
+
+The work and compiled raw theorems quantify over every tableau problem,
+valid body position and existing output. Their only premises are the body
+and index-plus-remaining invariants. They preserve canonical observation,
+the next cursor and its registers up to blank equivalence, and exactly the
+old output followed by the optional token. No token, lookup-success,
+workspace, execution, route or correctness certificate is supplied.
+
+The complete iteration's raw bound is its verifier-fixed input polynomial
+plus twelve times the existing output length. It includes lookup, recovery,
+optional emission, advancement and every bridge. The actual-storage bound
+is derived from execution and likewise retains the output-length term.
+Do not substitute the first-token cost for the growing-prefix scan cost or
+claim that the complete builder's original-input polynomial is already closed.
+
+All 25 regression contracts and seventeen public-theorem axiom audits pass.
+One audit uses only `propext`; sixteen use `propext` and `Quot.sound`.
+No project axiom or `Classical.choice` is required. Regressions pin every
+public theorem type, general optional emission, the complete entry map,
+missing versus padding, state-only observation, one-token growth and the
+linear cost for an arbitrary output prefix. The final combined run has its
+own green marker and terminal zero; no failed run is completion evidence.
+Existing dependency source and accepted evidence remain unchanged. No full
+core or PNPLabs suite was repeated.
+
+Next connect repeated body execution to physical loop control. The existing
+body opportunity count includes the final `Finish` token: prove that
+terminal branch separately rather than applying the body-only theorem at
+its excluded coordinate. Then close exact complete formula output,
+all-prefix original-input bounds, total runtime and the packaged reduction,
+followed by the full release gates. About five uneven major packages remain;
+the output/advance connection is progress within the first, not completion
+of the entire loop. M230 and its weighted checkpoint remain open.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207,
+risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
