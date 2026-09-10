@@ -8315,3 +8315,73 @@ remain open. M230 is not earned; the estimated six remaining coarse packages
 are unchanged. Defer PNPLabs publication. Formal artefact coverage remains
 205/207, risk-weighted proof estimate 35% with 20–40% uncertainty, and global
 gates 0/5.
+
+### Planned retained exterior contract for complete body-token lookup
+
+Legacy anchor: the canonical manuscript's all-input SAT NP-completeness
+construction feeding deterministic SAT decision and final complexity transport.
+The current M230 dependency edge is from real token-selection execution to
+physical root recovery and another builder-loop iteration.
+
+The actual-source search already constructs an internal decreasing
+`CostTrace`, a retained request prefix and exact execution. Prove by induction
+on that internally produced trace that blank input exteriors remain blank
+through guard, comparison, hit, miss and exhausted cases. Preserve every current
+canonical-token, retained-register, span and raw-time guarantee.
+
+Strengthen the public search and body-selector execution results with the
+additional conclusion
+`BlankOutside outside → BlankOutside resultOutside`. This is not a new
+execution premise or a caller-supplied trace. Lift it through actual body-frame
+preparation and the complete clause selector. The original lookup theorem
+signatures remain compatibility corollaries of the stronger results; the
+physical machines and existing polynomial bounds are unchanged.
+
+Affected contracts and consumers: a new source-search exterior proof module,
+the clause-token selector and complete body-token wrapper, a focused
+multi-module exact-type/axiom regression, the existing selector/body regression
+modules, and this plan. Update producer and expectation inputs together before
+verification. Compile the changed dependency chain through the existing real
+cursor-token target, audit every public theorem in the three changed producers,
+then run the focused and affected existing regression modules once. Do not run
+the complete core or PNPLabs suites for this internal contract integration.
+
+The negative-pair route, finite endpoint classification, actual root-prefix
+derivation and outcome-preserving recovery connection still require integration.
+The final source-cursor theorem must derive every such invariant internally.
+No finite-instance substitute, new proof assumption or supplied certificate is
+allowed. The full formula loop, exact canonical output on every input,
+complete polynomial packaged reduction and release gates remain mandatory.
+M230 stays open; this does not close a fixed weighted checkpoint. Defer PNPLabs
+publication and retain the current public progress values.
+
+### Verified recoverable exterior through actual body-token lookup
+
+[`BuilderPayloadSourceSearchBlank`](../../lean/PNP/Concrete/CookLevinBuilderPayloadSourceSearchBlank.lean)
+proves blank-exterior preservation by induction over the complete execution's
+internally constructed decreasing trace. It covers guards, comparisons, hits,
+misses, sign handling and exhaustion for all source-body lengths and positions.
+
+The clause selector and complete source/request body-token wrapper now expose
+`workRun_polynomial_lookup_with_blank`. These retain the exact canonical token,
+original request prefix, final register/exterior span and raw-time bound, and
+add `BlankOutside outside → BlankOutside resultOutside` as a conclusion.
+They add no runtime premise, supplied trace or correctness certificate.
+The original lookup signatures remain corollaries of the stronger theorems.
+No physical machine definition or polynomial bound changed.
+
+The changed dependency chain through the real cursor-token target built
+successfully. All 50 focused contracts and both affected existing regression
+modules passed, for 90 regression contracts in total. All 42 public-theorem
+axiom audits passed: twelve axiom-free, two using only `propext`, and 28
+using `propext` and `Quot.sound`; none uses project axioms or
+`Classical.choice`. No whole-root or PNPLabs proof suite was rerun.
+
+The exclusion-token frame, retained root-prefix derivation and actual
+outcome-preserving recovery connection still remain. This verifies the
+body branch's recovery invariant, not the complete second coarse stage.
+M230 and its fixed weighted checkpoint stay open. The full formula loop,
+exact all-input output, complete polynomial packaged reduction and release
+gates remain mandatory. Defer PNPLabs publication. Formal artefact coverage
+is unchanged at 205/207, risk-weighted proof estimate 35% with 20–40%
+uncertainty, and global gates 0/5.

@@ -16,6 +16,7 @@ import PNP.Concrete.CookLevinBuilderPayloadBodyPreparation
 namespace PNP.Concrete.CookLevin.BuilderPayloadBodyTokenLookup
 
 open PipelineTape
+open BuilderPayloadSourceSearchBlank (BlankOutside)
 open BuilderUnaryPolynomial (registerWord)
 open BuilderDividerOperands (endTape)
 open BuilderPayloadSearchSource (Family Request family body requestValues)
@@ -110,6 +111,45 @@ private theorem initial_projection (route : Family) (tape : WorkTape) :
 
 /-- The execution witness and physical search frame are derived internally
 from the actual source/request; no prepared count, token or execution is supplied. -/
+theorem workRun_polynomial_lookup_with_blank {width : Nat} (constraint : LocalConstraint width) (request : Request)
+    (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hSpan : (registerWord (requestValues constraint request older)).length + outside.length ≤ bound.eval input) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol),
+      workRunExact? (machine (family constraint)) steps
+        (initialConfiguration constraint request older inside outside) =
+        some (finalConfiguration constraint request values inside resultOutside) ∧
+      observe (finalConfiguration constraint request values inside resultOutside) =
+        (encodeClauseTokens (BoundedClause.emit (body constraint)))[request.originalPosition]? ∧
+      (∃ scratch, values = requestValues constraint request older ++ scratch) ∧
+      (registerWord values).length + resultOutside.length ≤ (spanPolynomial bound).eval input ∧
+      6 * steps ≤ (rawTimePolynomial bound).eval input ∧
+      (BlankOutside outside → BlankOutside resultOutside) := by
+  have hPrepBounds := BuilderPayloadBodyPreparation.source_polynomial_bounds constraint request older outside bound input hSpan
+  have hEntry : (registerWord (BuilderPayloadClauseTokenSelector.initialValues constraint request request.originalPosition older)).length +
+      (BuilderPayloadBodyPreparation.finalOutside constraint request outside).length ≤ (BuilderPayloadBodyPreparation.spanPolynomial bound).eval input := by
+    rw [← BuilderPayloadBodyPreparation.final_values_search_input]
+    exact hPrepBounds.1
+  obtain ⟨steps, values, resultOutside, hLookup, _, hRetained, hSpace, hTime, hResultBlank⟩ :=
+    BuilderPayloadClauseTokenSelector.workRun_polynomial_lookup_with_blank constraint request request.originalPosition older inside
+      (BuilderPayloadBodyPreparation.finalOutside constraint request outside) (BuilderPayloadBodyPreparation.spanPolynomial bound) input hEntry
+  have hPrep := BuilderPayloadBodyPreparation.workRunExact constraint request older inside outside
+  rw [← BuilderPayloadBodyPreparation.final_values_search_input] at hLookup
+  have hChain := WorkMachineChain.workRunExact (BuilderPayloadBodyPreparation.machine (family constraint))
+    (BuilderPayloadClauseTokenSelector.machine (family constraint)) (BuilderPayloadBodyPreparation.workSteps constraint request) steps
+    _ _ _ hPrep rfl hLookup
+  rw [machine_projection] at hChain
+  refine ⟨BuilderPayloadBodyPreparation.workSteps constraint request + 1 + steps, values, resultOutside, ?_,
+    final_observation constraint request values inside resultOutside, hRetained, hSpace, ?_, ?_⟩
+  · simpa only [BuilderPayloadBodyPreparation.initialConfiguration, BuilderPayloadBodyPreparation.initialValues, initial_projection, initialConfiguration,
+      finalConfiguration] using hChain
+  · have hPrepTime := hPrepBounds.2
+    simp only [rawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
+    omega
+  · intro hBlank
+    exact hResultBlank (BuilderPayloadSourceSearchBlank.blank_drop _ _
+      (BuilderPayloadSourceSearchBlank.blank_drop _ _ (BuilderPayloadSourceSearchBlank.blank_drop outside _ hBlank)))
+
+/-- Preserve the existing arbitrary-exterior lookup interface. -/
 theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint width) (request : Request)
     (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
     (hSpan : (registerWord (requestValues constraint request older)).length + outside.length ≤ bound.eval input) :
@@ -122,27 +162,9 @@ theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint wi
       (∃ scratch, values = requestValues constraint request older ++ scratch) ∧
       (registerWord values).length + resultOutside.length ≤ (spanPolynomial bound).eval input ∧
       6 * steps ≤ (rawTimePolynomial bound).eval input := by
-  have hPrepBounds := BuilderPayloadBodyPreparation.source_polynomial_bounds constraint request older outside bound input hSpan
-  have hEntry : (registerWord (BuilderPayloadClauseTokenSelector.initialValues constraint request request.originalPosition older)).length +
-      (BuilderPayloadBodyPreparation.finalOutside constraint request outside).length ≤ (BuilderPayloadBodyPreparation.spanPolynomial bound).eval input := by
-    rw [← BuilderPayloadBodyPreparation.final_values_search_input]
-    exact hPrepBounds.1
-  obtain ⟨steps, values, resultOutside, hLookup, _, hRetained, hSpace, hTime⟩ :=
-    BuilderPayloadClauseTokenSelector.workRun_polynomial_lookup constraint request request.originalPosition older inside
-      (BuilderPayloadBodyPreparation.finalOutside constraint request outside) (BuilderPayloadBodyPreparation.spanPolynomial bound) input hEntry
-  have hPrep := BuilderPayloadBodyPreparation.workRunExact constraint request older inside outside
-  rw [← BuilderPayloadBodyPreparation.final_values_search_input] at hLookup
-  have hChain := WorkMachineChain.workRunExact (BuilderPayloadBodyPreparation.machine (family constraint))
-    (BuilderPayloadClauseTokenSelector.machine (family constraint)) (BuilderPayloadBodyPreparation.workSteps constraint request) steps
-    _ _ _ hPrep rfl hLookup
-  rw [machine_projection] at hChain
-  refine ⟨BuilderPayloadBodyPreparation.workSteps constraint request + 1 + steps, values, resultOutside, ?_,
-    final_observation constraint request values inside resultOutside, hRetained, hSpace, ?_⟩
-  · simpa only [BuilderPayloadBodyPreparation.initialConfiguration, BuilderPayloadBodyPreparation.initialValues, initial_projection, initialConfiguration,
-      finalConfiguration] using hChain
-  · have hPrepTime := hPrepBounds.2
-    simp only [rawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
-    omega
+  obtain ⟨steps, values, resultOutside, hRun, hToken, hRetained, hSpace, hTime, _⟩ :=
+    workRun_polynomial_lookup_with_blank constraint request older inside outside bound input hSpan
+  exact ⟨steps, values, resultOutside, hRun, hToken, hRetained, hSpace, hTime⟩
 
 theorem uniform_polynomial_lookup {width : Nat} (constraint : LocalConstraint width) (request : Request)
     (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)

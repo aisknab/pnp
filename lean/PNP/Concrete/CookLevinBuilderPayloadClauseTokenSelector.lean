@@ -10,12 +10,13 @@ This is the first/body clause route of an actual local constraint. The outer
 clause-index dispatcher, negative-pair route integration, cleanup and complete
 formula builder remain separate obligations.
 -/
-import PNP.Concrete.CookLevinBuilderPayloadSourceSearchBounds
+import PNP.Concrete.CookLevinBuilderPayloadSourceSearchBlank
 import PNP.Concrete.CookLevinBuilderLiteralClauseTokenSelector
 
 namespace PNP.Concrete.CookLevin.BuilderPayloadClauseTokenSelector
 
 open PipelineTape
+open BuilderPayloadSourceSearchBlank (BlankOutside)
 open BuilderUnaryPolynomial (registerWord registerWord_length registerWord_append)
 open BuilderDividerOperands (endTape)
 open BuilderPayloadSearchSource (Family Request family body requestValues)
@@ -412,7 +413,7 @@ def rawTimePolynomial (bound : NatPolynomial) : NatPolynomial :=
 
 /-- The actual encoded source produces its entire body clause at every position,
 with no supplied run, literal, width verdict or cost certificate. -/
-theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint width) (request : Request)
+theorem workRun_polynomial_lookup_with_blank {width : Nat} (constraint : LocalConstraint width) (request : Request)
     (position : Nat) (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
     (hSpan : (registerWord (initialValues constraint request position older)).length + outside.length ≤ bound.eval input) :
     ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol),
@@ -424,7 +425,8 @@ theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint wi
         (encodeClauseTokens (BoundedClause.emit (body constraint)))[position]? ∧
       (∃ scratch, values = requestValues constraint request older ++ scratch) ∧
       (registerWord values).length + resultOutside.length ≤ (spanPolynomial bound).eval input ∧
-      6 * steps ≤ (rawTimePolynomial bound).eval input := by
+      6 * steps ≤ (rawTimePolynomial bound).eval input ∧
+      (BlankOutside outside → BlankOutside resultOutside) := by
   by_cases hZero : position = 0
   · subst position
     have hTag : LocalAcceptRun (positionNode (family constraint)) 3
@@ -442,19 +444,20 @@ theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint wi
       (machine (family constraint)) rfl (noRuleAtAccept (family constraint)) (noRuleAtReject (family constraint))
       _ _ _ hRun
     refine ⟨4, initialValues constraint request 0 older, outside, ?_,
-      endpoint_observes_encoding constraint 0 _, ⟨[0,(body constraint).length,0], ?_⟩, ?_, ?_⟩
+      endpoint_observes_encoding constraint 0 _, ⟨[0,(body constraint).length,0], ?_⟩, ?_, ?_, ?_⟩
     · simpa only [endpoint, BuilderLiteralClauseTokenSelector.endpoint, if_pos rfl, ite_true, separator_reference, Nat.add_zero] using hFull
     · simp only [initialValues, BuilderPayloadSearchSource.initialValues, BuilderPayloadSearchSource.baseValues, List.append_nil]
     · simp only [spanPolynomial, NatPolynomial.eval_add]
       omega
     · simp only [rawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
       omega
+    · exact fun hBlank => hBlank
   · have hEntry : (registerWord (initialValues constraint request (position - 1) older)).length +
         (bodyOutside outside).length ≤ bound.eval input := by
       rw [body_input_span constraint request position older outside (by omega)]
       exact hSpan
-    obtain ⟨steps, values, resultOutside, hSource, _, hRetained, hExhausted, hSpace, hTime⟩ :=
-      BuilderPayloadSourceSearchBounds.source_polynomial_bounds constraint request (position - 1) older
+    obtain ⟨steps, values, resultOutside, hSource, _, hRetained, hExhausted, hSpace, hTime, hResultBlank⟩ :=
+      BuilderPayloadSourceSearchBlank.source_polynomial_bounds constraint request (position - 1) older
         inside (bodyOutside outside) bound input hEntry
     have hPrefix := WorkMachineProgramPath.runExact (graph (family constraint)) _ _ _ _ _
       (graph_wellFormed (family constraint)) (positive_prefix constraint request position older inside outside (by omega))
@@ -467,7 +470,7 @@ theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint wi
       (machine (family constraint)) rfl (noRuleAtAccept (family constraint)) (noRuleAtReject (family constraint))
       _ _ _ hRun
     refine ⟨7 + (steps + afterSteps constraint (position - 1)), values, resultOutside, ?_,
-      endpoint_observes_encoding constraint position _, hRetained, ?_, ?_⟩
+      endpoint_observes_encoding constraint position _, hRetained, ?_, ?_, ?_⟩
     · simpa only [endpoint, afterEndpoint, BuilderLiteralClauseTokenSelector.endpoint, if_neg hZero] using hFull
     · simp only [spanPolynomial, NatPolynomial.eval_add]
       omega
@@ -475,6 +478,26 @@ theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint wi
       change afterSteps constraint (position - 1) ≤ 5 at hAfter
       simp only [rawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant, Nat.mul_add]
       omega
+    · intro hBlank
+      exact hResultBlank (BuilderPayloadSourceSearchBlank.blank_cons outside hBlank)
+
+/-- Preserve the existing arbitrary-exterior lookup interface. -/
+theorem workRun_polynomial_lookup {width : Nat} (constraint : LocalConstraint width) (request : Request)
+    (position : Nat) (older : List Nat) (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hSpan : (registerWord (initialValues constraint request position older)).length + outside.length ≤ bound.eval input) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol),
+      workRunExact? (machine (family constraint)) steps
+        (workStartConfiguration (machine (family constraint))
+          (endTape (initialValues constraint request position older) inside outside)) =
+        some (endpointConfiguration (endpoint constraint position) (endTape values inside resultOutside)) ∧
+      observe (endpointConfiguration (endpoint constraint position) (endTape values inside resultOutside)) =
+        (encodeClauseTokens (BoundedClause.emit (body constraint)))[position]? ∧
+      (∃ scratch, values = requestValues constraint request older ++ scratch) ∧
+      (registerWord values).length + resultOutside.length ≤ (spanPolynomial bound).eval input ∧
+      6 * steps ≤ (rawTimePolynomial bound).eval input := by
+  obtain ⟨steps, values, resultOutside, hRun, hToken, hRetained, hSpace, hTime, _⟩ :=
+    workRun_polynomial_lookup_with_blank constraint request position older inside outside bound input hSpan
+  exact ⟨steps, values, resultOutside, hRun, hToken, hRetained, hSpace, hTime⟩
 
 /-- The same complete clause lookup runs in the compiled raw machine with a
 uniform encoded-input polynomial bound and the original request intact. -/
