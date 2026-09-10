@@ -8979,3 +8979,85 @@ polynomial runtime, packaged reduction and release gates remain open.
 About five uneven major packages remain; M230 is not earned.
 Defer PNPLabs publication. Formal artefact coverage remains 205/207,
 risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
+
+### Planned complete source-derived physical cursor loop
+
+Legacy anchor: the canonical manuscript's all-input formula construction,
+with the fixed complete-builder checkpoint and exact output interface at the
+start of this plan. Close the actual repeated-execution dependency, not another
+fixed position or a semantic scan standing in for an executable loop.
+
+Build one finite three-node graph: a remaining-one guard, the source-derived
+output/advance body, and final Finish emission. Normalize successful body
+outcomes to the back edge and missing lookup to rejection. The graph and
+its entries depend only on the verifier, never on a supplied input, request,
+schedule, branch or correctness certificate. Derive the ordinary body domain
+from the original balance invariant and a remaining count of at least two.
+
+For every problem, index, remaining and output prefix, assuming only
+index + (remaining + 1) = bodySlotCount, prove an actual exact run to global
+accept. Its final tape must be blank-equivalent to the advanced cursor with
+zero remaining and the recursively specified full remaining output, including
+Finish. The specification may inspect canonical requests; the executable
+machine must derive every request itself. No missing lookup may become padding.
+
+Prove this for arbitrary remaining counts by induction, transporting the
+recursive run across the body's proved blank-equivalent tape. Charge guard
+scans, every actual lookup/recovery/emission/advance, both normalization
+bridges, graph exits, and the growing output. Use the fixed polynomial
+guardRaw + bodyRaw + 24 and the bound
+(remaining + 1) * (stepPolynomial(inputLength) +
+12 * (initialOutputLength + remaining + 1)). Derive compiled raw execution.
+
+Prepare exact theorem-type, control, missing-versus-padding, output-growth,
+all-count execution and axiom contracts with the source. Reuse unchanged
+component evidence; run the new target, its public axiom probe and regressions
+before any broad integration. This is still a loop over the prepared source
+cursor, not yet the complete original-input formula builder. Initialization,
+exact canonical formula output, whole-construction input-size bounds, the
+packaged reduction and core/publication release gates remain mandatory.
+Defer PNPLabs publication; M230 is not earned and no weighted credit changes.
+
+### Verified complete source-derived physical cursor loop
+
+[BuilderCursorLoop](../../lean/PNP/Concrete/CookLevinBuilderCursorLoop.lean)
+now materializes one fixed three-node graph. The guard physically reads the
+remaining register. A non-final positive position runs actual lookup, recovery,
+optional emission and balanced advancement, then follows the literal back edge.
+The final position emits Finish, advances to zero remaining and halts at global
+accept. Five successful body tags normalize to the back edge; missing lookup
+normalizes to rejection and is not padding.
+
+The exact execution theorem covers every problem, index, positive remaining
+count and pre-existing output prefix. Its only premise is the original balance
+index + (remaining + 1) = bodySlotCount. Ordinary-body membership and the
+presence of each canonical request are derived inside the proof. Induction
+over the complete remaining schedule composes real machine executions and
+transports the recursive execution across proved blank-equivalent tapes.
+The final tape has zero remaining, the fully advanced index and the entire
+recursive output including Finish. No execution or correctness certificate,
+selected request, supplied family or fixed schedule prefix is substituted.
+
+The compiled raw execution is checked with the bound
+(remaining + 1) * (stepPolynomial(inputLength) +
+12 * (initialOutputLength + remaining + 1)).
+The step polynomial is guardRaw + bodyRaw + 24. It charges guard scans,
+lookup/recovery/emission/advance, the two result-normalization bridges and
+graph exits; the output term grows across the full induction. The final
+output has at most initialOutputLength + remaining + 1 tokens.
+
+All 25 prepared regression contracts and 16 public axiom audits pass.
+Two public closures use only `propext`; fourteen use `propext` and
+`Quot.sound`. No project axiom or `Classical.choice` is required.
+The final run reached its own green marker and terminal zero exit.
+The earlier elaboration/algebra attempts are non-evidence. Their fixes did
+not change any public theorem type, assumption, bound or regression assertion.
+Unchanged component evidence was reused; no full core or PNPLabs suite ran.
+
+This retires the actual repeated-body execution dependency, not the whole
+M230 checkpoint. Next connect physical initialization/header output to the
+loop, establish equality to the complete canonical encoded formula, derive
+whole-construction original-input polynomial bounds, package the reduction,
+and pass the core and major-publication release gates. M230 is not earned.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207,
+risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
