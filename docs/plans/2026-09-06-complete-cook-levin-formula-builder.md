@@ -8385,3 +8385,114 @@ exact all-input output, complete polynomial packaged reduction and release
 gates remain mandatory. Defer PNPLabs publication. Formal artefact coverage
 is unchanged at 205/207, risk-weighted proof estimate 35% with 20–40%
 uncertainty, and global gates 0/5.
+
+### Planned exclusion-token recovery frame for every source request
+
+Legacy anchor: the canonical manuscript's all-input SAT NP-completeness
+construction feeding deterministic SAT decision and final complexity transport.
+The M230 dependency edge remains actual token execution to physical root
+recovery and the next formula-builder iteration.
+
+Prove that arbitrary literal-list search preserves the retained register
+prefix and a blank exterior, including hits, misses and exhaustion. Lift
+these properties through the complete exclusion selector's separator, body,
+finish and padding outcomes. Cover invalid pair ordinals separately; invalid
+requests must remain distinct from valid false tokens.
+
+The exact strengthened contract is
+`workRun_polynomial_lookup_with_frame`: every positive exactly-one
+source/request with the existing blank and input-span invariants constructs
+its actual execution, a no-rule terminal state, canonical token observation,
+the original request prefix, a blank-equivalent canonical register tape and
+a blank final exterior. Bound both the canonical register/exterior span and
+actual finite storage, and retain the existing raw-time bound. Also expose
+the compiled raw execution. Do not infer a canonical tape's length from the
+length of another blank-equivalent representation.
+
+Reuse the existing pair-lookup polynomial for the invalid branch and the
+existing selector polynomial for valid pairs. This changes no machine,
+existing theorem signature or mathematical authority. New generic source
+theorems and their exact-type/edge-case regressions are the affected surface.
+Prepare the regression contracts before the focused remote build and audit
+all new public theorem closures. Reuse unchanged dependencies; no whole-root
+or PNPLabs suite is needed for this internal proof integration.
+
+The actual dispatcher/root-prefix propagation and outcome-preserving cursor
+recovery connection remain mandatory. These lower-layer input invariants
+must be derived internally in the eventual source-cursor theorem. The full
+builder loop, exact canonical output on every input, complete polynomial
+packaged reduction and final release gates remain open. No supplied
+correctness certificate or finite-instance substitute is allowed.
+M230 and its fixed weighted checkpoint stay open. Defer PNPLabs publication;
+coverage remains 205/207, proof estimate 35% with 20–40% uncertainty,
+and global gates 0/5.
+
+### Planned complete request-frame propagation
+
+The exclusion-frame component has passed its focused execution contracts.
+Continue the same cleanup dependency edge through the actual request
+dispatcher; do not stop at a lower-layer helper that the builder cannot use.
+
+Strengthen the body's and exclusion's selected execution results with retained
+request values, a blank-equivalent canonical frame, a blank exterior and its
+polynomial span. Prove that graph finishing preserves the tape. Missing
+sources and padding retain the original request with empty canonical exterior.
+Case analysis over the actual source and request must construct these facts
+for every dispatch route, without any new execution or recovery premise.
+
+Expose `workRun_from_dispatch_with_frame`,
+`workRun_polynomial_lookup_with_frame` and compiled
+`uniform_polynomial_lookup_with_frame` from the complete request-token
+module. Preserve every existing public signature as an exact compatibility
+contract. Reuse the already verified exclusion-frame evidence by exact source
+and regression hashes; build the changed chain through the real cursor-token
+consumer, audit the changed producer and run new frame contracts plus the
+existing independent request-token regressions once.
+
+This closes request-level frame propagation, not original cursor-root
+propagation or outcome-preserving physical recovery. The six coarse remaining
+packages and the final all-input formula-builder target remain unchanged.
+M230 stays open; this is not weighted progress credit or a website release.
+
+### Verified recoverable frames through complete request-token execution
+
+[`BuilderExclusionTokenRecoveryFrame`](../../lean/PNP/Concrete/CookLevinBuilderExclusionTokenRecoveryFrame.lean)
+now derives a retained request, blank exterior and polynomial canonical-frame
+bound for every valid and invalid positive exclusion request. Literal search
+retains its prefix through all hits, misses and exhaustion. Separator, finish,
+padding and valid false tokens keep their exact semantics; invalid pair
+ordinals remain a separate terminal state. The invalid branch's canonical
+span is proved from the existing pair-construction bound, not inferred from
+another blank-equivalent representation's finite storage.
+
+[`BuilderRequestTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderRequestTokenLookup.lean)
+propagates these invariants through the actual dispatcher and node finishing.
+Body clauses use the already verified actual-source blank invariant; absence
+and padding preserve the original frame. Every request produces its own
+execution and retained frame internally. No selected pair, source family,
+trace or correctness certificate has been added as a supplied premise.
+
+The new `workRun_from_dispatch_with_frame`,
+`workRun_polynomial_lookup_with_frame` and
+`uniform_polynomial_lookup_with_frame` expose this complete contract.
+Every prior public theorem signature is unchanged. The real cursor-token
+consumer rebuilt successfully against the strengthened implementation.
+No physical machine, canonical token, original time bound or actual-storage
+bound changed; the added canonical-frame polynomial covers both routes.
+
+The 17 exclusion-frame regressions, seven new request-frame contracts and
+33 existing independent request-token contracts passed: 57 in total.
+All 28 public-theorem axiom audits passed: five axiom-free, two using only
+`propext`, and 21 using `propext` and `Quot.sound`.
+None uses project axioms or `Classical.choice`. The exclusion-frame evidence
+was reused by exact source and regression hashes during dispatcher integration;
+no complete core or PNPLabs proof suite was repeated.
+
+Original cursor-root propagation and token-outcome-preserving physical
+recovery remain the next connection. This does not close the entire cleanup
+stage. The full builder loop, exact all-input formula equality, complete
+polynomial packaged reduction and release gates remain mandatory.
+M230 is not earned, and about six uneven coarse packages remain.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207;
+risk-weighted proof estimate is 35% with 20–40% uncertainty; global gates
+are 0/5. No checkpoint score changes.

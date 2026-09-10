@@ -4,16 +4,19 @@ Copyright (c) 2026 PNP Labs.
 Complete token execution through the actual source/request dispatch graph.
 The selected program, execution and stable result are derived from the original
 request. Missing sources, padding and a valid false token are not conflated.
-Both the raw execution time and actual finite tape storage are bounded from
-the original frame. The real source-cursor adapter, recovery and complete
-formula-builder loop remain downstream obligations.
+The original request and a polynomially bounded blank canonical frame survive
+every outcome. Raw execution time and actual finite tape storage remain bounded
+from the original frame. Cursor-root propagation, physical recovery and the
+complete formula-builder loop remain downstream obligations.
 -/
 import PNP.Concrete.CookLevinBuilderRequestDispatch
+import PNP.Concrete.CookLevinBuilderExclusionTokenRecoveryFrame
 import PNP.Concrete.CNFWorkFrameCorrectness
 
 namespace PNP.Concrete.CookLevin.BuilderRequestTokenLookup
 
 open BuilderUnaryPolynomial (registerWord)
+open BuilderPayloadSourceSearchBlank (BlankOutside blank_nil)
 open BuilderDividerOperands (endTape)
 open BuilderLocalConstraintPayload (Slot)
 open BuilderPayloadSearchSource (Family Request family body)
@@ -55,6 +58,13 @@ def finishConfiguration (node : Node) (configuration : WorkConfiguration) : Work
 def finishSteps (node : Node) (configuration : WorkConfiguration) : Nat :=
   if configuration.state = node.program.acceptState then 1
   else if configuration.state = node.program.rejectState then 1 else 0
+
+theorem finish_tape (node : Node) (configuration : WorkConfiguration) :
+    (finishConfiguration node configuration).tape = configuration.tape := by
+  unfold finishConfiguration
+  split
+  · rfl
+  · split <;> rfl
 
 private theorem node_state_eq_iff (a b s t : Nat) :
     nodeState a s = nodeState b t ↔ a = b ∧ s = t :=
@@ -322,37 +332,6 @@ private theorem body_final_no_rule {width : Nat} (constraint : LocalConstraint w
   · rw [h]; exact BuilderPayloadBodyTokenLookup.noRuleAtSeparator (family constraint)
   · rw [h]; exact BuilderPayloadBodyTokenLookup.noRuleAtFinish (family constraint)
 
-private theorem exclusion_final_no_rule {width : Nat} (first second : Fin width) (position : Nat)
-    (older : List Nat) (inside : List WorkSymbol) :
-    WorkMachineProgramGraph.NoRuleAt BuilderRequestedExclusionTokenLookup.machine
-      (BuilderRequestedExclusionTokenLookup.finalConfiguration first second position older inside).state := by
-  have hCases : BuilderExclusionClauseTokenSelector.endpoint first second position = .accept ∨
-      BuilderExclusionClauseTokenSelector.endpoint first second position = .reject ∨
-      BuilderExclusionClauseTokenSelector.endpoint first second position = .dead ∨
-      BuilderExclusionClauseTokenSelector.endpoint first second position = .node BuilderExclusionClauseTokenSelector.separatorNode.reference ∨
-      BuilderExclusionClauseTokenSelector.endpoint first second position = .node BuilderExclusionClauseTokenSelector.finishNode.reference := by
-    unfold BuilderExclusionClauseTokenSelector.endpoint
-    by_cases hZero : position = 0
-    · rw [if_pos hZero]; exact Or.inr (Or.inr (Or.inr (Or.inl rfl)))
-    · rw [if_neg hZero]
-      by_cases hPast : BuilderExclusionClauseBoundary.boundary first.val second.val < position
-      · rw [if_pos hPast]; exact Or.inr (Or.inr (Or.inl rfl))
-      · rw [if_neg hPast]
-        by_cases hEnd : position = BuilderExclusionClauseBoundary.boundary first.val second.val
-        · rw [if_pos hEnd]; exact Or.inr (Or.inr (Or.inr (Or.inr rfl)))
-        · rw [if_neg hEnd]
-          rcases BuilderExclusionClauseTokenSelector.body_endpoint_terminal first second position (by omega) (by omega) with h | h
-          · exact Or.inl h
-          · exact Or.inr (Or.inl h)
-  change WorkMachineProgramGraph.NoRuleAt BuilderRequestedExclusionTokenLookup.machine
-    (WorkMachineChain.secondState (endpointState (BuilderExclusionClauseTokenSelector.endpoint first second position)))
-  rcases hCases with h | h | h | h | h
-  · rw [h]; exact BuilderRequestedExclusionTokenLookup.noRuleAtAccept
-  · rw [h]; exact BuilderRequestedExclusionTokenLookup.noRuleAtReject
-  · rw [h]; exact BuilderRequestedExclusionTokenLookup.noRuleAtPadding
-  · rw [h]; exact BuilderRequestedExclusionTokenLookup.noRuleAtSeparator
-  · rw [h]; exact BuilderRequestedExclusionTokenLookup.noRuleAtFinish
-
 private theorem node_entry_projection (node : Node) (tape : WorkTape) :
     renameConfiguration node.encode (workStartConfiguration node.program tape) =
       endpointConfiguration (.node node.reference) tape := rfl
@@ -380,30 +359,47 @@ def rawTimePolynomial (bound : NatPolynomial) : NatPolynomial :=
   .add (BuilderRequestDispatch.rawTimePolynomial bound) (selectedRawTimePolynomial bound)
 def spanPolynomial (bound : NatPolynomial) : NatPolynomial := .add bound (rawTimePolynomial bound)
 
+def canonicalSpanPolynomial (bound : NatPolynomial) : NatPolynomial :=
+  .add bound (.add (BuilderPayloadBodyTokenLookup.spanPolynomial bound)
+    (BuilderExclusionTokenRecoveryFrame.canonicalSpanPolynomial bound))
+
 private theorem body_run {width : Nat} (constraint : LocalConstraint width) (request : Request) (older : List Nat)
     (inside : List WorkSymbol) (tape : WorkTape) (bound : NatPolynomial) (input : Nat)
     (hTape : WorkTape.BlankEquivalent tape (endTape (requestValues (some (some constraint)) request older) inside []))
     (hSpan : (registerWord (requestValues (some (some constraint)) request older)).length ≤ bound.eval input) :
-    ∃ steps final,
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
       workRunExact? machine steps (endpointConfiguration (.node (bodyNode (family constraint)).reference) tape) = some final ∧
       WorkMachineProgramGraph.NoRuleAt machine final.state ∧
       observe final = some ((encodeClauseTokens (BoundedClause.emit (body constraint)))[request.originalPosition]?) ∧
+      (∃ scratch, values = requestValues (some (some constraint)) request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
       6 * steps ≤ (selectedRawTimePolynomial bound).eval input := by
   rw [BuilderRequestDispatch.request_values_present] at hTape hSpan
-  obtain ⟨steps,values,outside,hRun,hObserve,_,_,hTime⟩ :=
-    BuilderPayloadBodyTokenLookup.workRun_polynomial_lookup constraint request older inside [] bound input (by
-      simpa only [List.length_nil,Nat.add_zero] using hSpan)
+  obtain ⟨steps, values, outside, hRun, hObserve, hRetained, hCanonical, hTime, hBlank⟩ :=
+    BuilderPayloadBodyTokenLookup.workRun_polynomial_lookup_with_blank constraint request older inside [] bound input (by
+      simpa only [List.length_nil, Nat.add_zero] using hSpan)
   let child := BuilderPayloadBodyTokenLookup.finalConfiguration constraint request values inside outside
-  obtain ⟨final,hComplete,hEquivalent⟩ :=
+  obtain ⟨final, hComplete, hEquivalent⟩ :=
     node_complete (bodyNode (family constraint)) steps _ inside child tape (body_mem _) hTape hRun
   have hNo := finish_no_rule (bodyNode (family constraint)) child (body_mem _) rfl rfl
     (body_final_no_rule constraint request values inside outside)
-  refine ⟨steps + finishSteps (bodyNode (family constraint)) child,final,hComplete,?_,?_,?_⟩
-  · rw [hEquivalent.state]; exact hNo
-  · rw [observe_blankEquivalent hEquivalent,observe_body_finished]
+  refine ⟨steps + finishSteps (bodyNode (family constraint)) child, values, outside, final,
+    hComplete, ?_, ?_, ?_, ?_, hBlank blank_nil, ?_, ?_⟩
+  · rw [hEquivalent.state]
+    exact hNo
+  · rw [observe_blankEquivalent hEquivalent, observe_body_finished]
     exact congrArg some hObserve
+  · rw [BuilderRequestDispatch.request_values_present]
+    exact hRetained
+  · have hFinalTape := hEquivalent.tape
+    rw [finish_tape] at hFinalTape
+    exact hFinalTape
+  · simp only [canonicalSpanPolynomial, NatPolynomial.eval_add]
+    omega
   · have hBridge := finish_steps_le_one (bodyNode (family constraint)) child
-    simp only [selectedRawTimePolynomial,NatPolynomial.eval_add,NatPolynomial.eval_constant]
+    simp only [selectedRawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
     omega
 
 private theorem exclusion_run {width : Nat} (variables : List (Fin width)) (request : Request) (older : List Nat)
@@ -411,44 +407,43 @@ private theorem exclusion_run {width : Nat} (variables : List (Fin width)) (requ
     (hPositive : 0 < request.clauseIndex)
     (hTape : WorkTape.BlankEquivalent tape (endTape (requestValues (some (some (.exactlyOne variables))) request older) inside []))
     (hSpan : (registerWord (requestValues (some (some (.exactlyOne variables))) request older)).length ≤ bound.eval input) :
-    ∃ steps final,
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
       workRunExact? machine steps (endpointConfiguration (.node exclusionNode.reference) tape) = some final ∧
       WorkMachineProgramGraph.NoRuleAt machine final.state ∧
       observe final = some (BuilderRequestedExclusionTokenLookup.canonicalToken variables request) ∧
+      (∃ scratch, values = requestValues (some (some (.exactlyOne variables))) request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
       6 * steps ≤ (selectedRawTimePolynomial bound).eval input := by
   rw [BuilderRequestDispatch.request_values_present] at hTape hSpan
   change WorkTape.BlankEquivalent tape (endTape (BuilderRequestedPairLookup.initialValues variables request older) inside []) at hTape
   change (registerWord (BuilderRequestedPairLookup.initialValues variables request older)).length ≤ bound.eval input at hSpan
   have hBlank : BuilderRequestedPairLookup.BlankExterior ([] : List WorkSymbol) :=
     BuilderRequestedPairLookup.blankExterior_replicate 0
-  have hInputSpan : (registerWord (BuilderRequestedPairLookup.initialValues variables request older)).length + ([] : List WorkSymbol).length ≤ bound.eval input := by
-    simpa only [List.length_nil,Nat.add_zero] using hSpan
-  have hSource : ∃ steps child,
-      workRunExact? BuilderRequestedExclusionTokenLookup.machine steps
-        (BuilderRequestedExclusionTokenLookup.initialConfiguration variables request older inside []) = some child ∧
-      WorkMachineProgramGraph.NoRuleAt BuilderRequestedExclusionTokenLookup.machine child.state ∧
-      BuilderRequestedExclusionTokenLookup.observe child = BuilderRequestedExclusionTokenLookup.canonicalToken variables request ∧
-      6 * steps ≤ (BuilderRequestedExclusionTokenLookup.rawTimePolynomial bound).eval input := by
-    by_cases hValid : request.clauseIndex - 1 < LocalConstraint.pairCount variables.length
-    · obtain ⟨first,second,steps,preparedOlder,child,_,_,hRun,hEquivalent,hObserve,_,_,hTime⟩ :=
-        BuilderRequestedExclusionTokenLookup.workRun_valid_source_lookup variables request older inside [] bound input hPositive hBlank hValid hInputSpan
-      refine ⟨steps,child,hRun,?_,hObserve,hTime⟩
-      rw [hEquivalent.state]
-      exact exclusion_final_no_rule _ _ _ _ _
-    · obtain ⟨steps,child,hRun,hEquivalent,hObserve,_,hTime⟩ :=
-        BuilderRequestedExclusionTokenLookup.workRun_invalid_source_lookup variables request older inside [] bound input hPositive hBlank (by omega) hInputSpan
-      refine ⟨steps,child,hRun,?_,hObserve,hTime⟩
-      rw [hEquivalent.state]
-      exact BuilderRequestedExclusionTokenLookup.noRuleAtInvalid
-  obtain ⟨steps,child,hRun,hNo,hObserve,hTime⟩ := hSource
-  obtain ⟨final,hComplete,hEquivalent⟩ := node_complete exclusionNode steps _ inside child tape exclusion_mem hTape hRun
+  have hInputSpan : (registerWord (BuilderRequestedPairLookup.initialValues variables request older)).length +
+      ([] : List WorkSymbol).length ≤ bound.eval input := by
+    simpa only [List.length_nil, Nat.add_zero] using hSpan
+  obtain ⟨steps, values, outside, child, hRun, hNo, hObserve, hRetained, hFrame, hBlankFinal, hCanonical, _, hTime⟩ :=
+    BuilderExclusionTokenRecoveryFrame.workRun_polynomial_lookup_with_frame
+      variables request older inside [] bound input hPositive hBlank hInputSpan
+  obtain ⟨final, hComplete, hEquivalent⟩ := node_complete exclusionNode steps _ inside child tape exclusion_mem hTape hRun
   have hTerminal := finish_no_rule exclusionNode child exclusion_mem rfl rfl hNo
-  refine ⟨steps + finishSteps exclusionNode child,final,hComplete,?_,?_,?_⟩
-  · rw [hEquivalent.state]; exact hTerminal
-  · rw [observe_blankEquivalent hEquivalent,observe_exclusion_finished]
+  refine ⟨steps + finishSteps exclusionNode child, values, outside, final,
+    hComplete, ?_, ?_, ?_, ?_, hBlankFinal, ?_, ?_⟩
+  · rw [hEquivalent.state]
+    exact hTerminal
+  · rw [observe_blankEquivalent hEquivalent, observe_exclusion_finished]
     exact congrArg some hObserve
+  · rw [BuilderRequestDispatch.request_values_present]
+    exact hRetained
+  · have hFinalTape := hEquivalent.tape
+    rw [finish_tape] at hFinalTape
+    exact WorkTape.blankEquivalent_trans hFinalTape hFrame
+  · simp only [canonicalSpanPolynomial, NatPolynomial.eval_add]
+    omega
   · have hBridge := finish_steps_le_one exclusionNode child
-    simp only [selectedRawTimePolynomial,NatPolynomial.eval_add,NatPolynomial.eval_constant]
+    simp only [selectedRawTimePolynomial, NatPolynomial.eval_add, NatPolynomial.eval_constant]
     omega
 
 theorem canonical_body {width : Nat} (constraint : LocalConstraint width) (request : Request)
@@ -463,14 +458,76 @@ theorem canonical_exclusion {width : Nat} (variables : List (Fin width)) (reques
   rw [BuilderRequestedExclusionTokenLookup.canonicalToken_eq_emit]
   rfl
 
-private theorem padding_run (tape : WorkTape) (bound : NatPolynomial) (input : Nat) :
-    ∃ steps final, workRunExact? machine steps (endpointConfiguration .dead tape) = some final ∧
+private theorem padding_run {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
+    (inside : List WorkSymbol) (tape : WorkTape) (bound : NatPolynomial) (input : Nat)
+    (hTape : WorkTape.BlankEquivalent tape (endTape (requestValues slot request older) inside []))
+    (hSpan : (registerWord (requestValues slot request older)).length ≤ bound.eval input) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      workRunExact? machine steps (endpointConfiguration .dead tape) = some final ∧
       WorkMachineProgramGraph.NoRuleAt machine final.state ∧ observe final = some none ∧
-      6 * steps ≤ (selectedRawTimePolynomial bound).eval input :=
-  ⟨0,endpointConfiguration .dead tape,rfl,WorkMachineProgramGraph.noRuleAt_globalDead graph,observe_padding tape,Nat.zero_le _⟩
+      (∃ scratch, values = requestValues slot request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
+      6 * steps ≤ (selectedRawTimePolynomial bound).eval input := by
+  refine ⟨0, requestValues slot request older, [], endpointConfiguration .dead tape, rfl,
+    WorkMachineProgramGraph.noRuleAt_globalDead graph, observe_padding tape,
+    ⟨[], (List.append_nil _).symm⟩, hTape, blank_nil, ?_, Nat.zero_le _⟩
+  simp only [List.length_nil, Nat.add_zero, canonicalSpanPolynomial, NatPolynomial.eval_add]
+  omega
 
-/-- Execute the selected real program. Source family and positive-index premises
-are derived by case analysis on the actual source and request, not supplied. -/
+/-- Complete dispatch retains the actual request frame for every source kind,
+including absence, padding, body clauses and valid or invalid exclusions. -/
+theorem workRun_from_dispatch_with_frame {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
+    (inside : List WorkSymbol) (tape : WorkTape) (bound : NatPolynomial) (input : Nat)
+    (hTape : WorkTape.BlankEquivalent tape (endTape (requestValues slot request older) inside []))
+    (hSpan : (registerWord (requestValues slot request older)).length ≤ bound.eval input) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      workRunExact? machine steps
+        (endpointConfiguration (BuilderRequestDispatch.entry (BuilderRequestDispatch.route slot request.clauseIndex)) tape) = some final ∧
+      WorkMachineProgramGraph.NoRuleAt machine final.state ∧
+      observe final = canonicalResult slot request ∧
+      (∃ scratch, values = requestValues slot request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
+      6 * steps ≤ (selectedRawTimePolynomial bound).eval input := by
+  cases slot with
+  | none =>
+      refine ⟨0, requestValues none request older, [], endpointConfiguration (.node absentNode.reference) tape,
+        rfl, missing_no_rule, observe_missing tape, ⟨[], (List.append_nil _).symm⟩,
+        hTape, blank_nil, ?_, Nat.zero_le _⟩
+      simp only [List.length_nil, Nat.add_zero, canonicalSpanPolynomial, NatPolynomial.eval_add]
+      omega
+  | some source =>
+      cases source with
+      | none => exact padding_run (some none) request older inside tape bound input hTape hSpan
+      | some constraint =>
+          by_cases hZero : request.clauseIndex = 0
+          · have hRun := body_run constraint request older inside tape bound input hTape hSpan
+            rw [← canonical_body constraint request hZero] at hRun
+            cases constraint <;> simpa only [BuilderRequestDispatch.route, hZero, ite_true, BuilderRequestDispatch.entry,
+              BuilderPayloadSearchSource.family] using hRun
+          · cases constraint with
+            | require literal =>
+                have hResult : canonicalResult (some (some (.require literal))) request = some none := by
+                  cases hIndex : request.clauseIndex with
+                  | zero => exact False.elim (hZero hIndex)
+                  | succ index => simp [canonicalResult, LocalConstraint.emit, unitClauses, hIndex]
+                simpa only [BuilderRequestDispatch.route, if_neg hZero, BuilderRequestDispatch.entry, hResult] using
+                  padding_run (some (some (.require literal))) request older inside tape bound input hTape hSpan
+            | implication premises conclusion =>
+                have hResult : canonicalResult (some (some (.implication premises conclusion))) request = some none := by
+                  cases hIndex : request.clauseIndex with
+                  | zero => exact False.elim (hZero hIndex)
+                  | succ index => simp [canonicalResult, LocalConstraint.emit, implicationClauses, hIndex]
+                simpa only [BuilderRequestDispatch.route, if_neg hZero, BuilderRequestDispatch.entry, hResult] using
+                  padding_run (some (some (.implication premises conclusion))) request older inside tape bound input hTape hSpan
+            | exactlyOne variables =>
+                have hRun := exclusion_run variables request older inside tape bound input (by omega) hTape hSpan
+                rw [← canonical_exclusion variables request] at hRun
+                simpa only [BuilderRequestDispatch.route, if_neg hZero, BuilderRequestDispatch.entry] using hRun
+
 theorem workRun_from_dispatch {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
     (inside : List WorkSymbol) (tape : WorkTape) (bound : NatPolynomial) (input : Nat)
     (hTape : WorkTape.BlankEquivalent tape (endTape (requestValues slot request older) inside []))
@@ -481,38 +538,43 @@ theorem workRun_from_dispatch {width : Nat} (slot : Slot width) (request : Reque
       WorkMachineProgramGraph.NoRuleAt machine final.state ∧
       observe final = canonicalResult slot request ∧
       6 * steps ≤ (selectedRawTimePolynomial bound).eval input := by
-  cases slot with
-  | none =>
-      exact ⟨0,endpointConfiguration (.node absentNode.reference) tape,rfl,missing_no_rule,observe_missing tape,Nat.zero_le _⟩
-  | some source =>
-      cases source with
-      | none => exact padding_run tape bound input
-      | some constraint =>
-          by_cases hZero : request.clauseIndex = 0
-          · have hRun := body_run constraint request older inside tape bound input hTape hSpan
-            rw [← canonical_body constraint request hZero] at hRun
-            cases constraint <;> simpa only [BuilderRequestDispatch.route,hZero,ite_true,BuilderRequestDispatch.entry,
-              BuilderPayloadSearchSource.family] using hRun
-          · cases constraint with
-            | require literal =>
-                have hResult : canonicalResult (some (some (.require literal))) request = some none := by
-                  cases hIndex : request.clauseIndex with
-                  | zero => exact False.elim (hZero hIndex)
-                  | succ index => simp [canonicalResult,LocalConstraint.emit,unitClauses,hIndex]
-                simpa only [BuilderRequestDispatch.route,if_neg hZero,BuilderRequestDispatch.entry,hResult] using padding_run tape bound input
-            | implication premises conclusion =>
-                have hResult : canonicalResult (some (some (.implication premises conclusion))) request = some none := by
-                  cases hIndex : request.clauseIndex with
-                  | zero => exact False.elim (hZero hIndex)
-                  | succ index => simp [canonicalResult,LocalConstraint.emit,implicationClauses,hIndex]
-                simpa only [BuilderRequestDispatch.route,if_neg hZero,BuilderRequestDispatch.entry,hResult] using padding_run tape bound input
-            | exactlyOne variables =>
-                have hRun := exclusion_run variables request older inside tape bound input (by omega) hTape hSpan
-                rw [← canonical_exclusion variables request] at hRun
-                simpa only [BuilderRequestDispatch.route,if_neg hZero,BuilderRequestDispatch.entry] using hRun
+  obtain ⟨steps, _, _, final, hRun, hNo, hObserve, _, _, _, _, hTime⟩ :=
+    workRun_from_dispatch_with_frame slot request older inside tape bound input hTape hSpan
+  exact ⟨steps, final, hRun, hNo, hObserve, hTime⟩
 
-/-- Complete all-request execution with exact canonical semantics, stable
-terminal states, actual finite storage and original-input polynomial time. -/
+/-- Full actual-source execution derives its recoverable frame. No selected
+program, retained-frame certificate or output token is a supplied premise. -/
+theorem workRun_polynomial_lookup_with_frame {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
+    (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hBlank : BuilderRequestedPairLookup.BlankExterior outside)
+    (hSpan : (registerWord (requestValues slot request older)).length + outside.length ≤ bound.eval input) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      workRunExact? machine steps (initialConfiguration slot request older inside outside) = some final ∧
+      WorkMachineProgramGraph.NoRuleAt machine final.state ∧
+      observe final = canonicalResult slot request ∧
+      (∃ scratch, values = requestValues slot request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input ∧
+      6 * steps ≤ (rawTimePolynomial bound).eval input := by
+  obtain ⟨dispatchSteps, middle, hDispatch, hMiddle, _, hDispatchTime⟩ :=
+    BuilderRequestDispatch.workRun_request_dispatch slot request older inside outside bound input hBlank hSpan
+  obtain ⟨lookupSteps, values, resultOutside, final, hLookup, hNo, hObserve,
+      hRetained, hFrame, hBlankFinal, hCanonical, hLookupTime⟩ :=
+    workRun_from_dispatch_with_frame slot request older inside middle bound input hMiddle (by omega)
+  have hRun := workRunExact?_add_of_exact machine dispatchSteps lookupSteps _ _ _ hDispatch hLookup
+  have hTime : 6 * (dispatchSteps + lookupSteps) ≤ (rawTimePolynomial bound).eval input := by
+    simp only [rawTimePolynomial, NatPolynomial.eval_add]
+    omega
+  refine ⟨dispatchSteps + lookupSteps, values, resultOutside, final, hRun, hNo, hObserve,
+    hRetained, hFrame, hBlankFinal, hCanonical, ?_, hTime⟩
+  have hCells := BuilderRequestedPairLookup.workRun_storedCells machine _ _ _ hRun
+  simp only [BuilderRequestedPairLookup.storedCells, BuilderRequestDispatch.initialConfiguration, workStartConfiguration,
+    endTape, List.length_append, List.length_reverse] at hCells ⊢
+  simp only [spanPolynomial, NatPolynomial.eval_add]
+  omega
+
 theorem workRun_polynomial_lookup {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
     (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
     (hBlank : BuilderRequestedPairLookup.BlankExterior outside)
@@ -523,20 +585,9 @@ theorem workRun_polynomial_lookup {width : Nat} (slot : Slot width) (request : R
       observe final = canonicalResult slot request ∧
       BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input ∧
       6 * steps ≤ (rawTimePolynomial bound).eval input := by
-  obtain ⟨dispatchSteps,middle,hDispatch,hMiddle,_,hDispatchTime⟩ :=
-    BuilderRequestDispatch.workRun_request_dispatch slot request older inside outside bound input hBlank hSpan
-  obtain ⟨lookupSteps,final,hLookup,hNo,hObserve,hLookupTime⟩ :=
-    workRun_from_dispatch slot request older inside middle bound input hMiddle (by omega)
-  have hRun := workRunExact?_add_of_exact machine dispatchSteps lookupSteps _ _ _ hDispatch hLookup
-  have hTime : 6 * (dispatchSteps + lookupSteps) ≤ (rawTimePolynomial bound).eval input := by
-    simp only [rawTimePolynomial,NatPolynomial.eval_add]
-    omega
-  refine ⟨dispatchSteps + lookupSteps,final,hRun,hNo,hObserve,?_,hTime⟩
-  have hCells := BuilderRequestedPairLookup.workRun_storedCells machine _ _ _ hRun
-  simp only [BuilderRequestedPairLookup.storedCells,BuilderRequestDispatch.initialConfiguration,workStartConfiguration,
-    endTape,List.length_append,List.length_reverse] at hCells ⊢
-  simp only [spanPolynomial,NatPolynomial.eval_add]
-  omega
+  obtain ⟨steps, _, _, final, hRun, hNo, hObserve, _, _, _, _, hSpace, hTime⟩ :=
+    workRun_polynomial_lookup_with_frame slot request older inside outside bound input hBlank hSpan
+  exact ⟨steps, final, hRun, hNo, hObserve, hSpace, hTime⟩
 
 theorem uniform_polynomial_lookup {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
     (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
@@ -552,5 +603,27 @@ theorem uniform_polynomial_lookup {width : Nat} (slot : Slot width) (request : R
   obtain ⟨steps,final,hRun,hNo,hObserve,hSpace,hTime⟩ :=
     workRun_polynomial_lookup slot request older inside outside bound input hBlank hSpan
   exact ⟨6 * steps,final,hTime,run_compileWorkMachine_mul_of_workRunExact _ _ _ _ hRun,hNo,hObserve,hSpace⟩
+
+theorem uniform_polynomial_lookup_with_frame {width : Nat} (slot : Slot width) (request : Request) (older : List Nat)
+    (inside outside : List WorkSymbol) (bound : NatPolynomial) (input : Nat)
+    (hBlank : BuilderRequestedPairLookup.BlankExterior outside)
+    (hSpan : (registerWord (requestValues slot request older)).length + outside.length ≤ bound.eval input) :
+    ∃ (rawSteps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      rawSteps ≤ (rawTimePolynomial bound).eval input ∧
+      run (compileWorkMachine machine) rawSteps (encodeWorkConfiguration (initialConfiguration slot request older inside outside)) =
+        encodeWorkConfiguration final ∧
+      WorkMachineProgramGraph.NoRuleAt machine final.state ∧
+      observe final = canonicalResult slot request ∧
+      (∃ scratch, values = requestValues slot request older ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values inside resultOutside) ∧
+      BlankOutside resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤ (canonicalSpanPolynomial bound).eval input ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤ inside.length + (spanPolynomial bound).eval input := by
+  obtain ⟨steps, values, resultOutside, final, hRun, hNo, hObserve,
+      hRetained, hFrame, hBlankFinal, hCanonical, hSpace, hTime⟩ :=
+    workRun_polynomial_lookup_with_frame slot request older inside outside bound input hBlank hSpan
+  exact ⟨6 * steps, values, resultOutside, final, hTime,
+    run_compileWorkMachine_mul_of_workRunExact _ _ _ _ hRun,
+    hNo, hObserve, hRetained, hFrame, hBlankFinal, hCanonical, hSpace⟩
 
 end PNP.Concrete.CookLevin.BuilderRequestTokenLookup
