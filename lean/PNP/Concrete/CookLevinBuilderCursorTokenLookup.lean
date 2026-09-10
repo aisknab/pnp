@@ -8,7 +8,9 @@ dropped blank exteriors are proved blank, not replaced by empty lists.
 
 The only cursor premises are the existing body-branch and cursor-balance
 invariants. No source payload, request, family, selected pair, blank-exterior
-certificate or polynomial bound is supplied. Cleanup/root recovery and the
+certificate or polynomial bound is supplied. The original cursor registers,
+a nonempty scratch suffix and a blank canonical recovery frame are derived
+from that actual execution. Outcome-preserving physical cleanup and the
 complete output loop remain downstream obligations.
 -/
 import PNP.Concrete.CookLevinBuilderSourceTokenRequest
@@ -163,6 +165,17 @@ theorem source_request_layout {language : Language} (problem : VerifierTableauPr
   rw [BuilderSourceTokenRequest.final_request_layout]
   rfl
 
+/-- The actual source/request initializer preserves the original cursor root
+and leaves a nonempty scratch suffix. Neither is a supplied recovery premise. -/
+theorem source_retained_root {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining : Nat) (hBody : quotient problem index < count problem) :
+    ∃ scratch, BuilderSourceTokenRequest.finalValues problem index remaining hBody =
+      BuilderOperandRegisters.retainedValues problem index remaining ++ [count problem] ++ scratch := by
+  unfold BuilderSourceTokenRequest.finalValues
+  rw [BuilderSourceTokenRequest.source_layout]
+  simp only [BuilderSourceTokenRequest.indexBefore, List.append_assoc, List.cons_append, List.nil_append]
+  exact ⟨_, rfl⟩
+
 def canonicalResult {language : Language} (problem : VerifierTableauProblem language) (index : Nat) :
     Option (Option CNFToken) :=
   BuilderRequestTokenLookup.canonicalResult (problem.formulaConstraintSlotDirect (constraintIndex problem index)) (request problem index)
@@ -235,6 +248,8 @@ def initialConfiguration {language : Language} (problem : VerifierTableauProblem
 
 def spanBound {language : Language} (verifier : PolynomialTimeVerifier language) : NatPolynomial :=
   BuilderRequestTokenLookup.spanPolynomial (BuilderSourceTokenRequest.spanBound verifier)
+def canonicalSpanBound {language : Language} (verifier : PolynomialTimeVerifier language) : NatPolynomial :=
+  BuilderRequestTokenLookup.canonicalSpanPolynomial (BuilderSourceTokenRequest.spanBound verifier)
 def rawTimeBound {language : Language} (verifier : PolynomialTimeVerifier language) : NatPolynomial :=
   .add (.add (BuilderSourceTokenRequest.rawTimeBound verifier) (.constant 6))
     (BuilderRequestTokenLookup.rawTimePolynomial (BuilderSourceTokenRequest.spanBound verifier))
@@ -246,8 +261,69 @@ private theorem initial_projection {language : Language} (problem : VerifierTabl
     renameConfiguration WorkMachineChain.firstState (BuilderSourceTokenRequest.initialConfiguration problem index remaining output) =
       initialConfiguration problem index remaining output := rfl
 
-/-- The actual cursor produces its source, request, blank invariant and input-size
-bounds internally, then executes the complete fixed token program. -/
+/-- The actual cursor derives a recoverable frame from initialization and
+complete lookup. Only the existing body and balance invariants are premises. -/
+theorem workRun_polynomial_lookup_with_frame {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining : Nat) (output : List CNFToken)
+    (hBody : quotient problem index < count problem)
+    (hBalance : index + remaining = BuilderFullScheduleCursorController.bodySlotCount problem) :
+    ∃ (steps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      workRunExact? (machine problem.verifier) steps (initialConfiguration problem index remaining output) = some final ∧
+      final.state % 3 = 1 ∧
+      WorkMachineProgramGraph.NoRuleAt (machine problem.verifier) final.state ∧
+      observe final = canonicalResult problem index ∧
+      (∃ scratch, values =
+        BuilderOperandRegisters.retainedValues problem index remaining ++ [count problem] ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values (inside problem.input output) resultOutside) ∧
+      BlankExterior resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤
+        (canonicalSpanBound problem.verifier).eval problem.input.length ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤
+        (inside problem.input output).length + (spanBound problem.verifier).eval problem.input.length ∧
+      6 * steps ≤ (rawTimeBound problem.verifier).eval problem.input.length := by
+  have hSourceBounds := BuilderSourceTokenRequest.source_polynomial_bounds problem index remaining hBody hBalance
+  have hSpan : (registerWord (BuilderRequestDispatch.requestValues
+      (problem.formulaConstraintSlotDirect (constraintIndex problem index)) (request problem index)
+      (BuilderSourcePayload.history problem index remaining hBody))).length +
+      (BuilderSourceTokenRequest.exterior problem index remaining hBody).length ≤
+        (BuilderSourceTokenRequest.spanBound problem.verifier).eval problem.input.length := by
+    rw [← source_request_layout problem index remaining hBody]
+    exact hSourceBounds.1
+  obtain ⟨lookupSteps, values, outside, child, hLookup, hNo, hObserve,
+      hRetained, hFrame, hBlank, hCanonical, hSpace, hTime⟩ :=
+    BuilderRequestTokenLookup.workRun_polynomial_lookup_with_frame
+      (problem.formulaConstraintSlotDirect (constraintIndex problem index)) (request problem index)
+      (BuilderSourcePayload.history problem index remaining hBody) (inside problem.input output)
+      (BuilderSourceTokenRequest.exterior problem index remaining hBody)
+      (BuilderSourceTokenRequest.spanBound problem.verifier) problem.input.length
+      (source_exterior_blank problem index remaining hBody) hSpan
+  have hPrepared : workRunExact? BuilderRequestDispatch.machine lookupSteps
+      (workStartConfiguration BuilderRequestDispatch.machine
+        (BuilderSourceTokenRequest.finalConfiguration problem index remaining output hBody).tape) = some child := by
+    rw [BuilderSourceTokenRequest.final_tape, source_request_layout problem index remaining hBody]
+    exact hLookup
+  have hSource := BuilderSourceTokenRequest.workRunExact problem index remaining output hBody
+  have hChain := WorkMachineChain.workRunExact (BuilderSourceTokenRequest.machine problem.verifier)
+    BuilderRequestDispatch.machine (BuilderSourceTokenRequest.workSteps problem index remaining hBody)
+    lookupSteps _ _ _ hSource rfl hPrepared
+  rw [machine_projection, initial_projection] at hChain
+  let steps := BuilderSourceTokenRequest.workSteps problem index remaining hBody + 1 + lookupSteps
+  let final := renameConfiguration WorkMachineChain.secondState child
+  refine ⟨steps, values, outside, final, hChain, token_stage_tag child, ?_, ?_, ?_,
+    hFrame, hBlank, hCanonical, hSpace, ?_⟩
+  · exact no_rule_at_second _ _ _ hNo
+  · rw [observe_rename]
+    exact hObserve
+  · obtain ⟨lookupScratch, hLookupRetained⟩ := hRetained
+    rw [← source_request_layout problem index remaining hBody] at hLookupRetained
+    obtain ⟨sourceScratch, hSourceRetained⟩ := source_retained_root problem index remaining hBody
+    refine ⟨sourceScratch ++ lookupScratch, ?_⟩
+    rw [hLookupRetained, hSourceRetained]
+    simp only [List.append_assoc]
+  · have hPrepareTime := hSourceBounds.2
+    simp only [steps, rawTimeBound, NatPolynomial.eval_add, NatPolynomial.eval_constant]
+    omega
+
 theorem workRun_polynomial_lookup {language : Language} (problem : VerifierTableauProblem language)
     (index remaining : Nat) (output : List CNFToken)
     (hBody : quotient problem index < count problem)
@@ -260,40 +336,9 @@ theorem workRun_polynomial_lookup {language : Language} (problem : VerifierTable
       BuilderRequestedPairLookup.storedCells final.tape ≤
         (inside problem.input output).length + (spanBound problem.verifier).eval problem.input.length ∧
       6 * steps ≤ (rawTimeBound problem.verifier).eval problem.input.length := by
-  have hSourceBounds := BuilderSourceTokenRequest.source_polynomial_bounds problem index remaining hBody hBalance
-  have hSpan : (registerWord (BuilderRequestDispatch.requestValues
-      (problem.formulaConstraintSlotDirect (constraintIndex problem index)) (request problem index)
-      (BuilderSourcePayload.history problem index remaining hBody))).length +
-      (BuilderSourceTokenRequest.exterior problem index remaining hBody).length ≤
-        (BuilderSourceTokenRequest.spanBound problem.verifier).eval problem.input.length := by
-    rw [← source_request_layout problem index remaining hBody]
-    exact hSourceBounds.1
-  obtain ⟨lookupSteps,child,hLookup,hNo,hObserve,hSpace,hTime⟩ :=
-    BuilderRequestTokenLookup.workRun_polynomial_lookup
-      (problem.formulaConstraintSlotDirect (constraintIndex problem index)) (request problem index)
-      (BuilderSourcePayload.history problem index remaining hBody) (inside problem.input output)
-      (BuilderSourceTokenRequest.exterior problem index remaining hBody)
-      (BuilderSourceTokenRequest.spanBound problem.verifier) problem.input.length
-      (source_exterior_blank problem index remaining hBody) hSpan
-  have hPrepared : workRunExact? BuilderRequestDispatch.machine lookupSteps
-      (workStartConfiguration BuilderRequestDispatch.machine
-        (BuilderSourceTokenRequest.finalConfiguration problem index remaining output hBody).tape) = some child := by
-    rw [BuilderSourceTokenRequest.final_tape,source_request_layout problem index remaining hBody]
-    exact hLookup
-  have hSource := BuilderSourceTokenRequest.workRunExact problem index remaining output hBody
-  have hChain := WorkMachineChain.workRunExact (BuilderSourceTokenRequest.machine problem.verifier)
-    BuilderRequestDispatch.machine (BuilderSourceTokenRequest.workSteps problem index remaining hBody)
-    lookupSteps _ _ _ hSource rfl hPrepared
-  rw [machine_projection,initial_projection] at hChain
-  let steps := BuilderSourceTokenRequest.workSteps problem index remaining hBody + 1 + lookupSteps
-  let final := renameConfiguration WorkMachineChain.secondState child
-  refine ⟨steps,final,hChain,token_stage_tag child,?_,?_,hSpace,?_⟩
-  · exact no_rule_at_second _ _ _ hNo
-  · rw [observe_rename]
-    exact hObserve
-  · have hPrepareTime := hSourceBounds.2
-    simp only [steps,rawTimeBound,NatPolynomial.eval_add,NatPolynomial.eval_constant]
-    omega
+  obtain ⟨steps, _, _, final, hRun, hTag, hNo, hObserve, _, _, _, _, hSpace, hTime⟩ :=
+    workRun_polynomial_lookup_with_frame problem index remaining output hBody hBalance
+  exact ⟨steps, final, hRun, hTag, hNo, hObserve, hSpace, hTime⟩
 
 theorem uniform_polynomial_lookup {language : Language} (problem : VerifierTableauProblem language)
     (index remaining : Nat) (output : List CNFToken)
@@ -311,5 +356,31 @@ theorem uniform_polynomial_lookup {language : Language} (problem : VerifierTable
   obtain ⟨steps,final,hRun,hTag,hNo,hObserve,hSpace,hTime⟩ :=
     workRun_polynomial_lookup problem index remaining output hBody hBalance
   exact ⟨6 * steps,final,hTime,run_compileWorkMachine_mul_of_workRunExact _ _ _ _ hRun,hTag,hNo,hObserve,hSpace⟩
+
+theorem uniform_polynomial_lookup_with_frame {language : Language} (problem : VerifierTableauProblem language)
+    (index remaining : Nat) (output : List CNFToken)
+    (hBody : quotient problem index < count problem)
+    (hBalance : index + remaining = BuilderFullScheduleCursorController.bodySlotCount problem) :
+    ∃ (rawSteps : Nat) (values : List Nat) (resultOutside : List WorkSymbol) (final : WorkConfiguration),
+      rawSteps ≤ (rawTimeBound problem.verifier).eval problem.input.length ∧
+      run (compileWorkMachine (machine problem.verifier)) rawSteps
+        (encodeWorkConfiguration (initialConfiguration problem index remaining output)) = encodeWorkConfiguration final ∧
+      final.state % 3 = 1 ∧
+      WorkMachineProgramGraph.NoRuleAt (machine problem.verifier) final.state ∧
+      observe final = canonicalResult problem index ∧
+      (∃ scratch, values =
+        BuilderOperandRegisters.retainedValues problem index remaining ++ [count problem] ++ scratch) ∧
+      WorkTape.BlankEquivalent final.tape (endTape values (inside problem.input output) resultOutside) ∧
+      BlankExterior resultOutside ∧
+      (registerWord values).length + resultOutside.length ≤
+        (canonicalSpanBound problem.verifier).eval problem.input.length ∧
+      BuilderRequestedPairLookup.storedCells final.tape ≤
+        (inside problem.input output).length + (spanBound problem.verifier).eval problem.input.length := by
+  obtain ⟨steps, values, resultOutside, final, hRun, hTag, hNo, hObserve,
+      hRoot, hFrame, hBlank, hCanonical, hSpace, hTime⟩ :=
+    workRun_polynomial_lookup_with_frame problem index remaining output hBody hBalance
+  exact ⟨6 * steps, values, resultOutside, final, hTime,
+    run_compileWorkMachine_mul_of_workRunExact _ _ _ _ hRun,
+    hTag, hNo, hObserve, hRoot, hFrame, hBlank, hCanonical, hSpace⟩
 
 end PNP.Concrete.CookLevin.BuilderCursorTokenLookup

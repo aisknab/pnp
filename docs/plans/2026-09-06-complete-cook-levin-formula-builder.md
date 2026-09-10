@@ -8496,3 +8496,69 @@ M230 is not earned, and about six uneven coarse packages remain.
 Defer PNPLabs publication. Formal artefact coverage remains 205/207;
 risk-weighted proof estimate is 35% with 20–40% uncertainty; global gates
 are 0/5. No checkpoint score changes.
+
+### Planned original-cursor root propagation through actual token lookup
+
+Legacy anchor: the canonical manuscript's all-input SAT NP-completeness
+construction feeding deterministic SAT decision and final complexity transport.
+Continue the M230 cleanup dependency from the verified all-request frame to
+the original cursor root, rather than accepting another recovery certificate.
+
+The source initializer's proved `source_layout` begins with the actual
+`BuilderOperandRegisters.retainedValues`, followed by the count register and
+further scratch. Derive that nonempty suffix from initialization, then compose
+it with the complete request-token theorem's retained-request witness.
+
+Strengthen `BuilderCursorTokenLookup.workRun_polynomial_lookup_with_frame`
+to construct the actual execution, token-stage tag, stable terminal state,
+exact canonical result, original retained root plus nonempty scratch, a
+blank-equivalent canonical tape, blank exterior, canonical-span polynomial,
+actual-storage bound and raw-time polynomial. Its only premises remain the
+existing body-branch and cursor-balance invariants. Expose the corresponding
+compiled raw execution and preserve every previous public theorem signature.
+
+Update new exact-type and nonempty-suffix regressions before verification.
+Compile the changed cursor-token target, audit all public theorem closures
+in the changed producer and run its affected existing token regressions once.
+Reuse the unchanged lower request/exclusion frame evidence by exact hashes.
+Do not repeat full core, publication or PNPLabs tests for this internal edge.
+
+Outcome-preserving physical recovery remains to be connected; the retained
+frame alone does not close the cleanup stage. The full builder loop, exact
+all-input formula equality, complete polynomial reduction and release gates
+remain mandatory. M230 stays open and no weighted checkpoint is earned.
+Defer PNPLabs publication. Coverage remains 205/207, proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
+
+### Verified original-cursor recovery frame from actual token execution
+
+[`BuilderCursorTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderCursorTokenLookup.lean)
+now derives the original retained cursor registers and a nonempty scratch
+suffix from actual source/request initialization. The count register is the
+first scratch value. This prefix is propagated through complete actual token
+lookup, not supplied as a recovery certificate.
+
+The strengthened work and compiled raw theorems expose the exact execution,
+token-stage state tag, no-rule terminal state and canonical token result,
+together with the retained root, blank-equivalent canonical tape, blank
+exterior and canonical-span polynomial. The original actual-storage and
+raw-time polynomials are unchanged. The only execution premises remain the
+existing body-branch and cursor-balance invariants.
+
+All 14 existing public theorem signatures are preserved. Four new exact-type
+and nonempty-suffix regressions plus the 31 existing cursor-token regressions
+passed, for 35 contracts. All 17 public-theorem axiom checks passed: two using
+only `propext` and fifteen using `propext` and `Quot.sound`.
+None uses project axioms or `Classical.choice`. The unchanged request and
+exclusion frame evidence was reused; no lower-layer, complete core or
+PNPLabs test suite was repeated.
+
+The frame needed by physical root recovery is now derived from the actual
+cursor. The remaining cleanup connection is a bounded machine-control
+handoff that preserves every token outcome while executing physical recovery.
+Do not claim that connection or the whole cleanup stage has been earned yet.
+The full builder loop, exact canonical formula on every input, complete
+polynomial reduction and release gates remain mandatory. M230 stays open;
+about six uneven coarse packages remain. Defer PNPLabs publication.
+Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
