@@ -8748,3 +8748,77 @@ estimate from this count. M230 and its fixed weighted checkpoint remain
 open until all obligations are checked. Defer PNPLabs publication.
 Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
 with 20–40% uncertainty, and global gates 0/5.
+
+
+### Planned outcome-selected continuation entry for the physical builder loop
+
+Legacy anchor: the canonical manuscript's complete all-input SAT formula
+construction. The next M230 dependency edge connects the recovered canonical
+token observation to physical output emission and balanced cursor advancement.
+Both general machines already exist. The appender uses a shared rule table
+with token-specific entry states; padding can skip the appender and enter the
+advance stage directly.
+
+Extend the finite terminal handoff with a fixed six-outcome entry-state map.
+Materialize the selected entry in the finite launch table, not through a
+runtime host lookup or input-supplied selector. Prove exact work and compiled
+raw execution from the chosen entry, retaining the result and charging both
+bridges. Preserve every old public theorem signature and the exact old
+fixed-start machine as the constant-entry specialization.
+
+This is narrower than selecting unrelated continuation programs: the existing
+appender and balanced advancement can share one composed rule table. No
+token-specific machine family, arbitrary numeric state scan or parallel
+notification/publication infrastructure is needed.
+
+Affected contracts are the generic handoff's construction and control/work/raw
+proofs, the new entry-state interface, and actual cursor cleanup through the
+unchanged fixed-start interface. Before building, add exact new theorem types,
+the old complete machine shape, outcome-indexed entry selection, an unusable
+ordinary start, and successful execution from a different entry on every tape
+and for every outcome. Keep the existing generic and actual cursor-cleanup
+regressions unchanged and run them once against the modified dependency.
+Audit all public generic and affected cleanup theorem closures. Compare all
+old generic signatures against the exact base and keep cleanup source bytes
+unchanged.
+
+The next application must implement actual token output and advancement,
+then close the full loop and its terminal case. Do not promote this interface
+alone to loop completion. Exact all-input formula output, complete builder
+polynomial bounds and reduction, and all release gates remain mandatory.
+M230 stays open; about five uneven coarse packages remain.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207,
+risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
+
+### Verified outcome-selected continuation entry states
+
+The [terminal handoff](../../lean/PNP/Concrete/WorkMachineTerminalHandoff.lean)
+now chooses a continuation entry from its fixed six-outcome table. The
+continuation retains one shared finite rule table. Exact work and compiled
+raw execution preserve the result and final tape, charging both launch
+bridges. Constant entries reproduce the previous complete machine shape.
+
+All ten previous public theorem signatures are preserved. The nine new
+regression contracts cover exact theorem types, the old machine shape,
+outcome-indexed entry selection, an unusable ordinary start, and successful
+execution from the selected nondefault entry for every outcome and tape.
+The nineteen existing generic and eighteen actual cursor-cleanup contracts
+also pass unchanged: 46 affected regression contracts in total.
+
+All 26 public generic and affected cursor-cleanup axiom audits pass: three
+use only `propext`, and 23 use `propext` and `Quot.sound`. No project axiom
+or `Classical.choice` enters the closure. Actual cursor-cleanup source bytes
+are unchanged. The final combined run reached its green marker and zero
+exit; earlier failed runs are not completion evidence. No full core or
+PNPLabs suite was repeated.
+
+This closes the entry-selection connection needed to reuse the appender's
+token-specific starts and to skip emission for padding. Physical output
+emission, balanced advancement, the complete loop and its terminal case
+still need to be connected and proved. Exact all-input formula output,
+complete polynomial bounds and the packaged reduction remain required.
+About five uneven major packages remain, not a time estimate. M230 remains
+open. Defer PNPLabs publication: this internal connection does not yet
+change the public bottom line or close a weighted checkpoint.
+Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.

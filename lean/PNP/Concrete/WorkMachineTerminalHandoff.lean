@@ -4,7 +4,9 @@ Copyright (c) 2026 PNP Labs.
 Finite outcome-preserving composition at every reachable no-rule terminal.
 The terminal table is derived from the source program, not supplied by an
 input or correctness certificate. Six disjoint copies of the continuation
-retain the terminal classification. Both tape-preserving bridges are charged.
+retain the terminal classification. An optional fixed entry-state table selects
+where each continuation copy begins; the original fixed-start interface is its
+constant-entry specialization. Both tape-preserving bridges are charged.
 -/
 import PNP.Concrete.WorkMachineProgramGraph
 
@@ -142,18 +144,29 @@ theorem state_ne_outcome (name localState : Nat) (outcome : Fin 6) :
 def sourceRules (source : WorkMachine) : List WorkRule :=
   source.rules.map (renameRule (state 0))
 
-def terminalRules (source after : WorkMachine) (classify : Nat → Fin 6) : List WorkRule :=
+def terminalRulesWithEntries (source _after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6) : List WorkRule :=
   (terminalStates source).flatMap (fun terminal =>
-    launchRules (state 0 terminal) (state ((classify terminal).val + 1) after.startState))
+    launchRules (state 0 terminal) (state ((classify terminal).val + 1) (entry (classify terminal))))
 
 def recoveryBlock (after : WorkMachine) (outcome : Fin 6) : List WorkRule :=
   after.rules.map (renameRule (state (outcome.val + 1))) ++
     launchRules (state (outcome.val + 1) after.acceptState) outcome.val
 
-def machine (source after : WorkMachine) (classify : Nat → Fin 6) : WorkMachine :=
+def machineWithEntries (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6) : WorkMachine :=
   {rules := sourceRules source ++
-      (terminalRules source after classify ++ outcomes.flatMap (recoveryBlock after)),
+      (terminalRulesWithEntries source after entry classify ++ outcomes.flatMap (recoveryBlock after)),
     startState := state 0 source.startState, acceptState := 0, rejectState := 1}
+
+/-- The original fixed-start table is the constant-entry specialization. -/
+def terminalRules (source after : WorkMachine) (classify : Nat → Fin 6) : List WorkRule :=
+  terminalRulesWithEntries source after (fun _ => after.startState) classify
+
+/-- Preserve the original public machine and its exact constant-entry control. -/
+def machine (source after : WorkMachine) (classify : Nat → Fin 6) : WorkMachine :=
+  machineWithEntries source after (fun _ => after.startState) classify
+
+theorem machineWithEntries_constant (source after : WorkMachine) (classify : Nat → Fin 6) :
+    machineWithEntries source after (fun _ => after.startState) classify = machine source after classify := rfl
 
 private theorem query_of_source_ne {left right : WorkRule}
     (h : left.sourceState ≠ right.sourceState) : QueryDistinct left right := by
@@ -210,8 +223,8 @@ private theorem flatMap_pairwise {α : Type} (items : List α) (blocks : α → 
       exact hCross first List.mem_cons_self right (List.mem_cons_of_mem _ hr)
         (fun equality => hParts.1 (equality ▸ hr)) a ha b hbr
 
-private theorem terminal_source (source after : WorkMachine) (classify : Nat → Fin 6)
-    (rule : WorkRule) (h : rule ∈ terminalRules source after classify) :
+private theorem terminal_source (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
+    (rule : WorkRule) (h : rule ∈ terminalRulesWithEntries source after entry classify) :
     ∃ terminal ∈ terminalStates source, rule.sourceState = state 0 terminal := by
   rcases List.mem_flatMap.mp h with ⟨terminal, member, hr⟩
   exact ⟨terminal, member, launch_source hr⟩
@@ -238,11 +251,11 @@ private theorem recovery_pairwise (after : WorkMachine) (outcome : Fin 6)
   exact hNo original member ((state_injective equality).2)
 
 /-- Duplicate source targets and all nine work symbols cannot introduce query collisions. -/
-theorem rules_pairwise (source after : WorkMachine) (classify : Nat → Fin 6)
+theorem rules_pairwise_with_entries (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
     (hSource : source.rules.Pairwise QueryDistinct)
     (hAfter : after.rules.Pairwise QueryDistinct) (hNo : NoRuleAt after after.acceptState) :
-    (machine source after classify).rules.Pairwise QueryDistinct := by
-  have hTerminal : (terminalRules source after classify).Pairwise QueryDistinct := by
+    (machineWithEntries source after entry classify).rules.Pairwise QueryDistinct := by
+  have hTerminal : (terminalRulesWithEntries source after entry classify).Pairwise QueryDistinct := by
     apply flatMap_pairwise _ _ (terminalStates_nodup source)
     · intro terminal _
       exact launch_pairwise _ _
@@ -266,11 +279,11 @@ theorem rules_pairwise (source after : WorkMachine) (classify : Nat → Fin 6)
       have hNames := (state_injective equality).1
       omega
   change (sourceRules source ++
-    (terminalRules source after classify ++ outcomes.flatMap (recoveryBlock after))).Pairwise _
+    (terminalRulesWithEntries source after entry classify ++ outcomes.flatMap (recoveryBlock after))).Pairwise _
   rw [List.pairwise_append, List.pairwise_append]
   refine ⟨renamed_pairwise _ (fixed_injective 0) _ hSource, ⟨hTerminal, hRecovery, ?_⟩, ?_⟩
   · intro a ha b hb
-    rcases terminal_source source after classify a ha with ⟨terminal, _, hA⟩
+    rcases terminal_source source after entry classify a ha with ⟨terminal, _, hA⟩
     rcases List.mem_flatMap.mp hb with ⟨outcome, _, hB⟩
     rcases recovery_source after outcome b hB with ⟨localState, equality⟩
     apply query_of_source_ne
@@ -281,7 +294,7 @@ theorem rules_pairwise (source after : WorkMachine) (classify : Nat → Fin 6)
   · intro a ha b hb
     rcases renamed_source ha with ⟨original, member, hA⟩
     rcases List.mem_append.mp hb with hTerminal | hRecovery
-    · rcases terminal_source source after classify b hTerminal with ⟨terminal, ht, hB⟩
+    · rcases terminal_source source after entry classify b hTerminal with ⟨terminal, ht, hB⟩
       apply query_of_source_ne
       rw [hA, hB]
       intro h
@@ -295,15 +308,15 @@ theorem rules_pairwise (source after : WorkMachine) (classify : Nat → Fin 6)
       omega
 
 /-- Each result state is stable independently of reachability or source well-formedness. -/
-theorem noRuleAt_outcome (source after : WorkMachine) (classify : Nat → Fin 6)
-    (outcome : Fin 6) : NoRuleAt (machine source after classify) outcome.val := by
+theorem noRuleAt_outcome_with_entries (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
+    (outcome : Fin 6) : NoRuleAt (machineWithEntries source after entry classify) outcome.val := by
   intro rule member
   rcases List.mem_append.mp member with hSource | hRest
   · rcases renamed_source hSource with ⟨original, _, equality⟩
     rw [equality]
     exact state_ne_outcome _ _ outcome
   · rcases List.mem_append.mp hRest with hTerminal | hRecovery
-    · rcases terminal_source source after classify rule hTerminal with ⟨terminal, _, equality⟩
+    · rcases terminal_source source after entry classify rule hTerminal with ⟨terminal, _, equality⟩
       rw [equality]
       exact state_ne_outcome _ _ outcome
     · rcases List.mem_flatMap.mp hRecovery with ⟨tag, _, hTag⟩
@@ -326,22 +339,22 @@ private theorem find_member (rules : List WorkRule) (selected : WorkRule)
         · intro hMatch
           exact hParts.1 selected hRest (Prod.ext hMatch.1 hMatch.2)
 
-private theorem running_not_halted (source after : WorkMachine) (classify : Nat → Fin 6)
+private theorem running_not_halted (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
     (name localState : Nat) (tape : WorkTape) :
-    (machine source after classify).isHalted {state := state name localState, tape := tape} = false := by
+    (machineWithEntries source after entry classify).isHalted {state := state name localState, tape := tape} = false := by
   have hZero : state name localState ≠ 0 := state_ne_outcome name localState (0 : Fin 6)
   have hOne : state name localState ≠ 1 := state_ne_outcome name localState (1 : Fin 6)
-  simpa only [WorkMachine.isHalted, machine, Bool.or_eq_false_iff, beq_eq_false_iff_ne] using
+  simpa only [WorkMachine.isHalted, machineWithEntries, Bool.or_eq_false_iff, beq_eq_false_iff_ne] using
     And.intro hZero hOne
 
-private theorem source_rule_mem (source after : WorkMachine) (classify : Nat → Fin 6)
+private theorem source_rule_mem (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
     (rule : WorkRule) (h : rule ∈ source.rules) :
-    renameRule (state 0) rule ∈ (machine source after classify).rules :=
+    renameRule (state 0) rule ∈ (machineWithEntries source after entry classify).rules :=
   List.mem_append_left _ (List.mem_map.mpr ⟨rule, h, rfl⟩)
 
-private theorem recovery_rule_mem (source after : WorkMachine) (classify : Nat → Fin 6)
+private theorem recovery_rule_mem (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
     (outcome : Fin 6) (rule : WorkRule) (h : rule ∈ after.rules) :
-    renameRule (state (outcome.val + 1)) rule ∈ (machine source after classify).rules :=
+    renameRule (state (outcome.val + 1)) rule ∈ (machineWithEntries source after entry classify).rules :=
   List.mem_append_right _ (List.mem_append_right _ (List.mem_flatMap.mpr
     ⟨outcome, outcomes_mem outcome, List.mem_append_left _ (List.mem_map.mpr ⟨rule, h, rfl⟩)⟩))
 
@@ -365,17 +378,17 @@ private theorem lift_step (original combined : WorkMachine) (name : Nat)
   rw [hFinal]
   exact h
 
-private theorem bridge_step (source after : WorkMachine) (classify : Nat → Fin 6)
-    (hPairwise : (machine source after classify).rules.Pairwise QueryDistinct)
+private theorem bridge_step (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
+    (hPairwise : (machineWithEntries source after entry classify).rules.Pairwise QueryDistinct)
     (name localState target : Nat) (tape : WorkTape)
     (hMembers : ∀ symbol, launchRule (state name localState) target symbol ∈
-      (machine source after classify).rules) :
-    workStep? (machine source after classify) {state := state name localState, tape := tape} =
+      (machineWithEntries source after entry classify).rules) :
+    workStep? (machineWithEntries source after entry classify) {state := state name localState, tape := tape} =
       some {state := target, tape := tape} := by
   have hFind := find_member _ (launchRule (state name localState) target tape.head)
     hPairwise (hMembers tape.head)
   have h := workStep?_eq_apply_of_find _ _ _
-    (running_not_halted source after classify name localState tape) hFind
+    (running_not_halted source after entry classify name localState tape) hFind
   exact h
 
 private theorem launch_member (source target : Nat) (symbol : WorkSymbol) :
@@ -384,6 +397,80 @@ private theorem launch_member (source target : Nat) (symbol : WorkSymbol) :
 
 /-- The source, launch, continuation and finish execute in one finite machine.
 The classification is retained even when the continuation erases all scratch. -/
+theorem workRunExact_with_entries (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
+    (sourceSteps afterSteps : Nat) (initial : WorkTape) (middle : WorkConfiguration) (finalTape : WorkTape)
+    (hSourceRules : source.rules.Pairwise QueryDistinct)
+    (hAfterRules : after.rules.Pairwise QueryDistinct) (hAfterNo : NoRuleAt after after.acceptState)
+    (hSource : workRunExact? source sourceSteps (workStartConfiguration source initial) = some middle)
+    (hTerminal : NoRuleAt source middle.state)
+    (hAfter : workRunExact? after afterSteps {state := entry (classify middle.state), tape := middle.tape} =
+      some {state := after.acceptState, tape := finalTape}) :
+    workRunExact? (machineWithEntries source after entry classify) (sourceSteps + 1 + afterSteps + 1)
+      (workStartConfiguration (machineWithEntries source after entry classify) initial) =
+      some {state := (classify middle.state).val, tape := finalTape} := by
+  have hPairwise := rules_pairwise_with_entries source after entry classify hSourceRules hAfterRules hAfterNo
+  let outcome := classify middle.state
+  have hFirst := PipelineStageBridges.workRunExact?_transport source (machineWithEntries source after entry classify)
+    (state 0) (lift_step source _ 0 hPairwise (source_rule_mem source after entry classify)
+      (running_not_halted source after entry classify 0))
+    sourceSteps (workStartConfiguration source initial) middle hSource
+  have hMember := reached_terminal_mem source sourceSteps initial middle hSource hTerminal
+  have hLaunch := bridge_step source after entry classify hPairwise 0 middle.state
+    (state (outcome.val + 1) (entry outcome)) middle.tape (by
+      intro symbol
+      exact List.mem_append_right _ (List.mem_append_left _ (List.mem_flatMap.mpr
+        ⟨middle.state, hMember, launch_member _ _ symbol⟩)))
+  have hNext := PipelineStageBridges.workRunExact?_transport after (machineWithEntries source after entry classify)
+    (state (outcome.val + 1))
+    (lift_step after _ _ hPairwise (recovery_rule_mem source after entry classify outcome)
+      (running_not_halted source after entry classify _))
+    afterSteps {state := entry (classify middle.state), tape := middle.tape}
+    {state := after.acceptState, tape := finalTape} hAfter
+  have hFinish := bridge_step source after entry classify hPairwise (outcome.val + 1) after.acceptState
+    outcome.val finalTape (by
+      intro symbol
+      exact List.mem_append_right _ (List.mem_append_right _ (List.mem_flatMap.mpr
+        ⟨outcome, outcomes_mem outcome, List.mem_append_right _ (launch_member _ _ symbol)⟩)))
+  have hLaunchRun : workRunExact? (machineWithEntries source after entry classify) 1
+      (renameConfiguration (state 0) middle) =
+      some (renameConfiguration (state (outcome.val + 1)) {state := entry (classify middle.state), tape := middle.tape}) := by
+    simp only [workRunExact?, renameConfiguration, hLaunch]
+    rfl
+  have hFinishRun : workRunExact? (machineWithEntries source after entry classify) 1
+      (renameConfiguration (state (outcome.val + 1)) {state := after.acceptState, tape := finalTape}) =
+      some {state := outcome.val, tape := finalTape} := by
+    simp only [workRunExact?, renameConfiguration, hFinish]
+  have hJoin := PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hFirst hLaunchRun
+  have hJoin := PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hJoin hNext
+  exact PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hJoin hFinishRun
+
+theorem run_compile_exact_with_entries (source after : WorkMachine) (entry : Fin 6 → Nat) (classify : Nat → Fin 6)
+    (sourceSteps afterSteps : Nat) (initial : WorkTape) (middle : WorkConfiguration) (finalTape : WorkTape)
+    (hSourceRules : source.rules.Pairwise QueryDistinct)
+    (hAfterRules : after.rules.Pairwise QueryDistinct) (hAfterNo : NoRuleAt after after.acceptState)
+    (hSource : workRunExact? source sourceSteps (workStartConfiguration source initial) = some middle)
+    (hTerminal : NoRuleAt source middle.state)
+    (hAfter : workRunExact? after afterSteps {state := entry (classify middle.state), tape := middle.tape} =
+      some {state := after.acceptState, tape := finalTape}) :
+    run (compileWorkMachine (machineWithEntries source after entry classify)) (6 * (sourceSteps + 1 + afterSteps + 1))
+      (encodeWorkConfiguration (workStartConfiguration (machineWithEntries source after entry classify) initial)) =
+      encodeWorkConfiguration {state := (classify middle.state).val, tape := finalTape} :=
+  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
+    (workRunExact_with_entries source after entry classify sourceSteps afterSteps initial middle finalTape
+      hSourceRules hAfterRules hAfterNo hSource hTerminal hAfter)
+
+/-! Original public execution and control contracts remain unchanged. -/
+
+theorem rules_pairwise (source after : WorkMachine) (classify : Nat → Fin 6)
+    (hSource : source.rules.Pairwise QueryDistinct)
+    (hAfter : after.rules.Pairwise QueryDistinct) (hNo : NoRuleAt after after.acceptState) :
+    (machine source after classify).rules.Pairwise QueryDistinct :=
+  rules_pairwise_with_entries source after (fun _ => after.startState) classify hSource hAfter hNo
+
+theorem noRuleAt_outcome (source after : WorkMachine) (classify : Nat → Fin 6)
+    (outcome : Fin 6) : NoRuleAt (machine source after classify) outcome.val :=
+  noRuleAt_outcome_with_entries source after (fun _ => after.startState) classify outcome
+
 theorem workRunExact (source after : WorkMachine) (classify : Nat → Fin 6)
     (sourceSteps afterSteps : Nat) (initial : WorkTape) (middle : WorkConfiguration) (finalTape : WorkTape)
     (hSourceRules : source.rules.Pairwise QueryDistinct)
@@ -394,41 +481,8 @@ theorem workRunExact (source after : WorkMachine) (classify : Nat → Fin 6)
       some {state := after.acceptState, tape := finalTape}) :
     workRunExact? (machine source after classify) (sourceSteps + 1 + afterSteps + 1)
       (workStartConfiguration (machine source after classify) initial) =
-      some {state := (classify middle.state).val, tape := finalTape} := by
-  have hPairwise := rules_pairwise source after classify hSourceRules hAfterRules hAfterNo
-  let outcome := classify middle.state
-  have hFirst := PipelineStageBridges.workRunExact?_transport source (machine source after classify)
-    (state 0) (lift_step source _ 0 hPairwise (source_rule_mem source after classify)
-      (running_not_halted source after classify 0))
-    sourceSteps (workStartConfiguration source initial) middle hSource
-  have hMember := reached_terminal_mem source sourceSteps initial middle hSource hTerminal
-  have hLaunch := bridge_step source after classify hPairwise 0 middle.state
-    (state (outcome.val + 1) after.startState) middle.tape (by
-      intro symbol
-      exact List.mem_append_right _ (List.mem_append_left _ (List.mem_flatMap.mpr
-        ⟨middle.state, hMember, launch_member _ _ symbol⟩)))
-  have hNext := PipelineStageBridges.workRunExact?_transport after (machine source after classify)
-    (state (outcome.val + 1))
-    (lift_step after _ _ hPairwise (recovery_rule_mem source after classify outcome)
-      (running_not_halted source after classify _))
-    afterSteps (workStartConfiguration after middle.tape)
-    {state := after.acceptState, tape := finalTape} hAfter
-  have hFinish := bridge_step source after classify hPairwise (outcome.val + 1) after.acceptState
-    outcome.val finalTape (by
-      intro symbol
-      exact List.mem_append_right _ (List.mem_append_right _ (List.mem_flatMap.mpr
-        ⟨outcome, outcomes_mem outcome, List.mem_append_right _ (launch_member _ _ symbol)⟩)))
-  have hLaunchRun : workRunExact? (machine source after classify) 1
-      (renameConfiguration (state 0) middle) =
-      some (renameConfiguration (state (outcome.val + 1)) (workStartConfiguration after middle.tape)) := by
-    simp only [workRunExact?, renameConfiguration, workStartConfiguration, hLaunch]
-  have hFinishRun : workRunExact? (machine source after classify) 1
-      (renameConfiguration (state (outcome.val + 1)) {state := after.acceptState, tape := finalTape}) =
-      some {state := outcome.val, tape := finalTape} := by
-    simp only [workRunExact?, renameConfiguration, hFinish]
-  have hJoin := PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hFirst hLaunchRun
-  have hJoin := PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hJoin hNext
-  exact PipelineMachineSimulation.workRunExact?_compose _ _ _ _ _ _ hJoin hFinishRun
+      some {state := (classify middle.state).val, tape := finalTape} :=
+  workRunExact_with_entries source after (fun _ => after.startState) classify sourceSteps afterSteps initial middle finalTape hSourceRules hAfterRules hAfterNo hSource hTerminal hAfter
 
 theorem run_compile_exact (source after : WorkMachine) (classify : Nat → Fin 6)
     (sourceSteps afterSteps : Nat) (initial : WorkTape) (middle : WorkConfiguration) (finalTape : WorkTape)
@@ -441,8 +495,6 @@ theorem run_compile_exact (source after : WorkMachine) (classify : Nat → Fin 6
     run (compileWorkMachine (machine source after classify)) (6 * (sourceSteps + 1 + afterSteps + 1))
       (encodeWorkConfiguration (workStartConfiguration (machine source after classify) initial)) =
       encodeWorkConfiguration {state := (classify middle.state).val, tape := finalTape} :=
-  run_compileWorkMachine_mul_of_workRunExact _ _ _ _
-    (workRunExact source after classify sourceSteps afterSteps initial middle finalTape
-      hSourceRules hAfterRules hAfterNo hSource hTerminal hAfter)
+  run_compile_exact_with_entries source after (fun _ => after.startState) classify sourceSteps afterSteps initial middle finalTape hSourceRules hAfterRules hAfterNo hSource hTerminal hAfter
 
 end PNP.Concrete.WorkMachineTerminalHandoff
