@@ -9264,3 +9264,86 @@ Final inventories, core merge verification and major PNPLabs publication
 remain required. M230 is still open; defer website publication. Risk-weighted
 proof estimate remains 35%, uncertainty 20–40%, formal artefact coverage
 205/207, and global gates closed 0/5.
+
+### Planned complete machine and polynomial reduction packaging
+
+Legacy anchor and external interfaces remain exactly those selected at the
+start of M230: the canonical manuscript's SAT complexity transport needs the
+complete all-input Cook-Levin construction in the selected concrete model.
+Compose the source-derived full builder with the now-verified output finalizer,
+charging the intervening launch. Transport its actual blank-equivalent cursor
+to the finalizer; use the existing encoded-output blank-invariance theorem.
+
+Apply the already-proved ordinary-input bridge to the complete compiled
+machine. Establish acceptance and exact machineOutput for every input at one
+fixed polynomial raw budget. Include all initializer, loop, finalizer and
+bridge costs in that original-input bound; retain the canonical encoded-size
+bound. Package the literal machine as a PolynomialTimeFunction, and verify
+that the existing recursive RawRefinement compiler applies to the whole
+program and preserves its exact output.
+
+Implement the original formulaBuilder, formulaBuilder_output,
+polynomialReduction and cook_levin_formula_builder_checked_complete interfaces.
+Only after executable output equality, reuse the canonical formula's existing
+CNFSAT membership equivalence to prove the reduction. No supplied execution,
+family, output correctness or runtime certificate is added to these interfaces.
+
+Prepare universal exact-type, ordinary-input, no-timeout, complete cost/size,
+finite-machine-leaf, reduction-membership and recursive-refinement regressions
+with the source, and audit every new public theorem. Reuse the unchanged
+component proofs; no full core or website suite belongs in this targeted step.
+Root import, reviewed theorem/type/axiom inventories, status and publication
+integration, final core checks and the major PNPLabs release remain due.
+Do not award M230 or weighted credit before that complete integration passes.
+
+Axiom review before this packaging check: the immutable publication allowlist
+contains propext, Quot.sound and Classical.choice. The reused canonical formula
+membership equivalence already uses that standard classical foundation. Require
+the four executable-machine/output/refinement theorem closures to remain free
+of Classical.choice; require the two reduction-facing closures to match the
+existing semantic dependency exactly. This changes no publication allowlist or
+theorem statement. It corrects the temporary component runner's blanket
+choice-free expectation at a boundary that now packages the semantic reduction.
+Replace only the raw acceptance proof's broad simplification with constructive
+rewriting; retain every prepared regression and the complete original target.
+
+### Verified complete concrete formula builder and polynomial reduction
+
+[CookLevinCompleteBuilder](../../lean/PNP/Concrete/CookLevinCompleteBuilder.lean)
+now implements the exact all-input interfaces selected at the start of M230.
+One fixed finite machine runs the source-derived complete builder, launches
+the physical output finalizer, and accepts with exactly the canonical encoded
+tableau formula as its ordinary raw output. The ordinary-input bridge covers
+every bitstring, including empty and odd input lengths, without a supplied
+family, execution trace, output witness or correctness certificate.
+
+The PolynomialTimeFunction is an actual machine leaf. Its original-input
+polynomial budget includes initialization, every loop step, the inter-stage
+launch and finalization; total halting and the canonical encoded-output-size
+bound are proved. The recursive RawRefinement compiler preserves the complete
+function's exact output. The packaged PolynomialReduction uses that actual
+function and the existing canonical CNFSAT membership equivalence for every
+polynomial-time verifier language.
+
+All 14 prepared regression contracts and six public axiom probes pass. The
+four machine/output/refinement closures use only propext and Quot.sound.
+The two reduction-facing closures additionally contain Classical.choice from
+the existing formula-semantics theorem, exactly as permitted by the immutable
+publication allowlist. A private dependency probe isolated an accidental
+classical simplification in raw acceptance; constructive rewriting removed it
+without changing any theorem type, machine or regression. The semantic
+reduction's inherited standard foundation is recorded, not hidden or confused
+with a project-specific axiom.
+
+The targeted run reached its own final green marker and terminal zero exit.
+Unchanged component evidence was reused; no full core or website suite was
+duplicated. The complete builder is verified at this module boundary, but M230
+is not yet earned: the root import, compiled inventory and type fingerprints,
+status/publication contracts, hostile tests, full core verification, merge
+checks and exact-merge reproduction remain due. This substantial end-to-end
+capability warrants a major PNPLabs publication once that integration is earned.
+
+Until those gates pass, keep the coherent M229 public snapshot unchanged:
+risk-weighted proof estimate 35%, uncertainty 20–40%, formal artefact coverage
+205/207, global gates closed 0/5. This construction does not prove deterministic
+CNFSAT in P, unconditional ZeroSlack, exact residual minimization, or P = NP.
