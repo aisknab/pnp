@@ -8244,3 +8244,74 @@ packaged reduction, final core verification/merge and major publication remain
 mandatory. M230 and its fixed checkpoint are still open. Defer PNPLabs
 publication; formal artefact coverage remains 205/207, proof estimate 35% with
 20–40% uncertainty, and global gates 0/5.
+
+### Planned physical root cleanup and return to the actual cursor
+
+Legacy anchor: the canonical manuscript's SAT NP-completeness construction,
+used by its deterministic SAT decision and final complexity transport. M230
+must construct the complete canonical formula on every input, not a finite
+schedule prefix. The current dependency edge is from token-selection scratch
+to a reusable original cursor for the next iteration.
+
+Reuse the proved arbitrary-history root eraser, then execute a fixed four-rule
+return scan. The unbounded abstraction is every retained root list and every
+nonempty discarded suffix, with arbitrary source head, source/output tail and
+exterior cells. Only the retained root count determines the finite program.
+For the actual builder it is derived from the fixed verifier's initialization
+polynomials, not from the input or computed scratch length.
+
+The target contract is literal execution from
+`endTape (before ++ [value] ++ after) (leftMarker :: head :: tail) outside`
+to `sourceTape head tail (registerWord before) clearedOutside`, where the
+complete discarded word is replaced by blanks and every existing exterior cell
+is preserved. Prove exact raw execution, a terminal endpoint, unchanged stored
+cell count, blank-equivalent cursor restoration where exteriors are blank, and
+the bound `6 * (5 * inputSpan + 10)` on raw runtime. Specialize the retained
+root length and returned frame to the actual initialized builder cursor.
+
+Affected producer/consumer contracts: one new Lean recovery module and its
+exact-type, axiom and independent regression fixtures; this plan records the
+claim boundary. Existing token lookup statements, inventory name sets, status,
+public checkpoint score and website outputs are unchanged. Build only the new
+dependency target, then audit its public declarations and run its focused
+regression module; reuse unchanged upstream proof evidence.
+
+This component must not be reported as completed outcome-preserving token
+integration. The actual selector endpoints still need to expose their retained
+root frame and connect to recovery while preserving each token result. The
+complete loop, exact all-input formula equality, packaged polynomial reduction,
+final core gates and major publication remain mandatory. M230 stays open;
+defer PNPLabs publication and award no weighted progress credit here.
+
+### Verified arbitrary-history root erasure and cursor return
+
+[`BuilderCursorRecovery`](../../lean/PNP/Concrete/CookLevinBuilderCursorRecovery.lean)
+now executes the existing arbitrary-suffix root eraser followed by a fixed
+four-rule return scan. It preserves every retained register, the actual input
+head, the entire input/output tail and every exterior cell beyond the erased
+suffix. The exact stored-cell count is unchanged. Cleared blank exteriors can
+differ in finite length while denoting the same recovered cursor.
+
+The program's retained-root count is derived from the verifier's initialization
+syntax. It does not depend on input values or the variable-length scratch
+history. Exact work and compiled raw execution cover arbitrary retained roots,
+including empty roots, zero-valued scratch and arbitrary nonblank exterior
+data. The complete erasure, handoff and return require at most
+`6 * (5 * inputSpan + 10)` raw steps.
+
+All 28 regression contracts and 18 public-declaration axiom checks passed:
+five axiom-free, two using only `propext`, and eleven using `propext` and
+`Quot.sound`. None uses project axioms or `Classical.choice`. The focused
+target reused unchanged upstream evidence; no whole-root or PNPLabs proof
+suite was repeated.
+
+This establishes the physical recovery component, not the entire second
+coarse stage. Its scratch-frame interface must still be derived from all
+actual token-lookup endpoints, and their distinct results must survive the
+control handoff. No supplied scratch certificate is permitted in the final
+source-cursor theorem. The full loop, exact formula equality, complete
+polynomial reduction, final core verification/merge and major publication
+remain open. M230 is not earned; the estimated six remaining coarse packages
+are unchanged. Defer PNPLabs publication. Formal artefact coverage remains
+205/207, risk-weighted proof estimate 35% with 20–40% uncertainty, and global
+gates 0/5.
