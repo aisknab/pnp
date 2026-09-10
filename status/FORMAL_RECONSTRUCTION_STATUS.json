@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -744,10 +744,10 @@
   "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitOneStepShortNonhaltingFormalized": true,
   "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitExternalInputSizePolynomialFormalized": true,
   "leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralRawLoopFormalized": false,
-  "leanConcreteCookLevinBuilderDynamicCursorFormalized": false,
-  "leanConcreteCookLevinFormulaBuilderFormalized": false,
-  "leanConcreteCookLevinBuilderRawRefinementFormalized": false,
-  "leanConcreteCookLevinBuilderPolynomialReductionFormalized": false,
+  "leanConcreteCookLevinBuilderDynamicCursorFormalized": true,
+  "leanConcreteCookLevinFormulaBuilderFormalized": true,
+  "leanConcreteCookLevinBuilderRawRefinementFormalized": true,
+  "leanConcreteCookLevinBuilderPolynomialReductionFormalized": true,
   "leanConcretePipelineStateNamespaceFormalized": true,
   "leanConcretePipelineStateNamespaceAxiomAuditPassed": true,
   "leanConcretePipelineStateNamespaceAuditedDeclarationCount": 39,
@@ -1835,6 +1835,7 @@
     "node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs",
+    "node --test audits/lean-concrete-cook-levin-complete-builder0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs",
     "node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs",
@@ -1977,7 +1978,9 @@
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinCompleteBuilderAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinCompleteBuilder.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean",
     "lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean",
@@ -2469,7 +2472,7 @@
     "The concrete bitstring, natural-polynomial, and finite-rule machine kernel is consumed by a finite charged-pipeline P/NP/reduction interface, and every finite function/decision program tree now has a literal raw-machine refinement with a recursively generated polynomial bound. This closes only the concrete machine link.",
     "The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.",
     "The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.",
-    "CookLevinRawTapeBridge proves that the finite tableau semantics exactly represent ordinary two-sided raw Tape execution for both input-only and paired-certificate verifier modes, and derives CNFSAT problem.encodedFormula iff language problem.input. CookLevinFormulaSize supplies the external encoded-formula-size polynomial, CookLevinFormulaSchedule supplies an exact answer-independent padded slot schedule, CookLevinFormulaCursor supplies direct coordinate decoders plus exact fuelled traversal, and BuilderInputLength supplies the first literal raw builder stage: an input-preserving unary length tally. Formula emission, a complete raw finite formula builder, a concrete PolynomialReduction, CNFSAT NP-completeness, CNFSAT in P, and P = NP remain absent.",
+    "CookLevinRawTapeBridge proves that the finite tableau semantics exactly represent ordinary two-sided raw Tape execution for both input-only and paired-certificate verifier modes, and derives CNFSAT problem.encodedFormula iff language problem.input. CookLevinFormulaSize supplies the external encoded-formula-size polynomial, CookLevinFormulaSchedule supplies an exact answer-independent padded slot schedule, CookLevinFormulaCursor supplies direct coordinate decoders plus exact fuelled traversal, and BuilderInputLength supplies the first literal raw builder stage: an input-preserving unary length tally. M230 now composes the complete all-input raw formula loop and physical finalizer, proves exact ordinary output, total polynomial runtime and output size, and packages the concrete PolynomialReduction with RawRefinement. Component descriptions below retain their original module-specific scope; their missing-builder limitations do not describe the completed M230 route. Separate concrete NP-completeness transport, CNFSAT in P, unconditional ZeroSlack, full polynomial PCCMin and P = NP remain open.",
     "CookLevinFormulaSize bounds the actual canonical unary-indexed CNF bitstring by an explicit fixed-verifier NatPolynomial evaluated only at external source-input length. Exact codec costs, both input modes, all concrete constraint families, program and clause counts, and clause width are covered. This is an output-size theorem only: it does not implement or time a raw finite formula builder or package a PolynomialReduction.",
     "CookLevinFormulaSchedule allocates exact rectangular constraint, clause, token, and raw-bit slots without reading the canonical program, formula, token encoding, or encoded formula as schedule inputs. Filtering populated slots reproduces those existing canonical objects, and the bit-slot count is exactly encodedFormulaSizePolynomial at external input length. This is a pure schedule specification: it is not a raw finite builder, a construction-runtime theorem, a RawRefinement, or a PolynomialReduction.",
     "CookLevinFormulaCursor decodes constraint, clause, token, and raw-bit coordinates without constructing the complete canonical program, formula, token stream, or encoded formula. Its nested options distinguish out-of-range, valid padding, and populated slots; exact prefix, full, one-step-short, terminal, and excess-fuel theorems reproduce the canonical schedule and encoded output. A token-level specification cursor now exposes exact in-range, done, and terminal single-step laws. This remains a Lean specification cursor, not a constant-time raw slot interpreter, raw finite builder, construction-runtime theorem, RawRefinement, or PolynomialReduction.",
@@ -2657,7 +2660,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "9baa336a49724c0d61e2f13351419b6dddcb5e3262cd3a26848a6ca6496aa377",
+    "actualSourceClosureSha256": "175d8c223198d0b9ba8e97aa3d5628f70d97c65b998546e44c3b3fa4671ca20c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2687,22 +2690,22 @@
     },
     "passed": false
   },
-  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-05-229",
+  "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "1e4794c752a065610a470b36b304b4a18b095cfe57672695c742669e6f6e4ecd",
+  "leanTheoremInventorySha256": "6b6303f93b3c9fe70fa208482e63342c2d667a52e81dd0f69a96f5a9367a7203",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 33973,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 16029,
-  "leanTheoremInventoryTheoremCount": 17525,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 8207,
-  "leanTheoremInventorySourceClosureModuleCount": 349,
-  "leanSourceClosureSha256": "9baa336a49724c0d61e2f13351419b6dddcb5e3262cd3a26848a6ca6496aa377",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-05-229",
+  "leanTheoremInventoryDeclarationCount": 46092,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19720,
+  "leanTheoremInventoryTheoremCount": 25320,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11029,
+  "leanTheoremInventorySourceClosureModuleCount": 496,
+  "leanSourceClosureSha256": "175d8c223198d0b9ba8e97aa3d5628f70d97c65b998546e44c3b3fa4671ca20c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-10-230",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "fb6d002ac88615661ea88d5eff29a78ba8df3d377e7df1ecbcc1a674eb104084",
+  "formalPublicationMapSha256": "2307cd9a5eff0a143b42dad4ceee9c94d61444b9290ac7bcd8ef074a2050f0dd",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -48431,9 +48434,107 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cook-levin-complete-builder",
+      "title": "Complete all-input Cook-Levin formula builder and reduction",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.formulaBuilderMachine_accept",
+        "PNP.Concrete.CookLevin.formulaBuilderMachine_output",
+        "PNP.Concrete.CookLevin.formulaBuilder_output",
+        "PNP.Concrete.CookLevin.formulaBuilder_rawRefinement_output",
+        "PNP.Concrete.CookLevin.polynomialReduction_output",
+        "PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete"
+      ],
+      "scope": "For every concrete polynomial verifier and every ordinary raw bitstring, including empty and odd-length inputs, M230 runs the complete source-derived formula loop and physical output finalizer in one finite raw machine. Its exact ordinary output is the original canonical encoded Cook-Levin CNF formula, with total halting, runtime and output-size bounds polynomial in the original input length. The concrete PolynomialTimeFunction is a machine leaf; recursive FunctionProgram.RawRefinement preserves its output. The packaged PolynomialReduction to CNFSAT uses the already checked original formula semantics. No accepting certificate, execution trace, route, finite family, rank map or correctness certificate is supplied by the caller.",
+      "nonClaim": "This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom.",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_accept",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f78cfac94de5b6d1c2e461b4542527ddb8490796f83741389238daf13c48f048",
+          "expectedKernelTypeSha256": "f78cfac94de5b6d1c2e461b4542527ddb8490796f83741389238daf13c48f048",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "51f7ea88d2b8333cb5bfefd5d7c6b122c895e90b13508d7b48a5b00952d440f3",
+          "expectedKernelTypeSha256": "51f7ea88d2b8333cb5bfefd5d7c6b122c895e90b13508d7b48a5b00952d440f3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.formulaBuilder_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9517c55b7e470350cfec99950cd933ddc6455e7d158c94f8b85eece418e28293",
+          "expectedKernelTypeSha256": "9517c55b7e470350cfec99950cd933ddc6455e7d158c94f8b85eece418e28293",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.formulaBuilder_rawRefinement_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5afca0de879c1ff185aab5093c5622d7bc606404c2f05361c7bfa1231aa1b06e",
+          "expectedKernelTypeSha256": "5afca0de879c1ff185aab5093c5622d7bc606404c2f05361c7bfa1231aa1b06e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.polynomialReduction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5957ea8d28eb75362bba1cfb0dba94d3840d139b2904899c2c8a61b2423698ed",
+          "expectedKernelTypeSha256": "5957ea8d28eb75362bba1cfb0dba94d3840d139b2904899c2c8a61b2423698ed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7c319be45d775041419206e62eec233cda9c000839b697d43f7e2bc25423b35c",
+          "expectedKernelTypeSha256": "7c319be45d775041419206e62eec233cda9c000839b697d43f7e2bc25423b35c",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-05-229",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-10-230",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -99,15 +99,15 @@
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 33973 \\
-Theorem-kind declarations & 17525 \\
-Assumption-free theorem-kind declarations & 8207 \\
+Compiled declarations & 46092 \\
+Theorem-kind declarations & 25320 \\
+Assumption-free theorem-kind declarations & 11029 \\
 Project-specific axioms & 0 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{1e4794c752a065610a470b36b304b4a18b095cfe57672695c742669e6f6e4ecd}\par}
+{\small Inventory SHA-256: \code{6b6303f93b3c9fe70fa208482e63342c2d667a52e81dd0f69a96f5a9367a7203}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -139,6 +139,33 @@ equivalent to ordinary raw verifier execution in both input modes. It now also b
 canonical unary-indexed formula encoding by an explicit fixed-verifier polynomial evaluated only at
 external source-input length. That output-size theorem does not execute the formula builder as a raw
 finite machine, prove its construction runtime, or package a concrete polynomial reduction.
+
+M230 now completes the all-input construction. For every concrete polynomial
+verifier and every ordinary raw bitstring, one finite machine executes the
+source-derived full loop and physical finalizer, and its ordinary output is
+exactly the original canonical formula. Total runtime and encoded output size
+are polynomial in the original input length. The machine-leaf
+\code{PolynomialTimeFunction}, its recursive \code{RawRefinement} output
+theorem, and the exact \code{PolynomialReduction} to \code{CNFSAT} are checked.
+No execution trace, route, finite family or correctness certificate is supplied.
+Seven public execution-side closures use only \code{propext} and
+\code{Quot.sound}; the reduction and its two endpoints additionally inherit
+the already permitted standard \code{Classical.choice} from formula semantics.
+The component descriptions below retain their original individual scope;
+their incomplete-builder limitations do not describe the completed M230 route.
+
+\subsection*{Separate progress measurements}
+Formal artefact coverage: 206 of 208 current
+scoped publication rows earned. This is evidence-ledger coverage, not proof
+completion; its denominator can grow.
+The risk-weighted proof completion estimate is 38 percent,
+with an uncertainty range of 20 to 40 percent.
+Global gates closed: 0 of 5.
+These values are read from the canonical fixed-checkpoint progress ledger.
+M230 earns only the existing complete-builder checkpoint. The estimate is not
+a probability of correctness or a time estimate. Concrete NP-completeness
+transport, deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin
+and the eligible root theorem remain open.
 
 The concrete CNF-to-NAND development traverses any decoded formula
 structurally and constructs an intrinsically topological NAND circuit without
@@ -1334,7 +1361,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 3169 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 3175 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -1552,14 +1579,15 @@ Concrete standard P-versus-NP target and root theorem & not-formalized & Raw-mac
 All-route staged-request physical dispatch & formalized-foundation-only & For every concrete verifier problem and every coordinate in its complete post-header schedule, M227 runs M226's fixed terminal-joined classifier over a protected canonical optional-token request, proves common body-or-Finish terminal geometry, crosses the blank-free classifier prefix with M225's fixed 14-rule request relay, and executes M217's reflected fixed 64-rule dispatcher to the exact next canonical emitted prefix. The resulting collision-free 816-rule composition has exact work, six-for-one compiled, one-step-short and source-input-size polynomial evidence. All 65 public declarations are axiom-audited: 23 have empty closure, four use only propext, and 38 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone keeps the canonical optional-token request explicitly staged on the protected initial tape. It does not synthesize the request from raw classifier state, connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP. \\
 All-route derived-Finish physical request split & formalized-foundation-only & For every concrete verifier problem and every coordinate in its complete post-header schedule, M228 runs M226's terminal-joined classifier without a staged request cell. A fixed 20-rule relay reads the physical body-or-Finish terminal, crosses the exact blank-free classifier prefix, writes a collision-free body-pending marker for every body route, and writes the canonical Finish request only for the unique Finish route. A fixed 65-rule conditional reflected dispatcher rejects the body-pending marker and sends Finish to the exact next canonical emitted prefix. The collision-free 823-rule composition has exact work, six-for-one compiled, one-step-short and source-input-size polynomial evidence. All 91 public declarations are axiom-audited: 50 have empty closure, 18 use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone derives only the unique Finish request. Every body route halts at an explicit non-request pending marker; body-token and padding request synthesis remain open. It does not connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP. \\
 All-route physical body-remainder split & formalized-foundation-only & For every concrete verifier problem and every coordinate in its complete post-header schedule, M229 runs M228 without a staged request, route, remainder or success certificate. It preserves the completed Finish endpoint and sends every body route through one fixed 36-rule physical scanner. The scanner crosses the retained clause-count and exterior boundaries, skips consumed-dividend marks, and distinguishes zero from positive remainder by the actual separator or unit symbol. The physical remainder equals the canonical body token coordinate. The collision-free 895-rule graph has exact work, six-for-one compiled execution, one-step-short nonhalting, and a verifier-input-size polynomial bound. All 71 public declarations are axiom-audited: 39 have empty closure, nine use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone reads the physical body remainder but leaves clause occupancy and body-token and padding request synthesis open. Both body outcomes remain incomplete terminal configurations, distinguished by tape content. It does not connect successive schedule configurations, implement the repeated builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP. \\
+Complete all-input Cook-Levin formula builder and reduction & formalized-foundation-only & For every concrete polynomial verifier and every ordinary raw bitstring, including empty and odd-length inputs, M230 runs the complete source-derived formula loop and physical output finalizer in one finite raw machine. Its exact ordinary output is the original canonical encoded Cook-Levin CNF formula, with total halting, runtime and output-size bounds polynomial in the original input length. The concrete PolynomialTimeFunction is a machine leaf; recursive FunctionProgram.RawRefinement preserves its output. The packaged PolynomialReduction to CNFSAT uses the already checked original formula semantics. No accepting certificate, execution trace, route, finite family, rank map or correctness certificate is supplied by the caller. & This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 33973 exported \code{PNP.*} kernel declarations from
-349 modules. It excludes 16029 private compiler auxiliaries.
+The inventory contains 46092 exported \code{PNP.*} kernel declarations from
+496 modules. It excludes 19720 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1606,14 +1634,56 @@ PNP.\allowbreak{}Concrete.\allowbreak{}CNFWork\allowbreak{}Universal\allowbreak{
 PNP.\allowbreak{}Concrete.\allowbreak{}Complexity & 312 & 92 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Arbitrary\allowbreak{}Slot\allowbreak{}Header\allowbreak{}Router & 182 & 104 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Arbitrary\allowbreak{}Slot\allowbreak{}Post\allowbreak{}Header\allowbreak{}Decoder & 100 & 62 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Balanced\allowbreak{}Cursor & 37 & 24 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Body\allowbreak{}Start\allowbreak{}Prefix & 80 & 61 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Boundary\allowbreak{}Payload & 107 & 56 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Canonical\allowbreak{}Output & 18 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Classifier\allowbreak{}Register\allowbreak{}Restore & 69 & 31 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Clause\allowbreak{}Coordinate\allowbreak{}Registers & 42 & 32 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Clause\allowbreak{}Divider\allowbreak{}Execution & 61 & 44 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Clause\allowbreak{}Divider\allowbreak{}Operands & 85 & 61 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Complete\allowbreak{}Header & 141 & 92 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Complete\allowbreak{}Schedule\allowbreak{}Iteration & 27 & 15 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Constraint\allowbreak{}Region\allowbreak{}Assembly & 71 & 51 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Constraint\allowbreak{}Region\allowbreak{}Dispatch & 220 & 134 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Constraint\allowbreak{}Region\allowbreak{}Registers & 129 & 61 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Constraint\allowbreak{}Region\allowbreak{}Source & 57 & 41 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Action\allowbreak{}Source & 83 & 55 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Coordinates & 63 & 30 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Head\allowbreak{}Source & 74 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Implication\allowbreak{}Payload & 187 & 114 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Literal\allowbreak{}Sources & 180 & 118 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Control\allowbreak{}Payload & 91 & 61 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Loop & 55 & 39 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Output\allowbreak{}Advance & 40 & 26 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Recovery & 41 & 32 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Remaining\allowbreak{}One & 36 & 26 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Source & 25 & 17 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Token\allowbreak{}Lookup & 32 & 24 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Cursor\allowbreak{}Token\allowbreak{}Recovery & 29 & 18 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Dimension\allowbreak{}Registers & 22 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Divider\allowbreak{}Coordinate\allowbreak{}Registers & 58 & 27 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Divider\allowbreak{}Footprint & 32 & 30 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Divider\allowbreak{}Layout & 24 & 15 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Divider\allowbreak{}Operands & 55 & 34 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Divider\allowbreak{}Source\allowbreak{}Execution & 50 & 31 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Dynamic\allowbreak{}Token\allowbreak{}Cursor\allowbreak{}Step & 68 & 54 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exactly\allowbreak{}One\allowbreak{}Clause\allowbreak{}Occupancy & 81 & 54 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Clause\allowbreak{}Boundary & 68 & 47 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Clause\allowbreak{}Token\allowbreak{}Selector & 113 & 86 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}First\allowbreak{}Variable & 81 & 57 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Literal\allowbreak{}Tokens & 65 & 48 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Lookup & 71 & 51 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Preparation & 84 & 56 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Row & 46 & 36 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Second\allowbreak{}Variable & 134 & 93 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Pair\allowbreak{}Selection & 59 & 46 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Exclusion\allowbreak{}Token\allowbreak{}Recovery\allowbreak{}Frame & 18 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Family\allowbreak{}Payload & 75 & 59 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fifth\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 143 & 109 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 160 & 114 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Clause\allowbreak{}Prefix & 120 & 85 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Constraint\allowbreak{}Padding\allowbreak{}Run & 158 & 124 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Constraint\allowbreak{}Padding\allowbreak{}Run & 155 & 121 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 121 & 99 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}First\allowbreak{}Token\allowbreak{}Prefix & 48 & 36 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fourth\allowbreak{}Clause\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 138 & 102 \\
@@ -1622,8 +1692,59 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builde
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fourth\allowbreak{}Clause\allowbreak{}Second\allowbreak{}Literal\allowbreak{}Prefix & 187 & 137 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Fourth\allowbreak{}Clause\allowbreak{}Separator\allowbreak{}Step & 85 & 70 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Full\allowbreak{}Schedule\allowbreak{}Cursor\allowbreak{}Controller & 120 & 85 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Indexed\allowbreak{}Input\allowbreak{}Read & 55 & 41 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Indexed\allowbreak{}Literal\allowbreak{}Token\allowbreak{}Selector & 76 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Cell\allowbreak{}Coordinates & 149 & 107 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Cell\allowbreak{}Decoder & 146 & 81 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Cell\allowbreak{}Handoff & 205 & 105 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Cell\allowbreak{}Selection & 44 & 40 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Constraint\allowbreak{}Payload & 68 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Input\allowbreak{}Only\allowbreak{}Payload & 199 & 112 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Input\allowbreak{}Only\allowbreak{}Source & 59 & 40 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initialization & 22 & 14 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Length\allowbreak{}Payload & 90 & 62 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Length\allowbreak{}Selection & 47 & 31 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Paired\allowbreak{}Cell\allowbreak{}Payload & 61 & 45 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Paired\allowbreak{}Cell\allowbreak{}Resolution & 67 & 49 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Paired\allowbreak{}Cell\allowbreak{}Source & 182 & 113 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Paired\allowbreak{}Literal\allowbreak{}Payload & 215 & 108 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Paired\allowbreak{}Request & 279 & 132 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Payload & 200 & 125 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Request\allowbreak{}Resolution & 162 & 107 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Row\allowbreak{}Carry & 128 & 93 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Initial\allowbreak{}Row\allowbreak{}Loop & 155 & 98 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Input\allowbreak{}Length & 47 & 25 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Input\allowbreak{}Prefix & 52 & 39 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Argument\allowbreak{}Source & 180 & 91 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Clause\allowbreak{}Token\allowbreak{}Selector & 118 & 85 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Index\allowbreak{}Expression & 139 & 71 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}List\allowbreak{}Search & 78 & 44 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}List\allowbreak{}Search\allowbreak{}Bounds & 18 & 12 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Search\allowbreak{}Advance & 66 & 46 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Search\allowbreak{}Comparison & 77 & 52 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Search\allowbreak{}Frame & 61 & 46 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Search\allowbreak{}Guard & 51 & 35 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Search\allowbreak{}Select & 74 & 51 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Literal\allowbreak{}Token\allowbreak{}Selector & 111 & 76 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Local\allowbreak{}Constraint\allowbreak{}Payload & 114 & 78 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Operand\allowbreak{}Registers & 88 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Output\allowbreak{}Finalizer & 27 & 19 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Body\allowbreak{}Preparation & 73 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Body\allowbreak{}Token\allowbreak{}Lookup & 39 & 28 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Clause\allowbreak{}Occupancy & 117 & 76 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Clause\allowbreak{}Token\allowbreak{}Selector & 84 & 61 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Conclusion\allowbreak{}Guard & 51 & 35 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Field\allowbreak{}Copy & 73 & 55 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Literal\allowbreak{}Token\allowbreak{}Selector & 248 & 130 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Search\allowbreak{}Advance & 60 & 44 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Search\allowbreak{}Comparison & 93 & 63 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Search\allowbreak{}Hit & 39 & 27 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Search\allowbreak{}Source & 100 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Source\allowbreak{}Search & 49 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Source\allowbreak{}Search\allowbreak{}Blank & 15 & 14 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Source\allowbreak{}Search\allowbreak{}Bounds & 26 & 26 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Source\allowbreak{}Search\allowbreak{}Control & 56 & 40 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Payload\allowbreak{}Source\allowbreak{}Search\allowbreak{}Envelope & 40 & 33 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Classifier\allowbreak{}All\allowbreak{}Body\allowbreak{}Staged\allowbreak{}Request\allowbreak{}Mirrored\allowbreak{}Dispatch & 123 & 80 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Classifier\allowbreak{}All\allowbreak{}Route\allowbreak{}Body\allowbreak{}Remainder\allowbreak{}Split & 117 & 71 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Classifier\allowbreak{}All\allowbreak{}Route\allowbreak{}Derived\allowbreak{}Finish\allowbreak{}Split & 134 & 85 \\
@@ -1637,20 +1758,59 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builde
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Dispatch\allowbreak{}Schedule & 39 & 26 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Finish\allowbreak{}Request & 73 & 45 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Physical\allowbreak{}Optional\allowbreak{}Token\allowbreak{}Dispatch & 60 & 36 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Polynomial\allowbreak{}Register\allowbreak{}Copies & 170 & 87 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Post\allowbreak{}Divider\allowbreak{}Raw\allowbreak{}Route\allowbreak{}Classifier & 163 & 108 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Post\allowbreak{}Divider\allowbreak{}Selected\allowbreak{}Token\allowbreak{}Launch & 42 & 28 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Post\allowbreak{}Header\allowbreak{}Raw\allowbreak{}Divider & 123 & 83 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Post\allowbreak{}Header\allowbreak{}Raw\allowbreak{}Launch & 33 & 21 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Post\allowbreak{}Header\allowbreak{}Raw\allowbreak{}Tape\allowbreak{}Bridge & 143 & 91 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Preservation\allowbreak{}Coordinates & 56 & 28 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Preservation\allowbreak{}Implication\allowbreak{}Payload & 97 & 65 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Preservation\allowbreak{}Literal\allowbreak{}Sources & 77 & 56 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Preservation\allowbreak{}Payload & 88 & 59 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Raw\allowbreak{}Input\allowbreak{}Loop & 21 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Comparison\allowbreak{}Operands & 55 & 41 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Coordinate\allowbreak{}Division & 59 & 41 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Pair\allowbreak{}Comparison & 36 & 23 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Radix\allowbreak{}Decoder & 119 & 67 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Radix\allowbreak{}Dispatch & 84 & 64 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Radix\allowbreak{}Source & 119 & 71 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Residual\allowbreak{}Operands & 54 & 41 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Residual\allowbreak{}Registers & 80 & 39 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Region\allowbreak{}Residual\allowbreak{}Selection & 72 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Access & 32 & 21 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Compare\allowbreak{}Residual & 91 & 59 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Countdown\allowbreak{}Control & 55 & 43 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Descending\allowbreak{}Range & 111 & 81 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Equality & 45 & 30 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Erase & 41 & 30 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Exactly\allowbreak{}One\allowbreak{}Payload & 83 & 60 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Expression & 140 & 67 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Halve & 75 & 54 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Head\allowbreak{}Move & 128 & 88 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Indexed\allowbreak{}Copy & 123 & 84 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Less\allowbreak{}Than & 64 & 42 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Pack & 78 & 33 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Pair\allowbreak{}Exterior & 10 & 8 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Root\allowbreak{}Copy & 88 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Root\allowbreak{}Erase & 37 & 29 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Register\allowbreak{}Table & 100 & 59 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Request\allowbreak{}Dispatch & 106 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Requested\allowbreak{}Exclusion\allowbreak{}Input & 115 & 84 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Requested\allowbreak{}Exclusion\allowbreak{}Token\allowbreak{}Lookup & 60 & 46 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Requested\allowbreak{}Pair\allowbreak{}Lookup & 54 & 40 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Requested\allowbreak{}Pair\allowbreak{}Variables & 214 & 151 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Request\allowbreak{}Register\allowbreak{}Match & 45 & 29 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Request\allowbreak{}Token\allowbreak{}Lookup & 54 & 39 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 135 & 106 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 126 & 92 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}Prefix & 86 & 69 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}Second\allowbreak{}Literal\allowbreak{}Prefix & 158 & 118 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}Separator\allowbreak{}Step & 86 & 69 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Clause\allowbreak{}Separator\allowbreak{}Step & 84 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Fifth\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Terminator\allowbreak{}Opportunity\allowbreak{}Step & 114 & 82 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}First\allowbreak{}Unary\allowbreak{}Unit\allowbreak{}Step & 94 & 79 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Second\allowbreak{}Unary\allowbreak{}Unit\allowbreak{}Step & 94 & 79 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Sign\allowbreak{}Step & 99 & 84 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Sign\allowbreak{}Step & 94 & 79 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Successor\allowbreak{}Token\allowbreak{}Step & 111 & 79 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Terminator\allowbreak{}Step & 310 & 295 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}First\allowbreak{}Literal\allowbreak{}Third\allowbreak{}Unary\allowbreak{}Unit\allowbreak{}Step & 94 & 79 \\
@@ -1661,13 +1821,26 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builde
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Seventh\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Unary\allowbreak{}Opportunity\allowbreak{}Step & 96 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Sixth\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Opening\allowbreak{}Unary\allowbreak{}Opportunity\allowbreak{}Step & 96 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Second\allowbreak{}Constraint\allowbreak{}Third\allowbreak{}Padding\allowbreak{}Or\allowbreak{}Unary\allowbreak{}Opportunity\allowbreak{}Step & 96 & 67 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Shape\allowbreak{}Branch\allowbreak{}Payload & 92 & 65 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Shape\allowbreak{}Coordinates & 119 & 69 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Shape\allowbreak{}Payload & 101 & 67 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Classifier & 45 & 26 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Clause\allowbreak{}Coordinate & 51 & 38 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Clause\allowbreak{}Occupancy & 40 & 28 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Payload & 67 & 47 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Register\allowbreak{}Restore & 56 & 42 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Source\allowbreak{}Token\allowbreak{}Request & 231 & 143 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}First\allowbreak{}Literal\allowbreak{}Prefix & 131 & 105 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Padding\allowbreak{}Run & 134 & 100 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Prefix & 93 & 76 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Second\allowbreak{}Literal\allowbreak{}Prefix & 213 & 158 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Third\allowbreak{}Clause\allowbreak{}Separator\allowbreak{}Step & 81 & 66 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Token\allowbreak{}Appender & 99 & 64 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Unary\allowbreak{}Polynomial & 207 & 118 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Unary\allowbreak{}Polynomial & 329 & 197 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Builder\allowbreak{}Unary\allowbreak{}Tag\allowbreak{}Match & 27 & 22 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Clause\allowbreak{}Occupancy & 12 & 6 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Clause\allowbreak{}Occupancy\allowbreak{}Division & 23 & 17 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Complete\allowbreak{}Builder & 15 & 11 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Cursor & 259 & 121 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Schedule & 109 & 78 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Size & 168 & 149 \\
@@ -1773,9 +1946,11 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Input & 23 & 14 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine & 308 & 108 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Blank\allowbreak{}Equivalence & 51 & 33 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Chain & 28 & 20 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Left\allowbreak{}Boundary & 9 & 4 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Graph & 225 & 118 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Path & 23 & 8 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Program\allowbreak{}Path\allowbreak{}Blank\allowbreak{}Equivalence & 1 & 1 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Work\allowbreak{}Machine\allowbreak{}Terminal\allowbreak{}Handoff & 41 & 31 \\
 PNP.\allowbreak{}Concrete\allowbreak{}Legacy\allowbreak{}Locked\allowbreak{}NANDCompatibility & 4 & 4 \\
 PNP.\allowbreak{}Concrete\allowbreak{}Residual\allowbreak{}Band\allowbreak{}Compatibility & 3 & 3 \\
 PNP.\allowbreak{}Direct\allowbreak{}Wire\allowbreak{}Baseline & 48 & 25 \\
@@ -1979,10 +2154,10 @@ npm run report:check
 \end{verbatim}
 }
 
-The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-05-229}. Its exact byte digest is
-\code{1e4794c752a065610a470b36b304b4a18b095cfe57672695c742669e6f6e4ecd}. The report is regenerated from that inventory and the reviewed
+The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230}. Its exact byte digest is
+\code{6b6303f93b3c9fe70fa208482e63342c2d667a52e81dd0f69a96f5a9367a7203}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{9baa336a49724c0d61e2f13351419b6dddcb5e3262cd3a26848a6ca6496aa377}; the computed and pinned values match. Successful regeneration
+\code{175d8c223198d0b9ba8e97aa3d5628f70d97c65b998546e44c3b3fa4671ca20c}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

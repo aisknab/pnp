@@ -314,7 +314,10 @@ test('status, publication, progress, workflow, and docs retain exact conservativ
   assert.equal(progress.formalArtefactCoverage.totalRows,
     publication.milestones.length);
   assert.equal(progress.formalArtefactCoverage.isProofCompletionMetric, false);
-  assert.equal(progress.proofCompletion.pointsEarned, 35);
+  assert.equal(progress.proofCompletion.pointsEarned,
+    progress.tracks.flatMap(track => track.checkpoints)
+      .filter(checkpoint => checkpoint.status === 'earned')
+      .reduce((points, checkpoint) => points + checkpoint.points, 0));
   assert.equal(progress.globalGates.filter(
     ({ status: state }) => state === 'closed').length, 0);
   const m203History = progress.history.find(({ asOfCoordinate }) =>

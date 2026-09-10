@@ -267,10 +267,18 @@ test('first-token composition remains earned beneath the complete-header boundar
   assert.equal(status.leanConcreteCookLevinBuilderUnaryPolynomialFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderFormalized, true);
   assert.equal(status.leanConcreteCookLevinBuilderCompleteHeaderInputPrefixAppenderComposed, true);
-  assert.equal(status.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
-  assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
-  assert.equal(status.leanConcreteCookLevinBuilderRawRefinementFormalized, false);
-  assert.equal(status.leanConcreteCookLevinBuilderPolynomialReductionFormalized, false);
+  assert.equal(status.leanConcreteCookLevinBuilderDynamicCursorFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
+  assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
+  assert.equal(status.leanConcreteCookLevinBuilderRawRefinementFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
+  assert.equal(status.leanConcreteCookLevinBuilderPolynomialReductionFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
   assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);

@@ -300,10 +300,15 @@ test('root, verification, publication, and progress surfaces publish M223',
     assert.equal(
       status.leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchLiteralRawLoopFormalized,
       false);
-    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
     assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
     assert.equal(publishedMilestone?.earned, true);
-    assert.equal(builderCheckpoint?.status, 'open');
+    assert.equal(builderCheckpoint?.status,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true)
+        ? 'earned' : 'open');
     assert.ok(builderCheckpoint?.evidence.some((entry) =>
       entry.kind === 'milestone-earned' && entry.id === MILESTONE));
     assert.deepEqual(review?.formalArtefactCoverage,

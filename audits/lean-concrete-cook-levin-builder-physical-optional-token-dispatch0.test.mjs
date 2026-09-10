@@ -255,7 +255,10 @@ test('root, verification, publication, and progress surfaces publish M217',
       false);
     assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
     assert.equal(publishedMilestone?.earned, true);
-    assert.equal(builderCheckpoint?.status, 'open');
+    assert.equal(builderCheckpoint?.status,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true)
+        ? 'earned' : 'open');
     assert.ok(builderCheckpoint?.evidence.some((entry) =>
       entry.kind === 'milestone-earned' && entry.id === MILESTONE));
     assert.deepEqual(review?.formalArtefactCoverage,

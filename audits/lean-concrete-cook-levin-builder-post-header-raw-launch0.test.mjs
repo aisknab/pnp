@@ -222,10 +222,15 @@ test('root, durable verification, status, publication, and docs publish M212',
     assert.equal(
       status.leanConcreteCookLevinBuilderPostHeaderRawLaunchRawBodyTokenEmissionFormalized,
       false);
-    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
     assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
     assert.equal(publishedMilestone?.earned, true);
-    assert.equal(builderCheckpoint?.status, 'open');
+    assert.equal(builderCheckpoint?.status,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true)
+        ? 'earned' : 'open');
     assert.deepEqual(review?.formalArtefactCoverage,
       { earnedRows: 188, totalRows: 190 });
     assert.equal(review?.riskWeightedProofCompletionPercent, 35);

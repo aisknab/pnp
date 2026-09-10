@@ -123,7 +123,8 @@ lake env lean -DwarningAsError=true \
   lean-audit/PNPConcreteCookLevinBuilderCompleteHeaderAxiomAudit.lean
 ```
 
-The unary audit covers 74 declarations. The complete-header audit covers all
+The unary audit covers the evaluator and its reusable register operations,
+with its declaration set checked against the source. The complete-header audit covers all
 84 current declarations: 43 have empty closure, six use only `propext`, and
 35 use only `propext` and `Quot.sound`. No declaration reaches
 `Classical.choice`, a project axiom, `sorryAx`, or an unaudited assumption.

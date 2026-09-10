@@ -188,7 +188,9 @@ test('root, durable verification, status, publication, and docs publish M209',
     assert.equal(
       status.leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate,
       false);
-    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
     assert.deepEqual(milestone?.requiredTheorems, [ENDPOINT]);
     assert.equal(publishedMilestone?.earned, true);
     assert.deepEqual(review?.formalArtefactCoverage,

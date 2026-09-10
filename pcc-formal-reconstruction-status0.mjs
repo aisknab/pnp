@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -110,6 +110,7 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs',
+  'node --test audits/lean-concrete-cook-levin-complete-builder0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
@@ -252,7 +253,9 @@ const VERIFICATION_COMMANDS = Object.freeze([
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitAxiomAudit.lean',
+  'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinCompleteBuilderAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplit.lean',
+  'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinCompleteBuilder.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean',
   'lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean',
   'lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean',
@@ -745,7 +748,7 @@ const NON_CLAIMS = Object.freeze([
   'The concrete bitstring, natural-polynomial, and finite-rule machine kernel is consumed by a finite charged-pipeline P/NP/reduction interface, and every finite function/decision program tree now has a literal raw-machine refinement with a recursively generated polynomial bound. This closes only the concrete machine link.',
   'The concrete complexity interface proves P subset NP, reduction composition and transport, and the NP-complete-in-P implication relative to its exact pipeline semantics; it does not prove concrete SAT complete or in P.',
   'The integrated direct CNF-SAT finite-machine verifier proves exact accept/reject correctness, bounded no-timeout behavior, and PNP.Concrete.FinalUniversalDesign.cnfSATInNP; it proves CNF-SAT membership in NP only, not CNF-SAT in P, NP-completeness, or P = NP.',
-  'CookLevinRawTapeBridge proves that the finite tableau semantics exactly represent ordinary two-sided raw Tape execution for both input-only and paired-certificate verifier modes, and derives CNFSAT problem.encodedFormula iff language problem.input. CookLevinFormulaSize supplies the external encoded-formula-size polynomial, CookLevinFormulaSchedule supplies an exact answer-independent padded slot schedule, CookLevinFormulaCursor supplies direct coordinate decoders plus exact fuelled traversal, and BuilderInputLength supplies the first literal raw builder stage: an input-preserving unary length tally. Formula emission, a complete raw finite formula builder, a concrete PolynomialReduction, CNFSAT NP-completeness, CNFSAT in P, and P = NP remain absent.',
+  'CookLevinRawTapeBridge proves that the finite tableau semantics exactly represent ordinary two-sided raw Tape execution for both input-only and paired-certificate verifier modes, and derives CNFSAT problem.encodedFormula iff language problem.input. CookLevinFormulaSize supplies the external encoded-formula-size polynomial, CookLevinFormulaSchedule supplies an exact answer-independent padded slot schedule, CookLevinFormulaCursor supplies direct coordinate decoders plus exact fuelled traversal, and BuilderInputLength supplies the first literal raw builder stage: an input-preserving unary length tally. M230 now composes the complete all-input raw formula loop and physical finalizer, proves exact ordinary output, total polynomial runtime and output size, and packages the concrete PolynomialReduction with RawRefinement. Component descriptions below retain their original module-specific scope; their missing-builder limitations do not describe the completed M230 route. Separate concrete NP-completeness transport, CNFSAT in P, unconditional ZeroSlack, full polynomial PCCMin and P = NP remain open.',
   'CookLevinFormulaSize bounds the actual canonical unary-indexed CNF bitstring by an explicit fixed-verifier NatPolynomial evaluated only at external source-input length. Exact codec costs, both input modes, all concrete constraint families, program and clause counts, and clause width are covered. This is an output-size theorem only: it does not implement or time a raw finite formula builder or package a PolynomialReduction.',
   'CookLevinFormulaSchedule allocates exact rectangular constraint, clause, token, and raw-bit slots without reading the canonical program, formula, token encoding, or encoded formula as schedule inputs. Filtering populated slots reproduces those existing canonical objects, and the bit-slot count is exactly encodedFormulaSizePolynomial at external input length. This is a pure schedule specification: it is not a raw finite builder, a construction-runtime theorem, a RawRefinement, or a PolynomialReduction.',
   'CookLevinFormulaCursor decodes constraint, clause, token, and raw-bit coordinates without constructing the complete canonical program, formula, token stream, or encoded formula. Its nested options distinguish out-of-range, valid padding, and populated slots; exact prefix, full, one-step-short, terminal, and excess-fuel theorems reproduce the canonical schedule and encoded output. A token-level specification cursor now exposes exact in-range, done, and terminal single-step laws. This remains a Lean specification cursor, not a constant-time raw slot interpreter, raw finite builder, construction-runtime theorem, RawRefinement, or PolynomialReduction.',
@@ -1757,10 +1760,10 @@ const EXACT_FIELDS = Object.freeze({
   leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitOneStepShortNonhaltingFormalized: true,
   leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitExternalInputSizePolynomialFormalized: true,
   leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralRawLoopFormalized: false,
-  leanConcreteCookLevinBuilderDynamicCursorFormalized: false,
-  leanConcreteCookLevinFormulaBuilderFormalized: false,
-  leanConcreteCookLevinBuilderRawRefinementFormalized: false,
-  leanConcreteCookLevinBuilderPolynomialReductionFormalized: false,
+  leanConcreteCookLevinBuilderDynamicCursorFormalized: true,
+  leanConcreteCookLevinFormulaBuilderFormalized: true,
+  leanConcreteCookLevinBuilderRawRefinementFormalized: true,
+  leanConcreteCookLevinBuilderPolynomialReductionFormalized: true,
   leanConcretePipelineStateNamespaceFormalized: true,
   leanConcretePipelineStateNamespaceAxiomAuditPassed: true,
   leanConcretePipelineStateNamespaceAuditedDeclarationCount: 39,
@@ -3618,10 +3621,10 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitOneStepShortNonhaltingFormalized: true,
       leanConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitExternalInputSizePolynomialFormalized: true,
       leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralRawLoopFormalized: false,
-      leanConcreteCookLevinBuilderDynamicCursorFormalized: false,
-      leanConcreteCookLevinFormulaBuilderFormalized: false,
-      leanConcreteCookLevinBuilderRawRefinementFormalized: false,
-      leanConcreteCookLevinBuilderPolynomialReductionFormalized: false,
+      leanConcreteCookLevinBuilderDynamicCursorFormalized: true,
+      leanConcreteCookLevinFormulaBuilderFormalized: true,
+      leanConcreteCookLevinBuilderRawRefinementFormalized: true,
+      leanConcreteCookLevinBuilderPolynomialReductionFormalized: true,
       leanConcretePipelineStateNamespaceFormalized: true,
       leanConcretePipelineStateNamespaceAxiomAuditPassed: true,
       leanConcretePipelineStateNamespaceAuditedDeclarationCount: 39,
@@ -4689,7 +4692,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-05-229',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-10-230',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

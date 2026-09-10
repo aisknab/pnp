@@ -1,5 +1,18 @@
 # Compiled Lean theorem inventory and publication gate
 
+<!-- M230-CURRENT-SUMMARY:BEGIN -->
+## Current M230 boundary
+
+M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
+retain their original module-specific scope; M230 supersedes their incomplete-builder
+limitations without closing any global proof gate.
+<!-- M230-CURRENT-SUMMARY:END -->
+
 The current formal-publication inputs are generated from the compiled Lean environment, not by
 parsing Lean source text. After `lake build PNP`, `lean-audit/PNPTheoremInventory.lean` traverses
 `Lean.Environment.constants` for the public `PNP.*` declarations in the explicit `PNP` import

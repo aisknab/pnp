@@ -140,6 +140,33 @@ canonical unary-indexed formula encoding by an explicit fixed-verifier polynomia
 external source-input length. That output-size theorem does not execute the formula builder as a raw
 finite machine, prove its construction runtime, or package a concrete polynomial reduction.
 
+M230 now completes the all-input construction. For every concrete polynomial
+verifier and every ordinary raw bitstring, one finite machine executes the
+source-derived full loop and physical finalizer, and its ordinary output is
+exactly the original canonical formula. Total runtime and encoded output size
+are polynomial in the original input length. The machine-leaf
+\code{PolynomialTimeFunction}, its recursive \code{RawRefinement} output
+theorem, and the exact \code{PolynomialReduction} to \code{CNFSAT} are checked.
+No execution trace, route, finite family or correctness certificate is supplied.
+Seven public execution-side closures use only \code{propext} and
+\code{Quot.sound}; the reduction and its two endpoints additionally inherit
+the already permitted standard \code{Classical.choice} from formula semantics.
+The component descriptions below retain their original individual scope;
+their incomplete-builder limitations do not describe the completed M230 route.
+
+\subsection*{Separate progress measurements}
+Formal artefact coverage: @@ARTEFACT_EARNED@@ of @@ARTEFACT_TOTAL@@ current
+scoped publication rows earned. This is evidence-ledger coverage, not proof
+completion; its denominator can grow.
+The risk-weighted proof completion estimate is @@PROOF_ESTIMATE@@ percent,
+with an uncertainty range of @@UNCERTAINTY_LOW@@ to @@UNCERTAINTY_HIGH@@ percent.
+Global gates closed: @@GLOBAL_GATES_CLOSED@@ of 5.
+These values are read from the canonical fixed-checkpoint progress ledger.
+M230 earns only the existing complete-builder checkpoint. The estimate is not
+a probability of correctness or a time estimate. Concrete NP-completeness
+transport, deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin
+and the eligible root theorem remain open.
+
 The concrete CNF-to-NAND development traverses any decoded formula
 structurally and constructs an intrinsically topological NAND circuit without
 querying satisfiability. Lean proves exact valuation and satisfiability

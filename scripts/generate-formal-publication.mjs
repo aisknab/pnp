@@ -13,14 +13,15 @@ import {
   LEAN_INVENTORY_PUBLIC_PATH0,
 } from '../formal-publication0.mjs';
 import { BuildFormalReconstructionBaseStatus0 } from '../pcc-formal-reconstruction-status0.mjs';
+import { validateProofProgress0 } from '../pcc-proof-progress0.mjs';
 
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-05-229';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-10-230';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -38,11 +39,12 @@ const NEW_COMMANDS = Object.freeze([
 ]);
 
 export async function BuildFormalPublication0(root) {
-  const [inventoryBytes, publicInventoryBytes, mapBytes, template] = await Promise.all([
+  const [inventoryBytes, publicInventoryBytes, mapBytes, template, progressBytes] = await Promise.all([
     readFile(path.join(root, LEAN_INVENTORY_PATH0)),
     readFile(path.join(root, LEAN_INVENTORY_PUBLIC_PATH0)),
     readFile(path.join(root, FORMAL_PUBLICATION_MAP_PATH0)),
     readFile(path.join(root, TEMPLATE_PATH), 'utf8'),
+    readFile(path.join(root, 'status/PROOF_PROGRESS.json'), 'utf8'),
   ]);
   if (!inventoryBytes.equals(publicInventoryBytes)) throw new Error('Lean theorem inventory public mirror is not byte-identical');
   const inventory = JSON.parse(inventoryBytes.toString('utf8'));
@@ -112,11 +114,13 @@ export async function BuildFormalPublication0(root) {
     ),
   };
   const statusOutput = Buffer.from(`${JSON.stringify(status, null, 2)}\n`, 'utf8');
-  const reportOutput = Buffer.from(renderReport0(template, status, inventory, publication), 'utf8');
+  const progress = JSON.parse(progressBytes);
+  validateProofProgress0(progress, status, inventory);
+  const reportOutput = Buffer.from(renderReport0(template, status, inventory, publication, progress), 'utf8');
   return { status, publication, inventory, statusOutput, reportOutput };
 }
 
-function renderReport0(template, status, inventory, publication) {
+function renderReport0(template, status, inventory, publication, progress) {
   const modules = new Map();
   for (const entry of inventory.declarations) {
     const count = modules.get(entry.module) ?? { declarations: 0, theorems: 0 };
@@ -125,6 +129,12 @@ function renderReport0(template, status, inventory, publication) {
     modules.set(entry.module, count);
   }
   const replacements = new Map([
+    ['@@ARTEFACT_EARNED@@', String(progress.formalArtefactCoverage.earnedRows)],
+    ['@@ARTEFACT_TOTAL@@', String(progress.formalArtefactCoverage.totalRows)],
+    ['@@PROOF_ESTIMATE@@', String(progress.proofCompletion.percent)],
+    ['@@UNCERTAINTY_LOW@@', String(progress.proofCompletion.uncertaintyLowPercent)],
+    ['@@UNCERTAINTY_HIGH@@', String(progress.proofCompletion.uncertaintyHighPercent)],
+    ['@@GLOBAL_GATES_CLOSED@@', String(progress.globalGates.filter(gate => gate.status === 'closed').length)],
     ['@@STATUS_COORDINATE@@', texEscape0(status.coordinate)],
     ['@@DECLARATION_COUNT@@', String(inventory.declarationCount)],
     ['@@THEOREM_COUNT@@', String(inventory.theoremCount)],

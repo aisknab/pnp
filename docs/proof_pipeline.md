@@ -1,5 +1,18 @@
 # Proof and Checker Pipeline
 
+<!-- M230-CURRENT-SUMMARY:BEGIN -->
+## Current M230 boundary
+
+M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
+retain their original module-specific scope; M230 supersedes their incomplete-builder
+limitations without closing any global proof gate.
+<!-- M230-CURRENT-SUMMARY:END -->
+
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release
 > gate. Current status and remaining formal obligations are in
@@ -9,7 +22,7 @@
 > **Historical report-citation boundary:** Every numbered `Report §...`, appendix, or
 > `canonical_proof_report.tex` citation below refers exclusively to the historical 56-page
 > manuscript at source tag `final-pnp-proof-report-hardened-7072f8d` (commit
-> `7072f8d0bda6d44d240f9bb3fad624fd357e1278`). It never refers to the generated six-page report
+> `7072f8d0bda6d44d240f9bb3fad624fd357e1278`). It never refers to the generated reconstruction report
 > now at the repository root. For current authority, start with
 > [`lean_theorem_inventory.md`](lean_theorem_inventory.md).
 
