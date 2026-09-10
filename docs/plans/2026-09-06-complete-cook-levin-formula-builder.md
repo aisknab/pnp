@@ -9127,3 +9127,75 @@ checkpoint before those interfaces and audits are actually complete.
 M230 remains open. Defer PNPLabs publication. Formal artefact coverage is
 205/207; risk-weighted proof estimate remains 35%, uncertainty 20–40%,
 and global gates closed remain 0/5.
+
+### Planned exact canonical output of the complete physical builder
+
+Legacy anchor: the pinned manuscript's complete SAT formula construction and
+the exact M230 interfaces at the start of this plan. The physical machine
+already executes from raw work input with source-size polynomial bounds.
+Now identify its whole emitted stream with the existing canonical formula,
+without altering the machine, the formula, the token encoding or its order.
+
+Relate every source-derived body request to the same fixed clause-token
+rectangle used by formulaClauseTokenSlotDirect. Use the existing finite
+rectangle decoder and quotient/remainder uniqueness; preserve the outer
+missing result versus inner padding distinction. Derive this connection
+on the original body domain, not from a supplied token-correctness premise.
+
+Prove the recursive loop output equals the emitted remaining clause-token
+suffix followed by Finish, for every balanced cursor and prefix. At the
+actual initialized entry, reuse the existing canonical clause-schedule
+emission theorem and exact unary header to obtain
+BuilderRawInputLoop.outputTokens problem = encodeCNFTokens problem.formula.
+Derive encoded-bit equality and restate the actual work/raw execution with
+the canonical output while retaining all original-input polynomial bounds.
+
+Prepare exact-type, every-body-coordinate, all-suffix, padding-versus-missing,
+canonical token/bit equality, actual execution and axiom contracts before
+building the new theorem module. Reuse unchanged execution/size evidence;
+do not recompile the full core or run website suites for this new connection.
+FunctionProgram's external input/output adapter, complete encoded-size
+contracts, polynomial reduction packaging and release gates remain required.
+M230 stays open and PNPLabs publication remains deferred until the complete
+capability and its publication checkpoint are actually earned.
+
+### Verified exact canonical output of the complete physical builder
+
+[BuilderCanonicalOutput](../../lean/PNP/Concrete/CookLevinBuilderCanonicalOutput.lean)
+now proves that every original body request equals the corresponding direct
+clause-token slot and indexed padded canonical schedule entry. The existing
+finite rectangle decoder and quotient/remainder uniqueness identify both
+constraint/clause and clause/token coordinates. Outer missing lookup remains
+distinct from inner padding; no supplied token-correctness premise is added.
+
+For every balanced cursor and output prefix, the complete recursive output is
+the prefix followed by emission of the remaining clause-token suffix and one
+final Finish token. Specializing to the actual initialized entry and reusing
+the existing clause-schedule emission theorem gives the exact all-input result:
+BuilderRawInputLoop.outputTokens problem = encodeCNFTokens problem.formula.
+The formula, token order, header and machine implementation are unchanged.
+
+The corresponding token-pair bit word, including the existing trailing false
+framing bit, equals problem.encodedFormula. Its length is bounded by the fixed
+polynomial 2 * BuilderRawInputLoop.outputBound + 1 in original input length.
+The actual work and compiled raw execution theorems now expose the exact
+canonical token stream in their final tape condition, retaining the complete
+original-input runtime bound. The framed-word equality is not substituted
+for the still-required physical external-output adapter.
+
+All 16 prepared regression contracts and nine public axiom audits pass.
+Every closure uses only `propext` and `Quot.sound`; no project axiom
+or `Classical.choice` is needed. The final check reached its own green
+marker and terminal zero exit. Local coordinate normalization resolved the
+initial rewrite failures without changing any public theorem, bound or test
+expectation. Existing execution, bounds and schedule evidence was reused;
+no full core or PNPLabs suite was repeated.
+
+Next connect the finite machine to the external FunctionProgram input/output
+contract, include all adapter costs and encoded-output bounds in the complete
+PolynomialTimeFunction, and package the exact canonical polynomial reduction.
+Final root/type/axiom inventories, core merge verification and the major
+PNPLabs publication/deployment gates remain mandatory. The M230 complete-builder
+checkpoint is not yet earned. Defer PNPLabs publication; formal artefact
+coverage remains 205/207, risk-weighted proof estimate 35%, uncertainty
+20–40%, and global gates closed 0/5.
