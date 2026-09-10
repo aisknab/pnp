@@ -9199,3 +9199,68 @@ PNPLabs publication/deployment gates remain mandatory. The M230 complete-builder
 checkpoint is not yet earned. Defer PNPLabs publication; formal artefact
 coverage remains 205/207, risk-weighted proof estimate 35%, uncertainty
 20–40%, and global gates closed 0/5.
+
+### Planned literal external-output finalization
+
+Legacy anchor: the pinned manuscript's complete canonical SAT formula
+construction and the exact M230 FunctionProgram interfaces at the beginning
+of this plan. The input-side representation bridge already proves ordinary
+raw starts agree with rawInputWorkTape, including empty and odd inputs.
+CNF tokens already occupy exactly their two encoded raw cells; do not add
+another general input converter or terminal bit repacker.
+
+Implement one fixed finite finalizer from the actual builder workspace.
+Scan the represented input and unary tally, traverse the entire emitted token
+word, append the single false framing bit with a following blank, and rewind
+to the first output cell. Preserve all retained left workspace. Prove the
+exact run for every input and output word, including the empty cases, and
+prove ordinary encodeWorkTape outputBits equals encodeTokenPairs output
+followed by the false framing bit. No supplied output or trace premise.
+
+Charge every scan, append, rewind and boundary transition. Bound six times
+the work steps by 12 * input.length + 12 * output.length + 30, then substitute
+the already proved original-input polynomial output bound. Specialize the
+same finite stage to the actual completed canonical cursor; no extra instance
+or fixed schedule prefix earns credit.
+
+Prepare exact-type, finite-table, empty/odd-input, complete token encoding,
+framing-bit, retained-workspace independence, malformed-symbol and axiom
+contracts together with the source. Build only the new target and these
+contracts; reuse unchanged full-loop and canonical-output evidence. The
+complete machine composition, PolynomialTimeFunction and reduction packaging,
+final inventories and release checks remain required. M230 is not yet earned;
+defer PNPLabs until the complete capability passes its publication gate.
+
+### Verified literal external-output finalization
+
+[BuilderOutputFinalizer](../../lean/PNP/Concrete/CookLevinBuilderOutputFinalizer.lean)
+implements the final external-output stage with one fixed 17-rule machine.
+It scans past the represented input and tally, traverses every emitted token,
+writes the single false framing bit followed by a blank delimiter, and
+rewinds to the output's first raw bit. Tokens already occupy their canonical
+two raw cells, so no redundant general repacker is introduced.
+
+The exact-run theorem covers arbitrary input and output lengths, empty input
+and empty output, and arbitrary retained left workspace. The ordinary compiled
+tape's outputBits is exactly encodeTokenPairs output followed by the framing
+false. The retained input, tally and counter data are outside that observable
+word. Every scan, write, rewind and boundary transition is counted: six times
+the work steps is at most 12 * input.length + 12 * output.length + 30.
+The existing original-input output bound yields a polynomial adapter bound
+at the actual completed canonical cursor.
+
+All 18 prepared regression contracts and ten public axiom probes pass.
+Four closures are axiom-free, one uses only propext, and five use propext
+and Quot.sound; none uses a project axiom or Classical.choice. Formatting and
+local proof normalization fixes changed no machine or public theorem type.
+After qualifying one regression helper, its check reused the unchanged
+successful source build and axiom evidence. The final run reached its own
+green marker and terminal zero exit; no full core or PNPLabs suite was repeated.
+
+Next compose this physical stage with the verified complete builder, transport
+ordinary raw-input starts through the existing blank-equivalence bridge, and
+package PolynomialTimeFunction plus the exact canonical polynomial reduction.
+Final inventories, core merge verification and major PNPLabs publication
+remain required. M230 is still open; defer website publication. Risk-weighted
+proof estimate remains 35%, uncertainty 20–40%, formal artefact coverage
+205/207, and global gates closed 0/5.
