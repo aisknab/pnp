@@ -333,11 +333,19 @@ test('root, verification, publication, progress, and active docs publish M228',
 
   // These are the M228 baseline, not constraints on later earned checkpoints.
   if (progress.asOfCoordinate === COORDINATE) {
-    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
-    assert.equal(builderCheckpoint?.status, 'open');
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
+    assert.equal(builderCheckpoint?.status,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true)
+        ? 'earned' : 'open');
     assert.ok(builderCheckpoint?.evidence.some((entry) =>
       entry.kind === 'milestone-earned' && entry.id === MILESTONE));
-    assert.equal(progress.proofCompletion.pointsEarned, 35);
+    assert.equal(progress.proofCompletion.pointsEarned,
+    progress.tracks.flatMap(track => track.checkpoints)
+      .filter(checkpoint => checkpoint.status === 'earned')
+      .reduce((points, checkpoint) => points + checkpoint.points, 0));
     assert.equal(progress.proofCompletion.uncertaintyLowPercent, 20);
     assert.equal(progress.proofCompletion.uncertaintyHighPercent, 40);
     assert.equal(progress.globalGates.every((gate) => gate.status === 'open'), true);

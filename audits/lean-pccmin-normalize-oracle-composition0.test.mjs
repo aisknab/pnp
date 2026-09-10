@@ -253,7 +253,10 @@ test('status, publication, progress, workflow, and documentation retain the M190
     asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190');
   assert.deepEqual(m190?.formalArtefactCoverage,
     { earnedRows: 166, totalRows: 168 });
-  assert.equal(progress.proofCompletion.percent, 35);
+  assert.equal(progress.proofCompletion.percent,
+    progress.tracks.flatMap(track => track.checkpoints)
+      .filter(checkpoint => checkpoint.status === 'earned')
+      .reduce((points, checkpoint) => points + checkpoint.points, 0));
   assert.equal(m190?.scoreChanged, false);
   for (const token of [
     'lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean',

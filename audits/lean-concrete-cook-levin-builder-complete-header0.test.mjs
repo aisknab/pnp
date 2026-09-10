@@ -69,6 +69,215 @@ const UNARY_HEADS = Object.freeze([
   ['theorem', 'workTimePolynomial_eval'],
 ]);
 
+const UNARY_REGISTER_HEADS = Object.freeze({
+  "RegisterCopy": [
+    [
+      "def",
+      "stateCount"
+    ],
+    [
+      "def",
+      "machine"
+    ],
+    [
+      "theorem",
+      "rules_length"
+    ],
+    [
+      "theorem",
+      "rules_pairwise_query_distinct"
+    ],
+    [
+      "theorem",
+      "rule_source_lt_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_startState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_rejectState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState_ne_rejectState"
+    ],
+    [
+      "def",
+      "initialConfiguration"
+    ],
+    [
+      "def",
+      "finalConfiguration"
+    ],
+    [
+      "def",
+      "steps"
+    ],
+    [
+      "theorem",
+      "workRunExact"
+    ],
+    [
+      "theorem",
+      "steps_closed"
+    ],
+    [
+      "def",
+      "timePolynomial"
+    ],
+    [
+      "theorem",
+      "timePolynomial_eval"
+    ],
+    [
+      "theorem",
+      "steps_le"
+    ]
+  ],
+  "RegisterConstant": [
+    [
+      "def",
+      "stateCount"
+    ],
+    [
+      "def",
+      "machine"
+    ],
+    [
+      "def",
+      "steps"
+    ],
+    [
+      "theorem",
+      "rules_length"
+    ],
+    [
+      "theorem",
+      "rules_pairwise_query_distinct"
+    ],
+    [
+      "theorem",
+      "rule_source_lt_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_rejectState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState_ne_rejectState"
+    ],
+    [
+      "def",
+      "initialConfiguration"
+    ],
+    [
+      "def",
+      "finalConfiguration"
+    ],
+    [
+      "theorem",
+      "workRunExact"
+    ],
+    [
+      "theorem",
+      "run_compile_exact"
+    ]
+  ],
+  "RegisterBinary": [
+    [
+      "inductive",
+      "Operator"
+    ],
+    [
+      "def",
+      "value"
+    ],
+    [
+      "def",
+      "stateCount"
+    ],
+    [
+      "def",
+      "machine"
+    ],
+    [
+      "theorem",
+      "rules_length"
+    ],
+    [
+      "theorem",
+      "rules_pairwise_query_distinct"
+    ],
+    [
+      "theorem",
+      "rule_source_lt_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState"
+    ],
+    [
+      "theorem",
+      "machine_rejectState"
+    ],
+    [
+      "theorem",
+      "machine_acceptState_ne_rejectState"
+    ],
+    [
+      "def",
+      "initialConfiguration"
+    ],
+    [
+      "def",
+      "finalConfiguration"
+    ],
+    [
+      "def",
+      "steps"
+    ],
+    [
+      "theorem",
+      "workRunExact"
+    ],
+    [
+      "theorem",
+      "run_compile_exact"
+    ],
+    [
+      "def",
+      "workBound"
+    ],
+    [
+      "theorem",
+      "steps_le"
+    ],
+    [
+      "def",
+      "resultBound"
+    ],
+    [
+      "theorem",
+      "value_le"
+    ],
+    [
+      "theorem",
+      "register_span_added"
+    ]
+  ]
+});
+
 const HEADER_HEADS = Object.freeze([
   ['def', 'widthPolynomial'], ['def', 'width'],
   ['theorem', 'width_eq_FormulaWidth'], ['theorem', 'width_positive'],
@@ -180,7 +389,9 @@ function validateUnary0(source) {
   if (JSON.stringify(imports0(source)) !== JSON.stringify([
     'PNP.Concrete.CookLevinBuilderFirstTokenPrefix',
   ])) failures.push('unary-import');
-  if (JSON.stringify(heads0(source)) !== JSON.stringify(UNARY_HEADS)) {
+  if (JSON.stringify(heads0(source)) !== JSON.stringify([
+    ...UNARY_HEADS, ...Object.values(UNARY_REGISTER_HEADS).flat(),
+  ])) {
     failures.push('unary-surface');
   }
   if (!compact.includes('def ruleCount (polynomial : NatPolynomial) : Nat := 9 * stateCount polynomial')
@@ -266,8 +477,13 @@ test('kernel transcripts cover every public declaration exactly once', async () 
   ]);
   assert.equal(UNARY_HEADS.length, 74);
   assert.equal(HEADER_HEADS.length, 85);
-  assert.equal(printed0(unaryAudit).length, 74);
-  assert.equal(new Set(printed0(unaryAudit)).size, 74);
+  const unaryNames = [
+    ...UNARY_HEADS.map(([, name]) => name),
+    ...Object.entries(UNARY_REGISTER_HEADS).flatMap(([namespace, heads]) =>
+      heads.map(([, name]) => namespace + '.' + name)),
+  ].map(name => 'PNP.Concrete.CookLevin.BuilderUnaryPolynomial.' + name);
+  assert.deepEqual(printed0(unaryAudit), unaryNames);
+  assert.equal(new Set(printed0(unaryAudit)).size, unaryNames.length);
   assert.equal(printed0(headerAudit).length, 85);
   assert.equal(new Set(printed0(headerAudit)).size, 85);
   assert.deepEqual(imports0(unaryAudit), ['PNP']);
@@ -296,6 +512,11 @@ test('root, verifier, workflow, regression, and documentation publish the milest
     assert.ok(verifier.includes(TEST));
     assert.match(workflow,
       /PNPConcreteCookLevinBuilderUnaryPolynomialAxiomAudit\.lean/u);
+    const unaryStep = workflow.split(
+      '- name: Print Cook-Levin unary polynomial evaluator axiom closure')[1]
+      .split('\n      - name:')[0];
+    assert.ok(unaryStep.includes('assert.deepEqual(rows.map(row => row[1]).sort(), expected.sort())'));
+    assert.ok(unaryStep.includes("['propext', 'Quot.sound'].includes(axiom)"));
     assert.match(workflow,
       /PNPConcreteCookLevinBuilderCompleteHeaderAxiomAudit\.lean/u);
     assert.match(workflow,
@@ -341,6 +562,9 @@ test('hostile mutations are rejected', async () => {
   const hostEval = unary.replace('def rules (polynomial : NatPolynomial)',
     'def forbidden := NatPolynomial.eval\ndef rules (polynomial : NatPolynomial)');
   assert.ok(validateUnary0(hostEval).length > 0);
+  const missingRegisterTrace = unary.replace('namespace RegisterCopy',
+    'namespace RegisterCopy\ntheorem unreviewed : True := True.intro');
+  assert.ok(validateUnary0(missingRegisterTrace).includes('unary-surface'));
   const admitted = header.replace('theorem rawTimeBound_le',
     'axiom injected : False\ntheorem rawTimeBound_le');
   assert.ok(validateHeader0(admitted).includes('assumption'));

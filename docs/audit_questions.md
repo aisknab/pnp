@@ -1,5 +1,18 @@
 # Reviewer Audit Questions
 
+<!-- M230-CURRENT-SUMMARY:BEGIN -->
+## Current M230 boundary
+
+M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
+retain their original module-specific scope; M230 supersedes their incomplete-builder
+limitations without closing any global proof gate.
+<!-- M230-CURRENT-SUMMARY:END -->
+
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and
 > must not be used as current theorem status. See
@@ -9,7 +22,7 @@
 > **Historical report-citation boundary:** Every numbered `Report §...`, appendix, or
 > `canonical_proof_report.tex` citation below refers exclusively to the historical 56-page
 > manuscript at source tag `final-pnp-proof-report-hardened-7072f8d` (commit
-> `7072f8d0bda6d44d240f9bb3fad624fd357e1278`). It never refers to the generated six-page report
+> `7072f8d0bda6d44d240f9bb3fad624fd357e1278`). It never refers to the generated reconstruction report
 > now at the repository root. For current authority, start with
 > [`lean_theorem_inventory.md`](lean_theorem_inventory.md).
 
@@ -4014,6 +4027,24 @@ would be a material defect. So would claiming clause occupancy, body request
 synthesis, a repeated builder loop, or a global gate from this component.
 
 Formal artefact coverage is 205 of 207 current scoped publication rows earned. The risk-weighted proof completion estimate remains 35 percent, with an uncertainty range of 20 to 40 percent. Global gates closed: 0 of 5.
+
+
+### M230 complete all-input Cook–Levin construction
+
+Review the [exact complete-builder interface](lean_cook_levin_complete_builder.md).
+The input is arbitrary, not a finite fixture. Requests and the full schedule must
+be derived from the source; no trace, family or correctness certificate may be supplied.
+Check exact ordinary output, empty and odd inputs, the six-step launch charge,
+total original-input polynomial bounds, the machine leaf and raw refinement,
+and the unchanged formula semantics used by the reduction. Audit all ten public
+declarations: execution stays choice-free, while only the three semantic reduction
+closures may use the already permitted Lean standard Classical.choice.
+
+Credit only the existing three-point complete-builder checkpoint. A complete
+builder is neither a deterministic SAT decider nor unconditional ZeroSlack or PCCMin.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ---
 ## Cross-claim completion checklist

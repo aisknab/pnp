@@ -1,5 +1,18 @@
 # Lean bridge formalization
 
+<!-- M230-CURRENT-SUMMARY:BEGIN -->
+## Current M230 boundary
+
+M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
+retain their original module-specific scope; M230 supersedes their incomplete-builder
+limitations without closing any global proof gate.
+<!-- M230-CURRENT-SUMMARY:END -->
+
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
 The current Lean development contains a conditional theorem bridge corresponding to the report:
@@ -2384,7 +2397,7 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Starting from M229's physical body-remainder split, derive clause occupancy and every body-token and padding request from the physical classifier state, connect successive configurations as one physical loop, prove complete builder RawRefinement, and package the Cook--Levin polynomial reduction.
+2. Use M230's complete all-input Cook--Levin polynomial reduction to publish the separate concrete NP-hardness and NP-completeness transport, preserving the exact encoded source model.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
 4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
    a deterministic decider.

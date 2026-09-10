@@ -149,7 +149,9 @@ test('M229 is registered consistently in the root, verification entry points, an
       earnedRows: progress.formalArtefactCoverage.earnedRows,
       totalRows: progress.formalArtefactCoverage.totalRows,
     });
-    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized, false);
+    assert.equal(status.leanConcreteCookLevinFormulaBuilderFormalized,
+      status.formalPublicationMilestones.some(row =>
+        row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
     assert.equal(progress.tracks.flatMap(track => track.checkpoints)
       .find(checkpoint => checkpoint.id === 'reductions-complete-cook-levin-builder').status, 'open');
   }

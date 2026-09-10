@@ -256,7 +256,10 @@ test('status, publication, progress, workflow, and docs retain conservative M206
   assert.equal(progress.formalArtefactCoverage.earnedRows, earnedRows);
   assert.equal(progress.formalArtefactCoverage.totalRows, totalRows);
   assert.equal(progress.formalArtefactCoverage.isProofCompletionMetric, false);
-  assert.equal(progress.proofCompletion.pointsEarned, 35);
+  assert.equal(progress.proofCompletion.pointsEarned,
+    progress.tracks.flatMap(track => track.checkpoints)
+      .filter(checkpoint => checkpoint.status === 'earned')
+      .reduce((points, checkpoint) => points + checkpoint.points, 0));
   assert.equal(progress.globalGates.filter(
     ({ status: state }) => state === 'closed').length, 0);
   const history = progress.history.find(({ asOfCoordinate }) =>

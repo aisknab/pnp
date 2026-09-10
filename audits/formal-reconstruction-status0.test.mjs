@@ -552,10 +552,10 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepInputPrefixOptionalAppenderComposed, true);
   assert.equal(out.leanConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepFailClosedBoundaryTimeoutFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputPrefixAppenderComposed, true);
-  assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, false);
-  assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, false);
-  assert.equal(out.leanConcreteCookLevinBuilderRawRefinementFormalized, false);
-  assert.equal(out.leanConcreteCookLevinBuilderPolynomialReductionFormalized, false);
+  assert.equal(out.leanConcreteCookLevinBuilderDynamicCursorFormalized, true);
+  assert.equal(out.leanConcreteCookLevinFormulaBuilderFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderRawRefinementFormalized, true);
+  assert.equal(out.leanConcreteCookLevinBuilderPolynomialReductionFormalized, true);
   assert.equal(out.leanConcretePipelineStateNamespaceFormalized, true);
   assert.equal(out.leanConcretePipelineStateNamespaceAxiomAuditPassed, true);
   assert.equal(out.leanConcretePipelineStateNamespaceAuditedDeclarationCount, 39);
@@ -3238,7 +3238,9 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
   assert.equal(out.modelId, 'fixed-risk-weighted-checkpoints-v0');
   assert.equal(out.trackCount, 5);
   assert.equal(out.checkpointCount, 35);
-  assert.equal(out.pointsEarned, 35);
+  assert.equal(out.pointsEarned, sources.ledger.tracks.reduce((sum, track) => sum
+    + track.checkpoints.filter(checkpoint => checkpoint.status === 'earned')
+      .reduce((points, checkpoint) => points + checkpoint.points, 0), 0));
   assert.equal(out.pointsAvailable, 100);
   assert.equal(out.uncertaintyLowPercent, 20);
   assert.equal(out.uncertaintyHighPercent, 40);
@@ -3260,13 +3262,18 @@ test('proof progress preserves the fixed M184 baseline and derives current cover
     'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184');
   const latestScoreChange = sources.ledger.history.findLast(
     (entry) => entry.scoreChanged === true);
-  assert.equal(sources.ledger.history.at(-1).scoreChanged, false);
-  assert.deepEqual(sources.ledger.history.at(-1).changedCheckpointIds, []);
-  assert.deepEqual(latestScoreChange.changedCheckpointIds, [
+  const currentReview = sources.ledger.history.at(-1);
+  const previousReview = sources.ledger.history.at(-2);
+  assert.equal(currentReview.scoreChanged,
+    currentReview.riskWeightedProofCompletionPercent !== previousReview.riskWeightedProofCompletionPercent);
+  assert.equal(latestScoreChange.changeRecords.length, latestScoreChange.changedCheckpointIds.length);
+  const axiomRemovalReview = sources.ledger.history.find(entry =>
+    entry.asOfCoordinate === 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188');
+  assert.deepEqual(axiomRemovalReview.changedCheckpointIds, [
     'axiom-remove-generate-pccpack',
     'axiom-remove-check-pccpackexp',
   ]);
-  assert.equal(latestScoreChange.changeRecords.length, 2);
+  assert.equal(axiomRemovalReview.changeRecords.length, 2);
 });
 
 test('proof progress rejects changed weights and a stale stored total', async () => {
@@ -3351,7 +3358,7 @@ test('proof progress rejects formal coverage presented as proof completion or al
 test('proof progress rejects an uncertainty range that excludes the estimate', async () => {
   const { ledger, status, inventory } = await currentProofProgressSources0();
   const mutation = clone0(ledger);
-  mutation.proofCompletion.uncertaintyLowPercent = 36;
+  mutation.proofCompletion.uncertaintyLowPercent = ledger.proofCompletion.percent + 1;
   assert.throws(
     () => validateProofProgress0(mutation, status, inventory),
     (error) => error.code === 'ProofCompletion.UncertaintyRange',

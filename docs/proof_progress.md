@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-05-229`, 205 of 207
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230`, 206 of 208
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,16 +19,16 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M229 |
+| Track | Available | Earned at M230 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
-| Concrete reductions and locked-NAND route | 20 | 15 |
+| Concrete reductions and locked-NAND route | 20 | 18 |
 | Unconditional residual core and ZeroSlack | 35 | 2 |
 | Exact PCCMin algorithm, complexity and bounds | 20 | 1 |
 | Root theorem and project-axiom elimination | 10 | 4 |
-| **Total** | **100** | **35** |
+| **Total** | **100** | **38** |
 
-The M229 risk-weighted proof completion estimate is therefore 35 percent, with
+The M230 risk-weighted proof completion estimate is therefore 38 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -39,6 +39,12 @@ score-change record requirements, and baseline history are in the canonical
 machine-readable ledger:
 
 [`status/PROOF_PROGRESS.json`](../status/PROOF_PROGRESS.json)
+
+M230 closes exactly the fixed three-point reductions-complete-cook-levin-builder checkpoint,
+moving the estimate from 35 to 38 percent. The complete source-derived machine,
+total encoded-input polynomial runtime and output bound, raw refinement and
+original-formula reduction retire that load-bearing dependency. No new weight
+is assigned to its component count. The separate named concrete NP-hardness or NP-completeness transport remains open. The reduction is not a deterministic SAT algorithm and does not close residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
 unconditional ZeroSlack, polynomial runtime and certificate bounds, and the root

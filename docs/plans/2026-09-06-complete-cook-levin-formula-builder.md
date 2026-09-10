@@ -9347,3 +9347,71 @@ Until those gates pass, keep the coherent M229 public snapshot unchanged:
 risk-weighted proof estimate 35%, uncertainty 20–40%, formal artefact coverage
 205/207, global gates closed 0/5. This construction does not prove deterministic
 CNFSAT in P, unconditional ZeroSlack, exact residual minimization, or P = NP.
+
+## M230 root and publication integration (2026-09-10)
+
+The complete builder is now imported through the canonical PNP root. The
+normal inventory exporter built that root and enumerated its compiled environment;
+all six new theorem-type fingerprints were derived from exact kernel types,
+and every pre-existing reviewed theorem-type fingerprint remained unchanged.
+The permanent audit and exact durable workflow block checked all ten public
+declarations: seven execution-side closures use propext and Quot.sound, and
+three reduction-facing closures additionally inherit the permitted standard
+Classical.choice. The root regression command also passed. Source contracts
+and hostile finite-only, supplied-data, budget and output mutations passed first.
+
+The generated inventory contains 46092 declarations, 25320 theorems and no project-specific axioms. Publication
+derivation earns the complete-builder row but leaves all global proof gates open.
+The candidate fixed checkpoint transition is open to earned for
+reductions-complete-cook-levin-builder only: 35 to 38 points. Its full evidence,
+remaining limitations and unchanged uncertainty decision are recorded in the
+canonical ledger. Current documentation and the report generator consume those
+values; earlier milestone history and immutable archive coordinates are retained.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+Full core release validation, exact-head reproduction, PR and merge checks
+remain due. The public PNPLabs snapshot stays at its already verified source
+pin until that core release is earned. Publish/defer decision: publish M230
+after those gates, because both the fixed checkpoint and the all-input public
+capability have materially changed. Reuse the verified core Lean evidence at
+the site boundary; do not rerun a complete PNP proof suite for PNPLabs.
+
+### Integrated release validation
+
+The corrected source boundary passed the complete 231-file union of current
+package and conservative-verifier unit tests: all 1,391 tests passed, with no
+failures or skips. The conservative verifier, generated-publication byte checks
+and documentation-link checker also passed. The canonical report was rebuilt
+deterministically, every page was rendered for QA, and its two progress metrics
+were checked against the canonical ledger. The full unit matrix covered tree
+4bb862f5bee2f35f450f475636e799f7caea2094; this final plan record and CI-timeout
+metadata are checked separately before committing.
+
+The earlier integration run exposed two real audit gaps. The canonical root
+did not import the already proved source-clause occupancy module, and the unary
+evaluator's closed source/audit list omitted its added reusable register
+operations. The root now covers every tracked Lean source. Its rebuilt inventory
+and source seals were regenerated; all previously reviewed theorem-type
+fingerprints, including M230's six new pins, remained unchanged. The permanent
+unary audit now checks all 124 public evaluator/register declarations by exact
+name and permits only propext and Quot.sound. All ten affected root/header
+contracts passed before the corrected full run. No theorem statement, project
+axiom boundary or weighted score was changed by these repairs.
+
+The previous successful lean-bridge job took approximately 50 minutes
+([public CI record](https://github.com/aisknab/pnp/actions/runs/33959733257)).
+M230 increases the root source set from 352 to 499 modules. The durable
+timeout is raised from 90 to 120 minutes to preserve cold-build and cleanup
+headroom; no checks, permissions or resource limits are relaxed.
+
+The complete proposed public file set passed a bounded streaming privacy scan.
+Immutable archive paths are unchanged. The exact-head clean reproduction,
+normal draft-PR checks, manual merge and exact-merge checks remain release gates;
+a green development checkout is not represented as an already merged milestone.
+The coherent PNPLabs publication remains unchanged until those gates pass.
+
+Formal artefact coverage: 206 of 208 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%.
+Global gates closed: 0 of 5. This remains a release candidate, not a proof of P = NP.
