@@ -301,7 +301,9 @@ test('token appender remains earned beneath the complete-header boundary', async
   assert.equal(status.leanConcreteCookLevinBuilderPolynomialReductionFormalized,
       status.formalPublicationMilestones.some(row =>
         row.id === 'concrete-cook-levin-complete-builder' && row.earned === true));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

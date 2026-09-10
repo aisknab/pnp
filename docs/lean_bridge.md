@@ -1,17 +1,19 @@
 # Lean bridge formalization
 
-<!-- M230-CURRENT-SUMMARY:BEGIN -->
-## Current M230 boundary
+<!-- M231-CURRENT-SUMMARY:BEGIN -->
+## Current M231 boundary
 
-M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+M231 proves concrete CNF-SAT NP-hardness and the closed theorem `NPComplete CNFSAT`. It uses M230's complete all-input finite-machine Cook-Levin formula builder and exact polynomial reduction, together with the existing concrete NP verifier. This closes only the fixed two-point concrete NP-hardness checkpoint. Deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 206 of 208 current scoped publication rows earned.
-Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+Formal artefact coverage: 207 of 209 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
-retain their original module-specific scope; M230 supersedes their incomplete-builder
-limitations without closing any global proof gate.
-<!-- M230-CURRENT-SUMMARY:END -->
+See the [NP-completeness result and limits](lean_cook_levin_np_completeness.md)
+and the [complete-builder result](lean_cook_levin_complete_builder.md).
+Earlier milestone notes retain their original module-specific scope. M230 and M231
+supersede their missing-builder and missing-NP-completeness limitations without
+closing any global proof gate.
+<!-- M231-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
@@ -23,10 +25,12 @@ exists loop : PCCMinLoopCertificate,
 ```
 
 The compiled bridge has no project-specific axiom declarations, but it still
-requires the explicit loop-certificate existence premise and concrete SAT
-hardness. It therefore does **not** constitute a Lean proof of `P = NP`. It is
-also not a complete Lean reproof of the custom JavaScript checker, the full
-residual-slack package, a deterministic SAT algorithm, or the concrete NP-hardness transport. The purpose of the Lean
+requires the explicit loop-certificate existence premise and a concrete SAT
+hardness argument at its interface. M231 now supplies the separate concrete
+NP-completeness theorem, but the complete certificate and final root linkage
+remain open. The bridge therefore does **not** constitute a Lean proof of `P = NP`.
+It is also not a complete Lean reproof of the custom JavaScript checker, the full
+residual-slack package, or a deterministic SAT algorithm. The purpose of the Lean
 track is to replace each trust-base item with a checked theorem in visible stages.
 
 ## Build
@@ -319,8 +323,8 @@ table. Either first verdict continues on the represented first output; the secon
 ordinary raw output are exact, stuck first endpoints remain timeout, and the external bound is
 `PipelineRaw(p)(m) + 6 + PipelineRaw(q)(m + p(m) + 1)`. Their compiled axiom closures are empty.
 The recursive `RawRefinement` constructors consume this compiler at every composite node, so
-`Formal.ConcreteComplexityMachineLink` is now discharged. CNF-SAT in P, CNF-SAT NP-completeness,
-and the root theorem remain absent. See
+`Formal.ConcreteComplexityMachineLink` is now discharged. M231 separately proves
+concrete CNF-SAT NP-completeness; CNF-SAT in P and the root theorem remain absent. See
 [`lean_concrete_complexity.md`](./lean_concrete_complexity.md) and
 [`lean_pipeline_compiler.md`](./lean_pipeline_compiler.md), and
 [`lean_pipeline_sequential_compiler.md`](./lean_pipeline_sequential_compiler.md).
@@ -908,8 +912,8 @@ target bytes, an all-input compiled polynomial, an output-size polynomial,
 strict parser composition, and recursive raw refinement. The report-level
 language linkage and reduction edge are therefore checked rather than caller
 supplied. Remaining global work is to put that concrete target in P through
-the unconditional residual-band/ZeroSlack/PCCMin route; concrete SAT
-NP-hardness and the eligible root theorem also remain open.
+the unconditional residual-band/ZeroSlack/PCCMin route and construct the eligible
+root theorem. M231 separately closes concrete SAT NP-hardness and NP-completeness.
 
 ## Residual-band, ZeroSlack, and PCCMin layers
 
@@ -2387,8 +2391,8 @@ See [lean_cook_levin_builder_physical_classifier_all_route_body_remainder_split.
 1. Checker/reflection soundness: accepted PCCPack emits a semantically valid structured PCCMin loop certificate.
 2. Semantic adequacy of the PCCMin and ZeroSlack certificate fields.
 3. The locked-NAND-to-residual-band reduction theorem.
-4. A deterministic polynomial-time decider proving `CNFSAT ∈ P`, together with concrete SAT
-   NP-hardness/NP-completeness; the current direct verifier proves only `CNFSAT ∈ NP`.
+4. A deterministic polynomial-time decider proving `CNFSAT ∈ P` and its final concrete
+   complexity/root linkage. M231 supplies NP-completeness, not that decider.
 ```
 
 ## Next formalization targets
@@ -2397,14 +2401,14 @@ The highest-value next targets are:
 
 ```text
 1. Construct the locked-NAND-to-residual-band route and deterministic target decider without adding an assumption.
-2. Use M230's complete all-input Cook--Levin polynomial reduction to publish the separate concrete NP-hardness and NP-completeness transport, preserving the exact encoded source model.
+2. Use M230's complete reduction and M231's concrete NP-completeness endpoint in the remaining exact SAT/root linkage, without awarding a duplicate hardness checkpoint.
 3. Replace the remaining supplied ZeroSlack objects with terminal-derived propositions and prove the contradiction chain.
-4. Formalize concrete SAT NP-hardness, without treating the `CNFSAT ∈ NP` verifier as
-   a deterministic decider.
+4. Construct deterministic concrete SAT membership in P; neither the existing NP verifier
+   nor NP-completeness supplies a polynomial-time decider.
 5. Formalize checker/reflection soundness for the PCC package.
 ```
 
 A passing Lean build is a real checked artifact. At this stage it checks an assumption-free status
-declaration, the direct theorem `CNFSAT ∈ NP`, other local results, and an explicitly
+declaration, the direct theorem `CNFSAT ∈ NP`, concrete CNFSAT NP-completeness, other results, and an explicitly
 assumption-bearing conditional bridge. It is not a root theorem or an independent Lean proof of the
 report's conclusion.

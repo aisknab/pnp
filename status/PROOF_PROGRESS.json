@@ -2,13 +2,13 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230",
-  "lastReviewedDate": "2026-09-10",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+  "lastReviewedDate": "2026-09-11",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
-    "pointsEarned": 38,
+    "pointsEarned": 40,
     "pointsAvailable": 100,
-    "percent": 38,
+    "percent": 40,
     "uncertaintyLowPercent": 20,
     "uncertaintyHighPercent": 40,
     "isProbabilityOfCorrectness": false,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 206,
-    "totalRows": 208,
+    "earnedRows": 207,
+    "totalRows": 209,
     "percentRoundedOneDecimal": 99,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -109,7 +109,7 @@
       "id": "concrete-reductions",
       "title": "Concrete reductions and locked-NAND route",
       "pointsAvailable": 20,
-      "pointsEarned": 18,
+      "pointsEarned": 20,
       "checkpoints": [
         {
           "id": "reductions-cook-levin-semantics",
@@ -189,8 +189,8 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The originally earned literal finite-machine builder prefixes retain their two-point baseline credit. M230 completes the general construction under the separate fixed complete-builder checkpoint; no additional prefix points are awarded.",
-          "remainingLimitation": "These prefix results alone are not the complete construction. The M230 full builder is credited separately; The separate named concrete NP-hardness or NP-completeness transport remains open. The reduction is not a deterministic SAT algorithm and does not close residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.",
-          "lastReviewedDate": "2026-09-10"
+          "remainingLimitation": "These prefix results alone are not the complete construction. M230 earns the separate full-builder checkpoint and M231 earns the separate concrete NP-hardness checkpoint. Neither is a deterministic SAT algorithm or a closure of residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.",
+          "lastReviewedDate": "2026-09-11"
         },
         {
           "id": "reductions-report-locked-nand-linkage",
@@ -473,22 +473,49 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230",
           "justification": "One finite source-derived machine now constructs the complete original canonical Cook-Levin formula for every raw input, including empty and odd lengths, with total polynomial runtime and encoded-output-size bounds and exact recursive raw refinement. The compiled PolynomialReduction uses the original formula semantics without a supplied trace or correctness certificate. This retires the full builder dependency, not another prefix or finite fixture.",
-          "remainingLimitation": "The separate named concrete NP-hardness or NP-completeness transport remains open. The reduction is not a deterministic SAT algorithm and does not close residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.",
-          "lastReviewedDate": "2026-09-10"
+          "remainingLimitation": "M231 separately closes concrete CNFSAT NP-completeness using this complete reduction. The builder is not a deterministic SAT algorithm and does not close residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.",
+          "lastReviewedDate": "2026-09-11"
         },
         {
           "id": "reductions-concrete-np-hardness",
           "title": "Concrete NP-hardness or NP-completeness transport in the selected complexity model",
           "points": 2,
-          "status": "open",
+          "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFNPCompletenessFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cnf-np-completeness"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessAuditedDeclarationCount",
+              "expected": 2
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.cnfSAT_np_hard",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.cnfSAT_np_complete",
+              "expectedPresent": true
+            }
           ],
-          "awardedAtCoordinate": null,
-          "justification": "The concrete NP-completeness field is false and the concrete SAT blocker remains open.",
-          "remainingLimitation": "The selected concrete complexity model still lacks the required NP-hardness transport.",
-          "lastReviewedDate": "2026-08-23"
+          "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+          "justification": "The complete M230 source-derived polynomial reduction now applies to every concrete NP language through its verifier witness, and existing concrete CNFSAT membership closes the exact NPComplete CNFSAT proposition. This retires the named uniform NP-hardness transport obligation rather than adding a finite instance or supplied-data implication.",
+          "remainingLimitation": "Every fixed checkpoint in the concrete-reductions track is now earned. These reduction results do not supply deterministic CNFSAT in P, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin or the eligible root theorem. The separate final complexity-transport checkpoint remains open and receives no duplicate credit.",
+          "lastReviewedDate": "2026-09-11"
         },
         {
           "id": "reductions-final-target-compatibility",
@@ -502,8 +529,8 @@
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "justification": "The active report-facing SAT and locked-NAND endpoints are definitionally the concrete languages, and the bridge consumes the compiled all-bitstring polynomial reduction without a caller-supplied trust edge.",
-          "remainingLimitation": "The locked-NAND target still lacks a deterministic polynomial-time decider, and concrete SAT NP-hardness and CNFSAT-in-P remain open.",
-          "lastReviewedDate": "2026-08-23"
+          "remainingLimitation": "The locked-NAND target still lacks a deterministic polynomial-time decider, and CNFSAT-in-P remains open. M231 separately supplies concrete CNFSAT NP-completeness; compatibility alone does not supply the final P = NP transport or root theorem.",
+          "lastReviewedDate": "2026-09-11"
         }
       ]
     },
@@ -828,13 +855,20 @@
           "points": 1,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFNPCompletenessFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.RootTheoremAndAxiomAudit" }
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFSATInPFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.RootTheoremAndAxiomAudit"
+            }
           ],
           "awardedAtCoordinate": null,
-          "justification": "The concrete NP-completeness transport is not formalized and the root gate remains blocked.",
-          "remainingLimitation": "The exact concrete SAT theorem must be transported through the selected standard complexity model.",
-          "lastReviewedDate": "2026-08-23"
+          "justification": "Concrete CNFSAT NP-completeness is now proved, but the deterministic SAT theorem and its final standard-complexity linkage to the eligible P = NP root remain absent. The two-point reduction checkpoint is credited separately; it cannot also earn this final transport checkpoint.",
+          "remainingLimitation": "An exact concrete CNFSAT-in-P theorem and the remaining standard complexity transport required by the eligible root must be constructed and audited. NP-completeness alone earns no credit here.",
+          "lastReviewedDate": "2026-09-11"
         },
         {
           "id": "root-eligible-theorem",
@@ -1791,6 +1825,75 @@
         }
       ],
       "rationale": "M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open. Formal artefact coverage: 206 of 208 current scoped publication rows earned. Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+      "formalArtefactCoverage": {
+        "earnedRows": 207,
+        "totalRows": 209
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": true,
+      "changedCheckpointIds": [
+        "reductions-concrete-np-hardness"
+      ],
+      "changeRecords": [
+        {
+          "checkpointId": "reductions-concrete-np-hardness",
+          "oldStatus": "open",
+          "newStatus": "earned",
+          "compiledEvidence": [
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cnf-np-completeness"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFNPCompletenessAuditedDeclarationCount",
+              "expected": 2
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.cnfSAT_np_hard",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.cnfSAT_np_complete",
+              "expectedPresent": true
+            }
+          ],
+          "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+          "loadBearingRationale": "The complete M230 source-derived polynomial reduction now applies to every concrete NP language through its verifier witness, and existing concrete CNFSAT membership closes the exact NPComplete CNFSAT proposition. This retires the named uniform NP-hardness transport obligation rather than adding a finite instance or supplied-data implication.",
+          "remainingTrackLimitations": "Every fixed checkpoint in the concrete-reductions track is now earned. These reduction results do not supply deterministic CNFSAT in P, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin or the eligible root theorem. The separate final complexity-transport checkpoint remains open and receives no duplicate credit.",
+          "oldAndNewTotal": {
+            "old": 38,
+            "new": 40
+          },
+          "uncertaintyRangeDecision": {
+            "lowPercent": 20,
+            "highPercent": 40,
+            "changed": false,
+            "rationale": "Retain the reviewed 20-to-40-percent uncertainty range. Completing uniform concrete NP-hardness earns its fixed two points but does not reduce the unresolved risk in deterministic SAT, the unconditional residual core, polynomial PCCMin or the final root."
+          }
+        }
+      ],
+      "rationale": "M231 proves concrete CNF-SAT NP-hardness and the closed NP-completeness theorem using the complete M230 construction. Only the fixed two-point reductions-concrete-np-hardness checkpoint changes. No final root-transport point or global gate is awarded. Formal artefact coverage: 207 of 209 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

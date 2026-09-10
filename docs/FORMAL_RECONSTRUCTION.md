@@ -1,17 +1,19 @@
 # Formal reconstruction notice
 
-<!-- M230-CURRENT-SUMMARY:BEGIN -->
-## Current M230 boundary
+<!-- M231-CURRENT-SUMMARY:BEGIN -->
+## Current M231 boundary
 
-M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+M231 proves concrete CNF-SAT NP-hardness and the closed theorem `NPComplete CNFSAT`. It uses M230's complete all-input finite-machine Cook-Levin formula builder and exact polynomial reduction, together with the existing concrete NP verifier. This closes only the fixed two-point concrete NP-hardness checkpoint. Deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 206 of 208 current scoped publication rows earned.
-Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+Formal artefact coverage: 207 of 209 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
-retain their original module-specific scope; M230 supersedes their incomplete-builder
-limitations without closing any global proof gate.
-<!-- M230-CURRENT-SUMMARY:END -->
+See the [NP-completeness result and limits](lean_cook_levin_np_completeness.md)
+and the [complete-builder result](lean_cook_levin_complete_builder.md).
+Earlier milestone notes retain their original module-specific scope. M230 and M231
+supersede their missing-builder and missing-NP-completeness limitations without
+closing any global proof gate.
+<!-- M231-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 
@@ -104,8 +106,9 @@ and decision precomposition, proving exact output/verdict and a polynomial raw-m
 for every finite charged program tree. All 16 public declarations have empty axiom closure.
 The development also provides one direct raw-machine instance: a universally
 correct polynomial-time verifier for canonically encoded finite CNF formulae and bounded assignment
-certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. It does not provide a deterministic polynomial-time
-decider proving `CNFSAT ∈ P`, concrete NP-hardness or NP-completeness, the complete locked-NAND
+certificates, proving `PNP.Concrete.CNFSAT ∈ NP`. M231 combines it with the complete
+M230 Cook-Levin reduction to prove concrete CNFSAT NP-completeness. It does not provide a
+deterministic polynomial-time decider proving `CNFSAT ∈ P`, the complete locked-NAND
 target decider, the residual-band exact minimizer, ZeroSlack, or a root theorem
 `PNP.Main.p_eq_np` with an acceptable axiom audit.
 
@@ -1646,7 +1649,7 @@ the CNF verifier and all-bitstring locked-NAND reduction are reused, and
 The named endpoint has only `propext` and `Quot.sound` in its compiled closure,
 and `PNP.LockedNANDThreshold` is absent from the project-axiom inventory. A
 target decider, residual-band construction, ZeroSlack/PCCMin soundness,
-concrete NP-hardness, and the root theorem remain open. See
+and the root theorem remain open. M231 separately supplies concrete NP-hardness. See
 [`lean_concrete_legacy_locked_nand_compatibility.md`](./lean_concrete_legacy_locked_nand_compatibility.md).
 
 The historical hostile review named `DirectWireOutputLowerBound`, `MacroDistinct`,

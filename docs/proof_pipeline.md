@@ -1,17 +1,19 @@
 # Proof and Checker Pipeline
 
-<!-- M230-CURRENT-SUMMARY:BEGIN -->
-## Current M230 boundary
+<!-- M231-CURRENT-SUMMARY:BEGIN -->
+## Current M231 boundary
 
-M230 completes the all-input finite-machine Cook–Levin formula builder and exact polynomial reduction to CNFSAT. Its ordinary output is the original canonical formula, with complete runtime and encoded-output bounds in the original input length. This closes only the fixed complete-builder checkpoint; deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+M231 proves concrete CNF-SAT NP-hardness and the closed theorem `NPComplete CNFSAT`. It uses M230's complete all-input finite-machine Cook-Levin formula builder and exact polynomial reduction, together with the existing concrete NP verifier. This closes only the fixed two-point concrete NP-hardness checkpoint. Deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 206 of 208 current scoped publication rows earned.
-Risk-weighted proof completion estimate: 38%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+Formal artefact coverage: 207 of 209 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [complete-builder result and limits](lean_cook_levin_complete_builder.md). Earlier milestone notes
-retain their original module-specific scope; M230 supersedes their incomplete-builder
-limitations without closing any global proof gate.
-<!-- M230-CURRENT-SUMMARY:END -->
+See the [NP-completeness result and limits](lean_cook_levin_np_completeness.md)
+and the [complete-builder result](lean_cook_levin_complete_builder.md).
+Earlier milestone notes retain their original module-specific scope. M230 and M231
+supersede their missing-builder and missing-NP-completeness limitations without
+closing any global proof gate.
+<!-- M231-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

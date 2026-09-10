@@ -151,7 +151,9 @@ test('substitution, mode, cardinality, output, and overclaim mutations fail clos
 
 test('formula-size milestone remains fail-closed below reduction and NP-completeness', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

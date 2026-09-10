@@ -124,7 +124,7 @@ test('current verifier accepts without executing a historical replay', async () 
   assert.equal(out.leanConcreteCNFSATMembershipTheorem,
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
   assert.equal(out.leanConcreteCNFSATInPFormalized, false);
-  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, true);
   assert.equal(out.riskWeightedProofCompletionPercent,
     progress.proofCompletion.percent);
   assert.equal(out.proofCompletionPointsAvailable, 100);

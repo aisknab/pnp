@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230`, 206 of 208
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231`, 207 of 209
 current scoped rows are earned, or 99.0 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,16 +19,16 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M230 |
+| Track | Available | Earned at M231 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
-| Concrete reductions and locked-NAND route | 20 | 18 |
+| Concrete reductions and locked-NAND route | 20 | 20 |
 | Unconditional residual core and ZeroSlack | 35 | 2 |
 | Exact PCCMin algorithm, complexity and bounds | 20 | 1 |
 | Root theorem and project-axiom elimination | 10 | 4 |
-| **Total** | **100** | **38** |
+| **Total** | **100** | **40** |
 
-The M230 risk-weighted proof completion estimate is therefore 38 percent, with
+The M231 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -40,11 +40,22 @@ machine-readable ledger:
 
 [`status/PROOF_PROGRESS.json`](../status/PROOF_PROGRESS.json)
 
-M230 closes exactly the fixed three-point reductions-complete-cook-levin-builder checkpoint,
-moving the estimate from 35 to 38 percent. The complete source-derived machine,
-total encoded-input polynomial runtime and output bound, raw refinement and
-original-formula reduction retire that load-bearing dependency. No new weight
-is assigned to its component count. The separate named concrete NP-hardness or NP-completeness transport remains open. The reduction is not a deterministic SAT algorithm and does not close residual minimization, unconditional ZeroSlack, complete polynomial PCCMin or the eligible root theorem.
+M230 closed exactly the fixed three-point `reductions-complete-cook-levin-builder`
+checkpoint, moving the estimate from 35 to 38 percent. Its complete source-derived
+machine, encoded-input polynomial runtime and output bounds, raw refinement and
+original-formula reduction retired that builder dependency.
+
+M231 closes exactly the fixed two-point `reductions-concrete-np-hardness`
+checkpoint, moving the estimate from 38 to 40 percent. The all-language
+hardness theorem and the closed `NPComplete CNFSAT` theorem are kernel checked,
+root-built and pinned by their compiled types. The concrete-reductions track is
+now fully earned. No point is awarded again for `root-complexity-transport`:
+the deterministic SAT theorem and final complexity/root linkage remain open.
+The new theorem is not a SAT algorithm and does not close residual minimization,
+unconditional ZeroSlack, complete polynomial PCCMin or any global gate.
+
+Formal artefact coverage: 207 of 209 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
 unconditional ZeroSlack, polynomial runtime and certificate bounds, and the root

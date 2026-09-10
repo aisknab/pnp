@@ -184,7 +184,9 @@ test('stage order, final pad, length, dependency, endpoint, and overclaim mutati
 
 test('formula-schedule milestone remains fail-closed below a raw builder and reduction', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);

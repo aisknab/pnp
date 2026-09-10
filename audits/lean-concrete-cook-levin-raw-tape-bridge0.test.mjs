@@ -126,7 +126,9 @@ test('tape side, boundary, certificate, endpoint, and overclaim mutations fail c
 
 test('raw semantic equivalence does not widen the current publication boundary', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.concretePublicationGate.passed, false);
   assert.ok(status.remainingBlockers.includes('Formal.ConcreteSAT'));
 });

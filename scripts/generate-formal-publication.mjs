@@ -19,13 +19,13 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-10-230';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-231';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
-  'PNP.PEqualsNP is now a compatibility name for the concrete finite charged-pipeline target. The target remains inactive because deterministic CNFSAT membership in P, concrete NP-hardness transport, the eligible root theorem, and the exact publication fingerprints remain absent.',
+  'PNP.PEqualsNP is now a compatibility name for the concrete finite charged-pipeline target. Concrete CNFSAT NP-completeness is now kernel checked. The target remains inactive because deterministic CNFSAT membership in P, the eligible root theorem, and the exact publication fingerprints remain absent.',
   'PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.',
   'All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.',
   'The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.',
@@ -121,6 +121,19 @@ export async function BuildFormalPublication0(root) {
 }
 
 function renderReport0(template, status, inventory, publication, progress) {
+  const currentProofFields = [
+    ['CNF-SAT membership in NP', 'leanConcreteCNFSATMembershipFormalized'],
+    ['Complete all-input Cook-Levin builder', 'leanConcreteCookLevinFormulaBuilderFormalized'],
+    ['Concrete CNF-SAT NP-completeness', 'leanConcreteCNFNPCompletenessFormalized'],
+    ['Deterministic CNF-SAT membership in P', 'leanConcreteCNFSATInPFormalized'],
+    ['Eligible root theorem present', 'rootLeanTheoremPresent'],
+  ];
+  const coverRows = currentProofFields.map(([label, field]) => {
+    if (typeof status[field] !== 'boolean') throw new Error('missing report status field: ' + field);
+    return texEscape0(label) + ' & ' + (status[field] ? '\\statustrue' : '\\statusfalse') + ' \\\\';
+  }).join('\n');
+  const latestEarned = publication.milestones.filter(row => row.earned === true).at(-1);
+  if (!latestEarned) throw new Error('report requires an earned milestone');
   const modules = new Map();
   for (const entry of inventory.declarations) {
     const count = modules.get(entry.module) ?? { declarations: 0, theorems: 0 };
@@ -129,6 +142,8 @@ function renderReport0(template, status, inventory, publication, progress) {
     modules.set(entry.module, count);
   }
   const replacements = new Map([
+    ['@@COVER_STATUS_ROWS@@', coverRows],
+    ['@@LATEST_MILESTONE_TITLE@@', texEscape0(latestEarned.title)],
     ['@@ARTEFACT_EARNED@@', String(progress.formalArtefactCoverage.earnedRows)],
     ['@@ARTEFACT_TOTAL@@', String(progress.formalArtefactCoverage.totalRows)],
     ['@@PROOF_ESTIMATE@@', String(progress.proofCompletion.percent)],

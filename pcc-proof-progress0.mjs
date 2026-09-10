@@ -10,7 +10,7 @@ const BASELINE_COORDINATE =
   'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184';
 const BASELINE_COVERAGE = Object.freeze({ earnedRows: 160, totalRows: 162 });
 const BASELINE_SCORE = 30;
-const CURRENT_SCORE = 38;
+const CURRENT_SCORE = 40;
 const FILES = Object.freeze({
   ledger: 'status/PROOF_PROGRESS.json',
   status: 'status/FORMAL_RECONSTRUCTION_STATUS.json',
@@ -35,7 +35,7 @@ const EXPECTED_TRACKS = Object.freeze([
     id: 'concrete-reductions',
     title: 'Concrete reductions and locked-NAND route',
     pointsAvailable: 20,
-    pointsEarned: 18,
+    pointsEarned: 20,
     checkpoints: [
       ['reductions-cook-levin-semantics', 3, 'earned'],
       ['reductions-cnf-to-nand', 3, 'earned'],
@@ -43,7 +43,7 @@ const EXPECTED_TRACKS = Object.freeze([
       ['reductions-builder-prefixes', 2, 'earned'],
       ['reductions-report-locked-nand-linkage', 2, 'earned'],
       ['reductions-complete-cook-levin-builder', 3, 'earned'],
-      ['reductions-concrete-np-hardness', 2, 'open'],
+      ['reductions-concrete-np-hardness', 2, 'earned'],
       ['reductions-final-target-compatibility', 1, 'earned'],
     ],
   },

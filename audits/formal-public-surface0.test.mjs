@@ -25,7 +25,7 @@ test('formal public surface accepts the archive-only legacy boundary', async () 
   assert.equal(out.leanConcreteCNFSATMembershipTheorem,
     'PNP.Concrete.FinalUniversalDesign.cnfSATInNP');
   assert.equal(out.leanConcreteCNFSATInPFormalized, false);
-  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, true);
   assert.equal(out.publicTheoremStatement, null);
   assert.equal(out.finalTheoremReady, false);
   assert.equal(out.legacyV0CheckerExportedAsCurrentAuthority, false);
