@@ -8562,3 +8562,98 @@ polynomial reduction and release gates remain mandatory. M230 stays open;
 about six uneven coarse packages remain. Defer PNPLabs publication.
 Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
 with 20–40% uncertainty, and global gates 0/5.
+
+
+
+### Planned outcome-preserving physical recovery handoff
+
+Legacy anchor: the canonical manuscript's all-input SAT NP-completeness
+construction feeding deterministic SAT decision and final complexity transport.
+The M230 dependency edge is from the actual cursor's verified token result
+and retained frame through physical recovery to the next builder iteration.
+
+Construct a finite handoff table from the source machine's start state and
+actual rule targets. Deduplicate that finite list and retain only states with
+no outgoing source rule. Prove every reached no-rule terminal is covered;
+do not enumerate an unbounded numeric state range or supply a route list.
+
+Preserve the six token observations using disjoint tagged copies of the
+already verified recovery program. The assembled machine must execute the
+original lookup, a symbol-preserving launch, physical recovery, and an
+outcome-preserving finish transition. Prove exact work/raw execution,
+collision-free rule queries and stable final states. The classifier and
+tables are fixed by the verifier's finite machine, not the runtime input.
+
+Instantiate the control with the actual cursor-token theorem. Derive all
+source, request, root, scratch, blank and span invariants internally. Reuse
+`BuilderDividerFootprint.preservedTail_eq_nil` for the original cursor
+exterior, subject to checking its exact type. Prove recovery returns a
+blank-equivalent original cursor while retaining the canonical observation,
+and charge both bridge steps and the complete physical recovery.
+
+Prepare focused exact-type, terminal coverage, distinct-observation and
+adversarial-control regression contracts before building. Reuse unchanged
+cursor/frame/eraser evidence. No complete core or PNPLabs suite is due until
+the full mathematical milestone reaches its release boundary.
+
+This control connection is not the full builder loop, all-input canonical
+formula equality or packaged polynomial reduction. M230 and its weighted
+checkpoint remain open until those obligations and release gates pass.
+Defer PNPLabs publication; keep the existing public progress values.
+
+The stable outcomes are states 0 through 5. All source and recovery states
+use injective structural namespaces above those results. The exact generic
+execution type requires source and continuation runs, then proves their
+composition in `sourceSteps + 1 + afterSteps + 1` work steps and exactly six
+times that many raw steps. The later cursor specialization must derive these
+premises internally from its original body/balance invariants.
+
+The affected interface is one new finite-control module and its exact-type
+and hostile-control regression file. No existing theorem signature, inventory
+pin, status schema, workflow assertion or generated value changes at this
+internal integration point. Check terminal deduplication, exclusion of live
+source states and unmentioned states, zero-step coverage, six distinct
+outcomes and continuation namespaces, all-tape execution, full rule-query
+distinctness, raw execution and every public axiom closure before acceptance.
+
+### Verified finite outcome-preserving terminal handoff
+
+[`WorkMachineTerminalHandoff`](../../lean/PNP/Concrete/WorkMachineTerminalHandoff.lean)
+derives its terminal table from the actual source start state and rule
+targets, removes duplicates and excludes every state with an outgoing rule.
+Every reached no-rule endpoint is covered, including a zero-step start.
+There is no input-supplied terminal list or numerical maximum-state scan.
+
+One finite machine runs the original program, takes a symbol-preserving
+launch, executes an outcome-tagged continuation and takes a preserving
+finish step. Six disjoint continuation namespaces retain all six result
+classes. Running states are disjoint from the stable result states, whose
+values are 0 through 5. Rule queries are collision-free when the source and
+continuation queries are, and the continuation accept state has no rule.
+
+The exact composition theorem charges both bridges: source steps plus one,
+continuation steps plus one. The compiled theorem uses exactly six raw
+steps per work step. Neither theorem changes the source or continuation
+execution statements or supplies their correctness.
+
+All 19 regression contracts and all ten public-theorem axiom audits pass.
+The regressions cover exact theorem types, duplicate targets, excluded live
+states and absent routes, zero-step coverage, colliding source queries,
+distinct outcomes and namespaces, and all-tape execution for every outcome.
+All ten audited theorems use only `propext` and `Quot.sound`; none uses a
+project axiom or `Classical.choice`. The unchanged compiled source and axiom
+commands were reused after correcting only regression-fixture syntax.
+The final combined verification reached its own green marker and zero exit.
+Unchanged cursor, request, frame and physical recovery evidence was reused;
+no full core or PNPLabs suite was repeated.
+
+The next connection must instantiate this control with actual cursor lookup
+and physical root recovery, derive the recovery run from the existing frame,
+and prove the recovered tape equivalent to the original cursor while
+preserving the canonical observation and charging recovery. Until that
+specialization is checked, the cleanup stage remains open. The full builder
+loop, exact formula equality on every input, complete polynomial reduction
+and release gates remain mandatory. M230 is not earned; about six uneven
+coarse packages remain. Defer PNPLabs publication.
+Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
