@@ -8167,3 +8167,80 @@ all-input formula equality and the complete polynomial packaged reduction
 remain mandatory. M230 and its fixed checkpoint remain open. Defer PNPLabs
 publication. Formal artefact coverage remains 205/207; risk-weighted proof
 estimate 35%, uncertainty 20–40%; global gates 0/5.
+
+### Actual source-cursor connection to complete token execution
+
+Continue the pinned manuscript's all-input Cook-Levin construction. Connect the
+existing physical source/request producer to the complete token dispatcher.
+The dependency edge is the real body cursor to its canonical token observation,
+not a theorem about caller-supplied payloads or prepared requests.
+
+The source machine already starts at
+`BuilderCursorSource.cursorTape problem index remaining output`. Construct the
+typed request from its actual gap, clause index and token position, identify
+the source slot with `problem.formulaConstraintSlotDirect`, and use its proved
+final-register layout. Derive blank exteriors for every actual provider family,
+including cleared nonempty scratch, head-move branches, and repeated drops.
+Do not substitute an empty exterior for the actual finite tape representation.
+
+The complete execution theorem has only the existing body-branch and balanced
+cursor premises: `quotient problem index < count problem` and
+`index + remaining = bodySlotCount problem`. It must derive an exact execution
+from the real cursor, a token-stage result with no outgoing rule, the exact
+original emitted-clause token, an input-length polynomial runtime and a
+polynomial scratch-space bound in addition to the existing input/output frame.
+No source, family, pair, request, blank-exterior certificate, execution or bound
+may be added as a caller premise.
+
+Compose the source producer and unchanged dispatcher with their actual bridge.
+Preserve all missing/padded/false and separator/finish outcomes under injective
+state renaming. Reuse the source producer's original-input bounds and the exact
+verified token lookup. Prepare complete signature contracts and independent
+coordinate, machine identity, stage, outcome and bound regressions before
+targeted compilation and axiom auditing.
+
+Only this real cursor connection completes the first coarse remaining work
+package. Outcome-preserving cleanup/root recovery, the full builder loop, exact
+all-input formula output, the complete polynomial packaged reduction, final
+core verification/merge and major PNPLabs publication remain open. Do not
+narrow the final builder theorem or award progress points for this integration.
+M230 and its fixed checkpoint remain open; defer PNPLabs work. Formal artefact
+coverage remains 205/207, proof estimate 35% with 20–40% uncertainty, gates 0/5.
+
+### Verified complete token lookup from the real source cursor
+
+[`BuilderCursorTokenLookup`](../../lean/PNP/Concrete/CookLevinBuilderCursorTokenLookup.lean)
+now composes the actual source/request machine with the unchanged complete
+token dispatcher. Its initial configuration is the real body cursor tape,
+not a prepared payload or caller-selected token-program entry.
+
+The only input invariants are the existing body-branch condition and balanced
+cursor equation. The machine and proof derive the actual source slot, nine-field
+gap, clause index and original token position. All five source-provider
+families have a proved blank exterior, including nonempty cleared scratch,
+head-move branches and repeated drops. No blank-tape certificate or
+input-size bound is added to the caller interface.
+
+The result is the exact token in the selected source's original
+`constraint.emit` clause order and canonical clause encoding, at coordinates
+`(index / width) % clauseWidth` and `index % width`. Missing, padded and valid
+false results remain distinct. A proved token-stage state tag and a
+no-outgoing-rule theorem establish the returned stable endpoint. The source
+and token programs plus their actual connecting bridge have a polynomial raw
+runtime in the original input length. Actual stored scratch is bounded in
+addition to the existing input/output frame.
+
+All 31 regression contracts and 14 public-theorem axiom probes passed. Two
+closures use only `propext`; twelve use `propext` and `Quot.sound`. None
+uses project axioms or `Classical.choice`. The existing source producer and
+token dispatcher evidence was reused. No whole-root or PNPLabs suite was
+rerun for this internal integration.
+
+This completes the first coarse remaining work package: real source/request
+to complete token lookup, including the cursor adapter and blank invariants.
+The next obligation is outcome-preserving cleanup and root/cursor recovery.
+The full builder loop, exact all-input formula equality, complete polynomial
+packaged reduction, final core verification/merge and major publication remain
+mandatory. M230 and its fixed checkpoint are still open. Defer PNPLabs
+publication; formal artefact coverage remains 205/207, proof estimate 35% with
+20–40% uncertainty, and global gates 0/5.
