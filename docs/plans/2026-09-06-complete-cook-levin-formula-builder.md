@@ -8902,3 +8902,80 @@ the output/advance connection is progress within the first, not completion
 of the entire loop. M230 and its weighted checkpoint remain open.
 Defer PNPLabs publication. Formal artefact coverage remains 205/207,
 risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
+
+### Planned source-derived final-opportunity guard for the full loop
+
+Legacy anchor: the canonical manuscript's complete all-input formula
+construction. The body schedule includes one final `Finish` opportunity.
+The emitting loop must distinguish remaining = 1 from an ordinary positive
+body count before choosing between the verified body iteration and final
+emission. A positive loop invariant must justify treating a non-match as
+an ordinary body position; zero is also a non-match, not a final token.
+
+Inspection of the actual cursor shows that the remaining register is at
+the far end of the retained workspace, not next to the input head. Reuse
+the existing register-end seeker, fixed unary matcher for one, and
+tape-preserving return scan. Compose their real executions through the
+existing finite handoff. Do not rearrange the canonical tape or claim a
+constant bound for reaching and leaving the register.
+
+The intended source theorem quantifies over every tableau problem, index,
+remaining count and output, without any supplied layout, result, or
+execution premise. It returns the exact original cursor tape and accepts
+if and only if the physically read remaining register equals one.
+Prove exact work and compiled raw execution. Under the original balance
+invariant, bound the complete scan/test/return cost in original input size.
+
+Prepare exact public-type and axiom contracts with the implementation.
+Independently test zero, one and every larger counter, exact tape
+preservation, the single fixed rule table and both full scan costs.
+Existing dependency evidence is reusable; no full core or PNPLabs suite
+is needed for this new connection.
+
+This is a guard for the full repeated loop, not loop completion. Still
+connect final emission, the back edge, termination and all-prefix bounds,
+then exact complete formula output, total polynomial runtime, the
+packaged reduction and release gates. About five uneven major packages
+remain. Defer PNPLabs publication. Formal artefact coverage remains
+205/207, risk-weighted proof estimate 35% with 20–40% uncertainty,
+and global gates 0/5.
+
+### Verified source-derived final-opportunity guard
+
+[BuilderCursorRemainingOne](../../lean/PNP/Concrete/CookLevinBuilderCursorRemainingOne.lean)
+now composes the existing register-end scan, fixed unary matcher for one,
+and return scan through a finite outcome-preserving handoff. The machine
+does not depend on a supplied input, counter value, register layout or
+selected branch. Its exact source theorem covers every tableau problem,
+index, remaining count and existing output, and restores the entire
+original cursor tape.
+
+The accept result is equivalent to remaining = 1. The reject result is
+equivalent to remaining not equal to one, including zero. The eventual
+loop must maintain positive remaining before using rejection to select
+the ordinary body. This test alone does not justify treating zero as
+another body position or as a final token.
+
+Exact work and compiled raw traces are checked. The total work count is
+twice the retained word length, plus the existing matcher cost, plus eight
+bridge/entry/return steps. Under the original balance invariant its raw
+cost is bounded by the existing cursor raw polynomial plus 42. This
+includes both full workspace traversals; the local matcher's constant
+bound alone is not the whole guard's runtime.
+
+All 16 regression contracts and ten public axiom audits pass. One audit
+uses only `propext`; nine use `propext` and `Quot.sound`. No project
+axiom or `Classical.choice` is required. Exact interfaces, zero, one,
+every larger counter, complete tape preservation, the fixed machine and
+both scan costs are covered. The final combined run reached its own green
+marker and zero exit. Existing source dependencies remain unchanged;
+no full core or PNPLabs suite was repeated.
+
+Next compose the guard with the verified source-derived body iteration,
+final `Finish` emission and the physical back edge. Prove the repeated
+execution and original-input bounds rather than substituting the older
+scan-only schedule controller. Exact complete formula output, total
+polynomial runtime, packaged reduction and release gates remain open.
+About five uneven major packages remain; M230 is not earned.
+Defer PNPLabs publication. Formal artefact coverage remains 205/207,
+risk-weighted proof estimate 35% with 20–40% uncertainty, and global gates 0/5.
