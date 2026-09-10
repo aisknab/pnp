@@ -74,7 +74,7 @@ test('formal reconstruction status accepts the current source and public mirrors
   assert.equal(out.leanConcreteCNFProofScope,
     'direct-finite-machine-verifier-correctness-and-np-membership-only');
   assert.equal(out.leanConcreteCNFSATInPFormalized, false);
-  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(out.leanConcreteCNFNPCompletenessFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthFormalized, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthAxiomAuditPassed, true);
   assert.equal(out.leanConcreteCookLevinBuilderInputLengthAuditedDeclarationCount, 39);
@@ -2753,7 +2753,11 @@ test('formal reconstruction status rejects weakened or broadened direct CNF stat
     ['leanConcreteCNFWorkAxiomAuditPassed', false],
     ['leanConcreteCNFSATMembershipFormalized', false],
     ['leanConcreteCNFSATInPFormalized', true],
-    ['leanConcreteCNFNPCompletenessFormalized', true],
+    ['leanConcreteCNFNPCompletenessFormalized', false],
+    ['leanConcreteCNFNPCompletenessAxiomAuditPassed', false],
+    ['leanConcreteCNFNPCompletenessAuditedDeclarationCount', 1],
+    ['leanConcreteCNFNPCompletenessTheorem', 'PNP.Main.p_eq_np'],
+    ['leanConcreteCNFNPCompletenessHardnessTheorem', 'PNP.Main.p_eq_np'],
     ['leanConcreteCNFSATMembershipTheorem', 'PNP.Main.p_eq_np'],
   ]) {
     const status = await currentStatus0();

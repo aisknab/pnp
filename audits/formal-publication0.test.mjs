@@ -3867,10 +3867,17 @@ test('canonical report source is current and the committed PDF artifact exists',
     tex,
     /fixed parser\/carrier\/controller work graph now implements exactly that pure\s+compiler on every bitstring within one external-input polynomial/u,
   );
-  assert.match(
-    tex,
-    /separate fixed all-input machine now translates\s+strict canonical CNF into well-formed topological NAND, preserves satisfiability exactly, supplies\s+a polynomial-time function and raw refinement/u,
-  );
+  const cover = tex.split('\\end{titlepage}')[0].replace(/\s+/gu, ' ');
+  for (const [label, field] of [
+    ['CNF-SAT membership in NP', 'leanConcreteCNFSATMembershipFormalized'],
+    ['Complete all-input Cook-Levin builder', 'leanConcreteCookLevinFormulaBuilderFormalized'],
+    ['Concrete CNF-SAT NP-completeness', 'leanConcreteCNFNPCompletenessFormalized'],
+    ['Deterministic CNF-SAT membership in P', 'leanConcreteCNFSATInPFormalized'],
+    ['Eligible root theorem present', 'rootLeanTheoremPresent'],
+  ]) {
+    assert.equal(typeof status[field], 'boolean', field);
+    assert.ok(cover.includes(label + ' & ' + (status[field] ? '\\statustrue' : '\\statusfalse')), field);
+  }
   assert.match(
     tex,
     /compiled\s+machine never times out at the advertised bound, retains literal\s+\\code\{RawRefinement\}/u,
@@ -3910,7 +3917,8 @@ test('canonical report source is current and the committed PDF artifact exists',
     tex,
     /This reduction still does not decide CNF-SAT, put the\s+locked target in P, discharge residual-band\/ZeroSlack\/PCCMin, or prove \$P=NP\$/u,
   );
-  assert.match(tex, /A literal finite builder emits\s+\\code\{FormulaWidth\} copies of \\code\{T\} followed by \\code\{F\}, \\code\{Sep\}, and the complete positive\s+clause on variables zero, one, and two/u);
+  assert.match(tex, /M230 now completes the all-input construction/u);
+  assert.match(tex, /M231 now packages concrete CNF-SAT NP-completeness/u);
   assert.match(tex, /complete positive at-least-one shape clause on variables zero,\s+one, and two/u);
   assert.match(tex, /One literal token-cursor step continues from that first-clause endpoint/u);
   assert.match(tex, /not a general cursor loop or arbitrary schedule decoder/u);

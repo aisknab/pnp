@@ -97,7 +97,9 @@ test('stuck, length, pairing, and overclaim mutations fail closed', async () => 
 
 test('tableau milestone preserves the fail-closed publication boundary', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.concretePublicationGate.passed, false);
   assert.ok(status.remainingBlockers.includes('Formal.ConcreteSAT'));
 });

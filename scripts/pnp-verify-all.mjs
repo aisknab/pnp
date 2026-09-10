@@ -85,6 +85,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs',
   'audits/lean-concrete-cook-levin-complete-builder0.test.mjs',
+  'audits/lean-concrete-cook-levin-np-completeness0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
@@ -323,7 +324,8 @@ export async function RunPNPVerifyAll0(options = {}) {
       statusStep?.leanConcreteCNFSATMembershipTheorem ?? null,
     leanConcreteCNFProofScope: statusStep?.leanConcreteCNFProofScope ?? null,
     leanConcreteCNFSATInPFormalized: false,
-    leanConcreteCNFNPCompletenessFormalized: false,
+    leanConcreteCNFNPCompletenessFormalized:
+      statusStep?.leanConcreteCNFNPCompletenessFormalized ?? false,
     publicTheoremStatement: statusStep?.publicTheoremStatement ?? null,
     publicTheoremConclusion: statusStep?.publicTheoremConclusion ?? null,
     finalTheoremReady: statusStep?.finalTheoremReady ?? false,

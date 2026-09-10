@@ -300,6 +300,8 @@ private def reviewedMilestoneTheoremNames : Array Name := #[
   `PNP.Concrete.CookLevin.formulaBuilder_rawRefinement_output,
   `PNP.Concrete.CookLevin.polynomialReduction_output,
   `PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete,
+  `PNP.Concrete.CookLevin.cnfSAT_np_hard,
+  `PNP.Concrete.CookLevin.cnfSAT_np_complete,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState,
   `PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length,

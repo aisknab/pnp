@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -54,60 +54,46 @@
   \vspace{0.3cm}
   {\LARGE\bfseries\color{statusred} The repository does not currently establish $P=NP$.\par}
   \vspace{0.3cm}
-  Public theorem emission is disabled. A direct finite raw-machine verifier now proves concrete
-  CNF-SAT membership in NP with an explicit polynomial bound. It does not prove CNF-SAT in P,
-  NP-hardness, NP-completeness, or $P=NP$. The general charged pipeline is linked to the raw machine
-  kernel, and the Cook--Levin formula has an exact externally sized answer-independent slot
-  schedule plus direct fuelled bit and token specification cursors. A literal finite builder emits
-  \code{FormulaWidth} copies of \code{T} followed by \code{F}, \code{Sep}, and the complete positive
-  clause on variables zero, one, and two. It then executes the first padding transition and the
-  entire remaining first-clause padding run, then emits the complete second clause
-  \code{Sep F F F T F Finish}, traverses the entire remaining clause-two padding block, and then
-  emits the complete third clause \code{Sep F F F T T F Finish} on variables zero and two,
-  traverses the entire remaining clause-three padding block, and emits the complete fourth clause
-  \code{Sep F T F F T T F Finish} on variables one and two, traverses the remainder of the first
-  scheduled constraint, emits the second constraint's first positive literal through its
-  width-selected successor, and consumes the next seven width-dependent opportunities. At width one
-  those opportunities are padding and emit nothing; at wider widths they emit the first four unary
-  \code{T} tokens and terminating \code{F} of the second literal, followed by the next literal's
-  opening \code{T} and first unary-index \code{T}. Every traversed
-  padding slot and emitted populated slot has a direct schedule proof, the emitted bits are the exact
-  canonical prefix, and an external polynomial bounds the compiled run. The following
-  padding-or-terminating-\code{F} opportunity, a general dynamic formula cursor, arbitrary raw slot decoder,
-  and the remaining formula body are not
-  implemented, so there is no complete raw
-  polynomial-time Cook--Levin formula builder. A separate fixed all-input machine now translates
-  strict canonical CNF into well-formed topological NAND, preserves satisfiability exactly, supplies
-  a polynomial-time function and raw refinement, and packages the direct and locked-NAND-composed
-  polynomial reductions. The report-facing theorem now publishes their all-bitstring concrete
-  locked-NAND reduction. It does not decide CNF-SAT, put the locked target in P, or discharge
-  residual-band/ZeroSlack/PCCMin. The reviewed activation fingerprints
-  are unset and no root theorem exists. The report-facing bridge now uses the
-  concrete finite-pipeline interfaces and exact locked-NAND target, but that
-  compatibility cannot activate publication without the missing mathematics.
-  Its PCCPack generator and checker are transparent typed definitions over an
-  explicit proof-bearing loop certificate, so the compiled project-axiom
-  inventory is empty. A general well-founded loop now consumes proof-bearing
-  normalization and a rank-ordered oracle whose HResolve and BudgetResolve
-  stages are explicit. The selector stage now checks data-only Packet claims
-  at every canonical handle and derives exact rows from the supplied rank map.
-  The component algorithms, terminal data, and ZeroSlack closure are not
-  constructed, so this does not complete PCCMin or close any global gate.
+  Public theorem emission is disabled. The current reconstruction boundary below
+  is generated from the authoritative formal status, not a manually maintained
+  description of an older builder prefix.
+  \vspace{0.2cm}
+
+  \begin{tabular}{@{}p{0.72\linewidth}l@{}}
+  CNF-SAT membership in NP & \statustrue \\
+Complete all-input Cook-Levin builder & \statustrue \\
+Concrete CNF-SAT NP-completeness & \statustrue \\
+Deterministic CNF-SAT membership in P & \statusfalse \\
+Eligible root theorem present & \statusfalse \\
+  \end{tabular}
+
+  \vspace{0.2cm}
+  Latest earned evidence: \textbf{Concrete CNF-SAT NP-hardness and NP-completeness}.
+
+  Formal artefact coverage: 207 of 209 current
+  scoped publication rows. This is not proof completion.
+
+  Risk-weighted proof completion estimate: 40 percent.
+  Uncertainty range: 20 to 40 percent.
+  Global proof gates closed: 0 of 5.
+
+  The estimate is not a probability that the route is correct or a time estimate.
+  Exact theorem scope and remaining premises appear in the milestone ledger below.
   \vspace{0.3cm}
   \end{minipage}
 }
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 46092 \\
-Theorem-kind declarations & 25320 \\
+Compiled declarations & 46094 \\
+Theorem-kind declarations & 25322 \\
 Assumption-free theorem-kind declarations & 11029 \\
 Project-specific axioms & 0 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{6b6303f93b3c9fe70fa208482e63342c2d667a52e81dd0f69a96f5a9367a7203}\par}
+{\small Inventory SHA-256: \code{29671b56dd215e7f76f893933799cf89295fbdaec9b339e68a65e36a23d1f059}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -154,18 +140,29 @@ the already permitted standard \code{Classical.choice} from formula semantics.
 The component descriptions below retain their original individual scope;
 their incomplete-builder limitations do not describe the completed M230 route.
 
+M231 now packages concrete CNF-SAT NP-completeness. Every language in the
+concrete bounded-certificate NP class supplies its verifier through NP membership;
+the complete Cook--Levin construction gives its polynomial reduction to CNFSAT.
+Together with the existing concrete verifier, this proves the closed proposition
+\code{NPComplete CNFSAT}. The hardness theorem is
+\code{PNP.Concrete.CookLevin.cnfSAT\_np\_hard}; the closed endpoint is
+\code{PNP.Concrete.CookLevin.cnfSAT\_np\_complete}.
+Both closures use only the existing Lean standard axioms \code{Classical.choice},
+\code{Quot.sound} and \code{propext}. No reduction or correctness certificate is
+supplied, and no deterministic CNFSAT-in-P result follows.
+
 \subsection*{Separate progress measurements}
-Formal artefact coverage: 206 of 208 current
+Formal artefact coverage: 207 of 209 current
 scoped publication rows earned. This is evidence-ledger coverage, not proof
 completion; its denominator can grow.
-The risk-weighted proof completion estimate is 38 percent,
+The risk-weighted proof completion estimate is 40 percent,
 with an uncertainty range of 20 to 40 percent.
 Global gates closed: 0 of 5.
 These values are read from the canonical fixed-checkpoint progress ledger.
-M230 earns only the existing complete-builder checkpoint. The estimate is not
-a probability of correctness or a time estimate. Concrete NP-completeness
-transport, deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin
-and the eligible root theorem remain open.
+Only named fixed-checkpoint transitions change the estimate; their individual
+reviews are recorded in the canonical ledger history. The estimate is not a
+probability of correctness or a time estimate. Deterministic SAT, unconditional
+ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
 The concrete CNF-to-NAND development traverses any decoded formula
 structurally and constructs an intrinsically topological NAND circuit without
@@ -1361,7 +1358,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 3175 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 3177 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -1580,14 +1577,15 @@ All-route staged-request physical dispatch & formalized-foundation-only & For ev
 All-route derived-Finish physical request split & formalized-foundation-only & For every concrete verifier problem and every coordinate in its complete post-header schedule, M228 runs M226's terminal-joined classifier without a staged request cell. A fixed 20-rule relay reads the physical body-or-Finish terminal, crosses the exact blank-free classifier prefix, writes a collision-free body-pending marker for every body route, and writes the canonical Finish request only for the unique Finish route. A fixed 65-rule conditional reflected dispatcher rejects the body-pending marker and sends Finish to the exact next canonical emitted prefix. The collision-free 823-rule composition has exact work, six-for-one compiled, one-step-short and source-input-size polynomial evidence. All 91 public declarations are axiom-audited: 50 have empty closure, 18 use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone derives only the unique Finish request. Every body route halts at an explicit non-request pending marker; body-token and padding request synthesis remain open. It does not connect successive schedule configurations, implement one repeated raw-machine builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP. \\
 All-route physical body-remainder split & formalized-foundation-only & For every concrete verifier problem and every coordinate in its complete post-header schedule, M229 runs M228 without a staged request, route, remainder or success certificate. It preserves the completed Finish endpoint and sends every body route through one fixed 36-rule physical scanner. The scanner crosses the retained clause-count and exterior boundaries, skips consumed-dividend marks, and distinguishes zero from positive remainder by the actual separator or unit symbol. The physical remainder equals the canonical body token coordinate. The collision-free 895-rule graph has exact work, six-for-one compiled execution, one-step-short nonhalting, and a verifier-input-size polynomial bound. All 71 public declarations are axiom-audited: 39 have empty closure, nine use only propext, and 23 use only propext and Quot.sound, with no project axiom or Classical.choice. & This milestone reads the physical body remainder but leaves clause occupancy and body-token and padding request synthesis open. Both body outcomes remain incomplete terminal configurations, distinguished by tape content. It does not connect successive schedule configurations, implement the repeated builder loop, prove builder FunctionProgram.RawRefinement, or package the Cook-Levin PolynomialReduction. It does not establish CNFSAT NP-hardness or NP-completeness transport or CNFSAT in P, close a fixed checkpoint or global gate, create the eligible root theorem, or prove P = NP. \\
 Complete all-input Cook-Levin formula builder and reduction & formalized-foundation-only & For every concrete polynomial verifier and every ordinary raw bitstring, including empty and odd-length inputs, M230 runs the complete source-derived formula loop and physical output finalizer in one finite raw machine. Its exact ordinary output is the original canonical encoded Cook-Levin CNF formula, with total halting, runtime and output-size bounds polynomial in the original input length. The concrete PolynomialTimeFunction is a machine leaf; recursive FunctionProgram.RawRefinement preserves its output. The packaged PolynomialReduction to CNFSAT uses the already checked original formula semantics. No accepting certificate, execution trace, route, finite family, rank map or correctness certificate is supplied by the caller. & This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom. \\
+Concrete CNF-SAT NP-hardness and NP-completeness & formalized-foundation-only & For every language in the concrete bounded-certificate NP class, M231 extracts its polynomial-time verifier from NP membership and applies the complete source-derived all-input Cook-Levin PolynomialReduction to CNFSAT. Together with the existing concrete CNFSAT verifier, the closed theorem proves NPComplete CNFSAT in the selected finite-machine model. No reduction, execution trace, finite-instance restriction or correctness certificate is supplied. Both complete theorem interfaces are root-built and axiom-audited; their closures contain only the Lean standard axioms Classical.choice, Quot.sound and propext. & NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 46092 exported \code{PNP.*} kernel declarations from
-496 modules. It excludes 19720 private compiler auxiliaries.
+The inventory contains 46094 exported \code{PNP.*} kernel declarations from
+497 modules. It excludes 19720 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1846,6 +1844,7 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formul
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Formula\allowbreak{}Size & 168 & 149 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Layout & 204 & 71 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Local\allowbreak{}CNF & 172 & 53 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}NPCompleteness & 2 & 2 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Raw\allowbreak{}Tape\allowbreak{}Bridge & 107 & 95 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tableau & 71 & 23 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tableau\allowbreak{}CNF & 179 & 60 \\
@@ -2155,9 +2154,9 @@ npm run report:check
 }
 
 The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230}. Its exact byte digest is
-\code{6b6303f93b3c9fe70fa208482e63342c2d667a52e81dd0f69a96f5a9367a7203}. The report is regenerated from that inventory and the reviewed
+\code{29671b56dd215e7f76f893933799cf89295fbdaec9b339e68a65e36a23d1f059}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{175d8c223198d0b9ba8e97aa3d5628f70d97c65b998546e44c3b3fa4671ca20c}; the computed and pinned values match. Successful regeneration
+\code{57b0346b3ebeb259991dfa724987a75cb3944b761fa3d4fa1a258b81adfc715c}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

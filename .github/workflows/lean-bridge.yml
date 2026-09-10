@@ -2199,6 +2199,29 @@ jobs:
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinCompleteBuilder.lean
 
+      - name: Check concrete CNFSAT NP-completeness contracts
+        run: node --test audits/lean-concrete-cook-levin-np-completeness0.test.mjs
+
+      - name: Audit concrete CNFSAT NP-completeness and unbounded regressions
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinNPCompletenessAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' depends on axioms: \[([^\]]*)\]$/gmu)];
+          assert.deepEqual(rows.map(row => row[1]).sort(), [
+            'PNP.Concrete.CookLevin.cnfSAT_np_complete',
+            'PNP.Concrete.CookLevin.cnfSAT_np_hard',
+          ]);
+          for (const row of rows) {
+            assert.deepEqual(row[2].split(',').map(value => value.trim()).sort(),
+              ['Classical.choice', 'Quot.sound', 'propext']);
+          }
+          console.log('M231: both closed theorem interfaces use only the reviewed standard axioms.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinNPCompleteness.lean
+
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"

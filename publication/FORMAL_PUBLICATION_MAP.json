@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-10-230",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-231",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3175,7 +3175,9 @@
     "PNP.terminal_finite_bcel_packet_carrier_coherent_checked_complete": "1f2651016dabc74efe65d54a861f5508ca2477c5b3d677d453eba3720261479c",
     "PNP.typed_pccpack_reflection_checked_complete": "ac6c0a5045437ffb1df36a971ad4924f5e2cc785c97132e720c91f9461b16659",
     "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete": "6bfe3fda461aef5b96b6fbca726d8b3134b992b9c97b16bc365e5a410d4c0620",
-    "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d"
+    "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d",
+    "PNP.Concrete.CookLevin.cnfSAT_np_hard": "c2cae5f7ad14a81b32888e8405210b57552dea928200cc77e9ebb34099ec9909",
+    "PNP.Concrete.CookLevin.cnfSAT_np_complete": "7b1c0556dde7066ebe7abc9706b400857b9dd41dc1d704930a1f1d6c423bbe35"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3193,7 +3195,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "175d8c223198d0b9ba8e97aa3d5628f70d97c65b998546e44c3b3fa4671ca20c",
+  "milestoneSourceClosureSha256": "57b0346b3ebeb259991dfa724987a75cb3944b761fa3d4fa1a258b81adfc715c",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8478,6 +8480,17 @@
       ],
       "scope": "For every concrete polynomial verifier and every ordinary raw bitstring, including empty and odd-length inputs, M230 runs the complete source-derived formula loop and physical output finalizer in one finite raw machine. Its exact ordinary output is the original canonical encoded Cook-Levin CNF formula, with total halting, runtime and output-size bounds polynomial in the original input length. The concrete PolynomialTimeFunction is a machine leaf; recursive FunctionProgram.RawRefinement preserves its output. The packaged PolynomialReduction to CNFSAT uses the already checked original formula semantics. No accepting certificate, execution trace, route, finite family, rank map or correctness certificate is supplied by the caller.",
       "nonClaim": "This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-cnf-np-completeness",
+      "title": "Concrete CNF-SAT NP-hardness and NP-completeness",
+      "requiredTheorems": [
+        "PNP.Concrete.CookLevin.cnfSAT_np_hard",
+        "PNP.Concrete.CookLevin.cnfSAT_np_complete"
+      ],
+      "scope": "For every language in the concrete bounded-certificate NP class, M231 extracts its polynomial-time verifier from NP membership and applies the complete source-derived all-input Cook-Levin PolynomialReduction to CNFSAT. Together with the existing concrete CNFSAT verifier, the closed theorem proves NPComplete CNFSAT in the selected finite-machine model. No reduction, execution trace, finite-instance restriction or correctness certificate is supplied. Both complete theorem interfaces are root-built and axiom-audited; their closures contain only the Lean standard axioms Classical.choice, Quot.sound and propext.",
+      "nonClaim": "NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved."
     }
   ],
   "version": 0

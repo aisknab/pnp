@@ -282,7 +282,9 @@ test('supplied trace, compilers, and general refinement are earned while publica
   assert.equal(status.leanConcretePipelineExternalInputSizePolynomialFormalized, true);
   assert.equal(status.leanConcretePipelineMalformedInputBehaviorFormalized, true);
   assert.equal(status.leanConcreteCNFSATInPFormalized, false);
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.rootLeanTheoremPresent, false);
   assert.equal(status.concretePublicationGate.passed, false);
 });

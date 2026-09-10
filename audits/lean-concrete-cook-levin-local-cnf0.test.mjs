@@ -117,7 +117,9 @@ test('scope, implication, uniqueness, width, and overclaim mutations fail closed
 
 test('local-CNF milestone leaves ConcreteSAT and publication fail-closed', async () => {
   const status = JSON.parse(await text0('status/FORMAL_RECONSTRUCTION_STATUS.json'));
-  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, false);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized,
+    status.formalPublicationMilestones.some(row =>
+      row.id === 'concrete-cnf-np-completeness' && row.earned === true));
   assert.equal(status.concretePublicationGate.passed, false);
   assert.ok(status.remainingBlockers.includes('Formal.ConcreteSAT'));
 });
