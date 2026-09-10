@@ -8657,3 +8657,94 @@ and release gates remain mandatory. M230 is not earned; about six uneven
 coarse packages remain. Defer PNPLabs publication.
 Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
 with 20–40% uncertainty, and global gates 0/5.
+
+
+### Planned actual cursor-token lookup with physical recovery
+
+Legacy anchor: the canonical manuscript's all-input SAT construction and
+the M230 complete polynomial Cook--Levin formula builder. Close the recovery
+edge between actual token selection and the next physical builder iteration.
+The unbounded abstraction is every verifier, source input, balanced body
+cursor and already-written token prefix, not another fixed token position.
+
+Instantiate the verified finite terminal handoff with actual cursor-token
+lookup and the physical root eraser/return scan. Classify the six source
+observations in the fixed finite control. Derive the source terminal,
+retained original registers, nonempty scratch suffix, blank canonical frame
+and recovery span from the existing cursor theorem. Transport the existing
+physical recovery run to the actual tape representation.
+
+Prove exact work execution and compiled raw execution returning the original
+cursor tape up to blank equivalence while preserving the canonical token
+observation. Retain only the original body-branch and balance premises;
+do not supply source data, route coverage, selected objects, execution,
+scratch, blank-exterior or polynomial certificates. Reuse the actual
+initialization-footprint theorem for the original cursor exterior.
+
+The combined raw-time polynomial must include lookup, both bridge steps
+(twelve raw steps) and the entire physical recovery. Bound actual stored
+cells from actual execution rather than treating one canonical blank window
+as a bound on every equivalent representation.
+
+Affected contracts are one new cursor-recovery wrapper, its work/raw theorem
+types, finite observation coding, query distinctness, stable terminals and
+time/storage bounds. Prepare exact-type, six-way observation, missing versus
+padding, tape-independent observation, bridge-clock and cursor-only caller
+regressions before compilation. Existing cursor, frame, recovery and generic
+handoff sources, inventory pins, status fields and workflow contracts do not
+change. Build only the new dependency target, inspect each public axiom
+closure and run the focused new regressions. Reuse unchanged verified
+components; no whole-core or PNPLabs suite is due for this internal edge.
+
+Only after actual composed recovery passes may the cleanup stage be marked
+complete. The full output/advance controller, exact canonical formula on
+every input, complete polynomial reduction and final release gates remain
+mandatory. M230 is not yet earned. Defer PNPLabs publication.
+Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
+
+### Verified actual cursor-token lookup with physical recovery
+
+[`BuilderCursorTokenRecovery`](../../lean/PNP/Concrete/CookLevinBuilderCursorTokenRecovery.lean)
+now composes actual cursor-token lookup, the derived finite terminal
+handoff, physical scratch erasure and the return scan. All six canonical
+observations survive. The source terminal, retained root, nonempty scratch,
+blank canonical frame and recovery execution are derived from the actual
+cursor rather than supplied.
+
+The complete work and compiled raw theorems require only the original
+body-branch and balance invariants. They return a stable result state and
+the original cursor tape up to blank equivalence, preserving the input,
+already-written output and original cursor registers. The original exterior
+is derived from the initialization footprint, not assumed blank.
+
+The raw-time bound includes actual lookup, twelve raw bridge steps and the
+entire physical recovery. The actual-storage bound comes from actual
+execution and the established lookup bound, without identifying different
+finite blank windows by length. These are original-input polynomial bounds
+for the complete lookup/recovery operation, not yet the whole builder.
+
+All 18 regression contracts and eleven public-theorem axiom audits pass:
+three use only `propext` and eight use `propext` and `Quot.sound`.
+None uses a project axiom or `Classical.choice`. Exact-type and cursor-only
+caller regressions rule out extra source, scratch, route, blank, execution
+or polynomial premises. Independent contracts preserve the six result codes,
+missing versus padding, tape-independent observations and both bridge costs.
+
+The first launch stopped at whitespace preflight before compilation. A
+later elaboration timeout was isolated with non-evidence declaration-prefix
+probes to the substitution after lookup. Replacing broad substitution with
+targeted frame/span rewrites preserved every theorem statement and passed
+under the unchanged elaboration limits. The final combined run reached its
+own green marker and zero exit. Unchanged component evidence was reused;
+no full core or PNPLabs suite was repeated.
+
+The actual outcome-preserving cleanup stage is now complete. About five
+uneven coarse packages remain: the physical output/advance builder loop,
+exact canonical formula output for every input, complete polynomial bounds
+and packaged reduction, final core verification/review/merge, and major
+PNPLabs publication/deployment/production verification. Do not infer a time
+estimate from this count. M230 and its fixed weighted checkpoint remain
+open until all obligations are checked. Defer PNPLabs publication.
+Formal artefact coverage remains 205/207, risk-weighted proof estimate 35%
+with 20–40% uncertainty, and global gates 0/5.
