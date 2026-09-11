@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-236';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-237';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2521,6 +2521,15 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPhysicalChargeLedgerLookupTheorem: 'PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff',
   leanResidualTerminalPhysicalChargeLedgerSizeTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size',
   leanResidualTerminalPhysicalChargeLedgerScope: 'all-finite-systems-candidates-executable-models-seeds-computed-physical-nand-charge-partition-nodup-completeness-introduction-provenance-lookup-and-total-support-size-only',
+  leanResidualTerminalSaturatedSupportContextFormalized: true,
+  leanResidualTerminalSaturatedSupportContextAxiomAuditPassed: true,
+  leanResidualTerminalSaturatedSupportContextAuditedDeclarationCount: 5,
+  leanResidualTerminalSaturatedSupportContextBoundaryTheorem: 'PNP.DirectWire.terminalCandidateSaturate_boundary_isInput',
+  leanResidualTerminalSaturatedSupportContextSizeTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_size',
+  leanResidualTerminalSaturatedSupportContextReconstructionTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_equivalent',
+  leanResidualTerminalSaturatedSupportContextReplacementTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent',
+  leanResidualTerminalSaturatedSupportContextSlackTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le',
+  leanResidualTerminalSaturatedSupportContextScope: 'all-finite-candidates-executable-models-seeds-production-saturated-supports-computed-physical-complement-context-primary-input-boundary-exact-gate-partition-whole-boolean-reconstruction-equivalent-replacement-and-physical-slack-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4422,6 +4431,15 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPhysicalChargeLedgerLookupTheorem: 'PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff',
       leanResidualTerminalPhysicalChargeLedgerSizeTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size',
       leanResidualTerminalPhysicalChargeLedgerScope: 'all-finite-systems-candidates-executable-models-seeds-computed-physical-nand-charge-partition-nodup-completeness-introduction-provenance-lookup-and-total-support-size-only',
+      leanResidualTerminalSaturatedSupportContextFormalized: true,
+      leanResidualTerminalSaturatedSupportContextAxiomAuditPassed: true,
+      leanResidualTerminalSaturatedSupportContextAuditedDeclarationCount: 5,
+      leanResidualTerminalSaturatedSupportContextBoundaryTheorem: 'PNP.DirectWire.terminalCandidateSaturate_boundary_isInput',
+      leanResidualTerminalSaturatedSupportContextSizeTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_size',
+      leanResidualTerminalSaturatedSupportContextReconstructionTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_equivalent',
+      leanResidualTerminalSaturatedSupportContextReplacementTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent',
+      leanResidualTerminalSaturatedSupportContextSlackTheorem: 'PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le',
+      leanResidualTerminalSaturatedSupportContextScope: 'all-finite-candidates-executable-models-seeds-production-saturated-supports-computed-physical-complement-context-primary-input-boundary-exact-gate-partition-whole-boolean-reconstruction-equivalent-replacement-and-physical-slack-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4775,7 +4793,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-236',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-237',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

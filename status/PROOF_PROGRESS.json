@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-236",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-237",
   "lastReviewedDate": "2026-09-11",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 212,
-    "totalRows": 214,
+    "earnedRows": 213,
+    "totalRows": 215,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -1979,6 +1979,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M236 derives a duplicate-free and complete physical-NAND charge partition directly from normalized seeds and the actual saturation trace, with verified introduction provenance, an exact lookup specification and total support-size accounting. Introduction provenance can depend on the seed and traversal; it is not the fixed manuscript-wide ownership map or the complete materializer/profile charge universe. Active requesting pairs are not assigned manuscript owners. The observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, global route coverage, input-derived terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 212 of 214 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-237",
+      "formalArtefactCoverage": {
+        "earnedRows": 213,
+        "totalRows": 215
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M237 derives a computed physical replacement frame for every production saturated support, including its primary-input boundary, exact selected/complement gate partition, whole Boolean reconstruction, arbitrary equivalent replacement transport and physical residual-slack bound. These are physical Boolean laws, not arbitrary raw-support serializability or full-profile compatibility. The complete profile/materializer charge universe, fixed global ownership map and full-profile replacement transport remain open. The observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, global route coverage, input-derived complete terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 213 of 215 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

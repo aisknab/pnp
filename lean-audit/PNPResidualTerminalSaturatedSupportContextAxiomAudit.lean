@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalCandidateSaturate_boundary_isInput
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalContext_size
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalContext_equivalent
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le

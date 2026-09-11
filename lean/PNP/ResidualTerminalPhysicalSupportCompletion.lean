@@ -165,6 +165,23 @@ def terminalGateIsGlobalOutput {inputs gates outputs : Nat}
   physicalTerminalAny (allFin outputs) fun output =>
     decide (word.source output = Source.gate producer)
 
+/-- A physical gate is a global output exactly when the actual output tuple
+    names it at some position. Multiplicity and ordering are preserved. -/
+theorem terminalGateIsGlobalOutput_eq_true_iff {inputs gates outputs : Nat}
+    (word : DirectWireWord inputs gates outputs) (producer : Fin gates) :
+    terminalGateIsGlobalOutput word producer = true ↔
+      ∃ output : Fin outputs, word.source output = Source.gate producer := by
+  constructor
+  · intro checked
+    obtain ⟨output, _enumerated, same⟩ :=
+      (physicalTerminalAny_true_iff (allFin outputs)
+        (fun output => decide (word.source output = Source.gate producer))).1 checked
+    exact ⟨output, of_decide_eq_true same⟩
+  · rintro ⟨output, same⟩
+    exact (physicalTerminalAny_true_iff (allFin outputs)
+      (fun output => decide (word.source output = Source.gate producer))).2
+        ⟨output, mem_allFin output, decide_eq_true same⟩
+
 /-- Exact physical outgoing-interface test. -/
 def terminalInterfaceGate
     {inputs gates outputs profileWidth : Nat}
