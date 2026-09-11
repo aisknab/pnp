@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-234';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2496,6 +2496,13 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalProfileLocalityTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_locality',
   leanResidualTerminalProfilePreservationTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_preserved',
   leanResidualTerminalProfileLocalityScope: 'all-finite-candidates-executable-models-arbitrary-primitive-record-supports-computed-saturation-retained-ambient-profile-locality-and-preservation-only',
+  leanResidualTerminalSaturationTraceFidelityFormalized: true,
+  leanResidualTerminalSaturationTraceFidelityAxiomAuditPassed: true,
+  leanResidualTerminalSaturationTraceFidelityAuditedDeclarationCount: 5,
+  leanResidualTerminalSaturationReplayTheorem: 'PNP.DirectWire.terminalSaturateTrace_replayRecords_iff',
+  leanResidualTerminalSaturationEventValidityTheorem: 'PNP.DirectWire.terminalSaturateTrace_event_valid',
+  leanResidualTerminalSaturationMetadataTransparencyTheorem: 'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
+  leanResidualTerminalSaturationTraceFidelityScope: 'all-finite-systems-candidates-executable-models-seeds-generated-events-actual-replay-ambient-endpoint-cost-snapshot-and-metadata-transparency-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4372,6 +4379,13 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalProfileLocalityTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_locality',
       leanResidualTerminalProfilePreservationTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_preserved',
       leanResidualTerminalProfileLocalityScope: 'all-finite-candidates-executable-models-arbitrary-primitive-record-supports-computed-saturation-retained-ambient-profile-locality-and-preservation-only',
+      leanResidualTerminalSaturationTraceFidelityFormalized: true,
+      leanResidualTerminalSaturationTraceFidelityAxiomAuditPassed: true,
+      leanResidualTerminalSaturationTraceFidelityAuditedDeclarationCount: 5,
+      leanResidualTerminalSaturationReplayTheorem: 'PNP.DirectWire.terminalSaturateTrace_replayRecords_iff',
+      leanResidualTerminalSaturationEventValidityTheorem: 'PNP.DirectWire.terminalSaturateTrace_event_valid',
+      leanResidualTerminalSaturationMetadataTransparencyTheorem: 'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
+      leanResidualTerminalSaturationTraceFidelityScope: 'all-finite-systems-candidates-executable-models-seeds-generated-events-actual-replay-ambient-endpoint-cost-snapshot-and-metadata-transparency-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4725,7 +4739,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-233',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-234',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

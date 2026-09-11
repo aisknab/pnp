@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'b3cef596e85a2224ac81d55008ae9d82746cde151c7741b600398e1c7a2005db';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f19e9e2237bccd8229aa8c6b832427e7280ae051393432bbc7b73aa135c02041';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -255,6 +255,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff',
   'PNP.DirectWire.terminalCandidateSaturate_profile_locality',
   'PNP.DirectWire.terminalCandidateSaturate_profile_preserved',
+  'PNP.DirectWire.terminalSaturateTrace_replayRecords_iff',
+  'PNP.DirectWire.terminalSaturateTrace_event_valid',
+  'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
+  'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
+  'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.finalTape_represents',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.machine_acceptState_ne_rejectState',
   'PNP.Concrete.CookLevin.BuilderFirstClausePrefix.FirstClauseTailAppender.rules_length',
@@ -3499,7 +3504,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-11-233') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-11-234') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-233",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-234",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3185,7 +3185,12 @@
     "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq": "991e7712503e87f358b0d5a8fa89978d4a0552e28ce55fda31b3768fdf9e05a1",
     "PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff": "520e4c036df985fe6f97aa3c59fe3f7b14253fb85fec508464f077031da09d12",
     "PNP.DirectWire.terminalCandidateSaturate_profile_locality": "90f27df9e3ef24ce34a8ca9ebbe4658cd2c400652701b50f6847f6fbb44aa683",
-    "PNP.DirectWire.terminalCandidateSaturate_profile_preserved": "059c535361ddcce72aae10142584704865fd604cdedc853c71b30e6a213f61da"
+    "PNP.DirectWire.terminalCandidateSaturate_profile_preserved": "059c535361ddcce72aae10142584704865fd604cdedc853c71b30e6a213f61da",
+    "PNP.DirectWire.terminalSaturateTrace_replayRecords_iff": "7f80f837010adcb3f2fae342d28dd62abc409952246ae543f7b42d45e5ad4fa4",
+    "PNP.DirectWire.terminalSaturateTrace_event_valid": "c1b87935414b4d1f64511851d7a2f16950aabf4a941ecc67f2d377f8c9435733",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq": "9c95df1a18426898db16b49a2181726decbb73bd693034227e0046b98f8dbff5",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq": "a71b030f39a2e1a75045b984451b286d3ed66101bebea61d97693f9ba23ba6a5",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent": "e30fc653246ef6cd59ec517a9667f819ad013811f758aa855aa9f02a5ee6fc76"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3203,7 +3208,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "c66bf6881c8e554bef3a8eba0cf50e4ab553cf2b3242f0d1e3c8727fd508bce5",
+  "milestoneSourceClosureSha256": "52a12634599bf5975c6d5f8c40498a7e6f7768cce6ba22bd6465b9e58eed3612",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8525,6 +8530,20 @@
       ],
       "scope": "For every finite direct-wire candidate size, executable terminal model, seed and retained profile coordinate, M233 proves that arbitrary primitive-record supports with the same computed-saturation gate membership have equal actual ambient observations. Structural extraction and ambient-implementation equalities account for record order, duplicates and non-gate metadata without an observer-congruence premise. General omitted-gate elimination extends M232 from canonical contexts to arbitrary supports. The actual saturated support therefore preserves each retained observation of the complete gate universe. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, normalization certificate or correctness proof is supplied in place of the existing computation.",
       "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-saturation-trace-fidelity",
+      "title": "Computed saturation trace fidelity and metadata cost balance",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalSaturateTrace_replayRecords_iff",
+        "PNP.DirectWire.terminalSaturateTrace_event_valid",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent"
+      ],
+      "scope": "For arbitrary finite terminal systems and seeds, M234 proves that the actual cost-accounting replay contains exactly the canonical computed saturated records and that every emitted event adds its required record with a valid selected dependency rule. For every finite direct-wire candidate and executable terminal model, the replay and canonical endpoints have equal ambient implementations and equal cost snapshot coordinates, with the stored record list kept explicit. Every generated non-gate metadata event is structurally cost-transparent. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No trace-validity, replay-correctness, observer-congruence or balance certificate is supplied in place of the existing computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. Metadata cost balance does not establish physical-gate transparency, obligation discharge or complete closure safety. The theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
     }
   ],
   "version": 0

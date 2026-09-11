@@ -1,21 +1,21 @@
 # Proof and Checker Pipeline
 
-<!-- M233-CURRENT-SUMMARY:BEGIN -->
-## Current M233 boundary
+<!-- M234-CURRENT-SUMMARY:BEGIN -->
+## Current M234 boundary
 
-M233 proves structural normalization of arbitrary primitive-record supports, locality with respect to the actual computed saturation, and preservation of every retained ambient-profile observation of the complete gate universe. It extends M232 beyond canonical contexts without a caller-supplied dependency relation, normalization certificate or observer-congruence premise. The executable observer and profile model remain supplied data, and influence construction enumerates all subsets; this local result earns no fixed checkpoint or runtime credit.
+M234 proves that the actual saturation replay matches the computed closure, that generated events carry valid dependency rules, and that the replay endpoint has the same ambient implementation and cost coordinates as canonical saturation. Every generated non-gate metadata event is cost-transparent. Physical-gate transparency and obligation discharge remain separate: both limitations have checked counterexamples.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 209 of 211 current scoped publication rows earned.
+Formal artefact coverage: 210 of 212 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [retained-profile theorem and limits](./lean_residual_terminal_profile_locality.md)
-and the [NP-completeness result](./lean_cook_levin_np_completeness.md).
-Earlier milestone notes retain their original module-specific scope. M233 supplies
-the arbitrary-record normalization and retained-profile preservation left open by
-M232, without closing any global proof gate.
-<!-- M233-CURRENT-SUMMARY:END -->
+See the [trace-fidelity theorem and limits](./lean_residual_terminal_saturation_trace_fidelity.md)
+and the [retained-profile locality result](./lean_residual_terminal_profile_locality.md).
+Earlier milestone notes retain their original module-specific scope. M234
+connects the actual replay and metadata costs to computed saturation, without
+closing any global proof gate.
+<!-- M234-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

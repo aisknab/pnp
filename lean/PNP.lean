@@ -37,6 +37,7 @@ import PNP.ResidualTerminalBCELAnchorNucleus
 import PNP.ResidualTerminalSaturationPositivityFirewall
 import PNP.ResidualTerminalCandidateSaturation
 import PNP.ResidualTerminalProfileLocality
+import PNP.ResidualTerminalSaturationTraceFidelity
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-234}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -68,9 +68,9 @@ Eligible root theorem present & \statusfalse \\
   \end{tabular}
 
   \vspace{0.2cm}
-  Latest earned evidence: \textbf{Retained ambient-profile locality and whole-support preservation}.
+  Latest earned evidence: \textbf{Computed saturation trace fidelity and metadata cost balance}.
 
-  Formal artefact coverage: 209 of 211 current
+  Formal artefact coverage: 210 of 212 current
   scoped publication rows. This is not proof completion.
 
   Risk-weighted proof completion estimate: 40 percent.
@@ -85,15 +85,15 @@ Eligible root theorem present & \statusfalse \\
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 46108 \\
-Theorem-kind declarations & 25334 \\
+Compiled declarations & 46119 \\
+Theorem-kind declarations & 25345 \\
 Assumption-free theorem-kind declarations & 11029 \\
 Project-specific axioms & 0 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{c2e366319891a949df3ae30dcf2c29f4df4d0f85fde37758e275ff35c1f84d19}\par}
+{\small Inventory SHA-256: \code{5d89115b8c029557f7a043682f2e1fa52af283bc7b96701275063869f241866d}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -152,7 +152,7 @@ Both closures use only the existing Lean standard axioms \code{Classical.choice}
 supplied, and no deterministic CNFSAT-in-P result follows.
 
 \subsection*{Separate progress measurements}
-Formal artefact coverage: 209 of 211 current
+Formal artefact coverage: 210 of 212 current
 scoped publication rows earned. This is evidence-ledger coverage, not proof
 completion; its denominator can grow.
 The risk-weighted proof completion estimate is 40 percent,
@@ -1358,7 +1358,7 @@ SAT completeness, SAT in P, and the root theorem remain absent.
 \section{Formal milestone ledger}
 
 Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
-domain-separated kernel-type SHA-256 matches for 3185 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 3190 detailed candidates, and the pinned whole-Lean
 source closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
@@ -1580,14 +1580,15 @@ Complete all-input Cook-Levin formula builder and reduction & formalized-foundat
 Concrete CNF-SAT NP-hardness and NP-completeness & formalized-foundation-only & For every language in the concrete bounded-certificate NP class, M231 extracts its polynomial-time verifier from NP membership and applies the complete source-derived all-input Cook-Levin PolynomialReduction to CNFSAT. Together with the existing concrete CNFSAT verifier, the closed theorem proves NPComplete CNFSAT in the selected finite-machine model. No reduction, execution trace, finite-instance restriction or correctness certificate is supplied. Both complete theorem interfaces are root-built and axiom-audited; their closures contain only the Lean standard axioms Classical.choice, Quot.sound and propext. & NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved. \\
 Candidate-derived terminal profile dependency reflection and noninterference & formalized-foundation-only & For every finite direct-wire candidate size, executable terminal model, profile coordinate and gate, M232 proves that the computed profile-influence bit is true exactly when insertion changes the actual ambient observation in a canonical subset context. It identifies each computed profile-to-gate dependency with the coordinate's exact rule role and that influence bit. For every seed, a gate absent from the actual computed saturation cannot change a retained profile coordinate in any canonical context. The observation definition and all three general theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, coverage certificate or soundness proof is supplied in place of the existing computation. & The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved. \\
 Retained ambient-profile locality and whole-support preservation & formalized-foundation-only & For every finite direct-wire candidate size, executable terminal model, seed and retained profile coordinate, M233 proves that arbitrary primitive-record supports with the same computed-saturation gate membership have equal actual ambient observations. Structural extraction and ambient-implementation equalities account for record order, duplicates and non-gate metadata without an observer-congruence premise. General omitted-gate elimination extends M232 from canonical contexts to arbitrary supports. The actual saturated support therefore preserves each retained observation of the complete gate universe. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, normalization certificate or correctness proof is supplied in place of the existing computation. & The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved. \\
+Computed saturation trace fidelity and metadata cost balance & formalized-foundation-only & For arbitrary finite terminal systems and seeds, M234 proves that the actual cost-accounting replay contains exactly the canonical computed saturated records and that every emitted event adds its required record with a valid selected dependency rule. For every finite direct-wire candidate and executable terminal model, the replay and canonical endpoints have equal ambient implementations and equal cost snapshot coordinates, with the stored record list kept explicit. Every generated non-gate metadata event is structurally cost-transparent. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No trace-validity, replay-correctness, observer-congruence or balance certificate is supplied in place of the existing computation. & The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. Metadata cost balance does not establish physical-gate transparency, obligation discharge or complete closure safety. The theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 46108 exported \code{PNP.*} kernel declarations from
-498 modules. It excludes 19731 private compiler auxiliaries.
+The inventory contains 46119 exported \code{PNP.*} kernel declarations from
+499 modules. It excludes 19797 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -2010,7 +2011,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Budget\allowbreak{}Ze
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Candidate\allowbreak{}Saturation & 56 & 11 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Constant\allowbreak{}Cut\allowbreak{}Hypergraph\allowbreak{}Rigidity & 155 & 109 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Consumer\allowbreak{}Antichain\allowbreak{}Normal\allowbreak{}Form & 64 & 38 \\
-PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Executable\allowbreak{}Saturation & 90 & 31 \\
+PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Executable\allowbreak{}Saturation & 94 & 35 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Finite\allowbreak{}BCELPacket\allowbreak{}Activation\allowbreak{}Obstruction & 39 & 16 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Finite\allowbreak{}BCELPacket\allowbreak{}Carrier\allowbreak{}Coherence & 26 & 11 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Finite\allowbreak{}BCELReady & 34 & 17 \\
@@ -2086,6 +2087,7 @@ PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Rank\allowbreak{}WF &
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Saturation & 170 & 60 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Saturation\allowbreak{}Cost\allowbreak{}Balance & 162 & 48 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Saturation\allowbreak{}Positivity\allowbreak{}Firewall & 56 & 23 \\
+PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Saturation\allowbreak{}Trace\allowbreak{}Fidelity & 7 & 7 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Selector\allowbreak{}HBZero\allowbreak{}Slack\allowbreak{}Sidecar & 34 & 12 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Side\allowbreak{}Tight\allowbreak{}Minimum & 98 & 35 \\
 PNP.\allowbreak{}Residual\allowbreak{}Terminal\allowbreak{}Support\allowbreak{}Extraction & 65 & 34 \\
@@ -2157,9 +2159,9 @@ npm run report:check
 }
 
 The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230}. Its exact byte digest is
-\code{c2e366319891a949df3ae30dcf2c29f4df4d0f85fde37758e275ff35c1f84d19}. The report is regenerated from that inventory and the reviewed
+\code{5d89115b8c029557f7a043682f2e1fa52af283bc7b96701275063869f241866d}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{c66bf6881c8e554bef3a8eba0cf50e4ab553cf2b3242f0d1e3c8727fd508bce5}; the computed and pinned values match. Successful regeneration
+\code{52a12634599bf5975c6d5f8c40498a7e6f7768cce6ba22bd6465b9e58eed3612}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 
