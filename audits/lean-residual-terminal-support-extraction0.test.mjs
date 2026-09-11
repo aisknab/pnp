@@ -64,6 +64,11 @@ const AUDITED_DECLARATIONS = Object.freeze([
   ...REUSED_DECLARATIONS,
 ]);
 
+const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
+  ...PUBLIC_DECLARATIONS,
+  `${NAMESPACE}.extractTerminalSupport_eq_of_gateSelected_eq`,
+]);
+
 const MILESTONE_THEOREMS = Object.freeze([
   `${NAMESPACE}.mem_terminalSelectedGateIndices_iff`,
   `${NAMESPACE}.mem_terminalSelectedGates_iff`,
@@ -183,7 +188,7 @@ function validateSource0(source) {
   if (JSON.stringify(imports) !== JSON.stringify([
     'PNP.ResidualTerminalPhysicalSupportCompletion',
   ])) failures.push('closed-import');
-  if (JSON.stringify(declarations0(source)) !== JSON.stringify(PUBLIC_DECLARATIONS)) {
+  if (JSON.stringify(declarations0(source)) !== JSON.stringify(CURRENT_PUBLIC_DECLARATIONS)) {
     failures.push('declaration-surface');
   }
   if (JSON.stringify(privateHelpers0(source)) !== JSON.stringify(PRIVATE_HELPERS)) {

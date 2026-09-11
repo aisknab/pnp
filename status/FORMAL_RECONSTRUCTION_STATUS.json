@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1414,6 +1414,12 @@
   "leanResidualTerminalProfileDependencySemanticsAuditedDeclarationCount": 4,
   "leanResidualTerminalProfileDependencyNoninterferenceTheorem": "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference",
   "leanResidualTerminalProfileDependencySemanticsScope": "all-finite-candidates-executable-models-computed-profile-influence-role-labelled-edges-and-computed-saturation-noninterference-in-canonical-contexts-only",
+  "leanResidualTerminalProfileLocalityFormalized": true,
+  "leanResidualTerminalProfileLocalityAxiomAuditPassed": true,
+  "leanResidualTerminalProfileLocalityAuditedDeclarationCount": 5,
+  "leanResidualTerminalProfileLocalityTheorem": "PNP.DirectWire.terminalCandidateSaturate_profile_locality",
+  "leanResidualTerminalProfilePreservationTheorem": "PNP.DirectWire.terminalCandidateSaturate_profile_preserved",
+  "leanResidualTerminalProfileLocalityScope": "all-finite-candidates-executable-models-arbitrary-primitive-record-supports-computed-saturation-retained-ambient-profile-locality-and-preservation-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2672,7 +2678,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
+    "actualSourceClosureSha256": "c66bf6881c8e554bef3a8eba0cf50e4ab553cf2b3242f0d1e3c8727fd508bce5",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2705,19 +2711,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "aac34de3d5fe6d3beec64959c80504136d25169043bc060a3040ead3f57f02ce",
+  "leanTheoremInventorySha256": "c2e366319891a949df3ae30dcf2c29f4df4d0f85fde37758e275ff35c1f84d19",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46098,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19721,
-  "leanTheoremInventoryTheoremCount": 25325,
+  "leanTheoremInventoryDeclarationCount": 46108,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19731,
+  "leanTheoremInventoryTheoremCount": 25334,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11029,
-  "leanTheoremInventorySourceClosureModuleCount": 497,
-  "leanSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-232",
+  "leanTheoremInventorySourceClosureModuleCount": 498,
+  "leanSourceClosureSha256": "c66bf6881c8e554bef3a8eba0cf50e4ab553cf2b3242f0d1e3c8727fd508bce5",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-233",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "5765d42cc902774d8af7542c34c9b4ec87012b94e12438f2447f3c3213c5711b",
+  "formalPublicationMapSha256": "1bac509cf4deebf4bbf152b8a49be058895f52ca7db3d6c3b7d9ed6fc8748885",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -48647,9 +48653,92 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-profile-locality",
+      "title": "Retained ambient-profile locality and whole-support preservation",
+      "requiredTheorems": [
+        "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
+        "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq",
+        "PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_locality",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_preserved"
+      ],
+      "scope": "For every finite direct-wire candidate size, executable terminal model, seed and retained profile coordinate, M233 proves that arbitrary primitive-record supports with the same computed-saturation gate membership have equal actual ambient observations. Structural extraction and ambient-implementation equalities account for record order, duplicates and non-gate metadata without an observer-congruence premise. General omitted-gate elimination extends M232 from canonical contexts to arbitrary supports. The actual saturated support therefore preserves each retained observation of the complete gate universe. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, normalization certificate or correctness proof is supplied in place of the existing computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "36de3a72b162389f2f8f5a3411a8fc000007cf55da00a39898b4b59d76957f05",
+          "expectedKernelTypeSha256": "36de3a72b162389f2f8f5a3411a8fc000007cf55da00a39898b4b59d76957f05",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "991e7712503e87f358b0d5a8fa89978d4a0552e28ce55fda31b3768fdf9e05a1",
+          "expectedKernelTypeSha256": "991e7712503e87f358b0d5a8fa89978d4a0552e28ce55fda31b3768fdf9e05a1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "520e4c036df985fe6f97aa3c59fe3f7b14253fb85fec508464f077031da09d12",
+          "expectedKernelTypeSha256": "520e4c036df985fe6f97aa3c59fe3f7b14253fb85fec508464f077031da09d12",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturate_profile_locality",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "90f27df9e3ef24ce34a8ca9ebbe4658cd2c400652701b50f6847f6fbb44aa683",
+          "expectedKernelTypeSha256": "90f27df9e3ef24ce34a8ca9ebbe4658cd2c400652701b50f6847f6fbb44aa683",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturate_profile_preserved",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "059c535361ddcce72aae10142584704865fd604cdedc853c71b30e6a213f61da",
+          "expectedKernelTypeSha256": "059c535361ddcce72aae10142584704865fd604cdedc853c71b30e6a213f61da",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-232",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-233",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

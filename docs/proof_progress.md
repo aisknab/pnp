@@ -7,8 +7,8 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232`, 208 of 210
-current scoped rows are earned, or 99.0 percent of that evidence ledger.
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233`, 209 of 211
+current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
 difficulty, and the denominator can grow when a dependency is discovered or an
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M232 |
+| Track | Available | Earned at M233 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M232 risk-weighted proof completion estimate is therefore 40 percent, with
+The M233 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -58,7 +58,12 @@ M232 adds semantic profile-dependency reflection and computed-saturation
 noninterference. It retains the supplied observer and exhaustive subset
 construction, so no fixed checkpoint changes and the estimate remains 40 percent.
 
-Formal artefact coverage: 208 of 210 current scoped publication rows earned.
+M233 extends this to arbitrary primitive-record supports and proves retained
+ambient-profile locality and whole-support preservation. The retained-profile
+premise is necessary; the observer remains supplied and influence still enumerates
+all subsets. No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 209 of 211 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
