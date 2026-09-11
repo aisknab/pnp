@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalSaturateTrace_replayRecords_iff
+#print axioms PNP.DirectWire.terminalSaturateTrace_event_valid
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent

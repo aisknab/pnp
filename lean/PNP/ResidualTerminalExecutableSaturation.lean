@@ -983,6 +983,31 @@ private def terminalSaturationTraceStep
             costRecords := afterRecords
             events := state.events ++ [event] }
 
+private def terminalSaturationTraceErase
+    {inputs gates outputs profileWidth : Nat}
+    (state : TerminalSaturationTraceWorkState
+      inputs gates outputs profileWidth) :
+    TerminalSaturationWorkState inputs gates outputs profileWidth :=
+  { processed := state.processed
+    pending := state.pending.map fun item => item.record }
+
+private theorem terminalSaturationTraceStep_erase
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (state : TerminalSaturationTraceWorkState
+      inputs gates outputs profileWidth) :
+    terminalSaturationTraceErase (terminalSaturationTraceStep system state) =
+      terminalSaturationStep system (terminalSaturationTraceErase state) := by
+  cases pendingEq : state.pending with
+  | nil =>
+      simp only [terminalSaturationTraceStep, pendingEq,
+        terminalSaturationTraceErase, List.map_nil, terminalSaturationStep]
+  | cons current remaining =>
+      cases originEq : current.origin <;>
+        simp only [terminalSaturationTraceStep, pendingEq, originEq,
+          terminalSaturationTraceErase, List.map_cons, List.map_append,
+          List.map_map, Function.comp_def, List.map_id_fun', id, terminalSaturationStep]
+
 private theorem terminalSaturationTraceStep_linked
     {inputs gates outputs profileWidth : Nat}
     (system : TerminalSaturationSystem inputs gates outputs profileWidth)
@@ -1016,6 +1041,23 @@ private def terminalSaturationTraceWork
   | fuel + 1, state =>
       terminalSaturationTraceWork system fuel
         (terminalSaturationTraceStep system state)
+
+private theorem terminalSaturationTraceWork_erase
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth) :
+    ∀ fuel state,
+      terminalSaturationTraceErase (terminalSaturationTraceWork system fuel state) =
+        terminalSaturationWork system fuel (terminalSaturationTraceErase state) := by
+  intro fuel
+  induction fuel with
+  | zero =>
+      intro state
+      rfl
+  | succ fuel ih =>
+      intro state
+      simpa only [terminalSaturationTraceWork, terminalSaturationWork,
+        terminalSaturationTraceStep_erase] using
+        ih (terminalSaturationTraceStep system state)
 
 private theorem terminalSaturationTraceWork_linked
     {inputs gates outputs profileWidth : Nat}
@@ -1051,6 +1093,15 @@ private def terminalSaturationTraceInitialState
     costRecords := normalized.reverse
     events := [] }
 
+private theorem terminalSaturationTraceInitialState_erase
+    {inputs gates outputs profileWidth : Nat}
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalSaturationTraceErase (terminalSaturationTraceInitialState seed) =
+      terminalSaturationInitialState seed := by
+  simp only [terminalSaturationTraceErase, terminalSaturationTraceInitialState,
+    terminalSaturationInitialState, List.map_map, Function.comp_def, List.map_id_fun', id]
+
 private def terminalSaturationTraceFinalState
     {inputs gates outputs profileWidth : Nat}
     (system : TerminalSaturationSystem inputs gates outputs profileWidth)
@@ -1060,6 +1111,330 @@ private def terminalSaturationTraceFinalState
   terminalSaturationTraceWork system
     (allTerminalPrimitiveRecords inputs gates outputs profileWidth).length
     (terminalSaturationTraceInitialState seed)
+
+private theorem terminalSaturationTraceFinalState_erase
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalSaturationTraceErase (terminalSaturationTraceFinalState system seed) =
+      terminalSaturationFinalState system seed := by
+  unfold terminalSaturationTraceFinalState terminalSaturationFinalState
+  rw [terminalSaturationTraceWork_erase, terminalSaturationTraceInitialState_erase]
+
+private def terminalSaturationTraceSeedRecords
+    {inputs gates outputs profileWidth : Nat} :
+    List (TerminalSaturationTracePending inputs gates outputs profileWidth) →
+      List (TerminalPrimitiveRecord inputs gates outputs profileWidth)
+  | [] => []
+  | current :: remaining =>
+      match current.origin with
+      | .seed => current.record :: terminalSaturationTraceSeedRecords remaining
+      | .generated _kind _dependent => terminalSaturationTraceSeedRecords remaining
+
+private theorem terminalSaturationTraceSeedRecords_append
+    {inputs gates outputs profileWidth : Nat}
+    (left right : List
+      (TerminalSaturationTracePending inputs gates outputs profileWidth)) :
+    terminalSaturationTraceSeedRecords (left ++ right) =
+      terminalSaturationTraceSeedRecords left ++
+        terminalSaturationTraceSeedRecords right := by
+  induction left with
+  | nil => rfl
+  | cons current remaining ih =>
+      cases originEq : current.origin <;>
+        simp only [List.cons_append, terminalSaturationTraceSeedRecords,
+          originEq, ih]
+
+private theorem terminalSaturationTraceSeedRecords_generated
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (dependent : TerminalPrimitiveRecord inputs gates outputs profileWidth)
+    (records : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalSaturationTraceSeedRecords
+        (records.map fun required =>
+          ({ record := required
+             origin := .generated
+               (terminalFirstSaturationRule? system dependent required) dependent } :
+            TerminalSaturationTracePending inputs gates outputs profileWidth)) = [] := by
+  induction records with
+  | nil => rfl
+  | cons current remaining ih =>
+      simpa only [List.map_cons, terminalSaturationTraceSeedRecords] using ih
+
+private theorem terminalSaturationTraceSeedRecords_seed
+    {inputs gates outputs profileWidth : Nat}
+    (records : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalSaturationTraceSeedRecords
+        (records.map fun record =>
+          ({ record := record, origin := .seed } :
+            TerminalSaturationTracePending inputs gates outputs profileWidth)) =
+      records := by
+  induction records with
+  | nil => rfl
+  | cons current remaining ih =>
+      simp only [List.map_cons, terminalSaturationTraceSeedRecords, ih]
+
+private def TerminalSaturationTraceWorkState.CostRecordsAccounted
+    {inputs gates outputs profileWidth : Nat}
+    (state : TerminalSaturationTraceWorkState
+      inputs gates outputs profileWidth) : Prop :=
+  ∀ record, record ∈ state.costRecords ↔
+    record ∈ state.processed ∨
+      record ∈ terminalSaturationTraceSeedRecords state.pending
+
+private theorem terminalSaturationTraceStep_costRecordsAccounted
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (state : TerminalSaturationTraceWorkState
+      inputs gates outputs profileWidth)
+    (accounted : state.CostRecordsAccounted) :
+    (terminalSaturationTraceStep system state).CostRecordsAccounted := by
+  intro record
+  have old := accounted record
+  cases pendingEq : state.pending with
+  | nil =>
+      simpa only [terminalSaturationTraceStep, pendingEq] using old
+  | cons current remaining =>
+      cases originEq : current.origin with
+      | seed =>
+          simpa only [terminalSaturationTraceStep, pendingEq, originEq,
+            terminalSaturationTraceSeedRecords_append,
+            terminalSaturationTraceSeedRecords_generated,
+            terminalSaturationTraceSeedRecords, List.append_nil,
+            List.mem_cons, or_assoc, or_comm, or_left_comm] using old
+      | generated kind dependent =>
+          have added :
+              (record = current.record ∨ record ∈ state.costRecords) ↔
+                (record = current.record ∨
+                  (record ∈ state.processed ∨
+                    record ∈ terminalSaturationTraceSeedRecords state.pending)) :=
+            or_congr Iff.rfl old
+          simpa only [terminalSaturationTraceStep, pendingEq, originEq,
+            terminalSaturationTraceSeedRecords_append,
+            terminalSaturationTraceSeedRecords_generated,
+            terminalSaturationTraceSeedRecords, List.append_nil,
+            List.mem_cons, or_assoc] using added
+
+private theorem terminalSaturationTraceWork_costRecordsAccounted
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth) :
+    ∀ fuel state, state.CostRecordsAccounted →
+      (terminalSaturationTraceWork system fuel state).CostRecordsAccounted := by
+  intro fuel
+  induction fuel with
+  | zero =>
+      intro state accounted
+      exact accounted
+  | succ fuel ih =>
+      intro state accounted
+      exact ih (terminalSaturationTraceStep system state)
+        (terminalSaturationTraceStep_costRecordsAccounted system state accounted)
+
+private theorem terminalSaturationTraceInitialState_costRecordsAccounted
+    {inputs gates outputs profileWidth : Nat}
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalSaturationTraceInitialState seed).CostRecordsAccounted := by
+  intro record
+  simp only [terminalSaturationTraceInitialState,
+    terminalSaturationTraceSeedRecords_seed, List.mem_reverse,
+    List.mem_nil_iff, false_or]
+
+private theorem terminalSaturationTraceFinalState_costRecordsAccounted
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalSaturationTraceFinalState system seed).CostRecordsAccounted := by
+  unfold terminalSaturationTraceFinalState
+  exact terminalSaturationTraceWork_costRecordsAccounted system _
+    (terminalSaturationTraceInitialState seed)
+    (terminalSaturationTraceInitialState_costRecordsAccounted seed)
+
+private theorem terminalSaturationTraceFinalState_pending_empty
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalSaturationTraceFinalState system seed).pending = [] := by
+  have mapped :
+      (terminalSaturationTraceFinalState system seed).pending.map
+          (fun item => item.record) = [] := by
+    change (terminalSaturationTraceErase
+      (terminalSaturationTraceFinalState system seed)).pending = []
+    rw [terminalSaturationTraceFinalState_erase,
+      terminalSaturationFinalState_pending_empty]
+  cases pendingEq : (terminalSaturationTraceFinalState system seed).pending with
+  | nil => rfl
+  | cons current remaining =>
+      rw [pendingEq] at mapped
+      cases mapped
+
+private theorem firstTerminalSaturationRule?_valid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (dependent required :
+      TerminalPrimitiveRecord inputs gates outputs profileWidth)
+    (kinds : List TerminalSaturationRuleKind)
+    (witness : ∃ kind, kind ∈ kinds ∧
+      system.requires kind dependent required = true) :
+    ∃ kind, firstTerminalSaturationRule? system dependent required kinds = some kind ∧
+      system.requires kind dependent required = true := by
+  induction kinds with
+  | nil =>
+      obtain ⟨kind, member, _edge⟩ := witness
+      cases member
+  | cons head tail ih =>
+      by_cases headEdge : system.requires head dependent required = true
+      · exact ⟨head, by simp only [firstTerminalSaturationRule?, headEdge, if_true],
+          headEdge⟩
+      · have tailWitness : ∃ kind, kind ∈ tail ∧
+            system.requires kind dependent required = true := by
+          obtain ⟨kind, member, edge⟩ := witness
+          cases List.mem_cons.mp member with
+          | inl equal =>
+              subst kind
+              exact False.elim (headEdge edge)
+          | inr tailMember =>
+              exact ⟨kind, tailMember, edge⟩
+        obtain ⟨kind, selected, edge⟩ := ih tailWitness
+        exact ⟨kind, by
+          simpa only [firstTerminalSaturationRule?, if_neg headEdge] using selected,
+          edge⟩
+
+private theorem terminalFirstSaturationRule?_valid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (dependent required :
+      TerminalPrimitiveRecord inputs gates outputs profileWidth)
+    (edge : terminalSaturationEdge system dependent required = true) :
+    ∃ kind, terminalFirstSaturationRule? system dependent required = some kind ∧
+      system.requires kind dependent required = true := by
+  obtain ⟨kind, rule⟩ :=
+    (terminalSaturationEdge_eq_true_iff system dependent required).mp edge
+  exact firstTerminalSaturationRule?_valid system dependent required _
+    ⟨kind, mem_allTerminalSaturationRuleKinds kind, rule⟩
+
+private def TerminalSaturationTracePending.RuleValid
+    {inputs gates outputs profileWidth : Nat}
+    (item : TerminalSaturationTracePending inputs gates outputs profileWidth)
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth) : Prop :=
+  match item.origin with
+  | .seed => True
+  | .generated selected dependent =>
+      ∃ kind, selected = some kind ∧
+        system.requires kind dependent item.record = true
+
+private def TerminalSaturationTraceWorkState.RulesValid
+    {inputs gates outputs profileWidth : Nat}
+    (state : TerminalSaturationTraceWorkState inputs gates outputs profileWidth)
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth) : Prop :=
+  (∀ item, item ∈ state.pending → item.RuleValid system) ∧
+    (∀ event, event ∈ state.events →
+      event.afterRecords = event.required :: event.beforeRecords ∧
+        ∃ kind, event.kind? = some kind ∧
+          system.requires kind event.dependent event.required = true)
+
+private theorem terminalSaturationTraceStep_rulesValid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (state : TerminalSaturationTraceWorkState inputs gates outputs profileWidth)
+    (valid : state.RulesValid system) :
+    (terminalSaturationTraceStep system state).RulesValid system := by
+  cases pendingEq : state.pending with
+  | nil =>
+      simpa only [terminalSaturationTraceStep, pendingEq] using valid
+  | cons current remaining =>
+      have currentValid : current.RuleValid system :=
+        valid.1 current (by rw [pendingEq]; exact List.Mem.head _)
+      let retained := current.record ::
+        (state.processed ++ remaining.map (fun item => item.record))
+      let newPending : List
+          (TerminalSaturationTracePending inputs gates outputs profileWidth) :=
+        (terminalNewRequiredRecords system retained current.record).map fun required =>
+          { record := required
+            origin := .generated
+              (terminalFirstSaturationRule? system current.record required)
+              current.record }
+      have newValid : ∀ item, item ∈ newPending → item.RuleValid system := by
+        intro item member
+        obtain ⟨record, recordMember, equal⟩ := List.mem_map.mp member
+        subst item
+        have edge :=
+          (mem_terminalNewRequiredRecords_iff system retained current.record record).mp
+            recordMember
+        exact terminalFirstSaturationRule?_valid system current.record record edge.1
+      have pendingValid :
+          ∀ item, item ∈ remaining ++ newPending → item.RuleValid system := by
+        intro item member
+        cases List.mem_append.mp member with
+        | inl oldMember =>
+            exact valid.1 item (by rw [pendingEq]; exact List.Mem.tail _ oldMember)
+        | inr newMember =>
+            exact newValid item newMember
+      cases originEq : current.origin with
+      | seed =>
+          simpa only [TerminalSaturationTraceWorkState.RulesValid,
+            terminalSaturationTraceStep, pendingEq, originEq] using
+              And.intro pendingValid valid.2
+      | generated selected dependent =>
+          constructor
+          · simpa only [terminalSaturationTraceStep, pendingEq, originEq] using
+              pendingValid
+          · intro event member
+            simp only [terminalSaturationTraceStep, pendingEq, originEq] at member
+            cases List.mem_append.mp member with
+            | inl oldMember =>
+                exact valid.2 event oldMember
+            | inr newMember =>
+                have equal := List.mem_singleton.mp newMember
+                subst event
+                exact ⟨rfl, by
+                  simpa only [TerminalSaturationTracePending.RuleValid, originEq]
+                    using currentValid⟩
+
+private theorem terminalSaturationTraceWork_rulesValid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth) :
+    ∀ fuel state, state.RulesValid system →
+      (terminalSaturationTraceWork system fuel state).RulesValid system := by
+  intro fuel
+  induction fuel with
+  | zero =>
+      intro state valid
+      exact valid
+  | succ fuel ih =>
+      intro state valid
+      exact ih (terminalSaturationTraceStep system state)
+        (terminalSaturationTraceStep_rulesValid system state valid)
+
+private theorem terminalSaturationTraceInitialState_rulesValid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalSaturationTraceInitialState seed).RulesValid system := by
+  constructor
+  · intro item member
+    obtain ⟨record, _recordMember, equal⟩ := List.mem_map.mp member
+    subst item
+    exact True.intro
+  · intro event member
+    cases member
+
+private theorem terminalSaturationTraceFinalState_rulesValid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalSaturationTraceFinalState system seed).RulesValid system := by
+  unfold terminalSaturationTraceFinalState
+  exact terminalSaturationTraceWork_rulesValid system _
+    (terminalSaturationTraceInitialState seed)
+    (terminalSaturationTraceInitialState_rulesValid system seed)
 
 private theorem terminalSaturationTraceFinalState_linked
     {inputs gates outputs profileWidth : Nat}
@@ -1141,6 +1516,44 @@ theorem terminalSaturateTrace_eventsLinked
     (terminalSaturateTrace system seed).normalizedSeed =
       (allTerminalPrimitiveRecords inputs gates outputs profileWidth).filter
         (fun record => decide (record ∈ seed)) := rfl
+
+/-- The actual cost-accounting replay has exactly the computed saturated
+    records. Trace annotations do not change the finite terminal support. -/
+theorem terminalSaturateTrace_replayRecords_iff
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (record : TerminalPrimitiveRecord inputs gates outputs profileWidth) :
+    record ∈ (terminalSaturateTrace system seed).replayRecords ↔
+      record ∈ terminalSaturateRecords system seed := by
+  have accounted :=
+    terminalSaturationTraceFinalState_costRecordsAccounted system seed record
+  rw [terminalSaturationTraceFinalState_pending_empty] at accounted
+  have processed :
+      (terminalSaturationTraceFinalState system seed).processed =
+        (terminalSaturationFinalState system seed).processed :=
+    congrArg
+      (fun state : TerminalSaturationWorkState inputs gates outputs profileWidth =>
+        state.processed)
+      (terminalSaturationTraceFinalState_erase system seed)
+  simpa only [terminalSaturateTrace, terminalSaturateRecords,
+    terminalSaturationTraceSeedRecords, List.mem_nil_iff, or_false, processed]
+      using accounted
+
+/-- Every event actually emitted by saturation adds its required record and
+    carries a rule that really relates its dependent to that record. -/
+theorem terminalSaturateTrace_event_valid
+    {inputs gates outputs profileWidth : Nat}
+    (system : TerminalSaturationSystem inputs gates outputs profileWidth)
+    (seed : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (event : TerminalSaturationTraceEvent inputs gates outputs profileWidth)
+    (member : event ∈ (terminalSaturateTrace system seed).events) :
+    event.afterRecords = event.required :: event.beforeRecords ∧
+      ∃ kind, event.kind? = some kind ∧
+        system.requires kind event.dependent event.required = true := by
+  exact (terminalSaturationTraceFinalState_rulesValid system seed).2 event member
 
 end DirectWire
 end PNP
