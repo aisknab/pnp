@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241`, 217 of 219
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242`, 218 of 220
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M241 |
+| Track | Available | Earned at M242 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M241 risk-weighted proof completion estimate is therefore 40 percent, with
+The M242 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -109,7 +109,10 @@ No fixed checkpoint or global gate changes.
 M241 computes a support-independent physical ownership partition from arbitrary finite raw requests. It extracts each owned piece as an actual NAND circuit and proves that their gate counts sum exactly to the selected support size, including overlapping requests and unrequested gates. Open and induced-boundary semantics preserve the connection to the ambient circuit. This is a physical charge partition kernel, not complete admissible manuscript materializer ownership; the production nonunique-owner rejection remains unchanged.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 217 of 219 current scoped publication rows earned.
+M242 constructs a whole-program NAND-sharing stage: it computes aliases for every original gate, reuses actual retained gates with equal or commuted inputs, translates every ordered output, and proves exact physical gate savings and residual-slack descent. The concrete normalizer surfaces every computed fold as a checked gain. A no-fold branch does not establish semantic minimality or ZeroSlack.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 218 of 220 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

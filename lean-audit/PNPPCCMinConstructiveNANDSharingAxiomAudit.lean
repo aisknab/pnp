@@ -1,0 +1,11 @@
+import PNP
+
+#print axioms PNP.DirectWire.compileNANDSharing_alias_semantics
+#print axioms PNP.DirectWire.compileNANDSharing_exact_accounting
+#print axioms PNP.DirectWire.sharingImplementation_equivalent
+#print axioms PNP.DirectWire.sharingImplementation_gateCount_le
+#print axioms PNP.DirectWire.sharingImplementation_referenceMinimum
+#print axioms PNP.DirectWire.sharingImplementation_residualSlack
+#print axioms PNP.DirectWire.sharingImplementation_strictGain_iff
+#print axioms PNP.DirectWire.sharingImplementation_strictResidualDescent
+#print axioms PNP.DirectWire.nandSharingNormalizer_checked

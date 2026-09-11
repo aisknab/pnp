@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 217,
-    "totalRows": 219,
+    "earnedRows": 218,
+    "totalRows": 220,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2064,6 +2064,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M241 proves a general support-independent physical charge partition with computed first-requester ownership, a fixed remainder, actual extracted NAND materializers and an exact whole-support integer cost identity. Overlaps and unrequested gates are covered without supplied partition proofs or weights. This is not complete admissible materializer ownership: the raw request family remains supplied data, and canonical assignment does not discharge the production unique-active-owner, frontier or obligation conditions. No fixed weighted checkpoint or global gate changes. The evidence row changes coverage only. Formal artefact coverage: 217 of 219 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242",
+      "formalArtefactCoverage": {
+        "earnedRows": 218,
+        "totalRows": 220
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M242 constructs a general whole-program NAND-sharing stage rather than taking a supplied normalizer: every alias and reuse decision is computed, with exact physical gate savings and residual-slack accounting. This closes the structural-sharing input edge of the existing normalization/oracle composition only. A no-fold branch is not semantic minimality or ZeroSlack; complete N1-N10 normalization, full-profile rewrite transport, the total oracle and uniformly encoded-size polynomial construction remain open. No fixed weighted checkpoint or global gate changes. The evidence row changes coverage only.Formal artefact coverage: 218 of 220 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

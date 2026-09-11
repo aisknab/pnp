@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '2ac4d44489b0ee0e2981a9418e869f7013b369ac31acc3d6cb5e3f9b2f9148d8';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '3ac5c67c4bfd03218e418020ac11398ff6e677848a1824b60e4a6a36cf27b386';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -301,6 +301,15 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics',
   'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
   'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
+  'PNP.DirectWire.compileNANDSharing_alias_semantics',
+  'PNP.DirectWire.compileNANDSharing_exact_accounting',
+  'PNP.DirectWire.sharingImplementation_equivalent',
+  'PNP.DirectWire.sharingImplementation_gateCount_le',
+  'PNP.DirectWire.sharingImplementation_referenceMinimum',
+  'PNP.DirectWire.sharingImplementation_residualSlack',
+  'PNP.DirectWire.sharingImplementation_strictGain_iff',
+  'PNP.DirectWire.sharingImplementation_strictResidualDescent',
+  'PNP.DirectWire.nandSharingNormalizer_checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3548,7 +3557,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-242') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

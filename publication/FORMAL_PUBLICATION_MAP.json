@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-242",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3234,7 +3234,16 @@
     "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity": "536ab6d2243bb5599225af8762bebc639928dd957692cc58a4e38c16f7d05fbe",
     "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics": "8de6988c721b8734eea3bea0f9c66a58ef6b149f93a3366e195570422ca02c3b",
     "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced": "6382079281a6e01dc636253438900d6528f761ff9c5fc8e2001d02da554fac7a",
-    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge": "2cf21f36ac2063dd4093521f5eb5de20647af79da6848811ce8fae59b33b27a0"
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge": "2cf21f36ac2063dd4093521f5eb5de20647af79da6848811ce8fae59b33b27a0",
+    "PNP.DirectWire.compileNANDSharing_alias_semantics": "4deb034903ad839c8a3b4b239a3eedac0b9015b2ca80f813887ab3fe0da96822",
+    "PNP.DirectWire.compileNANDSharing_exact_accounting": "164deeba19f4e72d48b14460ecf95cab0aaaa5d9f1bd0d7c162197c2254c0c82",
+    "PNP.DirectWire.sharingImplementation_equivalent": "bf6462df6f7b2be0f1e107c0de6e9dbfe0d60f95207d32da437ba4d3e9bba1f8",
+    "PNP.DirectWire.sharingImplementation_gateCount_le": "2e8b717281088e2f705da023dcf9c3e70c36eb734e6b2e1cc21d011f743fe5b4",
+    "PNP.DirectWire.sharingImplementation_referenceMinimum": "1765f52468d594f9b61339121daf6522ab56cc1b1b2ce3c8ea0bc7a5b339a263",
+    "PNP.DirectWire.sharingImplementation_residualSlack": "a5dee1ecca503f2fbc2d154a79fece88bf4c9b22ba1b836c17222e62731cae1d",
+    "PNP.DirectWire.sharingImplementation_strictGain_iff": "5de93eb4cd692308ffce27770919129d605624fc0b0983d46cbe1f6fc675104d",
+    "PNP.DirectWire.sharingImplementation_strictResidualDescent": "78ca908349b5ce03bd5e8585dcfed98eb3a24cd860337fab2681d8e435cc19cf",
+    "PNP.DirectWire.nandSharingNormalizer_checked": "9ad481fa3cf574495fe90302d3f8945fe4917791935b065cbc86f51aef60b7fd"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3252,7 +3261,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
+  "milestoneSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8695,6 +8704,24 @@
       ],
       "scope": "For every finite candidate, arbitrary finite raw request family and terminal record list, M241 computes a first-requesting ambient owner before support selection, retaining unrequested physical gates in a fixed remainder bucket. Ten universal interfaces characterize the first requester and unrequested case, exact partition membership, disjointness and restriction stability, actual extracted gate counts, the complete integer charge identity, open semantics, induced-boundary reconnection and the whole-circuit charge total. Overlapping and duplicate requests require no supplied disjointness or coverage certificate. Each owned piece is an existing physical support extraction with its actual NAND size, not an arbitrary numerical weight. All ten interfaces are explicit-root built with their exact reviewed standard axiom closures.",
       "nonClaim": "This is a support-independent physical ownership and charge partition kernel, not the complete manuscript computational-record universe or proof of admissible materializer ownership. The raw finite request family is supplied data; a canonical assignment does not discharge unique active ownership, carrier, frontier or obligation conditions. The existing production nonunique-owner rejection is unchanged. Metadata records do not become free computational materializers or receive invented physical cost. The result does not establish HN assembly, forced full-profile minimum growth, quotient bounds, terminal-family derivation or complete rank-decreasing routes. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-constructive-nand-sharing",
+      "title": "Constructive whole-program NAND sharing and checked normalization",
+      "requiredTheorems": [
+        "PNP.DirectWire.compileNANDSharing_alias_semantics",
+        "PNP.DirectWire.compileNANDSharing_exact_accounting",
+        "PNP.DirectWire.sharingImplementation_equivalent",
+        "PNP.DirectWire.sharingImplementation_gateCount_le",
+        "PNP.DirectWire.sharingImplementation_referenceMinimum",
+        "PNP.DirectWire.sharingImplementation_residualSlack",
+        "PNP.DirectWire.sharingImplementation_strictGain_iff",
+        "PNP.DirectWire.sharingImplementation_strictResidualDescent",
+        "PNP.DirectWire.nandSharingNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND program and complete ordered output word, M242 computes a full structural-sharing traversal, translating every source through earlier computed aliases and searching the actual retained program for equal or commuted NAND input pairs. Each successful lookup reuses one existing gate; each unsuccessful lookup appends one translated gate. Nine universal interfaces prove every alias value, exact retained-plus-fold gate accounting, complete multi-output equivalence, non-increasing physical size, invariant reference minimum, exact residual-slack savings, strict gain exactly when a fold occurs, strict residual descent and the computed normalizer outcome. The caller supplies only the implementation, not an optimizer or correctness certificate. The pass performs structural lookup, not semantic enumeration. All nine interfaces are explicit-root built with only propext and Quot.sound.",
+      "nonClaim": "This is a computed physical R1/R4 structural-sharing stage, not complete manuscript N1-N10 normalization or a proof that every latent-sharing opportunity is found. A no-fold branch does not imply semantic minimality, absence of other gains or ZeroSlack; a checked regression gives a smaller equivalent circuit after the pass has no structural fold. The result does not construct a proper-support Package E ledger, arbitrary replacement pullback, full-profile carrier or obligation transport, terminal-derived families, global rank-decreasing route coverage or the complete PCCMin oracle. Reference minimum occurs in specification theorems, not in execution of this pass. No uniformly encoded-size polynomial execution theorem for the complete PCCMin construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

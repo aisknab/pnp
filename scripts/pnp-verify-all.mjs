@@ -96,6 +96,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs',
   'audits/lean-residual-independent-materializer-cost0.test.mjs',
   'audits/lean-residual-terminal-physical-ownership0.test.mjs',
+  'audits/lean-pccmin-constructive-nand-sharing0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
