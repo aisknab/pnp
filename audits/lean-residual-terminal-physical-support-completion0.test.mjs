@@ -51,6 +51,7 @@ const EXECUTABLE_SOURCE_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.terminalSaturateTrace_normalizedSeed`,
   `${NAMESPACE}.terminalSaturateTrace_replayRecords_iff`,
   `${NAMESPACE}.terminalSaturateTrace_event_valid`,
+  `${NAMESPACE}.terminalSaturateTrace_event_context`,
 ]);
 
 const PHYSICAL_DECLARATIONS = Object.freeze([
@@ -180,6 +181,16 @@ const EXECUTABLE_PRIVATE_HELPERS = Object.freeze([
   'terminalSaturationTraceWork_rulesValid',
   'terminalSaturationTraceInitialState_rulesValid',
   'terminalSaturationTraceFinalState_rulesValid',
+  'terminalSaturationTraceSeedRecords_subset',
+  'terminalSaturationTraceStep_costRecords_mono',
+  'terminalSaturationTracePending_seed_mem_costRecords',
+  'terminalSaturationTracePending_generated_fresh',
+  'TerminalSaturationTracePending.DependentActive',
+  'TerminalSaturationTraceWorkState.ContextsValid',
+  'terminalSaturationTraceStep_contextsValid',
+  'terminalSaturationTraceWork_contextsValid',
+  'terminalSaturationTraceInitialState_contextsValid',
+  'terminalSaturationTraceFinalState_contextsValid',
   'terminalSaturationTraceFinalState_linked',
 ]);
 

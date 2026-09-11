@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M234-CURRENT-SUMMARY:BEGIN -->
-## Current M234 boundary
+<!-- M235-CURRENT-SUMMARY:BEGIN -->
+## Current M235 boundary
 
-M234 proves that the actual saturation replay matches the computed closure, that generated events carry valid dependency rules, and that the replay endpoint has the same ambient implementation and cost coordinates as canonical saturation. Every generated non-gate metadata event is cost-transparent. Physical-gate transparency and obligation discharge remain separate: both limitations have checked counterexamples.
+M235 derives that actual generated saturation events have an already active dependent and insert a genuinely new record. The unchanged extractor therefore charges exactly one physical gate per gate insertion and zero for metadata. The recorded rule/dependent pair is an active owner, but need not be unique. The existing classifier either preserves full slack and nondecreasing projection defect at canonical computed saturation or exposes its exact first physical ownership/minimum-cost obstruction. Such a local obstruction is not yet a global named route.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 210 of 212 current scoped publication rows earned.
+Formal artefact coverage: 211 of 213 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [trace-fidelity theorem and limits](./lean_residual_terminal_saturation_trace_fidelity.md)
-and the [retained-profile locality result](./lean_residual_terminal_profile_locality.md).
-Earlier milestone notes retain their original module-specific scope. M234
-connects the actual replay and metadata costs to computed saturation, without
-closing any global proof gate.
-<!-- M234-CURRENT-SUMMARY:END -->
+See the [physical-accounting theorem and limits](./lean_residual_terminal_physical_saturation_accounting.md)
+and the [trace-fidelity and metadata result](./lean_residual_terminal_saturation_trace_fidelity.md).
+Earlier milestone notes retain their original module-specific scope. M235
+isolates actual physical ownership and minimum-cost obstructions; it does not
+turn a local obstruction into a global named route or close a global proof gate.
+<!-- M235-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

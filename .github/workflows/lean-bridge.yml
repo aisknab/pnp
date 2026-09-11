@@ -42,8 +42,10 @@ on:
       - 'audits/formal-publication0.test.mjs'
       - 'audits/lean-residual-terminal-profile-locality0.test.mjs'
       - 'audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs'
+      - 'audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
+      - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -508,8 +510,10 @@ on:
       - 'audits/formal-publication0.test.mjs'
       - 'audits/lean-residual-terminal-profile-locality0.test.mjs'
       - 'audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs'
+      - 'audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
+      - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -2306,6 +2310,32 @@ jobs:
           console.log('M234: all five trace-fidelity theorem interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturationTraceFidelity.lean
+
+      - name: Check actual physical saturation accounting contracts
+        run: node --test audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs
+
+      - name: Audit actual physical saturation accounting and regressions
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSaturationAccountingAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' depends on axioms: \[([^\]]*)\]$/gmu)];
+          assert.deepEqual(rows.map(row => row[1]).sort(), [
+            'PNP.DirectWire.terminalSaturateTrace_event_context',
+            'PNP.DirectWire.terminalCandidateSaturateTrace_supportCostBalanced',
+            'PNP.DirectWire.terminalCandidateSaturateTrace_event_owner',
+            'PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction',
+            'PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction',
+          ].sort());
+          for (const row of rows) {
+            assert.deepEqual(row[2].split(',').map(value => value.trim()).sort(),
+              ['Quot.sound', 'propext']);
+          }
+          console.log('M235: all five actual physical-accounting interfaces have the reviewed axiom closure.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSaturationAccounting.lean
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

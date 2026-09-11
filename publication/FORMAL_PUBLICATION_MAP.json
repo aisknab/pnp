@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-234",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-235",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3190,7 +3190,12 @@
     "PNP.DirectWire.terminalSaturateTrace_event_valid": "c1b87935414b4d1f64511851d7a2f16950aabf4a941ecc67f2d377f8c9435733",
     "PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq": "9c95df1a18426898db16b49a2181726decbb73bd693034227e0046b98f8dbff5",
     "PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq": "a71b030f39a2e1a75045b984451b286d3ed66101bebea61d97693f9ba23ba6a5",
-    "PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent": "e30fc653246ef6cd59ec517a9667f819ad013811f758aa855aa9f02a5ee6fc76"
+    "PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent": "e30fc653246ef6cd59ec517a9667f819ad013811f758aa855aa9f02a5ee6fc76",
+    "PNP.DirectWire.terminalSaturateTrace_event_context": "ee22de07094e37ab879f32dcf4cd29ca950e0ff9077b7b673478fecc77c14649",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_supportCostBalanced": "0b3ea6401032e726f0e43acba13490d9308e323109d0a1d3d1d33aae44080e66",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_event_owner": "ed16113c1dc85a8a77affb8544368ef558cfbccaa8cb6d435ef28f480e10ddb1",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction": "7b0e659ae86824ee35ef8c5a449cf39b44768e7d5b78173f68fa9d1541e4f9ab",
+    "PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction": "7d2d28cb4e283178d5d491a6213190a8895661a46bb0bf9973ba60d5b1a100c0"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3208,7 +3213,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "52a12634599bf5975c6d5f8c40498a7e6f7768cce6ba22bd6465b9e58eed3612",
+  "milestoneSourceClosureSha256": "1c3bf9aae23e2e7248e7ee936d5e0e79624ccb9e55d7c2f407d543c55559cceb",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8544,6 +8549,20 @@
       ],
       "scope": "For arbitrary finite terminal systems and seeds, M234 proves that the actual cost-accounting replay contains exactly the canonical computed saturated records and that every emitted event adds its required record with a valid selected dependency rule. For every finite direct-wire candidate and executable terminal model, the replay and canonical endpoints have equal ambient implementations and equal cost snapshot coordinates, with the stored record list kept explicit. Every generated non-gate metadata event is structurally cost-transparent. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No trace-validity, replay-correctness, observer-congruence or balance certificate is supplied in place of the existing computation.",
       "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. Metadata cost balance does not establish physical-gate transparency, obligation discharge or complete closure safety. The theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-saturation-accounting",
+      "title": "Actual physical saturation accounting and first-obstruction fidelity",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalSaturateTrace_event_context",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_supportCostBalanced",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_event_owner",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction",
+        "PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction"
+      ],
+      "scope": "For arbitrary finite terminal systems, seeds and actual generated events, M235 derives that the dependent is already active and the required record is genuinely new. For every finite direct-wire candidate and executable terminal model, the unchanged extractor charges exactly one physical gate for a generated gate event and zero for metadata, and the selected rule/dependent pair belongs to the computed active-owner list. Every generated nontransparent event is a physical insertion with a genuine nonunique-owner, full-minimum-growth or quotient-cost obstruction. The existing total classifier either preserves full slack and nondecreasing projection defect at canonical computed saturation or returns its exact first such obstruction with a transparent prefix. All five general interfaces are root-built and audited using only propext and Quot.sound. No freshness, charge-balance, active-owner, all-transparent-history or preselected-route certificate replaces the actual computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. An active dependency owner need not be unique. Exact physical support growth does not establish full-minimum growth, a quotient bound, obligation discharge, complete closure safety or a global named route. The first physical obstruction is not thereby a verified gain, an exact route or strict descent. This theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
     }
   ],
   "version": 0
