@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalSaturateTrace_event_context
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_supportCostBalanced
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_event_owner
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction
+#print axioms PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction
