@@ -452,6 +452,14 @@ branch.
 
 ### Lean elaboration and axiom-closure preflight
 
+- Probe a new executable exhaustive-search regression with a short timeout and
+  a modest per-job memory ceiling before including it in a broad suite. Use the
+  smallest input universe that exercises genuine success and failure. Cover
+  richer output layouts through the relevant targeted construction and
+  arbitrary-dimension theorems without duplicating the full exponential search
+  for each variation. A resource-limit termination is failed evidence: isolate
+  the expensive expression and retain the theorem statements and claim boundary.
+
 - If a small leaf theorem suddenly consumes gigabytes or remains in
   `mem_cgroup_handle_over_high`, do not wait indefinitely or raise the configured
   limits. Mark that run non-evidence, then compile bounded import-only,

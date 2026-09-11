@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3844dd85a04971626a5255a84c13db733286fb64a2379444eb4b5af6e2668bc9';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ccc3ef11151ae06ac6a3dde05d08264c5b0678f702ca1657a1b3dd6d7d77248b';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -272,6 +272,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_equivalent',
   'PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent',
   'PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le',
+  'PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent',
+  'PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain',
+  'PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain',
+  'PNP.DirectWire.findTerminalCandidatePhysicalGain_sound',
+  'PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3519,7 +3524,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-11-237') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-238') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

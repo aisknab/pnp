@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-237",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-238",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3205,7 +3205,12 @@
     "PNP.DirectWire.terminalCandidateSaturatePhysicalContext_size": "f0bc6f7e663522a203de0c795593b631dbee10e250ea098434e7b43798182f17",
     "PNP.DirectWire.terminalCandidateSaturatePhysicalContext_equivalent": "86fb01c46c418f630fcf7d85b8b1706bb78c03e0df292f42c877673258555323",
     "PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent": "b3404c4072cad4b15a86c1b1a58c83869093f77d1ca15684e61c7d0c22b74aca",
-    "PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le": "70f1c100034d2f37d8e2f6cc4f437b392e5f9c4adacfbb416fff852c763ec742"
+    "PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le": "70f1c100034d2f37d8e2f6cc4f437b392e5f9c4adacfbb416fff852c763ec742",
+    "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent": "e1da67101c515204dd045a2f04fb5e8b50cd2c930eb6ae526c3192657180af4a",
+    "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain": "3b1b137f09a7681341f12a83c5de1713d4116c1baa6f98ac0300da039342cf31",
+    "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain": "96dac6e6f5ecc546b311cf0bab666075da5143cd31563aa1e09eaf9cfba4de66",
+    "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound": "f5e4ab7db43a4f9476b036cbed4d58aa0a5a46889ff738e76c71bf354ea79479",
+    "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff": "de932d3dd29285c67a55cce7e67378b4ecd805f7daf84516e8c0b9ed3cc7f0fd"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3223,7 +3228,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "1cb545f7192cc17ccb509fbac319f1073bb8758349fc980950919440eaf0e0ef",
+  "milestoneSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8601,6 +8606,20 @@
       ],
       "scope": "For every finite direct-wire candidate, executable terminal model and seed list, M237 computes a concrete replacement frame from production saturation and the actual physical gate complement. Gate-source closure proves that the selected support boundary contains only primary inputs. The unchanged extractor constructs both gate halves, and every complement boundary gate is bound to an actual selected-support interface port. The frame preserves the original ordered Boolean outputs when the extracted support is plugged back in. Every equivalent replacement on the exact extracted boundary and interface preserves the whole circuit, with an exact gate-count equation that counts every original physical NAND gate once and permits arbitrary replacement size. Transport through the existing constructive frame theorem bounds the computed support's physical Boolean residual slack by whole-circuit slack. All five general interfaces are root-built and audited using only propext and Quot.sound. No caller-supplied frame, fan-in-closure certificate, gate partition or whole-circuit correctness proof replaces the computation.",
       "nonClaim": "These are physical Boolean replacement and slack laws for actual production saturated supports, not arbitrary raw supports or full-profile compatibility. The complete manuscript profile/materializer charge universe, fixed global ownership map and full-profile replacement transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. No full-minimum growth, quotient bound, global named route, input-derived complete terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-gain",
+      "title": "Computed proper-support physical gain and exact slack descent",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain",
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain",
+        "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound",
+        "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff"
+      ],
+      "scope": "For every finite direct-wire candidate, executable terminal profile model and seed list, M238 computes the whole physical replacement using the existing reference-minimum witness and the actual production saturated-support context. The complete ordered Boolean output word is preserved. The replacement gate count plus the computed local gain equals the original gate count, and replacement residual slack plus that gain equals the original physical residual slack. These equations require no properness, positivity, supplied frame or supplied charge partition. The total optional gain step maps this construction over the existing candidate-derived proper-positive support search. Every returned result carries an actually selected canonical proper positive seed and strictly decreases whole physical gate count and residual slack. Failure is exactly absence of every canonical proper positive seed for that computed system, not global minimality. All five universal interfaces are root-built and audited using only propext and Quot.sound. The caller supplies no search result, replacement, seed, context or correctness certificate to the gain-step algorithm.",
+      "nonClaim": "These are physical Boolean reference gain-realization and search-failure laws, not full-profile replacement compatibility or a complete named global route. The observer and profile model remain supplied data, while influence, canonical seed search and semantic minima use exhaustive finite reference constructions; no polynomial encoded-size or runtime bound is proved. Failure of the proper-support search does not imply global minimality or ZeroSlack. Complete profile/materializer charge coverage, fixed global ownership, obligation transport, full-minimum growth, quotient bounds, input-derived complete terminal families and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain
+#print axioms PNP.DirectWire.findTerminalCandidatePhysicalGain_sound
+#print axioms PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff
