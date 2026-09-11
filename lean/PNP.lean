@@ -43,6 +43,7 @@ import PNP.ResidualTerminalPhysicalChargeLedger
 import PNP.ResidualTerminalSaturatedSupportContext
 import PNP.ResidualTerminalPhysicalGain
 import PNP.ResidualTerminalGainProfileFirewall
+import PNP.ResidualIndependentMaterializerCost
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

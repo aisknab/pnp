@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-240",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1474,6 +1474,17 @@
   "leanResidualTerminalGainProfileFirewallRejectionTheorem": "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff",
   "leanResidualTerminalGainProfileFirewallFullSlackTheorem": "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain",
   "leanResidualTerminalGainProfileFirewallScope": "all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only",
+  "leanResidualIndependentMaterializerCostFormalized": true,
+  "leanResidualIndependentMaterializerCostAxiomAuditPassed": true,
+  "leanResidualIndependentMaterializerCostAuditedDeclarationCount": 7,
+  "leanResidualIndependentMaterializerCostSizeTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_size",
+  "leanResidualIndependentMaterializerCostOriginalOutputsTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_original",
+  "leanResidualIndependentMaterializerCostFreshOutputsTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_materializer",
+  "leanResidualIndependentMaterializerCostLowerBoundTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound",
+  "leanResidualIndependentMaterializerCostEquivalenceTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_equivalent",
+  "leanResidualIndependentMaterializerCostMinimumTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum",
+  "leanResidualIndependentMaterializerCostSlackTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack",
+  "leanResidualIndependentMaterializerCostScope": "all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2732,7 +2743,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
+    "actualSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2765,19 +2776,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "9404ca6e8961073c95316983c52bc6c1979e8baabde2e9b478e5877ea90af834",
+  "leanTheoremInventorySha256": "b244f5fe1763f256786eb9ecf3a55076b39f03b49cdedd862a9920b70cb5204c",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46305,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19923,
-  "leanTheoremInventoryTheoremCount": 25421,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11054,
-  "leanTheoremInventorySourceClosureModuleCount": 504,
-  "leanSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-239",
+  "leanTheoremInventoryDeclarationCount": 46316,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19997,
+  "leanTheoremInventoryTheoremCount": 25431,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11056,
+  "leanTheoremInventorySourceClosureModuleCount": 505,
+  "leanSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "12b65d6f2537e3cb438f66efec8d93b22ded500d947f017bd23fc99f4178a44e",
+  "formalPublicationMapSha256": "eae36c159ebfe41e23a94a57de6c1f6aef26c427eb6932013872cc87a38c59b8",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49313,9 +49324,114 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-independent-materializer-cost",
+      "title": "Independent NAND materializer exact minimum-cost additivity",
+      "requiredTheorems": [
+        "PNP.DirectWire.appendIndependentNandMaterializers_size",
+        "PNP.DirectWire.appendIndependentNandMaterializers_original",
+        "PNP.DirectWire.appendIndependentNandMaterializers_materializer",
+        "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound",
+        "PNP.DirectWire.appendIndependentNandMaterializers_equivalent",
+        "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum",
+        "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack"
+      ],
+      "scope": "For every finite direct-wire circuit and every finite bank size, M240 physically appends one NAND for each disjoint pair of fresh Boolean inputs while retaining all original ordered outputs. The seven universal interfaces prove exact size and both output semantics, preservation of complete Boolean equivalence, a lower bound against every equivalent competing topology, exact reference-minimum additivity and unchanged physical residual slack. The original circuit need not be minimum, and its outputs may be constant, repeated or direct primary-input wires. The lower bound derives distinct actual bank-output gates from semantic output conditions, restricts fresh inputs to false and computes an erasure/rebinding that removes exactly those gates, including through retained consumers. The resulting implementation realizes the original function. Appending the bank to its attained minimum witness gives the matching upper bound. No correctness certificate or supplied minimum is an algorithm input. All seven interfaces are explicit-root built with their exact reviewed standard axiom closures.",
+      "nonClaim": "This is an independent physical Boolean materializer forced-cost subcase, not transparency of every manuscript profile materializer or every actual saturation step. Fresh primary inputs and distinct appended NAND outputs are essential; repeating an existing output or reusing the original input pair does not justify additive cost. The result does not change or derive the full profile observer, global materializer ownership, quotient costs, obligation discharge, terminal families or complete rank-decreasing route coverage. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b9e62d820791057b85d460f0f0e4fcdf75b548ade178ffb02f6afbe43342007f",
+          "expectedKernelTypeSha256": "b9e62d820791057b85d460f0f0e4fcdf75b548ade178ffb02f6afbe43342007f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_original",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "7e65839855b25defa669921d118f54469f1adad851557433c6b2a3916bd0497b",
+          "expectedKernelTypeSha256": "7e65839855b25defa669921d118f54469f1adad851557433c6b2a3916bd0497b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_materializer",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b4ec58852a66b2b707ddac5378b3fce1481889d9e89a3be878cf3345fcdc81a1",
+          "expectedKernelTypeSha256": "b4ec58852a66b2b707ddac5378b3fce1481889d9e89a3be878cf3345fcdc81a1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d775d0bd12c5cb8af9a3ab08fd05a21637f1d724aff0bf3f28c93997db70ccdf",
+          "expectedKernelTypeSha256": "d775d0bd12c5cb8af9a3ab08fd05a21637f1d724aff0bf3f28c93997db70ccdf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e4ca1a4bc815ba9e1be215fff9ca41e24e10e90a43f627ea000eee029899ca68",
+          "expectedKernelTypeSha256": "e4ca1a4bc815ba9e1be215fff9ca41e24e10e90a43f627ea000eee029899ca68",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0b9830efe900d365e70e4150003eb0df18c3da3ba28e17df580edd64db48ccf8",
+          "expectedKernelTypeSha256": "0b9830efe900d365e70e4150003eb0df18c3da3ba28e17df580edd64db48ccf8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d4809059a0690effa9e02fa217a7d6ce6b59faaef074efb2f42a9d728e1e35c2",
+          "expectedKernelTypeSha256": "d4809059a0690effa9e02fa217a7d6ce6b59faaef074efb2f42a9d728e1e35c2",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-239",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-240",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

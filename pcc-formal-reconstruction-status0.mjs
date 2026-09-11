@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-240';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2550,6 +2550,17 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalGainProfileFirewallRejectionTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff',
   leanResidualTerminalGainProfileFirewallFullSlackTheorem: 'PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain',
   leanResidualTerminalGainProfileFirewallScope: 'all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only',
+  leanResidualIndependentMaterializerCostFormalized: true,
+  leanResidualIndependentMaterializerCostAxiomAuditPassed: true,
+  leanResidualIndependentMaterializerCostAuditedDeclarationCount: 7,
+  leanResidualIndependentMaterializerCostSizeTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_size',
+  leanResidualIndependentMaterializerCostOriginalOutputsTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_original',
+  leanResidualIndependentMaterializerCostFreshOutputsTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_materializer',
+  leanResidualIndependentMaterializerCostLowerBoundTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_lower_bound',
+  leanResidualIndependentMaterializerCostEquivalenceTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_equivalent',
+  leanResidualIndependentMaterializerCostMinimumTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
+  leanResidualIndependentMaterializerCostSlackTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
+  leanResidualIndependentMaterializerCostScope: 'all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4480,6 +4491,17 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalGainProfileFirewallRejectionTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff',
       leanResidualTerminalGainProfileFirewallFullSlackTheorem: 'PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain',
       leanResidualTerminalGainProfileFirewallScope: 'all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only',
+      leanResidualIndependentMaterializerCostFormalized: true,
+      leanResidualIndependentMaterializerCostAxiomAuditPassed: true,
+      leanResidualIndependentMaterializerCostAuditedDeclarationCount: 7,
+      leanResidualIndependentMaterializerCostSizeTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_size',
+      leanResidualIndependentMaterializerCostOriginalOutputsTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_original',
+      leanResidualIndependentMaterializerCostFreshOutputsTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_materializer',
+      leanResidualIndependentMaterializerCostLowerBoundTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_lower_bound',
+      leanResidualIndependentMaterializerCostEquivalenceTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_equivalent',
+      leanResidualIndependentMaterializerCostMinimumTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
+      leanResidualIndependentMaterializerCostSlackTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
+      leanResidualIndependentMaterializerCostScope: 'all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4833,7 +4855,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-239',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-240',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

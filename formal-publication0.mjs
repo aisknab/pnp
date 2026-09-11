@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'a7e04e526ccf7c9ae6b12442f38bb96396f20e9c115d3a4ed07e2a79a0fea6f9';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '9b9617556facf8f1ccacfd1d4146d3bf9a4d3679f0362b11421170040263d34e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -284,6 +284,13 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff',
   'PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff',
   'PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain',
+  'PNP.DirectWire.appendIndependentNandMaterializers_size',
+  'PNP.DirectWire.appendIndependentNandMaterializers_original',
+  'PNP.DirectWire.appendIndependentNandMaterializers_materializer',
+  'PNP.DirectWire.appendIndependentNandMaterializers_lower_bound',
+  'PNP.DirectWire.appendIndependentNandMaterializers_equivalent',
+  'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
+  'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3531,7 +3538,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-239') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
