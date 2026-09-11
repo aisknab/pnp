@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-237",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-238",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1454,6 +1454,15 @@
   "leanResidualTerminalSaturatedSupportContextReplacementTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalContext_replace_equivalent",
   "leanResidualTerminalSaturatedSupportContextSlackTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le",
   "leanResidualTerminalSaturatedSupportContextScope": "all-finite-candidates-executable-models-seeds-production-saturated-supports-computed-physical-complement-context-primary-input-boundary-exact-gate-partition-whole-boolean-reconstruction-equivalent-replacement-and-physical-slack-only",
+  "leanResidualTerminalPhysicalGainFormalized": true,
+  "leanResidualTerminalPhysicalGainAxiomAuditPassed": true,
+  "leanResidualTerminalPhysicalGainAuditedDeclarationCount": 5,
+  "leanResidualTerminalPhysicalGainEquivalenceTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
+  "leanResidualTerminalPhysicalGainSizeTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain",
+  "leanResidualTerminalPhysicalGainSlackTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain",
+  "leanResidualTerminalPhysicalGainSearchSoundnessTheorem": "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound",
+  "leanResidualTerminalPhysicalGainSearchFailureTheorem": "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff",
+  "leanResidualTerminalPhysicalGainScope": "all-finite-candidates-executable-models-production-saturated-supports-computed-reference-minimum-replacements-exact-physical-size-and-slack-descent-and-complete-proper-positive-search-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2712,7 +2721,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "1cb545f7192cc17ccb509fbac319f1073bb8758349fc980950919440eaf0e0ef",
+    "actualSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2745,19 +2754,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "cd1b3926fd6f620b65567fc75be0e4964d35ec742786803cfa2fd7dc07af7265",
+  "leanTheoremInventorySha256": "19ac1ac3f1370b9bb5bb4cb9d863d9bce398109be962b5b3363d407db739a21a",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46202,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19903,
-  "leanTheoremInventoryTheoremCount": 25383,
+  "leanTheoremInventoryDeclarationCount": 46210,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19906,
+  "leanTheoremInventoryTheoremCount": 25389,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11048,
-  "leanTheoremInventorySourceClosureModuleCount": 502,
-  "leanSourceClosureSha256": "1cb545f7192cc17ccb509fbac319f1073bb8758349fc980950919440eaf0e0ef",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-237",
+  "leanTheoremInventorySourceClosureModuleCount": 503,
+  "leanSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-238",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "950442c3b5fa31b9dbdaadd3247174a5180f335421abec864ecabb5cb8ce68f1",
+  "formalPublicationMapSha256": "97c94ebd86a910022504243cc56bf15126ed06a797d3ce85614719107aea0d7b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49102,9 +49111,92 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-gain",
+      "title": "Computed proper-support physical gain and exact slack descent",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain",
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain",
+        "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound",
+        "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff"
+      ],
+      "scope": "For every finite direct-wire candidate, executable terminal profile model and seed list, M238 computes the whole physical replacement using the existing reference-minimum witness and the actual production saturated-support context. The complete ordered Boolean output word is preserved. The replacement gate count plus the computed local gain equals the original gate count, and replacement residual slack plus that gain equals the original physical residual slack. These equations require no properness, positivity, supplied frame or supplied charge partition. The total optional gain step maps this construction over the existing candidate-derived proper-positive support search. Every returned result carries an actually selected canonical proper positive seed and strictly decreases whole physical gate count and residual slack. Failure is exactly absence of every canonical proper positive seed for that computed system, not global minimality. All five universal interfaces are root-built and audited using only propext and Quot.sound. The caller supplies no search result, replacement, seed, context or correctness certificate to the gain-step algorithm.",
+      "nonClaim": "These are physical Boolean reference gain-realization and search-failure laws, not full-profile replacement compatibility or a complete named global route. The observer and profile model remain supplied data, while influence, canonical seed search and semantic minima use exhaustive finite reference constructions; no polynomial encoded-size or runtime bound is proved. Failure of the proper-support search does not imply global minimality or ZeroSlack. Complete profile/materializer charge coverage, fixed global ownership, obligation transport, full-minimum growth, quotient bounds, input-derived complete terminal families and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e1da67101c515204dd045a2f04fb5e8b50cd2c930eb6ae526c3192657180af4a",
+          "expectedKernelTypeSha256": "e1da67101c515204dd045a2f04fb5e8b50cd2c930eb6ae526c3192657180af4a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3b1b137f09a7681341f12a83c5de1713d4116c1baa6f98ac0300da039342cf31",
+          "expectedKernelTypeSha256": "3b1b137f09a7681341f12a83c5de1713d4116c1baa6f98ac0300da039342cf31",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "96dac6e6f5ecc546b311cf0bab666075da5143cd31563aa1e09eaf9cfba4de66",
+          "expectedKernelTypeSha256": "96dac6e6f5ecc546b311cf0bab666075da5143cd31563aa1e09eaf9cfba4de66",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f5e4ab7db43a4f9476b036cbed4d58aa0a5a46889ff738e76c71bf354ea79479",
+          "expectedKernelTypeSha256": "f5e4ab7db43a4f9476b036cbed4d58aa0a5a46889ff738e76c71bf354ea79479",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "de932d3dd29285c67a55cce7e67378b4ecd805f7daf84516e8c0b9ed3cc7f0fd",
+          "expectedKernelTypeSha256": "de932d3dd29285c67a55cce7e67378b4ecd805f7daf84516e8c0b9ed3cc7f0fd",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-237",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-238",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
