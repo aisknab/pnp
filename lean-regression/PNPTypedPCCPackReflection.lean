@@ -24,8 +24,7 @@ example (loop : PCCMinLoopCertificate) :
 example (loop : PCCMinLoopCertificate) : FinalReportAntecedent :=
   ⟨loop, accepted_generated_package loop⟩
 
-example (hard : SATHard) : CheckerTrustModel :=
-  { satHard := hard }
+example : SATHard := sat_np_hard_checked
 
 example (loop : PCCMinLoopCertificate) :
     PClass ResidualBandExactMinimization :=

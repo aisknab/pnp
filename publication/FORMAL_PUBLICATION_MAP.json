@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-242",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-243",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3243,7 +3243,11 @@
     "PNP.DirectWire.sharingImplementation_residualSlack": "a5dee1ecca503f2fbc2d154a79fece88bf4c9b22ba1b836c17222e62731cae1d",
     "PNP.DirectWire.sharingImplementation_strictGain_iff": "5de93eb4cd692308ffce27770919129d605624fc0b0983d46cbe1f6fc675104d",
     "PNP.DirectWire.sharingImplementation_strictResidualDescent": "78ca908349b5ce03bd5e8585dcfed98eb3a24cd860337fab2681d8e435cc19cf",
-    "PNP.DirectWire.nandSharingNormalizer_checked": "9ad481fa3cf574495fe90302d3f8945fe4917791935b065cbc86f51aef60b7fd"
+    "PNP.DirectWire.nandSharingNormalizer_checked": "9ad481fa3cf574495fe90302d3f8945fe4917791935b065cbc86f51aef60b7fd",
+    "PNP.sat_np_hard_checked": "ebcaa13f070d5b1f8fc0105e0feea71c65010f94a5e135ae0c4abaf4544fb382",
+    "PNP.sat_np_complete_checked": "4ed163e43a3c4fd3be9ea3d1d5c348a0ce4951beb322aca3c617265e63b0fd26",
+    "PNP.accepted_generated_package_implies_p_eq_np": "89cfb0983711ce18a75e458324047e6007ac456dbdc926f09080db41d826379f",
+    "PNP.final_report_bridge": "956062f71216218a1edb59039ae63f85c01564a93e7a1e891754127f3e22c8a5"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3261,7 +3265,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
+  "milestoneSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8722,6 +8726,19 @@
       ],
       "scope": "For every finite direct-wire NAND program and complete ordered output word, M242 computes a full structural-sharing traversal, translating every source through earlier computed aliases and searching the actual retained program for equal or commuted NAND input pairs. Each successful lookup reuses one existing gate; each unsuccessful lookup appends one translated gate. Nine universal interfaces prove every alias value, exact retained-plus-fold gate accounting, complete multi-output equivalence, non-increasing physical size, invariant reference minimum, exact residual-slack savings, strict gain exactly when a fold occurs, strict residual descent and the computed normalizer outcome. The caller supplies only the implementation, not an optimizer or correctness certificate. The pass performs structural lookup, not semantic enumeration. All nine interfaces are explicit-root built with only propext and Quot.sound.",
       "nonClaim": "This is a computed physical R1/R4 structural-sharing stage, not complete manuscript N1-N10 normalization or a proof that every latent-sharing opportunity is found. A no-fold branch does not imply semantic minimality, absence of other gains or ZeroSlack; a checked regression gives a smaller equivalent circuit after the pass has no structural fold. The result does not construct a proper-support Package E ledger, arbitrary replacement pullback, full-profile carrier or obligation transport, terminal-derived families, global rank-decreasing route coverage or the complete PCCMin oracle. Reference minimum occurs in specification theorems, not in execution of this pass. No uniformly encoded-size polynomial execution theorem for the complete PCCMin construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-final-report-bridge",
+      "title": "Checked concrete SAT hardness in the active conditional final-report bridge",
+      "requiredTheorems": [
+        "PNP.sat_np_hard_checked",
+        "PNP.sat_np_complete_checked",
+        "PNP.accepted_generated_package_implies_p_eq_np",
+        "PNP.final_report_bridge"
+      ],
+      "scope": "M243 connects the already checked all-input Cook-Levin NP-hardness and NP-completeness theorem to the exact report-facing SAT predicate. The existing accepted-generated-package consequence and final_report_bridge no longer take a CheckerTrustModel or supplied SAT-hardness argument. They consume the checked theorem while retaining the explicit PCCMinLoopCertificate, its concrete residual-band polynomial decider and the loop-existence antecedent. This strengthens the active conditional interface rather than adding an unused parallel route. Four reviewed interfaces have exact kernel types and the same standard axioms as the consumed M231 theorem: Classical.choice, Quot.sound and propext.",
+      "nonClaim": "This is a conditional final-report bridge, not the eligible unconditional root theorem. No complete PCCMin loop certificate is constructed: the concrete residual-band decider remains an explicit certificate field. Canonical package acceptance does not supply missing algorithmic correctness, encoded-size bounds or loop existence. This does not establish unconditional SaturatePositive, BCELReady or ZeroSlack, a complete exact polynomial PCCMin construction, polynomial output and certificate bounds, deterministic CNFSAT in P or P = NP. M231 hardness was already credited; connecting it here earns no duplicate checkpoint points. No fixed weighted checkpoint or global gate closes."
     }
   ],
   "version": 0

@@ -122,13 +122,10 @@ function validateCompatibility0(files) {
     failures.push('pccmin-concrete-decider');
   }
 
-  const trust = declarationBlock0(files.bridge, 'CheckerTrustModel');
-  if (!trust.includes('satHard') ||
-      trust.includes('pccPackProducesPCCMinLoop')) {
+  if (/\b(?:CheckerTrustModel|satHard|pccPackProducesPCCMinLoop)\b/u.test(bridge)) {
     failures.push('checker-trust-fields');
   }
-  if (trust.includes('lockedNANDReduction') ||
-      trust.includes('residualBandReduction')) {
+  if (/lockedNANDReduction|residualBandReduction/u.test(bridge)) {
     failures.push('caller-locked-reduction');
   }
   if (!bridge.includes('sat_in_p_from_locked_nand_in_p (accepted_generated_package_implies_locked_nand_in_p loop h)')) {
@@ -173,7 +170,7 @@ test('axiom transcript and generic regression pin the concrete boundary', async 
   for (const token of [
     'sat_reduces_to_locked_nand_checked',
     'sat_in_p_from_locked_nand_in_p lockedInP',
-    'satHard := hard',
+    'example : SATHard := sat_np_hard_checked',
     'loop.residualBandDecider',
     'concrete_legacy_locked_nand_compatibility_checked_complete',
   ]) assert.equal(regression.includes(token), true, token);
@@ -221,8 +218,8 @@ test('hostile regressions reject every duplicate or weakened trust edge', async 
       'cert.loopCertificate.residualBandDecider',
       '{ code := "PCCMin" }')],
     ['bridge', files.bridge.replace(
-      'satHard : SATHard',
-      'residualBandReduction : ResidualBandReductionTrust\n  satHard : SATHard')],
+      'theorem accepted_generated_package_implies_p_eq_np',
+      'structure CheckerTrustModel where\n  residualBandReduction : ResidualBandReductionTrust\n\ntheorem accepted_generated_package_implies_p_eq_np')],
     ['source', files.source.replaceAll(
       'SAT = Concrete.CNFSAT',
       'SAT = SAT')],

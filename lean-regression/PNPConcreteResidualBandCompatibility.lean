@@ -28,8 +28,7 @@ example (residualInP : PClass ResidualBandExactMinimization) :
     PClass LockedNANDThreshold :=
   locked_nand_in_p_from_residual_band_in_p residualInP
 
-example (hard : SATHard) : CheckerTrustModel :=
-  { satHard := hard }
+example : SATHard := sat_np_hard_checked
 
 example :
     ResidualBandExactMinimization =

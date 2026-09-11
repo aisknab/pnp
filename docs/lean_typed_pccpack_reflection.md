@@ -26,9 +26,13 @@ only the fixed Lean-standard allowlist (`propext` and `Quot.sound`).
 This boundary does not construct a `PCCMinLoopCertificate`, validate historical
 package bytes, prove the semantic adequacy of every certificate field, derive
 unconditional ZeroSlack or PCCMin exactness, or establish encoded-size
-polynomial construction and runtime. `CheckerTrustModel.satHard` remains an
-explicit theorem premise. Deterministic CNFSAT in P, the eligible root theorem,
-and all five global gates remain open.
+polynomial construction and runtime. The original M188 bridge retained an
+explicit SAT-hardness premise. M243 now consumes the checked M231 theorem and
+removes that premise, while preserving the explicit loop-existence obligation.
+The strengthened bridge inherits M231's `Classical.choice` dependency; the
+unchanged M188 reflection endpoints retain their two-axiom closure.
+Deterministic CNFSAT in P, the eligible root theorem and all five global gates
+remain open.
 
 ## Verification
 

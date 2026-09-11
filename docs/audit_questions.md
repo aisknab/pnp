@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M242-CURRENT-SUMMARY:BEGIN -->
-## Current M242 boundary
+<!-- M243-CURRENT-SUMMARY:BEGIN -->
+## Current M243 boundary
 
-M242 constructs a whole-program NAND-sharing stage: it computes aliases for every original gate, reuses actual retained gates with equal or commuted inputs, translates every ordered output, and proves exact physical gate savings and residual-slack descent. The concrete normalizer surfaces every computed fold as a checked gain. A no-fold branch does not establish semantic minimality or ZeroSlack.
+M243 connects the checked all-input Cook-Levin NP-completeness theorem directly to the active final-report bridge. No supplied SAT-hardness parameter remains. The bridge still requires an explicit proof-bearing PCCMin loop certificate containing the concrete residual-band polynomial decider; packaging and acceptance do not construct that certificate.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 218 of 220 current scoped publication rows earned.
+Formal artefact coverage: 219 of 221 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [constructive sharing theorem and limits](./lean_pccmin_constructive_nand_sharing.md)
-and the [physical ownership boundary](./lean_residual_terminal_physical_ownership.md).
-Earlier milestone notes retain their original module-specific scope. M242
-constructs an actual structural-sharing stage, not complete normalization, semantic minimality or global route completeness.
+See the [checked conditional bridge and limits](./lean_concrete_final_report_bridge.md)
+and the [constructive sharing boundary](./lean_pccmin_constructive_nand_sharing.md).
+Earlier milestone notes retain their original module-specific scope. M243
+consumes the existing checked hardness theorem; it does not construct the missing proof-bearing PCCMin loop.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M242-CURRENT-SUMMARY:END -->
+<!-- M243-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and
