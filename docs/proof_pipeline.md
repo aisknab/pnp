@@ -1,21 +1,21 @@
 # Proof and Checker Pipeline
 
-<!-- M236-CURRENT-SUMMARY:BEGIN -->
-## Current M236 boundary
+<!-- M237-CURRENT-SUMMARY:BEGIN -->
+## Current M237 boundary
 
-M236 derives a duplicate-free, complete physical-NAND charge ledger from the normalized seed and actual computed saturation trace. Each entry records its inherited seed or actual generating rule and dependent. Exact lookup and total support-size theorems connect this ledger to the unchanged support extractor. Introduction provenance can depend on the seed and traversal; it is not manuscript-wide ownership. Materializer grouping, full-minimum growth and global routing remain open.
+M237 computes a concrete physical replacement frame around every production saturated support. The input-only boundary and exact selected/complement partition come from the actual candidate, and the unchanged extractor builds both halves. Plugging the extracted support reconstructs the original ordered Boolean outputs; every equivalent replacement preserves them with exact physical gate accounting. The support's physical Boolean slack is bounded by whole-circuit slack. Full-profile compatibility, global ownership and global routing remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 212 of 214 current scoped publication rows earned.
+Formal artefact coverage: 213 of 215 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [physical-charge ledger and limits](./lean_residual_terminal_physical_charge_ledger.md)
-and the [event-level physical-accounting result](./lean_residual_terminal_physical_saturation_accounting.md).
-Earlier milestone notes retain their original module-specific scope. M236
-proves a complete physical charge partition, not global manuscript ownership.
+See the [computed replacement context and limits](./lean_residual_terminal_saturated_support_context.md)
+and the [physical-charge partition](./lean_residual_terminal_physical_charge_ledger.md).
+Earlier milestone notes retain their original module-specific scope. M237
+proves physical Boolean replacement and slack laws, not full-profile compatibility.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M236-CURRENT-SUMMARY:END -->
+<!-- M237-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

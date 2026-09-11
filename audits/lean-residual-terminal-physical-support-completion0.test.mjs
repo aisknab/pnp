@@ -88,6 +88,14 @@ const PHYSICAL_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.completeSaturatedTerminalPhysicalSupport_compatible`,
 ]);
 
+// M237 exposes this exact global-output witness interface and audits its
+// kernel closure. Preserve the original physical-completion transcript boundary.
+const PHYSICAL_SOURCE_DECLARATIONS = Object.freeze([
+  ...PHYSICAL_DECLARATIONS.slice(0, 11),
+  `${NAMESPACE}.terminalGateIsGlobalOutput_eq_true_iff`,
+  ...PHYSICAL_DECLARATIONS.slice(11),
+]);
+
 const PUBLIC_DECLARATIONS = Object.freeze([
   ...EXECUTABLE_DECLARATIONS,
   ...PHYSICAL_DECLARATIONS,
@@ -318,7 +326,7 @@ function validatePhysical0(source) {
   if (JSON.stringify(imports) !== JSON.stringify([
     'PNP.ResidualTerminalExecutableSaturation',
   ])) failures.push('closed-import');
-  if (JSON.stringify(declarations0(source)) !== JSON.stringify(PHYSICAL_DECLARATIONS)) {
+  if (JSON.stringify(declarations0(source)) !== JSON.stringify(PHYSICAL_SOURCE_DECLARATIONS)) {
     failures.push('declaration-surface');
   }
   if (JSON.stringify(privateHelpers0(source)) !== JSON.stringify(PHYSICAL_PRIVATE_HELPERS)) {
@@ -391,7 +399,7 @@ test('compiled closure is approved for every executable and physical declaration
   const inventory = JSON.parse(await text0(INVENTORY_PATH));
   const rows = new Map(inventory.declarations.map((entry) => [entry.name, entry]));
   const approved = new Set(['propext', 'Quot.sound']);
-  for (const name of PUBLIC_DECLARATIONS) {
+  for (const name of new Set([...PUBLIC_DECLARATIONS, ...PHYSICAL_SOURCE_DECLARATIONS])) {
     const row = rows.get(name);
     assert.ok(row, name);
     for (const axiom of row.axioms) assert.equal(approved.has(axiom), true, `${name}: ${axiom}`);
