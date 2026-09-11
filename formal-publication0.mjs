@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '95fa64c35efd7d0640a058aac5b101b3f4a6f69de13fbffbddbaa3e97738dbf3';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'aac60777f877fbdb89e207728b413e039e3d7bcf6fc650be86329b0694b71660';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -262,6 +262,11 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalCandidateSaturateTrace_event_owner',
   'PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction',
   'PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction',
+  'PNP.DirectWire.terminalSaturatePhysicalCharges_nodup',
+  'PNP.DirectWire.terminalSaturatePhysicalCharges_complete',
+  'PNP.DirectWire.terminalSaturatePhysicalCharges_provenance',
+  'PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff',
+  'PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3509,7 +3514,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-11-235') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-11-236') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

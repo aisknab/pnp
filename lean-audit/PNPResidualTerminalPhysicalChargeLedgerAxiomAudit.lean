@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalSaturatePhysicalCharges_nodup
+#print axioms PNP.DirectWire.terminalSaturatePhysicalCharges_complete
+#print axioms PNP.DirectWire.terminalSaturatePhysicalCharges_provenance
+#print axioms PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff
+#print axioms PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size

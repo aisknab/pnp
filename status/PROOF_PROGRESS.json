@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-235",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-236",
   "lastReviewedDate": "2026-09-11",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 211,
-    "totalRows": 213,
+    "earnedRows": 212,
+    "totalRows": 214,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -1962,6 +1962,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M235 derives fresh generated contexts, exact physical support charges, active dependency ownership, and the first physical ownership/minimum obstruction at canonical saturation. The executable observer and profile model remain supplied data; influence and semantic minima use exhaustive finite reference constructions. Active ownership is not uniqueness, and exact physical support growth does not establish full-minimum growth, a quotient bound, obligation discharge, complete closure safety or a global named route. No input-derived terminal family, global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin construction is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 211 of 213 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-236",
+      "formalArtefactCoverage": {
+        "earnedRows": 212,
+        "totalRows": 214
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M236 derives a duplicate-free and complete physical-NAND charge partition directly from normalized seeds and the actual saturation trace, with verified introduction provenance, an exact lookup specification and total support-size accounting. Introduction provenance can depend on the seed and traversal; it is not the fixed manuscript-wide ownership map or the complete materializer/profile charge universe. Active requesting pairs are not assigned manuscript owners. The observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, global route coverage, input-derived terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 212 of 214 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

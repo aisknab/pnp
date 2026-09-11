@@ -39,6 +39,7 @@ import PNP.ResidualTerminalCandidateSaturation
 import PNP.ResidualTerminalProfileLocality
 import PNP.ResidualTerminalSaturationTraceFidelity
 import PNP.ResidualTerminalPhysicalSaturationAccounting
+import PNP.ResidualTerminalPhysicalChargeLedger
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

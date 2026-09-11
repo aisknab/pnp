@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-235",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-236",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1436,6 +1436,15 @@
   "leanResidualTerminalPhysicalSaturationObstructionTheorem": "PNP.DirectWire.terminalCandidateSaturateTrace_physicalObstruction",
   "leanResidualTerminalPhysicalSaturationBalanceOrObstructionTheorem": "PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction",
   "leanResidualTerminalPhysicalSaturationAccountingScope": "all-finite-systems-candidates-executable-models-seeds-generated-events-fresh-context-unit-physical-support-cost-active-owner-and-canonical-endpoint-first-obstruction-only",
+  "leanResidualTerminalPhysicalChargeLedgerFormalized": true,
+  "leanResidualTerminalPhysicalChargeLedgerAxiomAuditPassed": true,
+  "leanResidualTerminalPhysicalChargeLedgerAuditedDeclarationCount": 5,
+  "leanResidualTerminalPhysicalChargeLedgerNodupTheorem": "PNP.DirectWire.terminalSaturatePhysicalCharges_nodup",
+  "leanResidualTerminalPhysicalChargeLedgerCompletenessTheorem": "PNP.DirectWire.terminalSaturatePhysicalCharges_complete",
+  "leanResidualTerminalPhysicalChargeLedgerProvenanceTheorem": "PNP.DirectWire.terminalSaturatePhysicalCharges_provenance",
+  "leanResidualTerminalPhysicalChargeLedgerLookupTheorem": "PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff",
+  "leanResidualTerminalPhysicalChargeLedgerSizeTheorem": "PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size",
+  "leanResidualTerminalPhysicalChargeLedgerScope": "all-finite-systems-candidates-executable-models-seeds-computed-physical-nand-charge-partition-nodup-completeness-introduction-provenance-lookup-and-total-support-size-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2694,7 +2703,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "1c3bf9aae23e2e7248e7ee936d5e0e79624ccb9e55d7c2f407d543c55559cceb",
+    "actualSourceClosureSha256": "b7094b76bde1ca6d3b25f2dc6c772b70caa4410382d35dee94cdfd3e855abdf6",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2727,19 +2736,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "d5a68b1c51c6589e3ddf61165887d6e8057d5138889dfc0c4df1fa9a17017a50",
+  "leanTheoremInventorySha256": "5444ab8e3d2453584cd2ccf9bde7f8fc33c4a11320725d8f1e8fd0a89a36c2ac",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46124,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19815,
-  "leanTheoremInventoryTheoremCount": 25350,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11029,
-  "leanTheoremInventorySourceClosureModuleCount": 500,
-  "leanSourceClosureSha256": "1c3bf9aae23e2e7248e7ee936d5e0e79624ccb9e55d7c2f407d543c55559cceb",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-235",
+  "leanTheoremInventoryDeclarationCount": 46188,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19845,
+  "leanTheoremInventoryTheoremCount": 25371,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11043,
+  "leanTheoremInventorySourceClosureModuleCount": 501,
+  "leanSourceClosureSha256": "b7094b76bde1ca6d3b25f2dc6c772b70caa4410382d35dee94cdfd3e855abdf6",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-236",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "b699c6adac69ab53485959072ee12a10f1b33cc0915b804ec909b51644a4cec7",
+  "formalPublicationMapSha256": "27d694e16fbf88fc6105c6d7f81b9a753ab9dd7a6d34ae9efcf662610e81132b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -48918,9 +48927,92 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-charge-ledger",
+      "title": "Computed physical-charge partition and introduction provenance",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalSaturatePhysicalCharges_nodup",
+        "PNP.DirectWire.terminalSaturatePhysicalCharges_complete",
+        "PNP.DirectWire.terminalSaturatePhysicalCharges_provenance",
+        "PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff",
+        "PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size"
+      ],
+      "scope": "For arbitrary finite terminal systems and seeds, M236 constructs a physical-NAND charge ledger directly from the normalized initial records and actual computed saturation trace. Its physical gate identifiers are duplicate-free and occur exactly when the corresponding gate records occur in the computed saturated support. Each entry has inherited seed provenance or an actual generating event with its exact rule and dependent, active context and fresh required gate. The deterministic lookup returns exactly the provenance of the corresponding ledger entry. For every finite direct-wire candidate and executable terminal model, the complete computed ledger length equals the unchanged extractor's support size at canonical saturation. All five general interfaces are root-built and audited using only propext and Quot.sound. No supplied charge list, coverage certificate, freshness premise or ownership certificate replaces the actual computation.",
+      "nonClaim": "This is a physical-NAND charge partition with seed- and traversal-dependent introduction provenance, not the complete manuscript charge universe or its fixed global ownership function. Active requesting pairs are not assigned manuscript owners, and multiple physical charges may have the same requesting dependency. Materializer grouping and cross-support ownership transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, quotient bound, global named route, input-derived terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalSaturatePhysicalCharges_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0a497b58da7516008c21d16102eb4250efb393185ceb94e1ae5a231c0d52b0ca",
+          "expectedKernelTypeSha256": "0a497b58da7516008c21d16102eb4250efb393185ceb94e1ae5a231c0d52b0ca",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturatePhysicalCharges_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8e0e5f6e186440b15ad4d7df71bd695e66d73c2aa78e1c54464055849ebc884f",
+          "expectedKernelTypeSha256": "8e0e5f6e186440b15ad4d7df71bd695e66d73c2aa78e1c54464055849ebc884f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturatePhysicalCharges_provenance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "de03b8300d15fd5811d005d572f55ad8cd40c0be743b08c4d0d360937834324a",
+          "expectedKernelTypeSha256": "de03b8300d15fd5811d005d572f55ad8cd40c0be743b08c4d0d360937834324a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSaturatePhysicalChargeProvenance?_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5452a6276bb56f83bdfb7faadf64cf3a3f74e3b33d64f362f202c0c63af3dcb8",
+          "expectedKernelTypeSha256": "5452a6276bb56f83bdfb7faadf64cf3a3f74e3b33d64f362f202c0c63af3dcb8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0f4f2f19bf24e21a369d29a1ac517235c071f3511f0663dd87af3b854625f8fc",
+          "expectedKernelTypeSha256": "0f4f2f19bf24e21a369d29a1ac517235c071f3511f0663dd87af3b854625f8fc",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-235",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-236",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
