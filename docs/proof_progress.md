@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-238`, 214 of 216
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239`, 215 of 217
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M238 |
+| Track | Available | Earned at M239 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M238 risk-weighted proof completion estimate is therefore 40 percent, with
+The M239 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -100,7 +100,10 @@ Full-profile compatibility, materializer ownership and global routes remain
 open. The observer remains supplied and the searches remain exhaustive.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 214 of 216 current scoped publication rows earned.
+M239 checks the complete profile of the actual computed physical gain. It either preserves the precise no-gain result, reports the first mismatching coordinate with its agreeing prefix, or constructs full-carrier realization evidence and proves exact full-profile slack descent. This does not prove that every physical gain is compatible. The executable observer remains supplied, the search and minima remain exhaustive, and complete carrier derivation and global routes remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 215 of 217 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

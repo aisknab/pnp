@@ -459,6 +459,11 @@ branch.
   arbitrary-dimension theorems without duplicating the full exponential search
   for each variation. A resource-limit termination is failed evidence: isolate
   the expensive expression and retain the theorem statements and claim boundary.
+- Keep proof authority distinct from executable regression coverage. If kernel
+  reduction of a concrete fixture is prohibitively expensive, a bounded, guarded
+  runtime assertion may exercise that same computation and expected result.
+  It must fail on mismatch and must never replace a kernel-checked theorem,
+  create proof authority through native execution, or be reported as a proof.
 
 - If a small leaf theorem suddenly consumes gigabytes or remains in
   `mem_cgroup_handle_over_high`, do not wait indefinitely or raise the configured

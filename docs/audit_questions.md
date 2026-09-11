@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M238-CURRENT-SUMMARY:BEGIN -->
-## Current M238 boundary
+<!-- M239-CURRENT-SUMMARY:BEGIN -->
+## Current M239 boundary
 
-M238 computes an actual whole-circuit physical reference gain from the production proper-positive support search. Every successful result preserves the complete ordered Boolean outputs and has exact, strictly positive physical gate-count and residual-slack descent. Failure excludes exactly canonical proper positive supports; it does not prove global minimality. The observer remains supplied and the search and minima remain exhaustive. Full-profile compatibility, complete materializer ownership and global routes remain open.
+M239 checks the complete profile of the actual computed physical gain. It either preserves the precise no-gain result, reports the first mismatching coordinate with its agreeing prefix, or constructs full-carrier realization evidence and proves exact full-profile slack descent. This does not prove that every physical gain is compatible. The executable observer remains supplied, the search and minima remain exhaustive, and complete carrier derivation and global routes remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 214 of 216 current scoped publication rows earned.
+Formal artefact coverage: 215 of 217 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed physical gain and limits](./lean_residual_terminal_physical_gain.md)
-and the [computed support context](./lean_residual_terminal_saturated_support_context.md).
-Earlier milestone notes retain their original module-specific scope. M238
-proves physical reference gain realization, not full-profile or global route completeness.
+See the [computed full-profile gain acceptance and limits](./lean_residual_terminal_gain_profile_firewall.md)
+and the [computed physical gain](./lean_residual_terminal_physical_gain.md).
+Earlier milestone notes retain their original module-specific scope. M239
+proves full-profile acceptance and accepted-result descent, not universal compatibility or global route completeness.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M238-CURRENT-SUMMARY:END -->
+<!-- M239-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

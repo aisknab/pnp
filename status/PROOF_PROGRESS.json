@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-238",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 214,
-    "totalRows": 216,
+    "earnedRows": 215,
+    "totalRows": 217,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2013,6 +2013,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M238 computes the reference-minimum whole replacement for every production saturated physical support and proves exact physical size and slack descent. Its total optional gain step uses the actual candidate-derived proper-positive search and returns a smaller equivalent whole circuit on success, while failure excludes exactly canonical proper positive supports rather than proving global minimality. The executable regressions retain rich output and bypass coverage on fixed-seed replacement and use a smaller circuit for the complete exhaustive search; the arbitrary-dimension theorem statements are unchanged. These are physical Boolean laws, not full-profile compatibility, global materializer ownership, obligation transport or a complete named route. The observer remains supplied and influence, seed search and reference minima remain exhaustive. No input-derived complete terminal family, full-minimum growth, global rank-decreasing route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin or deterministic SAT theorem is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 214 of 216 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239",
+      "formalArtefactCoverage": {
+        "earnedRows": 215,
+        "totalRows": 217
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M239 computes the full-mode acceptance boundary for the actual production physical gain. It checks every profile coordinate, returns the first mismatch with its agreeing prefix, or constructs a full-carrier realization and proves exact full-profile slack descent using invariance of the full-profile minimum. The seven general theorem statements and axiom closures are kernel checked; one expensive semantic-observer fixture is a guarded runtime execution test, not theorem authority. These are accepted-result laws for a supplied executable profile model, not a proof that every physical gain is full-profile compatible. The observer remains supplied and influence, seed search and reference minima remain exhaustive. Complete materializer ownership, full-minimum growth, faithful carrier derivation, terminal families and global rank-decreasing routes remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin or deterministic SAT theorem is earned. No fixed checkpoint or global gate changes. Formal artefact coverage: 215 of 217 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
