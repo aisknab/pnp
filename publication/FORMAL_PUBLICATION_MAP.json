@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-239",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3217,7 +3217,14 @@
     "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff": "5271b9a9fdc0a1e07d5fe34f74d101a6ebd23ca15f7e21cc9779020761caeefa",
     "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff": "1d9f1e3ab39bdfed1ef6692e9aef6042a169a2d74f5d5dae632d5ad5ab036e4a",
     "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff": "dfc8ea46b715beacd6afa5b64988becc4d208d8c19ef8191d592bd4f3dc34a20",
-    "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain": "52a4af27b6946c6dee5fc9a0d00f3f5b1fc80a7a8a23c7153f0621953fff3ab9"
+    "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain": "52a4af27b6946c6dee5fc9a0d00f3f5b1fc80a7a8a23c7153f0621953fff3ab9",
+    "PNP.DirectWire.appendIndependentNandMaterializers_size": "b9e62d820791057b85d460f0f0e4fcdf75b548ade178ffb02f6afbe43342007f",
+    "PNP.DirectWire.appendIndependentNandMaterializers_original": "7e65839855b25defa669921d118f54469f1adad851557433c6b2a3916bd0497b",
+    "PNP.DirectWire.appendIndependentNandMaterializers_materializer": "b4ec58852a66b2b707ddac5378b3fce1481889d9e89a3be878cf3345fcdc81a1",
+    "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound": "d775d0bd12c5cb8af9a3ab08fd05a21637f1d724aff0bf3f28c93997db70ccdf",
+    "PNP.DirectWire.appendIndependentNandMaterializers_equivalent": "e4ca1a4bc815ba9e1be215fff9ca41e24e10e90a43f627ea000eee029899ca68",
+    "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum": "0b9830efe900d365e70e4150003eb0df18c3da3ba28e17df580edd64db48ccf8",
+    "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack": "d4809059a0690effa9e02fa217a7d6ce6b59faaef074efb2f42a9d728e1e35c2"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3235,7 +3242,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
+  "milestoneSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8643,6 +8650,22 @@
       ],
       "scope": "For every finite direct-wire candidate and supplied executable terminal profile model, M239 classifies the exact result of the existing production physical-gain search. No result is exactly the existing proper-support search failure. A result is scanned at every full-profile coordinate in canonical order. Rejection identifies the actual first mismatching coordinate and complete agreeing prefix; acceptance constructs the existing full-carrier realization without a caller-supplied result, seed, profile-equality proof or correctness certificate. Complete full-carrier realizations preserve the exhaustive full-profile minimum, and every accepted computed gain decreases full-profile slack by exactly the local physical gain of its actually selected proper-positive support. Existing obligation discharge transports through the full realization; an open obligation is not thereby discharged. The seven universal interfaces are explicit-root built with their reviewed standard axiom closures. The classifier reuses M238's proved Boolean equivalence rather than repeating an exhaustive equivalence check.",
       "nonClaim": "These are computed finite full-profile acceptance and accepted-result transport laws for the supplied executable profile system, not a derivation of manuscript carrier data or a theorem that every physical gain is full-profile compatible. A first profile mismatch is not a completed named global route. The observer and profile model remain supplied data; influence, canonical seed search and semantic minima remain exhaustive finite reference constructions, with no polynomial encoded-size or runtime theorem. The classifier does not search alternative physical gains after a mismatch or identify ambient observations with the differently typed global profile system. Complete materializer charges, fixed global ownership, full-minimum growth during saturation, quotient bounds, terminal-family derivation and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-independent-materializer-cost",
+      "title": "Independent NAND materializer exact minimum-cost additivity",
+      "requiredTheorems": [
+        "PNP.DirectWire.appendIndependentNandMaterializers_size",
+        "PNP.DirectWire.appendIndependentNandMaterializers_original",
+        "PNP.DirectWire.appendIndependentNandMaterializers_materializer",
+        "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound",
+        "PNP.DirectWire.appendIndependentNandMaterializers_equivalent",
+        "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum",
+        "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack"
+      ],
+      "scope": "For every finite direct-wire circuit and every finite bank size, M240 physically appends one NAND for each disjoint pair of fresh Boolean inputs while retaining all original ordered outputs. The seven universal interfaces prove exact size and both output semantics, preservation of complete Boolean equivalence, a lower bound against every equivalent competing topology, exact reference-minimum additivity and unchanged physical residual slack. The original circuit need not be minimum, and its outputs may be constant, repeated or direct primary-input wires. The lower bound derives distinct actual bank-output gates from semantic output conditions, restricts fresh inputs to false and computes an erasure/rebinding that removes exactly those gates, including through retained consumers. The resulting implementation realizes the original function. Appending the bank to its attained minimum witness gives the matching upper bound. No correctness certificate or supplied minimum is an algorithm input. All seven interfaces are explicit-root built with their exact reviewed standard axiom closures.",
+      "nonClaim": "This is an independent physical Boolean materializer forced-cost subcase, not transparency of every manuscript profile materializer or every actual saturation step. Fresh primary inputs and distinct appended NAND outputs are essential; repeating an existing output or reusing the original input pair does not justify additive cost. The result does not change or derive the full profile observer, global materializer ownership, quotient costs, obligation discharge, terminal families or complete rank-decreasing route coverage. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

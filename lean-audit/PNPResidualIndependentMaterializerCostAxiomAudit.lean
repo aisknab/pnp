@@ -1,0 +1,9 @@
+import PNP
+
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_size
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_original
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_materializer
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_lower_bound
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_equivalent
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum
+#print axioms PNP.DirectWire.appendIndependentNandMaterializers_residualSlack

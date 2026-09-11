@@ -47,6 +47,7 @@ on:
       - 'audits/lean-residual-terminal-saturated-support-context0.test.mjs'
       - 'audits/lean-residual-terminal-physical-gain0.test.mjs'
       - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
+      - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -54,6 +55,7 @@ on:
       - 'docs/lean_residual_terminal_saturated_support_context.md'
       - 'docs/lean_residual_terminal_physical_gain.md'
       - 'docs/lean_residual_terminal_gain_profile_firewall.md'
+      - 'docs/lean_residual_independent_materializer_cost.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -523,6 +525,7 @@ on:
       - 'audits/lean-residual-terminal-saturated-support-context0.test.mjs'
       - 'audits/lean-residual-terminal-physical-gain0.test.mjs'
       - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
+      - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -530,6 +533,7 @@ on:
       - 'docs/lean_residual_terminal_saturated_support_context.md'
       - 'docs/lean_residual_terminal_physical_gain.md'
       - 'docs/lean_residual_terminal_gain_profile_firewall.md'
+      - 'docs/lean_residual_independent_materializer_cost.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -2478,6 +2482,52 @@ jobs:
           console.log('M239: all seven full-profile gain interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalGainProfileFirewall.lean
+
+      - name: Check independent materializer cost contracts
+        run: node --test audits/lean-residual-independent-materializer-cost0.test.mjs
+
+      - name: Audit independent materializer cost and regressions
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualIndependentMaterializerCostAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.appendIndependentNandMaterializers_size": [],
+            "PNP.DirectWire.appendIndependentNandMaterializers_original": [
+              "Quot.sound"
+            ],
+            "PNP.DirectWire.appendIndependentNandMaterializers_materializer": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.appendIndependentNandMaterializers_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M240: all seven independent materializer cost interfaces have their exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPResidualIndependentMaterializerCost.lean
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

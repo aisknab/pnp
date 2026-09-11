@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M239-CURRENT-SUMMARY:BEGIN -->
-## Current M239 boundary
+<!-- M240-CURRENT-SUMMARY:BEGIN -->
+## Current M240 boundary
 
-M239 checks the complete profile of the actual computed physical gain. It either preserves the precise no-gain result, reports the first mismatching coordinate with its agreeing prefix, or constructs full-carrier realization evidence and proves exact full-profile slack descent. This does not prove that every physical gain is compatible. The executable observer remains supplied, the search and minima remain exhaustive, and complete carrier derivation and global routes remain open.
+M240 proves exact minimum-cost additivity for an arbitrary circuit accompanied by an arbitrary bank of independent fresh-input NAND outputs. A computed gate-erasure argument covers every equivalent competing topology, including interleaved gates and retained consumers. The matching attained-witness upper bound proves that physical residual slack is unchanged. This is an independent Boolean materializer forced-cost subcase, not transparency of every profile materializer or global saturation. Complete ownership, profile derivation, terminal families and global routes remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 215 of 217 current scoped publication rows earned.
+Formal artefact coverage: 216 of 218 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed full-profile gain acceptance and limits](./lean_residual_terminal_gain_profile_firewall.md)
-and the [computed physical gain](./lean_residual_terminal_physical_gain.md).
-Earlier milestone notes retain their original module-specific scope. M239
-proves full-profile acceptance and accepted-result descent, not universal compatibility or global route completeness.
+See the [independent materializer cost theorem and limits](./lean_residual_independent_materializer_cost.md)
+and the [computed full-profile gain boundary](./lean_residual_terminal_gain_profile_firewall.md).
+Earlier milestone notes retain their original module-specific scope. M240
+proves independent physical minimum-cost additivity, not every profile materializer or global route completeness.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M239-CURRENT-SUMMARY:END -->
+<!-- M240-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
