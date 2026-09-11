@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-240';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2561,6 +2561,20 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualIndependentMaterializerCostMinimumTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
   leanResidualIndependentMaterializerCostSlackTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
   leanResidualIndependentMaterializerCostScope: 'all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only',
+  leanResidualTerminalPhysicalOwnershipFormalized: true,
+  leanResidualTerminalPhysicalOwnershipAxiomAuditPassed: true,
+  leanResidualTerminalPhysicalOwnershipAuditedDeclarationCount: 10,
+  leanResidualTerminalPhysicalOwnershipUnrequestedTheorem: 'PNP.DirectWire.terminalPhysicalOwner_none_iff',
+  leanResidualTerminalPhysicalOwnershipFirstOwnerTheorem: 'PNP.DirectWire.terminalPhysicalOwner_first',
+  leanResidualTerminalPhysicalOwnershipPartitionTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_partition',
+  leanResidualTerminalPhysicalOwnershipDisjointTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_disjoint',
+  leanResidualTerminalPhysicalOwnershipRestrictionTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_restrict',
+  leanResidualTerminalPhysicalOwnershipGateCountTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount',
+  leanResidualTerminalPhysicalOwnershipChargeIdentityTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity',
+  leanResidualTerminalPhysicalOwnershipOpenSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics',
+  leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
+  leanResidualTerminalPhysicalOwnershipWholeChargeTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
+  leanResidualTerminalPhysicalOwnershipScope: 'all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4502,6 +4516,20 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualIndependentMaterializerCostMinimumTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
       leanResidualIndependentMaterializerCostSlackTheorem: 'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
       leanResidualIndependentMaterializerCostScope: 'all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only',
+      leanResidualTerminalPhysicalOwnershipFormalized: true,
+      leanResidualTerminalPhysicalOwnershipAxiomAuditPassed: true,
+      leanResidualTerminalPhysicalOwnershipAuditedDeclarationCount: 10,
+      leanResidualTerminalPhysicalOwnershipUnrequestedTheorem: 'PNP.DirectWire.terminalPhysicalOwner_none_iff',
+      leanResidualTerminalPhysicalOwnershipFirstOwnerTheorem: 'PNP.DirectWire.terminalPhysicalOwner_first',
+      leanResidualTerminalPhysicalOwnershipPartitionTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_partition',
+      leanResidualTerminalPhysicalOwnershipDisjointTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_disjoint',
+      leanResidualTerminalPhysicalOwnershipRestrictionTheorem: 'PNP.DirectWire.terminalOwnedPhysicalGates_restrict',
+      leanResidualTerminalPhysicalOwnershipGateCountTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount',
+      leanResidualTerminalPhysicalOwnershipChargeIdentityTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity',
+      leanResidualTerminalPhysicalOwnershipOpenSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics',
+      leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
+      leanResidualTerminalPhysicalOwnershipWholeChargeTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
+      leanResidualTerminalPhysicalOwnershipScope: 'all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4855,7 +4883,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-240',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-241',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

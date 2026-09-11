@@ -1,0 +1,12 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalPhysicalOwner_none_iff
+#print axioms PNP.DirectWire.terminalPhysicalOwner_first
+#print axioms PNP.DirectWire.terminalOwnedPhysicalGates_partition
+#print axioms PNP.DirectWire.terminalOwnedPhysicalGates_disjoint
+#print axioms PNP.DirectWire.terminalOwnedPhysicalGates_restrict
+#print axioms PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount
+#print axioms PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity
+#print axioms PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics
+#print axioms PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced
+#print axioms PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge

@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-240`, 216 of 218
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241`, 217 of 219
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M240 |
+| Track | Available | Earned at M241 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M240 risk-weighted proof completion estimate is therefore 40 percent, with
+The M241 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -106,7 +106,10 @@ No fixed checkpoint or global gate changes.
 M240 proves exact minimum-cost additivity for an arbitrary circuit accompanied by an arbitrary bank of independent fresh-input NAND outputs. A computed gate-erasure argument covers every equivalent competing topology, including interleaved gates and retained consumers. The matching attained-witness upper bound proves that physical residual slack is unchanged. This is an independent Boolean materializer forced-cost subcase, not transparency of every profile materializer or global saturation. Complete ownership, profile derivation, terminal families and global routes remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 216 of 218 current scoped publication rows earned.
+M241 computes a support-independent physical ownership partition from arbitrary finite raw requests. It extracts each owned piece as an actual NAND circuit and proves that their gate counts sum exactly to the selected support size, including overlapping requests and unrequested gates. Open and induced-boundary semantics preserve the connection to the ambient circuit. This is a physical charge partition kernel, not complete admissible manuscript materializer ownership; the production nonunique-owner rejection remains unchanged.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 217 of 219 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
