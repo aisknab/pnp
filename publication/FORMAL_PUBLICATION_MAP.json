@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-232",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-233",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3180,7 +3180,12 @@
     "PNP.Concrete.CookLevin.cnfSAT_np_complete": "7b1c0556dde7066ebe7abc9706b400857b9dd41dc1d704930a1f1d6c423bbe35",
     "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff": "6b889ca06140498835da44305ac96f7ab8820e0640b2b8175e36566910082ab3",
     "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence": "1f58c87385f0dbbe2932a1f1cbdc6a156dc0218a15171539d1c78daae7dec92a",
-    "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference": "3f9d0b7f8bd9fd56cdf1b1b2883913ddf6516d64680c6850870a6129ba89fb5d"
+    "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference": "3f9d0b7f8bd9fd56cdf1b1b2883913ddf6516d64680c6850870a6129ba89fb5d",
+    "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq": "36de3a72b162389f2f8f5a3411a8fc000007cf55da00a39898b4b59d76957f05",
+    "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq": "991e7712503e87f358b0d5a8fa89978d4a0552e28ce55fda31b3768fdf9e05a1",
+    "PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff": "520e4c036df985fe6f97aa3c59fe3f7b14253fb85fec508464f077031da09d12",
+    "PNP.DirectWire.terminalCandidateSaturate_profile_locality": "90f27df9e3ef24ce34a8ca9ebbe4658cd2c400652701b50f6847f6fbb44aa683",
+    "PNP.DirectWire.terminalCandidateSaturate_profile_preserved": "059c535361ddcce72aae10142584704865fd604cdedc853c71b30e6a213f61da"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3198,7 +3203,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
+  "milestoneSourceClosureSha256": "c66bf6881c8e554bef3a8eba0cf50e4ab553cf2b3242f0d1e3c8727fd508bce5",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8506,6 +8511,20 @@
       ],
       "scope": "For every finite direct-wire candidate size, executable terminal model, profile coordinate and gate, M232 proves that the computed profile-influence bit is true exactly when insertion changes the actual ambient observation in a canonical subset context. It identifies each computed profile-to-gate dependency with the coordinate's exact rule role and that influence bit. For every seed, a gate absent from the actual computed saturation cannot change a retained profile coordinate in any canonical context. The observation definition and all three general theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, coverage certificate or soundness proof is supplied in place of the existing computation.",
       "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-profile-locality",
+      "title": "Retained ambient-profile locality and whole-support preservation",
+      "requiredTheorems": [
+        "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
+        "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq",
+        "PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_locality",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_preserved"
+      ],
+      "scope": "For every finite direct-wire candidate size, executable terminal model, seed and retained profile coordinate, M233 proves that arbitrary primitive-record supports with the same computed-saturation gate membership have equal actual ambient observations. Structural extraction and ambient-implementation equalities account for record order, duplicates and non-gate metadata without an observer-congruence premise. General omitted-gate elimination extends M232 from canonical contexts to arbitrary supports. The actual saturated support therefore preserves each retained observation of the complete gate universe. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, normalization certificate or correctness proof is supplied in place of the existing computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
     }
   ],
   "version": 0

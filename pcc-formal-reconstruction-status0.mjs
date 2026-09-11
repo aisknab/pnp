@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2490,6 +2490,12 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalProfileDependencySemanticsAuditedDeclarationCount: 4,
   leanResidualTerminalProfileDependencyNoninterferenceTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_noninterference',
   leanResidualTerminalProfileDependencySemanticsScope: 'all-finite-candidates-executable-models-computed-profile-influence-role-labelled-edges-and-computed-saturation-noninterference-in-canonical-contexts-only',
+  leanResidualTerminalProfileLocalityFormalized: true,
+  leanResidualTerminalProfileLocalityAxiomAuditPassed: true,
+  leanResidualTerminalProfileLocalityAuditedDeclarationCount: 5,
+  leanResidualTerminalProfileLocalityTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_locality',
+  leanResidualTerminalProfilePreservationTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_preserved',
+  leanResidualTerminalProfileLocalityScope: 'all-finite-candidates-executable-models-arbitrary-primitive-record-supports-computed-saturation-retained-ambient-profile-locality-and-preservation-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4360,6 +4366,12 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalProfileDependencySemanticsAuditedDeclarationCount: 4,
       leanResidualTerminalProfileDependencyNoninterferenceTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_noninterference',
       leanResidualTerminalProfileDependencySemanticsScope: 'all-finite-candidates-executable-models-computed-profile-influence-role-labelled-edges-and-computed-saturation-noninterference-in-canonical-contexts-only',
+      leanResidualTerminalProfileLocalityFormalized: true,
+      leanResidualTerminalProfileLocalityAxiomAuditPassed: true,
+      leanResidualTerminalProfileLocalityAuditedDeclarationCount: 5,
+      leanResidualTerminalProfileLocalityTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_locality',
+      leanResidualTerminalProfilePreservationTheorem: 'PNP.DirectWire.terminalCandidateSaturate_profile_preserved',
+      leanResidualTerminalProfileLocalityScope: 'all-finite-candidates-executable-models-arbitrary-primitive-record-supports-computed-saturation-retained-ambient-profile-locality-and-preservation-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4713,7 +4725,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-232',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-233',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

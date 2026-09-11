@@ -1124,5 +1124,59 @@ theorem extractSaturatedTerminalSupport_induced
   extractTerminalSupport_induced candidate
     (terminalSaturateRecords system seed) input output
 
+/-- Changing the record-list representation without changing its selected
+    gates preserves every computed extraction field. Only the stored record
+    list is replaced; no observer congruence is assumed. -/
+theorem extractTerminalSupport_eq_of_gateSelected_eq
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (left right : List
+      (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (selectedEqual : terminalGateSelected left = terminalGateSelected right) :
+    { extractTerminalSupport candidate left with records := right } =
+      extractTerminalSupport candidate right := by
+  have boundaryEqual :
+      terminalBoundaryPorts candidate.program left =
+        terminalBoundaryPorts candidate.program right := by
+    unfold terminalBoundaryPorts
+    apply congrArg (fun predicate =>
+      (allTerminalSupportWires inputs gates).filter predicate)
+    funext wire
+    unfold terminalBoundaryWire
+    cases wire <;> simp only [terminalWireExternal, selectedEqual]
+  have interfaceEqual :
+      terminalInterfacePorts candidate left =
+        terminalInterfacePorts candidate right := by
+    unfold terminalInterfacePorts
+    apply congrArg (fun predicate => (allFin gates).filter predicate)
+    funext producer
+    simp only [terminalInterfaceGate, terminalGateHasExternalConsumer,
+      selectedEqual]
+  let assemble
+      (boundary : List (TerminalSupportWire inputs gates))
+      (interface : List (Fin gates))
+      (selected : Fin gates → Bool) :
+      TerminalExtractedSupport (profileWidth := profileWidth) candidate :=
+    let state := extractTerminalProgramAux boundary candidate.program selected
+      TerminalSupportWire.input TerminalSupportWire.gate
+    { records := right
+      boundary := boundary
+      selectedGates := terminalSelectedGateIndices selected
+      interface := interface
+      gateCount := state.gateCount
+      gateCount_eq_selected := state.gateCount_eq
+      extractedCandidate :=
+        Candidate.ofDirectWireWord state.extractedProgram
+          { source := fun output =>
+              let producer := interface.get output
+              if checked : selected producer = true then
+                .gate (state.gateIndex producer checked)
+              else .constant false } }
+  change assemble (terminalBoundaryPorts candidate.program left)
+      (terminalInterfacePorts candidate left) (terminalGateSelected left) =
+    assemble (terminalBoundaryPorts candidate.program right)
+      (terminalInterfacePorts candidate right) (terminalGateSelected right)
+  rw [boundaryEqual, interfaceEqual, selectedEqual]
+
 end DirectWire
 end PNP

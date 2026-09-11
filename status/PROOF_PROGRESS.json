@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233",
   "lastReviewedDate": "2026-09-11",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,9 +17,9 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 208,
-    "totalRows": 210,
-    "percentRoundedOneDecimal": 99,
+    "earnedRows": 209,
+    "totalRows": 211,
+    "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
   },
@@ -1911,6 +1911,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M232 proves semantic reflection of computed profile influence, exact role-labelled profile-to-gate dependencies and noninterference for the actual computed saturation in every canonical context. The executable observer and profile model remain supplied, and influence construction enumerates all subsets. This closes a local semantic dependency edge, not input-derived terminal families, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin. No fixed checkpoint or global gate changes. Formal artefact coverage: 208 of 210 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-233",
+      "formalArtefactCoverage": {
+        "earnedRows": 209,
+        "totalRows": 211
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M233 proves structural normalization of arbitrary primitive-record supports, locality with respect to the actual computed saturation, and preservation of retained ambient-profile observations of the complete gate universe. The executable observer and profile model remain supplied, and influence construction enumerates all subsets. The retained-profile premise is necessary. This closes a local semantic dependency edge, not input-derived terminal families, transparent cost, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin. No fixed checkpoint or global gate changes. Formal artefact coverage: 209 of 211 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

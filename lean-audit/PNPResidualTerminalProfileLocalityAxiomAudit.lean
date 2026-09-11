@@ -1,0 +1,7 @@
+import PNP
+
+#print axioms PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq
+#print axioms PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq
+#print axioms PNP.DirectWire.terminalCandidateProfileObservation_eq_of_gateMembership_iff
+#print axioms PNP.DirectWire.terminalCandidateSaturate_profile_locality
+#print axioms PNP.DirectWire.terminalCandidateSaturate_profile_preserved
