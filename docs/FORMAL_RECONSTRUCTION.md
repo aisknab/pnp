@@ -1,19 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M231-CURRENT-SUMMARY:BEGIN -->
-## Current M231 boundary
+<!-- M232-CURRENT-SUMMARY:BEGIN -->
+## Current M232 boundary
 
-M231 proves concrete CNF-SAT NP-hardness and the closed theorem `NPComplete CNFSAT`. It uses M230's complete all-input finite-machine Cook-Levin formula builder and exact polynomial reduction, together with the existing concrete NP verifier. This closes only the fixed two-point concrete NP-hardness checkpoint. Deterministic SAT, unconditional ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+M232 proves that computed profile dependencies reflect actual observation changes in every canonical gate-subset context. For the actual computed saturation, an absent gate cannot change a retained profile coordinate in those contexts. The executable observer and profile model remain supplied, and influence construction enumerates all subsets; this local result earns no fixed checkpoint or runtime credit.
 
-Formal artefact coverage: 207 of 209 current scoped publication rows earned.
+M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+
+Formal artefact coverage: 208 of 210 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [NP-completeness result and limits](lean_cook_levin_np_completeness.md)
-and the [complete-builder result](lean_cook_levin_complete_builder.md).
+See the [profile dependency theorem and limits](./lean_residual_terminal_profile_dependency_semantics.md)
+and the [NP-completeness result](./lean_cook_levin_np_completeness.md).
 Earlier milestone notes retain their original module-specific scope. M230 and M231
 supersede their missing-builder and missing-NP-completeness limitations without
 closing any global proof gate.
-<!-- M231-CURRENT-SUMMARY:END -->
+<!-- M232-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

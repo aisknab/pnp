@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232",
   "lastReviewedDate": "2026-09-11",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 207,
-    "totalRows": 209,
+    "earnedRows": 208,
+    "totalRows": 210,
     "percentRoundedOneDecimal": 99,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -1894,6 +1894,23 @@
         }
       ],
       "rationale": "M231 proves concrete CNF-SAT NP-hardness and the closed NP-completeness theorem using the complete M230 construction. Only the fixed two-point reductions-concrete-np-hardness checkpoint changes. No final root-transport point or global gate is awarded. Formal artefact coverage: 207 of 209 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232",
+      "formalArtefactCoverage": {
+        "earnedRows": 208,
+        "totalRows": 210
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M232 proves semantic reflection of computed profile influence, exact role-labelled profile-to-gate dependencies and noninterference for the actual computed saturation in every canonical context. The executable observer and profile model remain supplied, and influence construction enumerates all subsets. This closes a local semantic dependency edge, not input-derived terminal families, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin. No fixed checkpoint or global gate changes. Formal artefact coverage: 208 of 210 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

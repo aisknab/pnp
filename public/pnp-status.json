@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-231",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-11-232",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1409,6 +1409,11 @@
   "leanResidualTerminalSaturationPositivityFirewallAxiomAuditPassed": true,
   "leanResidualTerminalSaturationPositivityFirewallScope": "all-finite-direct-wire-candidates-explicit-terminal-dependency-systems-computed-governed-proper-positive-supports-forgetful-projections-and-executable-ambient-observers-total-zero-or-positive-whole-support-projection-defect-classification",
   "leanResidualTerminalCandidateSaturationFormalized": true,
+  "leanResidualTerminalProfileDependencySemanticsFormalized": true,
+  "leanResidualTerminalProfileDependencySemanticsAxiomAuditPassed": true,
+  "leanResidualTerminalProfileDependencySemanticsAuditedDeclarationCount": 4,
+  "leanResidualTerminalProfileDependencyNoninterferenceTheorem": "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference",
+  "leanResidualTerminalProfileDependencySemanticsScope": "all-finite-candidates-executable-models-computed-profile-influence-role-labelled-edges-and-computed-saturation-noninterference-in-canonical-contexts-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2667,7 +2672,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "57b0346b3ebeb259991dfa724987a75cb3944b761fa3d4fa1a258b81adfc715c",
+    "actualSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2700,19 +2705,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "29671b56dd215e7f76f893933799cf89295fbdaec9b339e68a65e36a23d1f059",
+  "leanTheoremInventorySha256": "aac34de3d5fe6d3beec64959c80504136d25169043bc060a3040ead3f57f02ce",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46094,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19720,
-  "leanTheoremInventoryTheoremCount": 25322,
+  "leanTheoremInventoryDeclarationCount": 46098,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19721,
+  "leanTheoremInventoryTheoremCount": 25325,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11029,
   "leanTheoremInventorySourceClosureModuleCount": 497,
-  "leanSourceClosureSha256": "57b0346b3ebeb259991dfa724987a75cb3944b761fa3d4fa1a258b81adfc715c",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-231",
+  "leanSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-232",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "c0fdd1f805f4672b34260d327c23d5d10f02fc239686ab9d721a3414cb38e760",
+  "formalPublicationMapSha256": "5765d42cc902774d8af7542c34c9b4ec87012b94e12438f2447f3c3213c5711b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -48585,9 +48590,66 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-profile-dependency-semantics",
+      "title": "Candidate-derived terminal profile dependency reflection and noninterference",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff",
+        "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference"
+      ],
+      "scope": "For every finite direct-wire candidate size, executable terminal model, profile coordinate and gate, M232 proves that the computed profile-influence bit is true exactly when insertion changes the actual ambient observation in a canonical subset context. It identifies each computed profile-to-gate dependency with the coordinate's exact rule role and that influence bit. For every seed, a gate absent from the actual computed saturation cannot change a retained profile coordinate in any canonical context. The observation definition and all three general theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, coverage certificate or soundness proof is supplied in place of the existing computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6b889ca06140498835da44305ac96f7ab8820e0640b2b8175e36566910082ab3",
+          "expectedKernelTypeSha256": "6b889ca06140498835da44305ac96f7ab8820e0640b2b8175e36566910082ab3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1f58c87385f0dbbe2932a1f1cbdc6a156dc0218a15171539d1c78daae7dec92a",
+          "expectedKernelTypeSha256": "1f58c87385f0dbbe2932a1f1cbdc6a156dc0218a15171539d1c78daae7dec92a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3f9d0b7f8bd9fd56cdf1b1b2883913ddf6516d64680c6850870a6129ba89fb5d",
+          "expectedKernelTypeSha256": "3f9d0b7f8bd9fd56cdf1b1b2883913ddf6516d64680c6850870a6129ba89fb5d",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-231",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-11-232",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

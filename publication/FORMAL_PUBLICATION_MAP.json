@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-231",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-11-232",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3177,7 +3177,10 @@
     "PNP.zeroslack_bcel_packet_activation_obstruction_checked_complete": "6bfe3fda461aef5b96b6fbca726d8b3134b992b9c97b16bc365e5a410d4c0620",
     "PNP.zeroslack_packet_selector_hb_bcel_coherent_checked_complete": "119db0567f3e4b314f5e9347e700aa53c749813938a5cf3b1e26a6cbf3c0a48d",
     "PNP.Concrete.CookLevin.cnfSAT_np_hard": "c2cae5f7ad14a81b32888e8405210b57552dea928200cc77e9ebb34099ec9909",
-    "PNP.Concrete.CookLevin.cnfSAT_np_complete": "7b1c0556dde7066ebe7abc9706b400857b9dd41dc1d704930a1f1d6c423bbe35"
+    "PNP.Concrete.CookLevin.cnfSAT_np_complete": "7b1c0556dde7066ebe7abc9706b400857b9dd41dc1d704930a1f1d6c423bbe35",
+    "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff": "6b889ca06140498835da44305ac96f7ab8820e0640b2b8175e36566910082ab3",
+    "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence": "1f58c87385f0dbbe2932a1f1cbdc6a156dc0218a15171539d1c78daae7dec92a",
+    "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference": "3f9d0b7f8bd9fd56cdf1b1b2883913ddf6516d64680c6850870a6129ba89fb5d"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3195,7 +3198,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "57b0346b3ebeb259991dfa724987a75cb3944b761fa3d4fa1a258b81adfc715c",
+  "milestoneSourceClosureSha256": "9631acc61ef6466a6a95d81b7d56bf58e8c98e12a2504cbacac5f867f4b26ffe",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8491,6 +8494,18 @@
       ],
       "scope": "For every language in the concrete bounded-certificate NP class, M231 extracts its polynomial-time verifier from NP membership and applies the complete source-derived all-input Cook-Levin PolynomialReduction to CNFSAT. Together with the existing concrete CNFSAT verifier, the closed theorem proves NPComplete CNFSAT in the selected finite-machine model. No reduction, execution trace, finite-instance restriction or correctness certificate is supplied. Both complete theorem interfaces are root-built and axiom-audited; their closures contain only the Lean standard axioms Classical.choice, Quot.sound and propext.",
       "nonClaim": "NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-profile-dependency-semantics",
+      "title": "Candidate-derived terminal profile dependency reflection and noninterference",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff",
+        "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence",
+        "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference"
+      ],
+      "scope": "For every finite direct-wire candidate size, executable terminal model, profile coordinate and gate, M232 proves that the computed profile-influence bit is true exactly when insertion changes the actual ambient observation in a canonical subset context. It identifies each computed profile-to-gate dependency with the coordinate's exact rule role and that influence bit. For every seed, a gate absent from the actual computed saturation cannot change a retained profile coordinate in any canonical context. The observation definition and all three general theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, coverage certificate or soundness proof is supplied in place of the existing computation.",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved."
     }
   ],
   "version": 0

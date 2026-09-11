@@ -310,5 +310,125 @@ def classifyTerminalCandidateSaturationPositivity
     TerminalSaturationPositivityOutcome problem.toProblem :=
   classifyTerminalSaturationPositivity problem.toProblem
 
+/-! ## Semantic reflection of candidate-derived profile dependencies -/
+
+/-- Observe the actual ambient implementation of one gate context.  This
+    notation adds no oracle, profile input or correctness certificate. -/
+def terminalCandidateProfileObservation
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (model : TerminalCandidateSaturationModel
+      (profileWidth := profileWidth) candidate)
+    (context : List (Fin gates)) (coordinate : Fin profileWidth) : Bool :=
+  model.observe (terminalAmbientSupportImplementation candidate
+    (context.map (fun gate =>
+      (TerminalPrimitiveRecord.gate gate :
+        TerminalPrimitiveRecord inputs gates outputs profileWidth)))) coordinate
+
+private theorem candidateTerminalAny_true_iff {alpha : Type}
+    (items : List alpha) (predicate : alpha → Bool) :
+    candidateTerminalAny items predicate = true ↔
+      ∃ item, item ∈ items ∧ predicate item = true := by
+  induction items with
+  | nil =>
+      constructor
+      · intro impossible
+        exact Bool.noConfusion impossible
+      · rintro ⟨item, member, _checked⟩
+        cases member
+  | cons head tail ih =>
+      change (predicate head || candidateTerminalAny tail predicate) = true ↔ _
+      rw [Bool.or_eq_true, ih]
+      constructor
+      · rintro (checked | ⟨item, member, checked⟩)
+        · exact ⟨head, List.Mem.head tail, checked⟩
+        · exact ⟨item, List.Mem.tail head member, checked⟩
+      · rintro ⟨item, member, checked⟩
+        cases List.mem_cons.mp member with
+        | inl equal =>
+            subst item
+            exact Or.inl checked
+        | inr member =>
+            exact Or.inr ⟨item, member, checked⟩
+
+/-- The computed influence bit is true exactly when an actual observation
+    changes in a canonical context, including nonsingleton interactions. -/
+theorem terminalGateInfluencesProfile_eq_true_iff
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (model : TerminalCandidateSaturationModel
+      (profileWidth := profileWidth) candidate)
+    (gate : Fin gates) (coordinate : Fin profileWidth) :
+    terminalGateInfluencesProfile candidate model gate coordinate = true ↔
+      ∃ context,
+        context ∈ terminalListSubsets
+          ((allFin gates).filter (fun other => decide (other ≠ gate))) ∧
+        terminalCandidateProfileObservation candidate model
+            (gate :: context) coordinate ≠
+          terminalCandidateProfileObservation candidate model context coordinate := by
+  unfold terminalGateInfluencesProfile
+  rw [candidateTerminalAny_true_iff]
+  constructor
+  · rintro ⟨context, member, changed⟩
+    exact ⟨context, member, of_decide_eq_true changed⟩
+  · rintro ⟨context, member, changed⟩
+    exact ⟨context, member, decide_eq_true changed⟩
+
+/-- Every profile-to-gate edge has exactly the coordinate's rule role and
+    the computed semantic influence bit.  Other physical edge rules cannot
+    introduce a spurious profile-to-gate dependency. -/
+theorem terminalCandidateProfileRequires_eq_influence
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (model : TerminalCandidateSaturationModel
+      (profileWidth := profileWidth) candidate)
+    (kind : TerminalSaturationRuleKind)
+    (coordinate : Fin profileWidth) (gate : Fin gates) :
+    (terminalCandidateSaturationSystem candidate model).requires kind
+        (.profile coordinate) (.gate gate) =
+      (decide (kind = terminalSaturationRuleOfProfileRole
+        (model.profileSystem.role coordinate)) &&
+        terminalGateInfluencesProfile candidate model gate coordinate) := by
+  cases kind <;> rfl
+
+/-- A gate absent from the actual computed saturation cannot change a retained
+    profile coordinate in any canonical gate context.  The executable observer
+    remains model data; no polynomial construction or global route is claimed. -/
+theorem terminalCandidateSaturate_profile_noninterference
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (model : TerminalCandidateSaturationModel
+      (profileWidth := profileWidth) candidate)
+    (seed : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (coordinate : Fin profileWidth) (gate : Fin gates)
+    (context : List (Fin gates))
+    (profileMember : TerminalPrimitiveRecord.profile coordinate ∈
+      terminalSaturateRecords (terminalCandidateSaturationSystem candidate model) seed)
+    (gateAbsent : TerminalPrimitiveRecord.gate gate ∉
+      terminalSaturateRecords (terminalCandidateSaturationSystem candidate model) seed)
+    (canonicalContext : context ∈ terminalListSubsets
+      ((allFin gates).filter (fun other => decide (other ≠ gate)))) :
+    terminalCandidateProfileObservation candidate model (gate :: context) coordinate =
+      terminalCandidateProfileObservation candidate model context coordinate := by
+  by_cases same :
+      terminalCandidateProfileObservation candidate model (gate :: context) coordinate =
+        terminalCandidateProfileObservation candidate model context coordinate
+  · exact same
+  · have influence : terminalGateInfluencesProfile candidate model gate coordinate = true :=
+      (terminalGateInfluencesProfile_eq_true_iff candidate model gate coordinate).mpr
+        ⟨context, canonicalContext, same⟩
+    let kind := terminalSaturationRuleOfProfileRole
+      (model.profileSystem.role coordinate)
+    have edge :
+        (terminalCandidateSaturationSystem candidate model).requires kind
+          (.profile coordinate) (.gate gate) = true := by
+      rw [terminalCandidateProfileRequires_eq_influence]
+      rw [Bool.and_eq_true]
+      exact ⟨decide_eq_true rfl, influence⟩
+    exact False.elim (gateAbsent
+      (terminalSaturateRecords_closed
+        (terminalCandidateSaturationSystem candidate model) seed
+        kind (.profile coordinate) (.gate gate) profileMember edge))
+
 end DirectWire
 end PNP
