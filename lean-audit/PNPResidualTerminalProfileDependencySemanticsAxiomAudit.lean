@@ -1,0 +1,6 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalCandidateProfileObservation
+#print axioms PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff
+#print axioms PNP.DirectWire.terminalCandidateProfileRequires_eq_influence
+#print axioms PNP.DirectWire.terminalCandidateSaturate_profile_noninterference

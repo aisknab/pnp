@@ -54,6 +54,16 @@ const CANDIDATE_LOCAL_DECLARATIONS = Object.freeze([
   'classifyTerminalCandidateSaturationPositivity',
 ]);
 
+// Preserve the historical 53-declaration audit; the later semantic extension
+// has its own root audit. Only the current module shape includes these names.
+const CANDIDATE_CURRENT_DECLARATIONS = Object.freeze([
+  ...CANDIDATE_LOCAL_DECLARATIONS,
+  'terminalCandidateProfileObservation',
+  'terminalGateInfluencesProfile_eq_true_iff',
+  'terminalCandidateProfileRequires_eq_influence',
+  'terminalCandidateSaturate_profile_noninterference',
+]);
+
 const COST_LOCAL_DECLARATIONS = Object.freeze([
   'TerminalSaturationCostSnapshot',
   'terminalSaturationCostSnapshot',
@@ -187,7 +197,7 @@ function validateTrace0(source) {
 function validateCandidate0(source) {
   const failures = commonFailures0(source);
   if (JSON.stringify(declarationNames0(source))
-      !== JSON.stringify(CANDIDATE_LOCAL_DECLARATIONS)) {
+      !== JSON.stringify(CANDIDATE_CURRENT_DECLARATIONS)) {
     failures.push('candidate-declaration-surface');
   }
   const imports = [...source.matchAll(/^\s*import\s+([^\s]+)\s*$/gmu)]
