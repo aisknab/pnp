@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M235-CURRENT-SUMMARY:BEGIN -->
-## Current M235 boundary
+<!-- M236-CURRENT-SUMMARY:BEGIN -->
+## Current M236 boundary
 
-M235 derives that actual generated saturation events have an already active dependent and insert a genuinely new record. The unchanged extractor therefore charges exactly one physical gate per gate insertion and zero for metadata. The recorded rule/dependent pair is an active owner, but need not be unique. The existing classifier either preserves full slack and nondecreasing projection defect at canonical computed saturation or exposes its exact first physical ownership/minimum-cost obstruction. Such a local obstruction is not yet a global named route.
+M236 derives a duplicate-free, complete physical-NAND charge ledger from the normalized seed and actual computed saturation trace. Each entry records its inherited seed or actual generating rule and dependent. Exact lookup and total support-size theorems connect this ledger to the unchanged support extractor. Introduction provenance can depend on the seed and traversal; it is not manuscript-wide ownership. Materializer grouping, full-minimum growth and global routing remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 211 of 213 current scoped publication rows earned.
+Formal artefact coverage: 212 of 214 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [physical-accounting theorem and limits](./lean_residual_terminal_physical_saturation_accounting.md)
-and the [trace-fidelity and metadata result](./lean_residual_terminal_saturation_trace_fidelity.md).
-Earlier milestone notes retain their original module-specific scope. M235
-isolates actual physical ownership and minimum-cost obstructions; it does not
-turn a local obstruction into a global named route or close a global proof gate.
-<!-- M235-CURRENT-SUMMARY:END -->
+See the [physical-charge ledger and limits](./lean_residual_terminal_physical_charge_ledger.md)
+and the [event-level physical-accounting result](./lean_residual_terminal_physical_saturation_accounting.md).
+Earlier milestone notes retain their original module-specific scope. M236
+proves a complete physical charge partition, not global manuscript ownership.
+No fixed weighted checkpoint or global proof gate closes.
+<!-- M236-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

@@ -90,6 +90,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-residual-terminal-profile-locality0.test.mjs',
   'audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs',
   'audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs',
+  'audits/lean-residual-terminal-physical-charge-ledger0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
