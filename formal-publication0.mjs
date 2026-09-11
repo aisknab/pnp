@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '5fc687900d2450822f86ba235a90d3629109a8d4b55531fe01b361dcb1d4ed32';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '43ef1d4eddced0e75d27c6332cb6f16ddad7ce7145e888da09d54a0ff2572242';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -314,6 +314,17 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.sat_np_complete_checked',
   'PNP.accepted_generated_package_implies_p_eq_np',
   'PNP.final_report_bridge',
+  'PNP.DirectWire.outputConeRecords_output',
+  'PNP.DirectWire.outputConeRecords_closed',
+  'PNP.DirectWire.outputConeRecords_least',
+  'PNP.DirectWire.outputConeRecords_noExternalGate',
+  'PNP.DirectWire.outputConeImplementation_equivalent',
+  'PNP.DirectWire.outputConeImplementation_gateCount_le',
+  'PNP.DirectWire.outputConeImplementation_exact_accounting',
+  'PNP.DirectWire.outputConeImplementation_referenceMinimum',
+  'PNP.DirectWire.outputConeImplementation_residualSlack',
+  'PNP.DirectWire.outputConeImplementation_strictGain_iff',
+  'PNP.DirectWire.outputConeNormalizer_checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3561,7 +3572,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-243') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-244') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

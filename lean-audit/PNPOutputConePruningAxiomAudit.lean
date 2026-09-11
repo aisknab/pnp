@@ -1,0 +1,13 @@
+import PNP
+
+#print axioms PNP.DirectWire.outputConeRecords_output
+#print axioms PNP.DirectWire.outputConeRecords_closed
+#print axioms PNP.DirectWire.outputConeRecords_least
+#print axioms PNP.DirectWire.outputConeRecords_noExternalGate
+#print axioms PNP.DirectWire.outputConeImplementation_equivalent
+#print axioms PNP.DirectWire.outputConeImplementation_gateCount_le
+#print axioms PNP.DirectWire.outputConeImplementation_exact_accounting
+#print axioms PNP.DirectWire.outputConeImplementation_referenceMinimum
+#print axioms PNP.DirectWire.outputConeImplementation_residualSlack
+#print axioms PNP.DirectWire.outputConeImplementation_strictGain_iff
+#print axioms PNP.DirectWire.outputConeNormalizer_checked

@@ -51,6 +51,7 @@ on:
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
       - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
       - 'audits/lean-concrete-final-report-bridge0.test.mjs'
+      - 'audits/lean-pccmin-output-cone-pruning0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -62,6 +63,7 @@ on:
       - 'docs/lean_residual_terminal_physical_ownership.md'
       - 'docs/lean_pccmin_constructive_nand_sharing.md'
       - 'docs/lean_concrete_final_report_bridge.md'
+      - 'docs/lean_pccmin_output_cone_pruning.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -535,6 +537,7 @@ on:
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
       - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
       - 'audits/lean-concrete-final-report-bridge0.test.mjs'
+      - 'audits/lean-pccmin-output-cone-pruning0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -546,6 +549,7 @@ on:
       - 'docs/lean_residual_terminal_physical_ownership.md'
       - 'docs/lean_pccmin_constructive_nand_sharing.md'
       - 'docs/lean_concrete_final_report_bridge.md'
+      - 'docs/lean_pccmin_output_cone_pruning.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -2699,6 +2703,72 @@ jobs:
           console.log('M243: the active conditional bridge consumes checked SAT hardness with exact reviewed standard axioms.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteFinalReportBridge.lean
+
+      - name: Check computed output-cone pruning contracts
+        run: node --test audits/lean-pccmin-output-cone-pruning0.test.mjs
+
+      - name: Audit computed output-cone pruning
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPOutputConePruningAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.outputConeRecords_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeRecords_closed": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeRecords_least": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeRecords_noExternalGate": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_gateCount_le": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_exact_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_referenceMinimum": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeImplementation_strictGain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.outputConeNormalizer_checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M244: all eleven computed output-cone and pruning interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPOutputConePruning.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
