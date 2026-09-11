@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3224,7 +3224,17 @@
     "PNP.DirectWire.appendIndependentNandMaterializers_lower_bound": "d775d0bd12c5cb8af9a3ab08fd05a21637f1d724aff0bf3f28c93997db70ccdf",
     "PNP.DirectWire.appendIndependentNandMaterializers_equivalent": "e4ca1a4bc815ba9e1be215fff9ca41e24e10e90a43f627ea000eee029899ca68",
     "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum": "0b9830efe900d365e70e4150003eb0df18c3da3ba28e17df580edd64db48ccf8",
-    "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack": "d4809059a0690effa9e02fa217a7d6ce6b59faaef074efb2f42a9d728e1e35c2"
+    "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack": "d4809059a0690effa9e02fa217a7d6ce6b59faaef074efb2f42a9d728e1e35c2",
+    "PNP.DirectWire.terminalPhysicalOwner_none_iff": "ffc0ed143bf7e48c93f51515386fd85a50d91876ef9079208c85da56384caecc",
+    "PNP.DirectWire.terminalPhysicalOwner_first": "ea71fecbc78798ce11593d9f1a9991444ed2441a909b02e9a9e64fdbb0791ac7",
+    "PNP.DirectWire.terminalOwnedPhysicalGates_partition": "fcc78b43e37b2ecff81821ca824b6846cbd7dedbc034a964e02604780c234792",
+    "PNP.DirectWire.terminalOwnedPhysicalGates_disjoint": "309b77fc6c02991fe447b18c499ffded34920f11e8e5738eb915edbdebceec60",
+    "PNP.DirectWire.terminalOwnedPhysicalGates_restrict": "5ad710531d391c95b4159defd761557215dfc0bceefcbced744060569dee942f",
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount": "fa95da38296729083ca7fc691fb6ddb2519b8cb14a5cdd7131a56baacd838678",
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity": "536ab6d2243bb5599225af8762bebc639928dd957692cc58a4e38c16f7d05fbe",
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics": "8de6988c721b8734eea3bea0f9c66a58ef6b149f93a3366e195570422ca02c3b",
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced": "6382079281a6e01dc636253438900d6528f761ff9c5fc8e2001d02da554fac7a",
+    "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge": "2cf21f36ac2063dd4093521f5eb5de20647af79da6848811ce8fae59b33b27a0"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3242,7 +3252,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
+  "milestoneSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8666,6 +8676,25 @@
       ],
       "scope": "For every finite direct-wire circuit and every finite bank size, M240 physically appends one NAND for each disjoint pair of fresh Boolean inputs while retaining all original ordered outputs. The seven universal interfaces prove exact size and both output semantics, preservation of complete Boolean equivalence, a lower bound against every equivalent competing topology, exact reference-minimum additivity and unchanged physical residual slack. The original circuit need not be minimum, and its outputs may be constant, repeated or direct primary-input wires. The lower bound derives distinct actual bank-output gates from semantic output conditions, restricts fresh inputs to false and computes an erasure/rebinding that removes exactly those gates, including through retained consumers. The resulting implementation realizes the original function. Appending the bank to its attained minimum witness gives the matching upper bound. No correctness certificate or supplied minimum is an algorithm input. All seven interfaces are explicit-root built with their exact reviewed standard axiom closures.",
       "nonClaim": "This is an independent physical Boolean materializer forced-cost subcase, not transparency of every manuscript profile materializer or every actual saturation step. Fresh primary inputs and distinct appended NAND outputs are essential; repeating an existing output or reusing the original input pair does not justify additive cost. The result does not change or derive the full profile observer, global materializer ownership, quotient costs, obligation discharge, terminal families or complete rank-decreasing route coverage. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-ownership",
+      "title": "Support-independent physical ownership and exact materializer charges",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalPhysicalOwner_none_iff",
+        "PNP.DirectWire.terminalPhysicalOwner_first",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_partition",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_disjoint",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_restrict",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge"
+      ],
+      "scope": "For every finite candidate, arbitrary finite raw request family and terminal record list, M241 computes a first-requesting ambient owner before support selection, retaining unrequested physical gates in a fixed remainder bucket. Ten universal interfaces characterize the first requester and unrequested case, exact partition membership, disjointness and restriction stability, actual extracted gate counts, the complete integer charge identity, open semantics, induced-boundary reconnection and the whole-circuit charge total. Overlapping and duplicate requests require no supplied disjointness or coverage certificate. Each owned piece is an existing physical support extraction with its actual NAND size, not an arbitrary numerical weight. All ten interfaces are explicit-root built with their exact reviewed standard axiom closures.",
+      "nonClaim": "This is a support-independent physical ownership and charge partition kernel, not the complete manuscript computational-record universe or proof of admissible materializer ownership. The raw finite request family is supplied data; a canonical assignment does not discharge unique active ownership, carrier, frontier or obligation conditions. The existing production nonunique-owner rejection is unchanged. Metadata records do not become free computational materializers or receive invented physical cost. The result does not establish HN assembly, forced full-profile minimum growth, quotient bounds, terminal-family derivation or complete rank-decreasing routes. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

@@ -1,21 +1,21 @@
 # Proof and Checker Pipeline
 
-<!-- M240-CURRENT-SUMMARY:BEGIN -->
-## Current M240 boundary
+<!-- M241-CURRENT-SUMMARY:BEGIN -->
+## Current M241 boundary
 
-M240 proves exact minimum-cost additivity for an arbitrary circuit accompanied by an arbitrary bank of independent fresh-input NAND outputs. A computed gate-erasure argument covers every equivalent competing topology, including interleaved gates and retained consumers. The matching attained-witness upper bound proves that physical residual slack is unchanged. This is an independent Boolean materializer forced-cost subcase, not transparency of every profile materializer or global saturation. Complete ownership, profile derivation, terminal families and global routes remain open.
+M241 computes a support-independent physical ownership partition from arbitrary finite raw requests. It extracts each owned piece as an actual NAND circuit and proves that their gate counts sum exactly to the selected support size, including overlapping requests and unrequested gates. Open and induced-boundary semantics preserve the connection to the ambient circuit. This is a physical charge partition kernel, not complete admissible manuscript materializer ownership; the production nonunique-owner rejection remains unchanged.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 216 of 218 current scoped publication rows earned.
+Formal artefact coverage: 217 of 219 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [independent materializer cost theorem and limits](./lean_residual_independent_materializer_cost.md)
-and the [computed full-profile gain boundary](./lean_residual_terminal_gain_profile_firewall.md).
-Earlier milestone notes retain their original module-specific scope. M240
-proves independent physical minimum-cost additivity, not every profile materializer or global route completeness.
+See the [physical ownership theorem and limits](./lean_residual_terminal_physical_ownership.md)
+and the [independent materializer forced-cost boundary](./lean_residual_independent_materializer_cost.md).
+Earlier milestone notes retain their original module-specific scope. M241
+proves exact physical ownership and charge partitioning, not complete admissible materializer ownership or global route completeness.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M240-CURRENT-SUMMARY:END -->
+<!-- M241-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

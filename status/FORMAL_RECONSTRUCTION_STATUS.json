@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-240",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1485,6 +1485,20 @@
   "leanResidualIndependentMaterializerCostMinimumTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum",
   "leanResidualIndependentMaterializerCostSlackTheorem": "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack",
   "leanResidualIndependentMaterializerCostScope": "all-finite-original-candidates-and-bank-sizes-disjoint-fresh-input-nand-materializers-computed-erasure-unrestricted-competitors-exact-reference-minimum-additivity-and-physical-slack-preservation-only",
+  "leanResidualTerminalPhysicalOwnershipFormalized": true,
+  "leanResidualTerminalPhysicalOwnershipAxiomAuditPassed": true,
+  "leanResidualTerminalPhysicalOwnershipAuditedDeclarationCount": 10,
+  "leanResidualTerminalPhysicalOwnershipUnrequestedTheorem": "PNP.DirectWire.terminalPhysicalOwner_none_iff",
+  "leanResidualTerminalPhysicalOwnershipFirstOwnerTheorem": "PNP.DirectWire.terminalPhysicalOwner_first",
+  "leanResidualTerminalPhysicalOwnershipPartitionTheorem": "PNP.DirectWire.terminalOwnedPhysicalGates_partition",
+  "leanResidualTerminalPhysicalOwnershipDisjointTheorem": "PNP.DirectWire.terminalOwnedPhysicalGates_disjoint",
+  "leanResidualTerminalPhysicalOwnershipRestrictionTheorem": "PNP.DirectWire.terminalOwnedPhysicalGates_restrict",
+  "leanResidualTerminalPhysicalOwnershipGateCountTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount",
+  "leanResidualTerminalPhysicalOwnershipChargeIdentityTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity",
+  "leanResidualTerminalPhysicalOwnershipOpenSemanticsTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics",
+  "leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced",
+  "leanResidualTerminalPhysicalOwnershipWholeChargeTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge",
+  "leanResidualTerminalPhysicalOwnershipScope": "all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2743,7 +2757,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
+    "actualSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2776,19 +2790,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "b244f5fe1763f256786eb9ecf3a55076b39f03b49cdedd862a9920b70cb5204c",
+  "leanTheoremInventorySha256": "72b7d278266d04a7909d621a7cea245dc85b48a51bdae0826632be82e1a5ee15",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46316,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19997,
-  "leanTheoremInventoryTheoremCount": 25431,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11056,
-  "leanTheoremInventorySourceClosureModuleCount": 505,
-  "leanSourceClosureSha256": "362b196b2a37cc163daa4f68457958dfc747d080bbd008ba73f982b29b607f6f",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240",
+  "leanTheoremInventoryDeclarationCount": 46334,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20010,
+  "leanTheoremInventoryTheoremCount": 25444,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11057,
+  "leanTheoremInventorySourceClosureModuleCount": 506,
+  "leanSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "eae36c159ebfe41e23a94a57de6c1f6aef26c427eb6932013872cc87a38c59b8",
+  "formalPublicationMapSha256": "e0fd2609238b3ecec1d690172aaaa03be136e9bd2b86818dc78a3d31a7037ece",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49429,9 +49443,154 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-physical-ownership",
+      "title": "Support-independent physical ownership and exact materializer charges",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalPhysicalOwner_none_iff",
+        "PNP.DirectWire.terminalPhysicalOwner_first",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_partition",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_disjoint",
+        "PNP.DirectWire.terminalOwnedPhysicalGates_restrict",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced",
+        "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge"
+      ],
+      "scope": "For every finite candidate, arbitrary finite raw request family and terminal record list, M241 computes a first-requesting ambient owner before support selection, retaining unrequested physical gates in a fixed remainder bucket. Ten universal interfaces characterize the first requester and unrequested case, exact partition membership, disjointness and restriction stability, actual extracted gate counts, the complete integer charge identity, open semantics, induced-boundary reconnection and the whole-circuit charge total. Overlapping and duplicate requests require no supplied disjointness or coverage certificate. Each owned piece is an existing physical support extraction with its actual NAND size, not an arbitrary numerical weight. All ten interfaces are explicit-root built with their exact reviewed standard axiom closures.",
+      "nonClaim": "This is a support-independent physical ownership and charge partition kernel, not the complete manuscript computational-record universe or proof of admissible materializer ownership. The raw finite request family is supplied data; a canonical assignment does not discharge unique active ownership, carrier, frontier or obligation conditions. The existing production nonunique-owner rejection is unchanged. Metadata records do not become free computational materializers or receive invented physical cost. The result does not establish HN assembly, forced full-profile minimum growth, quotient bounds, terminal-family derivation or complete rank-decreasing routes. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalPhysicalOwner_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ffc0ed143bf7e48c93f51515386fd85a50d91876ef9079208c85da56384caecc",
+          "expectedKernelTypeSha256": "ffc0ed143bf7e48c93f51515386fd85a50d91876ef9079208c85da56384caecc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalPhysicalOwner_first",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ea71fecbc78798ce11593d9f1a9991444ed2441a909b02e9a9e64fdbb0791ac7",
+          "expectedKernelTypeSha256": "ea71fecbc78798ce11593d9f1a9991444ed2441a909b02e9a9e64fdbb0791ac7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalGates_partition",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fcc78b43e37b2ecff81821ca824b6846cbd7dedbc034a964e02604780c234792",
+          "expectedKernelTypeSha256": "fcc78b43e37b2ecff81821ca824b6846cbd7dedbc034a964e02604780c234792",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalGates_disjoint",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "309b77fc6c02991fe447b18c499ffded34920f11e8e5738eb915edbdebceec60",
+          "expectedKernelTypeSha256": "309b77fc6c02991fe447b18c499ffded34920f11e8e5738eb915edbdebceec60",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalGates_restrict",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5ad710531d391c95b4159defd761557215dfc0bceefcbced744060569dee942f",
+          "expectedKernelTypeSha256": "5ad710531d391c95b4159defd761557215dfc0bceefcbced744060569dee942f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fa95da38296729083ca7fc691fb6ddb2519b8cb14a5cdd7131a56baacd838678",
+          "expectedKernelTypeSha256": "fa95da38296729083ca7fc691fb6ddb2519b8cb14a5cdd7131a56baacd838678",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "536ab6d2243bb5599225af8762bebc639928dd957692cc58a4e38c16f7d05fbe",
+          "expectedKernelTypeSha256": "536ab6d2243bb5599225af8762bebc639928dd957692cc58a4e38c16f7d05fbe",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8de6988c721b8734eea3bea0f9c66a58ef6b149f93a3366e195570422ca02c3b",
+          "expectedKernelTypeSha256": "8de6988c721b8734eea3bea0f9c66a58ef6b149f93a3366e195570422ca02c3b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6382079281a6e01dc636253438900d6528f761ff9c5fc8e2001d02da554fac7a",
+          "expectedKernelTypeSha256": "6382079281a6e01dc636253438900d6528f761ff9c5fc8e2001d02da554fac7a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2cf21f36ac2063dd4093521f5eb5de20647af79da6848811ce8fae59b33b27a0",
+          "expectedKernelTypeSha256": "2cf21f36ac2063dd4093521f5eb5de20647af79da6848811ce8fae59b33b27a0",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-240",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-241",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

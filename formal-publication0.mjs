@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '9b9617556facf8f1ccacfd1d4146d3bf9a4d3679f0362b11421170040263d34e';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '2ac4d44489b0ee0e2981a9418e869f7013b369ac31acc3d6cb5e3f9b2f9148d8';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -291,6 +291,16 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.appendIndependentNandMaterializers_equivalent',
   'PNP.DirectWire.appendIndependentNandMaterializers_referenceMinimum',
   'PNP.DirectWire.appendIndependentNandMaterializers_residualSlack',
+  'PNP.DirectWire.terminalPhysicalOwner_none_iff',
+  'PNP.DirectWire.terminalPhysicalOwner_first',
+  'PNP.DirectWire.terminalOwnedPhysicalGates_partition',
+  'PNP.DirectWire.terminalOwnedPhysicalGates_disjoint',
+  'PNP.DirectWire.terminalOwnedPhysicalGates_restrict',
+  'PNP.DirectWire.terminalOwnedPhysicalMaterializer_gateCount',
+  'PNP.DirectWire.terminalOwnedPhysicalMaterializer_chargeIdentity',
+  'PNP.DirectWire.terminalOwnedPhysicalMaterializer_semantics',
+  'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
+  'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3538,7 +3548,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-240') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
