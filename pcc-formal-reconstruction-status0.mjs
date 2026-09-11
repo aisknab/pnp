@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-238';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2539,6 +2539,17 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPhysicalGainSearchSoundnessTheorem: 'PNP.DirectWire.findTerminalCandidatePhysicalGain_sound',
   leanResidualTerminalPhysicalGainSearchFailureTheorem: 'PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff',
   leanResidualTerminalPhysicalGainScope: 'all-finite-candidates-executable-models-production-saturated-supports-computed-reference-minimum-replacements-exact-physical-size-and-slack-descent-and-complete-proper-positive-search-only',
+  leanResidualTerminalGainProfileFirewallFormalized: true,
+  leanResidualTerminalGainProfileFirewallAxiomAuditPassed: true,
+  leanResidualTerminalGainProfileFirewallAuditedDeclarationCount: 7,
+  leanResidualTerminalGainProfileFirewallProfileScanTheorem: 'PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff',
+  leanResidualTerminalGainProfileFirewallFirstMismatchTheorem: 'PNP.DirectWire.firstTerminalGainProfileMismatch_spec',
+  leanResidualTerminalGainProfileFirewallFullMinimumTheorem: 'PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization',
+  leanResidualTerminalGainProfileFirewallAcceptanceTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff',
+  leanResidualTerminalGainProfileFirewallSearchFailureTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff',
+  leanResidualTerminalGainProfileFirewallRejectionTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff',
+  leanResidualTerminalGainProfileFirewallFullSlackTheorem: 'PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain',
+  leanResidualTerminalGainProfileFirewallScope: 'all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4458,6 +4469,17 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPhysicalGainSearchSoundnessTheorem: 'PNP.DirectWire.findTerminalCandidatePhysicalGain_sound',
       leanResidualTerminalPhysicalGainSearchFailureTheorem: 'PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff',
       leanResidualTerminalPhysicalGainScope: 'all-finite-candidates-executable-models-production-saturated-supports-computed-reference-minimum-replacements-exact-physical-size-and-slack-descent-and-complete-proper-positive-search-only',
+      leanResidualTerminalGainProfileFirewallFormalized: true,
+      leanResidualTerminalGainProfileFirewallAxiomAuditPassed: true,
+      leanResidualTerminalGainProfileFirewallAuditedDeclarationCount: 7,
+      leanResidualTerminalGainProfileFirewallProfileScanTheorem: 'PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff',
+      leanResidualTerminalGainProfileFirewallFirstMismatchTheorem: 'PNP.DirectWire.firstTerminalGainProfileMismatch_spec',
+      leanResidualTerminalGainProfileFirewallFullMinimumTheorem: 'PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization',
+      leanResidualTerminalGainProfileFirewallAcceptanceTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff',
+      leanResidualTerminalGainProfileFirewallSearchFailureTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff',
+      leanResidualTerminalGainProfileFirewallRejectionTheorem: 'PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff',
+      leanResidualTerminalGainProfileFirewallFullSlackTheorem: 'PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain',
+      leanResidualTerminalGainProfileFirewallScope: 'all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4811,7 +4833,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-238',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-239',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

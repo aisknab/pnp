@@ -1,0 +1,9 @@
+import PNP
+
+#print axioms PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff
+#print axioms PNP.DirectWire.firstTerminalGainProfileMismatch_spec
+#print axioms PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization
+#print axioms PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff
+#print axioms PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff
+#print axioms PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff
+#print axioms PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain

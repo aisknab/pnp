@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-238",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-239",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1463,6 +1463,17 @@
   "leanResidualTerminalPhysicalGainSearchSoundnessTheorem": "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound",
   "leanResidualTerminalPhysicalGainSearchFailureTheorem": "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff",
   "leanResidualTerminalPhysicalGainScope": "all-finite-candidates-executable-models-production-saturated-supports-computed-reference-minimum-replacements-exact-physical-size-and-slack-descent-and-complete-proper-positive-search-only",
+  "leanResidualTerminalGainProfileFirewallFormalized": true,
+  "leanResidualTerminalGainProfileFirewallAxiomAuditPassed": true,
+  "leanResidualTerminalGainProfileFirewallAuditedDeclarationCount": 7,
+  "leanResidualTerminalGainProfileFirewallProfileScanTheorem": "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
+  "leanResidualTerminalGainProfileFirewallFirstMismatchTheorem": "PNP.DirectWire.firstTerminalGainProfileMismatch_spec",
+  "leanResidualTerminalGainProfileFirewallFullMinimumTheorem": "PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization",
+  "leanResidualTerminalGainProfileFirewallAcceptanceTheorem": "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff",
+  "leanResidualTerminalGainProfileFirewallSearchFailureTheorem": "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff",
+  "leanResidualTerminalGainProfileFirewallRejectionTheorem": "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff",
+  "leanResidualTerminalGainProfileFirewallFullSlackTheorem": "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain",
+  "leanResidualTerminalGainProfileFirewallScope": "all-finite-candidates-supplied-executable-profile-models-computed-physical-gain-full-coordinate-first-mismatch-acceptance-and-exact-accepted-full-profile-slack-descent-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2721,7 +2732,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
+    "actualSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2754,19 +2765,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "19ac1ac3f1370b9bb5bb4cb9d863d9bce398109be962b5b3363d407db739a21a",
+  "leanTheoremInventorySha256": "9404ca6e8961073c95316983c52bc6c1979e8baabde2e9b478e5877ea90af834",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46210,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19906,
-  "leanTheoremInventoryTheoremCount": 25389,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11048,
-  "leanTheoremInventorySourceClosureModuleCount": 503,
-  "leanSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-238",
+  "leanTheoremInventoryDeclarationCount": 46305,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 19923,
+  "leanTheoremInventoryTheoremCount": 25421,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11054,
+  "leanTheoremInventorySourceClosureModuleCount": 504,
+  "leanSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-239",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "97c94ebd86a910022504243cc56bf15126ed06a797d3ce85614719107aea0d7b",
+  "formalPublicationMapSha256": "12b65d6f2537e3cb438f66efec8d93b22ded500d947f017bd23fc99f4178a44e",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49194,9 +49205,117 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-gain-profile-firewall",
+      "title": "Computed full-profile gain acceptance and exact slack descent",
+      "requiredTheorems": [
+        "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
+        "PNP.DirectWire.firstTerminalGainProfileMismatch_spec",
+        "PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff",
+        "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain"
+      ],
+      "scope": "For every finite direct-wire candidate and supplied executable terminal profile model, M239 classifies the exact result of the existing production physical-gain search. No result is exactly the existing proper-support search failure. A result is scanned at every full-profile coordinate in canonical order. Rejection identifies the actual first mismatching coordinate and complete agreeing prefix; acceptance constructs the existing full-carrier realization without a caller-supplied result, seed, profile-equality proof or correctness certificate. Complete full-carrier realizations preserve the exhaustive full-profile minimum, and every accepted computed gain decreases full-profile slack by exactly the local physical gain of its actually selected proper-positive support. Existing obligation discharge transports through the full realization; an open obligation is not thereby discharged. The seven universal interfaces are explicit-root built with their reviewed standard axiom closures. The classifier reuses M238's proved Boolean equivalence rather than repeating an exhaustive equivalence check.",
+      "nonClaim": "These are computed finite full-profile acceptance and accepted-result transport laws for the supplied executable profile system, not a derivation of manuscript carrier data or a theorem that every physical gain is full-profile compatible. A first profile mismatch is not a completed named global route. The observer and profile model remain supplied data; influence, canonical seed search and semantic minima remain exhaustive finite reference constructions, with no polynomial encoded-size or runtime theorem. The classifier does not search alternative physical gains after a mismatch or identify ambient observations with the differently typed global profile system. Complete materializer charges, fixed global ownership, full-minimum growth during saturation, quotient bounds, terminal-family derivation and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "52aa9325d4a4b8f913638324e694e3d80d7640a630e29e2000b040a28d4dfcb8",
+          "expectedKernelTypeSha256": "52aa9325d4a4b8f913638324e694e3d80d7640a630e29e2000b040a28d4dfcb8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.firstTerminalGainProfileMismatch_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0296facc7457cb22362c0ba0417f1d9db05f472c05a7a80785270f1d0778f7a6",
+          "expectedKernelTypeSha256": "0296facc7457cb22362c0ba0417f1d9db05f472c05a7a80785270f1d0778f7a6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e86e3fcdfbc81b6f1a6d14d631dae151b60d34950ac04f4a0b71b5c1c76764f9",
+          "expectedKernelTypeSha256": "e86e3fcdfbc81b6f1a6d14d631dae151b60d34950ac04f4a0b71b5c1c76764f9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5271b9a9fdc0a1e07d5fe34f74d101a6ebd23ca15f7e21cc9779020761caeefa",
+          "expectedKernelTypeSha256": "5271b9a9fdc0a1e07d5fe34f74d101a6ebd23ca15f7e21cc9779020761caeefa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1d9f1e3ab39bdfed1ef6692e9aef6042a169a2d74f5d5dae632d5ad5ab036e4a",
+          "expectedKernelTypeSha256": "1d9f1e3ab39bdfed1ef6692e9aef6042a169a2d74f5d5dae632d5ad5ab036e4a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "dfc8ea46b715beacd6afa5b64988becc4d208d8c19ef8191d592bd4f3dc34a20",
+          "expectedKernelTypeSha256": "dfc8ea46b715beacd6afa5b64988becc4d208d8c19ef8191d592bd4f3dc34a20",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "52a4af27b6946c6dee5fc9a0d00f3f5b1fc80a7a8a23c7153f0621953fff3ab9",
+          "expectedKernelTypeSha256": "52a4af27b6946c6dee5fc9a0d00f3f5b1fc80a7a8a23c7153f0621953fff3ab9",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-238",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-239",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

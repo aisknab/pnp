@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-238",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-239",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3210,7 +3210,14 @@
     "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain": "3b1b137f09a7681341f12a83c5de1713d4116c1baa6f98ac0300da039342cf31",
     "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_slack_gain": "96dac6e6f5ecc546b311cf0bab666075da5143cd31563aa1e09eaf9cfba4de66",
     "PNP.DirectWire.findTerminalCandidatePhysicalGain_sound": "f5e4ab7db43a4f9476b036cbed4d58aa0a5a46889ff738e76c71bf354ea79479",
-    "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff": "de932d3dd29285c67a55cce7e67378b4ecd805f7daf84516e8c0b9ed3cc7f0fd"
+    "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff": "de932d3dd29285c67a55cce7e67378b4ecd805f7daf84516e8c0b9ed3cc7f0fd",
+    "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff": "52aa9325d4a4b8f913638324e694e3d80d7640a630e29e2000b040a28d4dfcb8",
+    "PNP.DirectWire.firstTerminalGainProfileMismatch_spec": "0296facc7457cb22362c0ba0417f1d9db05f472c05a7a80785270f1d0778f7a6",
+    "PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization": "e86e3fcdfbc81b6f1a6d14d631dae151b60d34950ac04f4a0b71b5c1c76764f9",
+    "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff": "5271b9a9fdc0a1e07d5fe34f74d101a6ebd23ca15f7e21cc9779020761caeefa",
+    "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff": "1d9f1e3ab39bdfed1ef6692e9aef6042a169a2d74f5d5dae632d5ad5ab036e4a",
+    "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff": "dfc8ea46b715beacd6afa5b64988becc4d208d8c19ef8191d592bd4f3dc34a20",
+    "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain": "52a4af27b6946c6dee5fc9a0d00f3f5b1fc80a7a8a23c7153f0621953fff3ab9"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3228,7 +3235,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "d470de2340738fda8c847a2c929c6a9529e3be36d0bee0fdbcdbe21668339e34",
+  "milestoneSourceClosureSha256": "b98af73568ad8dd421985e89bc19d1a54fad23a0a2892f5ca0e9661db7b3cd13",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8620,6 +8627,22 @@
       ],
       "scope": "For every finite direct-wire candidate, executable terminal profile model and seed list, M238 computes the whole physical replacement using the existing reference-minimum witness and the actual production saturated-support context. The complete ordered Boolean output word is preserved. The replacement gate count plus the computed local gain equals the original gate count, and replacement residual slack plus that gain equals the original physical residual slack. These equations require no properness, positivity, supplied frame or supplied charge partition. The total optional gain step maps this construction over the existing candidate-derived proper-positive support search. Every returned result carries an actually selected canonical proper positive seed and strictly decreases whole physical gate count and residual slack. Failure is exactly absence of every canonical proper positive seed for that computed system, not global minimality. All five universal interfaces are root-built and audited using only propext and Quot.sound. The caller supplies no search result, replacement, seed, context or correctness certificate to the gain-step algorithm.",
       "nonClaim": "These are physical Boolean reference gain-realization and search-failure laws, not full-profile replacement compatibility or a complete named global route. The observer and profile model remain supplied data, while influence, canonical seed search and semantic minima use exhaustive finite reference constructions; no polynomial encoded-size or runtime bound is proved. Failure of the proper-support search does not imply global minimality or ZeroSlack. Complete profile/materializer charge coverage, fixed global ownership, obligation transport, full-minimum growth, quotient bounds, input-derived complete terminal families and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "residual-terminal-gain-profile-firewall",
+      "title": "Computed full-profile gain acceptance and exact slack descent",
+      "requiredTheorems": [
+        "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
+        "PNP.DirectWire.firstTerminalGainProfileMismatch_spec",
+        "PNP.DirectWire.terminalFullProfileMinimum_eq_of_fullRealization",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_accepted_iff",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_noGain_iff",
+        "PNP.DirectWire.classifyTerminalCandidateGainProfile_mismatch_iff",
+        "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain"
+      ],
+      "scope": "For every finite direct-wire candidate and supplied executable terminal profile model, M239 classifies the exact result of the existing production physical-gain search. No result is exactly the existing proper-support search failure. A result is scanned at every full-profile coordinate in canonical order. Rejection identifies the actual first mismatching coordinate and complete agreeing prefix; acceptance constructs the existing full-carrier realization without a caller-supplied result, seed, profile-equality proof or correctness certificate. Complete full-carrier realizations preserve the exhaustive full-profile minimum, and every accepted computed gain decreases full-profile slack by exactly the local physical gain of its actually selected proper-positive support. Existing obligation discharge transports through the full realization; an open obligation is not thereby discharged. The seven universal interfaces are explicit-root built with their reviewed standard axiom closures. The classifier reuses M238's proved Boolean equivalence rather than repeating an exhaustive equivalence check.",
+      "nonClaim": "These are computed finite full-profile acceptance and accepted-result transport laws for the supplied executable profile system, not a derivation of manuscript carrier data or a theorem that every physical gain is full-profile compatible. A first profile mismatch is not a completed named global route. The observer and profile model remain supplied data; influence, canonical seed search and semantic minima remain exhaustive finite reference constructions, with no polynomial encoded-size or runtime theorem. The classifier does not search alternative physical gains after a mismatch or identify ambient observations with the differently typed global profile system. Complete materializer charges, fixed global ownership, full-minimum growth during saturation, quotient bounds, terminal-family derivation and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0
