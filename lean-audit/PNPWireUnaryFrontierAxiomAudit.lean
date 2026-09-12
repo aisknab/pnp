@@ -1,0 +1,32 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireUnaryFrontier.constantWord_value
+#print axioms PNP.DirectWire.WireUnaryFrontier.constantWord_gateCount
+#print axioms PNP.DirectWire.WireUnaryFrontier.unaryWord_value
+#print axioms PNP.DirectWire.WireUnaryFrontier.unaryWord_minimal
+#print axioms PNP.DirectWire.WireUnaryFrontier.unaryWord_gate_bound
+#print axioms PNP.DirectWire.WireUnaryFrontier.localWord_value
+#print axioms PNP.DirectWire.WireUnaryFrontier.localWord_minimal
+#print axioms PNP.DirectWire.WireUnaryFrontier.localWord_nonincrease
+#print axioms PNP.DirectWire.WireUnaryFrontier.localWord_gate_bound
+#print axioms PNP.DirectWire.WireUnaryFrontier.replacement_agreement
+#print axioms PNP.DirectWire.WireUnaryFrontier.replacement_minimal
+#print axioms PNP.DirectWire.WireUnaryFrontier.replacement_nonincrease
+#print axioms PNP.DirectWire.WireUnaryFrontier.replacement_gate_bound
+#print axioms PNP.DirectWire.WireUnaryFrontier.replacement_zero_gateCount
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_output
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_field
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_equivalent
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_charge
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_nonincrease
+#print axioms PNP.DirectWire.WireUnaryFrontier.expanded_gain_iff
+#print axioms PNP.DirectWire.WireUnaryFrontier.attempt_isSome_iff
+#print axioms PNP.DirectWire.WireUnaryFrontier.attempt_output
+#print axioms PNP.DirectWire.WireUnaryFrontier.attempt_field
+#print axioms PNP.DirectWire.WireUnaryFrontier.attempt_nonincrease
+#print axioms PNP.DirectWire.WireUnaryFrontier.attempt_charge
+#print axioms PNP.DirectWire.WireUnaryFrontier.dischargeR7_source_exact
+#print axioms PNP.DirectWire.WireUnaryFrontier.dischargeR7_full_value
+#print axioms PNP.DirectWire.WireUnaryFrontier.checkedProperGain_isSome_iff
+#print axioms PNP.DirectWire.WireUnaryFrontier.checkedProperGain_complete
+#print axioms PNP.DirectWire.WireUnaryFrontier.ProperGain.checked

@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-255",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-256",
   "lastReviewedDate": "2026-09-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 231,
-    "totalRows": 233,
+    "earnedRows": 232,
+    "totalRows": 234,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2302,6 +2302,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M255 reconstructs the pinned manuscript's unary R7 realization component directly from each original computational carrier. The actual two unary values determine a complete word with one shared NOT gate only when required; the lower bound compares every equivalent full carrier rather than only ordinary outputs. Source-exact full R7 discharges and a complete whole-word strict-gain query require no supplied replacement, truth table, agreement or minimizer. Arbitrary ambient cuts, the full carrier and obligation DAGs, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 231 of 233 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-256",
+      "formalArtefactCoverage": {
+        "earnedRows": 232,
+        "totalRows": 234
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M256 reconstructs the pinned manuscript's constant/unary R7 frontier step by joining the source-derived complete frontier with an actual minimum local word, then deriving successful expansion into the original exterior. Complete open-function equality, every full field value, exact physical charge and source-bound R7 discharge are proved rather than supplied. Proper-support gain requires both a positive original exterior and strict local saving. This closes a named dependency from M253 and M255, not every arbitrary ambient cut, the full carrier and obligation DAGs, all-trace normalization, complete Package E, global ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 232 of 234 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

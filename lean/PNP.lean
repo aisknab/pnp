@@ -58,6 +58,7 @@ import PNP.NANDWireQuotientLift
 import PNP.NANDWireFrontierLift
 import PNP.NANDWireMatchedCancellation
 import PNP.NANDWireUnaryRealization
+import PNP.NANDWireUnaryFrontier
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

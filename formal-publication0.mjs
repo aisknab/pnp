@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'bd64f175ea7823a0be32ba1dbaa93d789efc48332aa3ab590b7db1aafbd58e6b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f15ab86280cd4f68d887dad32c1c176e5317bc1ad39120aeb8fb545dd3aee273';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -516,6 +516,36 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireUnaryRealization.checkedGain_isSome_iff',
   'PNP.DirectWire.WireUnaryRealization.checkedGain_complete',
   'PNP.DirectWire.WireUnaryRealization.CheckedGain.checked',
+  'PNP.DirectWire.WireUnaryFrontier.constantWord_value',
+  'PNP.DirectWire.WireUnaryFrontier.constantWord_gateCount',
+  'PNP.DirectWire.WireUnaryFrontier.unaryWord_value',
+  'PNP.DirectWire.WireUnaryFrontier.unaryWord_minimal',
+  'PNP.DirectWire.WireUnaryFrontier.unaryWord_gate_bound',
+  'PNP.DirectWire.WireUnaryFrontier.localWord_value',
+  'PNP.DirectWire.WireUnaryFrontier.localWord_minimal',
+  'PNP.DirectWire.WireUnaryFrontier.localWord_nonincrease',
+  'PNP.DirectWire.WireUnaryFrontier.localWord_gate_bound',
+  'PNP.DirectWire.WireUnaryFrontier.replacement_agreement',
+  'PNP.DirectWire.WireUnaryFrontier.replacement_minimal',
+  'PNP.DirectWire.WireUnaryFrontier.replacement_nonincrease',
+  'PNP.DirectWire.WireUnaryFrontier.replacement_gate_bound',
+  'PNP.DirectWire.WireUnaryFrontier.replacement_zero_gateCount',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_output',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_field',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_equivalent',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_charge',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_nonincrease',
+  'PNP.DirectWire.WireUnaryFrontier.expanded_gain_iff',
+  'PNP.DirectWire.WireUnaryFrontier.attempt_isSome_iff',
+  'PNP.DirectWire.WireUnaryFrontier.attempt_output',
+  'PNP.DirectWire.WireUnaryFrontier.attempt_field',
+  'PNP.DirectWire.WireUnaryFrontier.attempt_nonincrease',
+  'PNP.DirectWire.WireUnaryFrontier.attempt_charge',
+  'PNP.DirectWire.WireUnaryFrontier.dischargeR7_source_exact',
+  'PNP.DirectWire.WireUnaryFrontier.dischargeR7_full_value',
+  'PNP.DirectWire.WireUnaryFrontier.checkedProperGain_isSome_iff',
+  'PNP.DirectWire.WireUnaryFrontier.checkedProperGain_complete',
+  'PNP.DirectWire.WireUnaryFrontier.ProperGain.checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3763,7 +3793,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-255') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-256') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

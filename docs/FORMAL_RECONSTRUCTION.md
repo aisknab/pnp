@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M255-CURRENT-SUMMARY:BEGIN -->
-## Current M255 boundary
+<!-- M256-CURRENT-SUMMARY:BEGIN -->
+## Current M256 boundary
 
-M255 constructs a complete unary computational word directly from its source values, preserves all outputs and fields with zero or one shared NOT gate, and proves minimum size against every equivalent full carrier. It derives source-exact R7 discharge witnesses and a complete whole-word strict-gain query. Arbitrary ambient cuts, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+M256 derives a minimum constant/unary word for the computed complete frontier and compiles it into the original exterior exactly once. It preserves all outputs and fields, derives full-value R7 witnesses, and recognizes genuine proper-support savings without supplied replacements or agreement. Arbitrary ambient supports, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 231 of 233 current scoped publication rows earned.
+Formal artefact coverage: 232 of 234 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [unary full-word realization and limits](./lean_wire_unary_realization.md)
+See the [constant/unary frontier replacement and limits](./lean_wire_unary_frontier.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M255
-constructs a minimum-size complete unary word and source-exact R7 witnesses from actual source values; arbitrary ambient cuts, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M256
+derives complete constant/unary frontier replacements and source-exact R7 witnesses with exact original-exterior accounting; arbitrary supports, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M255-CURRENT-SUMMARY:END -->
+<!-- M256-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 
