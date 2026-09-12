@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-249",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-250",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3332,7 +3332,23 @@
     "PNP.DirectWire.ArbitrarySupportSplice.graph_rank_decreases": "67c8f06262ace5918cb8e3f61c626b82fc4ef041148c7cac0b553fff6238e7ec",
     "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_primaryBoundary": "f3976f6579060f445aefe21487ac307efdcc929f9b469af1f56fc92cb2a9fb86",
     "PNP.DirectWire.ArbitrarySupportSplice.production_compiles": "900469aefe05cde3d9a9976d31672a502e532ee629545d7392785b2db9e3a00c",
-    "PNP.DirectWire.ArbitrarySupportSplice.production_agreement": "4184ac9ce3304d128becafaeeaeb180ab9a96b5431e4a3fb3ad7280bf99b6846"
+    "PNP.DirectWire.ArbitrarySupportSplice.production_agreement": "4184ac9ce3304d128becafaeeaeb180ab9a96b5431e4a3fb3ad7280bf99b6846",
+    "PNP.DirectWire.WireCarrier.exposed_unpack": "52b06e232ee698792723138e1bd7c233a0df92fc0596e5d1cb5a5ad3a6998ab2",
+    "PNP.DirectWire.WireCarrier.unpack_exposed": "e4bc75b87eb806542a29c7a7c6e523ba784ae91d2cdd3f258df74dee3a50190f",
+    "PNP.DirectWire.WireCarrier.normalize_output": "16061da3c8919111c1c6978a464a20b8569b0699b37cd393eb2dcdec5c9056aa",
+    "PNP.DirectWire.WireCarrier.normalize_field": "7db27122f63ded43c385da4a7261d23c7e9879d028553550b08aa876d4792416",
+    "PNP.DirectWire.WireCarrier.normalize_exact_accounting": "a198f6730e3dc53bbc9b1ab5c0422213e3d608a01e5db509eecdba8758f2ff2b",
+    "PNP.DirectWire.WireCarrier.normalize_quiescent": "34ab38584d59be857e7cf3a55c64f5c88f1f90c4dd2f40d67daa464aa8075ecd",
+    "PNP.DirectWire.WireCarrier.normalize_idempotent": "f7cce5f43df79ea96c60e655cb5b86173522fde20c2234a439868221011420c5",
+    "PNP.DirectWire.WireCarrier.field_producer_visible": "bc09f579729f6afb62951d1703ece5a713fe6a4beeed9cc53ca40c6fe3761b84",
+    "PNP.DirectWire.WireCarrier.splice_output": "411dc13ea230fc22b77724331e9e1c33714d660a4a604cfd7898538c8786f74c",
+    "PNP.DirectWire.WireCarrier.splice_field": "4ba4f77a1c9283281452654d90c7345f8d0f8c6dc9191e0605cda7c42484bb0d",
+    "PNP.DirectWire.WireCarrier.splice_exact_accounting": "5f466be2d9ebc3e5d9cf6e0e846f82bbaf1b888e89e12f38adf89aef53fd7d58",
+    "PNP.DirectWire.WireCarrier.splice_strict_gain": "4123bc53c6f2b6de684443b5c59fc548ccec92315b2f414fe8bc2a34a4585be6",
+    "PNP.DirectWire.WireCarrier.splice_checked": "98107b6a054e0da36408a39910ff8938933712f48a4a2f5dd669b98900d303f9",
+    "PNP.DirectWire.WireCarrier.splice_failure_iff": "8267d78155cac9ef72b19406e8a7b9e94064d7c675dddea99d1ef3e7c6fb881e",
+    "PNP.DirectWire.WireCarrier.production_boundary_isInput": "685e00c4d3d3038805c3db5f9c6b028a28ae8ef39c7cadab56e116151fafc1fc",
+    "PNP.DirectWire.WireCarrier.production_compiles": "09f0bee838b9d67f46d451c461a6272810bef6ec49d7b00cd1e4c615cefa8e22"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3350,7 +3366,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "16758e762eeef8a425ea26c6c9bb854a4a7a8ccf4c9f30fc4edb3c9f5d2a534a",
+  "milestoneSourceClosureSha256": "a73b67878bec2bdf85c14a088fa29d1c5d86623b0b8cbc49cd48bd0198a98c58",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8963,6 +8979,31 @@
       ],
       "scope": "For all finite raw NAND graphs, M249 computes a topological order from the actual source fields or rejects the unresolved cyclic remainder. The ordered program has one position for every original node, exact size and complete output semantics for every solution of the original equations. For arbitrary finite terminal support records, it then constructs the actual literal splice from the canonical exterior gates, computed boundary and interface, replacement word and every original ordered output. Every accepted splice has exactly the exterior size plus replacement size; an equivalent replacement preserves all outputs, and a strict local physical saving yields a strict whole-program saving. Actual production saturation derives a primary-input-only boundary and hence unconditional compilation success, without a supplied frame, order, wiring map or acyclicity certificate. Its result agrees in size and semantics with the existing production physical constructor. Twenty-four interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
       "nonClaim": "Arbitrary raw port compatibility and equal open Boolean functions do not by themselves guarantee acyclic literal wiring. The regression gives an equivalent replacement with a raw graph solution but a genuine dependency cycle, which the compiler rejects. This is a physical substitution and well-formedness result, not a contradiction of the manuscript's unconstructed complete carrier premises. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle, arbitrary-support Pull/Expand materializer identities, complete Package E and complete normalization remain open. No semantic minimum is computed, no unconditional global route is supplied, and a finite node-count termination argument is not a total encoded-size polynomial runtime theorem. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-carrier-transport",
+      "title": "Computed wire-backed carrier preservation under physical normalization and replacement",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireCarrier.exposed_unpack",
+        "PNP.DirectWire.WireCarrier.unpack_exposed",
+        "PNP.DirectWire.WireCarrier.normalize_output",
+        "PNP.DirectWire.WireCarrier.normalize_field",
+        "PNP.DirectWire.WireCarrier.normalize_exact_accounting",
+        "PNP.DirectWire.WireCarrier.normalize_quiescent",
+        "PNP.DirectWire.WireCarrier.normalize_idempotent",
+        "PNP.DirectWire.WireCarrier.field_producer_visible",
+        "PNP.DirectWire.WireCarrier.splice_output",
+        "PNP.DirectWire.WireCarrier.splice_field",
+        "PNP.DirectWire.WireCarrier.splice_exact_accounting",
+        "PNP.DirectWire.WireCarrier.splice_strict_gain",
+        "PNP.DirectWire.WireCarrier.splice_checked",
+        "PNP.DirectWire.WireCarrier.splice_failure_iff",
+        "PNP.DirectWire.WireCarrier.production_boundary_isInput",
+        "PNP.DirectWire.WireCarrier.production_compiles"
+      ],
+      "scope": "For all finite implementations with an ordered tuple of literal computational field sources, M250 exposes ordinary outputs followed by every field without adding NAND gates. Exact pack/unpack identities retain the program and ordered sources. The actual three-pass physical normalizer preserves every ordinary output and field value, has exact trace accounting, reaches common quiescence and is idempotent. Every selected field producer belongs to the computed support interface, even when no ordinary output uses it. The actual arbitrary-support splice compiler preserves both observation classes under equality of the complete extracted open function, counts every exterior and replacement gate, transfers strict local savings and rejects cyclic literal wiring. Production predecessor closure is derived from the combined physical program without a supplied observer, order, map or successful result. Sixteen interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
+      "nonClaim": "This represents and transports wire-backed computational fields; the wire bindings are actual input data, not a derivation of the complete manuscript carrier or every noncomputational record, role and history. Proof-only records do not become Boolean sources. The empty additional abstract profile in the physical specialization does not assert that the full manuscript profile is empty. R5/R6-R8 obligation creation and discharge, arbitrary-support Pull/Expand materializer identities, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial bounds remain open. Equal local Boolean functions do not guarantee acyclic arbitrary literal splicing; the compiler can reject them. No semantic minimum is executed, no fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

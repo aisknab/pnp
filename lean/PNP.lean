@@ -52,6 +52,7 @@ import PNP.PCCMinDeadSupportFullMode
 import PNP.PCCMinConstantPropagation
 import PNP.PCCMinPhysicalNormalizationClosure
 import PNP.NANDArbitrarySupportSplice
+import PNP.NANDWireCarrier
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

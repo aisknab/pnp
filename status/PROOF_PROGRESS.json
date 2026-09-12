@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-249",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-250",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 225,
-    "totalRows": 227,
+    "earnedRows": 226,
+    "totalRows": 228,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2200,6 +2200,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M249 closes the physical arbitrary-support substitution and topological well-formedness edge from the pinned manuscript's section 2 Compatible replacement and section 5 N1. The literal graph and its order are computed from actual data, successful replacement semantics and physical savings are general, and production saturation supplies acyclicity without a caller proof. Cyclic raw splices are rejected even when their open functions agree. This does not derive the full carrier, complete Package E, global ZeroSlack or the exact polynomial PCCMin algorithm. No fixed load-bearing checkpoint changes state, so all checkpoint weights, earned statuses and the proof estimate remain unchanged. Formal artefact coverage: 225 of 227 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-250",
+      "formalArtefactCoverage": {
+        "earnedRows": 226,
+        "totalRows": 228
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M250 reconstructs the computational-value preservation edge in the pinned manuscript's sections 2, 4 and 5. Required internal field wires are explicit observations, so actual physical normalization and successful literal replacement preserve them without arbitrary observers or extra gate charges. This is not the derivation of the full carrier, noncomputational record histories, R5/R6-R8 obligation calculus, complete Package E, unconditional global ZeroSlack or exact polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 226 of 228 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

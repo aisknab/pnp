@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M249-CURRENT-SUMMARY:BEGIN -->
-## Current M249 boundary
+<!-- M250-CURRENT-SUMMARY:BEGIN -->
+## Current M250 boundary
 
-M249 computes an actual literal replacement for arbitrary finite gate supports and topologically compiles the resulting NAND graph. Accepted splices preserve complete ordered-output semantics under the replacement's open-function equivalence and have exact physical size and strict savings. Actual production saturation derives acyclicity without a supplied order. Equal open functions alone do not guarantee acyclic literal wiring: cyclic splices are rejected. Full-profile preservation, complete Package E, global routing and exact polynomial PCCMin remain open.
+M250 makes literal computational carrier fields explicit observations during physical normalization and arbitrary-support replacement. It proves exact pack/unpack identities, preservation of ordinary outputs and every field, hidden-field interface exposure, exact physical accounting, cyclic rejection and observer-free production compilation. It does not derive the complete manuscript carrier or obligation lifecycle, and adds no fixed weighted checkpoint credit.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 225 of 227 current scoped publication rows earned.
+Formal artefact coverage: 226 of 228 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed arbitrary-support replacement and limits](./lean_arbitrary_support_splice.md)
+See the [wire-backed carrier transport and limits](./lean_wire_carrier.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M249
-constructs actual support wiring and source-derived ordering; full-profile preservation, complete Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M250
+preserves computational fields through actual physical transformations; the complete manuscript carrier, obligation lifecycle, complete Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M249-CURRENT-SUMMARY:END -->
+<!-- M250-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 
