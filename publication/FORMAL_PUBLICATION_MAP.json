@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-246",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-247",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3286,7 +3286,17 @@
     "PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff": "d08c20b2c7b9af0a2cdc926dcf66fe1bb7809c1d0cddd3f5ecee698c6454188a",
     "PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum": "feeab8f455701e6dd448e31dab4a596148cc02258492127d0f40cdde76a99f44",
     "PNP.DirectWire.DeadSupportFullModeGain.checked": "4cad2c9d19dd6d8d490643fe8145e7962898c2cb63eef3af2560f31a21baf729",
-    "PNP.DirectWire.classifyDeadSupportFullMode_checked": "e45814982c40279fd2e49a52e93e7428012a6dc5003e3effc7222977a0fb8e50"
+    "PNP.DirectWire.classifyDeadSupportFullMode_checked": "e45814982c40279fd2e49a52e93e7428012a6dc5003e3effc7222977a0fb8e50",
+    "PNP.DirectWire.constantGateValue_sound": "0ec6cff2be375dc0eb181e160e267405a485d3e2ac41b4a8cec33b994f02b2a8",
+    "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics": "499c24a8a4455a18159223191f8879034e87f39f45493973fb81c4076c4ced7e",
+    "PNP.DirectWire.compileNANDConstantPropagation_exact_accounting": "50d1f42a8732f6563a48dec3a1c364f41ed9fccfb0b4c7ed72faa382c3013c87",
+    "PNP.DirectWire.constantPropagationImplementation_equivalent": "85b42a5ccf8a28af9ba9b19ee9b73eecc63dfe63ca306777b395881fc6c9aabc",
+    "PNP.DirectWire.constantPropagationImplementation_gateCount_le": "7da5157348a386861cf8b2cb5ef617fc89d16409f8640de9376957b344b3ab29",
+    "PNP.DirectWire.constantPropagationImplementation_referenceMinimum": "9631c6094e82f3e0ce1b4c45bb4fa4e892321fd2746ff3437cddafd9130c9ae3",
+    "PNP.DirectWire.constantPropagationImplementation_residualSlack": "532ee6acbab9c551e3da7a3cb6296b1c405458f6bb821e059826bb3aed1c0981",
+    "PNP.DirectWire.constantPropagationImplementation_strictGain_iff": "f2447341b74dc43f0d98a5fb3a63dc153eef0da71d28017060be06238796d7e6",
+    "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent": "96c02d048c9f50fb371e546364a55c1d5bf364fdcb626b38aafda1f9724fb785",
+    "PNP.DirectWire.nandConstantPropagationNormalizer_checked": "7d26c6a7ceba21244ab334e8524b55ee9ff5e0f046c5c535506d2553f8106b3b"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3304,7 +3314,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "91d4bff170d9975e34e179bcfc4e83aab9ca9c98c7aa3c35b9d5f59d1d5f32b4",
+  "milestoneSourceClosureSha256": "ff0ce6ea7687ecb83ea765f942325a7d7a3ae5084759ed7bcb4e24a2ea5c14f4",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8844,6 +8854,25 @@
       ],
       "scope": "For every finite direct-wire implementation and input finite profile observation system, M246 classifies the actual M245 proper dead-support replacement without an exhaustive physical support or reference-minimum search. It reuses the complete profile mismatch scan and adds a canonical obligation-role scan. No proper support, first full-profile mismatch, first open obligation and accepted full-mode result are distinct proof-bearing outcomes. Eight general interfaces prove exact obligation-scan completeness, first-failure prefixes, acceptance precisely when computed properness, complete profile equality and observed obligation discharge all hold, exact no-proper-support rejection, full-profile minimum invariance as a specification theorem, and branch soundness with physical equivalence, properness, exact size/slack savings and strict descent. Accepted results inhabit the existing full-carrier interface. All eight interfaces are explicit-root built with only propext and Quot.sound. No result, profile-invariance premise or correctness certificate is supplied by the caller.",
       "nonClaim": "This is computed acceptance against an input finite profile observation system, not derivation of the manuscript carrier or its semantic dependency graph. Checking observed obligation bits is not a constructed R5 creation or R6-R8 discharge ledger, and does not by itself establish complete Package E admissibility. Full-profile equality is not replaced by quotient equality; matching profiles with an open obligation are rejected. No-proper-support rejection excludes only this computed dead-support route, not every physical gain or a smaller semantic implementation. A mismatch or open obligation is explicit rejecting data, not a completed global routing theorem. The full-profile reference minimum appears only in a specification theorem; it is not computed by the classifier. No bound on the supplied observer computation or uniformly encoded-size polynomial runtime is established. No terminal-derived global family, complete N1-N10 normalization, full Package E verifier, total PCCMin oracle, unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-constant-propagation",
+      "title": "Computed constant propagation through arbitrary NAND programs",
+      "requiredTheorems": [
+        "PNP.DirectWire.constantGateValue_sound",
+        "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics",
+        "PNP.DirectWire.compileNANDConstantPropagation_exact_accounting",
+        "PNP.DirectWire.constantPropagationImplementation_equivalent",
+        "PNP.DirectWire.constantPropagationImplementation_gateCount_le",
+        "PNP.DirectWire.constantPropagationImplementation_referenceMinimum",
+        "PNP.DirectWire.constantPropagationImplementation_residualSlack",
+        "PNP.DirectWire.constantPropagationImplementation_strictGain_iff",
+        "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent",
+        "PNP.DirectWire.nandConstantPropagationNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND program, M247 computes retained-source aliases for all original gates, substitutes them before inspecting each NAND operation, eliminates a gate exactly when literal constant NAND identities determine its value, and rewrites the complete ordered output tuple. Ten general interfaces prove primitive constant recognition sound for every valuation, alias semantics, exact retained-plus-eliminated gate accounting, complete multi-output equivalence, non-increasing size, invariant reference minimum, exact residual-slack savings, strict gain exactly when an elimination occurs, strict residual descent and the computed outcome of the existing total normalizer interface. Earlier constant eliminations propagate through arbitrarily later gates. The primitive recognition theorem is axiom-free; the other nine interfaces use only propext and Quot.sound. No optimizer, result, semantic equivalence certificate or caller correctness assertion is supplied.",
+      "nonClaim": "This is the physical literal-constant structural-congruence component, not complete manuscript R1-R9 verification or N1-N10 normalization. No-elimination does not imply semantic minimality or ZeroSlack: the regression retains NAND(x, NAND(x,x)) even though a zero-gate constant-true word is equivalent. No full-profile preservation, derived manuscript carrier, arbitrary-support pullback/expansion, obligation lifecycle ledger, complete Package E or total PCCMin oracle is established. The reference minimum is used only in specification theorems, not executed by the pass. No uniformly encoded-size polynomial runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root theorem remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

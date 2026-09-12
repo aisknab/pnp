@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '5fb0b4623589dd08b64daf93f7218187bb88d8c2c733ab3109de52a678410a54';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '1d4b600818751f4f646a84f495936fbd38656876dc6018d7e3ce6400f3d03442';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -353,6 +353,16 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum',
   'PNP.DirectWire.DeadSupportFullModeGain.checked',
   'PNP.DirectWire.classifyDeadSupportFullMode_checked',
+  'PNP.DirectWire.constantGateValue_sound',
+  'PNP.DirectWire.compileNANDConstantPropagation_alias_semantics',
+  'PNP.DirectWire.compileNANDConstantPropagation_exact_accounting',
+  'PNP.DirectWire.constantPropagationImplementation_equivalent',
+  'PNP.DirectWire.constantPropagationImplementation_gateCount_le',
+  'PNP.DirectWire.constantPropagationImplementation_referenceMinimum',
+  'PNP.DirectWire.constantPropagationImplementation_residualSlack',
+  'PNP.DirectWire.constantPropagationImplementation_strictGain_iff',
+  'PNP.DirectWire.constantPropagationImplementation_strictResidualDescent',
+  'PNP.DirectWire.nandConstantPropagationNormalizer_checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3600,7 +3610,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-246') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-247') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
