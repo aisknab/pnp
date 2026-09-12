@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M248-CURRENT-SUMMARY:BEGIN -->
-## Current M248 boundary
+<!-- M249-CURRENT-SUMMARY:BEGIN -->
+## Current M249 boundary
 
-M248 computes a terminating priority loop over constant propagation, NAND sharing and output-cone pruning. Its constructed trace preserves every ordered output and records exact physical savings. All three passes are quiet on the same final result, and re-execution returns that result unchanged. These twelve general interfaces establish operational quiescence, not semantic minimality, complete manuscript normalization or the global PCCMin route.
+M249 computes an actual literal replacement for arbitrary finite gate supports and topologically compiles the resulting NAND graph. Accepted splices preserve complete ordered-output semantics under the replacement's open-function equivalence and have exact physical size and strict savings. Actual production saturation derives acyclicity without a supplied order. Equal open functions alone do not guarantee acyclic literal wiring: cyclic splices are rejected. Full-profile preservation, complete Package E, global routing and exact polynomial PCCMin remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 224 of 226 current scoped publication rows earned.
+Formal artefact coverage: 225 of 227 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed physical normalization closure and limits](./lean_pccmin_physical_normalization_closure.md)
+See the [computed arbitrary-support replacement and limits](./lean_arbitrary_support_splice.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M248
-derives common quiescence and an actual strict-gain trace for three physical passes; complete manuscript normalization and the total PCCMin oracle remain open.
+Earlier milestone notes retain their original module-specific scope. M249
+constructs actual support wiring and source-derived ordering; full-profile preservation, complete Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M248-CURRENT-SUMMARY:END -->
+<!-- M249-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

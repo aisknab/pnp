@@ -56,6 +56,7 @@ on:
       - 'audits/lean-pccmin-dead-support-full-mode0.test.mjs'
       - 'audits/lean-pccmin-constant-propagation0.test.mjs'
       - 'audits/lean-pccmin-physical-normalization-closure0.test.mjs'
+      - 'audits/lean-arbitrary-support-splice0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -72,6 +73,7 @@ on:
       - 'docs/lean_pccmin_dead_support_full_mode.md'
       - 'docs/lean_pccmin_constant_propagation.md'
       - 'docs/lean_pccmin_physical_normalization_closure.md'
+      - 'docs/lean_arbitrary_support_splice.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -550,6 +552,7 @@ on:
       - 'audits/lean-pccmin-dead-support-full-mode0.test.mjs'
       - 'audits/lean-pccmin-constant-propagation0.test.mjs'
       - 'audits/lean-pccmin-physical-normalization-closure0.test.mjs'
+      - 'audits/lean-arbitrary-support-splice0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -566,6 +569,7 @@ on:
       - 'docs/lean_pccmin_dead_support_full_mode.md'
       - 'docs/lean_pccmin_constant_propagation.md'
       - 'docs/lean_pccmin_physical_normalization_closure.md'
+      - 'docs/lean_arbitrary_support_splice.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -3070,6 +3074,111 @@ jobs:
           console.log('M248: all twelve computed physical-closure interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPPhysicalNormalizationClosure.lean
+
+      - name: Check computed arbitrary-support splice contracts
+        run: node --test audits/lean-arbitrary-support-splice0.test.mjs
+
+      - name: Audit computed arbitrary-support splice
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPArbitrarySupportSpliceAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.RawNandCompilationState.readSource_sound": [
+              "propext"
+            ],
+            "PNP.DirectWire.RawNandCompilationState.readGate_sound": [
+              "propext"
+            ],
+            "PNP.DirectWire.RawNandReadyStep.apply_remaining_lt": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.RawNandCompilationStop.unresolved_predecessor": [
+              "propext"
+            ],
+            "PNP.DirectWire.RawNandCompilationStop.complete_of_wellFounded": [
+              "propext"
+            ],
+            "PNP.DirectWire.CompiledRawNandGraph.wellFounded": [],
+            "PNP.DirectWire.compileRawNandGraph_success_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.compileRawNandGraph_failure_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.CompiledRawNandGraph.candidate_gateCount": [],
+            "PNP.DirectWire.CompiledRawNandGraph.candidate_semantics": [],
+            "PNP.DirectWire.ArbitrarySupportSplice.result_gateCount": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.compile_success_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.compile_failure_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.replacementSource_eval": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.originalSource_eval": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.values_solution": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.result_semantics": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.exterior_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.result_exact_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.result_strict_gain": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.graph_rank_decreases": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_primaryBoundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.production_compiles": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.production_agreement": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M249: all twenty-four arbitrary-support splice interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPArbitrarySupportSplice.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure

@@ -7,6 +7,12 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const LEAN_ROOT = path.join(ROOT, 'lean');
 const EXPECTED_AXIOMS = Object.freeze([]);
+// Only these explicit imports belong to the already pinned Lean toolchain.
+// The project-source closure must still reject unknown external namespaces.
+const PINNED_TOOLCHAIN_IMPORTS = new Set([
+  'Init.Data.List.Erase',
+  'Init.Data.List.FinRange',
+]);
 
 async function text0(relativePath) {
   return readFile(path.join(ROOT, relativePath), 'utf8');
@@ -130,6 +136,7 @@ function importClosure0(sources, rootModule) {
   const pending = [rootModule];
   while (pending.length !== 0) {
     const moduleName = pending.pop();
+    if (PINNED_TOOLCHAIN_IMPORTS.has(moduleName)) continue;
     if (seen.has(moduleName)) continue;
     seen.add(moduleName);
     const file = modulePath0(moduleName);
@@ -164,6 +171,30 @@ test('PNP root import closure covers every tracked Lean source module', async ()
   const sources = await leanSources0();
   const closure = importClosure0(sources, 'PNP');
   assert.deepEqual(closure, Object.keys(sources).sort());
+});
+
+test('root closure separates reviewed pinned-toolchain imports from project source', () => {
+  const sources = {
+    'lean/PNP.lean': 'import PNP.Leaf\nimport Init.Data.List.FinRange\n',
+    'lean/PNP/Leaf.lean': 'import Init.Data.List.Erase\nimport Init.Data.List.FinRange\n',
+  };
+  assert.deepEqual(importClosure0(sources, 'PNP'), Object.keys(sources).sort());
+});
+
+test('root closure still rejects unknown external imports and missing project modules', () => {
+  for (const moduleName of [
+    'Unreviewed.Package',
+    'Init.Data.List.Unreviewed',
+    'Init.Data.List.Erase.Unreviewed',
+    'Std.Unreviewed',
+  ]) {
+    assert.throws(() => importClosure0({
+      'lean/PNP.lean': 'import ' + moduleName + '\n',
+    }, 'PNP'), /non-PNP import in root closure/u);
+  }
+  assert.throws(() => importClosure0({
+    'lean/PNP.lean': 'import PNP.Missing\n',
+  }, 'PNP'), /missing module source: PNP.Missing/u);
 });
 
 test('Lean source has no project axioms or hidden placeholders', async () => {

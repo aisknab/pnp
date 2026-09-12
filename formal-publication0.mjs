@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '94642612fbb495bc0de87bf5ce02da8f29a9a42ff3ae2d462277f1a7b0eff2e0';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd6f86dd8cb4dd2318802063940095a3d3044f3750fb4b07a8bb8da7b0530bc9a';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -375,6 +375,30 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.runPhysicalNormalization_residualSlack',
   'PNP.DirectWire.runPhysicalNormalization_gainIterations_le_residualSlack',
   'PNP.DirectWire.physicalClosureNormalizer_checked',
+  'PNP.DirectWire.RawNandCompilationState.readSource_sound',
+  'PNP.DirectWire.RawNandCompilationState.readGate_sound',
+  'PNP.DirectWire.RawNandReadyStep.apply_remaining_lt',
+  'PNP.DirectWire.RawNandCompilationStop.unresolved_predecessor',
+  'PNP.DirectWire.RawNandCompilationStop.complete_of_wellFounded',
+  'PNP.DirectWire.CompiledRawNandGraph.wellFounded',
+  'PNP.DirectWire.compileRawNandGraph_success_iff',
+  'PNP.DirectWire.compileRawNandGraph_failure_iff',
+  'PNP.DirectWire.CompiledRawNandGraph.candidate_gateCount',
+  'PNP.DirectWire.CompiledRawNandGraph.candidate_semantics',
+  'PNP.DirectWire.ArbitrarySupportSplice.result_gateCount',
+  'PNP.DirectWire.ArbitrarySupportSplice.compile_success_iff',
+  'PNP.DirectWire.ArbitrarySupportSplice.compile_failure_iff',
+  'PNP.DirectWire.ArbitrarySupportSplice.replacementSource_eval',
+  'PNP.DirectWire.ArbitrarySupportSplice.originalSource_eval',
+  'PNP.DirectWire.ArbitrarySupportSplice.values_solution',
+  'PNP.DirectWire.ArbitrarySupportSplice.result_semantics',
+  'PNP.DirectWire.ArbitrarySupportSplice.exterior_accounting',
+  'PNP.DirectWire.ArbitrarySupportSplice.result_exact_accounting',
+  'PNP.DirectWire.ArbitrarySupportSplice.result_strict_gain',
+  'PNP.DirectWire.ArbitrarySupportSplice.graph_rank_decreases',
+  'PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_primaryBoundary',
+  'PNP.DirectWire.ArbitrarySupportSplice.production_compiles',
+  'PNP.DirectWire.ArbitrarySupportSplice.production_agreement',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3622,7 +3646,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-248') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-249') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
