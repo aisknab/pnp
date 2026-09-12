@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M254-CURRENT-SUMMARY:BEGIN -->
-## Current M254 boundary
+<!-- M255-CURRENT-SUMMARY:BEGIN -->
+## Current M255 boundary
 
-M254 derives full-mode R6 cancellation from a computed retained original wire, restores unresolved fields with one actual shared R8 materializer, and preserves every full computational value under precise local quotient agreement. Its mixed ledger checks creation identities across the whole transcript, and its gain query pays the complete expansion cost. Arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+M255 constructs a complete unary computational word directly from its source values, preserves all outputs and fields with zero or one shared NOT gate, and proves minimum size against every equivalent full carrier. It derives source-exact R7 discharge witnesses and a complete whole-word strict-gain query. Arbitrary ambient cuts, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 230 of 232 current scoped publication rows earned.
+Formal artefact coverage: 231 of 233 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [full-mode wire cancellation and limits](./lean_wire_matched_cancellation.md)
+See the [unary full-word realization and limits](./lean_wire_unary_realization.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M254
-cancels matched lost wires from retained original source identity and restores unmatched wires with full-value witnesses and exact charges; arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M255
+constructs a minimum-size complete unary word and source-exact R7 witnesses from actual source values; arbitrary ambient cuts, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M254-CURRENT-SUMMARY:END -->
+<!-- M255-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

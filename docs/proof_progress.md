@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254`, 230 of 232
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-255`, 231 of 233
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M254 |
+| Track | Available | Earned at M255 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M254 risk-weighted proof completion estimate is therefore 40 percent, with
+The M255 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -148,7 +148,10 @@ No fixed checkpoint or global gate changes.
 M254 derives full-mode R6 cancellation from a computed retained original wire, restores unresolved fields with one actual shared R8 materializer, and preserves every full computational value under precise local quotient agreement. Its mixed ledger checks creation identities across the whole transcript, and its gain query pays the complete expansion cost. Arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 230 of 232 current scoped publication rows earned.
+M255 constructs a complete unary computational word directly from its source values, preserves all outputs and fields with zero or one shared NOT gate, and proves minimum size against every equivalent full carrier. It derives source-exact R7 discharge witnesses and a complete whole-word strict-gain query. Arbitrary ambient cuts, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 231 of 233 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

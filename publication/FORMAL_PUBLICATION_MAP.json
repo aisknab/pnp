@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-254",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-255",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3431,7 +3431,25 @@
     "PNP.DirectWire.WireMatchedCancellation.created_nodup": "6768c54d50fa580f817703b0ebdd6ec8bccc1e149aefc968836a475bc6055986",
     "PNP.DirectWire.WireMatchedCancellation.discharged_nodup": "92d6396ff619ed082c562af3e0e469c7745091c66a916ff678ed6dd9cd0d4dae",
     "PNP.DirectWire.WireMatchedCancellation.replay_closed": "1abaf7da81590fa0607285d5e8576843119d5c2dd0c92e0862235f982aa4d53e",
-    "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids": "fbd380c2eb40962a25bccbbcd30b86d60ec182ca41ee71beb486532d92223602"
+    "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids": "fbd380c2eb40962a25bccbbcd30b86d60ec182ca41ee71beb486532d92223602",
+    "PNP.DirectWire.WireUnaryRealization.observation_value": "0e33500a57b8014755eb324cb94a88a8003b72c517e85b6b7e9992dac62f186a",
+    "PNP.DirectWire.WireUnaryRealization.needsNegation_iff": "83a83a00275421eb25c735e9f8f24785bc9f64ba58065c0bfe8be3340d4b696d",
+    "PNP.DirectWire.WireUnaryRealization.implementation_value": "62a7a8db007388000aa40dc102f35ff142b1a810c3d490728bd4d1795a318f63",
+    "PNP.DirectWire.WireUnaryRealization.realize_output": "092307fb96200f321c54e0765a5bb5cf31be1013de71bf3a708e70d9a51c92e0",
+    "PNP.DirectWire.WireUnaryRealization.realize_field": "4ad51b9f8bb60af80b01543e78080aafbb42d0a5cf812e908ba90ca4233ca484",
+    "PNP.DirectWire.WireUnaryRealization.realize_equivalent": "57b87868b12c3b735c89b6b006d160e423cf327024c5a6b2c3a34220e7b03718",
+    "PNP.DirectWire.WireUnaryRealization.realize_full_equivalent": "cb77aa4f7f9b6269386b9d8fdf342c3bfc377b24e2f7e2d8e95d5b0fc72f4113",
+    "PNP.DirectWire.WireUnaryRealization.realize_gateCount": "b4755d75e4153c374e4db394a5ec4bf6cd1dcce17168a45b796137b439c7bc0f",
+    "PNP.DirectWire.WireUnaryRealization.negation_requires_gate": "0830bed847d01bcb5eb79ae2f6558568880e61075a5d5dc0dfc4e94ea7615214",
+    "PNP.DirectWire.WireUnaryRealization.realize_minimal": "8687f6a8fcc08bcb32f606829cb3fc7758013acbee8d66fc69ad3ca0c1bc3430",
+    "PNP.DirectWire.WireUnaryRealization.realize_nonincrease": "f23591915fb7fc1e714aeb1a108377802de42cc868ff8fe3af087e07e2a4acf6",
+    "PNP.DirectWire.WireUnaryRealization.realize_gate_bound": "8fa89009a88967d4df395926dd7a1f7c4143d1223997b2b4bf62c63fbbd2cb5a",
+    "PNP.DirectWire.WireUnaryRealization.R7Discharge.full_value": "9d0c1905736bf1019e6604996d70fefb515f1e137406ed5503ad0681c35b33ee",
+    "PNP.DirectWire.WireUnaryRealization.dischargeR7_source_exact": "19945f8412e44faedfc91210ef4e83439d564a2824edfc1f90b1a1db07d59e61",
+    "PNP.DirectWire.WireUnaryRealization.dischargeR7_full_value": "cffef514537ebcbd880834578e28877e24ba3c25394b490fab04b0045ca064aa",
+    "PNP.DirectWire.WireUnaryRealization.checkedGain_isSome_iff": "7858c41c4efdbb472ae418a27f5d2329fff99241ac349df86b2feffd9d44b79a",
+    "PNP.DirectWire.WireUnaryRealization.checkedGain_complete": "8a9b3ad847ac134d943f18e2247041be14b9042a8f4aa393bf2fe50a308223f2",
+    "PNP.DirectWire.WireUnaryRealization.CheckedGain.checked": "785fbaa771e7477604ab00a32d2db483d958dade5d53f96e2c88ceea95ccbe75"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3449,7 +3467,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "0c3537cb84830fb206260e9547c812fd97137a07cb39d36e641992860a3a4a78",
+  "milestoneSourceClosureSha256": "205d23e9f0eb499914dd2270fc7cc8909265e597c3dcada794cc903eb8b82666",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9206,6 +9224,33 @@
       ],
       "scope": "For every finite computational wire carrier and keep mask, M254 computes canonical retained representatives by literal source identity in the original ordinary outputs and kept fields. The precise local quotient-agreement premise derives each matched forgotten wire's full value in the actual replacement. A computed resolved mask selects one actual shared materializer for the remaining unresolved wires, with an explicit zero-gate case when all fields resolve. The expanded word preserves every ordinary output and ordered computational field, and has exactly replacement gates plus its actual materializer charge. Computed R6 cancellations and R8 restorations carry full-value witnesses bound to that expanded source. Their generated R5/discharge ledger covers exactly the forgotten coordinates, closes with no pending obligations and rejects creation-identity reuse across the whole transcript, including already discharged entries. The fully paid whole-word gain query compares the actual expansion with the original gate count. Twenty-six general interfaces have reviewed propext-only or propext-and-Quot.sound dependencies.",
       "nonClaim": "This is an original-source-identity computational R6 case, not every semantic cancellation or the complete manuscript obligation calculus. The keep mask, replacement and precise local quotient agreement are inputs; forgotten-field equality, supplied representatives, materializer weights and global correctness certificates are not. Syntactically different but semantically equal wires may remain unresolved. No universal comparison with independently normalized earlier materializers is proved. A whole-word strict gain is not a proper-support Package E certificate. The full manuscript carrier, noncomputational profile fields, R7 and arbitrary dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-unary-realization",
+      "title": "Computed unary full-word realization",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireUnaryRealization.observation_value",
+        "PNP.DirectWire.WireUnaryRealization.needsNegation_iff",
+        "PNP.DirectWire.WireUnaryRealization.implementation_value",
+        "PNP.DirectWire.WireUnaryRealization.realize_output",
+        "PNP.DirectWire.WireUnaryRealization.realize_field",
+        "PNP.DirectWire.WireUnaryRealization.realize_equivalent",
+        "PNP.DirectWire.WireUnaryRealization.realize_full_equivalent",
+        "PNP.DirectWire.WireUnaryRealization.realize_gateCount",
+        "PNP.DirectWire.WireUnaryRealization.negation_requires_gate",
+        "PNP.DirectWire.WireUnaryRealization.realize_minimal",
+        "PNP.DirectWire.WireUnaryRealization.realize_nonincrease",
+        "PNP.DirectWire.WireUnaryRealization.realize_gate_bound",
+        "PNP.DirectWire.WireUnaryRealization.R7Discharge.full_value",
+        "PNP.DirectWire.WireUnaryRealization.dischargeR7_source_exact",
+        "PNP.DirectWire.WireUnaryRealization.dischargeR7_full_value",
+        "PNP.DirectWire.WireUnaryRealization.checkedGain_isSome_iff",
+        "PNP.DirectWire.WireUnaryRealization.checkedGain_complete",
+        "PNP.DirectWire.WireUnaryRealization.CheckedGain.checked"
+      ],
+      "scope": "For every unary computational wire carrier, with arbitrary original gate count, ordered ordinary outputs and computational fields, M255 derives both unary observation values from the actual source and constructs a complete zero-or-one-gate realization. Constants and the input cost zero gates; every negated observation shares the same actual NOT gate. The result preserves every ordinary output and computational field at every unary valuation. Its exact gate formula is minimal among all equivalent full computational carriers: a zero-gate source cannot negate the only boundary input. The constructor accepts no replacement, truth table, local agreement or minimizer. Source-exact R7 discharge witnesses for original R5 identities refer to the actual computed program and the original full field values. The whole-word strict-gain query succeeds whenever any equivalent full unary carrier is smaller. Eighteen general interfaces have reviewed axiom closures: five are axiom-free and thirteen use only propext and Quot.sound.",
+      "nonClaim": "This is a complete unary computational word realization component for manuscript R7, not an arbitrary ambient-cut embedding, every R7 case or the complete manuscript obligation calculus. Minimum size is relative to all exposed computational observations, not ordinary outputs alone. A whole-word strict gain is not a proper-support Package E certificate. The keep mask and source-bound R5 identity are used only by the discharge interface; no supplied full-value agreement is a construction premise. There is no enumeration of implementations, but evaluating two unary inputs with recursive Program.eval does not prove polynomial encoded runtime. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

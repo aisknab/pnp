@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-255",
   "lastReviewedDate": "2026-09-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 230,
-    "totalRows": 232,
+    "earnedRows": 231,
+    "totalRows": 233,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2285,6 +2285,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M254 reconstructs the pinned manuscript's full-mode R6 dependency for an actual retained original wire, paired with computed R8 restoration for every unmatched forgotten field. The all-valuation full witness follows from original source identity and the precise local quotient agreement, not masked padding. Actual expanded sources, one remaining materializer and whole-transcript unique obligation identities are checked. This is a bounded computational cancellation component; arbitrary semantic cancellations, R7 and dependency DAGs, the full carrier, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 230 of 232 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-255",
+      "formalArtefactCoverage": {
+        "earnedRows": 231,
+        "totalRows": 233
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M255 reconstructs the pinned manuscript's unary R7 realization component directly from each original computational carrier. The actual two unary values determine a complete word with one shared NOT gate only when required; the lower bound compares every equivalent full carrier rather than only ordinary outputs. Source-exact full R7 discharges and a complete whole-word strict-gain query require no supplied replacement, truth table, agreement or minimizer. Arbitrary ambient cuts, the full carrier and obligation DAGs, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 231 of 233 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
