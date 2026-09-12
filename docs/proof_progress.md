@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-250`, 226 of 228
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-251`, 227 of 229
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M250 |
+| Track | Available | Earned at M251 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M250 risk-weighted proof completion estimate is therefore 40 percent, with
+The M251 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -136,7 +136,10 @@ No fixed checkpoint or global gate changes.
 M250 makes literal computational carrier fields explicit observations during physical normalization and arbitrary-support replacement. It proves exact pack/unpack identities, preservation of ordinary outputs and every field, hidden-field interface exposure, exact physical accounting, cyclic rejection and observer-free production compilation. It does not derive the complete manuscript carrier or obligation lifecycle, and adds no fixed weighted checkpoint credit.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 226 of 228 current scoped publication rows earned.
+M251 computes lost-wire restoration for every finite wire-backed carrier and keep mask. The actual projected word and one shared NAND materializer reconstruct every ordinary output and ordered field, with exact physical charge. Mask-derived R5 creations and full-value R8 discharges cover exactly the forgotten coordinates; replay rejects reused identities across the whole trace. The gate-count bound is not a polynomial execution theorem, and the complete manuscript carrier, obligation calculus, Package E and global proof gates remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 227 of 229 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
