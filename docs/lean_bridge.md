@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M253-CURRENT-SUMMARY:BEGIN -->
-## Current M253 boundary
+<!-- M254-CURRENT-SUMMARY:BEGIN -->
+## Current M254 boundary
 
-M253 computes a quotient-visible predecessor cone, completes its frontier against the original full computational word, and substitutes a locally equivalent replacement into the actual original exterior. Each exterior gate is retained once, so matched costs and strict gain refer to the original circuit, not a larger lifted reference. Complete local open-function agreement includes retained forgotten frontier wires; quotient-only agreement is insufficient. The gain query separately checks proper support and strict saving. Every arbitrary support, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+M254 derives full-mode R6 cancellation from a computed retained original wire, restores unresolved fields with one actual shared R8 materializer, and preserves every full computational value under precise local quotient agreement. Its mixed ledger checks creation identities across the whole transcript, and its gain query pays the complete expansion cost. Arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 229 of 231 current scoped publication rows earned.
+Formal artefact coverage: 230 of 232 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [original-accounted frontier lift and limits](./lean_wire_frontier_lift.md)
+See the [full-mode wire cancellation and limits](./lean_wire_matched_cancellation.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M253
-derives the complete frontier of a computed visible cone and retains each original exterior gate once under full local agreement; every-arbitrary-support transport, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M254
+cancels matched lost wires from retained original source identity and restores unmatched wires with full-value witnesses and exact charges; arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M253-CURRENT-SUMMARY:END -->
+<!-- M254-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

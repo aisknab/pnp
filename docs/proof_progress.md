@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253`, 229 of 231
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254`, 230 of 232
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M253 |
+| Track | Available | Earned at M254 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M253 risk-weighted proof completion estimate is therefore 40 percent, with
+The M254 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -145,7 +145,10 @@ No fixed checkpoint or global gate changes.
 M253 computes a quotient-visible predecessor cone, completes its frontier against the original full computational word, and substitutes a locally equivalent replacement into the actual original exterior. Each exterior gate is retained once, so matched costs and strict gain refer to the original circuit, not a larger lifted reference. Complete local open-function agreement includes retained forgotten frontier wires; quotient-only agreement is insufficient. The gain query separately checks proper support and strict saving. Every arbitrary support, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 229 of 231 current scoped publication rows earned.
+M254 derives full-mode R6 cancellation from a computed retained original wire, restores unresolved fields with one actual shared R8 materializer, and preserves every full computational value under precise local quotient agreement. Its mixed ledger checks creation identities across the whole transcript, and its gain query pays the complete expansion cost. Arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 230 of 232 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

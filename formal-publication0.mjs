@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '118131a678315c033188671b354a67fe1759ad35dc4386644d4ebd6600b21913';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '431f780521e9468a862859dcc2eb37a60f74ef8acd5e52312aec37c4f7c9203e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -472,6 +472,32 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive',
   'PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff',
   'PNP.DirectWire.WireFrontierLift.ProperGain.checked',
+  'PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff',
+  'PNP.DirectWire.WireMatchedCancellation.observation_value',
+  'PNP.DirectWire.WireMatchedCancellation.Representative.full_value',
+  'PNP.DirectWire.WireMatchedCancellation.allResolved_sound',
+  'PNP.DirectWire.WireMatchedCancellation.charge_allResolved',
+  'PNP.DirectWire.WireMatchedCancellation.missing_unresolved_field',
+  'PNP.DirectWire.WireMatchedCancellation.charge_bound',
+  'PNP.DirectWire.WireMatchedCancellation.visible_resolved_field',
+  'PNP.DirectWire.WireMatchedCancellation.expanded_charge',
+  'PNP.DirectWire.WireMatchedCancellation.expanded_output',
+  'PNP.DirectWire.WireMatchedCancellation.expanded_field',
+  'PNP.DirectWire.WireMatchedCancellation.expanded_equivalent',
+  'PNP.DirectWire.WireMatchedCancellation.Discharge.full_value',
+  'PNP.DirectWire.WireMatchedCancellation.discharge_source_exact',
+  'PNP.DirectWire.WireMatchedCancellation.discharge_isR6_iff',
+  'PNP.DirectWire.WireMatchedCancellation.discharge_full_value',
+  'PNP.DirectWire.WireMatchedCancellation.checkedGain_isSome_iff',
+  'PNP.DirectWire.WireMatchedCancellation.CheckedGain.checked',
+  'PNP.DirectWire.WireMatchedCancellation.created_exact',
+  'PNP.DirectWire.WireMatchedCancellation.discharged_exact',
+  'PNP.DirectWire.WireMatchedCancellation.creation_iff',
+  'PNP.DirectWire.WireMatchedCancellation.discharge_iff',
+  'PNP.DirectWire.WireMatchedCancellation.created_nodup',
+  'PNP.DirectWire.WireMatchedCancellation.discharged_nodup',
+  'PNP.DirectWire.WireMatchedCancellation.replay_closed',
+  'PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3719,7 +3745,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-253') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-254') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

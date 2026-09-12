@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-253",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-254",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3405,7 +3405,33 @@
     "PNP.DirectWire.WireFrontierLift.discharge_full_value": "5f76bac96ea0779b49d2e6c7db6cdc3f3d6a953ba834835e0a449c951a741738",
     "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive": "3ad5423b315def909a850c9f775b9bf51ced9833a9566b82978770b779319441",
     "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff": "419ea770c1d5c32e79ec2f3bc59d1d4497d1b447f3e363a5e70e9e2326d5a01e",
-    "PNP.DirectWire.WireFrontierLift.ProperGain.checked": "a3092c4aca64494c0ac7112cf82d000da02b4a4a61ae545f8b74719dc436a2a4"
+    "PNP.DirectWire.WireFrontierLift.ProperGain.checked": "a3092c4aca64494c0ac7112cf82d000da02b4a4a61ae545f8b74719dc436a2a4",
+    "PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff": "9a0ce14691f7d8efab0f371697999b2d067b00a5bfc9fcd44f862f21bcc4e6ba",
+    "PNP.DirectWire.WireMatchedCancellation.observation_value": "f94cb4b0dc8e6c033764ada12c4f515a90797071f034c88ae12b3d823f08ec68",
+    "PNP.DirectWire.WireMatchedCancellation.Representative.full_value": "b427980991225d6ec290732313658035f0423b39e96246f5f2cc3dcd3eca38f3",
+    "PNP.DirectWire.WireMatchedCancellation.allResolved_sound": "b8d11d28fe4db2ec5cd7e0425e4151719df9a47c68eb71bdc4f36cdeab857cd6",
+    "PNP.DirectWire.WireMatchedCancellation.charge_allResolved": "315efbe39ca329c5d4d6e122ace539f26c3f3d89dbd486cbff820cc4c52d5ae7",
+    "PNP.DirectWire.WireMatchedCancellation.missing_unresolved_field": "66dd6694892b90af070b2842905361dcdd6f7aa20ecb4e9b3b96b44272b43b59",
+    "PNP.DirectWire.WireMatchedCancellation.charge_bound": "1adaf4f65352bbcf5056894a1f581a8d4d2104e789f18e770823c90b6fffacde",
+    "PNP.DirectWire.WireMatchedCancellation.visible_resolved_field": "11a959061c3465bb82fa0daaabc34c0b0af67467602e70fa8838e02910ebbc5b",
+    "PNP.DirectWire.WireMatchedCancellation.expanded_charge": "5c010930b10c343eb99b555161171751238b45c577a7b2ef7a27675d9cb0b2ba",
+    "PNP.DirectWire.WireMatchedCancellation.expanded_output": "50f302457ac646b61330aab04da7d1cdc0ac4ef53ba18b9ab1967c3d9f2c882c",
+    "PNP.DirectWire.WireMatchedCancellation.expanded_field": "fd823a6e1a7a2eb2896ae0f86a9405acb41eb35d5a560e92ce5877157a5d2caa",
+    "PNP.DirectWire.WireMatchedCancellation.expanded_equivalent": "d739a414f98686dfc8eacb28580976115794150dc2339039706874eb98e47488",
+    "PNP.DirectWire.WireMatchedCancellation.Discharge.full_value": "9743c4ea11a1b3ef791893c7c4700e1dfd49d8d342f318241d92e5e104c353ab",
+    "PNP.DirectWire.WireMatchedCancellation.discharge_source_exact": "527fa079d1da2264a7c958b78b3264c08e89da693cbc4d579471d8c0a91b8fd5",
+    "PNP.DirectWire.WireMatchedCancellation.discharge_isR6_iff": "344e9293b8d23622e47cfc82a3d9f4a7311e085d78f1111a58a118c012a6478e",
+    "PNP.DirectWire.WireMatchedCancellation.discharge_full_value": "b2f03c46a68b1d103f2bb60d2ffebcea476463787a73e138b7db27110d4b8398",
+    "PNP.DirectWire.WireMatchedCancellation.checkedGain_isSome_iff": "75d6ee1639773cb2417ca3077af8011f6677d6c042f869b1d6691d7be3865b57",
+    "PNP.DirectWire.WireMatchedCancellation.CheckedGain.checked": "7729efcecab7e56556163bdc2bcf218be41a062a6ee285b9807ae6bd3ac2dea7",
+    "PNP.DirectWire.WireMatchedCancellation.created_exact": "e32e06f39dd7a79aeeb8194892b45d5bf39b86e9014f267b438e7613d26e03c9",
+    "PNP.DirectWire.WireMatchedCancellation.discharged_exact": "485a37483687566eff84234d8322dce65af02f4614c43d62a1c3bcddb4643cc3",
+    "PNP.DirectWire.WireMatchedCancellation.creation_iff": "213a77f56b3cf7580de96510516a7c919f1b983cf81c79d8547f639d754e2ba1",
+    "PNP.DirectWire.WireMatchedCancellation.discharge_iff": "14291497e107583d0464ec07e6ad74851f49fcc1526ef0fd7dc6e5dd7199dbcf",
+    "PNP.DirectWire.WireMatchedCancellation.created_nodup": "6768c54d50fa580f817703b0ebdd6ec8bccc1e149aefc968836a475bc6055986",
+    "PNP.DirectWire.WireMatchedCancellation.discharged_nodup": "92d6396ff619ed082c562af3e0e469c7745091c66a916ff678ed6dd9cd0d4dae",
+    "PNP.DirectWire.WireMatchedCancellation.replay_closed": "1abaf7da81590fa0607285d5e8576843119d5c2dd0c92e0862235f982aa4d53e",
+    "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids": "fbd380c2eb40962a25bccbbcd30b86d60ec182ca41ee71beb486532d92223602"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3423,7 +3449,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "77a824bdf0c87b6480b5f4cec5ffc8744a3049259794c1582a4e5e3e2094cf39",
+  "milestoneSourceClosureSha256": "0c3537cb84830fb206260e9547c812fd97137a07cb39d36e641992860a3a4a78",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9145,6 +9171,41 @@
       ],
       "scope": "For every finite computational wire carrier and keep mask, M253 computes the predecessor cone of ordinary and kept observations, then extracts its complete interface from the original fully exposed carrier. Selected forgotten field producers and exterior consumers participate in that frontier. Predecessor closure derives a primary-input-only boundary and actual replacement compiler success without a supplied support, order or success certificate. Every original exterior gate is retained exactly once. Original and expanded gate counts split into pulled or replacement gates plus the same actual exterior charge, giving matched integer differences and an exact original-saving equivalence. Equality with the complete extracted open function derives all ordinary and ordered computational field values and full discharges bound to the actual expanded sources. The computed proper-gain query separately requires proper support and strict local saving, then returns an actual original-circuit equivalent strict gain with every field preserved. Eighteen general interfaces have exact reviewed dependencies propext and Quot.sound.",
       "nonClaim": "This is a computational frontier lift for one input-derived visible predecessor cone, not arbitrary-support Pull/Expand across all manuscript traces. The keep mask, replacement and complete local open-function agreement are inputs. Ordinary-output or quotient-only agreement does not imply the stronger completed-frontier premise. No replacement search or automatic local agreement is proved. A whole-support saving is not a proper-support certificate. The construction does not complete the full manuscript carrier, noncomputational profile fields, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-matched-cancellation",
+      "title": "Computed full-mode wire cancellation",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff",
+        "PNP.DirectWire.WireMatchedCancellation.observation_value",
+        "PNP.DirectWire.WireMatchedCancellation.Representative.full_value",
+        "PNP.DirectWire.WireMatchedCancellation.allResolved_sound",
+        "PNP.DirectWire.WireMatchedCancellation.charge_allResolved",
+        "PNP.DirectWire.WireMatchedCancellation.missing_unresolved_field",
+        "PNP.DirectWire.WireMatchedCancellation.charge_bound",
+        "PNP.DirectWire.WireMatchedCancellation.visible_resolved_field",
+        "PNP.DirectWire.WireMatchedCancellation.expanded_charge",
+        "PNP.DirectWire.WireMatchedCancellation.expanded_output",
+        "PNP.DirectWire.WireMatchedCancellation.expanded_field",
+        "PNP.DirectWire.WireMatchedCancellation.expanded_equivalent",
+        "PNP.DirectWire.WireMatchedCancellation.Discharge.full_value",
+        "PNP.DirectWire.WireMatchedCancellation.discharge_source_exact",
+        "PNP.DirectWire.WireMatchedCancellation.discharge_isR6_iff",
+        "PNP.DirectWire.WireMatchedCancellation.discharge_full_value",
+        "PNP.DirectWire.WireMatchedCancellation.checkedGain_isSome_iff",
+        "PNP.DirectWire.WireMatchedCancellation.CheckedGain.checked",
+        "PNP.DirectWire.WireMatchedCancellation.created_exact",
+        "PNP.DirectWire.WireMatchedCancellation.discharged_exact",
+        "PNP.DirectWire.WireMatchedCancellation.creation_iff",
+        "PNP.DirectWire.WireMatchedCancellation.discharge_iff",
+        "PNP.DirectWire.WireMatchedCancellation.created_nodup",
+        "PNP.DirectWire.WireMatchedCancellation.discharged_nodup",
+        "PNP.DirectWire.WireMatchedCancellation.replay_closed",
+        "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids"
+      ],
+      "scope": "For every finite computational wire carrier and keep mask, M254 computes canonical retained representatives by literal source identity in the original ordinary outputs and kept fields. The precise local quotient-agreement premise derives each matched forgotten wire's full value in the actual replacement. A computed resolved mask selects one actual shared materializer for the remaining unresolved wires, with an explicit zero-gate case when all fields resolve. The expanded word preserves every ordinary output and ordered computational field, and has exactly replacement gates plus its actual materializer charge. Computed R6 cancellations and R8 restorations carry full-value witnesses bound to that expanded source. Their generated R5/discharge ledger covers exactly the forgotten coordinates, closes with no pending obligations and rejects creation-identity reuse across the whole transcript, including already discharged entries. The fully paid whole-word gain query compares the actual expansion with the original gate count. Twenty-six general interfaces have reviewed propext-only or propext-and-Quot.sound dependencies.",
+      "nonClaim": "This is an original-source-identity computational R6 case, not every semantic cancellation or the complete manuscript obligation calculus. The keep mask, replacement and precise local quotient agreement are inputs; forgotten-field equality, supplied representatives, materializer weights and global correctness certificates are not. Syntactically different but semantically equal wires may remain unresolved. No universal comparison with independently normalized earlier materializers is proved. A whole-word strict gain is not a proper-support Package E certificate. The full manuscript carrier, noncomputational profile fields, R7 and arbitrary dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

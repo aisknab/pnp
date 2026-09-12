@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253",
-  "lastReviewedDate": "2026-09-12",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254",
+  "lastReviewedDate": "2026-09-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 229,
-    "totalRows": 231,
+    "earnedRows": 230,
+    "totalRows": 232,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2268,6 +2268,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M253 reconstructs the original-circuit matched-cost edge of the pinned manuscript's compatible extraction, unique physical ownership, full-frontier replacement and strict proper-support obligations. Unlike the larger reference lift in M252, it derives an original gate partition and retains each exterior gate once. Its complete local open-function premise explicitly includes forgotten retained frontier wires; the kernel-checked wrong-frontier fixture rules out substituting quotient-only agreement. The proper-gain query rejects whole-support and non-strict replacements. This is one computed computational predecessor cone, not every arbitrary support across the full carrier and all traces; the obligation calculus, Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 229 of 231 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254",
+      "formalArtefactCoverage": {
+        "earnedRows": 230,
+        "totalRows": 232
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M254 reconstructs the pinned manuscript's full-mode R6 dependency for an actual retained original wire, paired with computed R8 restoration for every unmatched forgotten field. The all-valuation full witness follows from original source identity and the precise local quotient agreement, not masked padding. Actual expanded sources, one remaining materializer and whole-transcript unique obligation identities are checked. This is a bounded computational cancellation component; arbitrary semantic cancellations, R7 and dependency DAGs, the full carrier, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 230 of 232 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
