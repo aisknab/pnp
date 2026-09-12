@@ -1,0 +1,24 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireObligationRestoration.projected_output
+#print axioms PNP.DirectWire.WireObligationRestoration.projected_kept_field
+#print axioms PNP.DirectWire.WireObligationRestoration.materializer_forgotten_field
+#print axioms PNP.DirectWire.WireObligationRestoration.join_output
+#print axioms PNP.DirectWire.WireObligationRestoration.join_kept_field
+#print axioms PNP.DirectWire.WireObligationRestoration.join_forgotten_field
+#print axioms PNP.DirectWire.WireObligationRestoration.restored_output
+#print axioms PNP.DirectWire.WireObligationRestoration.restored_field
+#print axioms PNP.DirectWire.WireObligationRestoration.restored_exact_gate_charge
+#print axioms PNP.DirectWire.WireObligationRestoration.restored_gate_bound
+#print axioms PNP.DirectWire.WireObligationRestoration.created_exact
+#print axioms PNP.DirectWire.WireObligationRestoration.discharged_exact
+#print axioms PNP.DirectWire.WireObligationRestoration.mem_forgottenCoordinates_iff
+#print axioms PNP.DirectWire.WireObligationRestoration.creation_iff
+#print axioms PNP.DirectWire.WireObligationRestoration.discharge_iff
+#print axioms PNP.DirectWire.WireObligationRestoration.replay_closed
+#print axioms PNP.DirectWire.WireObligationRestoration.dischargeR8_full_value
+#print axioms PNP.DirectWire.WireObligationRestoration.gain?_isSome_iff
+#print axioms PNP.DirectWire.WireObligationRestoration.gain_checked
+#print axioms PNP.DirectWire.WireObligationRestoration.created_nodup
+#print axioms PNP.DirectWire.WireObligationRestoration.discharged_nodup
+#print axioms PNP.DirectWire.WireObligationRestoration.replay_rejects_duplicate_ids

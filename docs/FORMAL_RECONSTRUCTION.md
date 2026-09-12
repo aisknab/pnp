@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M250-CURRENT-SUMMARY:BEGIN -->
-## Current M250 boundary
+<!-- M251-CURRENT-SUMMARY:BEGIN -->
+## Current M251 boundary
 
-M250 makes literal computational carrier fields explicit observations during physical normalization and arbitrary-support replacement. It proves exact pack/unpack identities, preservation of ordinary outputs and every field, hidden-field interface exposure, exact physical accounting, cyclic rejection and observer-free production compilation. It does not derive the complete manuscript carrier or obligation lifecycle, and adds no fixed weighted checkpoint credit.
+M251 computes lost-wire restoration for every finite wire-backed carrier and keep mask. The actual projected word and one shared NAND materializer reconstruct every ordinary output and ordered field, with exact physical charge. Mask-derived R5 creations and full-value R8 discharges cover exactly the forgotten coordinates; replay rejects reused identities across the whole trace. The gate-count bound is not a polynomial execution theorem, and the complete manuscript carrier, obligation calculus, Package E and global proof gates remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 226 of 228 current scoped publication rows earned.
+Formal artefact coverage: 227 of 229 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [wire-backed carrier transport and limits](./lean_wire_carrier.md)
+See the [wire-obligation restoration and limits](./lean_wire_obligation_restoration.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M250
-preserves computational fields through actual physical transformations; the complete manuscript carrier, obligation lifecycle, complete Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M251
+restores forgotten computational fields with full physical charge and a derived unique event ledger; the full carrier, complete obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M250-CURRENT-SUMMARY:END -->
+<!-- M251-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

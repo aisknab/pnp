@@ -1,21 +1,21 @@
 # pnp
 
-<!-- M250-CURRENT-SUMMARY:BEGIN -->
-## Current M250 boundary
+<!-- M251-CURRENT-SUMMARY:BEGIN -->
+## Current M251 boundary
 
-M250 makes literal computational carrier fields explicit observations during physical normalization and arbitrary-support replacement. It proves exact pack/unpack identities, preservation of ordinary outputs and every field, hidden-field interface exposure, exact physical accounting, cyclic rejection and observer-free production compilation. It does not derive the complete manuscript carrier or obligation lifecycle, and adds no fixed weighted checkpoint credit.
+M251 computes lost-wire restoration for every finite wire-backed carrier and keep mask. The actual projected word and one shared NAND materializer reconstruct every ordinary output and ordered field, with exact physical charge. Mask-derived R5 creations and full-value R8 discharges cover exactly the forgotten coordinates; replay rejects reused identities across the whole trace. The gate-count bound is not a polynomial execution theorem, and the complete manuscript carrier, obligation calculus, Package E and global proof gates remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 226 of 228 current scoped publication rows earned.
+Formal artefact coverage: 227 of 229 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [wire-backed carrier transport and limits](./docs/lean_wire_carrier.md)
+See the [wire-obligation restoration and limits](./docs/lean_wire_obligation_restoration.md)
 and the [conditional final-report bridge](./docs/lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M250
-preserves computational fields through actual physical transformations; the complete manuscript carrier, obligation lifecycle, complete Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M251
+restores forgotten computational fields with full physical charge and a derived unique event ledger; the full carrier, complete obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M250-CURRENT-SUMMARY:END -->
+<!-- M251-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -39,12 +39,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M250 additionally preserves literal computational carrier fields through actual physical normalization and successful arbitrary-support splicing, while retaining complete manuscript carrier, obligation-lifecycle, global and polynomial obligations. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
+| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M251 additionally computes fully charged restoration of forgotten computational wire fields with a derived unique R5/full-R8 event ledger, while retaining the complete manuscript carrier, obligation calculus, global and polynomial obligations. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 226 of 228 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 227 of 229 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

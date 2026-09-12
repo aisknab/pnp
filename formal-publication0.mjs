@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '471052f0a36eaa93737045c47ac594622052cb27734380b619345f3d261ef949';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '2ad4e5dc638d0e5fc3446146ab7e8a917f77ae22dd30ba757a4b5c9ba7c39f05';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -415,6 +415,28 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireCarrier.splice_failure_iff',
   'PNP.DirectWire.WireCarrier.production_boundary_isInput',
   'PNP.DirectWire.WireCarrier.production_compiles',
+  'PNP.DirectWire.WireObligationRestoration.projected_output',
+  'PNP.DirectWire.WireObligationRestoration.projected_kept_field',
+  'PNP.DirectWire.WireObligationRestoration.materializer_forgotten_field',
+  'PNP.DirectWire.WireObligationRestoration.join_output',
+  'PNP.DirectWire.WireObligationRestoration.join_kept_field',
+  'PNP.DirectWire.WireObligationRestoration.join_forgotten_field',
+  'PNP.DirectWire.WireObligationRestoration.restored_output',
+  'PNP.DirectWire.WireObligationRestoration.restored_field',
+  'PNP.DirectWire.WireObligationRestoration.restored_exact_gate_charge',
+  'PNP.DirectWire.WireObligationRestoration.restored_gate_bound',
+  'PNP.DirectWire.WireObligationRestoration.created_exact',
+  'PNP.DirectWire.WireObligationRestoration.discharged_exact',
+  'PNP.DirectWire.WireObligationRestoration.mem_forgottenCoordinates_iff',
+  'PNP.DirectWire.WireObligationRestoration.creation_iff',
+  'PNP.DirectWire.WireObligationRestoration.discharge_iff',
+  'PNP.DirectWire.WireObligationRestoration.replay_closed',
+  'PNP.DirectWire.WireObligationRestoration.dischargeR8_full_value',
+  'PNP.DirectWire.WireObligationRestoration.gain?_isSome_iff',
+  'PNP.DirectWire.WireObligationRestoration.gain_checked',
+  'PNP.DirectWire.WireObligationRestoration.created_nodup',
+  'PNP.DirectWire.WireObligationRestoration.discharged_nodup',
+  'PNP.DirectWire.WireObligationRestoration.replay_rejects_duplicate_ids',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3662,7 +3684,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-250') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-251') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

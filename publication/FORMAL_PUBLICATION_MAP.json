@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-250",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-251",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3348,7 +3348,29 @@
     "PNP.DirectWire.WireCarrier.splice_checked": "98107b6a054e0da36408a39910ff8938933712f48a4a2f5dd669b98900d303f9",
     "PNP.DirectWire.WireCarrier.splice_failure_iff": "8267d78155cac9ef72b19406e8a7b9e94064d7c675dddea99d1ef3e7c6fb881e",
     "PNP.DirectWire.WireCarrier.production_boundary_isInput": "685e00c4d3d3038805c3db5f9c6b028a28ae8ef39c7cadab56e116151fafc1fc",
-    "PNP.DirectWire.WireCarrier.production_compiles": "09f0bee838b9d67f46d451c461a6272810bef6ec49d7b00cd1e4c615cefa8e22"
+    "PNP.DirectWire.WireCarrier.production_compiles": "09f0bee838b9d67f46d451c461a6272810bef6ec49d7b00cd1e4c615cefa8e22",
+    "PNP.DirectWire.WireObligationRestoration.projected_output": "9db137ff572598f27b8978c1e20592987442afe9518444b13a1a82be7389eafe",
+    "PNP.DirectWire.WireObligationRestoration.projected_kept_field": "18eb453392e344b669686f436529edc8eac10935796c5d660dadd58dae0dd27e",
+    "PNP.DirectWire.WireObligationRestoration.materializer_forgotten_field": "443dd40f055b1440727c3b6bae6e475ed159bf3fbe5d61093d6730f33d7f5950",
+    "PNP.DirectWire.WireObligationRestoration.join_output": "39bf1aac304078048078a936243756c731ef9e036aa97339424f1134457abab9",
+    "PNP.DirectWire.WireObligationRestoration.join_kept_field": "2beb641b17d6f90f1029f1c56ea226ba65d1b4a59e8bc22f39c08f9b1cd671e3",
+    "PNP.DirectWire.WireObligationRestoration.join_forgotten_field": "dbf92adf17c0520daefcd37b20bdae3868600663f73e69ccfd63479f6018b061",
+    "PNP.DirectWire.WireObligationRestoration.restored_output": "f2700308348906c76b750ce766a97d50c2c3e1c59f590ddc475384824b87cd37",
+    "PNP.DirectWire.WireObligationRestoration.restored_field": "64df896b2a0483021625f23df9f82a1b4d3316916a5b3e49acdc52fb3300ea24",
+    "PNP.DirectWire.WireObligationRestoration.restored_exact_gate_charge": "1dce5aeceb99a472a85441e2e20f95970b141bc335e78f0c6cbf8914ae355196",
+    "PNP.DirectWire.WireObligationRestoration.restored_gate_bound": "024165d580947e53951cc622e0da244a7b8b1c4073546afb4688274afa4bfb25",
+    "PNP.DirectWire.WireObligationRestoration.created_exact": "4e4f8fd06ec135760827ee6c7912f228bacb3c130c6265ca4f6a613e24cf947b",
+    "PNP.DirectWire.WireObligationRestoration.discharged_exact": "5768997e5f284d7fcd7f257d1c98475dd57c5c94c0183077411b26e656173b77",
+    "PNP.DirectWire.WireObligationRestoration.mem_forgottenCoordinates_iff": "fd19fd4184326b9f8b1a2d2c366ae70cc639af00735742284e1027676d54a47a",
+    "PNP.DirectWire.WireObligationRestoration.creation_iff": "f1b7532d0e888e57ce1b16f0ddce0fb03687dd335558c639939cde0654bcc0a0",
+    "PNP.DirectWire.WireObligationRestoration.discharge_iff": "4ae3a648df20849a27c29b2ad75f4dc2493b20b56ee7a970431a22d427cd7bab",
+    "PNP.DirectWire.WireObligationRestoration.replay_closed": "fe9eebebe76bf2c9468b1c74b8283cac786fe19c63c2b7e66eb11b38bbb2d842",
+    "PNP.DirectWire.WireObligationRestoration.dischargeR8_full_value": "ece2b699fc6d36735d7a62f772db312386c33ff388e1c0ed2b2a1ecba9bac05f",
+    "PNP.DirectWire.WireObligationRestoration.gain?_isSome_iff": "d0d8ddb1749b477af29863f43640eb7241a06445a9db2aa09f661b1fdaf0ad20",
+    "PNP.DirectWire.WireObligationRestoration.gain_checked": "6371bbe19d03e7455d308a83c48154ad5a8e97f39508b74b05e040314d9d877c",
+    "PNP.DirectWire.WireObligationRestoration.created_nodup": "c13d5f7f593ff543a7d6367f4513a07b09fac14a1bd804494d2b4f58418608ae",
+    "PNP.DirectWire.WireObligationRestoration.discharged_nodup": "de37f4291ba5722db2e4309d9d837e4ed439a819ee82f6fb1fc131be2b87954e",
+    "PNP.DirectWire.WireObligationRestoration.replay_rejects_duplicate_ids": "e946fbe19d83be47720897f76d693bace11654c868189c7bbf1ef43ddcf679e6"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3366,7 +3388,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a73b67878bec2bdf85c14a088fa29d1c5d86623b0b8cbc49cd48bd0198a98c58",
+  "milestoneSourceClosureSha256": "13c08246ecd0069c649b5191648282517333667f71b07a793170b53aa5fc45de",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9004,6 +9026,37 @@
       ],
       "scope": "For all finite implementations with an ordered tuple of literal computational field sources, M250 exposes ordinary outputs followed by every field without adding NAND gates. Exact pack/unpack identities retain the program and ordered sources. The actual three-pass physical normalizer preserves every ordinary output and field value, has exact trace accounting, reaches common quiescence and is idempotent. Every selected field producer belongs to the computed support interface, even when no ordinary output uses it. The actual arbitrary-support splice compiler preserves both observation classes under equality of the complete extracted open function, counts every exterior and replacement gate, transfers strict local savings and rejects cyclic literal wiring. Production predecessor closure is derived from the combined physical program without a supplied observer, order, map or successful result. Sixteen interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
       "nonClaim": "This represents and transports wire-backed computational fields; the wire bindings are actual input data, not a derivation of the complete manuscript carrier or every noncomputational record, role and history. Proof-only records do not become Boolean sources. The empty additional abstract profile in the physical specialization does not assert that the full manuscript profile is empty. R5/R6-R8 obligation creation and discharge, arbitrary-support Pull/Expand materializer identities, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial bounds remain open. Equal local Boolean functions do not guarantee acyclic arbitrary literal splicing; the compiler can reject them. No semantic minimum is executed, no fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-obligation-restoration",
+      "title": "Computed lost-wire projection obligations and fully charged restoration",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireObligationRestoration.projected_output",
+        "PNP.DirectWire.WireObligationRestoration.projected_kept_field",
+        "PNP.DirectWire.WireObligationRestoration.materializer_forgotten_field",
+        "PNP.DirectWire.WireObligationRestoration.join_output",
+        "PNP.DirectWire.WireObligationRestoration.join_kept_field",
+        "PNP.DirectWire.WireObligationRestoration.join_forgotten_field",
+        "PNP.DirectWire.WireObligationRestoration.restored_output",
+        "PNP.DirectWire.WireObligationRestoration.restored_field",
+        "PNP.DirectWire.WireObligationRestoration.restored_exact_gate_charge",
+        "PNP.DirectWire.WireObligationRestoration.restored_gate_bound",
+        "PNP.DirectWire.WireObligationRestoration.created_exact",
+        "PNP.DirectWire.WireObligationRestoration.discharged_exact",
+        "PNP.DirectWire.WireObligationRestoration.mem_forgottenCoordinates_iff",
+        "PNP.DirectWire.WireObligationRestoration.creation_iff",
+        "PNP.DirectWire.WireObligationRestoration.discharge_iff",
+        "PNP.DirectWire.WireObligationRestoration.replay_closed",
+        "PNP.DirectWire.WireObligationRestoration.dischargeR8_full_value",
+        "PNP.DirectWire.WireObligationRestoration.gain?_isSome_iff",
+        "PNP.DirectWire.WireObligationRestoration.gain_checked",
+        "PNP.DirectWire.WireObligationRestoration.created_nodup",
+        "PNP.DirectWire.WireObligationRestoration.discharged_nodup",
+        "PNP.DirectWire.WireObligationRestoration.replay_rejects_duplicate_ids"
+      ],
+      "scope": "For every finite wire-backed carrier and finite keep mask, M251 computes the actual projected NAND word and one shared materializer for all forgotten computational fields. Literal common-input concatenation restores every ordinary output and every ordered field for all valuations, with exact projected-plus-materializer physical gate charge and an output gate-count bound of twice the original. The mask derives exactly the forgotten coordinates, each with an original-source-bound R5 creation and actual restored-source-bound full-value R8 discharge. The computed independent event ledger creates and discharges every lost coordinate once and closes under replay; whole-trace identity validation rejects reusing an already discharged identity. Gain detection pays the complete materializer before requiring a strict decrease. No observer, restoration program, discharge trace or correctness certificate is supplied. Twenty-two interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
+      "nonClaim": "This is the computational lost-wire slice of the manuscript's projection and R5/full-R8 requirements, not the full carrier or complete finite-kernel rewrite and obligation calculus. The keep mask is an input, not a derived global route. Noncomputational records, R6/R7 cancellation, arbitrary obligation-dependency DAGs, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial runtime remain open. Quotient padding is not full-field agreement. Restoration need not be a net gain or a semantic minimum. The twice-original gate bound is only an output-size fact, not a total polynomial execution or certificate-size theorem. No fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0
