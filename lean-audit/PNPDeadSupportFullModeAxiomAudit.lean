@@ -1,0 +1,10 @@
+import PNP
+
+#print axioms PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff
+#print axioms PNP.DirectWire.firstTerminalOpenObligation_spec
+#print axioms PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged
+#print axioms PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff
+#print axioms PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff
+#print axioms PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum
+#print axioms PNP.DirectWire.DeadSupportFullModeGain.checked
+#print axioms PNP.DirectWire.classifyDeadSupportFullMode_checked

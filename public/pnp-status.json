@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1566,6 +1566,21 @@
   "leanPCCMinDeadSupportContextCompletePackageEVerifierProved": false,
   "leanPCCMinDeadSupportContextPolynomialRuntimeProved": false,
   "leanPCCMinDeadSupportContextScope": "all-finite-nand-implementations-computed-dead-gate-complement-empty-interface-exact-extracted-support-live-frontier-environment-framed-replacement-and-nonempty-proper-physical-gain-only",
+  "leanPCCMinDeadSupportFullModeFormalized": true,
+  "leanPCCMinDeadSupportFullModeAxiomAuditPassed": true,
+  "leanPCCMinDeadSupportFullModeAuditedDeclarationCount": 8,
+  "leanPCCMinDeadSupportFullModeObligationScanTheorem": "PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff",
+  "leanPCCMinDeadSupportFullModeFirstOpenObligationTheorem": "PNP.DirectWire.firstTerminalOpenObligation_spec",
+  "leanPCCMinDeadSupportFullModeCurrentObligationsTheorem": "PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged",
+  "leanPCCMinDeadSupportFullModeAcceptanceTheorem": "PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff",
+  "leanPCCMinDeadSupportFullModeNoProperSupportTheorem": "PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff",
+  "leanPCCMinDeadSupportFullModeFullProfileMinimumTheorem": "PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum",
+  "leanPCCMinDeadSupportFullModeAcceptedSoundnessTheorem": "PNP.DirectWire.DeadSupportFullModeGain.checked",
+  "leanPCCMinDeadSupportFullModeClassifierSoundnessTheorem": "PNP.DirectWire.classifyDeadSupportFullMode_checked",
+  "leanPCCMinDeadSupportFullModeManuscriptCarrierDerived": false,
+  "leanPCCMinDeadSupportFullModeCompletePackageEVerifierProved": false,
+  "leanPCCMinDeadSupportFullModePolynomialRuntimeProved": false,
+  "leanPCCMinDeadSupportFullModeScope": "computed-proper-dead-support-complete-finite-profile-and-observed-obligation-acceptance-over-input-observation-system-no-derived-manuscript-carrier-or-discharge-ledger",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2824,7 +2839,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "0d4d9738a7187934e27e64b808dbc02bdf5ecf192c92fba132cf593723e6ad42",
+    "actualSourceClosureSha256": "91d4bff170d9975e34e179bcfc4e83aab9ca9c98c7aa3c35b9d5f59d1d5f32b4",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2857,19 +2872,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f403b1dc79ea4e80f67ace933db2b1d126b3a3b1cbb1ecfba36414c7847fbe68",
+  "leanTheoremInventorySha256": "f4ab83eda87dcb2fb33506dd4a5fafe319cfea48e079e4cd226432f3fba1c9f3",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46483,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20104,
-  "leanTheoremInventoryTheoremCount": 25536,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11067,
-  "leanTheoremInventorySourceClosureModuleCount": 509,
-  "leanSourceClosureSha256": "0d4d9738a7187934e27e64b808dbc02bdf5ecf192c92fba132cf593723e6ad42",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-245",
+  "leanTheoremInventoryDeclarationCount": 46591,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20121,
+  "leanTheoremInventoryTheoremCount": 25576,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11074,
+  "leanTheoremInventorySourceClosureModuleCount": 510,
+  "leanSourceClosureSha256": "91d4bff170d9975e34e179bcfc4e83aab9ca9c98c7aa3c35b9d5f59d1d5f32b4",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-246",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "c9470fd2428b743e925701b9350ee14a79bf27cc9fbbff372e6bae132bb671d1",
+  "formalPublicationMapSha256": "88ac375729b79f2653c0929f581b337c00fdae9b2b0befe20a319847bc87c444",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -50303,9 +50318,131 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-dead-support-full-mode",
+      "title": "Full finite-profile and obligation acceptance for computed dead-support gains",
+      "requiredTheorems": [
+        "PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff",
+        "PNP.DirectWire.firstTerminalOpenObligation_spec",
+        "PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged",
+        "PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff",
+        "PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff",
+        "PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum",
+        "PNP.DirectWire.DeadSupportFullModeGain.checked",
+        "PNP.DirectWire.classifyDeadSupportFullMode_checked"
+      ],
+      "scope": "For every finite direct-wire implementation and input finite profile observation system, M246 classifies the actual M245 proper dead-support replacement without an exhaustive physical support or reference-minimum search. It reuses the complete profile mismatch scan and adds a canonical obligation-role scan. No proper support, first full-profile mismatch, first open obligation and accepted full-mode result are distinct proof-bearing outcomes. Eight general interfaces prove exact obligation-scan completeness, first-failure prefixes, acceptance precisely when computed properness, complete profile equality and observed obligation discharge all hold, exact no-proper-support rejection, full-profile minimum invariance as a specification theorem, and branch soundness with physical equivalence, properness, exact size/slack savings and strict descent. Accepted results inhabit the existing full-carrier interface. All eight interfaces are explicit-root built with only propext and Quot.sound. No result, profile-invariance premise or correctness certificate is supplied by the caller.",
+      "nonClaim": "This is computed acceptance against an input finite profile observation system, not derivation of the manuscript carrier or its semantic dependency graph. Checking observed obligation bits is not a constructed R5 creation or R6-R8 discharge ledger, and does not by itself establish complete Package E admissibility. Full-profile equality is not replaced by quotient equality; matching profiles with an open obligation are rejected. No-proper-support rejection excludes only this computed dead-support route, not every physical gain or a smaller semantic implementation. A mismatch or open obligation is explicit rejecting data, not a completed global routing theorem. The full-profile reference minimum appears only in a specification theorem; it is not computed by the classifier. No bound on the supplied observer computation or uniformly encoded-size polynomial runtime is established. No terminal-derived global family, complete N1-N10 normalization, full Package E verifier, total PCCMin oracle, unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1a0c93b1d9ce168b0e077280cb41ed9ab682db406f7d6915b2fe6e327a1de60d",
+          "expectedKernelTypeSha256": "1a0c93b1d9ce168b0e077280cb41ed9ab682db406f7d6915b2fe6e327a1de60d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.firstTerminalOpenObligation_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "123d777771db64aaaf53b9dd42a834694d86f7088c8d422008be7f445842e8be",
+          "expectedKernelTypeSha256": "123d777771db64aaaf53b9dd42a834694d86f7088c8d422008be7f445842e8be",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4439af8e42be526327a645db512351e9373ca77858c4adb172d5167b23a684d1",
+          "expectedKernelTypeSha256": "4439af8e42be526327a645db512351e9373ca77858c4adb172d5167b23a684d1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b552736e74904695506adb00c52b18047de6cdc4af1890f01d5a66a4b8cca642",
+          "expectedKernelTypeSha256": "b552736e74904695506adb00c52b18047de6cdc4af1890f01d5a66a4b8cca642",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d08c20b2c7b9af0a2cdc926dcf66fe1bb7809c1d0cddd3f5ecee698c6454188a",
+          "expectedKernelTypeSha256": "d08c20b2c7b9af0a2cdc926dcf66fe1bb7809c1d0cddd3f5ecee698c6454188a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "feeab8f455701e6dd448e31dab4a596148cc02258492127d0f40cdde76a99f44",
+          "expectedKernelTypeSha256": "feeab8f455701e6dd448e31dab4a596148cc02258492127d0f40cdde76a99f44",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.DeadSupportFullModeGain.checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4cad2c9d19dd6d8d490643fe8145e7962898c2cb63eef3af2560f31a21baf729",
+          "expectedKernelTypeSha256": "4cad2c9d19dd6d8d490643fe8145e7962898c2cb63eef3af2560f31a21baf729",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.classifyDeadSupportFullMode_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e45814982c40279fd2e49a52e93e7428012a6dc5003e3effc7222977a0fb8e50",
+          "expectedKernelTypeSha256": "e45814982c40279fd2e49a52e93e7428012a6dc5003e3effc7222977a0fb8e50",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-245",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-246",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
