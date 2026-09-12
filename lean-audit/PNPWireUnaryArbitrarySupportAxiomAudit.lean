@@ -1,0 +1,33 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr
+#print axioms PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.original_charge
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete
+#print axioms PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked

@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-256",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-257",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3479,7 +3479,38 @@
     "PNP.DirectWire.WireUnaryFrontier.dischargeR7_full_value": "b15b4a349ce8c1670d63d9cb844eedac3b76cd855e18f328cd95782a6c5618c8",
     "PNP.DirectWire.WireUnaryFrontier.checkedProperGain_isSome_iff": "a985b9427b18b7dd80fc8b442e23d5931780297c0743d36f051e3fafc0760769",
     "PNP.DirectWire.WireUnaryFrontier.checkedProperGain_complete": "b3a94c1864f51e3aa6295526c3435ad710721875c202426d39e40562b44a488f",
-    "PNP.DirectWire.WireUnaryFrontier.ProperGain.checked": "27dfb2128a2da21e7d2b104627b9e7860979c1f3332580f7ac52e1db64948521"
+    "PNP.DirectWire.WireUnaryFrontier.ProperGain.checked": "27dfb2128a2da21e7d2b104627b9e7860979c1f3332580f7ac52e1db64948521",
+    "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr": "0061f7c437b7e27d395569d35d48fe9855416854bdfb7cd22e4c78821cebff01",
+    "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix": "d245e3b3e3315e77d7e1f0ca38c2bc9ac0ad8bc60ce4d85eb6fbb61dc628dc7f",
+    "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary": "131ac4d4b954bfccdfb334f7592d63c49f7b0f8cbef14dfbd9708672f0622d9b",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source": "b18c68167c2cf5438f22a797e59049c228249a41db1df94fb3c68f4a255963cc",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant": "60d8adc847127db61ed6db043d02138664e66b9a200bc99b9b1b3f0510fdeace",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant": "4b8ba04460c91c0e6ee0f01e22d3c0be608d2ea54dd0224826f961d937f5965b",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement": "74d4b769ab2f48a65f221ba3e8811d4bc83b47ee8d4e49f70ceefacbda5f5cfd",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound": "ef7907c6929e65f812aa3844e922101642a88044dbcdc1136626452789aa8fef",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal": "3418c00e0587573e9846fe69fe66c478ed027632bf7d0f50cd3d1485106967d1",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease": "9a691e352f9e7e2343d297c759286c8cee0962cd9a15e4bcf8a890f8027530ac",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant": "3220d6d9eda3f54ad07c5fb7db7f0bf00b44327d56638164662a08dbe56e4bfb",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded": "657338f0205eadf7e6f37e70791da590374f199c08f737cd117ecfd42b819fb0",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome": "0b40032fd8e0e14732dac199a115ec61ef9290c916860bd70bd3b15f42d92e61",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge": "9c1feaa37b5a1fef557510998992eb40d5e5da7dde9b473b0b01868cd9cfabe3",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output": "ef4023d873287ec9b791acd9fc6756f06f96f287cbc0944dbe960b80c6b21e67",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field": "292b86e2253a9767a078cce964dd0896d49a644dd64a322bd85fff531ecf7481",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent": "e28606e602cc080a5d5a140f2101ecf705212c55372cedc7d96b63857af0c8b6",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge": "55ec202abef861068266ee283243cfe5064fcf6378328f4df87e59c39f9e278d",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease": "29f691ff3546ab68f504a9d1afa7e6d320ad8c486061be0eff2c5a287dadafe7",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff": "a30977882e20c40433ceafe9b8c2a6c1766563afe36815f233e25c5ddd2fddfd",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive": "59d8d725ad98e586da3887e5ffbdc7f8dba0c98a209dd9d6c1fbb41fb23dca43",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff": "b3fd2f73e6aa15a4f4f5eee75d4261473c49a1d994ef023bd12e74f9950cebff",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output": "c3f76011dd727f6e2479a1074dc8cf1b9f5c2ab4b85306dd038c0fdb1126b881",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field": "82d5498fcea1f4c0e8fbdbbc3f0f74cee2a44c97d84ad9b5e987301d5ab30924",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease": "10a5d687494ddb4e1b7f549b0d5de87af50285e7c753b2e63a4f720ef6bdcfb9",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge": "9c3d33ffd1e0e2506aba7e7b4303991bda2bbb8b5f2cb685a7345ff1a8a5544a",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact": "17e1f9fe0e9e1ab2675094cb0ac78aef910bd5874ac89abd74fa24f564335764",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value": "aa59004c5807cf81b93fee7ba5b990c274d19760237740386541a96ad82b587b",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff": "b5b5fcf8e6bfcc58f1fa6350972dbc222bd0219cad0409163191075f333f39b6",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete": "d6a6a6ab8f1b05050a450e078a96abf2fdd9b1e23557191928fc6ec00603bd41",
+    "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked": "0b9d4a813bdd0931dc63942366a1e181a2f7d13a84aaf796aeda9b75b6687961"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3497,7 +3528,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "e8e78b06163ae7282504c6dd6a3ea44262eb9f0ba6c8edf26a964ee9ee1092d4",
+  "milestoneSourceClosureSha256": "674f787439b75fa50c7df51f96b59d2dc412dc31f74ac6b65e6b3d31b3c81b9e",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9320,6 +9351,46 @@
       ],
       "scope": "For arbitrary computational wire carriers, original gate counts, ordered ordinary outputs, computational fields and keep masks, M256 computes the visible predecessor cone and its completed full frontier. When the actual incoming boundary has zero or one port, it derives a zero-gate constant word or the minimum complete unary word, preserving every local output at every open valuation. No replacement, truth table, semantic agreement, wire map, compilation order, compiler result or minimizer is supplied. The actual primary-boundary compiler substitutes this word into the original exterior, retained exactly once. Every ordinary output and computational field is preserved, including forgotten selected frontier fields and exterior fields depending on other ambient inputs. The result has exact replacement-plus-exterior gate count and cannot increase the original count. Source-bound R7 witnesses discharge original R5 identities with their full values in the actual expanded program. The proper-gain query computes boundary recognition, positive actual exterior and strict local saving separately; it succeeds whenever any complete local realization is smaller on such a proper recognized cone. Thirty general interfaces have reviewed axiom closures: two are axiom-free, one uses only Quot.sound and twenty-seven use only propext and Quot.sound.",
       "nonClaim": "This is source-derived constant/unary R7 realization for the computed visible predecessor cone, not every arbitrary ambient support or an external-gate boundary. Minimum size is relative to the complete fixed local frontier, not all ambient circuits with different exteriors. A whole-support saving is not a proper-support Package E certificate. More-than-unary boundaries are rejected rather than supplied with correctness certificates. Finite source evaluation and actual compiler termination are not encoded-size polynomial runtime theorems. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-unary-arbitrary-support",
+      "title": "Computed constant and unary replacement on arbitrary completed supports",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
+        "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
+        "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked"
+      ],
+      "scope": "For arbitrary finite computational wire carriers, original gate counts, ordered ordinary outputs, computational fields and finite terminal-record supports, M257 derives the complete boundary and frontier from the actual exposed program. Every actual zero- or one-port boundary has a computed minimum complete local word with at most one shared NOT gate. General open-evaluation prefix causality proves that a selected frontier gate before the sole external boundary gate is represented by a literal constant. A rank derived from original gate indices then proves well-foundedness and successful compilation of this actual replacement, without a supplied rank, acyclicity certificate, order, agreement, replacement program or compiler result. Empty and primary-input boundaries are covered as well as a sole external-gate boundary. The actual exterior is retained exactly once. Every ordinary output and computational field is preserved at every ambient valuation, with exact replacement-plus-exterior charge, nonincrease and equivalent strict local-to-global saving. Source-exact full-value R7 witnesses discharge the original R5 identities. The proper-gain query computes boundary recognition, positive exterior and strict local saving, and succeeds whenever any complete local realization is smaller on a recognized proper support. Thirty-one general interfaces have reviewed axiom closures: one is axiom-free, one uses only Quot.sound and twenty-nine use only propext and Quot.sound.",
+      "nonClaim": "Arbitrary support refers to the choice of finite physical support in a computational wire carrier, not arbitrary boundary width or the full manuscript carrier. Boundaries with more than one incoming port are rejected. The minimum is over complete local open realizations for the fixed extracted frontier, not over all ambient circuits or different exteriors. A whole-support saving is not a proper-support Package E certificate. Prefix causality and the source-derived rank prove termination of this compiler, not uniformly polynomial encoded-size execution. Noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

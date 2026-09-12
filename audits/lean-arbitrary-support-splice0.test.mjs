@@ -118,7 +118,8 @@ const SOURCES = [
       "graph_rank_decreases",
       "graph_wellFounded_of_primaryBoundary",
       "production_compiles",
-      "production_agreement"
+      "production_agreement",
+      "graph_wellFounded_of_singleGateBoundary"
     ]
   }
 ];

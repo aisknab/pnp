@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-256",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-257",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1855,6 +1855,48 @@
   "leanWireUnaryFrontierCompletePackageEProved": false,
   "leanWireUnaryFrontierPolynomialRuntimeProved": false,
   "leanWireUnaryFrontierScope": "all-finite-computational-wire-source-derived-visible-predecessor-cone-completed-frontier-zero-or-one-primary-boundary-computed-minimum-local-word-actual-original-exterior-once-full-field-preservation-source-exact-r7-proper-strict-gain-no-arbitrary-support-calculus-or-polynomial-runtime",
+  "leanWireUnaryArbitrarySupportFormalized": true,
+  "leanWireUnaryArbitrarySupportAxiomAuditPassed": true,
+  "leanWireUnaryArbitrarySupportAuditedDeclarationCount": 31,
+  "leanWireUnaryArbitrarySupportPrefixCausalityTheorem": "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
+  "leanWireUnaryArbitrarySupportSingleBoundaryCausalityTheorem": "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
+  "leanWireUnaryArbitrarySupportSingleBoundaryRankTheorem": "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary",
+  "leanWireUnaryArbitrarySupportConstantSourceTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source",
+  "leanWireUnaryArbitrarySupportUnaryLiteralConstantTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant",
+  "leanWireUnaryArbitrarySupportLocalLiteralConstantTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant",
+  "leanWireUnaryArbitrarySupportReplacementAgreementTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement",
+  "leanWireUnaryArbitrarySupportReplacementGateBoundTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound",
+  "leanWireUnaryArbitrarySupportReplacementMinimumTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal",
+  "leanWireUnaryArbitrarySupportReplacementNonincreaseTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease",
+  "leanWireUnaryArbitrarySupportEarlyFrontierConstantTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant",
+  "leanWireUnaryArbitrarySupportWellFoundedTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded",
+  "leanWireUnaryArbitrarySupportCompilerSuccessTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome",
+  "leanWireUnaryArbitrarySupportOriginalChargeTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge",
+  "leanWireUnaryArbitrarySupportOutputTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output",
+  "leanWireUnaryArbitrarySupportFieldTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field",
+  "leanWireUnaryArbitrarySupportEquivalenceTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent",
+  "leanWireUnaryArbitrarySupportExactChargeTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge",
+  "leanWireUnaryArbitrarySupportNonincreaseTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease",
+  "leanWireUnaryArbitrarySupportGainIffTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff",
+  "leanWireUnaryArbitrarySupportProperExteriorIffTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive",
+  "leanWireUnaryArbitrarySupportAttemptIffTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff",
+  "leanWireUnaryArbitrarySupportAttemptOutputTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output",
+  "leanWireUnaryArbitrarySupportAttemptFieldTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field",
+  "leanWireUnaryArbitrarySupportAttemptNonincreaseTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease",
+  "leanWireUnaryArbitrarySupportAttemptChargeTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge",
+  "leanWireUnaryArbitrarySupportR7SourceExactTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact",
+  "leanWireUnaryArbitrarySupportR7FullValueTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value",
+  "leanWireUnaryArbitrarySupportProperGainIffTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff",
+  "leanWireUnaryArbitrarySupportProperGainCompletenessTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete",
+  "leanWireUnaryArbitrarySupportCheckedProperGainTheorem": "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked",
+  "leanWireUnaryArbitrarySupportAllBoundaryWidthsCovered": false,
+  "leanWireUnaryArbitrarySupportAllR7CasesDerived": false,
+  "leanWireUnaryArbitrarySupportArbitraryObligationDAGsCovered": false,
+  "leanWireUnaryArbitrarySupportFullManuscriptCarrierProved": false,
+  "leanWireUnaryArbitrarySupportCompleteObligationCalculusProved": false,
+  "leanWireUnaryArbitrarySupportCompletePackageEProved": false,
+  "leanWireUnaryArbitrarySupportPolynomialRuntimeProved": false,
+  "leanWireUnaryArbitrarySupportScope": "all-finite-computational-wire-arbitrary-physical-support-completed-frontier-zero-or-one-actual-boundary-including-external-gate-source-derived-prefix-causality-minimum-local-word-ranked-actual-compiler-original-exterior-once-full-fields-source-exact-r7-proper-gain-no-general-calculus-or-polynomial-runtime",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -3113,7 +3155,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "e8e78b06163ae7282504c6dd6a3ea44262eb9f0ba6c8edf26a964ee9ee1092d4",
+    "actualSourceClosureSha256": "674f787439b75fa50c7df51f96b59d2dc412dc31f74ac6b65e6b3d31b3c81b9e",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3146,19 +3188,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "9e90bb6248481b6b2b3be15f36be182b00102ab5098cba56c9c886aaafa01022",
+  "leanTheoremInventorySha256": "afeba7d819c925f84a13c462a9695371c8e3bdb925f192b0b763efb745eb70bd",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 47686,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20292,
-  "leanTheoremInventoryTheoremCount": 26069,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11167,
-  "leanTheoremInventorySourceClosureModuleCount": 521,
-  "leanSourceClosureSha256": "e8e78b06163ae7282504c6dd6a3ea44262eb9f0ba6c8edf26a964ee9ee1092d4",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-256",
+  "leanTheoremInventoryDeclarationCount": 47768,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20311,
+  "leanTheoremInventoryTheoremCount": 26117,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11168,
+  "leanTheoremInventorySourceClosureModuleCount": 522,
+  "leanSourceClosureSha256": "674f787439b75fa50c7df51f96b59d2dc412dc31f74ac6b65e6b3d31b3c81b9e",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-257",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "6d910415d9f690f5c5520f48c88d70b94d19d513e2b5ebf6856d358f52db2b7a",
+  "formalPublicationMapSha256": "6fcad82b9926fbb52c8b99b867452fe3551565d6f95fb920eefde8a5eafb2d85",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -53352,9 +53394,426 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-unary-arbitrary-support",
+      "title": "Computed constant and unary replacement on arbitrary completed supports",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
+        "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
+        "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete",
+        "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked"
+      ],
+      "scope": "For arbitrary finite computational wire carriers, original gate counts, ordered ordinary outputs, computational fields and finite terminal-record supports, M257 derives the complete boundary and frontier from the actual exposed program. Every actual zero- or one-port boundary has a computed minimum complete local word with at most one shared NOT gate. General open-evaluation prefix causality proves that a selected frontier gate before the sole external boundary gate is represented by a literal constant. A rank derived from original gate indices then proves well-foundedness and successful compilation of this actual replacement, without a supplied rank, acyclicity certificate, order, agreement, replacement program or compiler result. Empty and primary-input boundaries are covered as well as a sole external-gate boundary. The actual exterior is retained exactly once. Every ordinary output and computational field is preserved at every ambient valuation, with exact replacement-plus-exterior charge, nonincrease and equivalent strict local-to-global saving. Source-exact full-value R7 witnesses discharge the original R5 identities. The proper-gain query computes boundary recognition, positive exterior and strict local saving, and succeeds whenever any complete local realization is smaller on a recognized proper support. Thirty-one general interfaces have reviewed axiom closures: one is axiom-free, one uses only Quot.sound and twenty-nine use only propext and Quot.sound.",
+      "nonClaim": "Arbitrary support refers to the choice of finite physical support in a computational wire carrier, not arbitrary boundary width or the full manuscript carrier. Boundaries with more than one incoming port are rejected. The minimum is over complete local open realizations for the fixed extracted frontier, not over all ambient circuits or different exteriors. A whole-support saving is not a proper-support Package E certificate. Prefix causality and the source-derived rank prove termination of this compiler, not uniformly polynomial encoded-size execution. Noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0061f7c437b7e27d395569d35d48fe9855416854bdfb7cd22e4c78821cebff01",
+          "expectedKernelTypeSha256": "0061f7c437b7e27d395569d35d48fe9855416854bdfb7cd22e4c78821cebff01",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d245e3b3e3315e77d7e1f0ca38c2bc9ac0ad8bc60ce4d85eb6fbb61dc628dc7f",
+          "expectedKernelTypeSha256": "d245e3b3e3315e77d7e1f0ca38c2bc9ac0ad8bc60ce4d85eb6fbb61dc628dc7f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "131ac4d4b954bfccdfb334f7592d63c49f7b0f8cbef14dfbd9708672f0622d9b",
+          "expectedKernelTypeSha256": "131ac4d4b954bfccdfb334f7592d63c49f7b0f8cbef14dfbd9708672f0622d9b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b18c68167c2cf5438f22a797e59049c228249a41db1df94fb3c68f4a255963cc",
+          "expectedKernelTypeSha256": "b18c68167c2cf5438f22a797e59049c228249a41db1df94fb3c68f4a255963cc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "60d8adc847127db61ed6db043d02138664e66b9a200bc99b9b1b3f0510fdeace",
+          "expectedKernelTypeSha256": "60d8adc847127db61ed6db043d02138664e66b9a200bc99b9b1b3f0510fdeace",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4b8ba04460c91c0e6ee0f01e22d3c0be608d2ea54dd0224826f961d937f5965b",
+          "expectedKernelTypeSha256": "4b8ba04460c91c0e6ee0f01e22d3c0be608d2ea54dd0224826f961d937f5965b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "74d4b769ab2f48a65f221ba3e8811d4bc83b47ee8d4e49f70ceefacbda5f5cfd",
+          "expectedKernelTypeSha256": "74d4b769ab2f48a65f221ba3e8811d4bc83b47ee8d4e49f70ceefacbda5f5cfd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ef7907c6929e65f812aa3844e922101642a88044dbcdc1136626452789aa8fef",
+          "expectedKernelTypeSha256": "ef7907c6929e65f812aa3844e922101642a88044dbcdc1136626452789aa8fef",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3418c00e0587573e9846fe69fe66c478ed027632bf7d0f50cd3d1485106967d1",
+          "expectedKernelTypeSha256": "3418c00e0587573e9846fe69fe66c478ed027632bf7d0f50cd3d1485106967d1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9a691e352f9e7e2343d297c759286c8cee0962cd9a15e4bcf8a890f8027530ac",
+          "expectedKernelTypeSha256": "9a691e352f9e7e2343d297c759286c8cee0962cd9a15e4bcf8a890f8027530ac",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3220d6d9eda3f54ad07c5fb7db7f0bf00b44327d56638164662a08dbe56e4bfb",
+          "expectedKernelTypeSha256": "3220d6d9eda3f54ad07c5fb7db7f0bf00b44327d56638164662a08dbe56e4bfb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "657338f0205eadf7e6f37e70791da590374f199c08f737cd117ecfd42b819fb0",
+          "expectedKernelTypeSha256": "657338f0205eadf7e6f37e70791da590374f199c08f737cd117ecfd42b819fb0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0b40032fd8e0e14732dac199a115ec61ef9290c916860bd70bd3b15f42d92e61",
+          "expectedKernelTypeSha256": "0b40032fd8e0e14732dac199a115ec61ef9290c916860bd70bd3b15f42d92e61",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9c1feaa37b5a1fef557510998992eb40d5e5da7dde9b473b0b01868cd9cfabe3",
+          "expectedKernelTypeSha256": "9c1feaa37b5a1fef557510998992eb40d5e5da7dde9b473b0b01868cd9cfabe3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ef4023d873287ec9b791acd9fc6756f06f96f287cbc0944dbe960b80c6b21e67",
+          "expectedKernelTypeSha256": "ef4023d873287ec9b791acd9fc6756f06f96f287cbc0944dbe960b80c6b21e67",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "292b86e2253a9767a078cce964dd0896d49a644dd64a322bd85fff531ecf7481",
+          "expectedKernelTypeSha256": "292b86e2253a9767a078cce964dd0896d49a644dd64a322bd85fff531ecf7481",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e28606e602cc080a5d5a140f2101ecf705212c55372cedc7d96b63857af0c8b6",
+          "expectedKernelTypeSha256": "e28606e602cc080a5d5a140f2101ecf705212c55372cedc7d96b63857af0c8b6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "55ec202abef861068266ee283243cfe5064fcf6378328f4df87e59c39f9e278d",
+          "expectedKernelTypeSha256": "55ec202abef861068266ee283243cfe5064fcf6378328f4df87e59c39f9e278d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "29f691ff3546ab68f504a9d1afa7e6d320ad8c486061be0eff2c5a287dadafe7",
+          "expectedKernelTypeSha256": "29f691ff3546ab68f504a9d1afa7e6d320ad8c486061be0eff2c5a287dadafe7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a30977882e20c40433ceafe9b8c2a6c1766563afe36815f233e25c5ddd2fddfd",
+          "expectedKernelTypeSha256": "a30977882e20c40433ceafe9b8c2a6c1766563afe36815f233e25c5ddd2fddfd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "59d8d725ad98e586da3887e5ffbdc7f8dba0c98a209dd9d6c1fbb41fb23dca43",
+          "expectedKernelTypeSha256": "59d8d725ad98e586da3887e5ffbdc7f8dba0c98a209dd9d6c1fbb41fb23dca43",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b3fd2f73e6aa15a4f4f5eee75d4261473c49a1d994ef023bd12e74f9950cebff",
+          "expectedKernelTypeSha256": "b3fd2f73e6aa15a4f4f5eee75d4261473c49a1d994ef023bd12e74f9950cebff",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c3f76011dd727f6e2479a1074dc8cf1b9f5c2ab4b85306dd038c0fdb1126b881",
+          "expectedKernelTypeSha256": "c3f76011dd727f6e2479a1074dc8cf1b9f5c2ab4b85306dd038c0fdb1126b881",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "82d5498fcea1f4c0e8fbdbbc3f0f74cee2a44c97d84ad9b5e987301d5ab30924",
+          "expectedKernelTypeSha256": "82d5498fcea1f4c0e8fbdbbc3f0f74cee2a44c97d84ad9b5e987301d5ab30924",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "10a5d687494ddb4e1b7f549b0d5de87af50285e7c753b2e63a4f720ef6bdcfb9",
+          "expectedKernelTypeSha256": "10a5d687494ddb4e1b7f549b0d5de87af50285e7c753b2e63a4f720ef6bdcfb9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9c3d33ffd1e0e2506aba7e7b4303991bda2bbb8b5f2cb685a7345ff1a8a5544a",
+          "expectedKernelTypeSha256": "9c3d33ffd1e0e2506aba7e7b4303991bda2bbb8b5f2cb685a7345ff1a8a5544a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "17e1f9fe0e9e1ab2675094cb0ac78aef910bd5874ac89abd74fa24f564335764",
+          "expectedKernelTypeSha256": "17e1f9fe0e9e1ab2675094cb0ac78aef910bd5874ac89abd74fa24f564335764",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aa59004c5807cf81b93fee7ba5b990c274d19760237740386541a96ad82b587b",
+          "expectedKernelTypeSha256": "aa59004c5807cf81b93fee7ba5b990c274d19760237740386541a96ad82b587b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b5b5fcf8e6bfcc58f1fa6350972dbc222bd0219cad0409163191075f333f39b6",
+          "expectedKernelTypeSha256": "b5b5fcf8e6bfcc58f1fa6350972dbc222bd0219cad0409163191075f333f39b6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d6a6a6ab8f1b05050a450e078a96abf2fdd9b1e23557191928fc6ec00603bd41",
+          "expectedKernelTypeSha256": "d6a6a6ab8f1b05050a450e078a96abf2fdd9b1e23557191928fc6ec00603bd41",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0b9d4a813bdd0931dc63942366a1e181a2f7d13a84aaf796aeda9b75b6687961",
+          "expectedKernelTypeSha256": "0b9d4a813bdd0931dc63942366a1e181a2f7d13a84aaf796aeda9b75b6687961",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-13-256",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-13-257",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

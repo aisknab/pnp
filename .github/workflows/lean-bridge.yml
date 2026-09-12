@@ -64,6 +64,7 @@ on:
       - 'audits/lean-wire-matched-cancellation0.test.mjs'
       - 'audits/lean-wire-unary-realization0.test.mjs'
       - 'audits/lean-wire-unary-frontier0.test.mjs'
+      - 'audits/lean-wire-unary-arbitrary-support0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -88,6 +89,7 @@ on:
       - 'docs/lean_wire_matched_cancellation.md'
       - 'docs/lean_wire_unary_realization.md'
       - 'docs/lean_wire_unary_frontier.md'
+      - 'docs/lean_wire_unary_arbitrary_support.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -574,6 +576,7 @@ on:
       - 'audits/lean-wire-matched-cancellation0.test.mjs'
       - 'audits/lean-wire-unary-realization0.test.mjs'
       - 'audits/lean-wire-unary-frontier0.test.mjs'
+      - 'audits/lean-wire-unary-arbitrary-support0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -598,6 +601,7 @@ on:
       - 'docs/lean_wire_matched_cancellation.md'
       - 'docs/lean_wire_unary_realization.md'
       - 'docs/lean_wire_unary_frontier.md'
+      - 'docs/lean_wire_unary_arbitrary_support.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -3914,6 +3918,148 @@ jobs:
           console.log('M256: all thirty computed unary frontier interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryFrontier.lean
+
+      - name: Check computed unary arbitrary-support source contracts
+        run: node --test audits/lean-wire-unary-arbitrary-support0.test.mjs
+
+      - name: Audit computed unary arbitrary-support replacement
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryArbitrarySupportAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source": [],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant": [
+              "Quot.sound"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M257: 31 computed unary arbitrary-support interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryArbitrarySupport.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure

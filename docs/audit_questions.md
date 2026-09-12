@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M256-CURRENT-SUMMARY:BEGIN -->
-## Current M256 boundary
+<!-- M257-CURRENT-SUMMARY:BEGIN -->
+## Current M257 boundary
 
-M256 derives a minimum constant/unary word for the computed complete frontier and compiles it into the original exterior exactly once. It preserves all outputs and fields, derives full-value R7 witnesses, and recognizes genuine proper-support savings without supplied replacements or agreement. Arbitrary ambient supports, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+M257 removes the primary-boundary restriction from source-derived constant/unary R7 replacement. General prefix causality and a derived physical rank make every recognized arbitrary support compile, including a sole external-gate boundary. All outputs and fields, exact exterior-once charge and proper strict-gain recognition are preserved. Wider boundaries, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 232 of 234 current scoped publication rows earned.
+Formal artefact coverage: 233 of 235 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [constant/unary frontier replacement and limits](./lean_wire_unary_frontier.md)
+See the [arbitrary-support unary replacement and limits](./lean_wire_unary_arbitrary_support.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M256
-derives complete constant/unary frontier replacements and source-exact R7 witnesses with exact original-exterior accounting; arbitrary supports, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M257
+derives constant/unary replacement for arbitrary completed supports with full fields and source-exact R7 witnesses; wider boundaries, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M256-CURRENT-SUMMARY:END -->
+<!-- M257-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

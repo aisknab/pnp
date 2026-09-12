@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f15ab86280cd4f68d887dad32c1c176e5317bc1ad39120aeb8fb545dd3aee273';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '59b14287c2d80901f41c079914091e1789ff1b9b53d1cc4ef32af924a08d07ce';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -546,6 +546,37 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireUnaryFrontier.checkedProperGain_isSome_iff',
   'PNP.DirectWire.WireUnaryFrontier.checkedProperGain_complete',
   'PNP.DirectWire.WireUnaryFrontier.ProperGain.checked',
+  'PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr',
+  'PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix',
+  'PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.original_charge',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete',
+  'PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3793,7 +3824,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-256') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-257') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
