@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M245-CURRENT-SUMMARY:BEGIN -->
-## Current M245 boundary
+<!-- M246-CURRENT-SUMMARY:BEGIN -->
+## Current M246 boundary
 
-M245 computes a proper physical deletion component from the actual unused-gate complement. The live frontier supplies the support inputs and all original outputs as bypass; the actual extracted support is reindexed only by its proved empty outgoing interface. A concrete replacement frame preserves complete output semantics and accounts for every removed gate and unit of residual slack. The gain witness accepts only a nonempty dead support with a nonempty retained cone. This is not complete manuscript Package E admissibility, full-profile normalization or global PCCMin.
+M246 checks the actual M245 computed proper dead-support replacement against every coordinate of an input finite profile observation system and every observed obligation role. It accepts a full-carrier result only when the complete profile agrees and observed obligations are closed, or returns a precise rejecting outcome. Eight general interfaces cover exact acceptance, first failures, physical semantics, properness and exact size/slack descent. The observation system remains input data: the manuscript carrier, semantic dependency graph, R5/R6-R8 ledger, complete Package E and global PCCMin route are not derived.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 221 of 223 current scoped publication rows earned.
+Formal artefact coverage: 222 of 224 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed dead-support context and limits](./lean_pccmin_dead_support_context.md)
+See the [computed dead-support full-mode acceptance and limits](./lean_pccmin_dead_support_full_mode.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M245
-constructs physical replacement from actual dead support; full-profile admissibility and the total PCCMin oracle remain open.
+Earlier milestone notes retain their original module-specific scope. M246
+checks complete input finite profiles and observed obligations; manuscript carrier/ledger derivation and the total PCCMin oracle remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M245-CURRENT-SUMMARY:END -->
+<!-- M246-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 221,
-    "totalRows": 223,
+    "earnedRows": 222,
+    "totalRows": 224,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2132,6 +2132,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M245 adds a general computed dead-support replacement context: the actual unused-gate complement has no outgoing ports, the live frontier computes its incoming values, the extracted support is preserved exactly, and a concrete frame performs a checked zero-gate replacement with exact size and slack accounting. Only a nonempty proper physical support is accepted; all-unused circuits are excluded from that witness. This is not complete manuscript full-profile Package E admissibility, a complete rewrite ledger, global routing or polynomial PCCMin. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty.Formal artefact coverage: 221 of 223 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246",
+      "formalArtefactCoverage": {
+        "earnedRows": 222,
+        "totalRows": 224
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M246 checks the actual computed proper dead-support replacement against every input finite-profile coordinate and observed obligation role. It constructs a full-carrier result only when all coordinates agree and all observed obligations are closed, otherwise retaining a precise rejecting outcome and canonical first-failure prefix. The observation system remains input data: no manuscript carrier or R5/R6-R8 obligation ledger is derived. No global family, complete route coverage, full PCCMin algorithm or encoded-size polynomial observer/runtime theorem is supplied. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty. Formal artefact coverage: 222 of 224 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

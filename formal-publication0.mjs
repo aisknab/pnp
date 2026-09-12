@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e23edd827bf54ceb10347ab2cf211da30c6acd639d27c8274988668021d2f922';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '5fb0b4623589dd08b64daf93f7218187bb88d8c2c733ab3109de52a678410a54';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -345,6 +345,14 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.deadSupportProperGain_sound',
   'PNP.DirectWire.deadSupportProperGain_none_of_all_dead',
   'PNP.DirectWire.deadSupportProperGain_none_of_no_dead',
+  'PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff',
+  'PNP.DirectWire.firstTerminalOpenObligation_spec',
+  'PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged',
+  'PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff',
+  'PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff',
+  'PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum',
+  'PNP.DirectWire.DeadSupportFullModeGain.checked',
+  'PNP.DirectWire.classifyDeadSupportFullMode_checked',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3592,7 +3600,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-245') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-246') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245`, 221 of 223
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246`, 222 of 224
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M245 |
+| Track | Available | Earned at M246 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M245 risk-weighted proof completion estimate is therefore 40 percent, with
+The M246 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -121,7 +121,10 @@ No fixed checkpoint or global gate changes.
 M245 computes a proper physical deletion component from the actual unused-gate complement. The live frontier supplies the support inputs and all original outputs as bypass; the actual extracted support is reindexed only by its proved empty outgoing interface. A concrete replacement frame preserves complete output semantics and accounts for every removed gate and unit of residual slack. The gain witness accepts only a nonempty dead support with a nonempty retained cone. This is not complete manuscript Package E admissibility, full-profile normalization or global PCCMin.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 221 of 223 current scoped publication rows earned.
+M246 checks the actual M245 computed proper dead-support replacement against every coordinate of an input finite profile observation system and every observed obligation role. It accepts a full-carrier result only when the complete profile agrees and observed obligations are closed, or returns a precise rejecting outcome. Eight general interfaces cover exact acceptance, first failures, physical semantics, properness and exact size/slack descent. The observation system remains input data: the manuscript carrier, semantic dependency graph, R5/R6-R8 ledger, complete Package E and global PCCMin route are not derived.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 222 of 224 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

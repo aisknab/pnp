@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2642,6 +2642,21 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinDeadSupportContextCompletePackageEVerifierProved: false,
   leanPCCMinDeadSupportContextPolynomialRuntimeProved: false,
   leanPCCMinDeadSupportContextScope: 'all-finite-nand-implementations-computed-dead-gate-complement-empty-interface-exact-extracted-support-live-frontier-environment-framed-replacement-and-nonempty-proper-physical-gain-only',
+  leanPCCMinDeadSupportFullModeFormalized: true,
+  leanPCCMinDeadSupportFullModeAxiomAuditPassed: true,
+  leanPCCMinDeadSupportFullModeAuditedDeclarationCount: 8,
+  leanPCCMinDeadSupportFullModeObligationScanTheorem: 'PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff',
+  leanPCCMinDeadSupportFullModeFirstOpenObligationTheorem: 'PNP.DirectWire.firstTerminalOpenObligation_spec',
+  leanPCCMinDeadSupportFullModeCurrentObligationsTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged',
+  leanPCCMinDeadSupportFullModeAcceptanceTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff',
+  leanPCCMinDeadSupportFullModeNoProperSupportTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff',
+  leanPCCMinDeadSupportFullModeFullProfileMinimumTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum',
+  leanPCCMinDeadSupportFullModeAcceptedSoundnessTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.checked',
+  leanPCCMinDeadSupportFullModeClassifierSoundnessTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_checked',
+  leanPCCMinDeadSupportFullModeManuscriptCarrierDerived: false,
+  leanPCCMinDeadSupportFullModeCompletePackageEVerifierProved: false,
+  leanPCCMinDeadSupportFullModePolynomialRuntimeProved: false,
+  leanPCCMinDeadSupportFullModeScope: 'computed-proper-dead-support-complete-finite-profile-and-observed-obligation-acceptance-over-input-observation-system-no-derived-manuscript-carrier-or-discharge-ledger',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4664,6 +4679,21 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinDeadSupportContextCompletePackageEVerifierProved: false,
       leanPCCMinDeadSupportContextPolynomialRuntimeProved: false,
       leanPCCMinDeadSupportContextScope: 'all-finite-nand-implementations-computed-dead-gate-complement-empty-interface-exact-extracted-support-live-frontier-environment-framed-replacement-and-nonempty-proper-physical-gain-only',
+      leanPCCMinDeadSupportFullModeFormalized: true,
+      leanPCCMinDeadSupportFullModeAxiomAuditPassed: true,
+      leanPCCMinDeadSupportFullModeAuditedDeclarationCount: 8,
+      leanPCCMinDeadSupportFullModeObligationScanTheorem: 'PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff',
+      leanPCCMinDeadSupportFullModeFirstOpenObligationTheorem: 'PNP.DirectWire.firstTerminalOpenObligation_spec',
+      leanPCCMinDeadSupportFullModeCurrentObligationsTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.currentObligationsDischarged',
+      leanPCCMinDeadSupportFullModeAcceptanceTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_accepted_iff',
+      leanPCCMinDeadSupportFullModeNoProperSupportTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_noProperSupport_iff',
+      leanPCCMinDeadSupportFullModeFullProfileMinimumTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.fullProfileMinimum',
+      leanPCCMinDeadSupportFullModeAcceptedSoundnessTheorem: 'PNP.DirectWire.DeadSupportFullModeGain.checked',
+      leanPCCMinDeadSupportFullModeClassifierSoundnessTheorem: 'PNP.DirectWire.classifyDeadSupportFullMode_checked',
+      leanPCCMinDeadSupportFullModeManuscriptCarrierDerived: false,
+      leanPCCMinDeadSupportFullModeCompletePackageEVerifierProved: false,
+      leanPCCMinDeadSupportFullModePolynomialRuntimeProved: false,
+      leanPCCMinDeadSupportFullModeScope: 'computed-proper-dead-support-complete-finite-profile-and-observed-obligation-acceptance-over-input-observation-system-no-derived-manuscript-carrier-or-discharge-ledger',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -5017,7 +5047,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-245',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-246',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,
