@@ -12,6 +12,14 @@ async function packageJson0() {
   return JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 }
 
+test('formal public surface package fields match without generated status', async () => {
+  const pkg = await packageJson0();
+  assert.equal(pkg.private, true);
+  assert.deepEqual(pkg.exports, CURRENT_PACKAGE_EXPORTS0);
+  assert.deepEqual(pkg.scripts, CURRENT_PACKAGE_SCRIPTS0);
+  assert.deepEqual(Object.keys(pkg.bin ?? {}), []);
+});
+
 test('formal public surface accepts the archive-only legacy boundary', async () => {
   const out = await CheckFormalPublicSurface0({ writeOutput: false });
   assert.equal(out.tag, 'accept');

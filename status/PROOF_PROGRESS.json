@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-252",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 228,
-    "totalRows": 230,
+    "earnedRows": 229,
+    "totalRows": 231,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2251,6 +2251,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M252 reconstructs the word-level local quotient replacement edge of the pinned manuscript's compatible-replacement, matched materializer accounting and full/quotient firewall. It derives actual expanded full-value sources and charges the shared materializer identically on both lifted words. The exact original-cost test and the checked no-net-gain example prevent cancellation against a larger lifted reference from being misreported as an original-circuit saving. This does not supply arbitrary-support embedding, derive the mask or local quotient agreement, complete the obligation calculus or Package E, close global ZeroSlack or prove polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 228 of 230 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253",
+      "formalArtefactCoverage": {
+        "earnedRows": 229,
+        "totalRows": 231
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M253 reconstructs the original-circuit matched-cost edge of the pinned manuscript's compatible extraction, unique physical ownership, full-frontier replacement and strict proper-support obligations. Unlike the larger reference lift in M252, it derives an original gate partition and retains each exterior gate once. Its complete local open-function premise explicitly includes forgotten retained frontier wires; the kernel-checked wrong-frontier fixture rules out substituting quotient-only agreement. The proper-gain query rejects whole-support and non-strict replacements. This is one computed computational predecessor cone, not every arbitrary support across the full carrier and all traces; the obligation calculus, Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 229 of 231 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

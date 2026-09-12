@@ -433,10 +433,13 @@ branch.
   `pcc-formal-public-surface0.mjs` in the same edit, then run
   `audits/formal-public-surface0.test.mjs` before any multi-file or full suite.
   That file also consumes sealed formal status. If a new reviewed theorem set
-  is still awaiting its inventory/publication/status seal, use the isolated
-  package-script contract for this initial preflight. Run the complete file
-  once those authoritative artifacts are synchronized, before the broad suite.
-  Do not test a knowingly unsealed intermediate status or weaken its rejection.
+  is still awaiting its inventory/publication/status seal, initially select
+  only the independent "package fields match without generated status" test
+  and the three package export, bin and script mutation tests. The integrated
+  "accepts the archive-only legacy boundary" test and both root-export mutations
+  require sealed status; they are not isolated package preflight checks.
+  Run the complete file once those authoritative artifacts are synchronized,
+  before the broad suite. Do not weaken rejection of unsealed status.
 - When adding a Lean module or explicit toolchain import, reconcile the root
   import-closure contract with the source. Run
   `audits/lean-root-target0.test.mjs` in the remote source preflight before

@@ -1,21 +1,21 @@
 # pnp
 
-<!-- M252-CURRENT-SUMMARY:BEGIN -->
-## Current M252 boundary
+<!-- M253-CURRENT-SUMMARY:BEGIN -->
+## Current M253 boundary
 
-M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
+M253 computes a quotient-visible predecessor cone, completes its frontier against the original full computational word, and substitutes a locally equivalent replacement into the actual original exterior. Each exterior gate is retained once, so matched costs and strict gain refer to the original circuit, not a larger lifted reference. Complete local open-function agreement includes retained forgotten frontier wires; quotient-only agreement is insufficient. The gain query separately checks proper support and strict saving. Every arbitrary support, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 228 of 230 current scoped publication rows earned.
+Formal artefact coverage: 229 of 231 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [quotient replacement lift and limits](./docs/lean_wire_quotient_lift.md)
+See the [original-accounted frontier lift and limits](./docs/lean_wire_frontier_lift.md)
 and the [conditional final-report bridge](./docs/lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M252
-lifts locally quotient-compatible replacements with actual shared materializers and a fully paid original-cost test; arbitrary-support embedding, the complete obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M253
+derives the complete frontier of a computed visible cone and retains each original exterior gate once under full local agreement; every-arbitrary-support transport, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M252-CURRENT-SUMMARY:END -->
+<!-- M253-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -39,12 +39,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M252 additionally lifts locally quotient-compatible replacements with matched actual materializer charges and a fully paid original-cost gain test, while retaining arbitrary-support embedding, the complete obligation calculus, global and polynomial obligations. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
+| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M253 additionally derives original-accounted frontier replacement with each exterior gate retained once and a strict proper-gain test under complete local agreement, while retaining every-arbitrary-support transport, the full carrier and obligation calculus, global and polynomial obligations. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 228 of 230 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 229 of 231 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

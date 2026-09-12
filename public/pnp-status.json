@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-252",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1720,6 +1720,34 @@
   "leanWireQuotientLiftCompletePackageEProved": false,
   "leanWireQuotientLiftPolynomialRuntimeProved": false,
   "leanWireQuotientLiftScope": "all-finite-computational-wire-quotient-compatible-replacements-literal-shared-materializer-full-value-lift-exact-matched-integer-charges-original-cost-gain-test-expanded-source-bound-discharge-no-arbitrary-support-embedding-or-polynomial-runtime",
+  "leanWireFrontierLiftFormalized": true,
+  "leanWireFrontierLiftAxiomAuditPassed": true,
+  "leanWireFrontierLiftAuditedDeclarationCount": 18,
+  "leanWireFrontierLiftOrdinaryOutputSelectedTheorem": "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
+  "leanWireFrontierLiftKeptFieldSelectedTheorem": "PNP.DirectWire.WireFrontierLift.kept_field_selected",
+  "leanWireFrontierLiftPredecessorClosureTheorem": "PNP.DirectWire.WireFrontierLift.records_predecessor_closed",
+  "leanWireFrontierLiftSelectedFieldFrontierTheorem": "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier",
+  "leanWireFrontierLiftPrimaryBoundaryTheorem": "PNP.DirectWire.WireFrontierLift.primary_boundary",
+  "leanWireFrontierLiftOriginalChargeTheorem": "PNP.DirectWire.WireFrontierLift.original_charge",
+  "leanWireFrontierLiftCompileIsSomeTheorem": "PNP.DirectWire.WireFrontierLift.compile_isSome",
+  "leanWireFrontierLiftExpandedChargeTheorem": "PNP.DirectWire.WireFrontierLift.expanded_charge",
+  "leanWireFrontierLiftMatchedOriginalChargeTheorem": "PNP.DirectWire.WireFrontierLift.matched_original_charge",
+  "leanWireFrontierLiftOriginalGainIffTheorem": "PNP.DirectWire.WireFrontierLift.original_gain_iff",
+  "leanWireFrontierLiftExpandedOutputTheorem": "PNP.DirectWire.WireFrontierLift.expanded_output",
+  "leanWireFrontierLiftExpandedFieldTheorem": "PNP.DirectWire.WireFrontierLift.expanded_field",
+  "leanWireFrontierLiftExpandedEquivalenceTheorem": "PNP.DirectWire.WireFrontierLift.expanded_equivalent",
+  "leanWireFrontierLiftDischargeSourceExactTheorem": "PNP.DirectWire.WireFrontierLift.discharge_source_exact",
+  "leanWireFrontierLiftDischargeFullValueTheorem": "PNP.DirectWire.WireFrontierLift.discharge_full_value",
+  "leanWireFrontierLiftProperIffExteriorPositiveTheorem": "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive",
+  "leanWireFrontierLiftProperGainIffTheorem": "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff",
+  "leanWireFrontierLiftCheckedProperGainTheorem": "PNP.DirectWire.WireFrontierLift.ProperGain.checked",
+  "leanWireFrontierLiftEveryArbitrarySupportCovered": false,
+  "leanWireFrontierLiftAutomaticLocalAgreementDerived": false,
+  "leanWireFrontierLiftFullManuscriptPullExpandProved": false,
+  "leanWireFrontierLiftCompleteObligationCalculusProved": false,
+  "leanWireFrontierLiftCompletePackageEProved": false,
+  "leanWireFrontierLiftPolynomialRuntimeProved": false,
+  "leanWireFrontierLiftScope": "all-finite-computational-wire-input-derived-quotient-visible-cone-completed-original-frontier-primary-boundary-actual-compiler-full-local-open-agreement-original-exterior-once-exact-integer-charges-strict-proper-gain-no-full-manuscript-calculus-or-polynomial-runtime",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2978,7 +3006,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "ba1c85c0de248fac102bde2ff4a549c82ff89a03edebd0fcdb8168b4f21fc099",
+    "actualSourceClosureSha256": "77a824bdf0c87b6480b5f4cec5ffc8744a3049259794c1582a4e5e3e2094cf39",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3011,19 +3039,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "58183a0170cdc990710b6bc395561896b1e91273781539c95c4f4efaaa9f41a7",
+  "leanTheoremInventorySha256": "7dc764bb8f9c51062260a2dd631b431f8ad2cff441eb2ba071163298cb72ecb4",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 47289,
+  "leanTheoremInventoryDeclarationCount": 47353,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 20255,
-  "leanTheoremInventoryTheoremCount": 25890,
+  "leanTheoremInventoryTheoremCount": 25921,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11143,
-  "leanTheoremInventorySourceClosureModuleCount": 517,
-  "leanSourceClosureSha256": "ba1c85c0de248fac102bde2ff4a549c82ff89a03edebd0fcdb8168b4f21fc099",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-252",
+  "leanTheoremInventorySourceClosureModuleCount": 518,
+  "leanSourceClosureSha256": "77a824bdf0c87b6480b5f4cec5ffc8744a3049259794c1582a4e5e3e2094cf39",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-253",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "9d6bdb2b1777fc2c38a1c4ea2ab0ac76e95f6d5bb8d1df58398e202cd7edc059",
+  "formalPublicationMapSha256": "b02a5f7746227d8d34fe82749bdab3c4164677971795738a54af5d0b516d364c",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -51972,9 +52000,261 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-frontier-lift",
+      "title": "Computed original-accounted frontier replacement",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
+        "PNP.DirectWire.WireFrontierLift.kept_field_selected",
+        "PNP.DirectWire.WireFrontierLift.records_predecessor_closed",
+        "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier",
+        "PNP.DirectWire.WireFrontierLift.primary_boundary",
+        "PNP.DirectWire.WireFrontierLift.original_charge",
+        "PNP.DirectWire.WireFrontierLift.compile_isSome",
+        "PNP.DirectWire.WireFrontierLift.expanded_charge",
+        "PNP.DirectWire.WireFrontierLift.matched_original_charge",
+        "PNP.DirectWire.WireFrontierLift.original_gain_iff",
+        "PNP.DirectWire.WireFrontierLift.expanded_output",
+        "PNP.DirectWire.WireFrontierLift.expanded_field",
+        "PNP.DirectWire.WireFrontierLift.expanded_equivalent",
+        "PNP.DirectWire.WireFrontierLift.discharge_source_exact",
+        "PNP.DirectWire.WireFrontierLift.discharge_full_value",
+        "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive",
+        "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff",
+        "PNP.DirectWire.WireFrontierLift.ProperGain.checked"
+      ],
+      "scope": "For every finite computational wire carrier and keep mask, M253 computes the predecessor cone of ordinary and kept observations, then extracts its complete interface from the original fully exposed carrier. Selected forgotten field producers and exterior consumers participate in that frontier. Predecessor closure derives a primary-input-only boundary and actual replacement compiler success without a supplied support, order or success certificate. Every original exterior gate is retained exactly once. Original and expanded gate counts split into pulled or replacement gates plus the same actual exterior charge, giving matched integer differences and an exact original-saving equivalence. Equality with the complete extracted open function derives all ordinary and ordered computational field values and full discharges bound to the actual expanded sources. The computed proper-gain query separately requires proper support and strict local saving, then returns an actual original-circuit equivalent strict gain with every field preserved. Eighteen general interfaces have exact reviewed dependencies propext and Quot.sound.",
+      "nonClaim": "This is a computational frontier lift for one input-derived visible predecessor cone, not arbitrary-support Pull/Expand across all manuscript traces. The keep mask, replacement and complete local open-function agreement are inputs. Ordinary-output or quotient-only agreement does not imply the stronger completed-frontier premise. No replacement search or automatic local agreement is proved. A whole-support saving is not a proper-support certificate. The construction does not complete the full manuscript carrier, noncomputational profile fields, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8931e68e92d35b11528e401a2794cd957f15aa680c3fc0d403792565c3877b60",
+          "expectedKernelTypeSha256": "8931e68e92d35b11528e401a2794cd957f15aa680c3fc0d403792565c3877b60",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.kept_field_selected",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f1e883390878267faaeb4e079fe8a8e6b1beaa818ee6289321b290e4569fd7a3",
+          "expectedKernelTypeSha256": "f1e883390878267faaeb4e079fe8a8e6b1beaa818ee6289321b290e4569fd7a3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.records_predecessor_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aaac754e3944140d3f9ab991fe42cc844199ca686b2df52f3853c289f980dc22",
+          "expectedKernelTypeSha256": "aaac754e3944140d3f9ab991fe42cc844199ca686b2df52f3853c289f980dc22",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4562d68496b552354fc79fa2203f76209b5c82152af04989e379d7661041e2c6",
+          "expectedKernelTypeSha256": "4562d68496b552354fc79fa2203f76209b5c82152af04989e379d7661041e2c6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.primary_boundary",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5f646ed8a46cd2fa78f3546ae15d17d10c7885b90c986df52e58dfd81c92bacd",
+          "expectedKernelTypeSha256": "5f646ed8a46cd2fa78f3546ae15d17d10c7885b90c986df52e58dfd81c92bacd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.original_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4eb5b3b2bea74fa2ef8f74430443fcf91703578efaa7c5bd240750acab1fe673",
+          "expectedKernelTypeSha256": "4eb5b3b2bea74fa2ef8f74430443fcf91703578efaa7c5bd240750acab1fe673",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.compile_isSome",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c7c54aca037e1809f3dc247e6b2fdd8400610a8534d0c13421fd92b7e1a68e9f",
+          "expectedKernelTypeSha256": "c7c54aca037e1809f3dc247e6b2fdd8400610a8534d0c13421fd92b7e1a68e9f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.expanded_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e1cd44f5181734485e18c9715033158ca360b888eda0f51e70b366d77760e88a",
+          "expectedKernelTypeSha256": "e1cd44f5181734485e18c9715033158ca360b888eda0f51e70b366d77760e88a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.matched_original_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3a44ac86b851eae886ec1c90d7f6a70b18873d9c25053910cf09fdd27c27b16a",
+          "expectedKernelTypeSha256": "3a44ac86b851eae886ec1c90d7f6a70b18873d9c25053910cf09fdd27c27b16a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.original_gain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2f4fcc36271b2b7ccbc96c064df4296c60498f617f0e9a7b0335a2f727ce584b",
+          "expectedKernelTypeSha256": "2f4fcc36271b2b7ccbc96c064df4296c60498f617f0e9a7b0335a2f727ce584b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.expanded_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bf326f0b42446e9c7acb8321afdbba90d86db4221d2a49b46ab390dc6fdf82af",
+          "expectedKernelTypeSha256": "bf326f0b42446e9c7acb8321afdbba90d86db4221d2a49b46ab390dc6fdf82af",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.expanded_field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d44019f1b34aea6e5192f1121e790d79176267f1a59f0a6d69153e4a38061378",
+          "expectedKernelTypeSha256": "d44019f1b34aea6e5192f1121e790d79176267f1a59f0a6d69153e4a38061378",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.expanded_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "71984fb9b72d71ad9ea78dd7d83d517064e2ec2a8f911fb1508962c71627c0ba",
+          "expectedKernelTypeSha256": "71984fb9b72d71ad9ea78dd7d83d517064e2ec2a8f911fb1508962c71627c0ba",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.discharge_source_exact",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5648f9e263315b547073b009e005fbeb0dc23065179daa94744fabe0068bb945",
+          "expectedKernelTypeSha256": "5648f9e263315b547073b009e005fbeb0dc23065179daa94744fabe0068bb945",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.discharge_full_value",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5f76bac96ea0779b49d2e6c7db6cdc3f3d6a953ba834835e0a449c951a741738",
+          "expectedKernelTypeSha256": "5f76bac96ea0779b49d2e6c7db6cdc3f3d6a953ba834835e0a449c951a741738",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3ad5423b315def909a850c9f775b9bf51ced9833a9566b82978770b779319441",
+          "expectedKernelTypeSha256": "3ad5423b315def909a850c9f775b9bf51ced9833a9566b82978770b779319441",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "419ea770c1d5c32e79ec2f3bc59d1d4497d1b447f3e363a5e70e9e2326d5a01e",
+          "expectedKernelTypeSha256": "419ea770c1d5c32e79ec2f3bc59d1d4497d1b447f3e363a5e70e9e2326d5a01e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireFrontierLift.ProperGain.checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a3092c4aca64494c0ac7112cf82d000da02b4a4a61ae545f8b74719dc436a2a4",
+          "expectedKernelTypeSha256": "a3092c4aca64494c0ac7112cf82d000da02b4a4a61ae545f8b74719dc436a2a4",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-252",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-253",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

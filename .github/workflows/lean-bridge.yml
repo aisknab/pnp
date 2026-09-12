@@ -60,6 +60,7 @@ on:
       - 'audits/lean-wire-carrier0.test.mjs'
       - 'audits/lean-wire-obligation-restoration0.test.mjs'
       - 'audits/lean-wire-quotient-lift0.test.mjs'
+      - 'audits/lean-wire-frontier-lift0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -80,6 +81,7 @@ on:
       - 'docs/lean_wire_carrier.md'
       - 'docs/lean_wire_obligation_restoration.md'
       - 'docs/lean_wire_quotient_lift.md'
+      - 'docs/lean_wire_frontier_lift.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -562,6 +564,7 @@ on:
       - 'audits/lean-wire-carrier0.test.mjs'
       - 'audits/lean-wire-obligation-restoration0.test.mjs'
       - 'audits/lean-wire-quotient-lift0.test.mjs'
+      - 'audits/lean-wire-frontier-lift0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -582,6 +585,7 @@ on:
       - 'docs/lean_wire_carrier.md'
       - 'docs/lean_wire_obligation_restoration.md'
       - 'docs/lean_wire_quotient_lift.md'
+      - 'docs/lean_wire_frontier_lift.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -3465,6 +3469,100 @@ jobs:
           console.log('M252: all seventeen quotient replacement lift interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireQuotientLift.lean
+
+      - name: Check computed original-accounted frontier lift source contracts
+        run: node --test audits/lean-wire-frontier-lift0.test.mjs
+
+      - name: Audit computed original-accounted frontier lift
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireFrontierLiftAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireFrontierLift.ordinary_output_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.kept_field_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.records_predecessor_closed": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.primary_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.compile_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.matched_original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.original_gain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.discharge_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.discharge_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.ProperGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M253: all eighteen original-accounted frontier lift interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireFrontierLift.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure

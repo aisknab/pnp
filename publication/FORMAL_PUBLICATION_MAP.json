@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-252",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-253",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3387,7 +3387,25 @@
     "PNP.DirectWire.WireQuotientLift.discharge_source_exact": "4f253f28d63c4ef390842de5ec99c84a819d2fa3e69b0f67ecaecb5ac7d4547f",
     "PNP.DirectWire.WireQuotientLift.discharge_full_value": "7b121a128cf884fcad0435492949da493316ec268b54a558c1c5c89ff3745677",
     "PNP.DirectWire.WireQuotientLift.checkedGain_isSome_iff": "79cbe56d948918e2995435dee395b44858bc98bd351f66b8a341479318d7db93",
-    "PNP.DirectWire.WireQuotientLift.CheckedGain.checked": "61ca863d7794e9ce01dd17ac5f76237d0c0d0019009f62d3c07decfe4f977fd7"
+    "PNP.DirectWire.WireQuotientLift.CheckedGain.checked": "61ca863d7794e9ce01dd17ac5f76237d0c0d0019009f62d3c07decfe4f977fd7",
+    "PNP.DirectWire.WireFrontierLift.ordinary_output_selected": "8931e68e92d35b11528e401a2794cd957f15aa680c3fc0d403792565c3877b60",
+    "PNP.DirectWire.WireFrontierLift.kept_field_selected": "f1e883390878267faaeb4e079fe8a8e6b1beaa818ee6289321b290e4569fd7a3",
+    "PNP.DirectWire.WireFrontierLift.records_predecessor_closed": "aaac754e3944140d3f9ab991fe42cc844199ca686b2df52f3853c289f980dc22",
+    "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier": "4562d68496b552354fc79fa2203f76209b5c82152af04989e379d7661041e2c6",
+    "PNP.DirectWire.WireFrontierLift.primary_boundary": "5f646ed8a46cd2fa78f3546ae15d17d10c7885b90c986df52e58dfd81c92bacd",
+    "PNP.DirectWire.WireFrontierLift.original_charge": "4eb5b3b2bea74fa2ef8f74430443fcf91703578efaa7c5bd240750acab1fe673",
+    "PNP.DirectWire.WireFrontierLift.compile_isSome": "c7c54aca037e1809f3dc247e6b2fdd8400610a8534d0c13421fd92b7e1a68e9f",
+    "PNP.DirectWire.WireFrontierLift.expanded_charge": "e1cd44f5181734485e18c9715033158ca360b888eda0f51e70b366d77760e88a",
+    "PNP.DirectWire.WireFrontierLift.matched_original_charge": "3a44ac86b851eae886ec1c90d7f6a70b18873d9c25053910cf09fdd27c27b16a",
+    "PNP.DirectWire.WireFrontierLift.original_gain_iff": "2f4fcc36271b2b7ccbc96c064df4296c60498f617f0e9a7b0335a2f727ce584b",
+    "PNP.DirectWire.WireFrontierLift.expanded_output": "bf326f0b42446e9c7acb8321afdbba90d86db4221d2a49b46ab390dc6fdf82af",
+    "PNP.DirectWire.WireFrontierLift.expanded_field": "d44019f1b34aea6e5192f1121e790d79176267f1a59f0a6d69153e4a38061378",
+    "PNP.DirectWire.WireFrontierLift.expanded_equivalent": "71984fb9b72d71ad9ea78dd7d83d517064e2ec2a8f911fb1508962c71627c0ba",
+    "PNP.DirectWire.WireFrontierLift.discharge_source_exact": "5648f9e263315b547073b009e005fbeb0dc23065179daa94744fabe0068bb945",
+    "PNP.DirectWire.WireFrontierLift.discharge_full_value": "5f76bac96ea0779b49d2e6c7db6cdc3f3d6a953ba834835e0a449c951a741738",
+    "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive": "3ad5423b315def909a850c9f775b9bf51ced9833a9566b82978770b779319441",
+    "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff": "419ea770c1d5c32e79ec2f3bc59d1d4497d1b447f3e363a5e70e9e2326d5a01e",
+    "PNP.DirectWire.WireFrontierLift.ProperGain.checked": "a3092c4aca64494c0ac7112cf82d000da02b4a4a61ae545f8b74719dc436a2a4"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3405,7 +3423,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "ba1c85c0de248fac102bde2ff4a549c82ff89a03edebd0fcdb8168b4f21fc099",
+  "milestoneSourceClosureSha256": "77a824bdf0c87b6480b5f4cec5ffc8744a3049259794c1582a4e5e3e2094cf39",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9100,6 +9118,33 @@
       ],
       "scope": "For every finite computational wire carrier, finite keep mask and replacement satisfying local quotient agreement on all ordinary outputs and every kept field, M252 constructs the literal replacement-plus-shared-materializer word. All ordinary outputs and all ordered computational fields agree with the original for every valuation. The same derived materializer gives exact natural gate charges and matched integer cost differences for the reference lift and the replacement expansion. Cancellation transports a saving only against the lifted reference; an original-circuit gain separately requires the full replacement-plus-materializer cost to be strictly smaller than the original. Lost-field discharges bind the original R5 source to the actual expanded source and derive full-value witnesses without any agreement about the replacement's forgotten fields. The computed gain test retains the local quotient premise and returns a complete equivalent strict gain with every field preserved. Seventeen general interfaces have exact reviewed dependencies propext and Quot.sound.",
       "nonClaim": "This is a computational word-level quotient lift, not arbitrary-support Pull/Expand or an embedding of the reference lift into the original circuit. The keep mask, replacement and local quotient agreement are inputs; the construction does not discover replacements or derive that local agreement. The lifted reference can exceed the original gate count, and a relative saving can leave no original gain. It does not complete the manuscript carrier, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-frontier-lift",
+      "title": "Computed original-accounted frontier replacement",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
+        "PNP.DirectWire.WireFrontierLift.kept_field_selected",
+        "PNP.DirectWire.WireFrontierLift.records_predecessor_closed",
+        "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier",
+        "PNP.DirectWire.WireFrontierLift.primary_boundary",
+        "PNP.DirectWire.WireFrontierLift.original_charge",
+        "PNP.DirectWire.WireFrontierLift.compile_isSome",
+        "PNP.DirectWire.WireFrontierLift.expanded_charge",
+        "PNP.DirectWire.WireFrontierLift.matched_original_charge",
+        "PNP.DirectWire.WireFrontierLift.original_gain_iff",
+        "PNP.DirectWire.WireFrontierLift.expanded_output",
+        "PNP.DirectWire.WireFrontierLift.expanded_field",
+        "PNP.DirectWire.WireFrontierLift.expanded_equivalent",
+        "PNP.DirectWire.WireFrontierLift.discharge_source_exact",
+        "PNP.DirectWire.WireFrontierLift.discharge_full_value",
+        "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive",
+        "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff",
+        "PNP.DirectWire.WireFrontierLift.ProperGain.checked"
+      ],
+      "scope": "For every finite computational wire carrier and keep mask, M253 computes the predecessor cone of ordinary and kept observations, then extracts its complete interface from the original fully exposed carrier. Selected forgotten field producers and exterior consumers participate in that frontier. Predecessor closure derives a primary-input-only boundary and actual replacement compiler success without a supplied support, order or success certificate. Every original exterior gate is retained exactly once. Original and expanded gate counts split into pulled or replacement gates plus the same actual exterior charge, giving matched integer differences and an exact original-saving equivalence. Equality with the complete extracted open function derives all ordinary and ordered computational field values and full discharges bound to the actual expanded sources. The computed proper-gain query separately requires proper support and strict local saving, then returns an actual original-circuit equivalent strict gain with every field preserved. Eighteen general interfaces have exact reviewed dependencies propext and Quot.sound.",
+      "nonClaim": "This is a computational frontier lift for one input-derived visible predecessor cone, not arbitrary-support Pull/Expand across all manuscript traces. The keep mask, replacement and complete local open-function agreement are inputs. Ordinary-output or quotient-only agreement does not imply the stronger completed-frontier premise. No replacement search or automatic local agreement is proved. A whole-support saving is not a proper-support certificate. The construction does not complete the full manuscript carrier, noncomputational profile fields, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

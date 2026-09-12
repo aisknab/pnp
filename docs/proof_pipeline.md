@@ -1,21 +1,21 @@
 # Proof and Checker Pipeline
 
-<!-- M252-CURRENT-SUMMARY:BEGIN -->
-## Current M252 boundary
+<!-- M253-CURRENT-SUMMARY:BEGIN -->
+## Current M253 boundary
 
-M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
+M253 computes a quotient-visible predecessor cone, completes its frontier against the original full computational word, and substitutes a locally equivalent replacement into the actual original exterior. Each exterior gate is retained once, so matched costs and strict gain refer to the original circuit, not a larger lifted reference. Complete local open-function agreement includes retained forgotten frontier wires; quotient-only agreement is insufficient. The gain query separately checks proper support and strict saving. Every arbitrary support, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 228 of 230 current scoped publication rows earned.
+Formal artefact coverage: 229 of 231 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [quotient replacement lift and limits](./lean_wire_quotient_lift.md)
+See the [original-accounted frontier lift and limits](./lean_wire_frontier_lift.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M252
-lifts locally quotient-compatible replacements with actual shared materializers and a fully paid original-cost test; arbitrary-support embedding, the complete obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M253
+derives the complete frontier of a computed visible cone and retains each original exterior gate once under full local agreement; every-arbitrary-support transport, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M252-CURRENT-SUMMARY:END -->
+<!-- M253-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release
