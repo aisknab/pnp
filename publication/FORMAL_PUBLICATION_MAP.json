@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-244",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-245",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3258,7 +3258,27 @@
     "PNP.DirectWire.outputConeImplementation_referenceMinimum": "a607337089e55510c9b9c32b166b739b728b3626fa58c63f043d35817b82308b",
     "PNP.DirectWire.outputConeImplementation_residualSlack": "8a9a1ad3414ffd5caf2ee0ee7a3bc9f1f7db7ac3654b34eff9d189fdeb5c327b",
     "PNP.DirectWire.outputConeImplementation_strictGain_iff": "74d077b8e8abb30b93dfefa3d0b836c39794144e2fa3b55883b6ea1040e5ef35",
-    "PNP.DirectWire.outputConeNormalizer_checked": "943e610f7a7ff686071f1adda11a52a5659428fa1fa8649254444ca20e982fd6"
+    "PNP.DirectWire.outputConeNormalizer_checked": "943e610f7a7ff686071f1adda11a52a5659428fa1fa8649254444ca20e982fd6",
+    "PNP.DirectWire.outputConeFrontierCandidate_semantics": "3dc1bb632f4ffbc3f0f1c8b32c170e70b6ba9812eb06eb4066c75d9a6f3f0055",
+    "PNP.DirectWire.deadSupport_interface_empty": "906b882fffcfde65b4de880537a04e1ec9dacb5647cbcb9bc8ec4d80abbf83f8",
+    "PNP.DirectWire.deadSupportGateCount_partition": "6edafb52a2e5ff5d1866967dd0a8b4a94b759429dc0d71486ccd5b6d76ad563a",
+    "PNP.DirectWire.deadSupportGateCount_eq_deleted": "82d59d27ed1c3cd19002619b0d1cfbb0606623acafcaf1c6fa659905da8a368b",
+    "PNP.DirectWire.deadSupportEnvironment_boundary": "162da320d61d2549c4fdbf27b8c6d91d1462fa130d351b14d87af2e39fcca254",
+    "PNP.DirectWire.deadSupportEnvironment_bypass": "7a706583784a3a8000d311fc7d744eee0afcda9bbeb244cb59df9ad5aa3f5c68",
+    "PNP.DirectWire.deadSupportCandidate_extracted": "eda366bcc7644aad67a9a8ff4a47b8911fe7d9defe1cfb08e707913c29605cf1",
+    "PNP.DirectWire.deadSupportCandidate_program": "e3b9e0c33c87b292695750a5e2b3b17ff3c190ccbe5b314647ca6367496c7fb2",
+    "PNP.DirectWire.deadSupportEmptyReplacement_equivalent": "a491c8f37fa95a7803005f043458bf5e0d62066c51082781b9d3764acede3e9f",
+    "PNP.DirectWire.deadSupportContext_plug_equivalent": "5de578a40f9d237158105924b2591a08cf0576898fed1eaab43799879c6343ec",
+    "PNP.DirectWire.deadSupportContext_original_size": "4c0b8ad72564b492a3e161db0f6c3d4f5731da4959b699585c8d8dbe5da54d71",
+    "PNP.DirectWire.deadSupportReplacement_gateCount": "e3049d0cee3f4870ea9d8f60100ff98dcd8105310e20579ba4f80b0f53d4870c",
+    "PNP.DirectWire.deadSupportReplacement_equivalent": "d5c1b86dfb34461c8b300d3647fcf54e8cf46b3104122595beb6368b2660bc2a",
+    "PNP.DirectWire.deadSupportReplacement_accounting": "61abe459f6ba20d1aea0ec9b3c26821fbf405e12aea50fdaa986a89c90fb186c",
+    "PNP.DirectWire.deadSupportReplacement_residualSlack": "5adb0248d3e63508b978489c8710df0d8ee4835cd2e8e33ea6d8fd7f4971225c",
+    "PNP.DirectWire.deadSupportReplacement_strictGain_iff": "9620a0e22c4e3cafafdf4ee248b08b0d5205b3e378e4bed1aa743be59a8f7b26",
+    "PNP.DirectWire.deadSupportProperGain_isSome_iff": "c031fe639898d6671d76e28409b5204852aa290dd37c6e294b6a641fd1cc55b2",
+    "PNP.DirectWire.deadSupportProperGain_sound": "51cc13a8b4d0c917107a5199e03f5a5a862e30b01ad4c3d6265c2065daf755a2",
+    "PNP.DirectWire.deadSupportProperGain_none_of_all_dead": "c7b2036d09f1e80c0f2367ed5046c49fc5aea9412e2b59b7404ddc4bad68dc11",
+    "PNP.DirectWire.deadSupportProperGain_none_of_no_dead": "36242686b99f11d533a8fd54ab724dd586c89e621d25d9bea4b0ab3e57d0c40a"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3276,7 +3296,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "a8f9112142808fc2ad2f89d1719033dfcaa86aabb8e16584402c8138b3a2f9d9",
+  "milestoneSourceClosureSha256": "0d4d9738a7187934e27e64b808dbc02bdf5ecf192c92fba132cf593723e6ad42",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8770,6 +8790,35 @@
       ],
       "scope": "For every finite direct-wire NAND candidate and complete ordered output word, M244 computes the least physical gate-predecessor closure of actual gate-valued outputs using the existing finite work-list saturation. It proves output inclusion, predecessor closure, leastness and absence of gate-valued external boundary wires. The existing checked support extractor is reused, its boundary is renamed to original primary inputs, and every ordered output position is reconnected, including constants and repeated wires. Eleven universal interfaces establish complete input/output equivalence, non-increasing physical gate count, exact retained-plus-deleted accounting, invariant semantic reference minimum, exact residual-slack savings, strict gain exactly when a gate is deleted and the concrete PCCMin normalizer outcome. The caller supplies only the implementation. All eleven interfaces are explicit-root built with only propext and Quot.sound.",
       "nonClaim": "This is a computed physical unused-gate pruning stage, not complete manuscript N1-N10 normalization or full-profile/metadata support derivation. The empty profile index describes only this physical closure; arbitrary full-profile observers may distinguish the pruned implementation. A no-deletion branch does not imply semantic minimality or ZeroSlack. The pass reuses executable closure and checked extraction; reference minimum occurs in specification theorems, not in execution. No proper-support Package E rewrite ledger, full-profile carrier/obligation transport, global terminal family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-dead-support-context",
+      "title": "Computed dead-support frames and proper physical deletion",
+      "requiredTheorems": [
+        "PNP.DirectWire.outputConeFrontierCandidate_semantics",
+        "PNP.DirectWire.deadSupport_interface_empty",
+        "PNP.DirectWire.deadSupportGateCount_partition",
+        "PNP.DirectWire.deadSupportGateCount_eq_deleted",
+        "PNP.DirectWire.deadSupportEnvironment_boundary",
+        "PNP.DirectWire.deadSupportEnvironment_bypass",
+        "PNP.DirectWire.deadSupportCandidate_extracted",
+        "PNP.DirectWire.deadSupportCandidate_program",
+        "PNP.DirectWire.deadSupportEmptyReplacement_equivalent",
+        "PNP.DirectWire.deadSupportContext_plug_equivalent",
+        "PNP.DirectWire.deadSupportContext_original_size",
+        "PNP.DirectWire.deadSupportReplacement_gateCount",
+        "PNP.DirectWire.deadSupportReplacement_equivalent",
+        "PNP.DirectWire.deadSupportReplacement_accounting",
+        "PNP.DirectWire.deadSupportReplacement_residualSlack",
+        "PNP.DirectWire.deadSupportReplacement_strictGain_iff",
+        "PNP.DirectWire.deadSupportProperGain_isSome_iff",
+        "PNP.DirectWire.deadSupportProperGain_sound",
+        "PNP.DirectWire.deadSupportProperGain_none_of_all_dead",
+        "PNP.DirectWire.deadSupportProperGain_none_of_no_dead"
+      ],
+      "scope": "For every finite direct-wire NAND implementation, M245 computes the physical complement of its output cone and proves that the actual extracted dead support has no outgoing interface. Its incoming wires are connected to original inputs or the computed live frontier; the live program also carries every original ordered output as bypass. The support is the actual extracted candidate, reindexed only by its proved empty interface. A concrete FramedContext inserts that support with the original physical gate count and plugs a zero-gate replacement with complete original output semantics. Twenty general interfaces establish exact boundary values, extraction identity, local and framed equivalence, retained-plus-dead gate accounting, exact residual-slack savings and a computed physical gain witness precisely when both dead support and live cone are nonempty. All twenty interfaces are explicit-root built with only propext and Quot.sound. No support, frame or correctness certificate is supplied by the caller.",
+      "nonClaim": "This is a computed proper physical deletion component, not complete manuscript Package E admissibility or a complete N1-N10 rewrite ledger. Properness concerns the actual gate subset and concrete frame, not full-profile carrier and obligation compatibility. An all-unused circuit is not accepted as a proper-subset witness. Rejecting this route does not imply semantic minimality or ZeroSlack. The construction does not search reference minima; the reference minimum occurs only in specification theorems. No arbitrary full-profile preservation, complete Package E verifier, terminal-derived global family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

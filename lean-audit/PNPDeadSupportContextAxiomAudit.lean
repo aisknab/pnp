@@ -1,0 +1,22 @@
+import PNP
+
+#print axioms PNP.DirectWire.outputConeFrontierCandidate_semantics
+#print axioms PNP.DirectWire.deadSupport_interface_empty
+#print axioms PNP.DirectWire.deadSupportGateCount_partition
+#print axioms PNP.DirectWire.deadSupportGateCount_eq_deleted
+#print axioms PNP.DirectWire.deadSupportEnvironment_boundary
+#print axioms PNP.DirectWire.deadSupportEnvironment_bypass
+#print axioms PNP.DirectWire.deadSupportCandidate_extracted
+#print axioms PNP.DirectWire.deadSupportCandidate_program
+#print axioms PNP.DirectWire.deadSupportEmptyReplacement_equivalent
+#print axioms PNP.DirectWire.deadSupportContext_plug_equivalent
+#print axioms PNP.DirectWire.deadSupportContext_original_size
+#print axioms PNP.DirectWire.deadSupportReplacement_gateCount
+#print axioms PNP.DirectWire.deadSupportReplacement_equivalent
+#print axioms PNP.DirectWire.deadSupportReplacement_accounting
+#print axioms PNP.DirectWire.deadSupportReplacement_residualSlack
+#print axioms PNP.DirectWire.deadSupportReplacement_strictGain_iff
+#print axioms PNP.DirectWire.deadSupportProperGain_isSome_iff
+#print axioms PNP.DirectWire.deadSupportProperGain_sound
+#print axioms PNP.DirectWire.deadSupportProperGain_none_of_all_dead
+#print axioms PNP.DirectWire.deadSupportProperGain_none_of_no_dead
