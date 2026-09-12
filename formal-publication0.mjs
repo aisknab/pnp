@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '59b14287c2d80901f41c079914091e1789ff1b9b53d1cc4ef32af924a08d07ce';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e534b231a5a21451534cba9eab97e97edbe9432df86a7b755c206bdba73dc008';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -577,6 +577,42 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff',
   'PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete',
   'PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked',
+  'PNP.DirectWire.WireUnarySupportSearch.maximalSelection_admissible',
+  'PNP.DirectWire.WireUnarySupportSearch.maximalSelection_contains',
+  'PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected_iff',
+  'PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected',
+  'PNP.DirectWire.WireUnarySupportSearch.admissible_boundary',
+  'PNP.DirectWire.WireUnarySupportSearch.admissible_boundary_small',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateRecords_boundary',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateRecords_proper',
+  'PNP.DirectWire.WireUnarySupportSearch.consumedWires_length',
+  'PNP.DirectWire.WireUnarySupportSearch.boundary_mem_consumedWires',
+  'PNP.DirectWire.WireUnarySupportSearch.boundaryChoices_length',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateFamily_length',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateFamily_maximal_mem',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateFamily_singleton_mem',
+  'PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem',
+  'PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem',
+  'PNP.DirectWire.WireUnarySupportSearch.supportChoice_external',
+  'PNP.DirectWire.WireUnarySupportSearch.supportChoice_mem',
+  'PNP.DirectWire.WireUnarySupportSearch.support_admissible',
+  'PNP.DirectWire.WireUnarySupportSearch.support_contained_in_candidate',
+  'PNP.DirectWire.WireUnarySupportSearch.selected_length_mono',
+  'PNP.DirectWire.WireUnarySupportSearch.selected_length_le',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateFamily_entry_length',
+  'PNP.DirectWire.WireUnarySupportSearch.extracted_gateCount_mono',
+  'PNP.DirectWire.WireUnarySupportSearch.singleton_selection',
+  'PNP.DirectWire.WireUnarySupportSearch.checkedGain_selection_invariant',
+  'PNP.DirectWire.WireUnarySupportSearch.candidateFamily_complete',
+  'PNP.DirectWire.WireUnarySupportSearch.findGain_complete',
+  'PNP.DirectWire.WireUnarySupportSearch.findGain_member',
+  'PNP.DirectWire.WireUnarySupportSearch.findGain_records_bound',
+  'PNP.DirectWire.WireUnarySupportSearch.GainResult.checked',
+  'PNP.DirectWire.WireUnarySupportSearch.findGain_none_excludes',
+  'PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_source_exact',
+  'PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_full_value',
+  'PNP.DirectWire.WireUnarySupportSearch.findReplacement_isSome',
+  'PNP.DirectWire.WireUnarySupportSearch.findReplacement_sound',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3824,7 +3860,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-257') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-258') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

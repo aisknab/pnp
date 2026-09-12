@@ -65,6 +65,7 @@ on:
       - 'audits/lean-wire-unary-realization0.test.mjs'
       - 'audits/lean-wire-unary-frontier0.test.mjs'
       - 'audits/lean-wire-unary-arbitrary-support0.test.mjs'
+      - 'audits/lean-wire-unary-support-search0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -90,6 +91,7 @@ on:
       - 'docs/lean_wire_unary_realization.md'
       - 'docs/lean_wire_unary_frontier.md'
       - 'docs/lean_wire_unary_arbitrary_support.md'
+      - 'docs/lean_wire_unary_support_search.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -577,6 +579,7 @@ on:
       - 'audits/lean-wire-unary-realization0.test.mjs'
       - 'audits/lean-wire-unary-frontier0.test.mjs'
       - 'audits/lean-wire-unary-arbitrary-support0.test.mjs'
+      - 'audits/lean-wire-unary-support-search0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -602,6 +605,7 @@ on:
       - 'docs/lean_wire_unary_realization.md'
       - 'docs/lean_wire_unary_frontier.md'
       - 'docs/lean_wire_unary_arbitrary_support.md'
+      - 'docs/lean_wire_unary_support_search.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -4060,6 +4064,166 @@ jobs:
           console.log('M257: 31 computed unary arbitrary-support interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryArbitrarySupport.lean
+
+      - name: Check computed unary support-search source contracts
+        run: node --test audits/lean-wire-unary-support-search0.test.mjs
+
+      - name: Audit computed unary support search
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnarySupportSearchAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_admissible": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_contains": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.admissible_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.admissible_boundary_small": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateRecords_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateRecords_proper": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.consumedWires_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.boundary_mem_consumedWires": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.boundaryChoices_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_maximal_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_singleton_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_external": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.support_admissible": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.support_contained_in_candidate": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.selected_length_mono": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.selected_length_le": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_entry_length": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.extracted_gateCount_mono": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.singleton_selection": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.checkedGain_selection_invariant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_member": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_records_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_none_excludes": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findReplacement_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findReplacement_sound": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M258: 36 computed unary support-search interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnarySupportSearch.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
