@@ -50,6 +50,7 @@ import PNP.PCCMinOutputConePruning
 import PNP.PCCMinDeadSupportContext
 import PNP.PCCMinDeadSupportFullMode
 import PNP.PCCMinConstantPropagation
+import PNP.PCCMinPhysicalNormalizationClosure
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

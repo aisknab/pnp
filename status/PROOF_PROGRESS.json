@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-247",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-248",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 223,
-    "totalRows": 225,
+    "earnedRows": 224,
+    "totalRows": 226,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2166,6 +2166,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M247 constructs the physical literal-constant structural-congruence pass over every finite NAND program. Actual source aliases propagate earlier constants, preserve every ordered output and account exactly for retained gates, eliminations and residual-slack descent. The no-elimination branch is not semantic minimality, as a checked correlated-input constant example demonstrates. This does not derive the complete manuscript carrier, obligation ledger, traceable normalization, total PCCMin oracle or an encoded-size polynomial runtime theorem. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty. Formal artefact coverage: 223 of 225 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-248",
+      "formalArtefactCoverage": {
+        "earnedRows": 224,
+        "totalRows": 226
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M248 constructs a total priority-respecting loop over the actual constant-propagation, sharing and output-cone-pruning passes. It derives a finite strict-gain trace, complete output equivalence, exact savings and common operational quiescence, including idempotent re-execution and a gate-saving iteration bound. Quiescence for these three passes is not semantic minimality, as a checked smaller equivalent constant word demonstrates. The arbitrary-support transport, full-profile carrier, obligation lifecycle, complete manuscript normalization, total PCCMin oracle and encoded-size polynomial runtime obligations remain open. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty.Formal artefact coverage: 224 of 226 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

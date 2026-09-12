@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-247`, 223 of 225
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-248`, 224 of 226
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M247 |
+| Track | Available | Earned at M248 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M247 risk-weighted proof completion estimate is therefore 40 percent, with
+The M248 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -127,7 +127,10 @@ No fixed checkpoint or global gate changes.
 M247 computes literal constant propagation through every gate of an arbitrary finite NAND program and rewrites its complete ordered output tuple. Computed source aliases propagate earlier constants, and ten general interfaces prove primitive recognition, all-input semantics, exact retained/eliminated gate accounting and residual-slack descent. No-elimination is not semantic minimality. This physical structural-congruence component does not derive the manuscript carrier, full-profile transport, obligation lifecycle ledger, complete normalization or global PCCMin route.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 223 of 225 current scoped publication rows earned.
+M248 computes a terminating priority loop over constant propagation, NAND sharing and output-cone pruning. Its constructed trace preserves every ordered output and records exact physical savings. All three passes are quiet on the same final result, and re-execution returns that result unchanged. These twelve general interfaces establish operational quiescence, not semantic minimality, complete manuscript normalization or the global PCCMin route.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 224 of 226 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

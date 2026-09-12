@@ -1,0 +1,14 @@
+import PNP
+
+#print axioms PNP.DirectWire.physicalNormalizationPass_equivalent
+#print axioms PNP.DirectWire.physicalNormalizationPass_exact_accounting
+#print axioms PNP.DirectWire.PhysicalNormalizationGain.checked
+#print axioms PNP.DirectWire.nextPhysicalNormalizationStep_checked
+#print axioms PNP.DirectWire.PhysicalNormalizationTrace.checked
+#print axioms PNP.DirectWire.runPhysicalNormalization_checked
+#print axioms PNP.DirectWire.runPhysicalNormalization_of_quiescent
+#print axioms PNP.DirectWire.runPhysicalNormalization_idempotent
+#print axioms PNP.DirectWire.runPhysicalNormalization_referenceMinimum
+#print axioms PNP.DirectWire.runPhysicalNormalization_residualSlack
+#print axioms PNP.DirectWire.runPhysicalNormalization_gainIterations_le_residualSlack
+#print axioms PNP.DirectWire.physicalClosureNormalizer_checked
