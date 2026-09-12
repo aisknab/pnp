@@ -274,3 +274,35 @@ test('Lean declaration inventory fails closed on an extra axiom or placeholder',
     { file: 'lean/PNP/Main.lean', token: 'sorry' },
   ]);
 });
+
+// Fail before provider-side workflow rejection, with headroom below 500 KiB.
+// Provider limit: https://docs.github.com/en/actions/reference/limits
+const WORKFLOW_REVIEW_BYTES = 480_000;
+
+function workflowSizeAccepted0(source) {
+  return Buffer.byteLength(source, 'utf8') <= WORKFLOW_REVIEW_BYTES;
+}
+
+test('durable workflow files retain reviewed provider size headroom', async () => {
+  const entries = await readdir(path.join(ROOT, '.github/workflows'));
+  for (const file of entries.filter((name) => /\.ya?ml$/u.test(name))) {
+    const source = await text0('.github/workflows/' + file);
+    assert.equal(workflowSizeAccepted0(source), true,
+      file + ' exceeds the 480,000-byte review budget; compact orchestration without removing checks');
+  }
+});
+
+test('workflow size guard counts encoded bytes and rejects oversized input', () => {
+  assert.equal(workflowSizeAccepted0('x'.repeat(WORKFLOW_REVIEW_BYTES)), true);
+  assert.equal(workflowSizeAccepted0('x'.repeat(WORKFLOW_REVIEW_BYTES + 1)), false);
+  assert.equal(workflowSizeAccepted0('é'.repeat(WORKFLOW_REVIEW_BYTES / 2)), true);
+  assert.equal(workflowSizeAccepted0('é'.repeat(WORKFLOW_REVIEW_BYTES / 2 + 1)), false);
+});
+
+test('Lean workflow keeps current-milestone trigger families compact', async () => {
+  const workflow = await text0('.github/workflows/lean-bridge.yml');
+  assert.equal((workflow.match(/^      - 'audits\/lean-\*\.test\.mjs'$/gmu) ?? []).length, 2);
+  assert.equal((workflow.match(/^      - 'docs\/lean_\*\.md'$/gmu) ?? []).length, 2);
+  assert.doesNotMatch(workflow, /^      - 'audits\/lean-[^/*]+\.test\.mjs'$/mu);
+  assert.doesNotMatch(workflow, /^      - 'docs\/lean_[^/*]+\.md'$/mu);
+});

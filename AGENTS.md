@@ -137,6 +137,20 @@ This repository already has the durable online workflow shape:
 Prefer those workflows. If more CI coverage is needed, extend the durable workflow in
 a small read-only way instead of adding branch-specific finalizer workflows.
 
+### Workflow size and trigger maintenance
+
+- Keep every workflow below the tested 480,000-byte review budget, leaving
+  headroom below the provider's 500 KiB launch limit. Run the workflow-size
+  regression in `audits/lean-root-target0.test.mjs` before a publication push.
+- Use the existing `audits/lean-*.test.mjs` and `docs/lean_*.md` trigger
+  families for new milestones. Do not grow duplicated file-by-file trigger
+  lists or repeat paths already covered by `lean/**`, `lean-audit/**` or
+  `lean-regression/**`.
+- A workflow-size repair must preserve all previously covered triggers,
+  commands, exact axiom expectations and validation gates. Verify job-body
+  identity when only trigger lists change; do not repeat unchanged proof
+  commands for a trigger-only edit.
+
 ## How To Apply Generated Changes
 
 If a task needs generated or mechanical edits:
