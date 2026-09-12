@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd6f86dd8cb4dd2318802063940095a3d3044f3750fb4b07a8bb8da7b0530bc9a';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '471052f0a36eaa93737045c47ac594622052cb27734380b619345f3d261ef949';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -399,6 +399,22 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_primaryBoundary',
   'PNP.DirectWire.ArbitrarySupportSplice.production_compiles',
   'PNP.DirectWire.ArbitrarySupportSplice.production_agreement',
+  'PNP.DirectWire.WireCarrier.exposed_unpack',
+  'PNP.DirectWire.WireCarrier.unpack_exposed',
+  'PNP.DirectWire.WireCarrier.normalize_output',
+  'PNP.DirectWire.WireCarrier.normalize_field',
+  'PNP.DirectWire.WireCarrier.normalize_exact_accounting',
+  'PNP.DirectWire.WireCarrier.normalize_quiescent',
+  'PNP.DirectWire.WireCarrier.normalize_idempotent',
+  'PNP.DirectWire.WireCarrier.field_producer_visible',
+  'PNP.DirectWire.WireCarrier.splice_output',
+  'PNP.DirectWire.WireCarrier.splice_field',
+  'PNP.DirectWire.WireCarrier.splice_exact_accounting',
+  'PNP.DirectWire.WireCarrier.splice_strict_gain',
+  'PNP.DirectWire.WireCarrier.splice_checked',
+  'PNP.DirectWire.WireCarrier.splice_failure_iff',
+  'PNP.DirectWire.WireCarrier.production_boundary_isInput',
+  'PNP.DirectWire.WireCarrier.production_compiles',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3646,7 +3662,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-249') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-250') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
