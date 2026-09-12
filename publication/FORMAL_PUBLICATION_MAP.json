@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-243",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-244",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3247,7 +3247,18 @@
     "PNP.sat_np_hard_checked": "ebcaa13f070d5b1f8fc0105e0feea71c65010f94a5e135ae0c4abaf4544fb382",
     "PNP.sat_np_complete_checked": "4ed163e43a3c4fd3be9ea3d1d5c348a0ce4951beb322aca3c617265e63b0fd26",
     "PNP.accepted_generated_package_implies_p_eq_np": "89cfb0983711ce18a75e458324047e6007ac456dbdc926f09080db41d826379f",
-    "PNP.final_report_bridge": "956062f71216218a1edb59039ae63f85c01564a93e7a1e891754127f3e22c8a5"
+    "PNP.final_report_bridge": "956062f71216218a1edb59039ae63f85c01564a93e7a1e891754127f3e22c8a5",
+    "PNP.DirectWire.outputConeRecords_output": "4a84fda6540cca8fb6973022a6b2fd87a24e4dcb3d9fb88fdfd7c8a220fb4cd3",
+    "PNP.DirectWire.outputConeRecords_closed": "35b36dfb577ea36b54a521a9821c3e8d8fd9b561aa8621f87160088ad2607005",
+    "PNP.DirectWire.outputConeRecords_least": "acbdad00014ed703ae3b6e5d8752f55e13d47c0238b477892758b9ca0fbb572d",
+    "PNP.DirectWire.outputConeRecords_noExternalGate": "378d1260b7d2ee62fe165ac89564e432ba1747781f13686e17d9a83e75cf47be",
+    "PNP.DirectWire.outputConeImplementation_equivalent": "064356bbc6da79448d31aa75eb34b149ee082822f42a2521b60da9930f85bcb6",
+    "PNP.DirectWire.outputConeImplementation_gateCount_le": "8da639dbcc1460fb5ef3f78e62cc27e8379c52ce5a8181a0ef9fe54644fe95cc",
+    "PNP.DirectWire.outputConeImplementation_exact_accounting": "c794c33214594e260a14552758c307ea23e1c3c945388c3a27a496263cb739a4",
+    "PNP.DirectWire.outputConeImplementation_referenceMinimum": "a607337089e55510c9b9c32b166b739b728b3626fa58c63f043d35817b82308b",
+    "PNP.DirectWire.outputConeImplementation_residualSlack": "8a9a1ad3414ffd5caf2ee0ee7a3bc9f1f7db7ac3654b34eff9d189fdeb5c327b",
+    "PNP.DirectWire.outputConeImplementation_strictGain_iff": "74d077b8e8abb30b93dfefa3d0b836c39794144e2fa3b55883b6ea1040e5ef35",
+    "PNP.DirectWire.outputConeNormalizer_checked": "943e610f7a7ff686071f1adda11a52a5659428fa1fa8649254444ca20e982fd6"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3265,7 +3276,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
+  "milestoneSourceClosureSha256": "a8f9112142808fc2ad2f89d1719033dfcaa86aabb8e16584402c8138b3a2f9d9",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8739,6 +8750,26 @@
       ],
       "scope": "M243 connects the already checked all-input Cook-Levin NP-hardness and NP-completeness theorem to the exact report-facing SAT predicate. The existing accepted-generated-package consequence and final_report_bridge no longer take a CheckerTrustModel or supplied SAT-hardness argument. They consume the checked theorem while retaining the explicit PCCMinLoopCertificate, its concrete residual-band polynomial decider and the loop-existence antecedent. This strengthens the active conditional interface rather than adding an unused parallel route. Four reviewed interfaces have exact kernel types and the same standard axioms as the consumed M231 theorem: Classical.choice, Quot.sound and propext.",
       "nonClaim": "This is a conditional final-report bridge, not the eligible unconditional root theorem. No complete PCCMin loop certificate is constructed: the concrete residual-band decider remains an explicit certificate field. Canonical package acceptance does not supply missing algorithmic correctness, encoded-size bounds or loop existence. This does not establish unconditional SaturatePositive, BCELReady or ZeroSlack, a complete exact polynomial PCCMin construction, polynomial output and certificate bounds, deterministic CNFSAT in P or P = NP. M231 hardness was already credited; connecting it here earns no duplicate checkpoint points. No fixed weighted checkpoint or global gate closes."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-output-cone-pruning",
+      "title": "Derived physical output cones and checked unused-gate pruning",
+      "requiredTheorems": [
+        "PNP.DirectWire.outputConeRecords_output",
+        "PNP.DirectWire.outputConeRecords_closed",
+        "PNP.DirectWire.outputConeRecords_least",
+        "PNP.DirectWire.outputConeRecords_noExternalGate",
+        "PNP.DirectWire.outputConeImplementation_equivalent",
+        "PNP.DirectWire.outputConeImplementation_gateCount_le",
+        "PNP.DirectWire.outputConeImplementation_exact_accounting",
+        "PNP.DirectWire.outputConeImplementation_referenceMinimum",
+        "PNP.DirectWire.outputConeImplementation_residualSlack",
+        "PNP.DirectWire.outputConeImplementation_strictGain_iff",
+        "PNP.DirectWire.outputConeNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND candidate and complete ordered output word, M244 computes the least physical gate-predecessor closure of actual gate-valued outputs using the existing finite work-list saturation. It proves output inclusion, predecessor closure, leastness and absence of gate-valued external boundary wires. The existing checked support extractor is reused, its boundary is renamed to original primary inputs, and every ordered output position is reconnected, including constants and repeated wires. Eleven universal interfaces establish complete input/output equivalence, non-increasing physical gate count, exact retained-plus-deleted accounting, invariant semantic reference minimum, exact residual-slack savings, strict gain exactly when a gate is deleted and the concrete PCCMin normalizer outcome. The caller supplies only the implementation. All eleven interfaces are explicit-root built with only propext and Quot.sound.",
+      "nonClaim": "This is a computed physical unused-gate pruning stage, not complete manuscript N1-N10 normalization or full-profile/metadata support derivation. The empty profile index describes only this physical closure; arbitrary full-profile observers may distinguish the pruned implementation. A no-deletion branch does not imply semantic minimality or ZeroSlack. The pass reuses executable closure and checked extraction; reference minimum occurs in specification theorems, not in execution. No proper-support Package E rewrite ledger, full-profile carrier/obligation transport, global terminal family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0

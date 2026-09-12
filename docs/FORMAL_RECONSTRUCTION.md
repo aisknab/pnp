@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M243-CURRENT-SUMMARY:BEGIN -->
-## Current M243 boundary
+<!-- M244-CURRENT-SUMMARY:BEGIN -->
+## Current M244 boundary
 
-M243 connects the checked all-input Cook-Levin NP-completeness theorem directly to the active final-report bridge. No supplied SAT-hardness parameter remains. The bridge still requires an explicit proof-bearing PCCMin loop certificate containing the concrete residual-band polynomial decider; packaging and acceptance do not construct that certificate.
+M244 computes the complete physical output-dependency cone of any finite direct-wire NAND implementation and removes unused gates through the existing checked extractor. Every original input and ordered output is preserved, and physical gate deletions give exact residual-slack savings. No-deletion is not semantic minimality, and Boolean equivalence is not full-profile preservation.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 219 of 221 current scoped publication rows earned.
+Formal artefact coverage: 220 of 222 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [checked conditional bridge and limits](./lean_concrete_final_report_bridge.md)
-and the [constructive sharing boundary](./lean_pccmin_constructive_nand_sharing.md).
-Earlier milestone notes retain their original module-specific scope. M243
-consumes the existing checked hardness theorem; it does not construct the missing proof-bearing PCCMin loop.
+See the [computed output-cone pruning and limits](./lean_pccmin_output_cone_pruning.md)
+and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
+Earlier milestone notes retain their original module-specific scope. M244
+derives physical gate support from actual outputs; full-profile normalization and the total PCCMin oracle remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M243-CURRENT-SUMMARY:END -->
+<!-- M244-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

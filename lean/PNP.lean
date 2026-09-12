@@ -46,6 +46,7 @@ import PNP.ResidualTerminalGainProfileFirewall
 import PNP.ResidualIndependentMaterializerCost
 import PNP.ResidualTerminalPhysicalOwnership
 import PNP.PCCMinConstructiveNANDSharing
+import PNP.PCCMinOutputConePruning
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting

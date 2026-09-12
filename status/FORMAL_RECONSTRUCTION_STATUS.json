@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-243",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-244",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1522,6 +1522,23 @@
   "leanConcreteFinalReportBridgeRequiresSuppliedSATHardness": false,
   "leanConcreteFinalReportBridgeLoopCertificateExistenceDischarged": false,
   "leanConcreteFinalReportBridgeScope": "checked-all-input-concrete-cook-levin-hardness-consumed-by-the-active-conditional-final-report-bridge-explicit-proof-bearing-pccmin-loop-existence-still-required",
+  "leanPCCMinOutputConePruningFormalized": true,
+  "leanPCCMinOutputConePruningAxiomAuditPassed": true,
+  "leanPCCMinOutputConePruningAuditedDeclarationCount": 11,
+  "leanPCCMinOutputConePruningOutputCoverageTheorem": "PNP.DirectWire.outputConeRecords_output",
+  "leanPCCMinOutputConePruningPredecessorClosureTheorem": "PNP.DirectWire.outputConeRecords_closed",
+  "leanPCCMinOutputConePruningLeastConeTheorem": "PNP.DirectWire.outputConeRecords_least",
+  "leanPCCMinOutputConePruningNoExternalGateTheorem": "PNP.DirectWire.outputConeRecords_noExternalGate",
+  "leanPCCMinOutputConePruningEquivalenceTheorem": "PNP.DirectWire.outputConeImplementation_equivalent",
+  "leanPCCMinOutputConePruningGateCountTheorem": "PNP.DirectWire.outputConeImplementation_gateCount_le",
+  "leanPCCMinOutputConePruningGateAccountingTheorem": "PNP.DirectWire.outputConeImplementation_exact_accounting",
+  "leanPCCMinOutputConePruningReferenceMinimumTheorem": "PNP.DirectWire.outputConeImplementation_referenceMinimum",
+  "leanPCCMinOutputConePruningResidualSlackTheorem": "PNP.DirectWire.outputConeImplementation_residualSlack",
+  "leanPCCMinOutputConePruningStrictGainTheorem": "PNP.DirectWire.outputConeImplementation_strictGain_iff",
+  "leanPCCMinOutputConePruningNormalizerTheorem": "PNP.DirectWire.outputConeNormalizer_checked",
+  "leanPCCMinOutputConePruningFullProfilePreservationProved": false,
+  "leanPCCMinOutputConePruningPolynomialRuntimeProved": false,
+  "leanPCCMinOutputConePruningScope": "all-finite-nand-candidates-derived-least-physical-output-predecessor-cone-checked-support-extraction-original-io-semantics-exact-deletion-accounting-and-physical-normalizer-stage-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2780,7 +2797,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
+    "actualSourceClosureSha256": "a8f9112142808fc2ad2f89d1719033dfcaa86aabb8e16584402c8138b3a2f9d9",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2813,19 +2830,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "7591d7c7f64b753f78d2bc48805192c1951b89b43bdb50c925e610234948c33b",
+  "leanTheoremInventorySha256": "95fb2eee41c6e48d024971ddf760f9292d7be4d913f4dc3fc24eb1e25cbf4a46",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46384,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20040,
-  "leanTheoremInventoryTheoremCount": 25472,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11064,
-  "leanTheoremInventorySourceClosureModuleCount": 507,
-  "leanSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-243",
+  "leanTheoremInventoryDeclarationCount": 46422,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20076,
+  "leanTheoremInventoryTheoremCount": 25499,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11067,
+  "leanTheoremInventorySourceClosureModuleCount": 508,
+  "leanSourceClosureSha256": "a8f9112142808fc2ad2f89d1719033dfcaa86aabb8e16584402c8138b3a2f9d9",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-244",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "c8bdccabd4b13d9fafb896c48a22306685f7fae2e435da51babcc81232cbc814",
+  "formalPublicationMapSha256": "ed26d0f6d6ce47da7b8f25c7cfef65d7f85e43e7cbbe9886e898e740a29b9fce",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49820,9 +49837,170 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-output-cone-pruning",
+      "title": "Derived physical output cones and checked unused-gate pruning",
+      "requiredTheorems": [
+        "PNP.DirectWire.outputConeRecords_output",
+        "PNP.DirectWire.outputConeRecords_closed",
+        "PNP.DirectWire.outputConeRecords_least",
+        "PNP.DirectWire.outputConeRecords_noExternalGate",
+        "PNP.DirectWire.outputConeImplementation_equivalent",
+        "PNP.DirectWire.outputConeImplementation_gateCount_le",
+        "PNP.DirectWire.outputConeImplementation_exact_accounting",
+        "PNP.DirectWire.outputConeImplementation_referenceMinimum",
+        "PNP.DirectWire.outputConeImplementation_residualSlack",
+        "PNP.DirectWire.outputConeImplementation_strictGain_iff",
+        "PNP.DirectWire.outputConeNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND candidate and complete ordered output word, M244 computes the least physical gate-predecessor closure of actual gate-valued outputs using the existing finite work-list saturation. It proves output inclusion, predecessor closure, leastness and absence of gate-valued external boundary wires. The existing checked support extractor is reused, its boundary is renamed to original primary inputs, and every ordered output position is reconnected, including constants and repeated wires. Eleven universal interfaces establish complete input/output equivalence, non-increasing physical gate count, exact retained-plus-deleted accounting, invariant semantic reference minimum, exact residual-slack savings, strict gain exactly when a gate is deleted and the concrete PCCMin normalizer outcome. The caller supplies only the implementation. All eleven interfaces are explicit-root built with only propext and Quot.sound.",
+      "nonClaim": "This is a computed physical unused-gate pruning stage, not complete manuscript N1-N10 normalization or full-profile/metadata support derivation. The empty profile index describes only this physical closure; arbitrary full-profile observers may distinguish the pruned implementation. A no-deletion branch does not imply semantic minimality or ZeroSlack. The pass reuses executable closure and checked extraction; reference minimum occurs in specification theorems, not in execution. No proper-support Package E rewrite ledger, full-profile carrier/obligation transport, global terminal family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.outputConeRecords_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4a84fda6540cca8fb6973022a6b2fd87a24e4dcb3d9fb88fdfd7c8a220fb4cd3",
+          "expectedKernelTypeSha256": "4a84fda6540cca8fb6973022a6b2fd87a24e4dcb3d9fb88fdfd7c8a220fb4cd3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeRecords_closed",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "35b36dfb577ea36b54a521a9821c3e8d8fd9b561aa8621f87160088ad2607005",
+          "expectedKernelTypeSha256": "35b36dfb577ea36b54a521a9821c3e8d8fd9b561aa8621f87160088ad2607005",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeRecords_least",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "acbdad00014ed703ae3b6e5d8752f55e13d47c0238b477892758b9ca0fbb572d",
+          "expectedKernelTypeSha256": "acbdad00014ed703ae3b6e5d8752f55e13d47c0238b477892758b9ca0fbb572d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeRecords_noExternalGate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "378d1260b7d2ee62fe165ac89564e432ba1747781f13686e17d9a83e75cf47be",
+          "expectedKernelTypeSha256": "378d1260b7d2ee62fe165ac89564e432ba1747781f13686e17d9a83e75cf47be",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "064356bbc6da79448d31aa75eb34b149ee082822f42a2521b60da9930f85bcb6",
+          "expectedKernelTypeSha256": "064356bbc6da79448d31aa75eb34b149ee082822f42a2521b60da9930f85bcb6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_gateCount_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8da639dbcc1460fb5ef3f78e62cc27e8379c52ce5a8181a0ef9fe54644fe95cc",
+          "expectedKernelTypeSha256": "8da639dbcc1460fb5ef3f78e62cc27e8379c52ce5a8181a0ef9fe54644fe95cc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_exact_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c794c33214594e260a14552758c307ea23e1c3c945388c3a27a496263cb739a4",
+          "expectedKernelTypeSha256": "c794c33214594e260a14552758c307ea23e1c3c945388c3a27a496263cb739a4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_referenceMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a607337089e55510c9b9c32b166b739b728b3626fa58c63f043d35817b82308b",
+          "expectedKernelTypeSha256": "a607337089e55510c9b9c32b166b739b728b3626fa58c63f043d35817b82308b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8a9a1ad3414ffd5caf2ee0ee7a3bc9f1f7db7ac3654b34eff9d189fdeb5c327b",
+          "expectedKernelTypeSha256": "8a9a1ad3414ffd5caf2ee0ee7a3bc9f1f7db7ac3654b34eff9d189fdeb5c327b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeImplementation_strictGain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "74d077b8e8abb30b93dfefa3d0b836c39794144e2fa3b55883b6ea1040e5ef35",
+          "expectedKernelTypeSha256": "74d077b8e8abb30b93dfefa3d0b836c39794144e2fa3b55883b6ea1040e5ef35",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.outputConeNormalizer_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "943e610f7a7ff686071f1adda11a52a5659428fa1fa8649254444ca20e982fd6",
+          "expectedKernelTypeSha256": "943e610f7a7ff686071f1adda11a52a5659428fa1fa8649254444ca20e982fd6",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-243",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-244",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
