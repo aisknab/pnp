@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1499,6 +1499,19 @@
   "leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced",
   "leanResidualTerminalPhysicalOwnershipWholeChargeTheorem": "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge",
   "leanResidualTerminalPhysicalOwnershipScope": "all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only",
+  "leanPCCMinConstructiveNANDSharingFormalized": true,
+  "leanPCCMinConstructiveNANDSharingAxiomAuditPassed": true,
+  "leanPCCMinConstructiveNANDSharingAuditedDeclarationCount": 9,
+  "leanPCCMinConstructiveNANDSharingAliasSemanticsTheorem": "PNP.DirectWire.compileNANDSharing_alias_semantics",
+  "leanPCCMinConstructiveNANDSharingGateAccountingTheorem": "PNP.DirectWire.compileNANDSharing_exact_accounting",
+  "leanPCCMinConstructiveNANDSharingEquivalenceTheorem": "PNP.DirectWire.sharingImplementation_equivalent",
+  "leanPCCMinConstructiveNANDSharingGateCountTheorem": "PNP.DirectWire.sharingImplementation_gateCount_le",
+  "leanPCCMinConstructiveNANDSharingReferenceMinimumTheorem": "PNP.DirectWire.sharingImplementation_referenceMinimum",
+  "leanPCCMinConstructiveNANDSharingResidualSlackTheorem": "PNP.DirectWire.sharingImplementation_residualSlack",
+  "leanPCCMinConstructiveNANDSharingStrictGainTheorem": "PNP.DirectWire.sharingImplementation_strictGain_iff",
+  "leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem": "PNP.DirectWire.sharingImplementation_strictResidualDescent",
+  "leanPCCMinConstructiveNANDSharingNormalizerTheorem": "PNP.DirectWire.nandSharingNormalizer_checked",
+  "leanPCCMinConstructiveNANDSharingScope": "all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2757,7 +2770,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
+    "actualSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2790,19 +2803,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "72b7d278266d04a7909d621a7cea245dc85b48a51bdae0826632be82e1a5ee15",
+  "leanTheoremInventorySha256": "187434fc5e383b67c9daac376b5660c99d1c83b5e18d1f2ba1e067d2cc19c135",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46334,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20010,
-  "leanTheoremInventoryTheoremCount": 25444,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11057,
-  "leanTheoremInventorySourceClosureModuleCount": 506,
-  "leanSourceClosureSha256": "bb23ac43d3fcb1d484a2b36b1435c066af896a74f833a85e1c214f3c33f350ab",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-241",
+  "leanTheoremInventoryDeclarationCount": 46389,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20040,
+  "leanTheoremInventoryTheoremCount": 25471,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11065,
+  "leanTheoremInventorySourceClosureModuleCount": 507,
+  "leanSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-242",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "e0fd2609238b3ecec1d690172aaaa03be136e9bd2b86818dc78a3d31a7037ece",
+  "formalPublicationMapSha256": "5bb72b3cccf835e027bd3d7b926f885b5a4684dd21b3ff0dafb89a5bb0defef6",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49588,9 +49601,144 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-constructive-nand-sharing",
+      "title": "Constructive whole-program NAND sharing and checked normalization",
+      "requiredTheorems": [
+        "PNP.DirectWire.compileNANDSharing_alias_semantics",
+        "PNP.DirectWire.compileNANDSharing_exact_accounting",
+        "PNP.DirectWire.sharingImplementation_equivalent",
+        "PNP.DirectWire.sharingImplementation_gateCount_le",
+        "PNP.DirectWire.sharingImplementation_referenceMinimum",
+        "PNP.DirectWire.sharingImplementation_residualSlack",
+        "PNP.DirectWire.sharingImplementation_strictGain_iff",
+        "PNP.DirectWire.sharingImplementation_strictResidualDescent",
+        "PNP.DirectWire.nandSharingNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND program and complete ordered output word, M242 computes a full structural-sharing traversal, translating every source through earlier computed aliases and searching the actual retained program for equal or commuted NAND input pairs. Each successful lookup reuses one existing gate; each unsuccessful lookup appends one translated gate. Nine universal interfaces prove every alias value, exact retained-plus-fold gate accounting, complete multi-output equivalence, non-increasing physical size, invariant reference minimum, exact residual-slack savings, strict gain exactly when a fold occurs, strict residual descent and the computed normalizer outcome. The caller supplies only the implementation, not an optimizer or correctness certificate. The pass performs structural lookup, not semantic enumeration. All nine interfaces are explicit-root built with only propext and Quot.sound.",
+      "nonClaim": "This is a computed physical R1/R4 structural-sharing stage, not complete manuscript N1-N10 normalization or a proof that every latent-sharing opportunity is found. A no-fold branch does not imply semantic minimality, absence of other gains or ZeroSlack; a checked regression gives a smaller equivalent circuit after the pass has no structural fold. The result does not construct a proper-support Package E ledger, arbitrary replacement pullback, full-profile carrier or obligation transport, terminal-derived families, global rank-decreasing route coverage or the complete PCCMin oracle. Reference minimum occurs in specification theorems, not in execution of this pass. No uniformly encoded-size polynomial execution theorem for the complete PCCMin construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.compileNANDSharing_alias_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4deb034903ad839c8a3b4b239a3eedac0b9015b2ca80f813887ab3fe0da96822",
+          "expectedKernelTypeSha256": "4deb034903ad839c8a3b4b239a3eedac0b9015b2ca80f813887ab3fe0da96822",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.compileNANDSharing_exact_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "164deeba19f4e72d48b14460ecf95cab0aaaa5d9f1bd0d7c162197c2254c0c82",
+          "expectedKernelTypeSha256": "164deeba19f4e72d48b14460ecf95cab0aaaa5d9f1bd0d7c162197c2254c0c82",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bf6462df6f7b2be0f1e107c0de6e9dbfe0d60f95207d32da437ba4d3e9bba1f8",
+          "expectedKernelTypeSha256": "bf6462df6f7b2be0f1e107c0de6e9dbfe0d60f95207d32da437ba4d3e9bba1f8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_gateCount_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2e8b717281088e2f705da023dcf9c3e70c36eb734e6b2e1cc21d011f743fe5b4",
+          "expectedKernelTypeSha256": "2e8b717281088e2f705da023dcf9c3e70c36eb734e6b2e1cc21d011f743fe5b4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_referenceMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1765f52468d594f9b61339121daf6522ab56cc1b1b2ce3c8ea0bc7a5b339a263",
+          "expectedKernelTypeSha256": "1765f52468d594f9b61339121daf6522ab56cc1b1b2ce3c8ea0bc7a5b339a263",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a5dee1ecca503f2fbc2d154a79fece88bf4c9b22ba1b836c17222e62731cae1d",
+          "expectedKernelTypeSha256": "a5dee1ecca503f2fbc2d154a79fece88bf4c9b22ba1b836c17222e62731cae1d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_strictGain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5de93eb4cd692308ffce27770919129d605624fc0b0983d46cbe1f6fc675104d",
+          "expectedKernelTypeSha256": "5de93eb4cd692308ffce27770919129d605624fc0b0983d46cbe1f6fc675104d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.sharingImplementation_strictResidualDescent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "78ca908349b5ce03bd5e8585dcfed98eb3a24cd860337fab2681d8e435cc19cf",
+          "expectedKernelTypeSha256": "78ca908349b5ce03bd5e8585dcfed98eb3a24cd860337fab2681d8e435cc19cf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.nandSharingNormalizer_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9ad481fa3cf574495fe90302d3f8945fe4917791935b065cbc86f51aef60b7fd",
+          "expectedKernelTypeSha256": "9ad481fa3cf574495fe90302d3f8945fe4917791935b065cbc86f51aef60b7fd",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-241",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-242",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

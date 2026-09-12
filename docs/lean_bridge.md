@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M241-CURRENT-SUMMARY:BEGIN -->
-## Current M241 boundary
+<!-- M242-CURRENT-SUMMARY:BEGIN -->
+## Current M242 boundary
 
-M241 computes a support-independent physical ownership partition from arbitrary finite raw requests. It extracts each owned piece as an actual NAND circuit and proves that their gate counts sum exactly to the selected support size, including overlapping requests and unrequested gates. Open and induced-boundary semantics preserve the connection to the ambient circuit. This is a physical charge partition kernel, not complete admissible manuscript materializer ownership; the production nonunique-owner rejection remains unchanged.
+M242 constructs a whole-program NAND-sharing stage: it computes aliases for every original gate, reuses actual retained gates with equal or commuted inputs, translates every ordered output, and proves exact physical gate savings and residual-slack descent. The concrete normalizer surfaces every computed fold as a checked gain. A no-fold branch does not establish semantic minimality or ZeroSlack.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 217 of 219 current scoped publication rows earned.
+Formal artefact coverage: 218 of 220 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [physical ownership theorem and limits](./lean_residual_terminal_physical_ownership.md)
-and the [independent materializer forced-cost boundary](./lean_residual_independent_materializer_cost.md).
-Earlier milestone notes retain their original module-specific scope. M241
-proves exact physical ownership and charge partitioning, not complete admissible materializer ownership or global route completeness.
+See the [constructive sharing theorem and limits](./lean_pccmin_constructive_nand_sharing.md)
+and the [physical ownership boundary](./lean_residual_terminal_physical_ownership.md).
+Earlier milestone notes retain their original module-specific scope. M242
+constructs an actual structural-sharing stage, not complete normalization, semantic minimality or global route completeness.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M241-CURRENT-SUMMARY:END -->
+<!-- M242-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

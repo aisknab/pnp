@@ -1,21 +1,21 @@
 # pnp
 
-<!-- M241-CURRENT-SUMMARY:BEGIN -->
-## Current M241 boundary
+<!-- M242-CURRENT-SUMMARY:BEGIN -->
+## Current M242 boundary
 
-M241 computes a support-independent physical ownership partition from arbitrary finite raw requests. It extracts each owned piece as an actual NAND circuit and proves that their gate counts sum exactly to the selected support size, including overlapping requests and unrequested gates. Open and induced-boundary semantics preserve the connection to the ambient circuit. This is a physical charge partition kernel, not complete admissible manuscript materializer ownership; the production nonunique-owner rejection remains unchanged.
+M242 constructs a whole-program NAND-sharing stage: it computes aliases for every original gate, reuses actual retained gates with equal or commuted inputs, translates every ordered output, and proves exact physical gate savings and residual-slack descent. The concrete normalizer surfaces every computed fold as a checked gain. A no-fold branch does not establish semantic minimality or ZeroSlack.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 217 of 219 current scoped publication rows earned.
+Formal artefact coverage: 218 of 220 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [physical ownership theorem and limits](./docs/lean_residual_terminal_physical_ownership.md)
-and the [independent materializer forced-cost boundary](./docs/lean_residual_independent_materializer_cost.md).
-Earlier milestone notes retain their original module-specific scope. M241
-proves exact physical ownership and charge partitioning, not complete admissible materializer ownership or global route completeness.
+See the [constructive sharing theorem and limits](./docs/lean_pccmin_constructive_nand_sharing.md)
+and the [physical ownership boundary](./docs/lean_residual_terminal_physical_ownership.md).
+Earlier milestone notes retain their original module-specific scope. M242
+constructs an actual structural-sharing stage, not complete normalization, semantic minimality or global route completeness.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M241-CURRENT-SUMMARY:END -->
+<!-- M242-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -39,12 +39,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M241 additionally computes support-independent physical ownership and proves that actual extracted materializer costs partition the selected support exactly, without treating a canonical owner as admissibility evidence. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
+| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M242 additionally constructs whole-program NAND sharing with exact gate and residual-slack savings, while proving that a no-fold branch is not a semantic stopping criterion. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 217 of 219 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 218 of 220 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-241';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2575,6 +2575,19 @@ const EXACT_FIELDS = Object.freeze({
   leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
   leanResidualTerminalPhysicalOwnershipWholeChargeTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
   leanResidualTerminalPhysicalOwnershipScope: 'all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only',
+  leanPCCMinConstructiveNANDSharingFormalized: true,
+  leanPCCMinConstructiveNANDSharingAxiomAuditPassed: true,
+  leanPCCMinConstructiveNANDSharingAuditedDeclarationCount: 9,
+  leanPCCMinConstructiveNANDSharingAliasSemanticsTheorem: 'PNP.DirectWire.compileNANDSharing_alias_semantics',
+  leanPCCMinConstructiveNANDSharingGateAccountingTheorem: 'PNP.DirectWire.compileNANDSharing_exact_accounting',
+  leanPCCMinConstructiveNANDSharingEquivalenceTheorem: 'PNP.DirectWire.sharingImplementation_equivalent',
+  leanPCCMinConstructiveNANDSharingGateCountTheorem: 'PNP.DirectWire.sharingImplementation_gateCount_le',
+  leanPCCMinConstructiveNANDSharingReferenceMinimumTheorem: 'PNP.DirectWire.sharingImplementation_referenceMinimum',
+  leanPCCMinConstructiveNANDSharingResidualSlackTheorem: 'PNP.DirectWire.sharingImplementation_residualSlack',
+  leanPCCMinConstructiveNANDSharingStrictGainTheorem: 'PNP.DirectWire.sharingImplementation_strictGain_iff',
+  leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem: 'PNP.DirectWire.sharingImplementation_strictResidualDescent',
+  leanPCCMinConstructiveNANDSharingNormalizerTheorem: 'PNP.DirectWire.nandSharingNormalizer_checked',
+  leanPCCMinConstructiveNANDSharingScope: 'all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4530,6 +4543,19 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanResidualTerminalPhysicalOwnershipInducedSemanticsTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_induced',
       leanResidualTerminalPhysicalOwnershipWholeChargeTheorem: 'PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge',
       leanResidualTerminalPhysicalOwnershipScope: 'all-finite-candidates-raw-request-families-and-supports-first-requester-ambient-ownership-fixed-remainder-disjoint-stable-physical-pieces-actual-extracted-nand-counts-open-semantics-and-exact-charge-total-only',
+      leanPCCMinConstructiveNANDSharingFormalized: true,
+      leanPCCMinConstructiveNANDSharingAxiomAuditPassed: true,
+      leanPCCMinConstructiveNANDSharingAuditedDeclarationCount: 9,
+      leanPCCMinConstructiveNANDSharingAliasSemanticsTheorem: 'PNP.DirectWire.compileNANDSharing_alias_semantics',
+      leanPCCMinConstructiveNANDSharingGateAccountingTheorem: 'PNP.DirectWire.compileNANDSharing_exact_accounting',
+      leanPCCMinConstructiveNANDSharingEquivalenceTheorem: 'PNP.DirectWire.sharingImplementation_equivalent',
+      leanPCCMinConstructiveNANDSharingGateCountTheorem: 'PNP.DirectWire.sharingImplementation_gateCount_le',
+      leanPCCMinConstructiveNANDSharingReferenceMinimumTheorem: 'PNP.DirectWire.sharingImplementation_referenceMinimum',
+      leanPCCMinConstructiveNANDSharingResidualSlackTheorem: 'PNP.DirectWire.sharingImplementation_residualSlack',
+      leanPCCMinConstructiveNANDSharingStrictGainTheorem: 'PNP.DirectWire.sharingImplementation_strictGain_iff',
+      leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem: 'PNP.DirectWire.sharingImplementation_strictResidualDescent',
+      leanPCCMinConstructiveNANDSharingNormalizerTheorem: 'PNP.DirectWire.nandSharingNormalizer_checked',
+      leanPCCMinConstructiveNANDSharingScope: 'all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4883,7 +4909,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-241',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-242',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

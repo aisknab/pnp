@@ -49,6 +49,7 @@ on:
       - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
       - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
+      - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -58,6 +59,7 @@ on:
       - 'docs/lean_residual_terminal_gain_profile_firewall.md'
       - 'docs/lean_residual_independent_materializer_cost.md'
       - 'docs/lean_residual_terminal_physical_ownership.md'
+      - 'docs/lean_pccmin_constructive_nand_sharing.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -529,6 +531,7 @@ on:
       - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
       - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
+      - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -538,6 +541,7 @@ on:
       - 'docs/lean_residual_terminal_gain_profile_firewall.md'
       - 'docs/lean_residual_independent_materializer_cost.md'
       - 'docs/lean_residual_terminal_physical_ownership.md'
+      - 'docs/lean_pccmin_constructive_nand_sharing.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -2591,6 +2595,64 @@ jobs:
           console.log('M241: all ten physical ownership and materializer interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalOwnership.lean
+
+      - name: Check constructive NAND sharing contracts
+        run: node --test audits/lean-pccmin-constructive-nand-sharing0.test.mjs
+
+      - name: Audit constructive NAND sharing and normalizer
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinConstructiveNANDSharingAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.compileNANDSharing_alias_semantics": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.compileNANDSharing_exact_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_gateCount_le": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_referenceMinimum": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_strictGain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.sharingImplementation_strictResidualDescent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.nandSharingNormalizer_checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M242: all nine constructive NAND-sharing interfaces have their exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPPCCMinConstructiveNANDSharing.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
