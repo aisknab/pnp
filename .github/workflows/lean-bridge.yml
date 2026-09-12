@@ -50,6 +50,7 @@ on:
       - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
       - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
+      - 'audits/lean-concrete-final-report-bridge0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -60,6 +61,7 @@ on:
       - 'docs/lean_residual_independent_materializer_cost.md'
       - 'docs/lean_residual_terminal_physical_ownership.md'
       - 'docs/lean_pccmin_constructive_nand_sharing.md'
+      - 'docs/lean_concrete_final_report_bridge.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -532,6 +534,7 @@ on:
       - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
       - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
       - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
+      - 'audits/lean-concrete-final-report-bridge0.test.mjs'
       - 'docs/lean_residual_terminal_profile_locality.md'
       - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
       - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
@@ -542,6 +545,7 @@ on:
       - 'docs/lean_residual_independent_materializer_cost.md'
       - 'docs/lean_residual_terminal_physical_ownership.md'
       - 'docs/lean_pccmin_constructive_nand_sharing.md'
+      - 'docs/lean_concrete_final_report_bridge.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'audits/lean-root-target0.test.mjs'
@@ -2653,6 +2657,48 @@ jobs:
           console.log('M242: all nine constructive NAND-sharing interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPPCCMinConstructiveNANDSharing.lean
+
+      - name: Check concrete final-report bridge contracts
+        run: node --test audits/lean-concrete-final-report-bridge0.test.mjs
+
+      - name: Audit concrete final-report bridge
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteFinalReportBridgeAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.sat_np_hard_checked": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.sat_np_complete_checked": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.accepted_generated_package_implies_p_eq_np": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.final_report_bridge": [
+              "Classical.choice",
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M243: the active conditional bridge consumes checked SAT hardness with exact reviewed standard axioms.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPConcreteFinalReportBridge.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
@@ -5998,8 +6044,9 @@ jobs:
           printf '%s\n' "$normalized" | grep -Fqx "'PNP.sat_in_p_from_locked_nand_in_p' depends on axioms: [propext, Quot.sound]"
           printf '%s\n' "$normalized" | grep -Fqx "'PNP.pccmin_concrete_decider_projection_exact' depends on axioms: [propext, Quot.sound]"
           printf '%s\n' "$normalized" | grep -Fqx "'PNP.concrete_legacy_locked_nand_compatibility_checked_complete' depends on axioms: [propext, Quot.sound]"
-          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, Quot.sound]"
-          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.LockedNANDThreshold'; then
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]"
+          # Every declaration above has an exact closure; only the final bridge uses M231's Classical.choice.
+          if printf '%s\n' "$normalized" | grep -Eq 'sorryAx|PNP\.LockedNANDThreshold'; then
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
@@ -6031,8 +6078,9 @@ jobs:
           do
             printf '%s\n' "$normalized" | grep -Fqx "'$declaration' depends on axioms: [propext]"
           done
-          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, Quot.sound]"
-          if printf '%s\n' "$normalized" | grep -Eq 'Classical\.choice|sorryAx|PNP\.LockedNANDThreshold'; then
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]"
+          # Every declaration above has an exact closure; only the final bridge uses M231's Classical.choice.
+          if printf '%s\n' "$normalized" | grep -Eq 'sorryAx|PNP\.LockedNANDThreshold'; then
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
@@ -6052,8 +6100,10 @@ jobs:
           test "$expected_count" -eq 15
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
           printf '%s\n' "$normalized" | grep -Fqx "'PNP.generatedPCCPackId' does not depend on any axioms"
-          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
-          if printf '%s\n' "$normalized" | grep -E 'Classical\.choice|sorryAx|depends on axioms: .*PNP\.'; then
+          test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 12
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.accepted_generated_package_implies_p_eq_np' depends on axioms: [propext, Classical.choice, Quot.sound]"
+          printf '%s\n' "$normalized" | grep -Fqx "'PNP.final_report_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]"
+          if printf '%s\n' "$normalized" | grep -E 'sorryAx|depends on axioms: .*PNP\.'; then
             printf '%s\n' "$normalized" >&2
             exit 1
           fi

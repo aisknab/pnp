@@ -2,10 +2,10 @@
 Copyright (c) 2026 PNP Labs.
 
 This file is the Lean bridge for the PNP proof-certificate stack.
-It intentionally formalizes the theorem boundary, not the entire custom PCC
-checker.  The remaining trust base is represented by fields of
-`CheckerTrustModel`, so Lean users can see exactly which bridge assumptions
-are still external to this formalization pass.
+It formalizes a conditional theorem boundary, not the entire custom PCC checker.
+Concrete SAT NP-completeness is supplied by the checked Cook-Levin construction.
+The complete proof-bearing PCCMin loop certificate must still exist explicitly;
+transparent package acceptance does not construct it.
 -/
 
 import PNP.PCCMin
@@ -83,23 +83,8 @@ typed packaging. -/
     (loop : PCCMinLoopCertificate) : AcceptedGeneratedPackage loop :=
   check_generated_pcc_pack_exp_accepts loop
 
-/-- The explicit trust model for this Lean bridge.
-
-This pass factors the checker-soundness route through an explicitly supplied,
-typed PCCMin loop certificate and rank-ordered ZeroSlack oracle certificate.
-Transparent package generation and structural checking preserve that exact
-certificate, so no caller reflection field remains.  The local locked NAND
-macro truth laws and the local prefix-conjunction semantics are discharged
-separately by `lockedNANDMacroCertificate` and
-`lockedNANDPrefixCertificate`. The sole remaining field is `satHard`: SAT is
-NP-hard for the witness-model reduction relation.
-
-The report-facing SAT, locked-NAND, and residual-band languages now reuse the
-concrete bitstring predicates.  Their checked all-input or identity polynomial
-reductions are compiled directly, so neither reduction remains caller trust.
--/
-structure CheckerTrustModel where
-  satHard : SATHard
+/- SAT hardness and the concrete reductions are compiled theorems, not caller
+trust fields. The proof-bearing PCCMin loop remains an explicit input. -/
 
 /-- An accepted typed package gives residual-band exact minimization in P
 through the exact explicitly supplied PCCMin loop certificate. -/
@@ -128,13 +113,13 @@ theorem accepted_generated_package_implies_sat_in_p
 
 /-- Formal version of the report's bridge: existence of an explicit loop
 certificate whose transparently generated typed package accepts implies
-`P = NP`, relative to the remaining concrete SAT-hardness trust field. -/
+`P = NP`. Concrete SAT NP-completeness is already kernel checked; the
+proof-bearing loop certificate is still required. -/
 theorem accepted_generated_package_implies_p_eq_np
-    (T : CheckerTrustModel)
     (loop : PCCMinLoopCertificate)
     (h : AcceptedGeneratedPackage loop) : PEqualsNP :=
   sat_np_complete_and_sat_in_p_implies_p_eq_np
-    (sat_np_complete_from_hardness T.satHard)
+    sat_np_complete_checked
     (accepted_generated_package_implies_sat_in_p loop h)
 
 /-- Report-facing antecedent.  The proof-bearing loop certificate must exist
@@ -146,12 +131,11 @@ def FinalReportAntecedent : Prop :=
 def FinalReportConsequent : Prop := PEqualsNP
 
 /-- The final report bridge as a theorem in Lean. -/
-theorem final_report_bridge
-    (T : CheckerTrustModel) :
+theorem final_report_bridge :
     FinalReportAntecedent → FinalReportConsequent :=
   fun h => by
     rcases h with ⟨loop, accepted⟩
-    exact accepted_generated_package_implies_p_eq_np T loop accepted
+    exact accepted_generated_package_implies_p_eq_np loop accepted
 
 /-- A small machine-readable summary object for downstream Lean files. -/
 structure LeanBridgeSummary where
@@ -172,7 +156,7 @@ def leanBridgeSummary : LeanBridgeSummary :=
       "Concrete finite-pipeline theorem: P ⊆ NP by embedding a deterministic decider as a bounded-certificate verifier",
       "Concrete finite-pipeline theorem: polynomial reductions transport P membership by composing proved function and decision programs",
       "Lean theorem: concrete NP-complete language in P implies mutual inclusion of concrete P and NP",
-      "Lean theorem: compiled concrete CNFSAT verifier plus concrete SAT-hardness gives SAT NP-completeness",
+      "Lean theorem: complete all-input Cook-Levin reduction and the compiled CNFSAT verifier establish concrete SAT NP-completeness without supplied hardness",
       "Lean theorem: concrete equality, constant-one, constant-zero, NAND-trace, and final-conjunction macro semantics",
       "Lean computation: exposed single-instance macro outputs are pairwise distinct, nonconstant, and nonprojection",
       "Lean theorem: two-gate prefix nodes compute conjunction and expose its negation",
@@ -186,8 +170,7 @@ def leanBridgeSummary : LeanBridgeSummary :=
     ]
     externalTrustBase := [
       "Existence of a proof-bearing PCCMin loop certificate containing the concrete residual-band decider",
-      "Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm",
-      "Concrete SAT NP-hardness in the finite-pipeline reduction model"
+      "Semantic adequacy of PCCMinLoopCertificate and ZeroSlackCertificate fields for the executable PCCMin algorithm"
     ] }
 
 end PNP

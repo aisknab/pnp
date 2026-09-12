@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M242-CURRENT-SUMMARY:BEGIN -->
-## Current M242 boundary
+<!-- M243-CURRENT-SUMMARY:BEGIN -->
+## Current M243 boundary
 
-M242 constructs a whole-program NAND-sharing stage: it computes aliases for every original gate, reuses actual retained gates with equal or commuted inputs, translates every ordered output, and proves exact physical gate savings and residual-slack descent. The concrete normalizer surfaces every computed fold as a checked gain. A no-fold branch does not establish semantic minimality or ZeroSlack.
+M243 connects the checked all-input Cook-Levin NP-completeness theorem directly to the active final-report bridge. No supplied SAT-hardness parameter remains. The bridge still requires an explicit proof-bearing PCCMin loop certificate containing the concrete residual-band polynomial decider; packaging and acceptance do not construct that certificate.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 218 of 220 current scoped publication rows earned.
+Formal artefact coverage: 219 of 221 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [constructive sharing theorem and limits](./lean_pccmin_constructive_nand_sharing.md)
-and the [physical ownership boundary](./lean_residual_terminal_physical_ownership.md).
-Earlier milestone notes retain their original module-specific scope. M242
-constructs an actual structural-sharing stage, not complete normalization, semantic minimality or global route completeness.
+See the [checked conditional bridge and limits](./lean_concrete_final_report_bridge.md)
+and the [constructive sharing boundary](./lean_pccmin_constructive_nand_sharing.md).
+Earlier milestone notes retain their original module-specific scope. M243
+consumes the existing checked hardness theorem; it does not construct the missing proof-bearing PCCMin loop.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M242-CURRENT-SUMMARY:END -->
+<!-- M243-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
@@ -26,11 +26,10 @@ exists loop : PCCMinLoopCertificate,
   CheckPCCPackexp (GeneratePCCPack loop) = accept => P = NP
 ```
 
-The compiled bridge has no project-specific axiom declarations, but it still
-requires the explicit loop-certificate existence premise and a concrete SAT
-hardness argument at its interface. M231 now supplies the separate concrete
-NP-completeness theorem, but the complete certificate and final root linkage
-remain open. The bridge therefore does **not** constitute a Lean proof of `P = NP`.
+The compiled bridge has no project-specific axiom declarations. M243 consumes
+M231's checked concrete NP-completeness theorem directly, so no supplied SAT
+hardness argument remains at its interface. The explicit loop-certificate
+existence premise, complete algorithm and eligible root linkage remain open. The bridge therefore does **not** constitute a Lean proof of `P = NP`.
 It is also not a complete Lean reproof of the custom JavaScript checker, the full
 residual-slack package, or a deterministic SAT algorithm. The purpose of the Lean
 track is to replace each trust-base item with a checked theorem in visible stages.
@@ -1688,8 +1687,7 @@ Most fields in these certificate objects are still digest/ledger handles. Replac
 `lean/PNP/Bridge.lean` proves:
 
 ```lean
-theorem final_report_bridge
-    (T : CheckerTrustModel) :
+theorem final_report_bridge :
     FinalReportAntecedent → FinalReportConsequent
 ```
 
@@ -1729,8 +1727,9 @@ the active bridge closure. The source audit fails closed if another `axiom`, a `
 declaration, or a `sorry`/`admit` placeholder appears in the tracked root closure.
 
 The remaining burden has not disappeared: `FinalReportAntecedent` requires an
-explicit proof-bearing loop certificate to exist, and `CheckerTrustModel.satHard`
-remains an explicit theorem premise. Packaging and structural acceptance do not
+explicit proof-bearing loop certificate to exist. M243 discharges the former
+supplied SAT-hardness premise with the checked M231 theorem, but does not
+construct that loop. Packaging and structural acceptance do not
 construct that certificate, prove unconditional ZeroSlack/PCCMin or polynomial
 runtime, establish deterministic SAT in P, or prove `P = NP`.
 

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-243';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -2588,6 +2588,16 @@ const EXACT_FIELDS = Object.freeze({
   leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem: 'PNP.DirectWire.sharingImplementation_strictResidualDescent',
   leanPCCMinConstructiveNANDSharingNormalizerTheorem: 'PNP.DirectWire.nandSharingNormalizer_checked',
   leanPCCMinConstructiveNANDSharingScope: 'all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only',
+  leanConcreteFinalReportBridgeFormalized: true,
+  leanConcreteFinalReportBridgeAxiomAuditPassed: true,
+  leanConcreteFinalReportBridgeAuditedDeclarationCount: 4,
+  leanConcreteFinalReportBridgeSATHardnessTheorem: 'PNP.sat_np_hard_checked',
+  leanConcreteFinalReportBridgeSATCompletenessTheorem: 'PNP.sat_np_complete_checked',
+  leanConcreteFinalReportBridgePackageConsequenceTheorem: 'PNP.accepted_generated_package_implies_p_eq_np',
+  leanConcreteFinalReportBridgeFinalReportTheorem: 'PNP.final_report_bridge',
+  leanConcreteFinalReportBridgeRequiresSuppliedSATHardness: false,
+  leanConcreteFinalReportBridgeLoopCertificateExistenceDischarged: false,
+  leanConcreteFinalReportBridgeScope: 'checked-all-input-concrete-cook-levin-hardness-consumed-by-the-active-conditional-final-report-bridge-explicit-proof-bearing-pccmin-loop-existence-still-required',
   leanResidualTerminalSaturationCostBalanceFormalized: true,
   leanResidualTerminalFirstNontransparentStepFormalized: true,
   leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4556,6 +4566,16 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem: 'PNP.DirectWire.sharingImplementation_strictResidualDescent',
       leanPCCMinConstructiveNANDSharingNormalizerTheorem: 'PNP.DirectWire.nandSharingNormalizer_checked',
       leanPCCMinConstructiveNANDSharingScope: 'all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only',
+      leanConcreteFinalReportBridgeFormalized: true,
+      leanConcreteFinalReportBridgeAxiomAuditPassed: true,
+      leanConcreteFinalReportBridgeAuditedDeclarationCount: 4,
+      leanConcreteFinalReportBridgeSATHardnessTheorem: 'PNP.sat_np_hard_checked',
+      leanConcreteFinalReportBridgeSATCompletenessTheorem: 'PNP.sat_np_complete_checked',
+      leanConcreteFinalReportBridgePackageConsequenceTheorem: 'PNP.accepted_generated_package_implies_p_eq_np',
+      leanConcreteFinalReportBridgeFinalReportTheorem: 'PNP.final_report_bridge',
+      leanConcreteFinalReportBridgeRequiresSuppliedSATHardness: false,
+      leanConcreteFinalReportBridgeLoopCertificateExistenceDischarged: false,
+      leanConcreteFinalReportBridgeScope: 'checked-all-input-concrete-cook-levin-hardness-consumed-by-the-active-conditional-final-report-bridge-explicit-proof-bearing-pccmin-loop-existence-still-required',
       leanResidualTerminalSaturationCostBalanceFormalized: true,
       leanResidualTerminalFirstNontransparentStepFormalized: true,
       leanResidualTerminalSaturationCostBalanceAxiomAuditPassed: true,
@@ -4909,7 +4929,7 @@ function publicationExpected0(publication, inventory, publicationMap, publicatio
     formalPublicationMapCoordinate: publicationMap.coordinate,
     formalPublicationMapPath: FORMAL_PUBLICATION_MAP_PATH0,
     formalPublicationMapSha256: publicationMapSha256,
-    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-242',
+    canonicalReportCoordinate: 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-243',
     canonicalReportSource: 'canonical_proof_report.tex',
     canonicalReportPdf: 'canonical_proof_report.pdf',
     canonicalReportDerivedFromLeanInventory: true,

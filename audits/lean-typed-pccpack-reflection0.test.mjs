@@ -89,9 +89,7 @@ function validateTypedReflection0(files) {
       !/if pack\.id = generatedPCCPackId then Verdict\.accept else Verdict\.reject/u.test(checker)) {
     failures.push('structural-checker');
   }
-  const trust = declarationBlock0(files.bridge, 'CheckerTrustModel');
-  if (!/satHard\s*:\s*SATHard/u.test(trust) ||
-      /pccPackProducesPCCMinLoop|checkerAccepts|accepted\s*:\s*Bool/u.test(trust)) {
+  if (/\b(?:CheckerTrustModel|satHard|pccPackProducesPCCMinLoop|checkerAccepts)\b|accepted\s*:\s*Bool/u.test(bridge)) {
     failures.push('checker-trust-boundary');
   }
   if (!/def AcceptedGeneratedPackage \(loop : PCCMinLoopCertificate\) : Prop :=/u.test(bridge) ||
@@ -133,7 +131,7 @@ test('axiom transcript and generic regression pin the M188 boundary', async () =
     'check_pcc_pack_exp_rejects_mismatched_id',
     'AcceptedGeneratedPackage loop',
     '⟨loop, accepted_generated_package loop⟩',
-    '{ satHard := hard }',
+    'example : SATHard := sat_np_hard_checked',
     'typed_pccpack_reflection_checked_complete loop',
   ]) assert.equal(regression.includes(token), true, token);
   assert.doesNotMatch(stripLeanCommentsAndStrings0(regression),
@@ -216,8 +214,8 @@ test('hostile regressions reject opaque, vacuous, and caller-trusted variants', 
       'if pack.id = generatedPCCPackId then Verdict.accept else Verdict.reject',
       'Verdict.accept'),
     files.bridge.replace(
-      'satHard : SATHard',
-      'pccPackProducesPCCMinLoop : AcceptedGeneratedPackage loop → PCCMinLoopCertificate\n  satHard : SATHard'),
+      'theorem accepted_generated_package_implies_p_eq_np',
+      'structure CheckerTrustModel where\n  pccPackProducesPCCMinLoop : True → PCCMinLoopCertificate\n\ntheorem accepted_generated_package_implies_p_eq_np'),
     files.bridge.replace(
       '∃ loop : PCCMinLoopCertificate, AcceptedGeneratedPackage loop',
       'True'),

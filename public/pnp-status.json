@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-242",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-243",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1512,6 +1512,16 @@
   "leanPCCMinConstructiveNANDSharingStrictResidualDescentTheorem": "PNP.DirectWire.sharingImplementation_strictResidualDescent",
   "leanPCCMinConstructiveNANDSharingNormalizerTheorem": "PNP.DirectWire.nandSharingNormalizer_checked",
   "leanPCCMinConstructiveNANDSharingScope": "all-finite-nand-programs-and-ordered-outputs-computed-structural-and-commuted-reuse-alias-semantics-exact-fold-accounting-invariant-reference-minimum-residual-descent-and-concrete-normalizer-stage-only",
+  "leanConcreteFinalReportBridgeFormalized": true,
+  "leanConcreteFinalReportBridgeAxiomAuditPassed": true,
+  "leanConcreteFinalReportBridgeAuditedDeclarationCount": 4,
+  "leanConcreteFinalReportBridgeSATHardnessTheorem": "PNP.sat_np_hard_checked",
+  "leanConcreteFinalReportBridgeSATCompletenessTheorem": "PNP.sat_np_complete_checked",
+  "leanConcreteFinalReportBridgePackageConsequenceTheorem": "PNP.accepted_generated_package_implies_p_eq_np",
+  "leanConcreteFinalReportBridgeFinalReportTheorem": "PNP.final_report_bridge",
+  "leanConcreteFinalReportBridgeRequiresSuppliedSATHardness": false,
+  "leanConcreteFinalReportBridgeLoopCertificateExistenceDischarged": false,
+  "leanConcreteFinalReportBridgeScope": "checked-all-input-concrete-cook-levin-hardness-consumed-by-the-active-conditional-final-report-bridge-explicit-proof-bearing-pccmin-loop-existence-still-required",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2770,7 +2780,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
+    "actualSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2803,19 +2813,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "187434fc5e383b67c9daac376b5660c99d1c83b5e18d1f2ba1e067d2cc19c135",
+  "leanTheoremInventorySha256": "7591d7c7f64b753f78d2bc48805192c1951b89b43bdb50c925e610234948c33b",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46389,
+  "leanTheoremInventoryDeclarationCount": 46384,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 20040,
-  "leanTheoremInventoryTheoremCount": 25471,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11065,
+  "leanTheoremInventoryTheoremCount": 25472,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11064,
   "leanTheoremInventorySourceClosureModuleCount": 507,
-  "leanSourceClosureSha256": "244d19e90e9b22caeece70e1dd88639d323108d1de9c5475329bb28ea5af52e9",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-242",
+  "leanSourceClosureSha256": "7b613f32f048e7e5b4006c7c7787ee56c78d0c2f0f6bbdecbc54ebf3c03b3645",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-243",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "5bb72b3cccf835e027bd3d7b926f885b5a4684dd21b3ff0dafb89a5bb0defef6",
+  "formalPublicationMapSha256": "c8bdccabd4b13d9fafb896c48a22306685f7fae2e435da51babcc81232cbc814",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49736,9 +49746,83 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "concrete-final-report-bridge",
+      "title": "Checked concrete SAT hardness in the active conditional final-report bridge",
+      "requiredTheorems": [
+        "PNP.sat_np_hard_checked",
+        "PNP.sat_np_complete_checked",
+        "PNP.accepted_generated_package_implies_p_eq_np",
+        "PNP.final_report_bridge"
+      ],
+      "scope": "M243 connects the already checked all-input Cook-Levin NP-hardness and NP-completeness theorem to the exact report-facing SAT predicate. The existing accepted-generated-package consequence and final_report_bridge no longer take a CheckerTrustModel or supplied SAT-hardness argument. They consume the checked theorem while retaining the explicit PCCMinLoopCertificate, its concrete residual-band polynomial decider and the loop-existence antecedent. This strengthens the active conditional interface rather than adding an unused parallel route. Four reviewed interfaces have exact kernel types and the same standard axioms as the consumed M231 theorem: Classical.choice, Quot.sound and propext.",
+      "nonClaim": "This is a conditional final-report bridge, not the eligible unconditional root theorem. No complete PCCMin loop certificate is constructed: the concrete residual-band decider remains an explicit certificate field. Canonical package acceptance does not supply missing algorithmic correctness, encoded-size bounds or loop existence. This does not establish unconditional SaturatePositive, BCELReady or ZeroSlack, a complete exact polynomial PCCMin construction, polynomial output and certificate bounds, deterministic CNFSAT in P or P = NP. M231 hardness was already credited; connecting it here earns no duplicate checkpoint points. No fixed weighted checkpoint or global gate closes.",
+      "theoremRows": [
+        {
+          "name": "PNP.sat_np_hard_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ebcaa13f070d5b1f8fc0105e0feea71c65010f94a5e135ae0c4abaf4544fb382",
+          "expectedKernelTypeSha256": "ebcaa13f070d5b1f8fc0105e0feea71c65010f94a5e135ae0c4abaf4544fb382",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.sat_np_complete_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4ed163e43a3c4fd3be9ea3d1d5c348a0ce4951beb322aca3c617265e63b0fd26",
+          "expectedKernelTypeSha256": "4ed163e43a3c4fd3be9ea3d1d5c348a0ce4951beb322aca3c617265e63b0fd26",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.accepted_generated_package_implies_p_eq_np",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "89cfb0983711ce18a75e458324047e6007ac456dbdc926f09080db41d826379f",
+          "expectedKernelTypeSha256": "89cfb0983711ce18a75e458324047e6007ac456dbdc926f09080db41d826379f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.final_report_bridge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "956062f71216218a1edb59039ae63f85c01564a93e7a1e891754127f3e22c8a5",
+          "expectedKernelTypeSha256": "956062f71216218a1edb59039ae63f85c01564a93e7a1e891754127f3e22c8a5",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-242",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-243",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

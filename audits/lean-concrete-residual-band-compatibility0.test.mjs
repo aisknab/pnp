@@ -113,12 +113,10 @@ function validateCompatibility0(files) {
       /def residualBandDecider\b/u.test(pccmin)) {
     failures.push('pccmin-decider-boundary');
   }
-  const trust = declarationBlock0(files.bridge, 'CheckerTrustModel');
-  if (!trust.includes('satHard') ||
-      trust.includes('pccPackProducesPCCMinLoop')) {
+  if (/\b(?:CheckerTrustModel|satHard|pccPackProducesPCCMinLoop)\b/u.test(bridge)) {
     failures.push('checker-trust-fields');
   }
-  if (/residualBandReduction|ResidualBandReductionTrust/u.test(trust)) {
+  if (/residualBandReduction|ResidualBandReductionTrust/u.test(bridge)) {
     failures.push('caller-residual-reduction');
   }
 
@@ -164,7 +162,7 @@ test('axiom transcript and generic regression pin the M187 boundary', async () =
     'residual_band_encoded_candidate_iff_reference_minimum candidate threshold',
     'locked_nand_reduces_to_residual_band_checked',
     'locked_nand_in_p_from_residual_band_in_p residualInP',
-    'satHard := hard',
+    'example : SATHard := sat_np_hard_checked',
     'concrete_residual_band_compatibility_checked_complete',
   ]) assert.equal(regression.includes(token), true, token);
   assert.doesNotMatch(stripLeanCommentsAndStrings0(regression),
@@ -204,8 +202,8 @@ test('hostile regressions reject restored trust and widened claims', async () =>
       'theorem locked_nand_reduces_to_residual_band_checked',
       'structure ResidualBandReductionTrust where\n  lockedNANDReducesToResidualBand : ReducesToPoly LockedNANDThreshold ResidualBandExactMinimization\n\ntheorem locked_nand_reduces_to_residual_band_checked')],
     ['bridge', files.bridge.replace(
-      'satHard : SATHard',
-      'residualBandReduction : ResidualBandReductionTrust\n  satHard : SATHard')],
+      'theorem accepted_generated_package_implies_p_eq_np',
+      'structure CheckerTrustModel where\n  residualBandReduction : ResidualBandReductionTrust\n\ntheorem accepted_generated_package_implies_p_eq_np')],
     ['source', files.source.replace(
       'ReducesToPoly LockedNANDThreshold ResidualBandExactMinimization ∧',
       'PClass ResidualBandExactMinimization ∧\n    ReducesToPoly LockedNANDThreshold ResidualBandExactMinimization ∧')],

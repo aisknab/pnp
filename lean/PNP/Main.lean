@@ -18,11 +18,11 @@ def rootTheoremStatus : RootTheoremStatus :=
     externalAssumptionsRemain := true
     publicTheoremReleased := false
     blockers := [
-      "Complexity pipeline compilation/refinement to raw machine semantics",
-      "Executable checker/reflection soundness",
-      "PCCMin and ZeroSlack semantic soundness and polynomial bounds",
-      "Residual-band reduction",
-      "SAT NP-hardness in the concrete model"
+      "Concrete deterministic CNFSAT decider",
+      "Complete residual-band exact-minimization algorithm",
+      "Unconditional SaturatePositive, BCELReady and ZeroSlack",
+      "Polynomial runtime, output-size and certificate-size bounds",
+      "Eligible root theorem, exact type/fingerprints and publication audit"
     ] }
 
 theorem rootTheoremStatus_not_released :
