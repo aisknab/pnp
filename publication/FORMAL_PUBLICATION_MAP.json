@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-247",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-248",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3296,7 +3296,19 @@
     "PNP.DirectWire.constantPropagationImplementation_residualSlack": "532ee6acbab9c551e3da7a3cb6296b1c405458f6bb821e059826bb3aed1c0981",
     "PNP.DirectWire.constantPropagationImplementation_strictGain_iff": "f2447341b74dc43f0d98a5fb3a63dc153eef0da71d28017060be06238796d7e6",
     "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent": "96c02d048c9f50fb371e546364a55c1d5bf364fdcb626b38aafda1f9724fb785",
-    "PNP.DirectWire.nandConstantPropagationNormalizer_checked": "7d26c6a7ceba21244ab334e8524b55ee9ff5e0f046c5c535506d2553f8106b3b"
+    "PNP.DirectWire.nandConstantPropagationNormalizer_checked": "7d26c6a7ceba21244ab334e8524b55ee9ff5e0f046c5c535506d2553f8106b3b",
+    "PNP.DirectWire.physicalNormalizationPass_equivalent": "1e98dba1264aa27ff4c269a804a91c3280100aafeb59f4f000c84c1916f3d186",
+    "PNP.DirectWire.physicalNormalizationPass_exact_accounting": "229aea7c24bfd7a753d61ab458d77663ab7afe172c669dae30155cf90dceccdb",
+    "PNP.DirectWire.PhysicalNormalizationGain.checked": "427337b3b71051ea6183892626f713e70e71a95dbc47a589b6d041d5a82d1a33",
+    "PNP.DirectWire.nextPhysicalNormalizationStep_checked": "1790d801558465f07fa0c179acef3b6ef54ce7e749207a96844b0bc38d5166b8",
+    "PNP.DirectWire.PhysicalNormalizationTrace.checked": "a0a622312d96848ad1fa1080be5fe4922be9e260ef640539d021401739cb0ec5",
+    "PNP.DirectWire.runPhysicalNormalization_checked": "dcc99d344b550bc094a11cb3c5276d275222849728f0532089e7b5cdf5b266a4",
+    "PNP.DirectWire.runPhysicalNormalization_of_quiescent": "289992dec9ffe984bb89f69e00a6b4e2fdc7187c4bda3d53130f7d87c6195c8e",
+    "PNP.DirectWire.runPhysicalNormalization_idempotent": "b11d9128d7a75c26f45a83ea6a800200f61acf33709d285bd809d1ae13031664",
+    "PNP.DirectWire.runPhysicalNormalization_referenceMinimum": "962346c00f368bc0320f4008d01920dddab26c57f4cfb6e0c66571c7bfebecb1",
+    "PNP.DirectWire.runPhysicalNormalization_residualSlack": "798ff693e7e90fbfd2d71794a07d1b9fe44c00d9e7509d6f73f412002276106b",
+    "PNP.DirectWire.runPhysicalNormalization_gainIterations_le_residualSlack": "681cc73dd14a8ec8a6df53b1317bfb870911e3b54646d8ce58cccc4cba8378c9",
+    "PNP.DirectWire.physicalClosureNormalizer_checked": "b5ae9aa84bf7be2011daca12a1a9f6213b8182b8a968265d116fecccdaa4509a"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3314,7 +3326,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "ff0ce6ea7687ecb83ea765f942325a7d7a3ae5084759ed7bcb4e24a2ea5c14f4",
+  "milestoneSourceClosureSha256": "0bebf609b4177afcad5d2b4c07203912b21bfde678fd6c9d6a616002ba257712",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -8873,6 +8885,27 @@
       ],
       "scope": "For every finite direct-wire NAND program, M247 computes retained-source aliases for all original gates, substitutes them before inspecting each NAND operation, eliminates a gate exactly when literal constant NAND identities determine its value, and rewrites the complete ordered output tuple. Ten general interfaces prove primitive constant recognition sound for every valuation, alias semantics, exact retained-plus-eliminated gate accounting, complete multi-output equivalence, non-increasing size, invariant reference minimum, exact residual-slack savings, strict gain exactly when an elimination occurs, strict residual descent and the computed outcome of the existing total normalizer interface. Earlier constant eliminations propagate through arbitrarily later gates. The primitive recognition theorem is axiom-free; the other nine interfaces use only propext and Quot.sound. No optimizer, result, semantic equivalence certificate or caller correctness assertion is supplied.",
       "nonClaim": "This is the physical literal-constant structural-congruence component, not complete manuscript R1-R9 verification or N1-N10 normalization. No-elimination does not imply semantic minimality or ZeroSlack: the regression retains NAND(x, NAND(x,x)) even though a zero-gate constant-true word is equivalent. No full-profile preservation, derived manuscript carrier, arbitrary-support pullback/expansion, obligation lifecycle ledger, complete Package E or total PCCMin oracle is established. The reference minimum is used only in specification theorems, not executed by the pass. No uniformly encoded-size polynomial runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root theorem remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-physical-normalization-closure",
+      "title": "Computed closure of constant propagation, NAND sharing and output-cone pruning",
+      "requiredTheorems": [
+        "PNP.DirectWire.physicalNormalizationPass_equivalent",
+        "PNP.DirectWire.physicalNormalizationPass_exact_accounting",
+        "PNP.DirectWire.PhysicalNormalizationGain.checked",
+        "PNP.DirectWire.nextPhysicalNormalizationStep_checked",
+        "PNP.DirectWire.PhysicalNormalizationTrace.checked",
+        "PNP.DirectWire.runPhysicalNormalization_checked",
+        "PNP.DirectWire.runPhysicalNormalization_of_quiescent",
+        "PNP.DirectWire.runPhysicalNormalization_idempotent",
+        "PNP.DirectWire.runPhysicalNormalization_referenceMinimum",
+        "PNP.DirectWire.runPhysicalNormalization_residualSlack",
+        "PNP.DirectWire.runPhysicalNormalization_gainIterations_le_residualSlack",
+        "PNP.DirectWire.physicalClosureNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire implementation, M248 computes a priority-respecting loop over the actual constant-propagation, NAND-sharing and output-cone-pruning constructions. It selects the first positive saving, recurses on strictly smaller physical gate count, and stops only when all three computed savings vanish on the same final implementation. Twelve general interfaces prove complete ordered-output equivalence, exact per-pass and telescoping trace savings, strict selected gains, priority, common quiescence, unchanged quiescent inputs, idempotent re-execution, invariant semantic reference minimum, exact residual-slack savings and a gain-iteration bound by the original slack. The existing normalizer interface exposes every positive total saving as a strict gain. All proof fields are derived by the construction, with no supplied normalizer, oracle, result or stopping certificate. The twelve interfaces use only propext and Quot.sound.",
+      "nonClaim": "This is operational quiescence for exactly three physical passes, not semantic minimality, all structural congruences, complete manuscript N1-N10 normalization or ZeroSlack. The regression remains quiescent on NAND(x, NAND(x,x)) while a zero-gate constant-true word is strictly smaller and equivalent. The trace is not the arbitrary-support Pull/Expand materializer transport required by the complete Traceable normalization theorem. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle ledger, complete Package E and the total PCCMin oracle remain open. Semantic reference minima occur only in specifications and are not executed by this loop. An iteration bound is not a runtime bound: no uniformly encoded-size polynomial construction, runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved."
     }
   ],
   "version": 0
