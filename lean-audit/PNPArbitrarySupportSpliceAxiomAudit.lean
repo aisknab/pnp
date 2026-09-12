@@ -1,0 +1,26 @@
+import PNP
+
+#print axioms PNP.DirectWire.RawNandCompilationState.readSource_sound
+#print axioms PNP.DirectWire.RawNandCompilationState.readGate_sound
+#print axioms PNP.DirectWire.RawNandReadyStep.apply_remaining_lt
+#print axioms PNP.DirectWire.RawNandCompilationStop.unresolved_predecessor
+#print axioms PNP.DirectWire.RawNandCompilationStop.complete_of_wellFounded
+#print axioms PNP.DirectWire.CompiledRawNandGraph.wellFounded
+#print axioms PNP.DirectWire.compileRawNandGraph_success_iff
+#print axioms PNP.DirectWire.compileRawNandGraph_failure_iff
+#print axioms PNP.DirectWire.CompiledRawNandGraph.candidate_gateCount
+#print axioms PNP.DirectWire.CompiledRawNandGraph.candidate_semantics
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.result_gateCount
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.compile_success_iff
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.compile_failure_iff
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.replacementSource_eval
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.originalSource_eval
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.values_solution
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.result_semantics
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.exterior_accounting
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.result_exact_accounting
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.result_strict_gain
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_rank_decreases
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_primaryBoundary
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.production_compiles
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.production_agreement
