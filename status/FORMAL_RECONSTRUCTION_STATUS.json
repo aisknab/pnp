@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-246",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-247",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1581,6 +1581,23 @@
   "leanPCCMinDeadSupportFullModeCompletePackageEVerifierProved": false,
   "leanPCCMinDeadSupportFullModePolynomialRuntimeProved": false,
   "leanPCCMinDeadSupportFullModeScope": "computed-proper-dead-support-complete-finite-profile-and-observed-obligation-acceptance-over-input-observation-system-no-derived-manuscript-carrier-or-discharge-ledger",
+  "leanPCCMinConstantPropagationFormalized": true,
+  "leanPCCMinConstantPropagationAxiomAuditPassed": true,
+  "leanPCCMinConstantPropagationAuditedDeclarationCount": 10,
+  "leanPCCMinConstantPropagationConstantRuleTheorem": "PNP.DirectWire.constantGateValue_sound",
+  "leanPCCMinConstantPropagationAliasSemanticsTheorem": "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics",
+  "leanPCCMinConstantPropagationGateAccountingTheorem": "PNP.DirectWire.compileNANDConstantPropagation_exact_accounting",
+  "leanPCCMinConstantPropagationEquivalenceTheorem": "PNP.DirectWire.constantPropagationImplementation_equivalent",
+  "leanPCCMinConstantPropagationGateCountTheorem": "PNP.DirectWire.constantPropagationImplementation_gateCount_le",
+  "leanPCCMinConstantPropagationReferenceMinimumTheorem": "PNP.DirectWire.constantPropagationImplementation_referenceMinimum",
+  "leanPCCMinConstantPropagationResidualSlackTheorem": "PNP.DirectWire.constantPropagationImplementation_residualSlack",
+  "leanPCCMinConstantPropagationStrictGainTheorem": "PNP.DirectWire.constantPropagationImplementation_strictGain_iff",
+  "leanPCCMinConstantPropagationResidualDescentTheorem": "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent",
+  "leanPCCMinConstantPropagationNormalizerTheorem": "PNP.DirectWire.nandConstantPropagationNormalizer_checked",
+  "leanPCCMinConstantPropagationFullProfilePreservationProved": false,
+  "leanPCCMinConstantPropagationCompleteNormalizationProved": false,
+  "leanPCCMinConstantPropagationPolynomialRuntimeProved": false,
+  "leanPCCMinConstantPropagationScope": "all-finite-direct-wire-nand-programs-computed-literal-constant-propagation-through-source-aliases-complete-ordered-io-exact-elimination-accounting-physical-normalizer-stage-only",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2839,7 +2856,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "91d4bff170d9975e34e179bcfc4e83aab9ca9c98c7aa3c35b9d5f59d1d5f32b4",
+    "actualSourceClosureSha256": "ff0ce6ea7687ecb83ea765f942325a7d7a3ae5084759ed7bcb4e24a2ea5c14f4",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -2872,19 +2889,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "f4ab83eda87dcb2fb33506dd4a5fafe319cfea48e079e4cd226432f3fba1c9f3",
+  "leanTheoremInventorySha256": "bdde477ca04621d8b3a8f721b605ac111623600a49e999636da237915e9e9bfd",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 46591,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20121,
-  "leanTheoremInventoryTheoremCount": 25576,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11074,
-  "leanTheoremInventorySourceClosureModuleCount": 510,
-  "leanSourceClosureSha256": "91d4bff170d9975e34e179bcfc4e83aab9ca9c98c7aa3c35b9d5f59d1d5f32b4",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-246",
+  "leanTheoremInventoryDeclarationCount": 46645,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20138,
+  "leanTheoremInventoryTheoremCount": 25602,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11081,
+  "leanTheoremInventorySourceClosureModuleCount": 511,
+  "leanSourceClosureSha256": "ff0ce6ea7687ecb83ea765f942325a7d7a3ae5084759ed7bcb4e24a2ea5c14f4",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-12-247",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "88ac375729b79f2653c0929f581b337c00fdae9b2b0befe20a319847bc87c444",
+  "formalPublicationMapSha256": "6907eaad671287fedc573ff70dd74df21d6ecacff0562bac669184dc6f7ee6ed",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -50440,9 +50457,154 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "pccmin-constant-propagation",
+      "title": "Computed constant propagation through arbitrary NAND programs",
+      "requiredTheorems": [
+        "PNP.DirectWire.constantGateValue_sound",
+        "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics",
+        "PNP.DirectWire.compileNANDConstantPropagation_exact_accounting",
+        "PNP.DirectWire.constantPropagationImplementation_equivalent",
+        "PNP.DirectWire.constantPropagationImplementation_gateCount_le",
+        "PNP.DirectWire.constantPropagationImplementation_referenceMinimum",
+        "PNP.DirectWire.constantPropagationImplementation_residualSlack",
+        "PNP.DirectWire.constantPropagationImplementation_strictGain_iff",
+        "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent",
+        "PNP.DirectWire.nandConstantPropagationNormalizer_checked"
+      ],
+      "scope": "For every finite direct-wire NAND program, M247 computes retained-source aliases for all original gates, substitutes them before inspecting each NAND operation, eliminates a gate exactly when literal constant NAND identities determine its value, and rewrites the complete ordered output tuple. Ten general interfaces prove primitive constant recognition sound for every valuation, alias semantics, exact retained-plus-eliminated gate accounting, complete multi-output equivalence, non-increasing size, invariant reference minimum, exact residual-slack savings, strict gain exactly when an elimination occurs, strict residual descent and the computed outcome of the existing total normalizer interface. Earlier constant eliminations propagate through arbitrarily later gates. The primitive recognition theorem is axiom-free; the other nine interfaces use only propext and Quot.sound. No optimizer, result, semantic equivalence certificate or caller correctness assertion is supplied.",
+      "nonClaim": "This is the physical literal-constant structural-congruence component, not complete manuscript R1-R9 verification or N1-N10 normalization. No-elimination does not imply semantic minimality or ZeroSlack: the regression retains NAND(x, NAND(x,x)) even though a zero-gate constant-true word is equivalent. No full-profile preservation, derived manuscript carrier, arbitrary-support pullback/expansion, obligation lifecycle ledger, complete Package E or total PCCMin oracle is established. The reference minimum is used only in specification theorems, not executed by the pass. No uniformly encoded-size polynomial runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root theorem remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.constantGateValue_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0ec6cff2be375dc0eb181e160e267405a485d3e2ac41b4a8cec33b994f02b2a8",
+          "expectedKernelTypeSha256": "0ec6cff2be375dc0eb181e160e267405a485d3e2ac41b4a8cec33b994f02b2a8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "499c24a8a4455a18159223191f8879034e87f39f45493973fb81c4076c4ced7e",
+          "expectedKernelTypeSha256": "499c24a8a4455a18159223191f8879034e87f39f45493973fb81c4076c4ced7e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.compileNANDConstantPropagation_exact_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "50d1f42a8732f6563a48dec3a1c364f41ed9fccfb0b4c7ed72faa382c3013c87",
+          "expectedKernelTypeSha256": "50d1f42a8732f6563a48dec3a1c364f41ed9fccfb0b4c7ed72faa382c3013c87",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85b42a5ccf8a28af9ba9b19ee9b73eecc63dfe63ca306777b395881fc6c9aabc",
+          "expectedKernelTypeSha256": "85b42a5ccf8a28af9ba9b19ee9b73eecc63dfe63ca306777b395881fc6c9aabc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_gateCount_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7da5157348a386861cf8b2cb5ef617fc89d16409f8640de9376957b344b3ab29",
+          "expectedKernelTypeSha256": "7da5157348a386861cf8b2cb5ef617fc89d16409f8640de9376957b344b3ab29",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_referenceMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9631c6094e82f3e0ce1b4c45bb4fa4e892321fd2746ff3437cddafd9130c9ae3",
+          "expectedKernelTypeSha256": "9631c6094e82f3e0ce1b4c45bb4fa4e892321fd2746ff3437cddafd9130c9ae3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_residualSlack",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "532ee6acbab9c551e3da7a3cb6296b1c405458f6bb821e059826bb3aed1c0981",
+          "expectedKernelTypeSha256": "532ee6acbab9c551e3da7a3cb6296b1c405458f6bb821e059826bb3aed1c0981",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_strictGain_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f2447341b74dc43f0d98a5fb3a63dc153eef0da71d28017060be06238796d7e6",
+          "expectedKernelTypeSha256": "f2447341b74dc43f0d98a5fb3a63dc153eef0da71d28017060be06238796d7e6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.constantPropagationImplementation_strictResidualDescent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "96c02d048c9f50fb371e546364a55c1d5bf364fdcb626b38aafda1f9724fb785",
+          "expectedKernelTypeSha256": "96c02d048c9f50fb371e546364a55c1d5bf364fdcb626b38aafda1f9724fb785",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.nandConstantPropagationNormalizer_checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7d26c6a7ceba21244ab334e8524b55ee9ff5e0f046c5c535506d2553f8106b3b",
+          "expectedKernelTypeSha256": "7d26c6a7ceba21244ab334e8524b55ee9ff5e0f046c5c535506d2553f8106b3b",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-246",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-12-247",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

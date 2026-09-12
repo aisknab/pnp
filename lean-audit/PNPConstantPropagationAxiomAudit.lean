@@ -1,0 +1,12 @@
+import PNP
+
+#print axioms PNP.DirectWire.constantGateValue_sound
+#print axioms PNP.DirectWire.compileNANDConstantPropagation_alias_semantics
+#print axioms PNP.DirectWire.compileNANDConstantPropagation_exact_accounting
+#print axioms PNP.DirectWire.constantPropagationImplementation_equivalent
+#print axioms PNP.DirectWire.constantPropagationImplementation_gateCount_le
+#print axioms PNP.DirectWire.constantPropagationImplementation_referenceMinimum
+#print axioms PNP.DirectWire.constantPropagationImplementation_residualSlack
+#print axioms PNP.DirectWire.constantPropagationImplementation_strictGain_iff
+#print axioms PNP.DirectWire.constantPropagationImplementation_strictResidualDescent
+#print axioms PNP.DirectWire.nandConstantPropagationNormalizer_checked

@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M246-CURRENT-SUMMARY:BEGIN -->
-## Current M246 boundary
+<!-- M247-CURRENT-SUMMARY:BEGIN -->
+## Current M247 boundary
 
-M246 checks the actual M245 computed proper dead-support replacement against every coordinate of an input finite profile observation system and every observed obligation role. It accepts a full-carrier result only when the complete profile agrees and observed obligations are closed, or returns a precise rejecting outcome. Eight general interfaces cover exact acceptance, first failures, physical semantics, properness and exact size/slack descent. The observation system remains input data: the manuscript carrier, semantic dependency graph, R5/R6-R8 ledger, complete Package E and global PCCMin route are not derived.
+M247 computes literal constant propagation through every gate of an arbitrary finite NAND program and rewrites its complete ordered output tuple. Computed source aliases propagate earlier constants, and ten general interfaces prove primitive recognition, all-input semantics, exact retained/eliminated gate accounting and residual-slack descent. No-elimination is not semantic minimality. This physical structural-congruence component does not derive the manuscript carrier, full-profile transport, obligation lifecycle ledger, complete normalization or global PCCMin route.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 222 of 224 current scoped publication rows earned.
+Formal artefact coverage: 223 of 225 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed dead-support full-mode acceptance and limits](./lean_pccmin_dead_support_full_mode.md)
+See the [computed NAND constant propagation and limits](./lean_pccmin_constant_propagation.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M246
-checks complete input finite profiles and observed obligations; manuscript carrier/ledger derivation and the total PCCMin oracle remain open.
+Earlier milestone notes retain their original module-specific scope. M247
+derives physical constant elimination from actual source aliases; full-profile normalization and the total PCCMin oracle remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M246-CURRENT-SUMMARY:END -->
+<!-- M247-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 
