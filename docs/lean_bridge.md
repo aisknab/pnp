@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M251-CURRENT-SUMMARY:BEGIN -->
-## Current M251 boundary
+<!-- M252-CURRENT-SUMMARY:BEGIN -->
+## Current M252 boundary
 
-M251 computes lost-wire restoration for every finite wire-backed carrier and keep mask. The actual projected word and one shared NAND materializer reconstruct every ordinary output and ordered field, with exact physical charge. Mask-derived R5 creations and full-value R8 discharges cover exactly the forgotten coordinates; replay rejects reused identities across the whole trace. The gate-count bound is not a polynomial execution theorem, and the complete manuscript carrier, obligation calculus, Package E and global proof gates remain open.
+M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 227 of 229 current scoped publication rows earned.
+Formal artefact coverage: 228 of 230 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [wire-obligation restoration and limits](./lean_wire_obligation_restoration.md)
+See the [quotient replacement lift and limits](./lean_wire_quotient_lift.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M251
-restores forgotten computational fields with full physical charge and a derived unique event ledger; the full carrier, complete obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M252
+lifts locally quotient-compatible replacements with actual shared materializers and a fully paid original-cost test; arbitrary-support embedding, the complete obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M251-CURRENT-SUMMARY:END -->
+<!-- M252-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

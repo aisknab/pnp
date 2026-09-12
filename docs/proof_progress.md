@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-251`, 227 of 229
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-252`, 228 of 230
 current scoped rows are earned, or 99.1 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M251 |
+| Track | Available | Earned at M252 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M251 risk-weighted proof completion estimate is therefore 40 percent, with
+The M252 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -139,7 +139,10 @@ No fixed checkpoint or global gate changes.
 M251 computes lost-wire restoration for every finite wire-backed carrier and keep mask. The actual projected word and one shared NAND materializer reconstruct every ordinary output and ordered field, with exact physical charge. Mask-derived R5 creations and full-value R8 discharges cover exactly the forgotten coordinates; replay rejects reused identities across the whole trace. The gate-count bound is not a polynomial execution theorem, and the complete manuscript carrier, obligation calculus, Package E and global proof gates remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 227 of 229 current scoped publication rows earned.
+M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 228 of 230 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
