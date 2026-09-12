@@ -48,6 +48,8 @@ const PUBLIC_HEADS = [
   "outputConeRecords_closed",
   "outputConeRecords_least",
   "outputConeRecords_noExternalGate",
+  "outputConeFrontierCandidate",
+  "outputConeFrontierCandidate_semantics",
   "outputConeImplementation",
   "outputConeImplementation_equivalent",
   "outputConeImplementation_gateCount_le",

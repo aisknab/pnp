@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M244-CURRENT-SUMMARY:BEGIN -->
-## Current M244 boundary
+<!-- M245-CURRENT-SUMMARY:BEGIN -->
+## Current M245 boundary
 
-M244 computes the complete physical output-dependency cone of any finite direct-wire NAND implementation and removes unused gates through the existing checked extractor. Every original input and ordered output is preserved, and physical gate deletions give exact residual-slack savings. No-deletion is not semantic minimality, and Boolean equivalence is not full-profile preservation.
+M245 computes a proper physical deletion component from the actual unused-gate complement. The live frontier supplies the support inputs and all original outputs as bypass; the actual extracted support is reindexed only by its proved empty outgoing interface. A concrete replacement frame preserves complete output semantics and accounts for every removed gate and unit of residual slack. The gain witness accepts only a nonempty dead support with a nonempty retained cone. This is not complete manuscript Package E admissibility, full-profile normalization or global PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 220 of 222 current scoped publication rows earned.
+Formal artefact coverage: 221 of 223 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed output-cone pruning and limits](./lean_pccmin_output_cone_pruning.md)
+See the [computed dead-support context and limits](./lean_pccmin_dead_support_context.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M244
-derives physical gate support from actual outputs; full-profile normalization and the total PCCMin oracle remain open.
+Earlier milestone notes retain their original module-specific scope. M245
+constructs physical replacement from actual dead support; full-profile admissibility and the total PCCMin oracle remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M244-CURRENT-SUMMARY:END -->
+<!-- M245-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

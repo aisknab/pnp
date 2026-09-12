@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '43ef1d4eddced0e75d27c6332cb6f16ddad7ce7145e888da09d54a0ff2572242';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e23edd827bf54ceb10347ab2cf211da30c6acd639d27c8274988668021d2f922';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -325,6 +325,26 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.outputConeImplementation_residualSlack',
   'PNP.DirectWire.outputConeImplementation_strictGain_iff',
   'PNP.DirectWire.outputConeNormalizer_checked',
+  'PNP.DirectWire.outputConeFrontierCandidate_semantics',
+  'PNP.DirectWire.deadSupport_interface_empty',
+  'PNP.DirectWire.deadSupportGateCount_partition',
+  'PNP.DirectWire.deadSupportGateCount_eq_deleted',
+  'PNP.DirectWire.deadSupportEnvironment_boundary',
+  'PNP.DirectWire.deadSupportEnvironment_bypass',
+  'PNP.DirectWire.deadSupportCandidate_extracted',
+  'PNP.DirectWire.deadSupportCandidate_program',
+  'PNP.DirectWire.deadSupportEmptyReplacement_equivalent',
+  'PNP.DirectWire.deadSupportContext_plug_equivalent',
+  'PNP.DirectWire.deadSupportContext_original_size',
+  'PNP.DirectWire.deadSupportReplacement_gateCount',
+  'PNP.DirectWire.deadSupportReplacement_equivalent',
+  'PNP.DirectWire.deadSupportReplacement_accounting',
+  'PNP.DirectWire.deadSupportReplacement_residualSlack',
+  'PNP.DirectWire.deadSupportReplacement_strictGain_iff',
+  'PNP.DirectWire.deadSupportProperGain_isSome_iff',
+  'PNP.DirectWire.deadSupportProperGain_sound',
+  'PNP.DirectWire.deadSupportProperGain_none_of_all_dead',
+  'PNP.DirectWire.deadSupportProperGain_none_of_no_dead',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3572,7 +3592,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-244') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-12-245') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

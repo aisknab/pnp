@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-244",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245",
   "lastReviewedDate": "2026-09-12",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 220,
-    "totalRows": 222,
+    "earnedRows": 221,
+    "totalRows": 223,
     "percentRoundedOneDecimal": 99.1,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2115,6 +2115,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M244 adds a general computed physical output-cone pruning stage: actual output seeds and program predecessors determine the least closed gate support, checked extraction preserves the original complete I/O semantics, and deleted physical gates give exact slack savings. A no-deletion branch is not semantic minimality or ZeroSlack; arbitrary full-profile observations are not claimed preserved. The physical component does not derive global families, a complete proper Package E ledger, global routing or polynomial PCCMin. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty.Formal artefact coverage: 220 of 222 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-245",
+      "formalArtefactCoverage": {
+        "earnedRows": 221,
+        "totalRows": 223
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M245 adds a general computed dead-support replacement context: the actual unused-gate complement has no outgoing ports, the live frontier computes its incoming values, the extracted support is preserved exactly, and a concrete frame performs a checked zero-gate replacement with exact size and slack accounting. Only a nonempty proper physical support is accepted; all-unused circuits are excluded from that witness. This is not complete manuscript full-profile Package E admissibility, a complete rewrite ledger, global routing or polynomial PCCMin. No fixed weighted checkpoint or global gate changes. This evidence row changes coverage only; the risk-weighted estimate remains 40% with 20% to 40% uncertainty.Formal artefact coverage: 221 of 223 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

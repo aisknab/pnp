@@ -99,6 +99,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-pccmin-constructive-nand-sharing0.test.mjs',
   'audits/lean-concrete-final-report-bridge0.test.mjs',
   'audits/lean-pccmin-output-cone-pruning0.test.mjs',
+  'audits/lean-pccmin-dead-support-context0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',

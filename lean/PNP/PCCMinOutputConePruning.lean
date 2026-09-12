@@ -165,6 +165,38 @@ private def outputConeRenamedCandidate {inputs gates outputs : Nat}
   (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate.renameInputs
     (outputConeBoundaryInput candidate)
 
+
+/-- The retained cone with its complete physical outgoing frontier, including
+live wires consumed only by removed gates. This exposes the existing computed
+frontier without changing the pruning algorithm. -/
+def outputConeFrontierCandidate {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) :
+    Candidate inputs
+      (extractTerminalSupport candidate (outputConeRecords candidate)).gateCount
+      (terminalInterfacePorts candidate (outputConeRecords candidate)).length :=
+  outputConeRenamedCandidate candidate
+
+/-- Every retained frontier port has its original whole-circuit value. -/
+theorem outputConeFrontierCandidate_semantics {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) (input : Valuation inputs)
+    (output : Fin (terminalInterfacePorts candidate (outputConeRecords candidate)).length) :
+    (outputConeFrontierCandidate candidate).semantics input output =
+      candidate.program.eval input
+        ((terminalInterfacePorts candidate (outputConeRecords candidate)).get output) := by
+  have renamed := Candidate.renameInputs_semantics (outputConeBoundaryInput candidate)
+    (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate
+    input output
+  have boundaryValues : (fun index => input (outputConeBoundaryInput candidate index)) =
+      terminalInducedBoundaryValuation candidate (outputConeRecords candidate) input := by
+    funext index
+    exact outputConeBoundaryInput_value candidate input index
+  have boundaryMatch := congrArg
+    (fun valuation =>
+      (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate.semantics
+        valuation output) boundaryValues
+  exact renamed.trans (boundaryMatch.trans
+    (extractTerminalSupport_induced candidate (outputConeRecords candidate) input output))
+
 private theorem outputConeOutput_interface {inputs gates outputs : Nat}
     (candidate : Candidate inputs gates outputs) (output : Fin outputs)
     (producer : Fin gates)
