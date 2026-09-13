@@ -1,0 +1,29 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.whole_selected
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.whole_exterior
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.whole_gateCount
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.whole_not_proper
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.all_gates_of_zero_exterior
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.WholeGain.checked
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.wholeGain_isSome_iff
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.wholeGain_complete
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.Gain.full_field
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.Gain.branch_boundary
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.Gain.exact_accounting
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.nextGain_isSome_iff
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_iff
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.nextGain_complete
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_excludes
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.normalization_accounting
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.normalization_iterations
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.Trace.checked
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.Trace.searchCalls_le
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_checked
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_of_stopped
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_idempotent
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_no_smaller_zeroUnary
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_referenceMinimum
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_residualSlack
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_gainIterations_le_residualSlack
+#print axioms PNP.DirectWire.WireZeroUnaryClosure.run_searchCalls_le_residualSlack

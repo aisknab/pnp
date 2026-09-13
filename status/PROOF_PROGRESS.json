@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-258",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-259",
   "lastReviewedDate": "2026-09-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 234,
-    "totalRows": 236,
+    "earnedRows": 235,
+    "totalRows": 237,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2353,6 +2353,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M258 closes the pinned manuscript section 6.1 support-discovery edge for proper zero/unary computational R7 gains. It derives a bounded maximal-and-singleton candidate family from actual gate sources and proves completeness for every eligible arbitrary physical support and any strictly smaller equivalent complete local word. The executable carrier-only search, actual full-field expansion, strict fully paid charge and scoped negative-result theorem are kernel checked. Candidate-count and record-count bounds do not retire the complete encoded-size construction and runtime obligations; inherited physical extraction has independent costs. This is a substantial general computational capability, not the full terminal-derived manuscript family, every boundary width, the obligation DAG calculus, all-trace normalization, complete Package E, global ZeroSlack or exact polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 234 of 236 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-259",
+      "formalArtefactCoverage": {
+        "earnedRows": 235,
+        "totalRows": 237
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M259 closes the pinned manuscript whole-span descent and NormalizeOrGain restart edge for the computational zero/unary support class. The carrier-only procedure derives the whole-span branch, combines it with complete proper-support discovery, performs actual full-field-preserving gain expansions and restarts physical normalization until both branches and the physical passes are quiescent. The general closure, exact savings, idempotence, scoped negative result and residual-slack accounting are kernel checked without a supplied family, trajectory or completeness certificate. A guarded counterexample proves that this common fixed point need not be globally minimal. These results do not retire arbitrary-boundary or obligation-DAG completeness, full-carrier normalization, unconditional ZeroSlack, exact general PCCMin or total encoded-size polynomial execution. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 235 of 237 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

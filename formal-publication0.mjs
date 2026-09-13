@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'e534b231a5a21451534cba9eab97e97edbe9432df86a7b755c206bdba73dc008';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '3e1acdf67469e68b34ea48d41083f5c2fb390849b982fcd7bd89de67f50abbee';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -613,6 +613,33 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_full_value',
   'PNP.DirectWire.WireUnarySupportSearch.findReplacement_isSome',
   'PNP.DirectWire.WireUnarySupportSearch.findReplacement_sound',
+  'PNP.DirectWire.WireZeroUnaryClosure.whole_selected',
+  'PNP.DirectWire.WireZeroUnaryClosure.whole_exterior',
+  'PNP.DirectWire.WireZeroUnaryClosure.whole_gateCount',
+  'PNP.DirectWire.WireZeroUnaryClosure.whole_not_proper',
+  'PNP.DirectWire.WireZeroUnaryClosure.all_gates_of_zero_exterior',
+  'PNP.DirectWire.WireZeroUnaryClosure.WholeGain.checked',
+  'PNP.DirectWire.WireZeroUnaryClosure.wholeGain_isSome_iff',
+  'PNP.DirectWire.WireZeroUnaryClosure.wholeGain_complete',
+  'PNP.DirectWire.WireZeroUnaryClosure.Gain.full_field',
+  'PNP.DirectWire.WireZeroUnaryClosure.Gain.branch_boundary',
+  'PNP.DirectWire.WireZeroUnaryClosure.Gain.exact_accounting',
+  'PNP.DirectWire.WireZeroUnaryClosure.nextGain_isSome_iff',
+  'PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_iff',
+  'PNP.DirectWire.WireZeroUnaryClosure.nextGain_complete',
+  'PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_excludes',
+  'PNP.DirectWire.WireZeroUnaryClosure.normalization_accounting',
+  'PNP.DirectWire.WireZeroUnaryClosure.normalization_iterations',
+  'PNP.DirectWire.WireZeroUnaryClosure.Trace.checked',
+  'PNP.DirectWire.WireZeroUnaryClosure.Trace.searchCalls_le',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_checked',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_of_stopped',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_idempotent',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_no_smaller_zeroUnary',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_referenceMinimum',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_residualSlack',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_gainIterations_le_residualSlack',
+  'PNP.DirectWire.WireZeroUnaryClosure.run_searchCalls_le_residualSlack',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3860,7 +3887,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-258') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-259') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

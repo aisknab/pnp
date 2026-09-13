@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M258-CURRENT-SUMMARY:BEGIN -->
-## Current M258 boundary
+<!-- M259-CURRENT-SUMMARY:BEGIN -->
+## Current M259 boundary
 
-M258 derives and searches a complete family of proper zero/unary computational supports from actual gate sources, without a supplied support family or completeness certificate. Every eligible strictly smaller complete local word implies search success; the returned replacement preserves all outputs and fields with exact original-exterior accounting and source-exact R7 witnesses. No result excludes gains only in this class, not global minimality. Physical candidate and record bounds do not establish complete encoded-size polynomial runtime. Wider boundaries, the full carrier and obligation calculus, Package E and global proof obligations remain open.
+M259 derives whole-span zero/unary descent and combines it with complete proper-support search in an executable normalization/gain-restart closure. The general trace preserves every output and computational field, terminates with both gain branches and physical passes quiet, and proves exact gate and residual-slack accounting, iteration bounds and idempotence. A checked nonminimum fixed point shows why this scoped stopping result is not global minimality or ZeroSlack. Wider boundaries, the full carrier and obligation calculus, Package E and complete encoded-size polynomial PCCMin remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 234 of 236 current scoped publication rows earned.
+Formal artefact coverage: 235 of 237 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [complete scoped unary support search and limits](./lean_wire_unary_support_search.md)
+See the [computed zero/unary closure and limits](./lean_wire_zero_unary_closure.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M258
-derives complete proper zero/unary support discovery and actual full-field-preserving replacements; wider boundaries, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M259
+derives actual whole-span and proper zero/unary descent with repeated physical normalization and common scoped stopping; wider boundaries, global minimality, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M258-CURRENT-SUMMARY:END -->
+<!-- M259-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
