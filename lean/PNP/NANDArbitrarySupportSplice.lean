@@ -629,6 +629,171 @@ theorem production_agreement
     exact (result_semantics candidate records replacement equivalent compiled input output).trans
       oldSemantics.symm
 
+/-- Place the optional replacement gate just after its sole external input.
+    Retained original gates keep their original relative order. -/
+private def singleGateRank (boundaryGate : Fin gates) :
+    Fin ((exterior records).length + replacementGates) → Nat :=
+  splitFin (fun index => 2 * ((exterior records).get index).val)
+    (fun _ => 2 * boundaryGate.val + 1)
+
+private theorem singleGateBoundarySource_rank
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (port : Fin (terminalBoundaryPorts candidate.program records).length)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : boundarySource candidate records port = .gate node) :
+    singleGateRank records boundaryGate node = 2 * boundaryGate.val := by
+  have atPort : (terminalBoundaryPorts candidate.program records).get port =
+      .gate boundaryGate := by
+    apply List.mem_singleton.mp
+    rw [← single]
+    exact List.get_mem _ _
+  unfold boundarySource at same
+  split at same
+  · rename_i index found
+    have impossible := found.symm.trans atPort
+    cases impossible
+  · rename_i original found
+    have equal : original = boundaryGate :=
+      TerminalSupportWire.gate.inj (found.symm.trans atPort)
+    have mapped := Source.gate.inj same
+    rw [← mapped, singleGateRank, splitFin_left, get_memberIndex, equal]
+
+private theorem singleGateReplacementSource_rank_bound
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (source : Source (terminalBoundaryPorts candidate.program records).length replacementGates)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : replacementSource candidate records source = .gate node) :
+    singleGateRank records boundaryGate node < 2 * boundaryGate.val + 2 := by
+  cases source with
+  | input port =>
+      have value := singleGateBoundarySource_rank candidate records boundaryGate
+        single port node same
+      omega
+  | constant value => cases same
+  | gate index =>
+      have mapped := Source.gate.inj same
+      rw [← mapped, singleGateRank, splitFin_right]
+      omega
+
+private theorem singleGateOriginalSource_rank_lt
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (early : ∀ port : Fin (terminalInterfacePorts candidate records).length,
+      ((terminalInterfacePorts candidate records).get port).val < boundaryGate.val →
+        ∃ value, replacement.directWireWord.source port = .constant value)
+    (source : Source inputs gates) (visible : Visible candidate records source)
+    (consumer : Fin gates)
+    (bounded : ∀ producer, source = .gate producer → producer.val < consumer.val)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : originalSource candidate records replacement source visible = .gate node) :
+    singleGateRank records boundaryGate node < 2 * consumer.val := by
+  cases source with
+  | input index => cases same
+  | constant value => cases same
+  | gate producer =>
+      simp only [originalSource] at same
+      split at same
+      · rename_i selected
+        by_cases before : producer.val < boundaryGate.val
+        · obtain ⟨value, literal⟩ := early (memberIndex (visible producer rfl selected))
+            (by rw [get_memberIndex]; exact before)
+          rw [literal] at same
+          cases same
+        · have sourceBound := singleGateReplacementSource_rank_bound candidate records
+            boundaryGate single _ node same
+          have earlier := bounded producer rfl
+          omega
+      · have mapped := Source.gate.inj same
+        rw [← mapped, singleGateRank, splitFin_left, get_memberIndex]
+        have earlier := bounded producer rfl
+        omega
+
+private theorem singleGateReplacementSource_rank_lt
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (small : replacementGates ≤ 1)
+    (source : Source (terminalBoundaryPorts candidate.program records).length replacementGates)
+    (consumer : Fin replacementGates)
+    (bounded : ∀ producer, source = .gate producer → producer.val < consumer.val)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : replacementSource candidate records source = .gate node) :
+    singleGateRank records boundaryGate node < 2 * boundaryGate.val + 1 := by
+  cases source with
+  | input port =>
+      have value := singleGateBoundarySource_rank candidate records boundaryGate
+        single port node same
+      omega
+  | constant value => cases same
+  | gate producer =>
+      have earlier := bounded producer rfl
+      have within := consumer.isLt
+      omega
+
+private theorem singleGateGraph_rank_decreases
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (small : replacementGates ≤ 1)
+    (early : ∀ port : Fin (terminalInterfacePorts candidate records).length,
+      ((terminalInterfacePorts candidate records).get port).val < boundaryGate.val →
+        ∃ value, replacement.directWireWord.source port = .constant value)
+    (producer consumer : Fin ((exterior records).length + replacementGates))
+    (edge : (graph candidate records replacement).Depends producer consumer) :
+    singleGateRank records boundaryGate producer <
+      singleGateRank records boundaryGate consumer := by
+  rcases finSum_decompose consumer with ⟨outside, rfl⟩ | ⟨inside, rfl⟩
+  · have consumerRank : singleGateRank (replacementGates := replacementGates)
+        records boundaryGate (Fin.castAdd replacementGates outside) =
+          2 * ((exterior records).get outside).val := by
+      unfold singleGateRank
+      rw [splitFin_left]
+    rw [consumerRank]
+    dsimp only [RawNandGraph.Depends, graph] at edge
+    simp only [splitFin_left] at edge
+    rcases edge with leftAt | rightAt
+    · exact singleGateOriginalSource_rank_lt candidate records replacement
+        boundaryGate single early _ _ ((exterior records).get outside)
+        (fun prior atSource => sources_ordered candidate.program _ prior (Or.inl atSource))
+        producer leftAt
+    · exact singleGateOriginalSource_rank_lt candidate records replacement
+        boundaryGate single early _ _ ((exterior records).get outside)
+        (fun prior atSource => sources_ordered candidate.program _ prior (Or.inr atSource))
+        producer rightAt
+  · have consumerRank : singleGateRank (replacementGates := replacementGates)
+        records boundaryGate (Fin.natAdd (exterior records).length inside) =
+          2 * boundaryGate.val + 1 := by
+      unfold singleGateRank
+      rw [splitFin_right]
+    rw [consumerRank]
+    dsimp only [RawNandGraph.Depends, graph] at edge
+    simp only [splitFin_right] at edge
+    rcases edge with leftAt | rightAt
+    · exact singleGateReplacementSource_rank_lt candidate records boundaryGate single
+        small _ inside
+        (fun prior atSource => sources_ordered replacement.program inside prior (Or.inl atSource))
+        producer leftAt
+    · exact singleGateReplacementSource_rank_lt candidate records boundaryGate single
+        small _ inside
+        (fun prior atSource => sources_ordered replacement.program inside prior (Or.inr atSource))
+        producer rightAt
+
+/-- A zero/one-gate replacement is acyclic across a sole external gate when
+    every earlier frontier observation is represented by a literal constant.
+    Source-derived unary realization establishes this condition by prefix
+    causality; no caller-supplied graph or ordering is needed there. -/
+theorem graph_wellFounded_of_singleGateBoundary
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (small : replacementGates ≤ 1)
+    (early : ∀ port : Fin (terminalInterfacePorts candidate records).length,
+      ((terminalInterfacePorts candidate records).get port).val < boundaryGate.val →
+        ∃ value, replacement.directWireWord.source port = .constant value) :
+    WellFounded (graph candidate records replacement).Depends :=
+  ⟨fun node => rank_accessible _ (singleGateRank records boundaryGate)
+    (singleGateGraph_rank_decreases candidate records replacement boundaryGate
+      single small early) node⟩
+
 end ArbitrarySupportSplice
 end DirectWire
 end PNP

@@ -7,20 +7,8 @@ on:
       - 'lakefile.lean'
       - 'lake-manifest.json'
       - 'lean/**'
-      - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
-      - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
-      - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
-      - 'lean/PNP/Concrete/CNFToNAND.lean'
       - 'lean-audit/**'
-      - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean'
       - 'lean-regression/**'
-      - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
-      - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
-      - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
-      - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-proof-progress0.mjs'
@@ -38,464 +26,23 @@ on:
       - 'public/pnp-status.json'
       - 'canonical_proof_report.tex'
       - 'canonical_proof_report.pdf'
-      - 'audits/lean-theorem-inventory0.test.mjs'
+      - 'audits/lean-*.test.mjs'
       - 'audits/formal-publication0.test.mjs'
-      - 'audits/lean-residual-terminal-profile-locality0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-charge-ledger0.test.mjs'
-      - 'audits/lean-residual-terminal-saturated-support-context0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-gain0.test.mjs'
-      - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
-      - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
-      - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
-      - 'audits/lean-concrete-final-report-bridge0.test.mjs'
-      - 'audits/lean-pccmin-output-cone-pruning0.test.mjs'
-      - 'audits/lean-pccmin-dead-support-context0.test.mjs'
-      - 'audits/lean-pccmin-dead-support-full-mode0.test.mjs'
-      - 'audits/lean-pccmin-constant-propagation0.test.mjs'
-      - 'audits/lean-pccmin-physical-normalization-closure0.test.mjs'
-      - 'audits/lean-arbitrary-support-splice0.test.mjs'
-      - 'audits/lean-wire-carrier0.test.mjs'
-      - 'audits/lean-wire-obligation-restoration0.test.mjs'
-      - 'audits/lean-wire-quotient-lift0.test.mjs'
-      - 'docs/lean_residual_terminal_profile_locality.md'
-      - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
-      - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
-      - 'docs/lean_residual_terminal_physical_charge_ledger.md'
-      - 'docs/lean_residual_terminal_saturated_support_context.md'
-      - 'docs/lean_residual_terminal_physical_gain.md'
-      - 'docs/lean_residual_terminal_gain_profile_firewall.md'
-      - 'docs/lean_residual_independent_materializer_cost.md'
-      - 'docs/lean_residual_terminal_physical_ownership.md'
-      - 'docs/lean_pccmin_constructive_nand_sharing.md'
-      - 'docs/lean_concrete_final_report_bridge.md'
-      - 'docs/lean_pccmin_output_cone_pruning.md'
-      - 'docs/lean_pccmin_dead_support_context.md'
-      - 'docs/lean_pccmin_dead_support_full_mode.md'
-      - 'docs/lean_pccmin_constant_propagation.md'
-      - 'docs/lean_pccmin_physical_normalization_closure.md'
-      - 'docs/lean_arbitrary_support_splice.md'
-      - 'docs/lean_wire_carrier.md'
-      - 'docs/lean_wire_obligation_restoration.md'
-      - 'docs/lean_wire_quotient_lift.md'
+      - 'docs/lean_*.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
-      - 'audits/lean-root-target0.test.mjs'
-      - 'audits/lean-concrete-machine0.test.mjs'
-      - 'audits/lean-concrete-tape-handoff0.test.mjs'
-      - 'audits/lean-concrete-tape-blank-equivalence0.test.mjs'
-      - 'audits/lean-concrete-pipeline-tape-geometry0.test.mjs'
-      - 'audits/lean-concrete-pipeline-input-framer0.test.mjs'
-      - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
-      - 'audits/lean-concrete-pipeline-state-namespace0.test.mjs'
-      - 'audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs'
-      - 'audits/lean-concrete-pipeline-sequential-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-stage-bridges0.test.mjs'
-      - 'audits/lean-concrete-terminal-output-packer0.test.mjs'
-      - 'audits/lean-concrete-pipeline-terminal-bridge0.test.mjs'
-      - 'audits/lean-concrete-pipeline-paired-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-machine-simulation0.test.mjs'
-      - 'audits/lean-concrete-complexity0.test.mjs'
-      - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
-      - 'audits/lean-concrete-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-layout0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-size0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-schedule0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-cursor0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs'
-      - 'docs/lean_cook_levin_builder_full_schedule_cursor_controller.md'
-      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs'
-      - 'docs/lean_cook_levin_builder_arbitrary_slot_header_router.md'
-      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs'
-      - 'docs/lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_divider.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_launch.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_tape_bridge.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_divider_raw_route_classifier.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_divider_selected_token_launch.md'
-      - 'audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs'
-      - 'docs/lean_cook_levin_builder_complete_schedule_iteration.md'
-      - 'audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_physical_optional_token_dispatch.md'
-      - 'audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs'
-      - 'docs/lean_cook_levin_builder_physical_dispatch_schedule.md'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-sign-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-first-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-fifth-padding-or-terminator-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-nand-semantics0.test.mjs'
-      - 'audits/lean-nand-enumerator0.test.mjs'
-      - 'audits/lean-nand-reference-minimum0.test.mjs'
-      - 'audits/lean-locked-nand-baseline0.test.mjs'
-      - 'audits/lean-locked-nand-threshold-boundary0.test.mjs'
-      - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
-      - 'audits/lean-locked-nand-global-candidates0.test.mjs'
-      - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
-      - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
-      - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
-      - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
-      - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-threshold-publication0.test.mjs'
-      - 'audits/lean-residual-routes0.test.mjs'
-      - 'audits/lean-residual-gain-chain0.test.mjs'
-      - 'audits/lean-residual-gain-stopping0.test.mjs'
-      - 'audits/lean-residual-terminal-full-bridge0.test.mjs'
-      - 'audits/lean-residual-terminal-mode-firewall0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-minimum0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-transfer0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-support-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-support-extraction0.test.mjs'
-      - 'audits/lean-residual-terminal-proper-support0.test.mjs'
-      - 'audits/lean-residual-terminal-support-square-closure0.test.mjs'
-      - 'audits/lean-residual-terminal-governed-support-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-frontier-pushout0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-square0.test.mjs'
-      - 'audits/lean-residual-terminal-side-tight-minimum0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-carrier0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs'
-      - 'audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs'
-      - 'audits/lean-residual-terminal-bcel-anchor-nucleus0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-positivity-firewall0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-cost-balance0.test.mjs'
-      - 'audits/lean-residual-terminal-interface-exposure-routing0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
-      - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
-      - 'audits/lean-concrete-residual-band-compatibility0.test.mjs'
-      - 'audits/lean-typed-pccpack-reflection0.test.mjs'
-      - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
-      - 'docs/lean_pccmin_total_oracle_loop.md'
-      - 'audits/lean-pccmin-normalize-oracle-composition0.test.mjs'
-      - 'docs/lean_pccmin_normalize_oracle_composition.md'
-      - 'audits/lean-pccmin-rank-ordered-oracle0.test.mjs'
-      - 'docs/lean_pccmin_rank_ordered_oracle.md'
-      - 'audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_ranked_selector.md'
-      - 'audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_hb_zeroslack_bridge.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_activation_route.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_derived_family.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-grouping0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-sparse-activation-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md'
-      - 'audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_bn6_positive_cellization.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md'
-      - 'audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md'
-      - 'audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-bn6-bcel-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md'
-      - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
-      - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
-      - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
-      - 'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-ambient-bn4-residual-reduction0.test.mjs'
-      - 'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs'
-      - 'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs'
-      - 'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs'
-      - 'audits/lean-residual-terminal-packet-selector-seeds0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorSeeds.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorSeedsAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorSeeds.lean'
-      - 'docs/lean_residual_terminal_packet_selector_seeds.md'
-      - 'audits/lean-residual-terminal-packet-selector-universe0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorUniverse.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverse.lean'
-      - 'docs/lean_residual_terminal_packet_selector_universe.md'
-      - 'audits/lean-residual-terminal-packet-selector-handles0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorHandles.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorHandles.lean'
-      - 'docs/lean_residual_terminal_packet_selector_handles.md'
-      - 'audits/lean-residual-terminal-packet-selector-codec0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorCodec.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorCodecAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorCodec.lean'
-      - 'docs/lean_residual_terminal_packet_selector_codec.md'
-      - 'audits/lean-residual-terminal-packet-selector-payload-realization0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorPayloadRealization.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorPayloadRealizationAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorPayloadRealization.lean'
-      - 'docs/lean_residual_terminal_packet_selector_payload_realization.md'
-      - 'audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorGainScan.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean'
-      - 'docs/lean_residual_terminal_packet_selector_gain_scan.md'
-      - 'audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorUniverseGainScan.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean'
-      - 'docs/lean_residual_terminal_packet_selector_universe_gain_scan.md'
-      - 'audits/lean-residual-terminal-packet-selector-gain-coverage0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorGainCoverage.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorGainCoverage.lean'
-      - 'docs/lean_residual_terminal_packet_selector_gain_coverage.md'
-      - 'audits/lean-residual-terminal-packet-charge-surplus0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketChargeSurplus.lean'
-      - 'lean-audit/PNPResidualTerminalPacketChargeSurplusAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketChargeSurplus.lean'
-      - 'docs/lean_residual_terminal_packet_charge_surplus.md'
-      - 'audits/lean-residual-terminal-packet-unit-charge-blueprint-realizer0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
-      - 'lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
-      - 'docs/lean_residual_terminal_packet_unit_charge_blueprint_realizer.md'
-      - 'audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketTypedRealizerContract.lean'
-      - 'lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean'
-      - 'docs/lean_residual_terminal_packet_typed_realizer_contract.md'
-      - 'audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs'
-      - 'lean/PNP/ResidualTerminalHBBlockerGraphAcyclicity.lean'
-      - 'lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean'
-      - 'docs/lean_residual_terminal_hb_blocker_graph_acyclicity.md'
-      - 'audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs'
-      - 'lean/PNP/ResidualTerminalHBDependencyTableClosure.lean'
-      - 'lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean'
-      - 'docs/lean_residual_terminal_hb_dependency_table_closure.md'
-      - 'docs/lean_residual_gain_chain.md'
-      - 'docs/lean_residual_gain_stopping.md'
-      - 'docs/lean_residual_terminal_full_bridge.md'
-      - 'docs/lean_residual_terminal_mode_firewall.md'
-      - 'docs/lean_residual_terminal_projection_minimum.md'
-      - 'docs/lean_residual_terminal_projection_transfer.md'
-      - 'docs/lean_residual_terminal_saturation.md'
-      - 'docs/lean_residual_terminal_physical_support_completion.md'
-      - 'docs/lean_residual_terminal_support_extraction.md'
-      - 'docs/lean_residual_terminal_four_corner_tight_basis_maximum.md'
-      - 'docs/lean_residual_terminal_bn2_square_legitimacy.md'
-      - 'docs/lean_residual_terminal_bcel_anchor_nucleus.md'
-      - 'docs/lean_residual_terminal_saturation_positivity_firewall.md'
-      - 'docs/lean_residual_terminal_saturation_cost_balance.md'
-      - 'docs/lean_residual_terminal_interface_exposure_routing.md'
-      - 'docs/lean_residual_terminal_bn3_request_envelope.md'
-      - 'docs/lean_residual_terminal_bn4_activation_cancellation.md'
-      - 'docs/lean_residual_terminal_bn5_full_shadow_localization.md'
-      - 'docs/lean_residual_terminal_pkgc_separating_consumers.md'
-      - 'docs/lean_residual_terminal_pkgc_typed_restoration.md'
-      - 'docs/lean_residual_terminal_pkgc_same_key_cancellation.md'
-      - 'docs/lean_residual_terminal_pkgc_ambient_bn4_ledger.md'
-      - 'docs/lean_residual_terminal_pkgc_ambient_bn4_residual_reduction.md'
-      - 'docs/lean_residual_terminal_consumer_antichain_normal_form.md'
-      - 'docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md'
-      - 'docs/lean_residual_terminal_finite_saturate_positive.md'
-      - 'docs/lean_residual_terminal_rank_wf.md'
-      - 'docs/lean_residual_terminal_proper_support.md'
-      - 'docs/lean_residual_terminal_support_square_closure.md'
-      - 'docs/lean_residual_terminal_governed_support_completion.md'
-      - 'docs/lean_residual_terminal_frontier_pushout.md'
-      - 'docs/lean_residual_terminal_projection_square.md'
-      - 'docs/lean_residual_terminal_side_tight_minimum.md'
-      - 'docs/lean_residual_terminal_four_corner_carrier.md'
-      - 'docs/lean_residual_terminal_four_corner_optimum_compatibility.md'
-      - 'docs/lean_residual_terminal_four_corner_optimum_coherence.md'
-      - 'docs/lean_residual_terminal_four_corner_side_tight_completion.md'
-      - 'audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs'
-      - 'docs/lean_residual_terminal_budget_envelope_resolver.md'
       - 'docs/plans/2026-08-21-residual-terminal-budget-envelope-resolver.md'
-      - 'audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs'
-      - 'docs/lean_residual_terminal_budget_no_lower_ledger.md'
       - 'docs/plans/2026-08-21-residual-terminal-budget-no-lower-ledger.md'
-      - 'audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs'
-      - 'docs/lean_residual_terminal_packet_budget_no_lower_composition.md'
       - 'docs/plans/2026-08-21-residual-terminal-packet-budget-no-lower-composition.md'
-      - 'audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs'
-      - 'docs/lean_residual_terminal_hresolve_maximal_h_disjoint_family.md'
       - 'docs/plans/2026-08-21-residual-terminal-hresolve-maximal-h-disjoint-family.md'
-      - 'audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs'
-      - 'docs/lean_residual_terminal_hn_bwl_certified_path_minimum.md'
       - 'docs/plans/2026-08-21-residual-terminal-hn-bwl-certified-path-minimum.md'
-      - 'audits/lean-residual-terminal-hresolve-certified-path-family0.test.mjs'
-      - 'docs/lean_residual_terminal_hresolve_certified_path_family.md'
       - 'docs/plans/2026-08-21-residual-terminal-hresolve-certified-path-family.md'
-      - 'audits/lean-residual-terminal-hresolve-zeroslack-sidecar0.test.mjs'
-      - 'docs/lean_residual_terminal_hresolve_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-hresolve-zeroslack-sidecar.md'
-      - 'lean/PNP/ResidualTerminalBudgetZeroSlackSidecar.lean'
-      - 'lean-audit/PNPResidualTerminalBudgetZeroSlackSidecarAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalBudgetZeroSlackSidecar.lean'
-      - 'audits/lean-residual-terminal-budget-zeroslack-sidecar0.test.mjs'
-      - 'docs/lean_residual_terminal_budget_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-budget-zeroslack-sidecar.md'
-      - 'lean/PNP/ResidualTerminalSelectorHBZeroSlackSidecar.lean'
-      - 'lean-audit/PNPResidualTerminalSelectorHBZeroSlackSidecarAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalSelectorHBZeroSlackSidecar.lean'
-      - 'audits/lean-residual-terminal-selector-hb-zeroslack-sidecar0.test.mjs'
-      - 'docs/lean_residual_terminal_selector_hb_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-selector-hb-zeroslack-sidecar.md'
-      - 'lean/PNP/ResidualTerminalPacketBudgetNoLowerZeroSlackSidecar.lean'
-      - 'lean-audit/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecarAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecar.lean'
-      - 'audits/lean-residual-terminal-packet-budget-no-lower-zeroslack-sidecar0.test.mjs'
-      - 'docs/lean_residual_terminal_packet_budget_no_lower_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-packet-budget-no-lower-zeroslack-sidecar.md'
-      - 'lean/PNP/ResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean'
-      - 'lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean'
-      - 'audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs'
-      - 'docs/lean_residual_terminal_bcel_packet_no_lower_zeroslack_sidecar.md'
       - 'docs/plans/2026-08-22-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar.md'
-      - 'lean/PNP/ResidualTerminalZeroSlackPacketSelectorHBCoherence.lean'
-      - 'lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean'
-      - 'audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs'
-      - 'docs/lean_residual_terminal_zeroslack_packet_selector_hb_coherence.md'
       - 'docs/plans/2026-08-23-zeroslack-packet-selector-hb-coherence.md'
-      - 'docs/lean_bridge.md'
-      - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
-      - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
-      - 'docs/lean_concrete_cnf_to_nand_polynomial_reduction.md'
-      - 'docs/lean_concrete_machine.md'
-      - 'docs/lean_tape_handoff.md'
-      - 'docs/lean_tape_blank_equivalence.md'
-      - 'docs/lean_pipeline_tape_geometry.md'
-      - 'docs/lean_pipeline_input_framer.md'
-      - 'docs/lean_pipeline_output_handoff.md'
-      - 'docs/lean_pipeline_state_namespace.md'
-      - 'docs/lean_pipeline_sequential_state_namespace.md'
-      - 'docs/lean_pipeline_sequential_compiler.md'
-      - 'docs/lean_pipeline_stage_bridges.md'
-      - 'docs/lean_terminal_output_packer.md'
-      - 'docs/lean_pipeline_terminal_bridge.md'
-      - 'docs/lean_pipeline_paired_compiler.md'
-      - 'docs/lean_pipeline_compiler.md'
-      - 'docs/lean_pipeline_machine_simulation.md'
-      - 'docs/lean_concrete_complexity.md'
-      - 'docs/lean_cook_levin_layout.md'
-      - 'docs/lean_cook_levin_tableau.md'
-      - 'docs/lean_cook_levin_verifier_tableau.md'
-      - 'docs/lean_cook_levin_local_cnf.md'
-      - 'docs/lean_cook_levin_tableau_cnf.md'
-      - 'docs/lean_cook_levin_tableau_cnf_semantics.md'
-      - 'docs/lean_cook_levin_raw_tape_bridge.md'
-      - 'docs/lean_cook_levin_formula_size.md'
-      - 'docs/lean_cook_levin_formula_schedule.md'
-      - 'docs/lean_cook_levin_formula_cursor.md'
-      - 'docs/lean_cook_levin_builder_input_length.md'
-      - 'docs/lean_cook_levin_builder_input_prefix.md'
-      - 'docs/lean_cook_levin_builder_token_appender.md'
-      - 'docs/lean_cook_levin_builder_first_token_prefix.md'
-      - 'docs/lean_cook_levin_builder_complete_header.md'
-      - 'docs/lean_cook_levin_builder_body_start_prefix.md'
-      - 'docs/lean_cook_levin_builder_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_first_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_separator_step.md'
-      - 'docs/lean_cook_levin_builder_second_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_third_clause_separator_step.md'
-      - 'docs/lean_cook_levin_builder_third_clause_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_fifth_clause_padding_run.md'
-      - 'docs/lean_nand_semantics.md'
-      - 'docs/lean_nand_enumerator.md'
-      - 'docs/lean_nand_reference_minimum.md'
-      - 'docs/lean_locked_nand_macros.md'
-      - 'docs/lean_locked_nand_prefix.md'
-      - 'docs/lean_locked_nand_baseline.md'
-      - 'docs/lean_locked_nand_threshold_boundary.md'
-      - 'docs/lean_locked_nand_carrier_trace.md'
-      - 'docs/lean_locked_nand_global_candidates.md'
-      - 'docs/lean_locked_nand_global_baseline_distinct.md'
-      - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
-      - 'docs/lean_locked_nand_global_semantic_threshold.md'
-      - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
-      - 'docs/lean_concrete_locked_nand_source_parser.md'
-      - 'docs/lean_concrete_locked_nand_target_emitter.md'
-      - 'docs/lean_residual_routes.md'
-      - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
       - 'docs/github_actions_audit.md'
@@ -509,20 +56,8 @@ on:
       - 'lakefile.lean'
       - 'lake-manifest.json'
       - 'lean/**'
-      - 'lean/PNP/Concrete/LockedNANDSourceParser*.lean'
-      - 'lean/PNP/Concrete/LockedNANDTargetEmitter*.lean'
-      - 'lean/PNP/Concrete/LockedNANDPolynomialReduction.lean'
-      - 'lean/PNP/Concrete/CNFToNAND.lean'
       - 'lean-audit/**'
-      - 'lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean'
-      - 'lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean'
       - 'lean-regression/**'
-      - 'lean-regression/PNPConcreteLockedNANDSourceParser.lean'
-      - 'lean-regression/PNPConcreteLockedNANDTargetEmitter.lean'
-      - 'lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean'
-      - 'lean-regression/PNPConcreteCNFToNAND.lean'
       - 'formal-publication0.mjs'
       - 'pcc-formal-reconstruction-status0.mjs'
       - 'pcc-proof-progress0.mjs'
@@ -540,413 +75,11 @@ on:
       - 'public/pnp-status.json'
       - 'canonical_proof_report.tex'
       - 'canonical_proof_report.pdf'
-      - 'audits/lean-theorem-inventory0.test.mjs'
+      - 'audits/lean-*.test.mjs'
       - 'audits/formal-publication0.test.mjs'
-      - 'audits/lean-residual-terminal-profile-locality0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-charge-ledger0.test.mjs'
-      - 'audits/lean-residual-terminal-saturated-support-context0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-gain0.test.mjs'
-      - 'audits/lean-residual-terminal-gain-profile-firewall0.test.mjs'
-      - 'audits/lean-residual-independent-materializer-cost0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-ownership0.test.mjs'
-      - 'audits/lean-pccmin-constructive-nand-sharing0.test.mjs'
-      - 'audits/lean-concrete-final-report-bridge0.test.mjs'
-      - 'audits/lean-pccmin-output-cone-pruning0.test.mjs'
-      - 'audits/lean-pccmin-dead-support-context0.test.mjs'
-      - 'audits/lean-pccmin-dead-support-full-mode0.test.mjs'
-      - 'audits/lean-pccmin-constant-propagation0.test.mjs'
-      - 'audits/lean-pccmin-physical-normalization-closure0.test.mjs'
-      - 'audits/lean-arbitrary-support-splice0.test.mjs'
-      - 'audits/lean-wire-carrier0.test.mjs'
-      - 'audits/lean-wire-obligation-restoration0.test.mjs'
-      - 'audits/lean-wire-quotient-lift0.test.mjs'
-      - 'docs/lean_residual_terminal_profile_locality.md'
-      - 'docs/lean_residual_terminal_saturation_trace_fidelity.md'
-      - 'docs/lean_residual_terminal_physical_saturation_accounting.md'
-      - 'docs/lean_residual_terminal_physical_charge_ledger.md'
-      - 'docs/lean_residual_terminal_saturated_support_context.md'
-      - 'docs/lean_residual_terminal_physical_gain.md'
-      - 'docs/lean_residual_terminal_gain_profile_firewall.md'
-      - 'docs/lean_residual_independent_materializer_cost.md'
-      - 'docs/lean_residual_terminal_physical_ownership.md'
-      - 'docs/lean_pccmin_constructive_nand_sharing.md'
-      - 'docs/lean_concrete_final_report_bridge.md'
-      - 'docs/lean_pccmin_output_cone_pruning.md'
-      - 'docs/lean_pccmin_dead_support_context.md'
-      - 'docs/lean_pccmin_dead_support_full_mode.md'
-      - 'docs/lean_pccmin_constant_propagation.md'
-      - 'docs/lean_pccmin_physical_normalization_closure.md'
-      - 'docs/lean_arbitrary_support_splice.md'
-      - 'docs/lean_wire_carrier.md'
-      - 'docs/lean_wire_obligation_restoration.md'
-      - 'docs/lean_wire_quotient_lift.md'
+      - 'docs/lean_*.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
-      - 'audits/lean-root-target0.test.mjs'
-      - 'audits/lean-concrete-machine0.test.mjs'
-      - 'audits/lean-concrete-tape-handoff0.test.mjs'
-      - 'audits/lean-concrete-tape-blank-equivalence0.test.mjs'
-      - 'audits/lean-concrete-pipeline-tape-geometry0.test.mjs'
-      - 'audits/lean-concrete-pipeline-input-framer0.test.mjs'
-      - 'audits/lean-concrete-pipeline-output-handoff0.test.mjs'
-      - 'audits/lean-concrete-pipeline-state-namespace0.test.mjs'
-      - 'audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs'
-      - 'audits/lean-concrete-pipeline-sequential-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-stage-bridges0.test.mjs'
-      - 'audits/lean-concrete-terminal-output-packer0.test.mjs'
-      - 'audits/lean-concrete-pipeline-terminal-bridge0.test.mjs'
-      - 'audits/lean-concrete-pipeline-paired-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-compiler0.test.mjs'
-      - 'audits/lean-concrete-pipeline-machine-simulation0.test.mjs'
-      - 'audits/lean-concrete-complexity0.test.mjs'
-      - 'audits/lean-concrete-pipeline-refinement0.test.mjs'
-      - 'audits/lean-concrete-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-layout0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-local-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-size0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-schedule0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-formula-cursor0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-input-length0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs'
-      - 'docs/lean_cook_levin_builder_full_schedule_cursor_controller.md'
-      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs'
-      - 'docs/lean_cook_levin_builder_arbitrary_slot_header_router.md'
-      - 'audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs'
-      - 'docs/lean_cook_levin_builder_arbitrary_slot_post_header_decoder.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_divider.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_launch.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_header_raw_tape_bridge.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_divider_raw_route_classifier.md'
-      - 'audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_post_divider_selected_token_launch.md'
-      - 'audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs'
-      - 'docs/lean_cook_levin_builder_complete_schedule_iteration.md'
-      - 'audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs'
-      - 'docs/lean_cook_levin_builder_physical_optional_token_dispatch.md'
-      - 'audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs'
-      - 'docs/lean_cook_levin_builder_physical_dispatch_schedule.md'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-second-literal-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-prefix0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-sign-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-first-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-fifth-padding-or-terminator-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs'
-      - 'audits/lean-nand-semantics0.test.mjs'
-      - 'audits/lean-nand-enumerator0.test.mjs'
-      - 'audits/lean-nand-reference-minimum0.test.mjs'
-      - 'audits/lean-locked-nand-baseline0.test.mjs'
-      - 'audits/lean-locked-nand-threshold-boundary0.test.mjs'
-      - 'audits/lean-locked-nand-carrier-trace0.test.mjs'
-      - 'audits/lean-locked-nand-global-candidates0.test.mjs'
-      - 'audits/lean-locked-nand-global-baseline-distinct0.test.mjs'
-      - 'audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs'
-      - 'audits/lean-locked-nand-global-semantic-threshold0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-source-parser0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-target-emitter0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs'
-      - 'audits/lean-concrete-cnf-to-nand0.test.mjs'
-      - 'audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs'
-      - 'audits/lean-concrete-locked-nand-threshold-publication0.test.mjs'
-      - 'audits/lean-residual-routes0.test.mjs'
-      - 'audits/lean-residual-gain-chain0.test.mjs'
-      - 'audits/lean-residual-gain-stopping0.test.mjs'
-      - 'audits/lean-residual-terminal-full-bridge0.test.mjs'
-      - 'audits/lean-residual-terminal-mode-firewall0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-minimum0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-transfer0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation0.test.mjs'
-      - 'audits/lean-residual-terminal-physical-support-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-support-extraction0.test.mjs'
-      - 'audits/lean-residual-terminal-proper-support0.test.mjs'
-      - 'audits/lean-residual-terminal-support-square-closure0.test.mjs'
-      - 'audits/lean-residual-terminal-governed-support-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-frontier-pushout0.test.mjs'
-      - 'audits/lean-residual-terminal-projection-square0.test.mjs'
-      - 'audits/lean-residual-terminal-side-tight-minimum0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-carrier0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs'
-      - 'audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs'
-      - 'audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs'
-      - 'audits/lean-residual-terminal-bcel-anchor-nucleus0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-positivity-firewall0.test.mjs'
-      - 'audits/lean-residual-terminal-saturation-cost-balance0.test.mjs'
-      - 'audits/lean-residual-terminal-interface-exposure-routing0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-saturate-positive0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-ready0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs'
-      - 'audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs'
-      - 'audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs'
-      - 'audits/lean-concrete-residual-band-compatibility0.test.mjs'
-      - 'audits/lean-typed-pccpack-reflection0.test.mjs'
-      - 'audits/lean-pccmin-total-oracle-loop0.test.mjs'
-      - 'docs/lean_pccmin_total_oracle_loop.md'
-      - 'audits/lean-pccmin-normalize-oracle-composition0.test.mjs'
-      - 'docs/lean_pccmin_normalize_oracle_composition.md'
-      - 'audits/lean-pccmin-rank-ordered-oracle0.test.mjs'
-      - 'docs/lean_pccmin_rank_ordered_oracle.md'
-      - 'audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_ranked_selector.md'
-      - 'audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_hb_zeroslack_bridge.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_hb_zeroslack_bridge.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_activation_route.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_derived_family.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-grouping0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_grouping.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_cut_ledger.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_canonical_constant_cut_basis.md'
-      - 'audits/lean-pccmin-checked-packet-bn6-bcel-sparse-activation-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_bn6_bcel_sparse_activation_route.md'
-      - 'audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_bn6_positive_cellization.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_bn6_bcel_source_route.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_ambient_bn4_extraction_route.md'
-      - 'audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_restoration_coverage_ambient_route.md'
-      - 'audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs'
-      - 'docs/lean_residual_terminal_pkgc_restoration_coverage_bn6_ledger.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-bn6-bcel-route0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_restoration_coverage_bn6_bcel_route.md'
-      - 'audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent0.test.mjs'
-      - 'docs/lean_pccmin_checked_packet_pkgc_restoration_coverage_charge_descent.md'
-      - 'audits/lean-residual-terminal-rank-wf0.test.mjs'
-      - 'audits/lean-residual-terminal-bn3-request-envelope0.test.mjs'
-      - 'audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs'
-      - 'audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs'
-      - 'audits/lean-residual-terminal-pkgc-ambient-bn4-residual-reduction0.test.mjs'
-      - 'audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs'
-      - 'audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs'
-      - 'audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs'
-      - 'audits/lean-residual-terminal-packet-selector-seeds0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorSeeds.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorSeedsAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorSeeds.lean'
-      - 'docs/lean_residual_terminal_packet_selector_seeds.md'
-      - 'audits/lean-residual-terminal-packet-selector-universe0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorUniverse.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverse.lean'
-      - 'docs/lean_residual_terminal_packet_selector_universe.md'
-      - 'audits/lean-residual-terminal-packet-selector-handles0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorHandles.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorHandles.lean'
-      - 'docs/lean_residual_terminal_packet_selector_handles.md'
-      - 'audits/lean-residual-terminal-packet-selector-codec0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorCodec.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorCodecAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorCodec.lean'
-      - 'docs/lean_residual_terminal_packet_selector_codec.md'
-      - 'audits/lean-residual-terminal-packet-selector-payload-realization0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorPayloadRealization.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorPayloadRealizationAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorPayloadRealization.lean'
-      - 'docs/lean_residual_terminal_packet_selector_payload_realization.md'
-      - 'audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorGainScan.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean'
-      - 'docs/lean_residual_terminal_packet_selector_gain_scan.md'
-      - 'audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorUniverseGainScan.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean'
-      - 'docs/lean_residual_terminal_packet_selector_universe_gain_scan.md'
-      - 'audits/lean-residual-terminal-packet-selector-gain-coverage0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketSelectorGainCoverage.lean'
-      - 'lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketSelectorGainCoverage.lean'
-      - 'docs/lean_residual_terminal_packet_selector_gain_coverage.md'
-      - 'audits/lean-residual-terminal-packet-charge-surplus0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketChargeSurplus.lean'
-      - 'lean-audit/PNPResidualTerminalPacketChargeSurplusAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketChargeSurplus.lean'
-      - 'docs/lean_residual_terminal_packet_charge_surplus.md'
-      - 'audits/lean-residual-terminal-packet-unit-charge-blueprint-realizer0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
-      - 'lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketUnitChargeBlueprintRealizer.lean'
-      - 'docs/lean_residual_terminal_packet_unit_charge_blueprint_realizer.md'
-      - 'audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs'
-      - 'lean/PNP/ResidualTerminalPacketTypedRealizerContract.lean'
-      - 'lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean'
-      - 'docs/lean_residual_terminal_packet_typed_realizer_contract.md'
-      - 'audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs'
-      - 'lean/PNP/ResidualTerminalHBBlockerGraphAcyclicity.lean'
-      - 'lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean'
-      - 'docs/lean_residual_terminal_hb_blocker_graph_acyclicity.md'
-      - 'audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs'
-      - 'lean/PNP/ResidualTerminalHBDependencyTableClosure.lean'
-      - 'lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean'
-      - 'lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean'
-      - 'docs/lean_residual_terminal_hb_dependency_table_closure.md'
-      - 'docs/lean_residual_gain_chain.md'
-      - 'docs/lean_residual_gain_stopping.md'
-      - 'docs/lean_residual_terminal_full_bridge.md'
-      - 'docs/lean_residual_terminal_mode_firewall.md'
-      - 'docs/lean_residual_terminal_projection_minimum.md'
-      - 'docs/lean_residual_terminal_projection_transfer.md'
-      - 'docs/lean_residual_terminal_saturation.md'
-      - 'docs/lean_residual_terminal_physical_support_completion.md'
-      - 'docs/lean_residual_terminal_support_extraction.md'
-      - 'docs/lean_residual_terminal_four_corner_tight_basis_maximum.md'
-      - 'docs/lean_residual_terminal_bn2_square_legitimacy.md'
-      - 'docs/lean_residual_terminal_bcel_anchor_nucleus.md'
-      - 'docs/lean_residual_terminal_saturation_positivity_firewall.md'
-      - 'docs/lean_residual_terminal_saturation_cost_balance.md'
-      - 'docs/lean_residual_terminal_interface_exposure_routing.md'
-      - 'docs/lean_residual_terminal_bn3_request_envelope.md'
-      - 'docs/lean_residual_terminal_bn4_activation_cancellation.md'
-      - 'docs/lean_residual_terminal_bn5_full_shadow_localization.md'
-      - 'docs/lean_residual_terminal_pkgc_separating_consumers.md'
-      - 'docs/lean_residual_terminal_pkgc_typed_restoration.md'
-      - 'docs/lean_residual_terminal_pkgc_same_key_cancellation.md'
-      - 'docs/lean_residual_terminal_pkgc_ambient_bn4_ledger.md'
-      - 'docs/lean_residual_terminal_pkgc_ambient_bn4_residual_reduction.md'
-      - 'docs/lean_residual_terminal_consumer_antichain_normal_form.md'
-      - 'docs/lean_residual_terminal_constant_cut_hypergraph_rigidity.md'
-      - 'docs/lean_residual_terminal_finite_saturate_positive.md'
-      - 'docs/lean_residual_terminal_rank_wf.md'
-      - 'docs/lean_residual_terminal_proper_support.md'
-      - 'docs/lean_residual_terminal_support_square_closure.md'
-      - 'docs/lean_residual_terminal_governed_support_completion.md'
-      - 'docs/lean_residual_terminal_frontier_pushout.md'
-      - 'docs/lean_residual_terminal_projection_square.md'
-      - 'docs/lean_residual_terminal_side_tight_minimum.md'
-      - 'docs/lean_residual_terminal_four_corner_carrier.md'
-      - 'docs/lean_residual_terminal_four_corner_optimum_compatibility.md'
-      - 'docs/lean_residual_terminal_four_corner_optimum_coherence.md'
-      - 'docs/lean_residual_terminal_four_corner_side_tight_completion.md'
-      - 'docs/lean_bridge.md'
-      - 'docs/lean_concrete_locked_nand_polynomial_reduction.md'
-      - 'docs/lean_concrete_cnf_to_nand_semantic_compiler.md'
-      - 'docs/lean_concrete_cnf_to_nand_polynomial_reduction.md'
-      - 'docs/lean_concrete_machine.md'
-      - 'docs/lean_tape_handoff.md'
-      - 'docs/lean_tape_blank_equivalence.md'
-      - 'docs/lean_pipeline_tape_geometry.md'
-      - 'docs/lean_pipeline_input_framer.md'
-      - 'docs/lean_pipeline_output_handoff.md'
-      - 'docs/lean_pipeline_state_namespace.md'
-      - 'docs/lean_pipeline_sequential_state_namespace.md'
-      - 'docs/lean_pipeline_sequential_compiler.md'
-      - 'docs/lean_pipeline_stage_bridges.md'
-      - 'docs/lean_terminal_output_packer.md'
-      - 'docs/lean_pipeline_terminal_bridge.md'
-      - 'docs/lean_pipeline_paired_compiler.md'
-      - 'docs/lean_pipeline_compiler.md'
-      - 'docs/lean_pipeline_machine_simulation.md'
-      - 'docs/lean_concrete_complexity.md'
-      - 'docs/lean_cook_levin_layout.md'
-      - 'docs/lean_cook_levin_tableau.md'
-      - 'docs/lean_cook_levin_verifier_tableau.md'
-      - 'docs/lean_cook_levin_local_cnf.md'
-      - 'docs/lean_cook_levin_tableau_cnf.md'
-      - 'docs/lean_cook_levin_tableau_cnf_semantics.md'
-      - 'docs/lean_cook_levin_raw_tape_bridge.md'
-      - 'docs/lean_cook_levin_formula_size.md'
-      - 'docs/lean_cook_levin_formula_schedule.md'
-      - 'docs/lean_cook_levin_formula_cursor.md'
-      - 'docs/lean_cook_levin_builder_input_length.md'
-      - 'docs/lean_cook_levin_builder_input_prefix.md'
-      - 'docs/lean_cook_levin_builder_token_appender.md'
-      - 'docs/lean_cook_levin_builder_first_token_prefix.md'
-      - 'docs/lean_cook_levin_builder_complete_header.md'
-      - 'docs/lean_cook_levin_builder_body_start_prefix.md'
-      - 'docs/lean_cook_levin_builder_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_first_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_separator_step.md'
-      - 'docs/lean_cook_levin_builder_second_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_second_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_third_clause_separator_step.md'
-      - 'docs/lean_cook_levin_builder_third_clause_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_third_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_first_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_second_literal_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_prefix.md'
-      - 'docs/lean_cook_levin_builder_fourth_clause_padding_run.md'
-      - 'docs/lean_cook_levin_builder_fifth_clause_padding_run.md'
-      - 'docs/lean_nand_semantics.md'
-      - 'docs/lean_nand_enumerator.md'
-      - 'docs/lean_nand_reference_minimum.md'
-      - 'docs/lean_locked_nand_macros.md'
-      - 'docs/lean_locked_nand_prefix.md'
-      - 'docs/lean_locked_nand_baseline.md'
-      - 'docs/lean_locked_nand_threshold_boundary.md'
-      - 'docs/lean_locked_nand_carrier_trace.md'
-      - 'docs/lean_locked_nand_global_candidates.md'
-      - 'docs/lean_locked_nand_global_baseline_distinct.md'
-      - 'docs/lean_locked_nand_global_unsatisfiable_final_zero.md'
-      - 'docs/lean_locked_nand_global_semantic_threshold.md'
-      - 'docs/lean_concrete_locked_nand_semantic_reduction.md'
-      - 'docs/lean_concrete_locked_nand_source_parser.md'
-      - 'docs/lean_concrete_locked_nand_target_emitter.md'
-      - 'docs/lean_residual_routes.md'
-      - 'docs/lean_theorem_inventory.md'
       - 'docs/proof_pipeline.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
       - 'docs/github_actions_audit.md'
@@ -3465,6 +2598,741 @@ jobs:
           console.log('M252: all seventeen quotient replacement lift interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireQuotientLift.lean
+
+      - name: Check computed original-accounted frontier lift source contracts
+        run: node --test audits/lean-wire-frontier-lift0.test.mjs
+
+      - name: Audit computed original-accounted frontier lift
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireFrontierLiftAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireFrontierLift.ordinary_output_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.kept_field_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.records_predecessor_closed": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.selected_field_in_frontier": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.primary_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.compile_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.matched_original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.original_gain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.discharge_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.discharge_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.proper_iff_exterior_positive": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.checkedProperGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireFrontierLift.ProperGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M253: all eighteen original-accounted frontier lift interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireFrontierLift.lean
+
+      - name: Check computed full-mode wire cancellation source contracts
+        run: node --test audits/lean-wire-matched-cancellation0.test.mjs
+
+      - name: Audit computed full-mode wire cancellation
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireMatchedCancellationAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.observation_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.Representative.full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.allResolved_sound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.charge_allResolved": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.missing_unresolved_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.charge_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.visible_resolved_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.Discharge.full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharge_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharge_isR6_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharge_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.checkedGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.CheckedGain.checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.created_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharged_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.creation_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharge_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.created_nodup": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.discharged_nodup": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.replay_closed": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M254: all twenty-six computed full-mode cancellation interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireMatchedCancellation.lean
+
+      - name: Check computed unary full-word realization source contracts
+        run: node --test audits/lean-wire-unary-realization0.test.mjs
+
+      - name: Audit computed unary full-word realization
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryRealizationAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireUnaryRealization.observation_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.needsNegation_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.implementation_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_full_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_gateCount": [],
+            "PNP.DirectWire.WireUnaryRealization.negation_requires_gate": [],
+            "PNP.DirectWire.WireUnaryRealization.realize_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.realize_gate_bound": [],
+            "PNP.DirectWire.WireUnaryRealization.R7Discharge.full_value": [],
+            "PNP.DirectWire.WireUnaryRealization.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.checkedGain_isSome_iff": [],
+            "PNP.DirectWire.WireUnaryRealization.checkedGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryRealization.CheckedGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M255: all eighteen computed unary full-word interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryRealization.lean
+
+      - name: Check computed unary frontier source contracts
+        run: node --test audits/lean-wire-unary-frontier0.test.mjs
+
+      - name: Audit computed unary frontier replacement
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryFrontierAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireUnaryFrontier.constantWord_value": [
+              "Quot.sound"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.constantWord_gateCount": [],
+            "PNP.DirectWire.WireUnaryFrontier.unaryWord_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.unaryWord_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.unaryWord_gate_bound": [],
+            "PNP.DirectWire.WireUnaryFrontier.localWord_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.localWord_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.localWord_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.localWord_gate_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.replacement_agreement": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.replacement_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.replacement_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.replacement_gate_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.replacement_zero_gateCount": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.expanded_gain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.attempt_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.attempt_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.attempt_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.attempt_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.attempt_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.checkedProperGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.checkedProperGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryFrontier.ProperGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M256: all thirty computed unary frontier interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryFrontier.lean
+
+      - name: Check computed unary arbitrary-support source contracts
+        run: node --test audits/lean-wire-unary-arbitrary-support0.test.mjs
+
+      - name: Audit computed unary arbitrary-support replacement
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryArbitrarySupportAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_singleGateBoundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.constantWord_source": [],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.unaryWord_source_of_constant": [
+              "Quot.sound"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.localWord_source_of_constant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_agreement": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_gate_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_minimal": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.replacement_early_constant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.graph_wellFounded": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.compile_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.original_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_equivalent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.expanded_gain_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.proper_iff_exterior_positive": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_output": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_nonincrease": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.attempt_charge": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.checkedProperGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M257: 31 computed unary arbitrary-support interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryArbitrarySupport.lean
+
+      - name: Check computed unary support-search source contracts
+        run: node --test audits/lean-wire-unary-support-search0.test.mjs
+
+      - name: Audit computed unary support search
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnarySupportSearchAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_admissible": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_contains": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.gateRecords_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.admissible_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.admissible_boundary_small": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateRecords_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateRecords_proper": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.consumedWires_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.boundary_mem_consumedWires": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.boundaryChoices_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_maximal_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_singleton_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_external": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.supportChoice_mem": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.support_admissible": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.support_contained_in_candidate": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.selected_length_mono": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.selected_length_le": [
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_entry_length": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.extracted_gateCount_mono": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.singleton_selection": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.checkedGain_selection_invariant": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.candidateFamily_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_member": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_records_bound": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findGain_none_excludes": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_source_exact": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.GainResult.dischargeR7_full_value": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findReplacement_isSome": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireUnarySupportSearch.findReplacement_sound": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M258: 36 computed unary support-search interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireUnarySupportSearch.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure

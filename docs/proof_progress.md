@@ -7,8 +7,8 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-252`, 228 of 230
-current scoped rows are earned, or 99.1 percent of that evidence ledger.
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-258`, 234 of 236
+current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
 difficulty, and the denominator can grow when a dependency is discovered or an
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M252 |
+| Track | Available | Earned at M258 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M252 risk-weighted proof completion estimate is therefore 40 percent, with
+The M258 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -142,7 +142,25 @@ No fixed checkpoint or global gate changes.
 M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 228 of 230 current scoped publication rows earned.
+M253 computes a quotient-visible predecessor cone, completes its frontier against the original full computational word, and substitutes a locally equivalent replacement into the actual original exterior. Each exterior gate is retained once, so matched costs and strict gain refer to the original circuit, not a larger lifted reference. Complete local open-function agreement includes retained forgotten frontier wires; quotient-only agreement is insufficient. The gain query separately checks proper support and strict saving. Every arbitrary support, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+M254 derives full-mode R6 cancellation from a computed retained original wire, restores unresolved fields with one actual shared R8 materializer, and preserves every full computational value under precise local quotient agreement. Its mixed ledger checks creation identities across the whole transcript, and its gain query pays the complete expansion cost. Arbitrary semantic cancellation, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+M255 constructs a complete unary computational word directly from its source values, preserves all outputs and fields with zero or one shared NOT gate, and proves minimum size against every equivalent full carrier. It derives source-exact R7 discharge witnesses and a complete whole-word strict-gain query. Arbitrary ambient cuts, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+M256 derives a minimum constant/unary word for the computed complete frontier and compiles it into the original exterior exactly once. It preserves all outputs and fields, derives full-value R7 witnesses, and recognizes genuine proper-support savings without supplied replacements or agreement. Arbitrary ambient supports, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+M257 removes the primary-boundary restriction from source-derived constant/unary R7 replacement. General prefix causality and a derived physical rank make every recognized arbitrary support compile, including a sole external-gate boundary. All outputs and fields, exact exterior-once charge and proper strict-gain recognition are preserved. Wider boundaries, the full carrier and obligation calculus, Package E and global polynomial obligations remain open.
+No fixed checkpoint or global gate changes.
+
+M258 derives and searches a complete family of proper zero/unary computational supports from actual gate sources, without a supplied support family or completeness certificate. Every eligible strictly smaller complete local word implies search success; the returned replacement preserves all outputs and fields with exact original-exterior accounting and source-exact R7 witnesses. No result excludes gains only in this class, not global minimality. Physical candidate and record bounds do not establish complete encoded-size polynomial runtime. Wider boundaries, the full carrier and obligation calculus, Package E and global proof obligations remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 234 of 236 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

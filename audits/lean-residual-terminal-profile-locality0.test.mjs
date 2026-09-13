@@ -168,7 +168,7 @@ test('M233 durable verification runs the new contracts, root axiom audit and reg
   assert.ok(verifier.includes(auditPath));
   assert.ok(workflow.includes('run: node --test ' + auditPath));
   for (const path of [auditPath, 'docs/lean_residual_terminal_profile_locality.md']) {
-    assert.equal(workflow.split("      - '" + path + "'").length - 1, 2, path + ' PR and main triggers');
+    assert.equal(workflow.split("      - '"+path.replace(/^audits\/lean-[^/]+\.test\.mjs$/u,'audits/lean-*.test.mjs').replace(/^docs\/lean_[^/]+\.md$/u,'docs/lean_*.md').replace(/^lean\/.*$/u,'lean/**').replace(/^lean-audit\/.*$/u,'lean-audit/**').replace(/^lean-regression\/.*$/u,'lean-regression/**')+"'").length - 1, 2, path + ' PR and main triggers');
   }
   assert.ok(workflow.includes(AUDIT));
   assert.ok(workflow.includes(REGRESSION));

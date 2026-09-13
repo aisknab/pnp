@@ -1178,5 +1178,148 @@ theorem extractTerminalSupport_eq_of_gateSelected_eq
       (terminalInterfacePorts candidate right) (terminalGateSelected right)
   rw [boundaryEqual, interfaceEqual, selectedEqual]
 
+/-- Open-source evaluation is extensional in the boundary and preceding values. -/
+private theorem Source.evalTerminalOpen_congr
+    {wireInputs wireGates inputs gates : Nat}
+    (source : Source inputs gates) (selected : Fin gates -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates -> TerminalSupportWire wireInputs wireGates)
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (left right : Valuation boundary.length)
+    (leftValues rightValues : Valuation gates)
+    (inputEqual : forall index,
+      terminalBoundaryValue boundary left (inputWire index) =
+        terminalBoundaryValue boundary right (inputWire index))
+    (gateEqual : forall index,
+      terminalBoundaryValue boundary left (gateWire index) =
+        terminalBoundaryValue boundary right (gateWire index))
+    (valuesEqual : forall index, leftValues index = rightValues index) :
+    source.evalTerminalOpen selected inputWire gateWire boundary left leftValues =
+      source.evalTerminalOpen selected inputWire gateWire boundary right rightValues := by
+  cases source with
+  | input index => exact inputEqual index
+  | constant value => rfl
+  | gate index =>
+      by_cases selectedGate : selected index = true
+      · simpa only [Source.evalTerminalOpen, if_pos selectedGate] using valuesEqual index
+      · simpa only [Source.evalTerminalOpen, if_neg selectedGate] using gateEqual index
+
+/-- An original prefix can depend only on boundary wires preceding that prefix.
+    The cutoff is arbitrary; the proof follows the actual program constructor. -/
+private theorem Program.evalTerminalOpenAux_prefix_congr
+    {wireInputs wireGates inputs gates : Nat}
+    (program : Program inputs gates) (selected : Fin gates -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates -> TerminalSupportWire wireInputs wireGates)
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (left right : Valuation boundary.length) (cutoff : Nat)
+    (inputEqual : forall index,
+      terminalBoundaryValue boundary left (inputWire index) =
+        terminalBoundaryValue boundary right (inputWire index))
+    (gateEqual : forall index, index.val < cutoff ->
+      terminalBoundaryValue boundary left (gateWire index) =
+        terminalBoundaryValue boundary right (gateWire index)) :
+    forall index, index.val < cutoff ->
+      program.evalTerminalOpenAux boundary left selected inputWire gateWire index =
+        program.evalTerminalOpenAux boundary right selected inputWire gateWire index := by
+  induction program with
+  | empty => intro index; exact Fin.elim0 index
+  | @snoc gates initial gate ih =>
+      let earlierSelected : Fin gates -> Bool := fun index => selected index.castSucc
+      let earlierGateWire : Fin gates -> TerminalSupportWire wireInputs wireGates :=
+        fun index => gateWire index.castSucc
+      have earlierBoundary : forall index : Fin gates, index.val < cutoff ->
+          terminalBoundaryValue boundary left (earlierGateWire index) =
+            terminalBoundaryValue boundary right (earlierGateWire index) :=
+        fun index before => gateEqual index.castSucc before
+      have earlierValues : forall index : Fin gates, index.val < cutoff ->
+          initial.evalTerminalOpenAux boundary left earlierSelected inputWire
+              earlierGateWire index =
+            initial.evalTerminalOpenAux boundary right earlierSelected inputWire
+              earlierGateWire index :=
+        ih earlierSelected earlierGateWire earlierBoundary
+      intro index
+      refine Fin.lastCases ?_ (fun earlier => ?_) index
+      · intro before
+        change gates < cutoff at before
+        change Valuation.snoc _ _ (Fin.last gates) =
+          Valuation.snoc _ _ (Fin.last gates)
+        rw [Valuation.snoc_last, Valuation.snoc_last]
+        by_cases selectedLast : selected (Fin.last gates) = true
+        · rw [if_pos selectedLast, if_pos selectedLast]
+          rw [gate.left.evalTerminalOpen_congr earlierSelected inputWire
+            earlierGateWire boundary left right _ _ inputEqual
+            (fun prior => earlierBoundary prior (Nat.lt_trans prior.isLt before))
+            (fun prior => earlierValues prior (Nat.lt_trans prior.isLt before))]
+          rw [gate.right.evalTerminalOpen_congr earlierSelected inputWire
+            earlierGateWire boundary left right _ _ inputEqual
+            (fun prior => earlierBoundary prior (Nat.lt_trans prior.isLt before))
+            (fun prior => earlierValues prior (Nat.lt_trans prior.isLt before))]
+        · rw [if_neg selectedLast, if_neg selectedLast]
+      · intro before
+        rw [Program.evalTerminalOpenAux_snoc_castSucc,
+          Program.evalTerminalOpenAux_snoc_castSucc]
+        exact earlierValues earlier before
+
+/-- Earlier open-support gate values are independent of later boundary gates.
+    Agreement is required only on primary inputs and boundary gates before the
+    chosen cutoff, not on all boundary coordinates or only induced valuations. -/
+theorem terminalOpenGateEvaluation_prefix_congr
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (left right : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (cutoff : Nat)
+    (agreement : forall port : Fin (terminalBoundaryPorts candidate.program records).length,
+      (match (terminalBoundaryPorts candidate.program records).get port with
+        | .input _ => True
+        | .gate boundaryGate => boundaryGate.val < cutoff) ->
+      left port = right port)
+    (gate : Fin gates) (before : gate.val < cutoff) :
+    terminalOpenGateEvaluation candidate records left gate =
+      terminalOpenGateEvaluation candidate records right gate := by
+  have wireEqual (wire : TerminalSupportWire inputs gates)
+      (earlier : match wire with
+        | .input _ => True
+        | .gate boundaryGate => boundaryGate.val < cutoff) :
+      terminalBoundaryValue (terminalBoundaryPorts candidate.program records) left wire =
+        terminalBoundaryValue (terminalBoundaryPorts candidate.program records) right wire := by
+    by_cases member : wire ∈ terminalBoundaryPorts candidate.program records
+    · simp only [terminalBoundaryValue, dif_pos member]
+      apply agreement
+      rw [get_memberIndex]
+      exact earlier
+    · simp only [terminalBoundaryValue, dif_neg member]
+  exact candidate.program.evalTerminalOpenAux_prefix_congr
+    (terminalGateSelected records) TerminalSupportWire.input TerminalSupportWire.gate
+    (terminalBoundaryPorts candidate.program records) left right cutoff
+    (fun index => wireEqual (.input index) True.intro)
+    (fun index preceding => wireEqual (.gate index) preceding) gate before
+
+/-- With one external gate as the entire boundary, every earlier selected gate
+    is constant as an open function, even when that boundary bit is unrealizable
+    in a complete execution of the original circuit. -/
+theorem terminalOpenGateEvaluation_single_gate_prefix
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (boundaryGate : Fin gates)
+    (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate])
+    (left right : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (gate : Fin gates) (before : gate.val < boundaryGate.val) :
+    terminalOpenGateEvaluation candidate records left gate =
+      terminalOpenGateEvaluation candidate records right gate := by
+  apply terminalOpenGateEvaluation_prefix_congr candidate records left right
+    boundaryGate.val ?_ gate before
+  intro port earlier
+  have member : (terminalBoundaryPorts candidate.program records).get port ∈
+      [.gate boundaryGate] := by
+    rw [← single]
+    exact List.get_mem (terminalBoundaryPorts candidate.program records) port
+  have portEqual : (terminalBoundaryPorts candidate.program records).get port =
+      .gate boundaryGate := List.mem_singleton.mp member
+  rw [portEqual] at earlier
+  exact False.elim (Nat.lt_irrefl boundaryGate.val earlier)
+
 end DirectWire
 end PNP

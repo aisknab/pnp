@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-252",
-  "lastReviewedDate": "2026-09-12",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-258",
+  "lastReviewedDate": "2026-09-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,9 +17,9 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 228,
-    "totalRows": 230,
-    "percentRoundedOneDecimal": 99.1,
+    "earnedRows": 234,
+    "totalRows": 236,
+    "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
   },
@@ -2251,6 +2251,108 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M252 reconstructs the word-level local quotient replacement edge of the pinned manuscript's compatible-replacement, matched materializer accounting and full/quotient firewall. It derives actual expanded full-value sources and charges the shared materializer identically on both lifted words. The exact original-cost test and the checked no-net-gain example prevent cancellation against a larger lifted reference from being misreported as an original-circuit saving. This does not supply arbitrary-support embedding, derive the mask or local quotient agreement, complete the obligation calculus or Package E, close global ZeroSlack or prove polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 228 of 230 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-12-253",
+      "formalArtefactCoverage": {
+        "earnedRows": 229,
+        "totalRows": 231
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M253 reconstructs the original-circuit matched-cost edge of the pinned manuscript's compatible extraction, unique physical ownership, full-frontier replacement and strict proper-support obligations. Unlike the larger reference lift in M252, it derives an original gate partition and retains each exterior gate once. Its complete local open-function premise explicitly includes forgotten retained frontier wires; the kernel-checked wrong-frontier fixture rules out substituting quotient-only agreement. The proper-gain query rejects whole-support and non-strict replacements. This is one computed computational predecessor cone, not every arbitrary support across the full carrier and all traces; the obligation calculus, Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, earned checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 229 of 231 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-254",
+      "formalArtefactCoverage": {
+        "earnedRows": 230,
+        "totalRows": 232
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M254 reconstructs the pinned manuscript's full-mode R6 dependency for an actual retained original wire, paired with computed R8 restoration for every unmatched forgotten field. The all-valuation full witness follows from original source identity and the precise local quotient agreement, not masked padding. Actual expanded sources, one remaining materializer and whole-transcript unique obligation identities are checked. This is a bounded computational cancellation component; arbitrary semantic cancellations, R7 and dependency DAGs, the full carrier, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 230 of 232 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-255",
+      "formalArtefactCoverage": {
+        "earnedRows": 231,
+        "totalRows": 233
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M255 reconstructs the pinned manuscript's unary R7 realization component directly from each original computational carrier. The actual two unary values determine a complete word with one shared NOT gate only when required; the lower bound compares every equivalent full carrier rather than only ordinary outputs. Source-exact full R7 discharges and a complete whole-word strict-gain query require no supplied replacement, truth table, agreement or minimizer. Arbitrary ambient cuts, the full carrier and obligation DAGs, all-trace normalization, complete Package E, global ZeroSlack and polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 231 of 233 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-256",
+      "formalArtefactCoverage": {
+        "earnedRows": 232,
+        "totalRows": 234
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M256 reconstructs the pinned manuscript's constant/unary R7 frontier step by joining the source-derived complete frontier with an actual minimum local word, then deriving successful expansion into the original exterior. Complete open-function equality, every full field value, exact physical charge and source-bound R7 discharge are proved rather than supplied. Proper-support gain requires both a positive original exterior and strict local saving. This closes a named dependency from M253 and M255, not every arbitrary ambient cut, the full carrier and obligation DAGs, all-trace normalization, complete Package E, global ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 232 of 234 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-257",
+      "formalArtefactCoverage": {
+        "earnedRows": 233,
+        "totalRows": 235
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M257 reconstructs the pinned manuscript's constant/unary R7 realization on arbitrary completed computational supports. It removes the primary-boundary predecessor-cone restriction by proving open prefix causality and deriving an acyclic rebound rank for the actual minimum word, including a sole external boundary gate. Compiler success, all ordinary outputs and full computational fields, exact physical charge and source-exact R7 discharge are derived from the source rather than supplied. Proper gain still requires positive exterior and strict local saving. This closes the named M249/M256 compilation dependency, not arbitrary boundary width, the full carrier and obligation DAG calculus, all-trace normalization, complete Package E, global ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 233 of 235 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-258",
+      "formalArtefactCoverage": {
+        "earnedRows": 234,
+        "totalRows": 236
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M258 closes the pinned manuscript section 6.1 support-discovery edge for proper zero/unary computational R7 gains. It derives a bounded maximal-and-singleton candidate family from actual gate sources and proves completeness for every eligible arbitrary physical support and any strictly smaller equivalent complete local word. The executable carrier-only search, actual full-field expansion, strict fully paid charge and scoped negative-result theorem are kernel checked. Candidate-count and record-count bounds do not retire the complete encoded-size construction and runtime obligations; inherited physical extraction has independent costs. This is a substantial general computational capability, not the full terminal-derived manuscript family, every boundary width, the obligation DAG calculus, all-trace normalization, complete Package E, global ZeroSlack or exact polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 234 of 236 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

@@ -155,7 +155,8 @@ test('package verifier and workflow enforce the complete output/handoff audit', 
   assert.ok(pkg.scripts.test.includes(auditCommand));
   assert.ok(surface.includes(auditCommand));
   assert.ok(verifier.includes(`'${auditCommand}'`));
-  assert.equal((workflow.match(/audits\/lean-concrete-tape-handoff0\.test\.mjs/g) ?? []).length, 3);
+  assert.equal((workflow.match(/audits\/lean-concrete-tape-handoff0\.test\.mjs/g) ?? []).length, 1);
+  assert.equal((workflow.match(/^      - 'audits\/lean-\*\.test\.mjs'$/gm) ?? []).length, 2);
   assert.match(workflow,
     /PNPConcreteTapeHandoffAxiomAudit\.lean[\s\S]{0,900}grep -Fc 'does not depend on any axioms'\)" -eq 14/u);
 });

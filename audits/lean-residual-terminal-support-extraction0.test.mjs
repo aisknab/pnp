@@ -67,6 +67,8 @@ const AUDITED_DECLARATIONS = Object.freeze([
 const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   ...PUBLIC_DECLARATIONS,
   `${NAMESPACE}.extractTerminalSupport_eq_of_gateSelected_eq`,
+  `${NAMESPACE}.terminalOpenGateEvaluation_prefix_congr`,
+  `${NAMESPACE}.terminalOpenGateEvaluation_single_gate_prefix`,
 ]);
 
 const MILESTONE_THEOREMS = Object.freeze([
@@ -129,6 +131,8 @@ const PRIVATE_HELPERS = Object.freeze([
   'terminalBoundaryValue_induced_of_mem',
   'physicalSourceAccounted_iff_terminalAccounted',
   'physicalTerminalSourcesAccounted',
+  'Source.evalTerminalOpen_congr',
+  'Program.evalTerminalOpenAux_prefix_congr',
 ]);
 
 async function text0(relativePath) {

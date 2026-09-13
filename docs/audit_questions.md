@@ -1,21 +1,21 @@
 # Reviewer Audit Questions
 
-<!-- M252-CURRENT-SUMMARY:BEGIN -->
-## Current M252 boundary
+<!-- M258-CURRENT-SUMMARY:BEGIN -->
+## Current M258 boundary
 
-M252 computes a word-level lift of any locally quotient-compatible replacement using the same actual shared materializer as the reference lift. It preserves every ordinary output and ordered computational field, proves exact matched costs, binds lost-field discharges to the actual expanded source, and tests the complete cost against the original circuit. A saving against a larger lifted reference is not automatically an original-circuit gain. The local quotient agreement remains a premise; arbitrary-support embedding, the full obligation calculus and global polynomial obligations remain open.
+M258 derives and searches a complete family of proper zero/unary computational supports from actual gate sources, without a supplied support family or completeness certificate. Every eligible strictly smaller complete local word implies search success; the returned replacement preserves all outputs and fields with exact original-exterior accounting and source-exact R7 witnesses. No result excludes gains only in this class, not global minimality. Physical candidate and record bounds do not establish complete encoded-size polynomial runtime. Wider boundaries, the full carrier and obligation calculus, Package E and global proof obligations remain open.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 228 of 230 current scoped publication rows earned.
+Formal artefact coverage: 234 of 236 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [quotient replacement lift and limits](./lean_wire_quotient_lift.md)
+See the [complete scoped unary support search and limits](./lean_wire_unary_support_search.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M252
-lifts locally quotient-compatible replacements with actual shared materializers and a fully paid original-cost test; arbitrary-support embedding, the complete obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M258
+derives complete proper zero/unary support discovery and actual full-field-preserving replacements; wider boundaries, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M252-CURRENT-SUMMARY:END -->
+<!-- M258-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

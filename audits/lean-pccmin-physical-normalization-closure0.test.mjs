@@ -234,7 +234,7 @@ test('M248 durable workflow retains source contracts, exact audit and bounded re
   assert.ok(verifier.includes(auditPath));
   assert.ok(workflow.includes('run: node --test '+auditPath));
   for(const path of [auditPath,'docs/lean_pccmin_physical_normalization_closure.md'])
-    assert.equal(workflow.split("      - '"+path+"'").length-1,2);
+    assert.equal(workflow.split("      - '"+path.replace(/^audits\/lean-[^/]+\.test\.mjs$/u,'audits/lean-*.test.mjs').replace(/^docs\/lean_[^/]+\.md$/u,'docs/lean_*.md').replace(/^lean\/.*$/u,'lean/**').replace(/^lean-audit\/.*$/u,'lean-audit/**').replace(/^lean-regression\/.*$/u,'lean-regression/**')+"'").length-1,2);
   assert.ok(workflow.includes(AUDIT));
   assert.ok(workflow.includes(REGRESSION));
 });

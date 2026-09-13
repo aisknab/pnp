@@ -1,0 +1,28 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff
+#print axioms PNP.DirectWire.WireMatchedCancellation.observation_value
+#print axioms PNP.DirectWire.WireMatchedCancellation.Representative.full_value
+#print axioms PNP.DirectWire.WireMatchedCancellation.allResolved_sound
+#print axioms PNP.DirectWire.WireMatchedCancellation.charge_allResolved
+#print axioms PNP.DirectWire.WireMatchedCancellation.missing_unresolved_field
+#print axioms PNP.DirectWire.WireMatchedCancellation.charge_bound
+#print axioms PNP.DirectWire.WireMatchedCancellation.visible_resolved_field
+#print axioms PNP.DirectWire.WireMatchedCancellation.expanded_charge
+#print axioms PNP.DirectWire.WireMatchedCancellation.expanded_output
+#print axioms PNP.DirectWire.WireMatchedCancellation.expanded_field
+#print axioms PNP.DirectWire.WireMatchedCancellation.expanded_equivalent
+#print axioms PNP.DirectWire.WireMatchedCancellation.Discharge.full_value
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharge_source_exact
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharge_isR6_iff
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharge_full_value
+#print axioms PNP.DirectWire.WireMatchedCancellation.checkedGain_isSome_iff
+#print axioms PNP.DirectWire.WireMatchedCancellation.CheckedGain.checked
+#print axioms PNP.DirectWire.WireMatchedCancellation.created_exact
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharged_exact
+#print axioms PNP.DirectWire.WireMatchedCancellation.creation_iff
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharge_iff
+#print axioms PNP.DirectWire.WireMatchedCancellation.created_nodup
+#print axioms PNP.DirectWire.WireMatchedCancellation.discharged_nodup
+#print axioms PNP.DirectWire.WireMatchedCancellation.replay_closed
+#print axioms PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids
