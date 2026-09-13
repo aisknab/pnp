@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-259",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-260",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -1996,6 +1996,48 @@
   "leanWireZeroUnaryClosureCompletePackageEProved": false,
   "leanWireZeroUnaryClosurePolynomialRuntimeProved": false,
   "leanWireZeroUnaryClosureScope": "all-finite-computational-wire-derived-proper-and-whole-zero-or-one-actual-boundary-search-full-field-gain-normalization-restart-closure-common-scoped-quiescence-idempotence-exact-gate-and-residual-slack-accounting-no-global-minimum-or-total-encoded-polynomial-runtime",
+  "leanSourceBoundedPhysicalBoundaryFormalized": true,
+  "leanSourceBoundedPhysicalBoundaryAxiomAuditPassed": true,
+  "leanSourceBoundedPhysicalBoundaryAuditedDeclarationCount": 23,
+  "leanSourceBoundedPhysicalBoundaryUniqueMembershipTheorem": "PNP.DirectWire.SourceListOrder.mem_unique",
+  "leanSourceBoundedPhysicalBoundaryUniqueNoDuplicatesTheorem": "PNP.DirectWire.SourceListOrder.unique_nodup",
+  "leanSourceBoundedPhysicalBoundaryUniqueLengthBoundTheorem": "PNP.DirectWire.SourceListOrder.unique_length_le",
+  "leanSourceBoundedPhysicalBoundaryCanonicalMembershipTheorem": "PNP.DirectWire.SourceListOrder.mem_canonical",
+  "leanSourceBoundedPhysicalBoundaryCanonicalNoDuplicatesTheorem": "PNP.DirectWire.SourceListOrder.canonical_nodup",
+  "leanSourceBoundedPhysicalBoundaryCanonicalLengthBoundTheorem": "PNP.DirectWire.SourceListOrder.canonical_length_le",
+  "leanSourceBoundedPhysicalBoundaryCanonicalOrderTheorem": "PNP.DirectWire.SourceListOrder.canonical_ordered",
+  "leanSourceBoundedPhysicalBoundaryOrderedReferenceUniquenessTheorem": "PNP.DirectWire.SourceListOrder.ordered_eq_of_mem",
+  "leanSourceBoundedPhysicalBoundaryCanonicalReferenceTheorem": "PNP.DirectWire.SourceListOrder.canonical_eq_reference",
+  "leanSourceBoundedPhysicalBoundaryCoordinateInjectivityTheorem": "PNP.DirectWire.TerminalSupportWire.orderCode_injective",
+  "leanSourceBoundedPhysicalBoundaryAmbientReferenceOrderTheorem": "PNP.DirectWire.allTerminalSupportWires_strictOrder",
+  "leanSourceBoundedPhysicalBoundarySourceOccurrenceMembershipTheorem": "PNP.DirectWire.Source.mem_terminalWireOccurrences_iff",
+  "leanSourceBoundedPhysicalBoundarySourceOccurrenceBoundTheorem": "PNP.DirectWire.Source.terminalWireOccurrences_length",
+  "leanSourceBoundedPhysicalBoundaryProgramOccurrenceBoundTheorem": "PNP.DirectWire.terminalSourceWireOccurrences_length",
+  "leanSourceBoundedPhysicalBoundaryCrossingSourceCompletenessTheorem": "PNP.DirectWire.terminalBoundaryWire_mem_sourceOccurrences",
+  "leanSourceBoundedPhysicalBoundarySourceDrivenReferenceTheorem": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_eq_reference",
+  "leanSourceBoundedPhysicalBoundarySourceDrivenLengthBoundTheorem": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length",
+  "leanSourceBoundedPhysicalBoundarySourceDrivenNoDuplicatesTheorem": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup",
+  "leanSourceBoundedPhysicalBoundarySourceDrivenOrderTheorem": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_ordered",
+  "leanSourceBoundedPhysicalBoundaryActiveReferenceTheorem": "PNP.DirectWire.terminalBoundaryPorts_reference",
+  "leanSourceBoundedPhysicalBoundaryActiveLengthBoundTheorem": "PNP.DirectWire.terminalBoundaryPorts_length",
+  "leanSourceBoundedPhysicalBoundaryActiveNoDuplicatesTheorem": "PNP.DirectWire.terminalBoundaryPorts_nodup",
+  "leanSourceBoundedPhysicalBoundaryActiveOrderTheorem": "PNP.DirectWire.terminalBoundaryPorts_ordered",
+  "leanSourceBoundedPhysicalBoundaryActualGateSourceOccurrencesDerived": true,
+  "leanSourceBoundedPhysicalBoundaryExactOrderedReferenceEqualityProved": true,
+  "leanSourceBoundedPhysicalBoundaryOccurrenceAndBoundaryLengthBoundsProved": true,
+  "leanSourceBoundedPhysicalBoundaryDuplicateFreeCanonicalOrderProved": true,
+  "leanSourceBoundedPhysicalBoundaryActiveExtractorUsesSourceOccurrences": true,
+  "leanSourceBoundedPhysicalBoundaryExistingPhysicalInterfacesPreserved": true,
+  "leanSourceBoundedPhysicalBoundaryUnusedInputEnumerationRequired": false,
+  "leanSourceBoundedPhysicalBoundaryCallerSuppliedBoundaryRequired": false,
+  "leanSourceBoundedPhysicalBoundaryCallerSuppliedCompletenessRequired": false,
+  "leanSourceBoundedPhysicalBoundaryRuntimeExecutionIsProofAuthority": false,
+  "leanSourceBoundedPhysicalBoundaryFullManuscriptCarrierProved": false,
+  "leanSourceBoundedPhysicalBoundaryCompleteObligationCalculusProved": false,
+  "leanSourceBoundedPhysicalBoundaryCompletePackageEProved": false,
+  "leanSourceBoundedPhysicalBoundaryGlobalMinimalityProved": false,
+  "leanSourceBoundedPhysicalBoundaryPolynomialRuntimeProved": false,
+  "leanSourceBoundedPhysicalBoundaryScope": "all-finite-program-dimensions-actual-gate-source-derived-physical-crossings-exact-ordered-ambient-reference-equality-duplicate-free-canonical-order-twice-gate-count-occurrence-and-boundary-bounds-active-extraction-no-unused-input-scan-or-total-encoded-polynomial-runtime",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -3254,7 +3296,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "6d031c520d142c41014bb50ff84ac04addb1680329fd715aa9865966843e3c00",
+    "actualSourceClosureSha256": "7bd2eb00f3ab625dfaa9286da280e2c727444ed188f13133e3ad164525304a0c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3287,19 +3329,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "c68f976958c4938e55500432d7a31aefadd8426163713f7ed6e23682dfe300d1",
+  "leanTheoremInventorySha256": "01998e01a8c0f46700a08c946fc6d2452cbb3a47dc65ccba45cfcf235d46edfb",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 48001,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20353,
-  "leanTheoremInventoryTheoremCount": 26225,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11169,
-  "leanTheoremInventorySourceClosureModuleCount": 524,
-  "leanSourceClosureSha256": "6d031c520d142c41014bb50ff84ac04addb1680329fd715aa9865966843e3c00",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-259",
+  "leanTheoremInventoryDeclarationCount": 48039,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20359,
+  "leanTheoremInventoryTheoremCount": 26252,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11170,
+  "leanTheoremInventorySourceClosureModuleCount": 525,
+  "leanSourceClosureSha256": "7bd2eb00f3ab625dfaa9286da280e2c727444ed188f13133e3ad164525304a0c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-260",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "f3b4cd20c0b3c898bd06370d54512b497e5fa3f24c6a3a226eccf85e80266004",
+  "formalPublicationMapSha256": "8761e73a0577321d02d088b1f6aa643c4089496e99761532b96151dcdee8ca28",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -33486,6 +33528,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "96d01f7650e0584503501f4278dc196e1b1a2ea658abf237e99978715d942ef0",
@@ -33508,6 +33551,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e541fac972a4f9402aab6b47c6aa6164cdf54d5a490beb750a8ddf498719e789",
@@ -33519,6 +33563,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "5955b959132cd6a3f3bf734ea8f62513554f476a2ee7b46a65ff716e9a328b7a",
@@ -33530,6 +33575,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
@@ -33541,6 +33587,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "619c37407e969a13746611f68b4169ba34a8cac4e6d8a01d5388808eec58fe91",
@@ -33552,6 +33599,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "831f8ce697624f2e413d5da6a56fde592b2157793a1dd1f4f85060154faafc58",
@@ -33818,6 +33866,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e541fac972a4f9402aab6b47c6aa6164cdf54d5a490beb750a8ddf498719e789",
@@ -33829,6 +33878,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
@@ -33840,6 +33890,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "831f8ce697624f2e413d5da6a56fde592b2157793a1dd1f4f85060154faafc58",
@@ -34082,6 +34133,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "831f8ce697624f2e413d5da6a56fde592b2157793a1dd1f4f85060154faafc58",
@@ -34364,6 +34416,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "2a19ccf8594f3749b91d263b915e1d2156a90ad2681ca6ed527f124de4b564f3",
@@ -34423,6 +34476,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
@@ -34544,6 +34598,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e340ac8efd05f6760b8c8f18e88a5e80c53c81599e3876913898c167f2308b13",
@@ -34555,6 +34610,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "d4415e5f4b90980b4170664d526e3c51eec5c6c9013e814e9f4529451fc23792",
@@ -34733,6 +34789,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "54f14acec8c40024eb7982e02373e24a80e864b0478a7815105f94362601b1fd",
@@ -34780,6 +34837,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "2a19ccf8594f3749b91d263b915e1d2156a90ad2681ca6ed527f124de4b564f3",
@@ -34858,6 +34916,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "6917c9d5b8c2dd5597ada2d19b520b3f670c1b2d0aff6e036d5e30af88f364a9",
@@ -34869,6 +34928,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "d66f50c4ddb7c57a1d87173e653a7f5e4ed95b5bc3df5a98796f481f364c3cb3",
@@ -34903,6 +34963,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "65e1394f56ba5d990fe995323e9dc178be50bed77eb2d0bb755dd900d33b86f2",
@@ -35020,6 +35081,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "8c44ddf2248725d3f73ec432fe5ea59ab8c73b9eab920068e3d3f51926e8fd2f",
@@ -35134,6 +35196,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "2a19ccf8594f3749b91d263b915e1d2156a90ad2681ca6ed527f124de4b564f3",
@@ -35249,6 +35312,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "39c9d3b8078740dd0140667219de0c5d66b35bff11f787b8d692e8857ecdaff9",
@@ -35260,6 +35324,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "1e27fb54a4b5c0f3f02bf26d3cd38b89596da3aa57312b928c817bc36a599c90",
@@ -35271,6 +35336,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "28d9df62f589b2ab8943c4106a692612cc291504a1f3d57b95ee6240f4cf5343",
@@ -35282,6 +35348,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "9a3bb52ded9dfc28a8c1d8c18303ba392f4ddcba000ba9e4fe4e63fd8b372939",
@@ -35293,6 +35360,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "facc10a1bb53afa05adaf689dcb650f13eaa85f7b573d7a07578a2aef59e1bbd",
@@ -35304,6 +35372,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "dc3922479745fff935163a6cfa0a9664ae2306589197c6bcbd0b24a2c2c86b08",
@@ -35315,6 +35384,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "c872d6eafff42e0de60e67d52555c203f589a05422392e32f8fa1ef7f7586865",
@@ -35326,6 +35396,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "9e63a2390bccaf3706b0328f2f867bc4911f383ed779faf94bd921eeae68d52e",
@@ -35800,6 +35871,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "a17a6f8030c70a14adb2df79307260e0a6604d74971edeb56d0b120fa7ea8fee",
@@ -35811,6 +35883,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "4280ddc44a0c8bd9cb3286891884e90420fcec78a4c33e53ac76db5aef07020a",
@@ -35834,6 +35907,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "712283c4673524aa982002f212e6ac6422678d26f87efef00f13514d9bc81deb",
@@ -35845,6 +35919,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "ef0d11e47a02a1f40941ab31106f6e596879a68310f4997770b47728aad16e71",
@@ -35892,6 +35967,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
@@ -35963,6 +36039,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "baa7cb59491626b993a2f8fd7009685a934df1c830ac20fb7ad28f8302c785e8",
@@ -36069,6 +36146,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "8c44ddf2248725d3f73ec432fe5ea59ab8c73b9eab920068e3d3f51926e8fd2f",
@@ -36695,6 +36773,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
@@ -54126,6 +54205,7 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
+            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e5a7155113a150e4aaf7b68426b1e90b908c19d2ef957df26e5b91f0893b8717",
@@ -54759,9 +54839,316 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "source-bounded-physical-boundary",
+      "title": "Source-bounded ordered physical boundary extraction",
+      "requiredTheorems": [
+        "PNP.DirectWire.SourceListOrder.mem_unique",
+        "PNP.DirectWire.SourceListOrder.unique_nodup",
+        "PNP.DirectWire.SourceListOrder.unique_length_le",
+        "PNP.DirectWire.SourceListOrder.mem_canonical",
+        "PNP.DirectWire.SourceListOrder.canonical_nodup",
+        "PNP.DirectWire.SourceListOrder.canonical_length_le",
+        "PNP.DirectWire.SourceListOrder.canonical_ordered",
+        "PNP.DirectWire.SourceListOrder.ordered_eq_of_mem",
+        "PNP.DirectWire.SourceListOrder.canonical_eq_reference",
+        "PNP.DirectWire.TerminalSupportWire.orderCode_injective",
+        "PNP.DirectWire.allTerminalSupportWires_strictOrder",
+        "PNP.DirectWire.Source.mem_terminalWireOccurrences_iff",
+        "PNP.DirectWire.Source.terminalWireOccurrences_length",
+        "PNP.DirectWire.terminalSourceWireOccurrences_length",
+        "PNP.DirectWire.terminalBoundaryWire_mem_sourceOccurrences",
+        "PNP.DirectWire.terminalBoundaryPortsSourceDriven_eq_reference",
+        "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length",
+        "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup",
+        "PNP.DirectWire.terminalBoundaryPortsSourceDriven_ordered",
+        "PNP.DirectWire.terminalBoundaryPorts_reference",
+        "PNP.DirectWire.terminalBoundaryPorts_length",
+        "PNP.DirectWire.terminalBoundaryPorts_nodup",
+        "PNP.DirectWire.terminalBoundaryPorts_ordered"
+      ],
+      "scope": "For arbitrary finite program dimensions and any list of terminal primitive records, M260 computes the incoming physical boundary from nonconstant sources of actual gates. It filters those occurrences with the existing physical crossing predicate, removes duplicates and sorts by the canonical primary-input-before-gate-output coordinate. Every boundary crossing is derived from an actual gate source. The resulting list is proved exactly equal, including order and multiplicity, to the former ambient-wire filtered reference. Source occurrences and the emitted boundary each have length at most twice the physical gate count, independent of unused declared input slots. The active terminalBoundaryPorts implementation uses this source-driven construction. Public reference, length, duplicate-free and order theorems preserve the existing physical extraction and downstream support interfaces. A generic finite-list canonicalizer proves exact equality with any ordered duplicate-free reference under an injective coordinate map, without enumerating the ambient type. Guarded execution exercises exact small reference lists and sparse programs with a billion declared inputs; those large fixtures do not execute the ambient reference.",
+      "nonClaim": "Occurrence and output bounds are structural size bounds, not total encoded-input-size polynomial execution theorems. The reference equality preserves the existing physical semantics; it does not establish a new global minimization result. The old ambient enumeration remains only as a theorem-side specification, never the active boundary implementation. No caller-supplied boundary or completeness certificate is introduced. The full manuscript carrier, arbitrary obligation dependency DAGs, every normalization and gain interaction, complete Package E and global route coverage remain open. These results do not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total polynomial runtime, output and certificate bounds for the complete construction. Runtime execution is regression evidence, not theorem authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.SourceListOrder.mem_unique",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7a49dd95817c0455891c81ec6ed64a3c2a85b5781329a7679db339569689ed68",
+          "expectedKernelTypeSha256": "7a49dd95817c0455891c81ec6ed64a3c2a85b5781329a7679db339569689ed68",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.unique_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fdb6af13cee2da15e3a1bf9db99b9e84632ea80f4d365237d4afc0eaf13c8505",
+          "expectedKernelTypeSha256": "fdb6af13cee2da15e3a1bf9db99b9e84632ea80f4d365237d4afc0eaf13c8505",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.unique_length_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b2aeba847545c7ed287ff77c5c6333cf7d02493e92f4ac7aeda9364ac8e86260",
+          "expectedKernelTypeSha256": "b2aeba847545c7ed287ff77c5c6333cf7d02493e92f4ac7aeda9364ac8e86260",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.mem_canonical",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "dca5768a25f190fc4611cb1e2054e6141a42e4f0e226eb0d7eceaba7f6629c85",
+          "expectedKernelTypeSha256": "dca5768a25f190fc4611cb1e2054e6141a42e4f0e226eb0d7eceaba7f6629c85",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.canonical_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "efa8dd491c242ec16a53d9e5bd3d04b51848b13cc07975f9a4ba330bd7f21586",
+          "expectedKernelTypeSha256": "efa8dd491c242ec16a53d9e5bd3d04b51848b13cc07975f9a4ba330bd7f21586",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.canonical_length_le",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f84d3b5d18c0db478a3823e93af8fa9f6e4e5f29882d12965770cf7ae356f2ad",
+          "expectedKernelTypeSha256": "f84d3b5d18c0db478a3823e93af8fa9f6e4e5f29882d12965770cf7ae356f2ad",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.canonical_ordered",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "69011b5c2c4adac5ef23fcb94e92f461ad000e1caebe690499e4d85793d80f1e",
+          "expectedKernelTypeSha256": "69011b5c2c4adac5ef23fcb94e92f461ad000e1caebe690499e4d85793d80f1e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.ordered_eq_of_mem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "030006421cdf64692885e8d0413aca2328d1c0abe95581d510690e07f498138c",
+          "expectedKernelTypeSha256": "030006421cdf64692885e8d0413aca2328d1c0abe95581d510690e07f498138c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.SourceListOrder.canonical_eq_reference",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0f99873639e837a33d8fd74e57f65fc63f8250e4cf40652588b6d54a8daf8a33",
+          "expectedKernelTypeSha256": "0f99873639e837a33d8fd74e57f65fc63f8250e4cf40652588b6d54a8daf8a33",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.TerminalSupportWire.orderCode_injective",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c14e48f0535f611e3de7a1bbd5af9f321918215e5da69823c3c986360231b4a2",
+          "expectedKernelTypeSha256": "c14e48f0535f611e3de7a1bbd5af9f321918215e5da69823c3c986360231b4a2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.allTerminalSupportWires_strictOrder",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "75ca4fb846a495969bed16586007970e011e9c5d3ff81d59243e82acf0c02c3c",
+          "expectedKernelTypeSha256": "75ca4fb846a495969bed16586007970e011e9c5d3ff81d59243e82acf0c02c3c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.Source.mem_terminalWireOccurrences_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f31f5bdd51cc3289dc4cd9eac239a507cb73353f3add38f60ae741e1f676a3e5",
+          "expectedKernelTypeSha256": "f31f5bdd51cc3289dc4cd9eac239a507cb73353f3add38f60ae741e1f676a3e5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.Source.terminalWireOccurrences_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "4480ea986948d9dc413b1b5681dc0f03a32f2537bf3404fb42106ed271bef8b4",
+          "expectedKernelTypeSha256": "4480ea986948d9dc413b1b5681dc0f03a32f2537bf3404fb42106ed271bef8b4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalSourceWireOccurrences_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5d9dcd82ddcf9b34ac1fcf7032b8ec57e1a79dac9eef18cbbf8eabd267a83169",
+          "expectedKernelTypeSha256": "5d9dcd82ddcf9b34ac1fcf7032b8ec57e1a79dac9eef18cbbf8eabd267a83169",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryWire_mem_sourceOccurrences",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "90451eea87b5af9e66066b0508f3933a7dcccf79c130391e2be031ad8337df68",
+          "expectedKernelTypeSha256": "90451eea87b5af9e66066b0508f3933a7dcccf79c130391e2be031ad8337df68",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_eq_reference",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "65d0debd44a86f70d7febae2421a6526bd5c56eb7a5b64cc0775b6af76c07930",
+          "expectedKernelTypeSha256": "65d0debd44a86f70d7febae2421a6526bd5c56eb7a5b64cc0775b6af76c07930",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7ec44311f450db96fe5a40e401c6650f4e6bec4df250ab0e1d3e613b22bf3e80",
+          "expectedKernelTypeSha256": "7ec44311f450db96fe5a40e401c6650f4e6bec4df250ab0e1d3e613b22bf3e80",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7e5fa7bbee7ccfaaf40761dafdcc3dac3d64b12c0af6ad1b24a483a94b7a7044",
+          "expectedKernelTypeSha256": "7e5fa7bbee7ccfaaf40761dafdcc3dac3d64b12c0af6ad1b24a483a94b7a7044",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPortsSourceDriven_ordered",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "547ca82d8d21213fe160f9f3284932a60032de7cf82d6dc0d6adf33cff17ea77",
+          "expectedKernelTypeSha256": "547ca82d8d21213fe160f9f3284932a60032de7cf82d6dc0d6adf33cff17ea77",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPorts_reference",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6833f172589ae02ed7b73f6853916e7101f12ed7adfe923272f648221736fe4a",
+          "expectedKernelTypeSha256": "6833f172589ae02ed7b73f6853916e7101f12ed7adfe923272f648221736fe4a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPorts_length",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ba62c4628cd68cb6bbbc0abb968f00d067f305738395d8e13378aaceabad89b1",
+          "expectedKernelTypeSha256": "ba62c4628cd68cb6bbbc0abb968f00d067f305738395d8e13378aaceabad89b1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPorts_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9d59decf9fe49a6f8553d10b327e375c3f91c53879545748a5bdba607a146ee6",
+          "expectedKernelTypeSha256": "9d59decf9fe49a6f8553d10b327e375c3f91c53879545748a5bdba607a146ee6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.terminalBoundaryPorts_ordered",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c38618e05bb7e55cc5a952be125f3d089f7057336d3b0f981c5648e8c5eacd58",
+          "expectedKernelTypeSha256": "c38618e05bb7e55cc5a952be125f3d089f7057336d3b0f981c5648e8c5eacd58",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-13-259",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-13-260",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

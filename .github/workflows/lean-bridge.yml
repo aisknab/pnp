@@ -3240,6 +3240,7 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem": [
+              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem": [
@@ -3463,6 +3464,110 @@ jobs:
           console.log('M259: 27 computed full-field zero/unary descent-closure interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireZeroUnaryClosure.lean
+
+      - name: Check source-bounded physical-boundary source contracts
+        run: node --test audits/lean-source-bounded-physical-boundary0.test.mjs
+
+      - name: Audit source-bounded physical boundary
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPSourceBoundedPhysicalBoundaryAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.SourceListOrder.mem_unique": [
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.unique_nodup": [
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.unique_length_le": [
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.mem_canonical": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.canonical_nodup": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.canonical_length_le": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.canonical_ordered": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.ordered_eq_of_mem": [
+              "propext"
+            ],
+            "PNP.DirectWire.SourceListOrder.canonical_eq_reference": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.TerminalSupportWire.orderCode_injective": [
+              "propext"
+            ],
+            "PNP.DirectWire.allTerminalSupportWires_strictOrder": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.Source.mem_terminalWireOccurrences_iff": [
+              "propext"
+            ],
+            "PNP.DirectWire.Source.terminalWireOccurrences_length": [],
+            "PNP.DirectWire.terminalSourceWireOccurrences_length": [
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryWire_mem_sourceOccurrences": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPortsSourceDriven_eq_reference": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPortsSourceDriven_ordered": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPorts_reference": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPorts_length": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPorts_nodup": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.terminalBoundaryPorts_ordered": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M260: 23 source-bounded physical-boundary interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPSourceBoundedPhysicalBoundary.lean
 
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure

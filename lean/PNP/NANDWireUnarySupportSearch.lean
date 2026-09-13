@@ -324,7 +324,7 @@ theorem admissible_boundary_small
     (lawful : Admissible program choice omitted (terminalGateSelected records)) :
     (terminalBoundaryPorts program records).length ≤ 1 := by
   have distinct : (terminalBoundaryPorts program records).Nodup :=
-    (allTerminalSupportWires_nodup inputs gates).sublist (List.filter_sublist)
+    terminalBoundaryPorts_nodup program records
   cases boundaryAt : terminalBoundaryPorts program records with
   | nil => exact Nat.zero_le 1
   | cons head tail =>

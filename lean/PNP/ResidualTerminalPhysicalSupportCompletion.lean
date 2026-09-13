@@ -15,6 +15,7 @@ claim.
 -/
 
 import PNP.ResidualTerminalExecutableSaturation
+import PNP.NANDSourceListOrder
 
 namespace PNP
 namespace DirectWire
@@ -296,14 +297,259 @@ theorem terminalInterfaceGate_eq_true_iff
           terminalGateIsGlobalOutput candidate.directWireWord producer = true) := by
   simp only [terminalInterfaceGate, Bool.and_eq_true, Bool.or_eq_true]
 
-/-- Canonically ordered incoming physical ports. -/
+/-- Injective canonical coordinate: primary inputs precede all gate outputs. -/
+def TerminalSupportWire.orderCode {inputs gates : Nat} :
+    TerminalSupportWire inputs gates → Nat
+  | .input index => index.val
+  | .gate index => inputs + index.val
+
+theorem TerminalSupportWire.orderCode_injective {inputs gates : Nat} :
+    Function.Injective (@TerminalSupportWire.orderCode inputs gates) := by
+  intro left right same
+  cases left with
+  | input left =>
+      cases right with
+      | input right => exact congrArg TerminalSupportWire.input (Fin.ext same)
+      | gate right =>
+          change left.val = inputs + right.val at same
+          have bounded := left.isLt
+          rw [same] at bounded
+          exact False.elim ((Nat.not_lt_of_ge
+            (Nat.le_add_right inputs right.val)) bounded)
+  | gate left =>
+      cases right with
+      | input right =>
+          change inputs + left.val = right.val at same
+          have bounded := right.isLt
+          rw [← same] at bounded
+          exact False.elim ((Nat.not_lt_of_ge
+            (Nat.le_add_right inputs left.val)) bounded)
+      | gate right =>
+          exact congrArg TerminalSupportWire.gate (Fin.ext (Nat.add_left_cancel same))
+
+private theorem allFin_strictOrder (width : Nat) :
+    (allFin width).Pairwise (fun left right => left.val < right.val) := by
+  induction width with
+  | zero => exact List.Pairwise.nil
+  | succ width ih =>
+      apply List.pairwise_cons.mpr
+      constructor
+      · intro item member
+        obtain ⟨earlier, _member, same⟩ := List.mem_map.mp member
+        subst item
+        exact Nat.zero_lt_succ earlier.val
+      · rw [List.pairwise_map]
+        exact ih.imp (fun less => Nat.succ_lt_succ less)
+
+/-- The specification's ambient list has the exact canonical strict order. -/
+theorem allTerminalSupportWires_strictOrder (inputs gates : Nat) :
+    (allTerminalSupportWires inputs gates).Pairwise
+      (fun left right => left.orderCode < right.orderCode) := by
+  unfold allTerminalSupportWires
+  apply List.pairwise_append.mpr
+  refine ⟨?_, ?_, ?_⟩
+  · rw [List.pairwise_map]
+    exact allFin_strictOrder inputs
+  · rw [List.pairwise_map]
+    exact (allFin_strictOrder gates).imp (fun less => Nat.add_lt_add_left less inputs)
+  · intro left leftMember right rightMember
+    obtain ⟨input, _inputMember, inputSame⟩ := List.mem_map.mp leftMember
+    obtain ⟨gate, _gateMember, gateSame⟩ := List.mem_map.mp rightMember
+    subst left
+    subst right
+    exact Nat.lt_of_lt_of_le input.isLt (Nat.le_add_right inputs gate.val)
+
+/-- One actual nonconstant source contributes one occurrence, not an input scan. -/
+def Source.terminalWireOccurrences {inputs gates : Nat} :
+    Source inputs gates → List (TerminalSupportWire inputs gates)
+  | .constant _ => []
+  | .input index => [.input index]
+  | .gate index => [.gate index]
+
+theorem Source.mem_terminalWireOccurrences_iff {inputs gates : Nat}
+    (source : Source inputs gates) (wire : TerminalSupportWire inputs gates) :
+    wire ∈ source.terminalWireOccurrences ↔
+      source.terminalSupportWire? = some wire := by
+  cases source with
+  | constant value =>
+      constructor
+      · intro impossible
+        cases impossible
+      · intro impossible
+        cases impossible
+  | input index =>
+      constructor
+      · intro member
+        have same := List.mem_singleton.mp member
+        cases same
+        rfl
+      · intro same
+        have sameWire := Option.some.inj same
+        cases sameWire
+        exact List.mem_cons_self
+  | gate index =>
+      constructor
+      · intro member
+        have same := List.mem_singleton.mp member
+        cases same
+        rfl
+      · intro same
+        have sameWire := Option.some.inj same
+        cases sameWire
+        exact List.mem_cons_self
+
+theorem Source.terminalWireOccurrences_length {inputs gates : Nat}
+    (source : Source inputs gates) : source.terminalWireOccurrences.length ≤ 1 := by
+  cases source with
+  | constant value => exact Nat.zero_le 1
+  | input index => exact Nat.le_refl 1
+  | gate index => exact Nat.le_refl 1
+
+/-- Actual gate-source occurrences only, with multiplicity retained before sorting. -/
+def terminalSourceWireOccurrences {inputs gates : Nat} (program : Program inputs gates) :
+    List (TerminalSupportWire inputs gates) :=
+  (allFin gates).flatMap fun consumer =>
+    (program.terminalGateSources consumer).1.terminalWireOccurrences ++
+      (program.terminalGateSources consumer).2.terminalWireOccurrences
+
+private theorem sourceOccurrence_flatMap_length {alpha beta : Type}
+    (items : List alpha) (mapping : alpha → List beta) (bound : Nat)
+    (each : ∀ item, item ∈ items → (mapping item).length ≤ bound) :
+    (items.flatMap mapping).length ≤ items.length * bound := by
+  induction items with
+  | nil =>
+      simp only [List.flatMap_nil, List.length_nil, Nat.zero_mul, Nat.le_refl]
+  | cons head tail ih =>
+      have first := each head List.mem_cons_self
+      have rest := ih (fun item member => each item (List.mem_cons_of_mem head member))
+      simp only [List.flatMap_cons, List.length_append, List.length_cons, Nat.succ_mul]
+      exact Nat.le_trans (Nat.add_le_add first rest) (Nat.le_of_eq (Nat.add_comm _ _))
+
+/-- The occurrence budget depends on physical gates, not unused declared inputs. -/
+theorem terminalSourceWireOccurrences_length {inputs gates : Nat}
+    (program : Program inputs gates) :
+    (terminalSourceWireOccurrences program).length ≤ 2 * gates := by
+  have bound := sourceOccurrence_flatMap_length (allFin gates)
+    (fun consumer =>
+      (program.terminalGateSources consumer).1.terminalWireOccurrences ++
+        (program.terminalGateSources consumer).2.terminalWireOccurrences) 2
+    (fun consumer _member => by
+      rw [List.length_append]
+      exact Nat.add_le_add (Source.terminalWireOccurrences_length _)
+        (Source.terminalWireOccurrences_length _))
+  simpa only [terminalSourceWireOccurrences, allFin_length, Nat.mul_comm] using bound
+
+/-- Every incoming crossing is witnessed by an actual selected gate's source. -/
+theorem terminalBoundaryWire_mem_sourceOccurrences
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (wire : TerminalSupportWire inputs gates)
+    (crossing : terminalBoundaryWire program records wire = true) :
+    wire ∈ terminalSourceWireOccurrences program := by
+  obtain ⟨_external, consumer, enumerated, _selected, used⟩ :=
+    (terminalBoundaryWire_eq_true_iff program records wire).mp crossing
+  apply List.mem_flatMap.mpr
+  refine ⟨consumer, enumerated, ?_⟩
+  change (decide ((program.terminalGateSources consumer).1.terminalSupportWire? = some wire) ||
+    decide ((program.terminalGateSources consumer).2.terminalSupportWire? = some wire)) = true
+    at used
+  simp only [Bool.or_eq_true] at used
+  rcases used with left | right
+  · exact List.mem_append_left _
+      ((Source.mem_terminalWireOccurrences_iff _ wire).mpr (of_decide_eq_true left))
+  · exact List.mem_append_right _
+      ((Source.mem_terminalWireOccurrences_iff _ wire).mpr (of_decide_eq_true right))
+
+/-- Canonical physical boundary computed solely from actual gate-source occurrences. -/
+def terminalBoundaryPortsSourceDriven
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    List (TerminalSupportWire inputs gates) :=
+  SourceListOrder.canonical TerminalSupportWire.orderCode
+    ((terminalSourceWireOccurrences program).filter (terminalBoundaryWire program records))
+
+/-- Exact ordered equality with the independent ambient-enumeration specification. -/
+theorem terminalBoundaryPortsSourceDriven_eq_reference
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalBoundaryPortsSourceDriven program records =
+      (allTerminalSupportWires inputs gates).filter (terminalBoundaryWire program records) := by
+  apply SourceListOrder.canonical_eq_reference TerminalSupportWire.orderCode
+    TerminalSupportWire.orderCode_injective
+  · have distinct : (allTerminalSupportWires inputs gates).Nodup :=
+      (allTerminalSupportWires_strictOrder inputs gates).imp (fun less same => by
+        subst same
+        exact Nat.lt_irrefl _ less)
+    exact distinct.sublist List.filter_sublist
+  · exact ((allTerminalSupportWires_strictOrder inputs gates).imp
+      (fun less => Nat.le_of_lt less)).filter _
+  · intro wire
+    rw [List.mem_filter, List.mem_filter]
+    constructor
+    · intro checked
+      exact ⟨mem_allTerminalSupportWires wire, checked.2⟩
+    · intro checked
+      exact ⟨terminalBoundaryWire_mem_sourceOccurrences program records wire checked.2,
+        checked.2⟩
+
+theorem terminalBoundaryPortsSourceDriven_length
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPortsSourceDriven program records).length ≤ 2 * gates :=
+  Nat.le_trans (SourceListOrder.canonical_length_le _ _)
+    (Nat.le_trans (List.length_filter_le _ _) (terminalSourceWireOccurrences_length program))
+
+theorem terminalBoundaryPortsSourceDriven_nodup
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPortsSourceDriven program records).Nodup :=
+  SourceListOrder.canonical_nodup _ _
+
+theorem terminalBoundaryPortsSourceDriven_ordered
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPortsSourceDriven program records).Pairwise
+      (fun left right => left.orderCode ≤ right.orderCode) :=
+  SourceListOrder.canonical_ordered _ _
+
+/-- Canonically ordered incoming physical ports from actual gate sources. -/
 def terminalBoundaryPorts
     {inputs gates outputs profileWidth : Nat}
     (program : Program inputs gates)
     (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
     List (TerminalSupportWire inputs gates) :=
-  (allTerminalSupportWires inputs gates).filter
-    (terminalBoundaryWire program records)
+  terminalBoundaryPortsSourceDriven program records
+
+
+/-- Exact reference semantics; the active extractor does not execute this enumeration. -/
+theorem terminalBoundaryPorts_reference
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    terminalBoundaryPorts program records =
+      (allTerminalSupportWires inputs gates).filter (terminalBoundaryWire program records) :=
+  terminalBoundaryPortsSourceDriven_eq_reference program records
+
+/-- Active physical extraction has at most two incoming ports per physical gate. -/
+theorem terminalBoundaryPorts_length
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPorts program records).length ≤ 2 * gates :=
+  terminalBoundaryPortsSourceDriven_length program records
+
+/-- Active extraction never repeats a coordinate. -/
+theorem terminalBoundaryPorts_nodup
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPorts program records).Nodup :=
+  terminalBoundaryPortsSourceDriven_nodup program records
+
+/-- Active extraction preserves the canonical coordinate order. -/
+theorem terminalBoundaryPorts_ordered
+    {inputs gates outputs profileWidth : Nat} (program : Program inputs gates)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (terminalBoundaryPorts program records).Pairwise
+      (fun left right => left.orderCode ≤ right.orderCode) :=
+  terminalBoundaryPortsSourceDriven_ordered program records
 
 /-- Canonically ordered outgoing physical ports. -/
 def terminalInterfacePorts
@@ -321,6 +567,7 @@ theorem mem_terminalBoundaryPorts_iff
     (wire : TerminalSupportWire inputs gates) :
     wire ∈ terminalBoundaryPorts program records ↔
       terminalBoundaryWire program records wire = true := by
+  rw [terminalBoundaryPorts_reference]
   constructor
   · intro member
     exact (List.mem_filter.mp member).2

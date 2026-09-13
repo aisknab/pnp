@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3e1acdf67469e68b34ea48d41083f5c2fb390849b982fcd7bd89de67f50abbee';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '9e6f4758825314e0d64ae853c41b8befa14d8080952d8cd999c7c5276274d1be';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -640,6 +640,29 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.WireZeroUnaryClosure.run_residualSlack',
   'PNP.DirectWire.WireZeroUnaryClosure.run_gainIterations_le_residualSlack',
   'PNP.DirectWire.WireZeroUnaryClosure.run_searchCalls_le_residualSlack',
+  'PNP.DirectWire.SourceListOrder.mem_unique',
+  'PNP.DirectWire.SourceListOrder.unique_nodup',
+  'PNP.DirectWire.SourceListOrder.unique_length_le',
+  'PNP.DirectWire.SourceListOrder.mem_canonical',
+  'PNP.DirectWire.SourceListOrder.canonical_nodup',
+  'PNP.DirectWire.SourceListOrder.canonical_length_le',
+  'PNP.DirectWire.SourceListOrder.canonical_ordered',
+  'PNP.DirectWire.SourceListOrder.ordered_eq_of_mem',
+  'PNP.DirectWire.SourceListOrder.canonical_eq_reference',
+  'PNP.DirectWire.TerminalSupportWire.orderCode_injective',
+  'PNP.DirectWire.allTerminalSupportWires_strictOrder',
+  'PNP.DirectWire.Source.mem_terminalWireOccurrences_iff',
+  'PNP.DirectWire.Source.terminalWireOccurrences_length',
+  'PNP.DirectWire.terminalSourceWireOccurrences_length',
+  'PNP.DirectWire.terminalBoundaryWire_mem_sourceOccurrences',
+  'PNP.DirectWire.terminalBoundaryPortsSourceDriven_eq_reference',
+  'PNP.DirectWire.terminalBoundaryPortsSourceDriven_length',
+  'PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup',
+  'PNP.DirectWire.terminalBoundaryPortsSourceDriven_ordered',
+  'PNP.DirectWire.terminalBoundaryPorts_reference',
+  'PNP.DirectWire.terminalBoundaryPorts_length',
+  'PNP.DirectWire.terminalBoundaryPorts_nodup',
+  'PNP.DirectWire.terminalBoundaryPorts_ordered',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3887,7 +3910,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-259') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-260') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

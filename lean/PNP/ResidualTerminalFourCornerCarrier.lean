@@ -187,7 +187,7 @@ theorem TerminalFourCornerCarrier.boundary_nodup
     (corner : TerminalSupportSquareCorner) :
     (carrier.support corner).frontier.boundary.Nodup := by
   rw [(carrier.support corner).frontier_boundary]
-  exact (allTerminalSupportWires_nodup inputs gates).sublist List.filter_sublist
+  exact terminalBoundaryPorts_nodup _ _
 
 /-- Every corner interface is in canonical ambient order and duplicate-free. -/
 theorem TerminalFourCornerCarrier.interface_nodup
