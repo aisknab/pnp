@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-258`, 234 of 236
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-259`, 235 of 237
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M258 |
+| Track | Available | Earned at M259 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M258 risk-weighted proof completion estimate is therefore 40 percent, with
+The M259 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -160,7 +160,10 @@ No fixed checkpoint or global gate changes.
 M258 derives and searches a complete family of proper zero/unary computational supports from actual gate sources, without a supplied support family or completeness certificate. Every eligible strictly smaller complete local word implies search success; the returned replacement preserves all outputs and fields with exact original-exterior accounting and source-exact R7 witnesses. No result excludes gains only in this class, not global minimality. Physical candidate and record bounds do not establish complete encoded-size polynomial runtime. Wider boundaries, the full carrier and obligation calculus, Package E and global proof obligations remain open.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 234 of 236 current scoped publication rows earned.
+M259 derives whole-span zero/unary descent and combines it with complete proper-support search in an executable normalization/gain-restart closure. The general trace preserves every output and computational field, terminates with both gain branches and physical passes quiet, and proves exact gate and residual-slack accounting, iteration bounds and idempotence. A checked nonminimum fixed point shows why this scoped stopping result is not global minimality or ZeroSlack. Wider boundaries, the full carrier and obligation calculus, Package E and complete encoded-size polynomial PCCMin remain open.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 235 of 237 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,

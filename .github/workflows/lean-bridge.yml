@@ -3334,6 +3334,136 @@ jobs:
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnarySupportSearch.lean
 
+      - name: Check computed zero/unary descent-closure source contracts
+        run: node --test audits/lean-wire-zero-unary-closure0.test.mjs
+
+      - name: Audit computed full-field zero/unary descent closure
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireZeroUnaryClosureAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = {
+            "PNP.DirectWire.WireZeroUnaryClosure.whole_selected": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.whole_exterior": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.whole_gateCount": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.whole_not_proper": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.all_gates_of_zero_exterior": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.WholeGain.checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.wholeGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.wholeGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.Gain.full_field": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.Gain.branch_boundary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.Gain.exact_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.nextGain_isSome_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_iff": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.nextGain_complete": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.nextGain_none_excludes": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.normalization_accounting": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.normalization_iterations": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.Trace.checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.Trace.searchCalls_le": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_checked": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_of_stopped": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_idempotent": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_no_smaller_zeroUnary": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_referenceMinimum": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_gainIterations_le_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ],
+            "PNP.DirectWire.WireZeroUnaryClosure.run_searchCalls_le_residualSlack": [
+              "Quot.sound",
+              "propext"
+            ]
+          };
+          assert.deepEqual(rows.map(row => row[1]).sort(), Object.keys(expected).sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expected[row[1]]);
+          }
+          console.log('M259: 27 computed full-field zero/unary descent-closure interfaces have exact reviewed axiom closures.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireZeroUnaryClosure.lean
+
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

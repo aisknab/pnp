@@ -61,6 +61,7 @@ import PNP.NANDWireUnaryRealization
 import PNP.NANDWireUnaryFrontier
 import PNP.NANDWireUnaryArbitrarySupport
 import PNP.NANDWireUnarySupportSearch
+import PNP.NANDWireZeroUnaryClosure
 import PNP.ResidualTerminalSaturationCostBalance
 import PNP.ResidualTerminalInterfaceExposureRouting
 import PNP.ResidualTerminalOriginKernelObligationRouting
