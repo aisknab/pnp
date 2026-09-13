@@ -150,6 +150,9 @@ a small read-only way instead of adding branch-specific finalizer workflows.
   commands, exact axiom expectations and validation gates. Verify job-body
   identity when only trigger lists change; do not repeat unchanged proof
   commands for a trigger-only edit.
+- Validate trigger coverage separately from command and audit presence. Do not
+  combine trigger-list entries and executed commands into one literal-occurrence
+  count; changing the trigger representation must not weaken either check.
 
 ## How To Apply Generated Changes
 
