@@ -1,20 +1,20 @@
 # Lean bridge formalization
 
-<!-- M262-CURRENT-SUMMARY:BEGIN -->
-## Current M262 boundary
+<!-- M263-CURRENT-SUMMARY:BEGIN -->
+## Current M263 boundary
 
-M262 constructs a total source-ordered physical expansion for arbitrary computational supports and incoming-boundary widths. Compilation needs no supplied rank, order or success certificate. Under complete local open-function agreement, the result preserves all ordered outputs and full computational fields, repeated literal-source sharing and existing R5 source values. Every actual gate is owned and charged: cost is E + K * R, and strict original-size saving holds exactly when K * R < S; properness S < G is separate. This does not prove matched-kappa Pull/Expand, arbitrary observer equality, the complete obligation calculus or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
+M263 computes dependency-ordered physical obligation histories from arbitrary finite raw events. It validates identities and references, derives the event order, executes an evolving computational carrier, records actual creation snapshots and requires later full-value R6/R8 discharges before completion. Every original output and field is preserved, and final gates plus actual removals equal initial gates plus charged materializers. Acyclicity alone is not lifecycle validity. This does not complete all manuscript rewrite families, Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 238 of 240 current scoped publication rows earned.
+Formal artefact coverage: 239 of 241 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [source-ordered physical expansion and limits](./lean_wire_causal_expansion.md)
-and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
+See the [computed physical histories and limits](lean_wire_obligation_history.md)
+and the [conditional final-report bridge](lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-No fixed weighted checkpoint or global proof gate closes.
-<!-- M262-CURRENT-SUMMARY:END -->
+No fixed weighted checkpoint or global proof gate closes. PNPLabs publication is deferred for this component.
+<!-- M263-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

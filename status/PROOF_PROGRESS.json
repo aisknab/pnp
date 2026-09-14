@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-262",
-  "lastReviewedDate": "2026-09-14",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-263",
+  "lastReviewedDate": "2026-09-15",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 238,
-    "totalRows": 240,
+    "earnedRows": 239,
+    "totalRows": 241,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2421,6 +2421,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M262 closes the source-derived causal physical expansion prerequisite at arbitrary computational-support and incoming-boundary widths. A computed rank proves total compilation, complete local open-function agreement yields all-open mask and full-field semantics, and every actual exterior/copy gate is uniquely owned and charged. Strict original-size saving is equivalent to K * R < S, not merely R < S; properness remains separate. Existing R5 bindings retain their original full source values. This does not prove matched-kappa Pull/Expand, arbitrary observers or profiles, the complete obligation calculus and Package E, global routing, unconditional ZeroSlack, exact general PCCMin or complete encoded polynomial bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 238 of 240 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-263",
+      "formalArtefactCoverage": {
+        "earnedRows": 239,
+        "totalRows": 241
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M263 closes the computed dependency-ordered physical history prerequisite for arbitrary finite raw events. The constructor validates identities and references, executes the actual evolving carrier, retains creation snapshots, requires strictly later full-value discharges and charges every appended materializer. Final physical gate balance is exact. Acyclicity is not semantic admissibility or confluence. This remains one computational R5/R6/R8 history component, not all manuscript rewrite and normalization families, noncomputational records, matched-kappa Pull/Expand, complete Package E, input-derived terminal families, global routes, unconditional ZeroSlack or full polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the proof estimate and uncertainty remain unchanged. Formal artefact coverage: 239 of 241 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

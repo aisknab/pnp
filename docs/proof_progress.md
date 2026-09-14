@@ -3,11 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
+Formal artefact coverage: 239 of 241 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-262`, 238 of 240
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-263`, 239 of 241
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +22,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M262 |
+| Track | Available | Earned at M263 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +31,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M262 risk-weighted proof completion estimate is therefore 40 percent, with
+The M263 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -744,3 +747,9 @@ npm run formal:progress
 The validator checks the fixed 100-point model, recomputes earned points and
 formal artefact coverage independently, verifies checkpoint evidence, and rejects
 conflicting gate, axiom, root-theorem, or publication states.
+
+## M263 coverage review
+
+M263 closes the computed dependency-ordered physical history prerequisite for arbitrary finite raw events. The constructor validates identities and references, executes the actual evolving carrier, retains creation snapshots, requires strictly later full-value discharges and charges every appended materializer. Final physical gate balance is exact. Acyclicity is not semantic admissibility or confluence. This remains one computational R5/R6/R8 history component, not all manuscript rewrite and normalization families, noncomputational records, matched-kappa Pull/Expand, complete Package E, input-derived terminal families, global routes, unconditional ZeroSlack or full polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the proof estimate and uncertainty remain unchanged. Formal artefact coverage: 239 of 241 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+See the [computed history boundary](lean_wire_obligation_history.md). PNPLabs publication is deferred; its coherent M262 source pin remains unchanged.
