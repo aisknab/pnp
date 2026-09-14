@@ -3240,7 +3240,6 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem": [
-              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem": [
@@ -3487,7 +3486,6 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.SourceListOrder.mem_canonical": [
-              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.SourceListOrder.canonical_nodup": [
@@ -3495,7 +3493,6 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.SourceListOrder.canonical_length_le": [
-              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.SourceListOrder.canonical_ordered": [
@@ -3532,7 +3529,6 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length": [
-              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup": [
@@ -3548,7 +3544,6 @@ jobs:
               "propext"
             ],
             "PNP.DirectWire.terminalBoundaryPorts_length": [
-              "Quot.sound",
               "propext"
             ],
             "PNP.DirectWire.terminalBoundaryPorts_nodup": [

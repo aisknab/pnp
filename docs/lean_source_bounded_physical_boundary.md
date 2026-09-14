@@ -57,8 +57,8 @@ This result does not discharge the full encoded-size polynomial PCCMin checkpoin
 ## Reviewed general interfaces
 
 All 23 reviewed interfaces build from the explicit PNP root and have pinned
-kernel-type fingerprints. Seven depend only on `propext`, fifteen on `propext`
-and `Quot.sound`, and one uses no axioms. No reviewed interface depends on
+kernel-type fingerprints. The compiled inventory and exact audit record each
+interface's standard-axiom dependencies. No reviewed interface depends on
 `Classical.choice`, a project-specific axiom or an unchecked implementation.
 
 | Exact declaration | Checked interface |
@@ -96,16 +96,17 @@ and [recorded plan](./plans/2026-09-13-source-bounded-physical-boundary.md).
 
 ## Inherited standard-axiom review
 
-The source-driven canonical sorting proof adds Lean's standard `Quot.sound`
-dependency to 28 previously propext-only reviewed interfaces. Every inherited
+The source-driven physical-boundary proof adds Lean's standard `Quot.sound`
+dependency to five previously propext-only reviewed interfaces. Every inherited
 reviewed theorem type, defining module and publication fingerprint is unchanged.
 No project axiom or `Classical.choice` enters those closures. Their current
 inventory, status and exact audit expectations record the change; historical
 release objects retain their original transcripts.
 
-The 28 affected names and unchanged fingerprints are pinned in this milestone's
-compiled regression. This dependency was already within the foundational audit
-allowlist; no fixed weighted checkpoint or global gate changes.
+The compiled regression pins those five changes and 23 further inherited
+interfaces that retain their original propext-only closures, together with all
+28 unchanged fingerprints. This dependency was already within the foundational
+audit allowlist; no fixed weighted checkpoint or global gate changes.
 
 ## Regression and hostile evidence
 

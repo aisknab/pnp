@@ -3296,7 +3296,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "7bd2eb00f3ab625dfaa9286da280e2c727444ed188f13133e3ad164525304a0c",
+    "actualSourceClosureSha256": "dcf1e9940b03579f417990dcb2e42f211ebb725f40b719908468aa14f6d90a90",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3329,19 +3329,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "01998e01a8c0f46700a08c946fc6d2452cbb3a47dc65ccba45cfcf235d46edfb",
+  "leanTheoremInventorySha256": "144b55c47e3b0a8f9d57c47c00fa59a52a61031daca3f2cb08e6493128f8ae0d",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
   "leanTheoremInventoryDeclarationCount": 48039,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20359,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20374,
   "leanTheoremInventoryTheoremCount": 26252,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11170,
   "leanTheoremInventorySourceClosureModuleCount": 525,
-  "leanSourceClosureSha256": "7bd2eb00f3ab625dfaa9286da280e2c727444ed188f13133e3ad164525304a0c",
+  "leanSourceClosureSha256": "dcf1e9940b03579f417990dcb2e42f211ebb725f40b719908468aa14f6d90a90",
   "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-260",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "8761e73a0577321d02d088b1f6aa643c4089496e99761532b96151dcdee8ca28",
+  "formalPublicationMapSha256": "b643460b6109eaae46e51ec888c11b3082da82431a9d29d0789f7c23c50807ae",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -33563,7 +33563,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "5955b959132cd6a3f3bf734ea8f62513554f476a2ee7b46a65ff716e9a328b7a",
@@ -33587,7 +33586,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "619c37407e969a13746611f68b4169ba34a8cac4e6d8a01d5388808eec58fe91",
@@ -34598,7 +34596,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e340ac8efd05f6760b8c8f18e88a5e80c53c81599e3876913898c167f2308b13",
@@ -34610,7 +34607,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "d4415e5f4b90980b4170664d526e3c51eec5c6c9013e814e9f4529451fc23792",
@@ -34916,7 +34912,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "6917c9d5b8c2dd5597ada2d19b520b3f670c1b2d0aff6e036d5e30af88f364a9",
@@ -34928,7 +34923,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "d66f50c4ddb7c57a1d87173e653a7f5e4ed95b5bc3df5a98796f481f364c3cb3",
@@ -34963,7 +34957,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "65e1394f56ba5d990fe995323e9dc178be50bed77eb2d0bb755dd900d33b86f2",
@@ -35081,7 +35074,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "8c44ddf2248725d3f73ec432fe5ea59ab8c73b9eab920068e3d3f51926e8fd2f",
@@ -35312,7 +35304,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "39c9d3b8078740dd0140667219de0c5d66b35bff11f787b8d692e8857ecdaff9",
@@ -35324,7 +35315,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "1e27fb54a4b5c0f3f02bf26d3cd38b89596da3aa57312b928c817bc36a599c90",
@@ -35336,7 +35326,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "28d9df62f589b2ab8943c4106a692612cc291504a1f3d57b95ee6240f4cf5343",
@@ -35348,7 +35337,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "9a3bb52ded9dfc28a8c1d8c18303ba392f4ddcba000ba9e4fe4e63fd8b372939",
@@ -35360,7 +35348,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "facc10a1bb53afa05adaf689dcb650f13eaa85f7b573d7a07578a2aef59e1bbd",
@@ -35372,7 +35359,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "dc3922479745fff935163a6cfa0a9664ae2306589197c6bcbd0b24a2c2c86b08",
@@ -35384,7 +35370,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "c872d6eafff42e0de60e67d52555c203f589a05422392e32f8fa1ef7f7586865",
@@ -35396,7 +35381,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "9e63a2390bccaf3706b0328f2f867bc4911f383ed779faf94bd921eeae68d52e",
@@ -35871,7 +35855,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "a17a6f8030c70a14adb2df79307260e0a6604d74971edeb56d0b120fa7ea8fee",
@@ -35883,7 +35866,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "4280ddc44a0c8bd9cb3286891884e90420fcec78a4c33e53ac76db5aef07020a",
@@ -35907,7 +35889,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "712283c4673524aa982002f212e6ac6422678d26f87efef00f13514d9bc81deb",
@@ -35919,7 +35900,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "ef0d11e47a02a1f40941ab31106f6e596879a68310f4997770b47728aad16e71",
@@ -35967,7 +35947,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
@@ -36039,7 +36018,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "baa7cb59491626b993a2f8fd7009685a934df1c830ac20fb7ad28f8302c785e8",
@@ -36146,7 +36124,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "8c44ddf2248725d3f73ec432fe5ea59ab8c73b9eab920068e3d3f51926e8fd2f",
@@ -36773,7 +36750,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "401a598c9f5d9f9a5db940695710f9d44df9a2317cf498b08d9b95a59af08e10",
@@ -54205,7 +54181,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "e5a7155113a150e4aaf7b68426b1e90b908c19d2ef957df26e5b91f0893b8717",
@@ -54910,7 +54885,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "dca5768a25f190fc4611cb1e2054e6141a42e4f0e226eb0d7eceaba7f6629c85",
@@ -54934,7 +54908,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "f84d3b5d18c0db478a3823e93af8fa9f6e4e5f29882d12965770cf7ae356f2ad",
@@ -55059,7 +55032,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "7ec44311f450db96fe5a40e401c6650f4e6bec4df250ab0e1d3e613b22bf3e80",
@@ -55107,7 +55079,6 @@
           "present": true,
           "kind": "theorem",
           "axioms": [
-            "Quot.sound",
             "propext"
           ],
           "actualKernelTypeSha256": "ba62c4628cd68cb6bbbc0abb968f00d067f305738395d8e13378aaceabad89b1",

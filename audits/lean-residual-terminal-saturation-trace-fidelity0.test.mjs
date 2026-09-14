@@ -119,7 +119,11 @@ test('M234 regressions retain metadata constructors, actual observers, cycles an
     'cycleSystem.requires .kernel cycleGate cycleProfile = true',
     '[cycleGate, cycleGate]).events = [cycleEvent]',
   ]) assert.ok(regression.includes(token), token);
-  assert.doesNotMatch(regression, /\b(?:sorry|admit|native_decide|Classical)\b/u);
+  const forbidden = /\b(?:sorry|admit|native_decide|Classical)\b|\+native\b/u;
+  assert.doesNotMatch(regression, forbidden);
+  const nativeMutation = regression.replace('by decide', 'by decide +native');
+  assert.notEqual(nativeMutation, regression);
+  assert.match(nativeMutation, forbidden);
 });
 
 test('M234 rejects finite, supplied, canonical-field and unconditional-transparency substitutes', async () => {

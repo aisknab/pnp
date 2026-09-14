@@ -57,38 +57,98 @@ theorem unique_length_le (items : List alpha) :
       · exact Nat.le_trans ih (Nat.le_succ _)
       · exact Nat.succ_le_succ ih
 
+omit [DecidableEq alpha] in
+/-- Insert one actual source into an already ordered finite source list. -/
+private def insertOrdered (key : alpha → Nat) (item : alpha) : List alpha → List alpha
+  | [] => [item]
+  | head :: tail =>
+      if key item ≤ key head then item :: head :: tail
+      else head :: insertOrdered key item tail
+
+omit [DecidableEq alpha] in
+private theorem insertOrdered_perm (key : alpha → Nat) (item : alpha)
+    (items : List alpha) :
+    (insertOrdered key item items).Perm (item :: items) := by
+  induction items with
+  | nil => exact List.Perm.refl _
+  | cons head tail ih =>
+      simp only [insertOrdered]
+      split
+      · exact List.Perm.refl _
+      · exact (List.Perm.cons head ih).trans (List.Perm.swap item head tail)
+
+omit [DecidableEq alpha] in
+private theorem insertOrdered_ordered (key : alpha → Nat) (item : alpha)
+    (items : List alpha)
+    (ordered : items.Pairwise (fun left right => key left ≤ key right)) :
+    (insertOrdered key item items).Pairwise (fun left right => key left ≤ key right) := by
+  induction items with
+  | nil => exact List.pairwise_singleton _ _
+  | cons head tail ih =>
+      have head_le := (List.pairwise_cons.mp ordered).1
+      have tail_ordered := (List.pairwise_cons.mp ordered).2
+      simp only [insertOrdered]
+      split
+      · rename_i before
+        apply List.pairwise_cons.mpr
+        refine ⟨?_, ordered⟩
+        intro other member
+        rcases List.mem_cons.mp member with same | member
+        · subst other
+          exact before
+        · exact Nat.le_trans before (head_le other member)
+      · rename_i after
+        apply List.pairwise_cons.mpr
+        refine ⟨?_, ih tail_ordered⟩
+        intro other member
+        have found := (insertOrdered_perm key item tail).mem_iff.mp member
+        rcases List.mem_cons.mp found with same | member
+        · subst other
+          exact Nat.le_of_lt (Nat.lt_of_not_ge after)
+        · exact head_le other member
+
+omit [DecidableEq alpha] in
+/-- Structural recursion keeps the actual source sort kernel-reducible. -/
+private def sort (key : alpha → Nat) : List alpha → List alpha
+  | [] => []
+  | head :: tail => insertOrdered key head (sort key tail)
+
+omit [DecidableEq alpha] in
+private theorem sort_perm (key : alpha → Nat) (items : List alpha) :
+    (sort key items).Perm items := by
+  induction items with
+  | nil => exact List.Perm.refl _
+  | cons head tail ih =>
+      exact (insertOrdered_perm key head (sort key tail)).trans (List.Perm.cons head ih)
+
+omit [DecidableEq alpha] in
+private theorem sort_ordered (key : alpha → Nat) (items : List alpha) :
+    (sort key items).Pairwise (fun left right => key left ≤ key right) := by
+  induction items with
+  | nil => exact List.Pairwise.nil
+  | cons head tail ih => exact insertOrdered_ordered key head (sort key tail) ih
+
 /-- Sort actual source coordinates; no ambient-width enumeration occurs. -/
 def canonical (key : alpha → Nat) (items : List alpha) : List alpha :=
-  (unique items).mergeSort (fun left right => decide (key left ≤ key right))
+  sort key (unique items)
 
 theorem mem_canonical (key : alpha → Nat) (item : alpha) (items : List alpha) :
     item ∈ canonical key items ↔ item ∈ items := by
-  exact List.mem_mergeSort.trans (mem_unique item items)
+  exact (sort_perm key (unique items)).mem_iff.trans (mem_unique item items)
 
 theorem canonical_nodup (key : alpha → Nat) (items : List alpha) :
     (canonical key items).Nodup :=
-  (List.mergeSort_perm (unique items) _).symm.nodup (unique_nodup items)
+  (sort_perm key (unique items)).symm.nodup (unique_nodup items)
 
 theorem canonical_length_le (key : alpha → Nat) (items : List alpha) :
     (canonical key items).length ≤ items.length := by
   unfold canonical
-  rw [List.length_mergeSort]
+  rw [(sort_perm key (unique items)).length_eq]
   exact unique_length_le items
 
 theorem canonical_ordered (key : alpha → Nat) (items : List alpha) :
-    (canonical key items).Pairwise (fun left right => key left ≤ key right) := by
-  have ordered := List.pairwise_mergeSort
-    (le := fun left right : alpha => decide (key left ≤ key right))
-    (fun left middle right first second =>
-      decide_eq_true (Nat.le_trans (of_decide_eq_true first) (of_decide_eq_true second)))
-    (fun left right => by
-      rcases Nat.le_total (key left) (key right) with forward | backward
-      · rw [decide_eq_true forward]
-        rfl
-      · rw [decide_eq_true backward]
-        cases decide (key left ≤ key right) <;> rfl)
-    (unique items)
-  exact ordered.imp (fun checked => of_decide_eq_true checked)
+    (canonical key items).Pairwise (fun left right => key left ≤ key right) :=
+  sort_ordered key (unique items)
 
 omit [DecidableEq alpha] in
 /-- Injective keys, order, distinctness and membership determine the exact list. -/

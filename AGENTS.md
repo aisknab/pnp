@@ -495,6 +495,17 @@ branch.
   It must fail on mismatch and must never replace a kernel-checked theorem,
   create proof authority through native execution, or be reported as a proof.
 
+- Include existing Lean regression files, not only JavaScript audits, in the
+  consumer scan after an executable dependency changes. Ordinary `decide` may
+  stop at a well-founded definition even when the proposition remains true.
+  Use `decide +kernel` only after the unchanged proposition passes kernel
+  checking; never replace proof authority with `decide +native` or
+  `native_decide`. Reconcile fixture guards and verify the affected existing
+  regression commands before another broad workflow. A zero- or one-element
+  probe does not establish reducibility for a longer list. Check both direct
+  kernel computation and dependent-width conversion; if reduction still fails,
+  preserve the full theorem interface while repairing the implementation or
+  using proved equations. Do not accumulate unsupported tactic substitutions.
 - If a small leaf theorem suddenly consumes gigabytes or remains in
   `mem_cgroup_handle_over_high`, do not wait indefinitely or raise the configured
   limits. Mark that run non-evidence, then compile bounded import-only,

@@ -516,7 +516,6 @@ const M258_AXIOMS = Object.freeze({
     "propext"
   ],
   "PNP.DirectWire.WireUnarySupportSearch.supportChoice_wire_mem": [
-    "Quot.sound",
     "propext"
   ],
   "PNP.DirectWire.WireUnarySupportSearch.supportChoice_of_mem": [

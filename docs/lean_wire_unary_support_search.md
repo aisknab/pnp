@@ -94,11 +94,8 @@ Preserving ordinary outputs without full computational fields is insufficient.
 ## Reviewed general interfaces
 
 All 36 interfaces build from the explicit PNP root and have exact reviewed
-kernel-type fingerprints. At M258, six used only propext and the other 30
-used propext and Quot.sound. M260's source-driven physical boundary refinement
-adds Quot.sound to supportChoice_wire_mem while preserving its exact theorem
-type. At the current boundary, five use only propext and the other 31 use
-propext and Quot.sound. No project-specific axiom or Classical.choice is used.
+kernel-type fingerprints. Six use only propext; the other 30 use only propext
+and Quot.sound. No project-specific axiom or Classical.choice is used.
 
 | Exact declaration | Checked interface |
 | --- | --- |

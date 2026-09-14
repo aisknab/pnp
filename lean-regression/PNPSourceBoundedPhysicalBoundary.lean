@@ -72,6 +72,22 @@ example {inputs gates outputs profileWidth : Nat} (program : Program inputs gate
     (terminalBoundaryPorts program records).Nodup :=
   terminalBoundaryPorts_nodup program records
 
+-- kernel-source-order: imported source ordering reduces in the trusted kernel.
+example : SourceListOrder.canonical (fun n : Nat => n) [2, 1] = [1, 2] := by decide
+
+-- kernel-duplicate-order: deduplication and ordering compose without an oracle.
+example : SourceListOrder.canonical (fun n : Nat => n) [3, 1, 2, 1, 0, 3] =
+    [0, 1, 2, 3] := by decide
+
+-- kernel-wide-boundary-order: no ambient-width enumeration is needed by reduction.
+example : (terminalBoundaryPorts widePair
+    ([.gate ⟨0, by decide⟩] : List (TerminalPrimitiveRecord 1000000000 1 0 0))).map
+      TerminalSupportWire.orderCode = [7, 999999999] := by decide
+
+-- kernel-dependent-boundary-width: preserve the original concrete valuation type.
+example (boundary : Valuation 2) : Valuation (terminalBoundaryPorts onePair
+    ([.gate ⟨0, by decide⟩] : List (TerminalPrimitiveRecord 4 1 0 0))).length := boundary
+
 #eval (show IO Unit from do
   checkSmall "empty-dimensions" (.empty : Program 0 0) [] []
   checkSmall "empty-selected-support" onePair [] []

@@ -119,16 +119,49 @@ alone does not alter the public mathematical bottom line.
 
 ## Inherited standard-axiom review
 
-The compiled inventory comparison found 28 previously reviewed interfaces whose
-closures now also use Lean's standard Quot.sound dependency through canonical
-sorting. Every inherited reviewed kernel type, defining module and publication
-fingerprint is unchanged. No earned row is revoked, no project axiom returns and
-no Classical.choice dependency is introduced in these interfaces.
+The initial library-sort candidate added standard Quot.sound dependencies to
+28 inherited reviewed interfaces. After the structural ordering repair, the
+complete compiled inventory comparison against the exact M259 merge finds only
+five such changes. The other 23 retain their original propext-only closures,
+including supportChoice_wire_mem. Every inherited reviewed kernel type,
+defining module and publication fingerprint is unchanged.
 
-The current inventory and status report this change explicitly. The M258 exact
-expectation for supportChoice_wire_mem and its current module documentation are
-updated from the compiled evidence; immutable historical coordinates are not
-rewritten. M260 records all 28 exact transitions and unchanged fingerprints in
-its hostile/compiled regression. Standard Lean quotient soundness was already
-within the audited foundational allowlist, so this does not change a fixed
-proof-progress checkpoint or global gate.
+The current inventory, status, exact workflow and module expectations are derived
+from that repaired compiled evidence. The regression retains all 28 reviewed
+interfaces and their exact current axiom lists, including the 23 restored
+closures. Immutable historical coordinates are not rewritten. Standard Lean
+quotient soundness was already within the audited foundational allowlist; no
+earned row is revoked, project axiom or Classical.choice is introduced, or fixed
+proof-progress checkpoint or global gate changes.
+
+## Kernel-reducible source ordering repair
+
+The inherited regression review exposed a distinction between executable and
+kernel reduction. The imported library sort computes the correct boundary at
+runtime, and its equations prove the same result, but direct kernel reduction
+stops even on a two-element list. Changing ordinary decide to decide +kernel
+repaired only some fixtures and did not repair dependent-width conversion.
+
+The integrated correction uses structural insertion and sorting of the actual
+finite source list. General permutation and ordering proofs re-establish the
+same nine canonical-list interfaces with no added premise: exact ordered
+reference equality for injective coordinate keys, membership, distinctness and
+the source-length bound. It does not enumerate ambient inputs, use a supplied
+certificate, change the manuscript route or introduce native proof authority.
+The isolated complete proof and direct kernel fixtures passed; reference equality
+and ordering use only propext and Quot.sound, and the length bound uses propext.
+
+The superseded tactic-only edits to 26 inherited Lean fixtures are removed. Their
+original propositions, expected values, valuation types and proofs are restored
+byte-for-byte. The existing regression contract retains native-authority mutation
+rejection. M260 adds direct kernel tests for a two-element sort, deduplication,
+large unused input width and dependent valuation-width conversion.
+
+Reconcile canonical-source shape, private helper names and hostile mutations
+before verification. Rebuild the changed dependency chain and explicit root,
+verify affected inherited regression commands, regenerate inventory, publication,
+status and report identities, and derive changed expectations from those outputs.
+The core input change requires new dependent evidence; independent unchanged
+checks remain reusable. No fixed checkpoint, global gate, total-runtime claim or
+website publication decision changes. Keep the same arbitrary-dimension theorem
+targets, source-only construction and conservative M260 claim boundary.

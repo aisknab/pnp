@@ -154,9 +154,12 @@ const SPECS = [
 
 const text0 = relative => readFile(new URL('../' + relative, import.meta.url), 'utf8');
 const compact0 = value => stripLeanCommentsAndStrings0(value).replace(/\s+/gu,' ').trim();
+const privateHeads0 = source => [...stripLeanCommentsAndStrings0(source).matchAll(
+  /^[ \t]*private[ \t]+(def|theorem|inductive|structure|abbrev)[ \t]+([^\s({:]+)/gmu)]
+  .map(match => ({kind:match[1], name:match[2], index:match.index}));
 function block0(source,name) {
   const stripped=stripLeanCommentsAndStrings0(source);
-  const boundaries=[...stripped.matchAll(/^[ \t]*(?:(?:private|protected|noncomputable)[ \t]+)*(?:(?:def|theorem|inductive|structure|abbrev)[ \t]+([^\s({:]+)|variable\b|namespace\b|end\b)/gmu)];
+  const boundaries=[...stripped.matchAll(/^[ \t]*(?:(?:private|protected|noncomputable)[ \t]+)*(?:(?:def|theorem|inductive|structure|abbrev)[ \t]+([^\s({:]+)|variable\b|omit\b|include\b|namespace\b|end\b)/gmu)];
   const index=boundaries.findIndex(item=>item[1]===name);
   return index<0?'':compact0(source.slice(boundaries[index].index,boundaries[index+1]?.index??source.length));
 }
@@ -184,6 +187,18 @@ function validateSource0(source, spec) {
   const require0 = (condition, label) => { if (!condition) failures.push(label); };
   const block = name => block0(source, name);
   const clean = compact0(source);
+  const expectedPrivate = spec.kind === 'canonical' ? [
+    'def:insertOrdered', 'theorem:insertOrdered_perm', 'theorem:insertOrdered_ordered',
+    'def:sort', 'theorem:sort_perm', 'theorem:sort_ordered',
+  ] : [
+    'def:physicalTerminalAny', 'theorem:physicalTerminalAny_true_iff',
+    'def:sourceMatchesTerminalWire', 'theorem:allFin_strictOrder',
+    'theorem:sourceOccurrence_flatMap_length', 'theorem:sourceMatchesTerminalWire_self',
+    'theorem:gateUsesWire_of_left', 'theorem:gateUsesWire_of_right',
+    'theorem:boundaryWire_of_selected_source', 'theorem:sourceAccounted',
+  ];
+  require0(JSON.stringify(privateHeads0(source).map(head => head.kind + ':' + head.name))
+    === JSON.stringify(expectedPrivate), 'private-interface');
   require0(!hasLeanAssumptionDeclaration0(source), 'assumption');
   require0(!hasUnauditedLeanDeclarationForm0(source), 'unaudited-form');
   require0(!/\b(?:sorry|admit|unsafe|native_decide|Classical|noncomputable|callerCertificate|suppliedBoundary|suppliedOrder|implemented_by|csimp)\b/u.test(clean),
@@ -198,8 +213,13 @@ function validateSource0(source, spec) {
     require0(block('unique') ===
       'def unique : List alpha → List alpha | [] => [] | head :: tail => let rest := unique tail if head ∈ rest then rest else head :: rest',
       'computed-unique');
-    require0(block('canonical').endsWith(
-      '(unique items).mergeSort (fun left right => decide (key left ≤ key right))'),
+    require0(block('insertOrdered') ===
+      'private def insertOrdered (key : alpha → Nat) (item : alpha) : List alpha → List alpha | [] => [item] | head :: tail => if key item ≤ key head then item :: head :: tail else head :: insertOrdered key item tail',
+      'computed-insert-order');
+    require0(block('sort') ===
+      'private def sort (key : alpha → Nat) : List alpha → List alpha | [] => [] | head :: tail => insertOrdered key head (sort key tail)',
+      'structural-source-sort');
+    require0(block('canonical').endsWith('sort key (unique items)'),
       'computed-canonical-order');
     require0(!/\b(?:allFin|allTerminalSupportWires|allSubsets|referenceMinimum)\b|List\.range/u.test(clean),
       'no-ambient-enumeration');
@@ -241,7 +261,8 @@ function validateSource0(source, spec) {
 }
 
 function mutateBlock0(source, name, old, replacement) {
-  const heads = explicitLeanDeclarationHeads0(source);
+  const heads = [...explicitLeanDeclarationHeads0(source), ...privateHeads0(source)]
+    .sort((left, right) => left.index - right.index);
   const at = heads.findIndex(head => head.name === name);
   assert.ok(at >= 0, name);
   const begin = heads[at].index;
@@ -265,6 +286,8 @@ test('M260 source parser preserves default binders and complete let-bound target
   const target = 'theorem probe (defaulted : Nat := 0) : let witness := defaulted; witness = defaulted';
   assert.equal(signature0(target + ' := by rfl'), target);
   assert.equal(signature0('theorem incomplete : let witness := 0'), '');
+  assert.equal(block0('def first : Nat := 0\nomit [DecidableEq alpha] in\nprivate def next : Nat := 1', 'first'),
+    'def first : Nat := 0');
 });
 
 test('M260 closes canonical-list and source-derived physical interfaces', async () => {
@@ -287,7 +310,9 @@ test('M260 rejects duplicate, reversed and ambient-enumerating source canonicali
   await rejectMutations0(canonicalSpec, [
     ['unique', 'if head ∈ rest then rest else head :: rest',
       'head :: rest', 'computed-unique'],
-    ['canonical', 'key left ≤ key right', 'key right ≤ key left', 'computed-canonical-order'],
+    ['insertOrdered', 'key item ≤ key head', 'key head ≤ key item', 'computed-insert-order'],
+    ['sort', 'insertOrdered key head (sort key tail)', 'tail', 'structural-source-sort'],
+    ['canonical', 'sort key (unique items)', 'unique items', 'computed-canonical-order'],
   ]);
   const source = await text0(canonicalSpec.path);
   assert.ok(validateSource0(source + '\ndef hidden := List.range 1000000000\n', canonicalSpec)
@@ -333,6 +358,7 @@ test('M260 rejects assumptions, hidden declarations and unchecked implementation
     const source = await text0(spec.path);
     assert.ok(validateSource0(source + '\naxiom hidden : False\n', spec).includes('assumption'));
     assert.ok(validateSource0(source + '\nexample : True := by trivial\n', spec).includes('unaudited-form'));
+    assert.ok(validateSource0(source + '\nprivate def hidden := 0\n', spec).includes('private-interface'));
     assert.ok(validateSource0(source + '\nattribute [implemented_by hidden] canonical\n', spec)
       .includes('shortcut-or-certificate'));
     assert.ok(validateSource0(source + '\ndef hidden := suppliedBoundary\n', spec)
@@ -341,6 +367,45 @@ test('M260 rejects assumptions, hidden declarations and unchecked implementation
 });
 
 test('M260 runtime regressions guard exact order and large unused input dimensions', async () => {
+  // Preserve the inherited fixture assertions while repairing the source sort.
+  // Native execution cannot substitute for kernel-checked regression proofs.
+  const inheritedFixtures = [
+    "lean-regression/PNPArbitrarySupportSplice.lean",
+    "lean-regression/PNPResidualTerminalBN2SquareLegitimacy.lean",
+    "lean-regression/PNPResidualTerminalBudgetEnvelopeResolver.lean",
+    "lean-regression/PNPResidualTerminalBudgetNoLowerLedger.lean",
+    "lean-regression/PNPResidualTerminalBudgetZeroSlackSidecar.lean",
+    "lean-regression/PNPResidualTerminalFiniteSaturatePositive.lean",
+    "lean-regression/PNPResidualTerminalFourCornerCarrier.lean",
+    "lean-regression/PNPResidualTerminalFourCornerOptimumCoherence.lean",
+    "lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean",
+    "lean-regression/PNPResidualTerminalFourCornerSideTightCompletion.lean",
+    "lean-regression/PNPResidualTerminalFourCornerTightBasisMaximum.lean",
+    "lean-regression/PNPResidualTerminalFrontierPushout.lean",
+    "lean-regression/PNPResidualTerminalGainProfileFirewall.lean",
+    "lean-regression/PNPResidualTerminalGovernedSupportCompletion.lean",
+    "lean-regression/PNPResidualTerminalHResolveSupportResolver.lean",
+    "lean-regression/PNPResidualTerminalInterfaceExposureRouting.lean",
+    "lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean",
+    "lean-regression/PNPResidualTerminalPhysicalChargeLedger.lean",
+    "lean-regression/PNPResidualTerminalPhysicalGain.lean",
+    "lean-regression/PNPResidualTerminalPhysicalOwnership.lean",
+    "lean-regression/PNPResidualTerminalPhysicalSupportCompletion.lean",
+    "lean-regression/PNPResidualTerminalSaturatedSupportContext.lean",
+    "lean-regression/PNPResidualTerminalSaturationCostBalance.lean",
+    "lean-regression/PNPResidualTerminalSaturationPositivityFirewall.lean",
+    "lean-regression/PNPResidualTerminalSaturationTraceFidelity.lean",
+    "lean-regression/PNPWireCarrier.lean"
+];
+  const safeFixture = source => !/\b(?:axiom|sorry|admit|native_decide|allowUnsafeReducibility)\b|\+\s*native\b/u
+    .test(stripLeanCommentsAndStrings0(source));
+  for (const file of inheritedFixtures) {
+    const fixture = await text0(file);
+    assert.ok(safeFixture(fixture), file + ': trusted fixture authority');
+    assert.match(fixture, /by decide/u, file + ': ordinary checked fixture proof');
+    assert.equal(safeFixture(fixture.replace('by decide', 'by decide +native')), false,
+      file + ': rejects native authority mutation');
+  }
   const source = await text0(REGRESSION);
   assert.match(source, /^import PNP\s*$/mu);
   for (const name of [
@@ -358,7 +423,10 @@ test('M260 runtime regressions guard exact order and large unused input dimensio
   assert.ok(start >= 0 && end > start);
   assert.doesNotMatch(source.slice(start, end), /allTerminalSupportWires|allFin|List\.range|2 \^/u);
   assert.match(source, /M260_SOURCE_BOUNDED_PHYSICAL_BOUNDARY_RUNTIME_GREEN/u);
-  assert.doesNotMatch(source, /#eval!|\bnative_decide\b/u);
+  assert.doesNotMatch(source, /#eval!|\bnative_decide\b|\+\s*native\b/u);
+  for (const marker of ['kernel-source-order', 'kernel-duplicate-order',
+    'kernel-wide-boundary-order', 'kernel-dependent-boundary-width'])
+    assert.ok(source.includes(marker), marker);
 });
 
 test('M260 durable workflow audits the compiled root and bounded runtime', async () => {
@@ -456,7 +524,6 @@ const M260_AXIOMS = Object.freeze({
     "propext"
   ],
   "PNP.DirectWire.SourceListOrder.mem_canonical": [
-    "Quot.sound",
     "propext"
   ],
   "PNP.DirectWire.SourceListOrder.canonical_nodup": [
@@ -464,7 +531,6 @@ const M260_AXIOMS = Object.freeze({
     "propext"
   ],
   "PNP.DirectWire.SourceListOrder.canonical_length_le": [
-    "Quot.sound",
     "propext"
   ],
   "PNP.DirectWire.SourceListOrder.canonical_ordered": [
@@ -501,7 +567,6 @@ const M260_AXIOMS = Object.freeze({
     "propext"
   ],
   "PNP.DirectWire.terminalBoundaryPortsSourceDriven_length": [
-    "Quot.sound",
     "propext"
   ],
   "PNP.DirectWire.terminalBoundaryPortsSourceDriven_nodup": [
@@ -517,7 +582,6 @@ const M260_AXIOMS = Object.freeze({
     "propext"
   ],
   "PNP.DirectWire.terminalBoundaryPorts_length": [
-    "Quot.sound",
     "propext"
   ],
   "PNP.DirectWire.terminalBoundaryPorts_nodup": [
@@ -708,13 +772,12 @@ test('M260 current summaries distinguish structural boundary bounds from complet
   }
 });
 
-const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
+const M260_INHERITED_AXIOM_REVIEW = Object.freeze({
   "PNP.DirectWire.TerminalFourCornerCarrier.boundaryDisposition?_eq_some_iff": {
     "before": [
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -725,7 +788,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -736,7 +798,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -747,7 +808,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -758,7 +818,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -769,7 +828,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFourCornerCarrier",
@@ -780,7 +838,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalGovernedSupportCompletion",
@@ -791,7 +848,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalGovernedSupportCompletion",
@@ -802,7 +858,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -813,7 +868,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -824,7 +878,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -846,7 +899,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -857,7 +909,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -868,7 +919,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -879,7 +929,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -890,7 +939,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFrontierPushout",
@@ -901,7 +949,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.NANDWireUnarySupportSearch",
@@ -923,7 +970,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalPhysicalSupportCompletion",
@@ -956,7 +1002,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalPhysicalSupportCompletion",
@@ -967,7 +1012,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFrontierPushout",
@@ -989,7 +1033,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFrontierPushout",
@@ -1000,7 +1043,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalProjectionSquare",
@@ -1011,7 +1053,6 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
       "propext"
     ],
     "after": [
-      "Quot.sound",
       "propext"
     ],
     "module": "PNP.ResidualTerminalFrontierPushout",
@@ -1019,11 +1060,12 @@ const M260_INHERITED_AXIOM_TRANSITIONS = Object.freeze({
   }
 });
 
-test('M260 records only the reviewed inherited standard-axiom transition with unchanged theorem types', async () => {
+test('M260 records the reviewed inherited axiom closures with unchanged theorem types', async () => {
   const {inventory,map} = await compiledSources0();
-  for (const [name,expected] of Object.entries(M260_INHERITED_AXIOM_TRANSITIONS)) {
+  assert.equal(Object.keys(M260_INHERITED_AXIOM_REVIEW).length, 28);
+  assert.equal(Object.values(M260_INHERITED_AXIOM_REVIEW).filter(row => row.after.includes('Quot.sound')).length, 5);
+  for (const [name,expected] of Object.entries(M260_INHERITED_AXIOM_REVIEW)) {
     assert.deepEqual(expected.before, ['propext'], name);
-    assert.deepEqual(expected.after, ['Quot.sound','propext'], name);
     const candidate = inventory.milestoneCandidates.find(row => row.name === name);
     assert.equal(candidate?.kind, 'theorem', name);
     assert.equal(candidate.module, expected.module, name);
