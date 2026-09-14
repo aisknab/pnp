@@ -601,7 +601,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 161
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected tableau-CNF semantic axiom closure.' >&2
@@ -618,7 +618,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.(Tape\.|CookLevin\.)")" -eq 54
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(Classical.choice|Quot.sound|propext)(, (Classical.choice|Quot.sound|propext))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(Classical.choice|Quot.sound|propext)(, (Classical.choice|Quot.sound|propext))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin raw-tape bridge axiom closure.' >&2
@@ -635,7 +635,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 110
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin formula-size axiom closure.' >&2
@@ -653,7 +653,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 79
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin formula-schedule axiom closure.' >&2
@@ -671,7 +671,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.")" -eq 136
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin formula-cursor axiom closure.' >&2
@@ -689,7 +689,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderInputLength\.")" -eq 39
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin builder input-length axiom closure.' >&2
@@ -710,7 +710,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderInputPrefix\.")" -eq 40
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin builder input-prefix axiom closure.' >&2
@@ -731,7 +731,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderTokenAppender\.")" -eq 68
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin builder token-appender axiom closure.' >&2
@@ -752,7 +752,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstTokenPrefix\.")" -eq 37
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin builder first-token-prefix axiom closure.' >&2
@@ -795,7 +795,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderCompleteHeader\.")" -eq 85
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin complete-header builder axiom closure.' >&2
@@ -816,7 +816,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderBodyStartPrefix\.")" -eq 60
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin body-start-prefix builder axiom closure.' >&2
@@ -837,7 +837,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstLiteralPrefix\.")" -eq 74
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin first-literal-prefix builder axiom closure.' >&2
@@ -858,7 +858,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.(BuilderFirstClausePrefix|BuilderFirstLiteralPrefix\.rule_source_ne_acceptState)")" -eq 80
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin first-clause-prefix builder axiom closure.' >&2
@@ -879,7 +879,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.")" -eq 47
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin dynamic-token-cursor-step axiom closure.' >&2
@@ -901,7 +901,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.")" -eq 83
           test "$(printf '%s\n' "$audit_output" | grep -Fc "'PNP.Concrete.CookLevin.BuilderCompleteHeader.HeaderController.workRunExact_of_unit_or_separator'")" -eq 1
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin first-clause-padding-run axiom closure.' >&2
@@ -922,7 +922,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFullScheduleCursorController\.")" -eq 70
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin full-schedule cursor-controller axiom closure.' >&2
@@ -940,7 +940,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderArbitrarySlotHeaderRouter\.")" -eq 51
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin arbitrary-slot header-router axiom closure.' >&2
@@ -961,7 +961,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderArbitrarySlotPostHeaderDecoder\.")" -eq 22
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin arbitrary-slot post-header-decoder axiom closure.' >&2
@@ -982,7 +982,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawDivider\.")" -eq 57
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin post-header raw-divider axiom closure.' >&2
@@ -1003,7 +1003,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawLaunch\.")" -eq 24
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin post-header raw-launch axiom closure.' >&2
@@ -1024,7 +1024,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostHeaderRawTapeBridge\.")" -eq 78
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin post-header raw-tape-bridge axiom closure.' >&2
@@ -1045,7 +1045,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostDividerRawRouteClassifier\.")" -eq 85
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin post-divider raw route classifier axiom closure.' >&2
@@ -1066,7 +1066,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPostDividerSelectedTokenLaunch\.")" -eq 30
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin post-divider selected-token launch axiom closure.' >&2
@@ -1087,7 +1087,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderCompleteScheduleIteration\.")" -eq 12
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin complete schedule iteration axiom closure.' >&2
@@ -1108,7 +1108,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalOptionalTokenDispatch\.")" -eq 49
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical optional-token dispatch axiom closure.' >&2
@@ -1129,7 +1129,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalDispatchSchedule\.")" -eq 16
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical dispatch schedule axiom closure.' >&2
@@ -1149,7 +1149,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalFinishRequest\.")" -eq 49
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical Finish-request axiom closure.' >&2
@@ -1170,7 +1170,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierPipeline\.")" -eq 63
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical classifier pipeline axiom closure.' >&2
@@ -1191,7 +1191,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierFinishRequest\.")" -eq 36
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical classifier Finish-request axiom closure.' >&2
@@ -1212,7 +1212,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierFinishWorkspaceOrientation\.")" -eq 57
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin classifier Finish-workspace orientation axiom closure.' >&2
@@ -1233,7 +1233,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierFinishMirroredDispatch\.")" -eq 51
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin classifier Finish mirrored-dispatch axiom closure.' >&2
@@ -1254,7 +1254,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch\.")" -eq 121
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin first-body separator mirrored-dispatch axiom closure.' >&2
@@ -1275,7 +1275,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch\.")" -eq 82
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin all-body staged-request mirrored-dispatch axiom closure.' >&2
@@ -1296,7 +1296,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierTerminalJoin\.")" -eq 34
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin physical classifier terminal-join axiom closure.' >&2
@@ -1317,7 +1317,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch\.")" -eq 65
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin all-route staged-request mirrored-dispatch axiom closure.' >&2
@@ -1338,7 +1338,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllRouteDerivedFinishSplit\.")" -eq 91
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin all-route derived-Finish request-split axiom closure.' >&2
@@ -1362,7 +1362,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderPhysicalClassifierAllRouteBodyRemainderSplit\.")" -eq 71
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin all-route physical body-remainder-split axiom closure.' >&2
@@ -3609,7 +3609,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSeparatorStep\.")" -eq 54
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-clause-separator-step axiom closure.' >&2
@@ -3631,7 +3631,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseFirstLiteralPrefix\.")" -eq 85
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-clause first-literal-prefix axiom closure.' >&2
@@ -3653,7 +3653,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.")" -eq 113
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-clause second-literal-prefix axiom closure.' >&2
@@ -3675,7 +3675,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClausePrefix\.")" -eq 55
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin complete second-clause-prefix axiom closure.' >&2
@@ -3697,7 +3697,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClausePaddingRun\.")" -eq 65
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.PaddingCountdown\.(machine|loop_workRunExact|loopSteps_le)'")" -eq 3
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-clause padding-run axiom closure.' >&2
@@ -3720,7 +3720,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSeparatorStep\.SeparatorCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin third-clause separator-step axiom closure.' >&2
@@ -3744,7 +3744,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseFirstLiteralPrefix\.FirstLiteralSuffix\.(rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState|machine)'")" -eq 5
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin third-clause first-literal-prefix axiom closure.' >&2
@@ -3765,7 +3765,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderThirdClauseSecondLiteralPrefix\.")" -eq 145
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin third-clause second-literal-prefix axiom closure.' >&2
@@ -3787,7 +3787,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderThirdClausePrefix\.")" -eq 55
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin complete third-clause-prefix axiom closure.' >&2
@@ -3809,7 +3809,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderThirdClausePaddingRun\.")" -eq 65
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.PaddingCountdown\.(machine|loop_workRunExact|loopSteps_le)'")" -eq 3
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin third-clause padding-run axiom closure.' >&2
@@ -3832,7 +3832,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSeparatorStep\.SeparatorCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin fourth-clause separator-step axiom closure.' >&2
@@ -3855,7 +3855,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.(TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)|TrueFalseSuffix\.(machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)|SecondLiteralSuffix\.(machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState))'")" -eq 16
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin fourth-clause first-literal-prefix axiom closure.' >&2
@@ -3878,7 +3878,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderThirdClauseSecondLiteralPrefix\.(TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)|TrueFalseSuffix\.(machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)|TrueTrueFalseSuffix\.(machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)|SecondLiteralSuffix\.(machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState))'")" -eq 21
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin fourth-clause second-literal-prefix axiom closure.' >&2
@@ -3900,7 +3900,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFourthClausePrefix\.")" -eq 55
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin complete fourth-clause prefix axiom closure.' >&2
@@ -3922,7 +3922,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFourthClausePaddingRun\.")" -eq 65
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.PaddingCountdown\.(machine|loop_workRunExact|loopSteps_le)'")" -eq 3
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin fourth-clause padding-run axiom closure.' >&2
@@ -3944,7 +3944,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFifthClausePaddingRun\.")" -eq 65
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.PaddingCountdown\.(machine|loop_workRunExact|loopSteps_le)'")" -eq 3
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin fifth-clause padding-run axiom closure.' >&2
@@ -3966,7 +3966,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstConstraintPaddingRun\.")" -eq 65
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderFirstClausePaddingRun\.PaddingCountdown\.(machine|loop_workRunExact|loopSteps_le)'")" -eq 3
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin first-constraint padding-run axiom closure.' >&2
@@ -3989,7 +3989,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSeparatorStep\.SeparatorCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint separator-step axiom closure.' >&2
@@ -4012,7 +4012,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal sign-step axiom closure.' >&2
@@ -4035,7 +4035,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal first-unary-unit-step axiom closure.' >&2
@@ -4058,7 +4058,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal second-unary-unit-step axiom closure.' >&2
@@ -4081,7 +4081,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseSecondLiteralPrefix\.TrueTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal third-unary-unit-step axiom closure.' >&2
@@ -4104,7 +4104,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondClauseFirstLiteralPrefix\.FalseTokenCursor\.(appender|machine|rules_length|rules_pairwise_query_distinct|machine_acceptState_ne_rejectState|rule_source_ne_acceptState)'")" -eq 6
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderDynamicTokenCursorStep\.CursorAdvance\.(malformedScratch_enters_dead|deadState_workStep)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal terminator-step axiom closure.' >&2
@@ -4126,7 +4126,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralSuccessorTokenStep\.")" -eq 80
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor|followingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint first-literal successor-token-step axiom closure.' >&2
@@ -4148,7 +4148,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.")" -eq 80
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_optional_unary|secondFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint padding-or-unary opportunity-step axiom closure.' >&2
@@ -4171,7 +4171,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.WidthOptionalAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_two_optional_unary|thirdFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint second padding-or-unary opportunity-step axiom closure.' >&2
@@ -4194,7 +4194,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.WidthOptionalAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_three_optional_unary|fourthFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint third padding-or-unary opportunity-step axiom closure.' >&2
@@ -4217,7 +4217,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.WidthOptionalAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary|fifthFollowingTokenSlot_direct_eq_padding_or_f)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint fourth padding-or-unary opportunity-step axiom closure.' >&2
@@ -4241,7 +4241,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStep\.WidthOptionalTerminatorAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary_and_optional_terminator|sixthFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint fifth padding-or-terminator opportunity-step axiom closure.' >&2
@@ -4264,7 +4264,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.WidthOptionalAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary_and_optional_terminator_and_optional_opening_unary|seventhFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint sixth padding-or-opening-unary opportunity-step axiom closure.' >&2
@@ -4287,7 +4287,7 @@ jobs:
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintPaddingOrUnaryOpportunityStep\.WidthOptionalAppender\.")" -eq 14
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.CookLevin\.BuilderSecondConstraintFirstLiteralTerminatorStep\.(encodeCNFTokens_eq_terminator_then_successor_and_four_optional_unary_and_optional_terminator_and_optional_opening_unary_and_optional_first_unary|eighthFollowingTokenSlot_direct_eq_padding_or_t)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Cook-Levin second-constraint seventh padding-or-unary opportunity-step axiom closure.' >&2
@@ -4448,7 +4448,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDTrace\.")" -eq 71
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked-NAND carrier/trace axiom closure.' >&2
@@ -4469,7 +4469,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.")" -eq 71
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked-NAND global-candidate axiom closure.' >&2
@@ -4490,7 +4490,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.")" -eq 5
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked-NAND BaselineDistinct axiom closure.' >&2
@@ -4509,7 +4509,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.(fullCandidate_final_eq_false_of_unsatisfiable|fullCandidate_referenceMinimum_eq_baseline_of_unsatisfiable)'")" -eq 2
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked-NAND unsatisfiable final-zero axiom closure.' >&2
@@ -4529,7 +4529,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.DirectWire\.LockedNANDGlobalCandidates\.")" -eq 8
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext, Quot.sound\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked-NAND semantic-threshold axiom closure.' >&2
@@ -4549,7 +4549,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.LockedNAND\.")" -eq 50
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected encoded locked-NAND semantic-boundary axiom closure.' >&2
@@ -4571,7 +4571,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.Concrete\.LockedNAND\.")" -eq 380
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected strict-v0 locked-NAND source-parser axiom closure.' >&2
@@ -4597,7 +4597,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 3295
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected strict-v0 locked-NAND target-emitter axiom closure.' >&2
@@ -4623,7 +4623,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 16
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected strict-v0 locked-NAND polynomial-reduction axiom closure.' >&2
@@ -4648,7 +4648,7 @@ jobs:
           expected_count="$(node -p "require('./status/FORMAL_RECONSTRUCTION_STATUS.json').leanConcreteCNFToNANDSemanticCompilerAuditedDeclarationCount")"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq "$expected_count"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected CNF-to-NAND semantic-compiler axiom closure.' >&2
@@ -4673,7 +4673,7 @@ jobs:
           expected_count="$(node -p "require('./status/FORMAL_RECONSTRUCTION_STATUS.json').leanConcreteCNFToNANDPolynomialReductionAuditedDeclarationCount")"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq "$expected_count"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected all-input CNF-to-NAND polynomial-reduction axiom closure.' >&2
@@ -4696,7 +4696,7 @@ jobs:
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDThresholdPublicationAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound|Quot\.sound, propext)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound|Quot\.sound, propext)\]$' || true)"
           test -z "$unexpected"
           test "$(printf '%s\n' "$audit_output" | grep -Fc "'PNP.Main.locked_nand_threshold'")" -eq 1
 
@@ -4729,7 +4729,7 @@ jobs:
           printf '%s\n' "$audit_output"
           test "$(printf '%s\n' "$audit_output" | grep -Ec "^'PNP\.")" -eq 4
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext, Quot\.sound|Quot\.sound, propext)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext, Quot\.sound|Quot\.sound, propext)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected locked residual-gain-chain axiom closure.' >&2
@@ -4801,7 +4801,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.terminal")" -eq 27
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[propext\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal projection-minimum axiom closure.' >&2
@@ -4825,7 +4825,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.(TerminalProjectionFourCorners|terminalProjectionDefect_int)")" -eq 8
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal projection-transfer axiom closure.' >&2
@@ -4849,7 +4849,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 18
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal saturation axiom closure.' >&2
@@ -4873,7 +4873,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 40
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal physical-support completion axiom closure.' >&2
@@ -4897,7 +4897,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 34
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal support extraction axiom closure.' >&2
@@ -4921,7 +4921,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 37
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal proper-positive support axiom closure.' >&2
@@ -4945,7 +4945,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 40
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal saturated support-square axiom closure.' >&2
@@ -4969,7 +4969,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 42
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal governed support-completion axiom closure.' >&2
@@ -4993,7 +4993,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 39
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal governed frontier-pushout axiom closure.' >&2
@@ -5017,7 +5017,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 33
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal governed projection-square axiom closure.' >&2
@@ -5041,7 +5041,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 43
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal side-tight minimum axiom closure.' >&2
@@ -5065,7 +5065,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 38
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal four-corner carrier axiom closure.' >&2
@@ -5089,7 +5089,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 57
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal four-corner optimum compatibility axiom closure.' >&2
@@ -5113,7 +5113,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 40
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal four-corner optimum coherence axiom closure.' >&2
@@ -5137,7 +5137,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 28
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal four-corner side-tight completion axiom closure.' >&2
@@ -5161,7 +5161,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 45
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal four-corner tight-basis maximum axiom closure.' >&2
@@ -5185,7 +5185,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 23
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected computed terminal BN2 square legitimacy axiom closure.' >&2
@@ -5209,7 +5209,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 79
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected computed terminal BCEL anchor nucleus axiom closure.' >&2
@@ -5233,7 +5233,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 20
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal saturation-positivity firewall axiom closure.' >&2
@@ -5257,7 +5257,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 53
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected candidate-derived terminal saturation cost-balance axiom closure.' >&2
@@ -5281,7 +5281,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 28
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite terminal interface-exposure routing axiom closure.' >&2
@@ -5305,7 +5305,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 37
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite terminal SaturatePositive composition axiom closure.' >&2
@@ -5329,7 +5329,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 6
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked finite SaturatePositive-to-BCEL-ready axiom closure.' >&2
@@ -5353,7 +5353,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 39
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected residual terminal RankWF axiom closure.' >&2
@@ -5377,7 +5377,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 21
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite BN3 request-envelope axiom closure.' >&2
@@ -5407,7 +5407,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 33
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite BN4 activation-cancellation axiom closure.' >&2
@@ -5431,7 +5431,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 40
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite BN5 full-shadow localization axiom closure.' >&2
@@ -5455,7 +5455,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 27
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite PkgC separating-consumer restoration axiom closure.' >&2
@@ -5479,7 +5479,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 17
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite PkgC typed-restoration axiom closure.' >&2
@@ -5503,7 +5503,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 21
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite PkgC same-key cancellation axiom closure.' >&2
@@ -5527,7 +5527,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 17
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite PkgC ambient BN4 ledger axiom closure.' >&2
@@ -5551,7 +5551,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 13
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite PkgC ambient BN4 residual-reduction axiom closure.' >&2
@@ -5575,7 +5575,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 28
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected V54 consumer-antichain normal-form axiom closure.' >&2
@@ -5599,7 +5599,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 58
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected V53 constant-cut hypergraph rigidity axiom closure.' >&2
@@ -5623,7 +5623,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 21
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite BN6 hypergraph-packet axiom closure.' >&2
@@ -5647,7 +5647,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 5
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite Packet selector-seed axiom closure.' >&2
@@ -5671,7 +5671,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 9
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite Packet payload-selector universe axiom closure.' >&2
@@ -5695,7 +5695,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 16
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical finite Packet selector-handle axiom closure.' >&2
@@ -5719,7 +5719,7 @@ jobs:
           printf '%s\n' "$audit_output"
           normalized="$(printf '%s\n' "$audit_output" | sed ':a;N;$!ba;s/\n / /g')"
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq 16
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet selector-codec axiom closure.' >&2
@@ -5745,7 +5745,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorPayloadRealizationAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected fail-closed Packet source-payload realization axiom closure.' >&2
@@ -5771,7 +5771,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             exit 1
@@ -5796,7 +5796,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             exit 1
@@ -5821,7 +5821,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             exit 1
@@ -5846,7 +5846,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketChargeSurplusAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             exit 1
@@ -5871,7 +5871,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet unit-charge blueprint realizer axiom closure.' >&2
@@ -5897,7 +5897,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet typed-realizer contract axiom closure.' >&2
@@ -5923,7 +5923,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked HB blocker-graph acyclicity axiom closure.' >&2
@@ -5949,7 +5949,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked total-table HB dependency closure axiom closure.' >&2
@@ -5975,7 +5975,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBActiveDependencyClosureAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked HB active-dependency closure axiom closure.' >&2
@@ -6001,7 +6001,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBSelectorSilenceClosureAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected conditional HB selector-silence rank-closure axiom closure.' >&2
@@ -6027,7 +6027,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHBExecutableSelectorSilenceInductionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected executable HB selector-silence induction axiom closure.' >&2
@@ -6053,7 +6053,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessRoutingAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Packet selector-faithfulness routing axiom closure.' >&2
@@ -6079,7 +6079,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet faithfulness-table axiom closure.' >&2
@@ -6105,7 +6105,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected total Packet selector first-route axiom closure.' >&2
@@ -6131,7 +6131,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSelectorFirstRouteSemanticsAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected exact Packet first-route semantics axiom closure.' >&2
@@ -6157,7 +6157,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketDescentRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected rank-reflected Packet descent-route axiom closure.' >&2
@@ -6183,7 +6183,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketRankRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet rank-tag route axiom closure.' >&2
@@ -6209,7 +6209,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketExactRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet exact-route reflection axiom closure.' >&2
@@ -6235,7 +6235,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketChargeRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet charge-route reflection axiom closure.' >&2
@@ -6261,7 +6261,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketColourRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet colour-route reflection axiom closure.' >&2
@@ -6287,7 +6287,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketFrontierRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected canonical Packet typed-frontier route reflection axiom closure.' >&2
@@ -6313,7 +6313,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBN5ObligationRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected BN5-bound Packet frontier and obligation route reflection axiom closure.' >&2
@@ -6339,7 +6339,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBN4ActivationRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected BN4 activation-exact Packet route reflection axiom closure.' >&2
@@ -6365,7 +6365,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketDirectionRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected typed-direction Packet route reflection axiom closure.' >&2
@@ -6391,7 +6391,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBudgetRouteReflectionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected typed-budget Packet route reflection axiom closure.' >&2
@@ -6417,7 +6417,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBudgetHBActivityBindingAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Packet budget/HB activity binding axiom closure.' >&2
@@ -6443,7 +6443,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketSemanticHNActivityBindingAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Packet semantic/HN activity binding axiom closure.' >&2
@@ -6469,7 +6469,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketDescentNoLowerBindingAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Packet descent no-lower binding axiom closure.' >&2
@@ -6495,7 +6495,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketNoLowerLedgerAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected Packet no-lower ledger axiom closure.' >&2
@@ -6521,7 +6521,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveCoverageLedgerAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected HResolve coverage ledger axiom closure.' >&2
@@ -6547,7 +6547,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveSupportResolverAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal HResolve support resolver axiom closure.' >&2
@@ -6573,7 +6573,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalBudgetEnvelopeResolverAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal budget-envelope resolver axiom closure.' >&2
@@ -6599,7 +6599,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal budget no-lower ledger axiom closure.' >&2
@@ -6625,7 +6625,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal Packet-budget no-lower composition axiom closure.' >&2
@@ -6651,7 +6651,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal HResolve maximal H-disjoint-family axiom closure.' >&2
@@ -6677,7 +6677,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal HN BWL certified-path-minimum axiom closure.' >&2
@@ -6703,7 +6703,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveCertifiedPathFamilyAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected terminal HResolve certified-path-family axiom closure.' >&2
@@ -6729,7 +6729,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalHResolveZeroSlackSidecarAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected proof-bearing HResolve ZeroSlack sidecar axiom closure.' >&2
@@ -6755,7 +6755,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalBudgetZeroSlackSidecarAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected proof-bearing Budget ZeroSlack sidecar axiom closure.' >&2
@@ -6781,7 +6781,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalSelectorHBZeroSlackSidecarAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected proof-bearing Selector/HB ZeroSlack sidecar axiom closure.' >&2
@@ -6807,7 +6807,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecarAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected proof-bearing Packet/budget no-lower ZeroSlack sidecar axiom closure.' >&2
@@ -6833,7 +6833,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected proof-bearing BCEL/Packet no-lower ZeroSlack sidecar axiom closure.' >&2
@@ -6859,7 +6859,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected same-family Selector/HB, Packet, and BCEL ZeroSlack coherence axiom closure.' >&2
@@ -6885,7 +6885,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected same-candidate finite BCEL-ready and Packet carrier coherence axiom closure.' >&2
@@ -6911,7 +6911,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean)"
           test "$expected_count" -gt 0
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected finite BCEL/Packet activation-coherence obstruction axiom closure.' >&2
@@ -7063,7 +7063,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinRankOrderedOracleAxiomAudit.lean)"
           test "$expected_count" -eq 15
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected rank-ordered PCCOracle axiom closure.' >&2
@@ -7088,7 +7088,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean)"
           test "$expected_count" -eq 15
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet ranked-selector axiom closure.' >&2
@@ -7113,7 +7113,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketHBZeroSlackBridgeAxiomAudit.lean)"
           test "$expected_count" -eq 15
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/HB ZeroSlack bridge axiom closure.' >&2
@@ -7138,7 +7138,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6HBZeroSlackBridgeAxiomAudit.lean)"
           test "$expected_count" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/HB ZeroSlack bridge axiom closure.' >&2
@@ -7163,7 +7163,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELActivationRouteAxiomAudit.lean)"
           test "$expected_count" -eq 15
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL activation-route axiom closure.' >&2
@@ -7188,7 +7188,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean)"
           test "$expected_count" -eq 14
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL derived-family axiom closure.' >&2
@@ -7213,7 +7213,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalGroupingAxiomAudit.lean)"
           test "$expected_count" -eq 34
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL canonical-grouping axiom closure.' >&2
@@ -7238,7 +7238,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedgerAxiomAudit.lean)"
           test "$expected_count" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL canonical cut-ledger axiom closure.' >&2
@@ -7263,7 +7263,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAudit.lean)"
           test "$expected_count" -eq 22
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL canonical constant-cut-basis axiom closure.' >&2
@@ -7288,7 +7288,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketBN6BCELSparseActivationRouteAxiomAudit.lean)"
           test "$expected_count" -eq 30
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/BN6/BCEL sparse activation-route axiom closure.' >&2
@@ -7313,7 +7313,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPkgCBN6PositiveCellizationAxiomAudit.lean)"
           test "$expected_count" -eq 19
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected residual terminal PkgC-to-BN6 positive-cellization axiom closure.' >&2
@@ -7338,7 +7338,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAudit.lean)"
           test "$expected_count" -eq 7
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/PkgC/BN6/BCEL source-route axiom closure.' >&2
@@ -7363,7 +7363,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketPkgCAmbientBN4ExtractionRouteAxiomAudit.lean)"
           test "$expected_count" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected checked Packet/PkgC ambient-BN4 extraction-route axiom closure.' >&2
@@ -7388,7 +7388,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPkgCRestorationCoverageAmbientRouteAxiomAudit.lean)"
           test "$expected_count" -eq 17
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected PkgC restoration-coverage ambient-route axiom closure.' >&2
@@ -7413,7 +7413,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAudit.lean)"
           test "$expected_count" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected PkgC restoration-coverage BN6-ledger axiom closure.' >&2
@@ -7438,7 +7438,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRouteAxiomAudit.lean)"
           test "$expected_count" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected candidate-bound PkgC restoration-coverage BN6/BCEL-route axiom closure.' >&2
@@ -7463,7 +7463,7 @@ jobs:
           expected_count="$(grep -Ec '^#print axioms ' lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageChargeDescentAxiomAudit.lean)"
           test "$expected_count" -eq 16
           test "$(printf '%s\n' "$normalized" | grep -Ec "^'PNP\.DirectWire\.")" -eq "$expected_count"
-          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\] || true)"
+          unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot.sound|propext, Quot.sound)\]$' || true)"
           if [ -n "$unexpected" ]; then
             printf '%s\n' "$unexpected" >&2
             echo 'Unexpected PkgC restoration-coverage charge-descent axiom closure.' >&2

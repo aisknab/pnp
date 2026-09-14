@@ -139,6 +139,13 @@ a small read-only way instead of adding branch-specific finalizer workflows.
 
 ### Workflow size and trigger maintenance
 
+- Before a workflow push, run the multiline-shell syntax and anchored axiom-filter
+  regressions in audits/lean-root-target0.test.mjs. They parse every literal
+  run block without executing it; changed commands still need their exact
+  targeted execution. Do not wait for a root build to reveal shell quoting errors.
+- Use literal replacement callbacks in mechanical JavaScript source rewrites;
+  replacement-string dollar expansions can silently alter shell regex anchors
+  and quotes. Review every resulting workflow delta, including inherited steps.
 - Keep every workflow below the tested 480,000-byte review budget, leaving
   headroom below the provider's 500 KiB launch limit. Run the workflow-size
   regression in `audits/lean-root-target0.test.mjs` before a publication push.
