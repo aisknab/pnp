@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-260",
-  "lastReviewedDate": "2026-09-13",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-261",
+  "lastReviewedDate": "2026-09-14",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 236,
-    "totalRows": 238,
+    "earnedRows": 237,
+    "totalRows": 239,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2387,6 +2387,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M260 closes the unused-primary-input enumeration dependency in the pinned manuscript physical boundary construction. The active extractor derives its complete ordered boundary from actual gate-source occurrences, with exact reference-list equality and twice-gate-count occurrence and boundary bounds for arbitrary finite dimensions. Existing physical extraction and support theorem interfaces are preserved without a supplied boundary or completeness certificate. These are structural size bounds, not a total encoded-input-size polynomial execution theorem. This does not retire the full manuscript carrier, arbitrary obligation-DAG completeness, unconditional ZeroSlack, exact general PCCMin or complete runtime and certificate bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 236 of 238 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-261",
+      "formalArtefactCoverage": {
+        "earnedRows": 237,
+        "totalRows": 239
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M261 closes the context-aware Boolean transport dependency for the pinned manuscript support square: ordinary selected-gate inclusion derives a computed boundary substitution for every larger open-boundary valuation, with identity, composition and two-path equality. Retained outputs agree for the original extraction, arbitrary valid realizations and actual canonical full and quotient local minima. This does not equate arbitrary observers, physically glue local minima, derive charge or obligation ownership, complete the manuscript dependency DAG or establish global routing, unconditional ZeroSlack, exact general PCCMin or complete polynomial bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the 40% proof estimate and 20% to 40% uncertainty remain unchanged. Formal artefact coverage: 237 of 239 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

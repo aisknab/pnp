@@ -348,6 +348,11 @@ produce.
   name sets and generator inputs before compilation; derive hashes and emitted
   counts only from the successful compiled evidence, then reconcile downstream
   consumers before their checks. Never invent compiled evidence in advance.
+- For an edited Lean module, search every audit for its repository path as
+  well as its declaration names. Older milestone audits may retain complete
+  closed-interface lists for reused modules. Reconcile all such consumers and
+  run their positive and hostile source-only cases before inventory sealing
+  or a broad suite; checking only the new milestone audit is insufficient.
 
 ### Reconcile expected values before expensive verification
 

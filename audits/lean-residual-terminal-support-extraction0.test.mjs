@@ -69,6 +69,12 @@ const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   `${NAMESPACE}.extractTerminalSupport_eq_of_gateSelected_eq`,
   `${NAMESPACE}.terminalOpenGateEvaluation_prefix_congr`,
   `${NAMESPACE}.terminalOpenGateEvaluation_single_gate_prefix`,
+  `${NAMESPACE}.terminalOpenWireValue`,
+  `${NAMESPACE}.terminalBoundaryPullback`,
+  `${NAMESPACE}.terminalOpenGateEvaluation_pullback`,
+  `${NAMESPACE}.terminalOpenSupportSemantics_pullback`,
+  `${NAMESPACE}.terminalBoundaryPullback_identity`,
+  `${NAMESPACE}.terminalBoundaryPullback_compose`,
 ]);
 
 const MILESTONE_THEOREMS = Object.freeze([
@@ -133,6 +139,14 @@ const PRIVATE_HELPERS = Object.freeze([
   'physicalTerminalSourcesAccounted',
   'Source.evalTerminalOpen_congr',
   'Program.evalTerminalOpenAux_prefix_congr',
+  'terminalBoundaryValue_pullback',
+  'Source.evalTerminalOpen_nested',
+  'Program.evalTerminalOpenAux_nested',
+  'boundary_get_injective_of_nodup',
+  'terminalBoundaryValue_get',
+  'terminalOpenWireValue_on_boundary',
+  'terminalBoundaryPorts_nested_external',
+  'terminalOpenWireValue_pullback_on_boundary',
 ]);
 
 async function text0(relativePath) {

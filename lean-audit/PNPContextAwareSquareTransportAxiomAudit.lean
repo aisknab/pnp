@@ -1,0 +1,16 @@
+import PNP
+
+#print axioms PNP.DirectWire.terminalOpenGateEvaluation_pullback
+#print axioms PNP.DirectWire.terminalOpenSupportSemantics_pullback
+#print axioms PNP.DirectWire.terminalBoundaryPullback_identity
+#print axioms PNP.DirectWire.terminalBoundaryPullback_compose
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.selectedGateTransport
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_left
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_right
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_square
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.extracted_retained_semantics
+#print axioms PNP.DirectWire.TerminalOptimumLegTransport.realization_retained_semantics
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumFamily.full_retained_semantics
+#print axioms PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics
+#print axioms PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics

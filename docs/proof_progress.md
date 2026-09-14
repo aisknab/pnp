@@ -7,7 +7,7 @@ questions and must never be combined.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-260`, 236 of 238
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-261`, 237 of 239
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -19,7 +19,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M260 |
+| Track | Available | Earned at M261 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -28,7 +28,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M260 risk-weighted proof completion estimate is therefore 40 percent, with
+The M261 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -166,7 +166,10 @@ No fixed checkpoint or global gate changes.
 M260 computes incoming physical ports from actual gate-source occurrences, preserving the exact previous reference list including its order and coordinates. The general construction proves duplicate freedom and occurrence/output bounds of twice the physical gate count, independent of unused declared inputs, and is now the active extractor used by the existing support and zero/unary closure interfaces. These structural bounds do not prove total encoded-size polynomial runtime, global minimality, the full manuscript carrier or obligation calculus, complete Package E or unconditional ZeroSlack.
 No fixed checkpoint or global gate changes.
 
-Formal artefact coverage: 236 of 238 current scoped publication rows earned.
+M261 computes nested open-boundary substitutions from the actual larger-support evaluator, including wires that become internal. For every larger open-boundary valuation, selected gates and retained interface producers preserve their Boolean values. The complete maps satisfy identity, composition and equality of both support-square paths; retained outputs agree for extracted circuits, arbitrary valid realizations and actual canonical full and quotient local minima. This does not equate arbitrary observers, physically glue minimum circuits, derive coherent charge ownership, complete the obligation calculus or global routing, or prove unconditional ZeroSlack or polynomial PCCMin.
+No fixed checkpoint or global gate changes.
+
+Formal artefact coverage: 237 of 239 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 The five current global gates are open: Concrete SAT, residual-band minimisation,
