@@ -90,12 +90,16 @@ const SOURCES = [
       "production_agreement": "theorem production_agreement (model : TerminalCandidateSaturationModel (profileWidth"
     },
     "publicHeads": [
+      "sources_eval",
+      "sources_ordered",
       "exterior",
       "mem_exterior_iff",
       "boundarySource",
       "replacementSource",
       "Visible",
       "originalSource",
+      "exteriorSource_visible",
+      "output_visible",
       "exteriorGate",
       "replacementGate",
       "graph",

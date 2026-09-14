@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f09f9efa54e13e82612d54f7b046b0e0849ce35c475e31e946dd7717a22d6acc';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '516a64f222526fb609c76760fcafe916f56c741aeb6461988459507b4f24721e';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -677,6 +677,35 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics',
   'PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics',
   'PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics',
+  'PNP.DirectWire.WireCausalExpansion.graph_rank_decreases',
+  'PNP.DirectWire.WireCausalExpansion.graph_wellFounded',
+  'PNP.DirectWire.WireCausalExpansion.compile_success',
+  'PNP.DirectWire.WireCausalExpansion.compiled_spec',
+  'PNP.DirectWire.WireCausalExpansion.expanded_gateCount',
+  'PNP.DirectWire.WireCausalExpansion.masked_replacement_output',
+  'PNP.DirectWire.WireCausalExpansion.replacementSource_eval',
+  'PNP.DirectWire.WireCausalExpansion.originalSource_eval',
+  'PNP.DirectWire.WireCausalExpansion.values_solution',
+  'PNP.DirectWire.WireCausalExpansion.expanded_semantics',
+  'PNP.DirectWire.WireCausalExpansion.expanded_smaller_iff',
+  'PNP.DirectWire.WireCausalExpansion.single_interface_smaller',
+  'PNP.DirectWire.WireCausalExpansion.interface_nodup',
+  'PNP.DirectWire.WireCausalExpansion.interface_owner_injective',
+  'PNP.DirectWire.WireCausalExpansion.exteriorPosition_injective',
+  'PNP.DirectWire.WireCausalExpansion.copyPosition_injective',
+  'PNP.DirectWire.WireCausalExpansion.exteriorPosition_ne_copyPosition',
+  'PNP.DirectWire.WireCausalExpansion.raw_node_ownership',
+  'PNP.DirectWire.WireCausalExpansion.expanded_gate_ownership',
+  'PNP.DirectWire.WireCausalExpansion.expanded_source',
+  'PNP.DirectWire.WireCausalExpansion.expanded_source_equal',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_output',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_field',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_gateCount',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_smaller_iff',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_proper_and_smaller',
+  'PNP.DirectWire.WireCausalExpansion.expandedCarrier_source_equal',
+  'PNP.DirectWire.WireCausalExpansion.expandedR5Creation_coordinate',
+  'PNP.DirectWire.WireCausalExpansion.expandedR5Creation_fullWitness',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3924,7 +3953,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-14-261') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-14-262') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

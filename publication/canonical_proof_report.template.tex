@@ -1323,23 +1323,30 @@ compiled current project-axiom inventory contains @@AXIOM_COUNT@@ declarations:
 \end{itemize}
 \end{samepage}
 
-\subsection{Why the abstract bridge is ineligible}
+\subsection{Current concrete target and historical abstract bridge}
 
-The current \code{PNP.PEqualsNP} abbreviation compares witness classes whose language and
-algorithm structures carry string names or code handles rather than concrete execution semantics
-and proved polynomial bounds. Consequently, even a kernel-clean theorem of that abstract type
-would not establish the standard P-versus-NP statement. It is compatibility information only.
+The former abstract bridge compared witness classes whose language and algorithm
+structures carried string names or code handles rather than concrete execution
+semantics and proved polynomial bounds. A theorem of that former abstract type
+would not establish the standard P-versus-NP statement.
 
-The separate \code{PNP.Concrete.PEqualsNP} target uses proof-bearing P and NP witnesses,
-canonical input/certificate pairing, finite program syntax, and charged polynomial runtime and
-output bounds. Its recursive compiler/refinement link to the raw machine kernel is formalized.
-SAT completeness, SAT in P, and the root theorem remain absent.
+The current \code{PNP.PEqualsNP} compatibility name refers to
+\code{PNP.Concrete.PEqualsNP}; the eligible publication target is
+\code{PNP.Main.ConcretePEqualsNP}. These concrete finite charged-pipeline
+semantics carry proof-bearing P and NP witnesses, canonical input/certificate
+pairing, and polynomial runtime and output bounds. The recursive
+compiler/refinement link to the raw machine kernel is formalized.
+Concrete CNF-SAT NP-completeness is kernel checked. Deterministic CNF-SAT
+membership in P and the exact eligible root theorem remain absent; the
+publication fingerprints are unset and the publication gate remains false.
 
 \section{Formal milestone ledger}
 
-Each earned row requires exact compiled names and theorem kinds, empty axiom closures, per-name
+Each earned row requires exact compiled names and theorem kinds, an axiom closure
+contained in the reviewed Lean standard-axiom allowlist, and per-name
 domain-separated kernel-type SHA-256 matches for @@DETAILED_MILESTONE_COUNT@@ detailed candidates, and the pinned whole-Lean
-source closure. Human-readable scope remains conservative: type or source drift revokes credit.
+source closure. No project-specific axiom is allowed; an earned row need not have
+an empty axiom closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
 {\small
 \sloppy

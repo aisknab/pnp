@@ -1,21 +1,20 @@
 # Proof and Checker Pipeline
 
-<!-- M261-CURRENT-SUMMARY:BEGIN -->
-## Current M261 boundary
+<!-- M262-CURRENT-SUMMARY:BEGIN -->
+## Current M262 boundary
 
-M261 computes nested open-boundary substitutions from the actual larger-support evaluator, including wires that become internal. For every larger open-boundary valuation, selected gates and retained interface producers preserve their Boolean values. The complete maps satisfy identity, composition and equality of both support-square paths; retained outputs agree for extracted circuits, arbitrary valid realizations and actual canonical full and quotient local minima. This does not equate arbitrary observers, physically glue minimum circuits, derive coherent charge ownership, complete the obligation calculus or global routing, or prove unconditional ZeroSlack or polynomial PCCMin.
+M262 constructs a total source-ordered physical expansion for arbitrary computational supports and incoming-boundary widths. Compilation needs no supplied rank, order or success certificate. Under complete local open-function agreement, the result preserves all ordered outputs and full computational fields, repeated literal-source sharing and existing R5 source values. Every actual gate is owned and charged: cost is E + K * R, and strict original-size saving holds exactly when K * R < S; properness S < G is separate. This does not prove matched-kappa Pull/Expand, arbitrary observer equality, the complete obligation calculus or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 237 of 239 current scoped publication rows earned.
+Formal artefact coverage: 238 of 240 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [context-aware square transport and limits](./lean_context_aware_square_transport.md)
+See the [source-ordered physical expansion and limits](./lean_wire_causal_expansion.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M261
-derives context-aware boundary substitutions and square-path equality with retained-output transport; arbitrary observer equality, physical minimum gluing, global routing and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M261-CURRENT-SUMMARY:END -->
+<!-- M262-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

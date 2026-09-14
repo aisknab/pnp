@@ -139,12 +139,16 @@ const SPECS = [
       "graph_wellFounded_of_singleGateBoundary": "theorem graph_wellFounded_of_singleGateBoundary (boundaryGate : Fin gates) (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate]) (small : replacementGates ≤ 1) (early : ∀ port : Fin (terminalInterfacePorts candidate records).length, ((terminalInterfacePorts candidate records).get port).val < boundaryGate.val → ∃ value, replacement.directWireWord.source port = .constant value) : WellFounded (graph candidate records replacement).Depends"
     },
     "heads": [
+      "sources_eval",
+      "sources_ordered",
       "exterior",
       "mem_exterior_iff",
       "boundarySource",
       "replacementSource",
       "Visible",
       "originalSource",
+      "exteriorSource_visible",
+      "output_visible",
       "exteriorGate",
       "replacementGate",
       "graph",

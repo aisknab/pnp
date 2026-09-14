@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-261",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-14-262",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,72 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanWireCausalExpansionFormalized": true,
+  "leanWireCausalExpansionAxiomAuditPassed": true,
+  "leanWireCausalExpansionAuditedDeclarationCount": 29,
+  "leanWireCausalExpansionRankDecreaseTheorem": "PNP.DirectWire.WireCausalExpansion.graph_rank_decreases",
+  "leanWireCausalExpansionGraphWellFoundedTheorem": "PNP.DirectWire.WireCausalExpansion.graph_wellFounded",
+  "leanWireCausalExpansionCompileSuccessTheorem": "PNP.DirectWire.WireCausalExpansion.compile_success",
+  "leanWireCausalExpansionCompiledResultTheorem": "PNP.DirectWire.WireCausalExpansion.compiled_spec",
+  "leanWireCausalExpansionPhysicalGateCountTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_gateCount",
+  "leanWireCausalExpansionAllOpenMaskedOutputTheorem": "PNP.DirectWire.WireCausalExpansion.masked_replacement_output",
+  "leanWireCausalExpansionReplacementSourceValueTheorem": "PNP.DirectWire.WireCausalExpansion.replacementSource_eval",
+  "leanWireCausalExpansionOriginalSourceValueTheorem": "PNP.DirectWire.WireCausalExpansion.originalSource_eval",
+  "leanWireCausalExpansionGraphSolutionTheorem": "PNP.DirectWire.WireCausalExpansion.values_solution",
+  "leanWireCausalExpansionOrderedOutputSemanticsTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_semantics",
+  "leanWireCausalExpansionPaidSavingIffTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_smaller_iff",
+  "leanWireCausalExpansionSingleInterfaceSavingTheorem": "PNP.DirectWire.WireCausalExpansion.single_interface_smaller",
+  "leanWireCausalExpansionInterfaceNoDuplicatesTheorem": "PNP.DirectWire.WireCausalExpansion.interface_nodup",
+  "leanWireCausalExpansionPhysicalProducerIdentityTheorem": "PNP.DirectWire.WireCausalExpansion.interface_owner_injective",
+  "leanWireCausalExpansionExteriorOwnershipTheorem": "PNP.DirectWire.WireCausalExpansion.exteriorPosition_injective",
+  "leanWireCausalExpansionCopyOwnershipTheorem": "PNP.DirectWire.WireCausalExpansion.copyPosition_injective",
+  "leanWireCausalExpansionDisjointOwnershipTheorem": "PNP.DirectWire.WireCausalExpansion.exteriorPosition_ne_copyPosition",
+  "leanWireCausalExpansionRawOwnershipCoverageTheorem": "PNP.DirectWire.WireCausalExpansion.raw_node_ownership",
+  "leanWireCausalExpansionEmittedOwnershipCoverageTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_gate_ownership",
+  "leanWireCausalExpansionActualOutputSourceTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_source",
+  "leanWireCausalExpansionLiteralOutputSharingTheorem": "PNP.DirectWire.WireCausalExpansion.expanded_source_equal",
+  "leanWireCausalExpansionCarrierOutputTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_output",
+  "leanWireCausalExpansionCarrierFieldTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_field",
+  "leanWireCausalExpansionCarrierPhysicalGateCountTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_gateCount",
+  "leanWireCausalExpansionCarrierPaidSavingIffTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_smaller_iff",
+  "leanWireCausalExpansionProperAndPaidSavingTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_proper_and_smaller",
+  "leanWireCausalExpansionLiteralFieldSharingTheorem": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_source_equal",
+  "leanWireCausalExpansionR5CoordinateTheorem": "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_coordinate",
+  "leanWireCausalExpansionR5OriginalFullSourceTheorem": "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_fullWitness",
+  "leanWireCausalExpansionArbitrarySupportAndBoundaryWidthsCovered": true,
+  "leanWireCausalExpansionSourceDerivedRankProved": true,
+  "leanWireCausalExpansionUnconditionalCompilationProved": true,
+  "leanWireCausalExpansionCompleteOpenMaskSemanticsProved": true,
+  "leanWireCausalExpansionEveryOrderedOutputPreservedUnderFullAgreement": true,
+  "leanWireCausalExpansionEveryComputationalFieldPreservedUnderFullAgreement": true,
+  "leanWireCausalExpansionUniquePhysicalCopyOwnershipProved": true,
+  "leanWireCausalExpansionEveryEmittedGateOwned": true,
+  "leanWireCausalExpansionLiteralRepeatedSourceSharingProved": true,
+  "leanWireCausalExpansionOriginalR5CoordinateAndFullValueTransportProved": true,
+  "leanWireCausalExpansionExactExteriorPlusCopiesGateCountProved": true,
+  "leanWireCausalExpansionPaidSavingIffProved": true,
+  "leanWireCausalExpansionPropernessSeparate": true,
+  "leanWireCausalExpansionExistingLiteralCompilerPreserved": true,
+  "leanWireCausalExpansionCallerSuppliedRankRequired": false,
+  "leanWireCausalExpansionCallerSuppliedCompilerSuccessRequired": false,
+  "leanWireCausalExpansionCallerSuppliedFinalSemanticsRequired": false,
+  "leanWireCausalExpansionSemanticsWithoutLocalAgreementProved": false,
+  "leanWireCausalExpansionWholeCircuitValuationsOnly": false,
+  "leanWireCausalExpansionQuotientOnlyFieldAgreementSufficient": false,
+  "leanWireCausalExpansionUnpaidLocalSavingTransportProved": false,
+  "leanWireCausalExpansionMatchedKappaPullExpandProved": false,
+  "leanWireCausalExpansionArbitraryObserverEqualityProved": false,
+  "leanWireCausalExpansionFullManuscriptCarrierProved": false,
+  "leanWireCausalExpansionCompleteObligationCalculusProved": false,
+  "leanWireCausalExpansionCompletePackageEProved": false,
+  "leanWireCausalExpansionGlobalRouteCoverageProved": false,
+  "leanWireCausalExpansionUnconditionalSaturatePositiveProved": false,
+  "leanWireCausalExpansionUnconditionalBCELReadyProved": false,
+  "leanWireCausalExpansionUnconditionalZeroSlackProved": false,
+  "leanWireCausalExpansionExactGeneralPCCMinProved": false,
+  "leanWireCausalExpansionPolynomialRuntimeProved": false,
+  "leanWireCausalExpansionRuntimeExecutionIsProofAuthority": false,
+  "leanWireCausalExpansionScope": "arbitrary-finite-computational-supports-and-boundary-widths-source-derived-rank-total-causal-physical-expansion-all-open-mask-semantics-under-full-local-agreement-all-outputs-and-full-fields-exact-exterior-plus-producer-copies-unique-complete-ownership-literal-sharing-original-R5-source-transport-paid-saving-iff-no-matched-kappa-global-route-or-polynomial-runtime",
   "leanResidualTerminalSaturationCostBalanceFormalized": true,
   "leanResidualTerminalFirstNontransparentStepFormalized": true,
   "leanResidualTerminalSaturationCostBalanceAxiomAuditPassed": true,
@@ -2456,6 +2522,9 @@
     "npm run legacy:v0:check",
     "npm run pnp:verify -- --no-write",
     "node --test audits/lean-root-target0.test.mjs",
+    "node --test audits/lean-wire-causal-expansion0.test.mjs",
+    "lake env lean -DwarningAsError=true lean-audit/PNPWireCausalExpansionAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPWireCausalExpansion.lean",
     "node --test audits/lean-concrete-machine0.test.mjs",
     "node --test audits/lean-concrete-tape-handoff0.test.mjs",
     "node --test audits/lean-concrete-tape-blank-equivalence0.test.mjs",
@@ -3309,7 +3378,8 @@
     "PNP.PEqualsNP is now a compatibility name for the concrete finite charged-pipeline target. Concrete CNFSAT NP-completeness is now kernel checked. The target remains inactive because deterministic CNFSAT membership in P, the eligible root theorem, and the exact publication fingerprints remain absent.",
     "PNP.Main.ConcretePEqualsNP now names the inactive finite charged-pipeline target, while PNP.Main.p_eq_np remains absent.",
     "All five reviewed activation fingerprints remain intentionally unset, so target presence alone cannot open the concrete publication gate.",
-    "The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only."
+    "The current canonical TeX and PDF are generated non-claiming reconstruction reports; the historical 56-page direct-claim report remains historical audit material only.",
+    "M262 constructs a total source-ordered physical expansion under no supplied order or compiler-success witness. Complete local open-function agreement is required for semantic preservation. Exact cost E + K * R permits strict original-size saving only when K * R < S; arbitrary local saving does not imply global saving. Matched-kappa Pull/Expand, the full R5-R8 obligation calculus, complete Package E, global routes, unconditional ZeroSlack and complete polynomial PCCMin remain open."
   ],
   "mathematicalTheoremEstablished": false,
   "publicTheoremEmissionAllowed": false,
@@ -3338,7 +3408,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "87560808551fad7abfe8ac0a5132ef53c0978a48b04656e7311179a3ec385c57",
+    "actualSourceClosureSha256": "e2ef5c0b7366cd0e28bf1539878a3aeccee506c5fd3b71b7608511dc24a32290",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3371,19 +3441,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "1b5e6b86f8d2c3ea23ca111cb6cb00f0ab7381fe58dbbaca0b294f49996f3d32",
+  "leanTheoremInventorySha256": "0849daec3584fab76c3df2b8757d8e2dd917e556ed6fa84446ec9c6bab35e66a",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 48059,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20385,
-  "leanTheoremInventoryTheoremCount": 26269,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11170,
-  "leanTheoremInventorySourceClosureModuleCount": 526,
-  "leanSourceClosureSha256": "87560808551fad7abfe8ac0a5132ef53c0978a48b04656e7311179a3ec385c57",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-14-261",
+  "leanTheoremInventoryDeclarationCount": 48133,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20440,
+  "leanTheoremInventoryTheoremCount": 26320,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11172,
+  "leanTheoremInventorySourceClosureModuleCount": 527,
+  "leanSourceClosureSha256": "e2ef5c0b7366cd0e28bf1539878a3aeccee506c5fd3b71b7608511dc24a32290",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-14-262",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "a8a416cceb53d4d9b67375e87b500e787ed31f3fd8aa09d09501f3b3b72f828f",
+  "formalPublicationMapSha256": "84b270e13cff65f29b62f4f5a0cd4dbb5ab87032312c49d81e74488042bf7885",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -49129,7 +49199,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "concrete-cook-levin-complete-builder",
-      "title": "Complete all-input Cook-Levin formula builder and reduction",
+      "nonClaim": "This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom.",
       "requiredTheorems": [
         "PNP.Concrete.CookLevin.formulaBuilderMachine_accept",
         "PNP.Concrete.CookLevin.formulaBuilderMachine_output",
@@ -49139,7 +49209,7 @@
         "PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete"
       ],
       "scope": "For every concrete polynomial verifier and every ordinary raw bitstring, including empty and odd-length inputs, M230 runs the complete source-derived formula loop and physical output finalizer in one finite raw machine. Its exact ordinary output is the original canonical encoded Cook-Levin CNF formula, with total halting, runtime and output-size bounds polynomial in the original input length. The concrete PolynomialTimeFunction is a machine leaf; recursive FunctionProgram.RawRefinement preserves its output. The packaged PolynomialReduction to CNFSAT uses the already checked original formula semantics. No accepting certificate, execution trace, route, finite family, rank map or correctness certificate is supplied by the caller.",
-      "nonClaim": "This completes the fixed all-input builder checkpoint, not a deterministic SAT algorithm. The separate named concrete NP-hardness or NP-completeness transport remains to be published. Unconditional residual minimization and ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, and the eligible root theorem remain open. No global gate closes and P = NP is not proved. Execution theorem closures use only propext and Quot.sound; reduction-facing semantic closures additionally use the already allowed Lean standard axiom Classical.choice, never a project-specific axiom.",
+      "title": "Complete all-input Cook-Levin formula builder and reduction",
       "theoremRows": [
         {
           "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_accept",
@@ -49227,13 +49297,13 @@
     {
       "classification": "formalized-foundation-only",
       "id": "concrete-cnf-np-completeness",
-      "title": "Concrete CNF-SAT NP-hardness and NP-completeness",
+      "nonClaim": "NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.Concrete.CookLevin.cnfSAT_np_hard",
         "PNP.Concrete.CookLevin.cnfSAT_np_complete"
       ],
       "scope": "For every language in the concrete bounded-certificate NP class, M231 extracts its polynomial-time verifier from NP membership and applies the complete source-derived all-input Cook-Levin PolynomialReduction to CNFSAT. Together with the existing concrete CNFSAT verifier, the closed theorem proves NPComplete CNFSAT in the selected finite-machine model. No reduction, execution trace, finite-instance restriction or correctness certificate is supplied. Both complete theorem interfaces are root-built and axiom-audited; their closures contain only the Lean standard axioms Classical.choice, Quot.sound and propext.",
-      "nonClaim": "NP-completeness is hardness plus NP membership, not a deterministic polynomial-time SAT algorithm. This closes only the fixed concrete NP-hardness checkpoint. It does not close the separate final complexity transport to P = NP, unconditional residual minimization or ZeroSlack, complete polynomial PCCMin construction and certificate bounds, deterministic CNFSAT in P, or the eligible root theorem. All five global proof gates and the publication gate remain open; P = NP is not proved.",
+      "title": "Concrete CNF-SAT NP-hardness and NP-completeness",
       "theoremRows": [
         {
           "name": "PNP.Concrete.CookLevin.cnfSAT_np_hard",
@@ -49273,14 +49343,14 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-profile-dependency-semantics",
-      "title": "Candidate-derived terminal profile dependency reflection and noninterference",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff",
         "PNP.DirectWire.terminalCandidateProfileRequires_eq_influence",
         "PNP.DirectWire.terminalCandidateSaturate_profile_noninterference"
       ],
       "scope": "For every finite direct-wire candidate size, executable terminal model, profile coordinate and gate, M232 proves that the computed profile-influence bit is true exactly when insertion changes the actual ambient observation in a canonical subset context. It identifies each computed profile-to-gate dependency with the coordinate's exact rule role and that influence bit. For every seed, a gate absent from the actual computed saturation cannot change a retained profile coordinate in any canonical context. The observation definition and all three general theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, coverage certificate or soundness proof is supplied in place of the existing computation.",
-      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. This is a local semantic reflection and noninterference theorem, not an input-derived terminal family, arbitrary-record normalization, unconditional SaturatePositive or BCELReady, global route coverage or ZeroSlack, exact PCCMin construction, or an encoded-size polynomial runtime result. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Candidate-derived terminal profile dependency reflection and noninterference",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalGateInfluencesProfile_eq_true_iff",
@@ -49330,7 +49400,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-profile-locality",
-      "title": "Retained ambient-profile locality and whole-support preservation",
+      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
         "PNP.DirectWire.terminalAmbientSupportImplementation_eq_of_gateSelected_eq",
@@ -49339,7 +49409,7 @@
         "PNP.DirectWire.terminalCandidateSaturate_profile_preserved"
       ],
       "scope": "For every finite direct-wire candidate size, executable terminal model, seed and retained profile coordinate, M233 proves that arbitrary primitive-record supports with the same computed-saturation gate membership have equal actual ambient observations. Structural extraction and ambient-implementation equalities account for record order, duplicates and non-gate metadata without an observer-congruence premise. General omitted-gate elimination extends M232 from canonical contexts to arbitrary supports. The actual saturated support therefore preserves each retained observation of the complete gate universe. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No dependency relation, normalization certificate or correctness proof is supplied in place of the existing computation.",
-      "nonClaim": "The executable observer and profile model remain supplied data, and influence construction enumerates all subsets. The theorem does not derive profile semantics or terminal families from every valid input, identify the ambient observer with the differently typed profileSystem.observe, prove transparent cost or complete route coverage, establish unconditional SaturatePositive, BCELReady or ZeroSlack, or supply an exact polynomial PCCMin construction and certificate bound. The retained-profile premise is necessary. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Retained ambient-profile locality and whole-support preservation",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
@@ -49413,7 +49483,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-saturation-trace-fidelity",
-      "title": "Computed saturation trace fidelity and metadata cost balance",
+      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. Metadata cost balance does not establish physical-gate transparency, obligation discharge or complete closure safety. The theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalSaturateTrace_replayRecords_iff",
         "PNP.DirectWire.terminalSaturateTrace_event_valid",
@@ -49422,7 +49492,7 @@
         "PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent"
       ],
       "scope": "For arbitrary finite terminal systems and seeds, M234 proves that the actual cost-accounting replay contains exactly the canonical computed saturated records and that every emitted event adds its required record with a valid selected dependency rule. For every finite direct-wire candidate and executable terminal model, the replay and canonical endpoints have equal ambient implementations and equal cost snapshot coordinates, with the stored record list kept explicit. Every generated non-gate metadata event is structurally cost-transparent. All five theorem interfaces are root-built and axiom-audited using only propext and Quot.sound. No trace-validity, replay-correctness, observer-congruence or balance certificate is supplied in place of the existing computation.",
-      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. Metadata cost balance does not establish physical-gate transparency, obligation discharge or complete closure safety. The theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Computed saturation trace fidelity and metadata cost balance",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalSaturateTrace_replayRecords_iff",
@@ -49496,7 +49566,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-physical-saturation-accounting",
-      "title": "Actual physical saturation accounting and first-obstruction fidelity",
+      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. An active dependency owner need not be unique. Exact physical support growth does not establish full-minimum growth, a quotient bound, obligation discharge, complete closure safety or a global named route. The first physical obstruction is not thereby a verified gain, an exact route or strict descent. This theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalSaturateTrace_event_context",
         "PNP.DirectWire.terminalCandidateSaturateTrace_supportCostBalanced",
@@ -49505,7 +49575,7 @@
         "PNP.DirectWire.terminalCandidateSaturateTrace_balance_or_physicalObstruction"
       ],
       "scope": "For arbitrary finite terminal systems, seeds and actual generated events, M235 derives that the dependent is already active and the required record is genuinely new. For every finite direct-wire candidate and executable terminal model, the unchanged extractor charges exactly one physical gate for a generated gate event and zero for metadata, and the selected rule/dependent pair belongs to the computed active-owner list. Every generated nontransparent event is a physical insertion with a genuine nonunique-owner, full-minimum-growth or quotient-cost obstruction. The existing total classifier either preserves full slack and nondecreasing projection defect at canonical computed saturation or returns its exact first such obstruction with a transparent prefix. All five general interfaces are root-built and audited using only propext and Quot.sound. No freshness, charge-balance, active-owner, all-transparent-history or preselected-route certificate replaces the actual computation.",
-      "nonClaim": "The executable observer and profile model remain supplied data. Influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. An active dependency owner need not be unique. Exact physical support growth does not establish full-minimum growth, a quotient bound, obligation discharge, complete closure safety or a global named route. The first physical obstruction is not thereby a verified gain, an exact route or strict descent. This theorem does not derive terminal families from every valid input, prove global route coverage, unconditional SaturatePositive, BCELReady or ZeroSlack, or construct the exact polynomial PCCMin algorithm and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Actual physical saturation accounting and first-obstruction fidelity",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalSaturateTrace_event_context",
@@ -49579,7 +49649,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-physical-charge-ledger",
-      "title": "Computed physical-charge partition and introduction provenance",
+      "nonClaim": "This is a physical-NAND charge partition with seed- and traversal-dependent introduction provenance, not the complete manuscript charge universe or its fixed global ownership function. Active requesting pairs are not assigned manuscript owners, and multiple physical charges may have the same requesting dependency. Materializer grouping and cross-support ownership transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, quotient bound, global named route, input-derived terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalSaturatePhysicalCharges_nodup",
         "PNP.DirectWire.terminalSaturatePhysicalCharges_complete",
@@ -49588,7 +49658,7 @@
         "PNP.DirectWire.terminalCandidateSaturatePhysicalCharges_size"
       ],
       "scope": "For arbitrary finite terminal systems and seeds, M236 constructs a physical-NAND charge ledger directly from the normalized initial records and actual computed saturation trace. Its physical gate identifiers are duplicate-free and occur exactly when the corresponding gate records occur in the computed saturated support. Each entry has inherited seed provenance or an actual generating event with its exact rule and dependent, active context and fresh required gate. The deterministic lookup returns exactly the provenance of the corresponding ledger entry. For every finite direct-wire candidate and executable terminal model, the complete computed ledger length equals the unchanged extractor's support size at canonical saturation. All five general interfaces are root-built and audited using only propext and Quot.sound. No supplied charge list, coverage certificate, freshness premise or ownership certificate replaces the actual computation.",
-      "nonClaim": "This is a physical-NAND charge partition with seed- and traversal-dependent introduction provenance, not the complete manuscript charge universe or its fixed global ownership function. Active requesting pairs are not assigned manuscript owners, and multiple physical charges may have the same requesting dependency. Materializer grouping and cross-support ownership transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions. No full-minimum growth, quotient bound, global named route, input-derived terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Computed physical-charge partition and introduction provenance",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalSaturatePhysicalCharges_nodup",
@@ -49662,7 +49732,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-saturated-support-context",
-      "title": "Computed saturated-support replacement context and physical slack",
+      "nonClaim": "These are physical Boolean replacement and slack laws for actual production saturated supports, not arbitrary raw supports or full-profile compatibility. The complete manuscript profile/materializer charge universe, fixed global ownership map and full-profile replacement transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. No full-minimum growth, quotient bound, global named route, input-derived complete terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalCandidateSaturate_boundary_isInput",
         "PNP.DirectWire.terminalCandidateSaturatePhysicalContext_size",
@@ -49671,7 +49741,7 @@
         "PNP.DirectWire.terminalCandidateSaturatePhysicalSupport_slack_le"
       ],
       "scope": "For every finite direct-wire candidate, executable terminal model and seed list, M237 computes a concrete replacement frame from production saturation and the actual physical gate complement. Gate-source closure proves that the selected support boundary contains only primary inputs. The unchanged extractor constructs both gate halves, and every complement boundary gate is bound to an actual selected-support interface port. The frame preserves the original ordered Boolean outputs when the extracted support is plugged back in. Every equivalent replacement on the exact extracted boundary and interface preserves the whole circuit, with an exact gate-count equation that counts every original physical NAND gate once and permits arbitrary replacement size. Transport through the existing constructive frame theorem bounds the computed support's physical Boolean residual slack by whole-circuit slack. All five general interfaces are root-built and audited using only propext and Quot.sound. No caller-supplied frame, fan-in-closure certificate, gate partition or whole-circuit correctness proof replaces the computation.",
-      "nonClaim": "These are physical Boolean replacement and slack laws for actual production saturated supports, not arbitrary raw supports or full-profile compatibility. The complete manuscript profile/materializer charge universe, fixed global ownership map and full-profile replacement transport remain open. The executable observer and profile model remain supplied data, while influence and semantic minima use exhaustive finite reference constructions; no polynomial runtime is proved. No full-minimum growth, quotient bound, global named route, input-derived complete terminal family, unconditional SaturatePositive, BCELReady or ZeroSlack, or complete polynomial PCCMin runtime and certificate bounds is established. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "title": "Computed saturated-support replacement context and physical slack",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalCandidateSaturate_boundary_isInput",
@@ -49745,7 +49815,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-physical-gain",
-      "title": "Computed proper-support physical gain and exact slack descent",
+      "nonClaim": "These are physical Boolean reference gain-realization and search-failure laws, not full-profile replacement compatibility or a complete named global route. The observer and profile model remain supplied data, while influence, canonical seed search and semantic minima use exhaustive finite reference constructions; no polynomial encoded-size or runtime bound is proved. Failure of the proper-support search does not imply global minimality or ZeroSlack. Complete profile/materializer charge coverage, fixed global ownership, obligation transport, full-minimum growth, quotient bounds, input-derived complete terminal families and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
         "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_size_gain",
@@ -49754,7 +49824,7 @@
         "PNP.DirectWire.findTerminalCandidatePhysicalGain_eq_none_iff"
       ],
       "scope": "For every finite direct-wire candidate, executable terminal profile model and seed list, M238 computes the whole physical replacement using the existing reference-minimum witness and the actual production saturated-support context. The complete ordered Boolean output word is preserved. The replacement gate count plus the computed local gain equals the original gate count, and replacement residual slack plus that gain equals the original physical residual slack. These equations require no properness, positivity, supplied frame or supplied charge partition. The total optional gain step maps this construction over the existing candidate-derived proper-positive support search. Every returned result carries an actually selected canonical proper positive seed and strictly decreases whole physical gate count and residual slack. Failure is exactly absence of every canonical proper positive seed for that computed system, not global minimality. All five universal interfaces are root-built and audited using only propext and Quot.sound. The caller supplies no search result, replacement, seed, context or correctness certificate to the gain-step algorithm.",
-      "nonClaim": "These are physical Boolean reference gain-realization and search-failure laws, not full-profile replacement compatibility or a complete named global route. The observer and profile model remain supplied data, while influence, canonical seed search and semantic minima use exhaustive finite reference constructions; no polynomial encoded-size or runtime bound is proved. Failure of the proper-support search does not imply global minimality or ZeroSlack. Complete profile/materializer charge coverage, fixed global ownership, obligation transport, full-minimum growth, quotient bounds, input-derived complete terminal families and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed proper-support physical gain and exact slack descent",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalCandidateSaturatePhysicalMinimumReplacement_equivalent",
@@ -49828,7 +49898,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-gain-profile-firewall",
-      "title": "Computed full-profile gain acceptance and exact slack descent",
+      "nonClaim": "These are computed finite full-profile acceptance and accepted-result transport laws for the supplied executable profile system, not a derivation of manuscript carrier data or a theorem that every physical gain is full-profile compatible. A first profile mismatch is not a completed named global route. The observer and profile model remain supplied data; influence, canonical seed search and semantic minima remain exhaustive finite reference constructions, with no polynomial encoded-size or runtime theorem. The classifier does not search alternative physical gains after a mismatch or identify ambient observations with the differently typed global profile system. Complete materializer charges, fixed global ownership, full-minimum growth during saturation, quotient bounds, terminal-family derivation and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
         "PNP.DirectWire.firstTerminalGainProfileMismatch_spec",
@@ -49839,7 +49909,7 @@
         "PNP.DirectWire.TerminalCandidateFullProfileGain.fullSlack_gain"
       ],
       "scope": "For every finite direct-wire candidate and supplied executable terminal profile model, M239 classifies the exact result of the existing production physical-gain search. No result is exactly the existing proper-support search failure. A result is scanned at every full-profile coordinate in canonical order. Rejection identifies the actual first mismatching coordinate and complete agreeing prefix; acceptance constructs the existing full-carrier realization without a caller-supplied result, seed, profile-equality proof or correctness certificate. Complete full-carrier realizations preserve the exhaustive full-profile minimum, and every accepted computed gain decreases full-profile slack by exactly the local physical gain of its actually selected proper-positive support. Existing obligation discharge transports through the full realization; an open obligation is not thereby discharged. The seven universal interfaces are explicit-root built with their reviewed standard axiom closures. The classifier reuses M238's proved Boolean equivalence rather than repeating an exhaustive equivalence check.",
-      "nonClaim": "These are computed finite full-profile acceptance and accepted-result transport laws for the supplied executable profile system, not a derivation of manuscript carrier data or a theorem that every physical gain is full-profile compatible. A first profile mismatch is not a completed named global route. The observer and profile model remain supplied data; influence, canonical seed search and semantic minima remain exhaustive finite reference constructions, with no polynomial encoded-size or runtime theorem. The classifier does not search alternative physical gains after a mismatch or identify ambient observations with the differently typed global profile system. Complete materializer charges, fixed global ownership, full-minimum growth during saturation, quotient bounds, terminal-family derivation and global rank-decreasing route coverage remain open. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed full-profile gain acceptance and exact slack descent",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.firstTerminalGainProfileMismatch_eq_none_iff",
@@ -49936,7 +50006,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-independent-materializer-cost",
-      "title": "Independent NAND materializer exact minimum-cost additivity",
+      "nonClaim": "This is an independent physical Boolean materializer forced-cost subcase, not transparency of every manuscript profile materializer or every actual saturation step. Fresh primary inputs and distinct appended NAND outputs are essential; repeating an existing output or reusing the original input pair does not justify additive cost. The result does not change or derive the full profile observer, global materializer ownership, quotient costs, obligation discharge, terminal families or complete rank-decreasing route coverage. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.appendIndependentNandMaterializers_size",
         "PNP.DirectWire.appendIndependentNandMaterializers_original",
@@ -49947,7 +50017,7 @@
         "PNP.DirectWire.appendIndependentNandMaterializers_residualSlack"
       ],
       "scope": "For every finite direct-wire circuit and every finite bank size, M240 physically appends one NAND for each disjoint pair of fresh Boolean inputs while retaining all original ordered outputs. The seven universal interfaces prove exact size and both output semantics, preservation of complete Boolean equivalence, a lower bound against every equivalent competing topology, exact reference-minimum additivity and unchanged physical residual slack. The original circuit need not be minimum, and its outputs may be constant, repeated or direct primary-input wires. The lower bound derives distinct actual bank-output gates from semantic output conditions, restricts fresh inputs to false and computes an erasure/rebinding that removes exactly those gates, including through retained consumers. The resulting implementation realizes the original function. Appending the bank to its attained minimum witness gives the matching upper bound. No correctness certificate or supplied minimum is an algorithm input. All seven interfaces are explicit-root built with their exact reviewed standard axiom closures.",
-      "nonClaim": "This is an independent physical Boolean materializer forced-cost subcase, not transparency of every manuscript profile materializer or every actual saturation step. Fresh primary inputs and distinct appended NAND outputs are essential; repeating an existing output or reusing the original input pair does not justify additive cost. The result does not change or derive the full profile observer, global materializer ownership, quotient costs, obligation discharge, terminal families or complete rank-decreasing route coverage. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Independent NAND materializer exact minimum-cost additivity",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.appendIndependentNandMaterializers_size",
@@ -50041,7 +50111,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "residual-terminal-physical-ownership",
-      "title": "Support-independent physical ownership and exact materializer charges",
+      "nonClaim": "This is a support-independent physical ownership and charge partition kernel, not the complete manuscript computational-record universe or proof of admissible materializer ownership. The raw finite request family is supplied data; a canonical assignment does not discharge unique active ownership, carrier, frontier or obligation conditions. The existing production nonunique-owner rejection is unchanged. Metadata records do not become free computational materializers or receive invented physical cost. The result does not establish HN assembly, forced full-profile minimum growth, quotient bounds, terminal-family derivation or complete rank-decreasing routes. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalPhysicalOwner_none_iff",
         "PNP.DirectWire.terminalPhysicalOwner_first",
@@ -50055,7 +50125,7 @@
         "PNP.DirectWire.terminalOwnedPhysicalMaterializer_wholeCharge"
       ],
       "scope": "For every finite candidate, arbitrary finite raw request family and terminal record list, M241 computes a first-requesting ambient owner before support selection, retaining unrequested physical gates in a fixed remainder bucket. Ten universal interfaces characterize the first requester and unrequested case, exact partition membership, disjointness and restriction stability, actual extracted gate counts, the complete integer charge identity, open semantics, induced-boundary reconnection and the whole-circuit charge total. Overlapping and duplicate requests require no supplied disjointness or coverage certificate. Each owned piece is an existing physical support extraction with its actual NAND size, not an arbitrary numerical weight. All ten interfaces are explicit-root built with their exact reviewed standard axiom closures.",
-      "nonClaim": "This is a support-independent physical ownership and charge partition kernel, not the complete manuscript computational-record universe or proof of admissible materializer ownership. The raw finite request family is supplied data; a canonical assignment does not discharge unique active ownership, carrier, frontier or obligation conditions. The existing production nonunique-owner rejection is unchanged. Metadata records do not become free computational materializers or receive invented physical cost. The result does not establish HN assembly, forced full-profile minimum growth, quotient bounds, terminal-family derivation or complete rank-decreasing routes. Reference minima remain exhaustive finite constructions, not a polynomial-time algorithm. No unconditional SaturatePositive, BCELReady or ZeroSlack, complete polynomial PCCMin, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Support-independent physical ownership and exact materializer charges",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalPhysicalOwner_none_iff",
@@ -50186,7 +50256,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-constructive-nand-sharing",
-      "title": "Constructive whole-program NAND sharing and checked normalization",
+      "nonClaim": "This is a computed physical R1/R4 structural-sharing stage, not complete manuscript N1-N10 normalization or a proof that every latent-sharing opportunity is found. A no-fold branch does not imply semantic minimality, absence of other gains or ZeroSlack; a checked regression gives a smaller equivalent circuit after the pass has no structural fold. The result does not construct a proper-support Package E ledger, arbitrary replacement pullback, full-profile carrier or obligation transport, terminal-derived families, global rank-decreasing route coverage or the complete PCCMin oracle. Reference minimum occurs in specification theorems, not in execution of this pass. No uniformly encoded-size polynomial execution theorem for the complete PCCMin construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.compileNANDSharing_alias_semantics",
         "PNP.DirectWire.compileNANDSharing_exact_accounting",
@@ -50199,7 +50269,7 @@
         "PNP.DirectWire.nandSharingNormalizer_checked"
       ],
       "scope": "For every finite direct-wire NAND program and complete ordered output word, M242 computes a full structural-sharing traversal, translating every source through earlier computed aliases and searching the actual retained program for equal or commuted NAND input pairs. Each successful lookup reuses one existing gate; each unsuccessful lookup appends one translated gate. Nine universal interfaces prove every alias value, exact retained-plus-fold gate accounting, complete multi-output equivalence, non-increasing physical size, invariant reference minimum, exact residual-slack savings, strict gain exactly when a fold occurs, strict residual descent and the computed normalizer outcome. The caller supplies only the implementation, not an optimizer or correctness certificate. The pass performs structural lookup, not semantic enumeration. All nine interfaces are explicit-root built with only propext and Quot.sound.",
-      "nonClaim": "This is a computed physical R1/R4 structural-sharing stage, not complete manuscript N1-N10 normalization or a proof that every latent-sharing opportunity is found. A no-fold branch does not imply semantic minimality, absence of other gains or ZeroSlack; a checked regression gives a smaller equivalent circuit after the pass has no structural fold. The result does not construct a proper-support Package E ledger, arbitrary replacement pullback, full-profile carrier or obligation transport, terminal-derived families, global rank-decreasing route coverage or the complete PCCMin oracle. Reference minimum occurs in specification theorems, not in execution of this pass. No uniformly encoded-size polynomial execution theorem for the complete PCCMin construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Constructive whole-program NAND sharing and checked normalization",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.compileNANDSharing_alias_semantics",
@@ -50321,7 +50391,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "concrete-final-report-bridge",
-      "title": "Checked concrete SAT hardness in the active conditional final-report bridge",
+      "nonClaim": "This is a conditional final-report bridge, not the eligible unconditional root theorem. No complete PCCMin loop certificate is constructed: the concrete residual-band decider remains an explicit certificate field. Canonical package acceptance does not supply missing algorithmic correctness, encoded-size bounds or loop existence. This does not establish unconditional SaturatePositive, BCELReady or ZeroSlack, a complete exact polynomial PCCMin construction, polynomial output and certificate bounds, deterministic CNFSAT in P or P = NP. M231 hardness was already credited; connecting it here earns no duplicate checkpoint points. No fixed weighted checkpoint or global gate closes.",
       "requiredTheorems": [
         "PNP.sat_np_hard_checked",
         "PNP.sat_np_complete_checked",
@@ -50329,7 +50399,7 @@
         "PNP.final_report_bridge"
       ],
       "scope": "M243 connects the already checked all-input Cook-Levin NP-hardness and NP-completeness theorem to the exact report-facing SAT predicate. The existing accepted-generated-package consequence and final_report_bridge no longer take a CheckerTrustModel or supplied SAT-hardness argument. They consume the checked theorem while retaining the explicit PCCMinLoopCertificate, its concrete residual-band polynomial decider and the loop-existence antecedent. This strengthens the active conditional interface rather than adding an unused parallel route. Four reviewed interfaces have exact kernel types and the same standard axioms as the consumed M231 theorem: Classical.choice, Quot.sound and propext.",
-      "nonClaim": "This is a conditional final-report bridge, not the eligible unconditional root theorem. No complete PCCMin loop certificate is constructed: the concrete residual-band decider remains an explicit certificate field. Canonical package acceptance does not supply missing algorithmic correctness, encoded-size bounds or loop existence. This does not establish unconditional SaturatePositive, BCELReady or ZeroSlack, a complete exact polynomial PCCMin construction, polynomial output and certificate bounds, deterministic CNFSAT in P or P = NP. M231 hardness was already credited; connecting it here earns no duplicate checkpoint points. No fixed weighted checkpoint or global gate closes.",
+      "title": "Checked concrete SAT hardness in the active conditional final-report bridge",
       "theoremRows": [
         {
           "name": "PNP.sat_np_hard_checked",
@@ -50395,7 +50465,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-output-cone-pruning",
-      "title": "Derived physical output cones and checked unused-gate pruning",
+      "nonClaim": "This is a computed physical unused-gate pruning stage, not complete manuscript N1-N10 normalization or full-profile/metadata support derivation. The empty profile index describes only this physical closure; arbitrary full-profile observers may distinguish the pruned implementation. A no-deletion branch does not imply semantic minimality or ZeroSlack. The pass reuses executable closure and checked extraction; reference minimum occurs in specification theorems, not in execution. No proper-support Package E rewrite ledger, full-profile carrier/obligation transport, global terminal family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.outputConeRecords_output",
         "PNP.DirectWire.outputConeRecords_closed",
@@ -50410,7 +50480,7 @@
         "PNP.DirectWire.outputConeNormalizer_checked"
       ],
       "scope": "For every finite direct-wire NAND candidate and complete ordered output word, M244 computes the least physical gate-predecessor closure of actual gate-valued outputs using the existing finite work-list saturation. It proves output inclusion, predecessor closure, leastness and absence of gate-valued external boundary wires. The existing checked support extractor is reused, its boundary is renamed to original primary inputs, and every ordered output position is reconnected, including constants and repeated wires. Eleven universal interfaces establish complete input/output equivalence, non-increasing physical gate count, exact retained-plus-deleted accounting, invariant semantic reference minimum, exact residual-slack savings, strict gain exactly when a gate is deleted and the concrete PCCMin normalizer outcome. The caller supplies only the implementation. All eleven interfaces are explicit-root built with only propext and Quot.sound.",
-      "nonClaim": "This is a computed physical unused-gate pruning stage, not complete manuscript N1-N10 normalization or full-profile/metadata support derivation. The empty profile index describes only this physical closure; arbitrary full-profile observers may distinguish the pruned implementation. A no-deletion branch does not imply semantic minimality or ZeroSlack. The pass reuses executable closure and checked extraction; reference minimum occurs in specification theorems, not in execution. No proper-support Package E rewrite ledger, full-profile carrier/obligation transport, global terminal family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Derived physical output cones and checked unused-gate pruning",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.outputConeRecords_output",
@@ -50556,7 +50626,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-dead-support-context",
-      "title": "Computed dead-support frames and proper physical deletion",
+      "nonClaim": "This is a computed proper physical deletion component, not complete manuscript Package E admissibility or a complete N1-N10 rewrite ledger. Properness concerns the actual gate subset and concrete frame, not full-profile carrier and obligation compatibility. An all-unused circuit is not accepted as a proper-subset witness. Rejecting this route does not imply semantic minimality or ZeroSlack. The construction does not search reference minima; the reference minimum occurs only in specification theorems. No arbitrary full-profile preservation, complete Package E verifier, terminal-derived global family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.outputConeFrontierCandidate_semantics",
         "PNP.DirectWire.deadSupport_interface_empty",
@@ -50580,7 +50650,7 @@
         "PNP.DirectWire.deadSupportProperGain_none_of_no_dead"
       ],
       "scope": "For every finite direct-wire NAND implementation, M245 computes the physical complement of its output cone and proves that the actual extracted dead support has no outgoing interface. Its incoming wires are connected to original inputs or the computed live frontier; the live program also carries every original ordered output as bypass. The support is the actual extracted candidate, reindexed only by its proved empty interface. A concrete FramedContext inserts that support with the original physical gate count and plugs a zero-gate replacement with complete original output semantics. Twenty general interfaces establish exact boundary values, extraction identity, local and framed equivalence, retained-plus-dead gate accounting, exact residual-slack savings and a computed physical gain witness precisely when both dead support and live cone are nonempty. All twenty interfaces are explicit-root built with only propext and Quot.sound. No support, frame or correctness certificate is supplied by the caller.",
-      "nonClaim": "This is a computed proper physical deletion component, not complete manuscript Package E admissibility or a complete N1-N10 rewrite ledger. Properness concerns the actual gate subset and concrete frame, not full-profile carrier and obligation compatibility. An all-unused circuit is not accepted as a proper-subset witness. Rejecting this route does not imply semantic minimality or ZeroSlack. The construction does not search reference minima; the reference minimum occurs only in specification theorems. No arbitrary full-profile preservation, complete Package E verifier, terminal-derived global family, complete rank-decreasing route coverage or total PCCMin oracle is constructed. No uniformly encoded-size polynomial execution theorem for the complete construction is proved. No unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed dead-support frames and proper physical deletion",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.outputConeFrontierCandidate_semantics",
@@ -50834,7 +50904,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-dead-support-full-mode",
-      "title": "Full finite-profile and obligation acceptance for computed dead-support gains",
+      "nonClaim": "This is computed acceptance against an input finite profile observation system, not derivation of the manuscript carrier or its semantic dependency graph. Checking observed obligation bits is not a constructed R5 creation or R6-R8 discharge ledger, and does not by itself establish complete Package E admissibility. Full-profile equality is not replaced by quotient equality; matching profiles with an open obligation are rejected. No-proper-support rejection excludes only this computed dead-support route, not every physical gain or a smaller semantic implementation. A mismatch or open obligation is explicit rejecting data, not a completed global routing theorem. The full-profile reference minimum appears only in a specification theorem; it is not computed by the classifier. No bound on the supplied observer computation or uniformly encoded-size polynomial runtime is established. No terminal-derived global family, complete N1-N10 normalization, full Package E verifier, total PCCMin oracle, unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff",
         "PNP.DirectWire.firstTerminalOpenObligation_spec",
@@ -50846,7 +50916,7 @@
         "PNP.DirectWire.classifyDeadSupportFullMode_checked"
       ],
       "scope": "For every finite direct-wire implementation and input finite profile observation system, M246 classifies the actual M245 proper dead-support replacement without an exhaustive physical support or reference-minimum search. It reuses the complete profile mismatch scan and adds a canonical obligation-role scan. No proper support, first full-profile mismatch, first open obligation and accepted full-mode result are distinct proof-bearing outcomes. Eight general interfaces prove exact obligation-scan completeness, first-failure prefixes, acceptance precisely when computed properness, complete profile equality and observed obligation discharge all hold, exact no-proper-support rejection, full-profile minimum invariance as a specification theorem, and branch soundness with physical equivalence, properness, exact size/slack savings and strict descent. Accepted results inhabit the existing full-carrier interface. All eight interfaces are explicit-root built with only propext and Quot.sound. No result, profile-invariance premise or correctness certificate is supplied by the caller.",
-      "nonClaim": "This is computed acceptance against an input finite profile observation system, not derivation of the manuscript carrier or its semantic dependency graph. Checking observed obligation bits is not a constructed R5 creation or R6-R8 discharge ledger, and does not by itself establish complete Package E admissibility. Full-profile equality is not replaced by quotient equality; matching profiles with an open obligation are rejected. No-proper-support rejection excludes only this computed dead-support route, not every physical gain or a smaller semantic implementation. A mismatch or open obligation is explicit rejecting data, not a completed global routing theorem. The full-profile reference minimum appears only in a specification theorem; it is not computed by the classifier. No bound on the supplied observer computation or uniformly encoded-size polynomial runtime is established. No terminal-derived global family, complete N1-N10 normalization, full Package E verifier, total PCCMin oracle, unconditional SaturatePositive, BCELReady or ZeroSlack, deterministic CNFSAT in P or eligible root theorem is established. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Full finite-profile and obligation acceptance for computed dead-support gains",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.firstTerminalOpenObligation_eq_none_iff",
@@ -50956,7 +51026,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-constant-propagation",
-      "title": "Computed constant propagation through arbitrary NAND programs",
+      "nonClaim": "This is the physical literal-constant structural-congruence component, not complete manuscript R1-R9 verification or N1-N10 normalization. No-elimination does not imply semantic minimality or ZeroSlack: the regression retains NAND(x, NAND(x,x)) even though a zero-gate constant-true word is equivalent. No full-profile preservation, derived manuscript carrier, arbitrary-support pullback/expansion, obligation lifecycle ledger, complete Package E or total PCCMin oracle is established. The reference minimum is used only in specification theorems, not executed by the pass. No uniformly encoded-size polynomial runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root theorem remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.constantGateValue_sound",
         "PNP.DirectWire.compileNANDConstantPropagation_alias_semantics",
@@ -50970,7 +51040,7 @@
         "PNP.DirectWire.nandConstantPropagationNormalizer_checked"
       ],
       "scope": "For every finite direct-wire NAND program, M247 computes retained-source aliases for all original gates, substitutes them before inspecting each NAND operation, eliminates a gate exactly when literal constant NAND identities determine its value, and rewrites the complete ordered output tuple. Ten general interfaces prove primitive constant recognition sound for every valuation, alias semantics, exact retained-plus-eliminated gate accounting, complete multi-output equivalence, non-increasing size, invariant reference minimum, exact residual-slack savings, strict gain exactly when an elimination occurs, strict residual descent and the computed outcome of the existing total normalizer interface. Earlier constant eliminations propagate through arbitrarily later gates. The primitive recognition theorem is axiom-free; the other nine interfaces use only propext and Quot.sound. No optimizer, result, semantic equivalence certificate or caller correctness assertion is supplied.",
-      "nonClaim": "This is the physical literal-constant structural-congruence component, not complete manuscript R1-R9 verification or N1-N10 normalization. No-elimination does not imply semantic minimality or ZeroSlack: the regression retains NAND(x, NAND(x,x)) even though a zero-gate constant-true word is equivalent. No full-profile preservation, derived manuscript carrier, arbitrary-support pullback/expansion, obligation lifecycle ledger, complete Package E or total PCCMin oracle is established. The reference minimum is used only in specification theorems, not executed by the pass. No uniformly encoded-size polynomial runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root theorem remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed constant propagation through arbitrary NAND programs",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.constantGateValue_sound",
@@ -51101,7 +51171,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "pccmin-physical-normalization-closure",
-      "title": "Computed closure of constant propagation, NAND sharing and output-cone pruning",
+      "nonClaim": "This is operational quiescence for exactly three physical passes, not semantic minimality, all structural congruences, complete manuscript N1-N10 normalization or ZeroSlack. The regression remains quiescent on NAND(x, NAND(x,x)) while a zero-gate constant-true word is strictly smaller and equivalent. The trace is not the arbitrary-support Pull/Expand materializer transport required by the complete Traceable normalization theorem. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle ledger, complete Package E and the total PCCMin oracle remain open. Semantic reference minima occur only in specifications and are not executed by this loop. An iteration bound is not a runtime bound: no uniformly encoded-size polynomial construction, runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.physicalNormalizationPass_equivalent",
         "PNP.DirectWire.physicalNormalizationPass_exact_accounting",
@@ -51117,7 +51187,7 @@
         "PNP.DirectWire.physicalClosureNormalizer_checked"
       ],
       "scope": "For every finite direct-wire implementation, M248 computes a priority-respecting loop over the actual constant-propagation, NAND-sharing and output-cone-pruning constructions. It selects the first positive saving, recurses on strictly smaller physical gate count, and stops only when all three computed savings vanish on the same final implementation. Twelve general interfaces prove complete ordered-output equivalence, exact per-pass and telescoping trace savings, strict selected gains, priority, common quiescence, unchanged quiescent inputs, idempotent re-execution, invariant semantic reference minimum, exact residual-slack savings and a gain-iteration bound by the original slack. The existing normalizer interface exposes every positive total saving as a strict gain. All proof fields are derived by the construction, with no supplied normalizer, oracle, result or stopping certificate. The twelve interfaces use only propext and Quot.sound.",
-      "nonClaim": "This is operational quiescence for exactly three physical passes, not semantic minimality, all structural congruences, complete manuscript N1-N10 normalization or ZeroSlack. The regression remains quiescent on NAND(x, NAND(x,x)) while a zero-gate constant-true word is strictly smaller and equivalent. The trace is not the arbitrary-support Pull/Expand materializer transport required by the complete Traceable normalization theorem. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle ledger, complete Package E and the total PCCMin oracle remain open. Semantic reference minima occur only in specifications and are not executed by this loop. An iteration bound is not a runtime bound: no uniformly encoded-size polynomial construction, runtime, output-size or certificate-size theorem is established. Unconditional SaturatePositive, BCELReady and ZeroSlack, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed closure of constant propagation, NAND sharing and output-cone pruning",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.physicalNormalizationPass_equivalent",
@@ -51275,7 +51345,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "arbitrary-support-splice",
-      "title": "Computed arbitrary-support literal NAND replacement and topological compilation",
+      "nonClaim": "Arbitrary raw port compatibility and equal open Boolean functions do not by themselves guarantee acyclic literal wiring. The regression gives an equivalent replacement with a raw graph solution but a genuine dependency cycle, which the compiler rejects. This is a physical substitution and well-formedness result, not a contradiction of the manuscript's unconstructed complete carrier premises. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle, arbitrary-support Pull/Expand materializer identities, complete Package E and complete normalization remain open. No semantic minimum is computed, no unconditional global route is supplied, and a finite node-count termination argument is not a total encoded-size polynomial runtime theorem. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.RawNandCompilationState.readSource_sound",
         "PNP.DirectWire.RawNandCompilationState.readGate_sound",
@@ -51303,7 +51373,7 @@
         "PNP.DirectWire.ArbitrarySupportSplice.production_agreement"
       ],
       "scope": "For all finite raw NAND graphs, M249 computes a topological order from the actual source fields or rejects the unresolved cyclic remainder. The ordered program has one position for every original node, exact size and complete output semantics for every solution of the original equations. For arbitrary finite terminal support records, it then constructs the actual literal splice from the canonical exterior gates, computed boundary and interface, replacement word and every original ordered output. Every accepted splice has exactly the exterior size plus replacement size; an equivalent replacement preserves all outputs, and a strict local physical saving yields a strict whole-program saving. Actual production saturation derives a primary-input-only boundary and hence unconditional compilation success, without a supplied frame, order, wiring map or acyclicity certificate. Its result agrees in size and semantics with the existing production physical constructor. Twenty-four interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
-      "nonClaim": "Arbitrary raw port compatibility and equal open Boolean functions do not by themselves guarantee acyclic literal wiring. The regression gives an equivalent replacement with a raw graph solution but a genuine dependency cycle, which the compiler rejects. This is a physical substitution and well-formedness result, not a contradiction of the manuscript's unconstructed complete carrier premises. Full-profile preservation, the manuscript carrier and R5/R6-R8 obligation lifecycle, arbitrary-support Pull/Expand materializer identities, complete Package E and complete normalization remain open. No semantic minimum is computed, no unconditional global route is supplied, and a finite node-count termination argument is not a total encoded-size polynomial runtime theorem. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes; P = NP is not proved.",
+      "title": "Computed arbitrary-support literal NAND replacement and topological compilation",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.RawNandCompilationState.readSource_sound",
@@ -51592,7 +51662,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-carrier-transport",
-      "title": "Computed wire-backed carrier preservation under physical normalization and replacement",
+      "nonClaim": "This represents and transports wire-backed computational fields; the wire bindings are actual input data, not a derivation of the complete manuscript carrier or every noncomputational record, role and history. Proof-only records do not become Boolean sources. The empty additional abstract profile in the physical specialization does not assert that the full manuscript profile is empty. R5/R6-R8 obligation creation and discharge, arbitrary-support Pull/Expand materializer identities, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial bounds remain open. Equal local Boolean functions do not guarantee acyclic arbitrary literal splicing; the compiler can reject them. No semantic minimum is executed, no fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireCarrier.exposed_unpack",
         "PNP.DirectWire.WireCarrier.unpack_exposed",
@@ -51612,7 +51682,7 @@
         "PNP.DirectWire.WireCarrier.production_compiles"
       ],
       "scope": "For all finite implementations with an ordered tuple of literal computational field sources, M250 exposes ordinary outputs followed by every field without adding NAND gates. Exact pack/unpack identities retain the program and ordered sources. The actual three-pass physical normalizer preserves every ordinary output and field value, has exact trace accounting, reaches common quiescence and is idempotent. Every selected field producer belongs to the computed support interface, even when no ordinary output uses it. The actual arbitrary-support splice compiler preserves both observation classes under equality of the complete extracted open function, counts every exterior and replacement gate, transfers strict local savings and rejects cyclic literal wiring. Production predecessor closure is derived from the combined physical program without a supplied observer, order, map or successful result. Sixteen interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
-      "nonClaim": "This represents and transports wire-backed computational fields; the wire bindings are actual input data, not a derivation of the complete manuscript carrier or every noncomputational record, role and history. Proof-only records do not become Boolean sources. The empty additional abstract profile in the physical specialization does not assert that the full manuscript profile is empty. R5/R6-R8 obligation creation and discharge, arbitrary-support Pull/Expand materializer identities, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial bounds remain open. Equal local Boolean functions do not guarantee acyclic arbitrary literal splicing; the compiler can reject them. No semantic minimum is executed, no fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed wire-backed carrier preservation under physical normalization and replacement",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireCarrier.exposed_unpack",
@@ -51816,7 +51886,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-obligation-restoration",
-      "title": "Computed lost-wire projection obligations and fully charged restoration",
+      "nonClaim": "This is the computational lost-wire slice of the manuscript's projection and R5/full-R8 requirements, not the full carrier or complete finite-kernel rewrite and obligation calculus. The keep mask is an input, not a derived global route. Noncomputational records, R6/R7 cancellation, arbitrary obligation-dependency DAGs, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial runtime remain open. Quotient padding is not full-field agreement. Restoration need not be a net gain or a semantic minimum. The twice-original gate bound is only an output-size fact, not a total polynomial execution or certificate-size theorem. No fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireObligationRestoration.projected_output",
         "PNP.DirectWire.WireObligationRestoration.projected_kept_field",
@@ -51842,7 +51912,7 @@
         "PNP.DirectWire.WireObligationRestoration.replay_rejects_duplicate_ids"
       ],
       "scope": "For every finite wire-backed carrier and finite keep mask, M251 computes the actual projected NAND word and one shared materializer for all forgotten computational fields. Literal common-input concatenation restores every ordinary output and every ordered field for all valuations, with exact projected-plus-materializer physical gate charge and an output gate-count bound of twice the original. The mask derives exactly the forgotten coordinates, each with an original-source-bound R5 creation and actual restored-source-bound full-value R8 discharge. The computed independent event ledger creates and discharges every lost coordinate once and closes under replay; whole-trace identity validation rejects reusing an already discharged identity. Gain detection pays the complete materializer before requiring a strict decrease. No observer, restoration program, discharge trace or correctness certificate is supplied. Twenty-two interfaces have exactly reviewed dependencies contained in propext and Quot.sound.",
-      "nonClaim": "This is the computational lost-wire slice of the manuscript's projection and R5/full-R8 requirements, not the full carrier or complete finite-kernel rewrite and obligation calculus. The keep mask is an input, not a derived global route. Noncomputational records, R6/R7 cancellation, arbitrary obligation-dependency DAGs, complete Package E and N1-N10, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial runtime remain open. Quotient padding is not full-field agreement. Restoration need not be a net gain or a semantic minimum. The twice-original gate bound is only an output-size fact, not a total polynomial execution or certificate-size theorem. No fixed weighted checkpoint or global gate closes, deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed lost-wire projection obligations and fully charged restoration",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireObligationRestoration.projected_output",
@@ -52110,7 +52180,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-quotient-lift",
-      "title": "Computed quotient replacement lift with matched materializer costs",
+      "nonClaim": "This is a computational word-level quotient lift, not arbitrary-support Pull/Expand or an embedding of the reference lift into the original circuit. The keep mask, replacement and local quotient agreement are inputs; the construction does not discover replacements or derive that local agreement. The lifted reference can exceed the original gate count, and a relative saving can leave no original gain. It does not complete the manuscript carrier, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireQuotientLift.expanded_reference",
         "PNP.DirectWire.WireQuotientLift.referenceLift_charge",
@@ -52131,7 +52201,7 @@
         "PNP.DirectWire.WireQuotientLift.CheckedGain.checked"
       ],
       "scope": "For every finite computational wire carrier, finite keep mask and replacement satisfying local quotient agreement on all ordinary outputs and every kept field, M252 constructs the literal replacement-plus-shared-materializer word. All ordinary outputs and all ordered computational fields agree with the original for every valuation. The same derived materializer gives exact natural gate charges and matched integer cost differences for the reference lift and the replacement expansion. Cancellation transports a saving only against the lifted reference; an original-circuit gain separately requires the full replacement-plus-materializer cost to be strictly smaller than the original. Lost-field discharges bind the original R5 source to the actual expanded source and derive full-value witnesses without any agreement about the replacement's forgotten fields. The computed gain test retains the local quotient premise and returns a complete equivalent strict gain with every field preserved. Seventeen general interfaces have exact reviewed dependencies propext and Quot.sound.",
-      "nonClaim": "This is a computational word-level quotient lift, not arbitrary-support Pull/Expand or an embedding of the reference lift into the original circuit. The keep mask, replacement and local quotient agreement are inputs; the construction does not discover replacements or derive that local agreement. The lifted reference can exceed the original gate count, and a relative saving can leave no original gain. It does not complete the manuscript carrier, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed quotient replacement lift with matched materializer costs",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireQuotientLift.expanded_reference",
@@ -52349,7 +52419,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-frontier-lift",
-      "title": "Computed original-accounted frontier replacement",
+      "nonClaim": "This is a computational frontier lift for one input-derived visible predecessor cone, not arbitrary-support Pull/Expand across all manuscript traces. The keep mask, replacement and complete local open-function agreement are inputs. Ordinary-output or quotient-only agreement does not imply the stronger completed-frontier premise. No replacement search or automatic local agreement is proved. A whole-support saving is not a proper-support certificate. The construction does not complete the full manuscript carrier, noncomputational profile fields, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
         "PNP.DirectWire.WireFrontierLift.kept_field_selected",
@@ -52371,7 +52441,7 @@
         "PNP.DirectWire.WireFrontierLift.ProperGain.checked"
       ],
       "scope": "For every finite computational wire carrier and keep mask, M253 computes the predecessor cone of ordinary and kept observations, then extracts its complete interface from the original fully exposed carrier. Selected forgotten field producers and exterior consumers participate in that frontier. Predecessor closure derives a primary-input-only boundary and actual replacement compiler success without a supplied support, order or success certificate. Every original exterior gate is retained exactly once. Original and expanded gate counts split into pulled or replacement gates plus the same actual exterior charge, giving matched integer differences and an exact original-saving equivalence. Equality with the complete extracted open function derives all ordinary and ordered computational field values and full discharges bound to the actual expanded sources. The computed proper-gain query separately requires proper support and strict local saving, then returns an actual original-circuit equivalent strict gain with every field preserved. Eighteen general interfaces have exact reviewed dependencies propext and Quot.sound.",
-      "nonClaim": "This is a computational frontier lift for one input-derived visible predecessor cone, not arbitrary-support Pull/Expand across all manuscript traces. The keep mask, replacement and complete local open-function agreement are inputs. Ordinary-output or quotient-only agreement does not imply the stronger completed-frontier premise. No replacement search or automatic local agreement is proved. A whole-support saving is not a proper-support certificate. The construction does not complete the full manuscript carrier, noncomputational profile fields, R6/R7 and general obligation-dependency DAG calculus, N1-N10, Package E, global routing, unconditional SaturatePositive, BCELReady or ZeroSlack, exact PCCMin or total encoded-size polynomial construction, runtime, output and certificate bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed original-accounted frontier replacement",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireFrontierLift.ordinary_output_selected",
@@ -52601,7 +52671,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-matched-cancellation",
-      "title": "Computed full-mode wire cancellation",
+      "nonClaim": "This is an original-source-identity computational R6 case, not every semantic cancellation or the complete manuscript obligation calculus. The keep mask, replacement and precise local quotient agreement are inputs; forgotten-field equality, supplied representatives, materializer weights and global correctness certificates are not. Syntactically different but semantically equal wires may remain unresolved. No universal comparison with independently normalized earlier materializers is proved. A whole-word strict gain is not a proper-support Package E certificate. The full manuscript carrier, noncomputational profile fields, R7 and arbitrary dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff",
         "PNP.DirectWire.WireMatchedCancellation.observation_value",
@@ -52631,7 +52701,7 @@
         "PNP.DirectWire.WireMatchedCancellation.replay_rejects_duplicate_ids"
       ],
       "scope": "For every finite computational wire carrier and keep mask, M254 computes canonical retained representatives by literal source identity in the original ordinary outputs and kept fields. The precise local quotient-agreement premise derives each matched forgotten wire's full value in the actual replacement. A computed resolved mask selects one actual shared materializer for the remaining unresolved wires, with an explicit zero-gate case when all fields resolve. The expanded word preserves every ordinary output and ordered computational field, and has exactly replacement gates plus its actual materializer charge. Computed R6 cancellations and R8 restorations carry full-value witnesses bound to that expanded source. Their generated R5/discharge ledger covers exactly the forgotten coordinates, closes with no pending obligations and rejects creation-identity reuse across the whole transcript, including already discharged entries. The fully paid whole-word gain query compares the actual expansion with the original gate count. Twenty-six general interfaces have reviewed propext-only or propext-and-Quot.sound dependencies.",
-      "nonClaim": "This is an original-source-identity computational R6 case, not every semantic cancellation or the complete manuscript obligation calculus. The keep mask, replacement and precise local quotient agreement are inputs; forgotten-field equality, supplied representatives, materializer weights and global correctness certificates are not. Syntactically different but semantically equal wires may remain unresolved. No universal comparison with independently normalized earlier materializers is proved. A whole-word strict gain is not a proper-support Package E certificate. The full manuscript carrier, noncomputational profile fields, R7 and arbitrary dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed full-mode wire cancellation",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireMatchedCancellation.representative_isSome_iff",
@@ -52956,7 +53026,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-unary-realization",
-      "title": "Computed unary full-word realization",
+      "nonClaim": "This is a complete unary computational word realization component for manuscript R7, not an arbitrary ambient-cut embedding, every R7 case or the complete manuscript obligation calculus. Minimum size is relative to all exposed computational observations, not ordinary outputs alone. A whole-word strict gain is not a proper-support Package E certificate. The keep mask and source-bound R5 identity are used only by the discharge interface; no supplied full-value agreement is a construction premise. There is no enumeration of implementations, but evaluating two unary inputs with recursive Program.eval does not prove polynomial encoded runtime. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireUnaryRealization.observation_value",
         "PNP.DirectWire.WireUnaryRealization.needsNegation_iff",
@@ -52978,7 +53048,7 @@
         "PNP.DirectWire.WireUnaryRealization.CheckedGain.checked"
       ],
       "scope": "For every unary computational wire carrier, with arbitrary original gate count, ordered ordinary outputs and computational fields, M255 derives both unary observation values from the actual source and constructs a complete zero-or-one-gate realization. Constants and the input cost zero gates; every negated observation shares the same actual NOT gate. The result preserves every ordinary output and computational field at every unary valuation. Its exact gate formula is minimal among all equivalent full computational carriers: a zero-gate source cannot negate the only boundary input. The constructor accepts no replacement, truth table, local agreement or minimizer. Source-exact R7 discharge witnesses for original R5 identities refer to the actual computed program and the original full field values. The whole-word strict-gain query succeeds whenever any equivalent full unary carrier is smaller. Eighteen general interfaces have reviewed axiom closures: five are axiom-free and thirteen use only propext and Quot.sound.",
-      "nonClaim": "This is a complete unary computational word realization component for manuscript R7, not an arbitrary ambient-cut embedding, every R7 case or the complete manuscript obligation calculus. Minimum size is relative to all exposed computational observations, not ordinary outputs alone. A whole-word strict gain is not a proper-support Package E certificate. The keep mask and source-bound R5 identity are used only by the discharge interface; no supplied full-value agreement is a construction premise. There is no enumeration of implementations, but evaluating two unary inputs with recursive Program.eval does not prove polynomial encoded runtime. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed unary full-word realization",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireUnaryRealization.observation_value",
@@ -53193,7 +53263,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-unary-frontier",
-      "title": "Computed constant and unary frontier replacement",
+      "nonClaim": "This is source-derived constant/unary R7 realization for the computed visible predecessor cone, not every arbitrary ambient support or an external-gate boundary. Minimum size is relative to the complete fixed local frontier, not all ambient circuits with different exteriors. A whole-support saving is not a proper-support Package E certificate. More-than-unary boundaries are rejected rather than supplied with correctness certificates. Finite source evaluation and actual compiler termination are not encoded-size polynomial runtime theorems. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireUnaryFrontier.constantWord_value",
         "PNP.DirectWire.WireUnaryFrontier.constantWord_gateCount",
@@ -53227,7 +53297,7 @@
         "PNP.DirectWire.WireUnaryFrontier.ProperGain.checked"
       ],
       "scope": "For arbitrary computational wire carriers, original gate counts, ordered ordinary outputs, computational fields and keep masks, M256 computes the visible predecessor cone and its completed full frontier. When the actual incoming boundary has zero or one port, it derives a zero-gate constant word or the minimum complete unary word, preserving every local output at every open valuation. No replacement, truth table, semantic agreement, wire map, compilation order, compiler result or minimizer is supplied. The actual primary-boundary compiler substitutes this word into the original exterior, retained exactly once. Every ordinary output and computational field is preserved, including forgotten selected frontier fields and exterior fields depending on other ambient inputs. The result has exact replacement-plus-exterior gate count and cannot increase the original count. Source-bound R7 witnesses discharge original R5 identities with their full values in the actual expanded program. The proper-gain query computes boundary recognition, positive actual exterior and strict local saving separately; it succeeds whenever any complete local realization is smaller on such a proper recognized cone. Thirty general interfaces have reviewed axiom closures: two are axiom-free, one uses only Quot.sound and twenty-seven use only propext and Quot.sound.",
-      "nonClaim": "This is source-derived constant/unary R7 realization for the computed visible predecessor cone, not every arbitrary ambient support or an external-gate boundary. Minimum size is relative to the complete fixed local frontier, not all ambient circuits with different exteriors. A whole-support saving is not a proper-support Package E certificate. More-than-unary boundaries are rejected rather than supplied with correctness certificates. Finite source evaluation and actual compiler termination are not encoded-size polynomial runtime theorems. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed constant and unary frontier replacement",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireUnaryFrontier.constantWord_value",
@@ -53594,7 +53664,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-unary-arbitrary-support",
-      "title": "Computed constant and unary replacement on arbitrary completed supports",
+      "nonClaim": "Arbitrary support refers to the choice of finite physical support in a computational wire carrier, not arbitrary boundary width or the full manuscript carrier. Boundaries with more than one incoming port are rejected. The minimum is over complete local open realizations for the fixed extracted frontier, not over all ambient circuits or different exteriors. A whole-support saving is not a proper-support Package E certificate. Prefix causality and the source-derived rank prove termination of this compiler, not uniformly polynomial encoded-size execution. Noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
         "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
@@ -53629,7 +53699,7 @@
         "PNP.DirectWire.WireUnaryArbitrarySupport.ProperGain.checked"
       ],
       "scope": "For arbitrary finite computational wire carriers, original gate counts, ordered ordinary outputs, computational fields and finite terminal-record supports, M257 derives the complete boundary and frontier from the actual exposed program. Every actual zero- or one-port boundary has a computed minimum complete local word with at most one shared NOT gate. General open-evaluation prefix causality proves that a selected frontier gate before the sole external boundary gate is represented by a literal constant. A rank derived from original gate indices then proves well-foundedness and successful compilation of this actual replacement, without a supplied rank, acyclicity certificate, order, agreement, replacement program or compiler result. Empty and primary-input boundaries are covered as well as a sole external-gate boundary. The actual exterior is retained exactly once. Every ordinary output and computational field is preserved at every ambient valuation, with exact replacement-plus-exterior charge, nonincrease and equivalent strict local-to-global saving. Source-exact full-value R7 witnesses discharge the original R5 identities. The proper-gain query computes boundary recognition, positive exterior and strict local saving, and succeeds whenever any complete local realization is smaller on a recognized proper support. Thirty-one general interfaces have reviewed axiom closures: one is axiom-free, one uses only Quot.sound and twenty-nine use only propext and Quot.sound.",
-      "nonClaim": "Arbitrary support refers to the choice of finite physical support in a computational wire carrier, not arbitrary boundary width or the full manuscript carrier. Boundaries with more than one incoming port are rejected. The minimum is over complete local open realizations for the fixed extracted frontier, not over all ambient circuits or different exteriors. A whole-support saving is not a proper-support Package E certificate. Prefix causality and the source-derived rank prove termination of this compiler, not uniformly polynomial encoded-size execution. Noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-size polynomial construction, runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed constant and unary replacement on arbitrary completed supports",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
@@ -54011,7 +54081,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-unary-support-search",
-      "title": "Computed complete search for proper constant and unary R7 gains",
+      "nonClaim": "Completeness is for proper physical supports with zero or one actual incoming boundary in a computational wire carrier. It is not completeness for all boundary widths, every R7 case or all ambient circuit optimizations. A negative search result is not global minimality or unconditional ZeroSlack; a guarded two-boundary duplicate fixture has an explicit smaller global realization while this scoped search correctly returns no gain. A whole-support saving is not a proper-support Package E certificate. Boundary-choice enumeration excludes unused declared inputs, but inherited physical-port extraction and compilation retain their own execution costs. The physical candidate and record counts are not a theorem of total uniformly polynomial encoded-input-size execution, output size or certificate size. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and its complete polynomial bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_admissible",
         "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_contains",
@@ -54051,7 +54121,7 @@
         "PNP.DirectWire.WireUnarySupportSearch.findReplacement_sound"
       ],
       "scope": "For arbitrary finite computational wire carriers, original gate counts, ordinary outputs and full computational fields, M258 computes a complete family of proper zero/unary support-gain candidates from the actual program. Optional boundary choices use only source wires actually consumed by gates, plus no boundary. For each choice and omitted gate, a topological maximal scan derives a support with at most one actual incoming wire and a nonempty exterior; canonical singleton supports handle one-gate savings. Any arbitrary proper zero/unary support is contained in the corresponding maximal candidate, and extraction is invariant under repeated or metadata records selecting the same gates. A support with at least two gates yields a strict saving because the complete zero/unary frontier word uses at most one shared NOT; a one-gate saving transfers to its canonical singleton. The carrier-only executable search is therefore complete whenever any proper zero/unary support admits a strictly smaller equivalent complete local word, without a supplied support family, replacement, rank, order, compiler result or completeness certificate. An accepted result constructs the actual expanded carrier, preserves every ordinary output and computational field at every valuation, charges the original exterior once, gives a strict fully paid saving and retains source-exact full-value R7 discharges for original R5 identities. A negative result excludes every such gain in this exact class. With g original gates, the computed family has at most (2*g+1)*g+g entries, each containing at most g gate records.",
-      "nonClaim": "Completeness is for proper physical supports with zero or one actual incoming boundary in a computational wire carrier. It is not completeness for all boundary widths, every R7 case or all ambient circuit optimizations. A negative search result is not global minimality or unconditional ZeroSlack; a guarded two-boundary duplicate fixture has an explicit smaller global realization while this scoped search correctly returns no gain. A whole-support saving is not a proper-support Package E certificate. Boundary-choice enumeration excludes unused declared inputs, but inherited physical-port extraction and compilation retain their own execution costs. The physical candidate and record counts are not a theorem of total uniformly polynomial encoded-input-size execution, output size or certificate size. The full manuscript carrier, noncomputational profile fields, arbitrary obligation dependency DAGs, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global routing, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and its complete polynomial bounds remain open. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed complete search for proper constant and unary R7 gains",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireUnarySupportSearch.maximalSelection_admissible",
@@ -54491,7 +54561,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "wire-zero-unary-closure",
-      "title": "Computed full-field zero/unary descent and normalization closure",
+      "nonClaim": "The stopping result is restricted to physical normalization and zero/one-actual-boundary computational gains. It is not global minimality: a guarded physically quiescent common fixed point has an explicit smaller equivalent carrier and strictly positive global residual slack. Whole-span descent is not relabelled as a proper-support Package E certificate. Preserving every computational field does not reconstruct the full manuscript carrier, noncomputational profile fields or arbitrary obligation dependency DAGs. Wider boundaries, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-size polynomial runtime, output and certificate bounds remain open. A gate-decrease or search-call bound is not a total polynomial execution theorem; inherited extraction, compilation and candidate-search costs still require their own bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.WireZeroUnaryClosure.whole_selected",
         "PNP.DirectWire.WireZeroUnaryClosure.whole_exterior",
@@ -54522,7 +54592,7 @@
         "PNP.DirectWire.WireZeroUnaryClosure.run_searchCalls_le_residualSlack"
       ],
       "scope": "For every finite computational wire carrier, M259 computes a whole-span zero/unary saving branch and combines it with the complete proper-support search. The whole-span branch selects all physical gates, has zero exterior charge and is kept distinct from proper-support R7. The combined carrier-only search is complete whenever any support with zero or one actual incoming boundary admits a strictly smaller equivalent complete local word; neither a support family nor a replacement or completeness certificate is supplied by the caller. Every accepted branch builds the actual smaller carrier and preserves all ordinary outputs and every computational field at every valuation, with exact original-gate accounting. A well-founded executable closure repeatedly performs physical normalization, searches for a proper or whole-span gain, expands an accepted gain and restarts normalization. Its derived trace proves termination, full-field preservation, common physical quiescence and absence of every gain in this scoped zero/unary class. It proves exact gate savings, bounds normalization and gain iterations by the retired gates, bounds search calls including the final negative call, and proves output idempotence. Semantic reference minima occur only in specifications: their invariance yields exact residual-slack retirement and corresponding iteration and search-call bounds, without reference-minimum enumeration in the algorithm.",
-      "nonClaim": "The stopping result is restricted to physical normalization and zero/one-actual-boundary computational gains. It is not global minimality: a guarded physically quiescent common fixed point has an explicit smaller equivalent carrier and strictly positive global residual slack. Whole-span descent is not relabelled as a proper-support Package E certificate. Preserving every computational field does not reconstruct the full manuscript carrier, noncomputational profile fields or arbitrary obligation dependency DAGs. Wider boundaries, every R5-R8 interaction, all-trace N1-N10 normalization, complete Package E, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-size polynomial runtime, output and certificate bounds remain open. A gate-decrease or search-call bound is not a total polynomial execution theorem; inherited extraction, compilation and candidate-search costs still require their own bounds. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Computed full-field zero/unary descent and normalization closure",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.WireZeroUnaryClosure.whole_selected",
@@ -54860,7 +54930,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "source-bounded-physical-boundary",
-      "title": "Source-bounded ordered physical boundary extraction",
+      "nonClaim": "Occurrence and output bounds are structural size bounds, not total encoded-input-size polynomial execution theorems. The reference equality preserves the existing physical semantics; it does not establish a new global minimization result. The old ambient enumeration remains only as a theorem-side specification, never the active boundary implementation. No caller-supplied boundary or completeness certificate is introduced. The full manuscript carrier, arbitrary obligation dependency DAGs, every normalization and gain interaction, complete Package E and global route coverage remain open. These results do not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total polynomial runtime, output and certificate bounds for the complete construction. Runtime execution is regression evidence, not theorem authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.SourceListOrder.mem_unique",
         "PNP.DirectWire.SourceListOrder.unique_nodup",
@@ -54887,7 +54957,7 @@
         "PNP.DirectWire.terminalBoundaryPorts_ordered"
       ],
       "scope": "For arbitrary finite program dimensions and any list of terminal primitive records, M260 computes the incoming physical boundary from nonconstant sources of actual gates. It filters those occurrences with the existing physical crossing predicate, removes duplicates and sorts by the canonical primary-input-before-gate-output coordinate. Every boundary crossing is derived from an actual gate source. The resulting list is proved exactly equal, including order and multiplicity, to the former ambient-wire filtered reference. Source occurrences and the emitted boundary each have length at most twice the physical gate count, independent of unused declared input slots. The active terminalBoundaryPorts implementation uses this source-driven construction. Public reference, length, duplicate-free and order theorems preserve the existing physical extraction and downstream support interfaces. A generic finite-list canonicalizer proves exact equality with any ordered duplicate-free reference under an injective coordinate map, without enumerating the ambient type. Guarded execution exercises exact small reference lists and sparse programs with a billion declared inputs; those large fixtures do not execute the ambient reference.",
-      "nonClaim": "Occurrence and output bounds are structural size bounds, not total encoded-input-size polynomial execution theorems. The reference equality preserves the existing physical semantics; it does not establish a new global minimization result. The old ambient enumeration remains only as a theorem-side specification, never the active boundary implementation. No caller-supplied boundary or completeness certificate is introduced. The full manuscript carrier, arbitrary obligation dependency DAGs, every normalization and gain interaction, complete Package E and global route coverage remain open. These results do not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total polynomial runtime, output and certificate bounds for the complete construction. Runtime execution is regression evidence, not theorem authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Source-bounded ordered physical boundary extraction",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.SourceListOrder.mem_unique",
@@ -55163,7 +55233,7 @@
     {
       "classification": "formalized-foundation-only",
       "id": "context-aware-square-transport",
-      "title": "Context-aware nested open-support and four-corner transport",
+      "nonClaim": "The theorem covers arbitrary larger open-boundary valuations, not only whole-circuit executions, and introduces no caller-supplied transport or correctness certificate. Retained Boolean-output transport does not prove equality of arbitrary implementation-dependent observers or profiles, physically glue minimum circuits, or establish coherent charge and obligation ownership. Canonical finite reference minima supply specification-level comparison objects, not an efficient executable minimizer. The full manuscript carrier, arbitrary obligation dependency DAGs, complete Package E and global route coverage remain open. This result does not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total encoded-input-size polynomial runtime, output and certificate bounds for the complete construction. Runtime fixtures are regression evidence, not proof authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
       "requiredTheorems": [
         "PNP.DirectWire.terminalOpenGateEvaluation_pullback",
         "PNP.DirectWire.terminalOpenSupportSemantics_pullback",
@@ -55181,7 +55251,7 @@
         "PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics"
       ],
       "scope": "For arbitrary finite candidate dimensions, terminal record lists and ordinary selected-gate inclusions, M261 computes a smaller open boundary valuation from the larger support evaluator. A wire internalized in the larger support receives its computed gate value, not an independent ambient bit. For every valuation on the larger open boundary, selected gates and retained interface producers have exactly the same Boolean values after this substitution. The complete valuation maps satisfy identity and three-support composition. Actual support-square inclusions derive the four leg maps, and both join-to-meet paths agree as valuation functions. Retained output values agree for extracted implementations, arbitrary valid full realizations and the actual canonical full and quotient local-minimum families. These semantic maps come from the original open carrier, not invented internal gates of a minimum realization. The existing unconstrained-ambient coherence classifier and its exact mismatch results are preserved as a different relation.",
-      "nonClaim": "The theorem covers arbitrary larger open-boundary valuations, not only whole-circuit executions, and introduces no caller-supplied transport or correctness certificate. Retained Boolean-output transport does not prove equality of arbitrary implementation-dependent observers or profiles, physically glue minimum circuits, or establish coherent charge and obligation ownership. Canonical finite reference minima supply specification-level comparison objects, not an efficient executable minimizer. The full manuscript carrier, arbitrary obligation dependency DAGs, complete Package E and global route coverage remain open. This result does not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total encoded-input-size polynomial runtime, output and certificate bounds for the complete construction. Runtime fixtures are regression evidence, not proof authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "title": "Context-aware nested open-support and four-corner transport",
       "theoremRows": [
         {
           "name": "PNP.DirectWire.terminalOpenGateEvaluation_pullback",
@@ -55359,9 +55429,404 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-causal-expansion",
+      "nonClaim": "This is a source-derived physical construction at arbitrary finite widths, not matched-kappa Pull/Expand or unrestricted CompatibleReplacement/SlackLaw from merely R < S. Full local open-function agreement is required for semantics; quotient-only or ordinary-output-only equality does not suffice for full computational fields. Distinct equal-valued physical producers are not merged, and repeated physical copies are not free. The inherited cyclic literal splice remains rejected; existing cone and unary constructions retain their own bounds. Literal R5 binding transport is not the complete R5–R8 event calculus or an arbitrary semantic obligation DAG. Arbitrary implementation-dependent observers, profile histories, the full manuscript carrier, complete Package E, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and total encoded-input-size polynomial runtime, output and certificate bounds remain open. Runtime fixtures are regression evidence, not proof authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireCausalExpansion.graph_rank_decreases",
+        "PNP.DirectWire.WireCausalExpansion.graph_wellFounded",
+        "PNP.DirectWire.WireCausalExpansion.compile_success",
+        "PNP.DirectWire.WireCausalExpansion.compiled_spec",
+        "PNP.DirectWire.WireCausalExpansion.expanded_gateCount",
+        "PNP.DirectWire.WireCausalExpansion.masked_replacement_output",
+        "PNP.DirectWire.WireCausalExpansion.replacementSource_eval",
+        "PNP.DirectWire.WireCausalExpansion.originalSource_eval",
+        "PNP.DirectWire.WireCausalExpansion.values_solution",
+        "PNP.DirectWire.WireCausalExpansion.expanded_semantics",
+        "PNP.DirectWire.WireCausalExpansion.expanded_smaller_iff",
+        "PNP.DirectWire.WireCausalExpansion.single_interface_smaller",
+        "PNP.DirectWire.WireCausalExpansion.interface_nodup",
+        "PNP.DirectWire.WireCausalExpansion.interface_owner_injective",
+        "PNP.DirectWire.WireCausalExpansion.exteriorPosition_injective",
+        "PNP.DirectWire.WireCausalExpansion.copyPosition_injective",
+        "PNP.DirectWire.WireCausalExpansion.exteriorPosition_ne_copyPosition",
+        "PNP.DirectWire.WireCausalExpansion.raw_node_ownership",
+        "PNP.DirectWire.WireCausalExpansion.expanded_gate_ownership",
+        "PNP.DirectWire.WireCausalExpansion.expanded_source",
+        "PNP.DirectWire.WireCausalExpansion.expanded_source_equal",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_output",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_field",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_gateCount",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_smaller_iff",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_proper_and_smaller",
+        "PNP.DirectWire.WireCausalExpansion.expandedCarrier_source_equal",
+        "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_coordinate",
+        "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_fullWitness"
+      ],
+      "scope": "For arbitrary finite candidate, support, replacement and computational-field dimensions, M262 derives an actual acyclic raw NAND graph and executable compiled expansion from source data. Each exterior gate is retained once and each distinct retained physical interface producer owns one complete replacement copy. Primary and earlier gate boundary ports retain actual values; only later gate-valued ports are deliberately masked, and a computed source rank decreases along every actual edge. Compilation requires no supplied rank, order, semantic or compiler-success certificate. Under complete local open-function equality, masking preserves the selected output for every open boundary valuation, the derived graph valuation satisfies every NAND equation, and every original ordered output and computational field retains its full value. Repeated literal references share the same actual compiled source. Exterior and copy ownership are injective and disjoint and cover every emitted gate. Existing R5 creations retain their coordinate and original full source value. Actual cost is E + K * R and strict original-size saving is equivalent to K * R < S, with properness S < G separately required.",
+      "title": "Total source-ordered charged arbitrary-support expansion",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.graph_rank_decreases",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "57644abb11a3b3a89770af0bff4b95d4a4fb6fe89c95b7597c680d636dd64784",
+          "expectedKernelTypeSha256": "57644abb11a3b3a89770af0bff4b95d4a4fb6fe89c95b7597c680d636dd64784",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.graph_wellFounded",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4f5418492f37d279d5f263f809691860e3b09a5d40a7d19b812c05d33c167477",
+          "expectedKernelTypeSha256": "4f5418492f37d279d5f263f809691860e3b09a5d40a7d19b812c05d33c167477",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.compile_success",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4411fb4ee3c71709b0374fdd9c5af36d12d6796c5bad2dbba107eeb5fef85e3b",
+          "expectedKernelTypeSha256": "4411fb4ee3c71709b0374fdd9c5af36d12d6796c5bad2dbba107eeb5fef85e3b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.compiled_spec",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aaf6be59c4f88a7fead74673109d28700ce16820dd0f9ad83cf42c7f2fda507b",
+          "expectedKernelTypeSha256": "aaf6be59c4f88a7fead74673109d28700ce16820dd0f9ad83cf42c7f2fda507b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "758d28d24a55d457119e6ae98f54798de7f173d5c9802e4df7ee95561bdc3209",
+          "expectedKernelTypeSha256": "758d28d24a55d457119e6ae98f54798de7f173d5c9802e4df7ee95561bdc3209",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.masked_replacement_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "498f6fec12401d5e8a6ac437fba202351b12399567e9591ba6fc224cdc04e27a",
+          "expectedKernelTypeSha256": "498f6fec12401d5e8a6ac437fba202351b12399567e9591ba6fc224cdc04e27a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.replacementSource_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1ed6dee331e6062b34c11d9ee8a6abba3113b0043e50f7ad7061af1d9a49fbc3",
+          "expectedKernelTypeSha256": "1ed6dee331e6062b34c11d9ee8a6abba3113b0043e50f7ad7061af1d9a49fbc3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.originalSource_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7c2f1c2c8a2be86a7e09aec3d634c6f5c6e1786b93fe7b491d1795a48fa7d7f0",
+          "expectedKernelTypeSha256": "7c2f1c2c8a2be86a7e09aec3d634c6f5c6e1786b93fe7b491d1795a48fa7d7f0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.values_solution",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9ce5f997c23c4cdd4fa5eb1b0421d8891f4763b1e9e7045aeedbc5215579a0d8",
+          "expectedKernelTypeSha256": "9ce5f997c23c4cdd4fa5eb1b0421d8891f4763b1e9e7045aeedbc5215579a0d8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d6ab0ab4c6510402f806592b8888b9da2c0ee6edc88632c3ed61924e7b7b838d",
+          "expectedKernelTypeSha256": "d6ab0ab4c6510402f806592b8888b9da2c0ee6edc88632c3ed61924e7b7b838d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_smaller_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b8d6d37e0936f1464d863e28cad33536118657cc8b900e6978a45c7bbc2fa0a7",
+          "expectedKernelTypeSha256": "b8d6d37e0936f1464d863e28cad33536118657cc8b900e6978a45c7bbc2fa0a7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.single_interface_smaller",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c9b50726136c91ec59b2a341172622351e1e37c05b9b7a9b865e467dac95e739",
+          "expectedKernelTypeSha256": "c9b50726136c91ec59b2a341172622351e1e37c05b9b7a9b865e467dac95e739",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.interface_nodup",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9d06c6bbc391a4a17d0a10bb418e085458cf36654d08be9efff05237037c29d9",
+          "expectedKernelTypeSha256": "9d06c6bbc391a4a17d0a10bb418e085458cf36654d08be9efff05237037c29d9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.interface_owner_injective",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "596fbac80224cdea520d2cfe72826db69f806725ae86dbfe9bec41e071e87819",
+          "expectedKernelTypeSha256": "596fbac80224cdea520d2cfe72826db69f806725ae86dbfe9bec41e071e87819",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.exteriorPosition_injective",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "41595a52bb4e193f3dbe8f6649e0948a0fae4d0e45e46d6a4761aaf70d9c1511",
+          "expectedKernelTypeSha256": "41595a52bb4e193f3dbe8f6649e0948a0fae4d0e45e46d6a4761aaf70d9c1511",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.copyPosition_injective",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a5ccf42333c6b2f01b9c8b0a18ce894001dcb8eb157428245b9702b0870dc778",
+          "expectedKernelTypeSha256": "a5ccf42333c6b2f01b9c8b0a18ce894001dcb8eb157428245b9702b0870dc778",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.exteriorPosition_ne_copyPosition",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b962ed0a91245467f2ad53ce6f0fefd92cabb01d232985604a76e0e79b202c1c",
+          "expectedKernelTypeSha256": "b962ed0a91245467f2ad53ce6f0fefd92cabb01d232985604a76e0e79b202c1c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.raw_node_ownership",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7da2fa53475565b8c6561eaef5bd4d8be3ac6f2b435d931175be7ead3d511622",
+          "expectedKernelTypeSha256": "7da2fa53475565b8c6561eaef5bd4d8be3ac6f2b435d931175be7ead3d511622",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_gate_ownership",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "59a10f634f371082d7cf52c73e31806a2225245671020447310930a6dbfa1855",
+          "expectedKernelTypeSha256": "59a10f634f371082d7cf52c73e31806a2225245671020447310930a6dbfa1855",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "51d3a08c647d37b79586934fe8ab9264543b9473edfb524b6fbffd20d0a7940a",
+          "expectedKernelTypeSha256": "51d3a08c647d37b79586934fe8ab9264543b9473edfb524b6fbffd20d0a7940a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expanded_source_equal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "40d8e8ecefe37a22b2d076f6ea12a623b4e456230601f6094d2d71005b149d1e",
+          "expectedKernelTypeSha256": "40d8e8ecefe37a22b2d076f6ea12a623b4e456230601f6094d2d71005b149d1e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fa6da8a64f9d09a4a1f329e28892d99305ed68ebc1aaa309fc7100a302bad3d3",
+          "expectedKernelTypeSha256": "fa6da8a64f9d09a4a1f329e28892d99305ed68ebc1aaa309fc7100a302bad3d3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8482512bec2fdd91a41de913dec04499cc23fe9dfb4e22a9c8ac1a9d4d7a9691",
+          "expectedKernelTypeSha256": "8482512bec2fdd91a41de913dec04499cc23fe9dfb4e22a9c8ac1a9d4d7a9691",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2ea5c2c9ed9ec03102e3197c42330f2943f914e404f208fe8ea58cdb1e4a9744",
+          "expectedKernelTypeSha256": "2ea5c2c9ed9ec03102e3197c42330f2943f914e404f208fe8ea58cdb1e4a9744",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_smaller_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "407306bfe3a6784147d80e73a8df3fdc25d67030b8a4669a101495b388da9c15",
+          "expectedKernelTypeSha256": "407306bfe3a6784147d80e73a8df3fdc25d67030b8a4669a101495b388da9c15",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_proper_and_smaller",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7d70d141e95bba9b84f18ece6d34ed734c461fc71df177093af4cb703eb7aebd",
+          "expectedKernelTypeSha256": "7d70d141e95bba9b84f18ece6d34ed734c461fc71df177093af4cb703eb7aebd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedCarrier_source_equal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5a8220e89738e799ed538c8549e0ded5f5fe6c00a8046957ad23104579d93386",
+          "expectedKernelTypeSha256": "5a8220e89738e799ed538c8549e0ded5f5fe6c00a8046957ad23104579d93386",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_coordinate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ad550a5727ce90e16c4049b5b586e57dead7e6fc9438db879ca25e8a35760788",
+          "expectedKernelTypeSha256": "ad550a5727ce90e16c4049b5b586e57dead7e6fc9438db879ca25e8a35760788",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCausalExpansion.expandedR5Creation_fullWitness",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7e01ca8c99d4a13c025db43dc44f130d836c0e5a9c3f09b45640997f1ce0937e",
+          "expectedKernelTypeSha256": "7e01ca8c99d4a13c025db43dc44f130d836c0e5a9c3f09b45640997f1ce0937e",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-14-261",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-14-262",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
