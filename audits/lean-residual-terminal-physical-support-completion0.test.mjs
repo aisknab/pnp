@@ -93,7 +93,27 @@ const PHYSICAL_DECLARATIONS = Object.freeze([
 const PHYSICAL_SOURCE_DECLARATIONS = Object.freeze([
   ...PHYSICAL_DECLARATIONS.slice(0, 11),
   `${NAMESPACE}.terminalGateIsGlobalOutput_eq_true_iff`,
-  ...PHYSICAL_DECLARATIONS.slice(11),
+  ...PHYSICAL_DECLARATIONS.slice(11, 17),
+  `${NAMESPACE}.TerminalSupportWire.orderCode`,
+  `${NAMESPACE}.TerminalSupportWire.orderCode_injective`,
+  `${NAMESPACE}.allTerminalSupportWires_strictOrder`,
+  `${NAMESPACE}.Source.terminalWireOccurrences`,
+  `${NAMESPACE}.Source.mem_terminalWireOccurrences_iff`,
+  `${NAMESPACE}.Source.terminalWireOccurrences_length`,
+  `${NAMESPACE}.terminalSourceWireOccurrences`,
+  `${NAMESPACE}.terminalSourceWireOccurrences_length`,
+  `${NAMESPACE}.terminalBoundaryWire_mem_sourceOccurrences`,
+  `${NAMESPACE}.terminalBoundaryPortsSourceDriven`,
+  `${NAMESPACE}.terminalBoundaryPortsSourceDriven_eq_reference`,
+  `${NAMESPACE}.terminalBoundaryPortsSourceDriven_length`,
+  `${NAMESPACE}.terminalBoundaryPortsSourceDriven_nodup`,
+  `${NAMESPACE}.terminalBoundaryPortsSourceDriven_ordered`,
+  PHYSICAL_DECLARATIONS[17],
+  `${NAMESPACE}.terminalBoundaryPorts_reference`,
+  `${NAMESPACE}.terminalBoundaryPorts_length`,
+  `${NAMESPACE}.terminalBoundaryPorts_nodup`,
+  `${NAMESPACE}.terminalBoundaryPorts_ordered`,
+  ...PHYSICAL_DECLARATIONS.slice(18),
 ]);
 
 const PUBLIC_DECLARATIONS = Object.freeze([
@@ -206,6 +226,8 @@ const PHYSICAL_PRIVATE_HELPERS = Object.freeze([
   'physicalTerminalAny',
   'physicalTerminalAny_true_iff',
   'sourceMatchesTerminalWire',
+  'allFin_strictOrder',
+  'sourceOccurrence_flatMap_length',
   'sourceMatchesTerminalWire_self',
   'gateUsesWire_of_left',
   'gateUsesWire_of_right',
@@ -325,6 +347,7 @@ function validatePhysical0(source) {
     .map((match) => match[1]);
   if (JSON.stringify(imports) !== JSON.stringify([
     'PNP.ResidualTerminalExecutableSaturation',
+    'PNP.NANDSourceListOrder',
   ])) failures.push('closed-import');
   if (JSON.stringify(declarations0(source)) !== JSON.stringify(PHYSICAL_SOURCE_DECLARATIONS)) {
     failures.push('declaration-surface');
@@ -339,6 +362,8 @@ function validatePhysical0(source) {
   const boundary = declarationBlock0(source, 'terminalBoundaryWire');
   const interfaceGate = declarationBlock0(source, 'terminalInterfaceGate');
   const boundaryPorts = declarationBlock0(source, 'terminalBoundaryPorts');
+  const sourceDriven = declarationBlock0(source, 'terminalBoundaryPortsSourceDriven');
+  const reference = declarationBlock0(source, 'terminalBoundaryPortsSourceDriven_eq_reference');
   const interfacePorts = declarationBlock0(source, 'terminalInterfacePorts');
   const compatible = declarationBlock0(
     source,
@@ -364,7 +389,9 @@ function validatePhysical0(source) {
   if (!/terminalGateSelected records producer &&[\s\S]*terminalGateHasExternalConsumer[\s\S]*terminalGateIsGlobalOutput/u.test(interfaceGate)) {
     failures.push('exact-outgoing-crossing');
   }
-  if (!/allTerminalSupportWires inputs gates\)\.filter[\s\S]*terminalBoundaryWire/u.test(boundaryPorts)
+  if (!/terminalBoundaryPortsSourceDriven program records/u.test(boundaryPorts)
+      || !/SourceListOrder\.canonical TerminalSupportWire\.orderCode[\s\S]*terminalSourceWireOccurrences program/u.test(sourceDriven)
+      || !/allTerminalSupportWires inputs gates\)\.filter[\s\S]*terminalBoundaryWire/u.test(reference)
       || !/allFin gates\)\.filter \(terminalInterfaceGate/u.test(interfacePorts)) {
     failures.push('canonical-port-order');
   }

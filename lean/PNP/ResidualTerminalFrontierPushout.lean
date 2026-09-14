@@ -517,7 +517,7 @@ private theorem terminalBoundaryPorts_congr
         TerminalPrimitiveRecord.gate gate ∈ right) :
     terminalBoundaryPorts program left = terminalBoundaryPorts program right := by
   have selectedEqual := terminalGateSelected_function_congr left right sameGates
-  unfold terminalBoundaryPorts
+  rw [terminalBoundaryPorts_reference, terminalBoundaryPorts_reference]
   apply congrArg (fun predicate =>
     (allTerminalSupportWires inputs gates).filter predicate)
   funext wire
@@ -550,7 +550,8 @@ private theorem terminalBoundaryFrontierPushout_eq_ports_append
     (left right : TerminalGovernedCompletedSupport candidate system) :
     terminalBoundaryFrontierPushout left right =
       terminalBoundaryPorts candidate.program (left.records ++ right.records) := by
-  unfold terminalBoundaryFrontierPushout terminalBoundaryPorts
+  rw [terminalBoundaryPorts_reference]
+  unfold terminalBoundaryFrontierPushout
   apply congrArg (fun predicate =>
     (allTerminalSupportWires inputs gates).filter predicate)
   funext wire

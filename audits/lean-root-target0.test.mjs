@@ -12,6 +12,7 @@ const EXPECTED_AXIOMS = Object.freeze([]);
 const PINNED_TOOLCHAIN_IMPORTS = new Set([
   'Init.Data.List.Erase',
   'Init.Data.List.FinRange',
+  'Init.Data.List.Sort.Lemmas',
 ]);
 
 async function text0(relativePath) {

@@ -1,21 +1,21 @@
 # Formal reconstruction notice
 
-<!-- M259-CURRENT-SUMMARY:BEGIN -->
-## Current M259 boundary
+<!-- M260-CURRENT-SUMMARY:BEGIN -->
+## Current M260 boundary
 
-M259 derives whole-span zero/unary descent and combines it with complete proper-support search in an executable normalization/gain-restart closure. The general trace preserves every output and computational field, terminates with both gain branches and physical passes quiet, and proves exact gate and residual-slack accounting, iteration bounds and idempotence. A checked nonminimum fixed point shows why this scoped stopping result is not global minimality or ZeroSlack. Wider boundaries, the full carrier and obligation calculus, Package E and complete encoded-size polynomial PCCMin remain open.
+M260 computes incoming physical ports from actual gate-source occurrences, preserving the exact previous reference list including its order and coordinates. The general construction proves duplicate freedom and occurrence/output bounds of twice the physical gate count, independent of unused declared inputs, and is now the active extractor used by the existing support and zero/unary closure interfaces. These structural bounds do not prove total encoded-size polynomial runtime, global minimality, the full manuscript carrier or obligation calculus, complete Package E or unconditional ZeroSlack.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 235 of 237 current scoped publication rows earned.
+Formal artefact coverage: 236 of 238 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed zero/unary closure and limits](./lean_wire_zero_unary_closure.md)
+See the [source-bounded physical boundary and limits](./lean_source_bounded_physical_boundary.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M259
-derives actual whole-span and proper zero/unary descent with repeated physical normalization and common scoped stopping; wider boundaries, global minimality, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M260
+derives source-bounded physical ports with exact ordered reference equality and structural size bounds; complete encoded execution bounds, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M259-CURRENT-SUMMARY:END -->
+<!-- M260-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

@@ -1138,7 +1138,7 @@ theorem extractTerminalSupport_eq_of_gateSelected_eq
   have boundaryEqual :
       terminalBoundaryPorts candidate.program left =
         terminalBoundaryPorts candidate.program right := by
-    unfold terminalBoundaryPorts
+    rw [terminalBoundaryPorts_reference, terminalBoundaryPorts_reference]
     apply congrArg (fun predicate =>
       (allTerminalSupportWires inputs gates).filter predicate)
     funext wire
