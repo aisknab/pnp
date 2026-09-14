@@ -54,6 +54,7 @@ import PNP.PCCMinConstantPropagation
 import PNP.PCCMinPhysicalNormalizationClosure
 import PNP.NANDArbitrarySupportSplice
 import PNP.NANDWireCarrier
+import PNP.NANDWireCausalExpansion
 import PNP.NANDWireObligationRestoration
 import PNP.NANDWireQuotientLift
 import PNP.NANDWireFrontierLift

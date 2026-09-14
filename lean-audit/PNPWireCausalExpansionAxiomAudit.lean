@@ -1,0 +1,31 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireCausalExpansion.graph_rank_decreases
+#print axioms PNP.DirectWire.WireCausalExpansion.graph_wellFounded
+#print axioms PNP.DirectWire.WireCausalExpansion.compile_success
+#print axioms PNP.DirectWire.WireCausalExpansion.compiled_spec
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_gateCount
+#print axioms PNP.DirectWire.WireCausalExpansion.masked_replacement_output
+#print axioms PNP.DirectWire.WireCausalExpansion.replacementSource_eval
+#print axioms PNP.DirectWire.WireCausalExpansion.originalSource_eval
+#print axioms PNP.DirectWire.WireCausalExpansion.values_solution
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_semantics
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_smaller_iff
+#print axioms PNP.DirectWire.WireCausalExpansion.single_interface_smaller
+#print axioms PNP.DirectWire.WireCausalExpansion.interface_nodup
+#print axioms PNP.DirectWire.WireCausalExpansion.interface_owner_injective
+#print axioms PNP.DirectWire.WireCausalExpansion.exteriorPosition_injective
+#print axioms PNP.DirectWire.WireCausalExpansion.copyPosition_injective
+#print axioms PNP.DirectWire.WireCausalExpansion.exteriorPosition_ne_copyPosition
+#print axioms PNP.DirectWire.WireCausalExpansion.raw_node_ownership
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_gate_ownership
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_source
+#print axioms PNP.DirectWire.WireCausalExpansion.expanded_source_equal
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_output
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_field
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_gateCount
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_smaller_iff
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_proper_and_smaller
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedCarrier_source_equal
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedR5Creation_coordinate
+#print axioms PNP.DirectWire.WireCausalExpansion.expandedR5Creation_fullWitness

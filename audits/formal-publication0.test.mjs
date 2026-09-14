@@ -4032,3 +4032,36 @@ test('canonical report source is current and the committed PDF artifact exists',
   const pdf = await readFile(new URL('../canonical_proof_report.pdf', import.meta.url));
   assert.equal(pdf.subarray(0, 5).toString('ascii'), '%PDF-');
 });
+
+test('canonical report distinguishes reviewed standard axioms and the current concrete target', async () => {
+  const [template, tex, status] = await Promise.all([
+    readFile(new URL('../publication/canonical_proof_report.template.tex', import.meta.url), 'utf8'),
+    readFile(new URL('../canonical_proof_report.tex', import.meta.url), 'utf8'),
+    status0(),
+  ]);
+  for (const source of [template, tex]) {
+    const ledgerIntro = source.match(/\\section\{Formal milestone ledger\}([\s\S]*?)\{\\small/u)?.[1]
+      .replace(/\s+/gu, ' ');
+    assert.ok(ledgerIntro);
+    assert.match(ledgerIntro, /contained in the reviewed Lean standard-axiom allowlist/u);
+    assert.match(ledgerIntro, /No project-specific axiom is allowed/u);
+    assert.doesNotMatch(ledgerIntro, /theorem kinds, empty axiom closures/u);
+    const target = source.match(/\\subsection\{Current concrete target and historical abstract bridge\}([\s\S]*?)\\section\{Formal milestone ledger\}/u)?.[1]
+      .replace(/\s+/gu, ' ');
+    assert.ok(target);
+    assert.match(target, /The former abstract bridge/u);
+    assert.match(target, /current \\code\{PNP\.PEqualsNP\} compatibility name refers to \\code\{PNP\.Concrete\.PEqualsNP\}/u);
+    assert.match(target, /Concrete CNF-SAT NP-completeness is kernel checked/u);
+    assert.match(target, /Deterministic CNF-SAT membership in P and the exact eligible root theorem remain absent/u);
+    assert.match(target, /publication gate remains false/u);
+    assert.doesNotMatch(target, /SAT completeness, SAT in P, and the root theorem remain absent/u);
+  }
+  const earned = status.formalPublicationMilestones.find(row => row.id === 'wire-causal-expansion');
+  assert.equal(earned?.earned, true);
+  assert.equal(earned.allAssumptionFree, false);
+  assert.equal(earned.axiomClosureUsesOnlyLeanStandardAllowlist, true);
+  assert.equal(status.leanConcreteCNFNPCompletenessFormalized, true);
+  assert.equal(status.leanConcreteCNFSATInPFormalized, false);
+  assert.equal(status.rootLeanTheoremPresent, false);
+  assert.equal(status.concretePublicationGate.passed, false);
+});

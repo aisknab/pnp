@@ -84,7 +84,7 @@ private theorem weaken_eval {inputs gates : Nat}
   | constant value => rfl
   | gate index => exact Program.eval_snoc_castSucc program gate input index
 
-private theorem sources_eval {inputs gates : Nat}
+theorem sources_eval {inputs gates : Nat}
     (program : Program inputs gates) (input : Valuation inputs) (index : Fin gates) :
     boolNand
       ((program.terminalGateSources index).1.eval input (program.eval input))
@@ -110,7 +110,7 @@ private theorem weaken_gate {inputs gates : Nat}
       have indices : earlier.castSucc = producer := Source.gate.inj same
       exact ⟨earlier, rfl, indices.symm⟩
 
-private theorem sources_ordered {inputs gates : Nat}
+theorem sources_ordered {inputs gates : Nat}
     (program : Program inputs gates) (consumer producer : Fin gates)
     (edge : (program.terminalGateSources consumer).1 = .gate producer ∨
       (program.terminalGateSources consumer).2 = .gate producer) :
@@ -210,7 +210,7 @@ def originalSource : (source : Source inputs gates) →
             | false => rfl
             | true => exact False.elim (selected value)))))
 
-private theorem exteriorSource_visible (consumer : Fin gates)
+theorem exteriorSource_visible (consumer : Fin gates)
     (outside : terminalGateSelected records consumer = false)
     (source : Source inputs gates)
     (occurs : (candidate.program.terminalGateSources consumer).1 = source ∨
@@ -233,7 +233,7 @@ private theorem exteriorSource_visible (consumer : Fin gates)
   · exact Or.inl (decide_eq_true (by rw [leftAt, sourceAt]; rfl))
   · exact Or.inr (decide_eq_true (by rw [rightAt, sourceAt]; rfl))
 
-private theorem output_visible (output : Fin outputs) :
+theorem output_visible (output : Fin outputs) :
     Visible candidate records (candidate.directWireWord.source output) := by
   intro producer sourceAt selected
   apply (mem_terminalInterfacePorts_iff candidate records producer).2

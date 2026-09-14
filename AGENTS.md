@@ -43,6 +43,11 @@ limits in private user-level instructions rather than this public file.
   its exact runtime filename and verify every referenced remote path is readable
   before launching the bounded job. Do not rely on a directory-only `scp`
   destination when the runner expects a different basename.
+- A readable transferred file is not necessarily complete. Wait for each `scp`
+  or `rsync` process to exit successfully, then compare the destination's byte
+  hash with the reviewed source before running it. Use a fresh target name or
+  an atomic rename after verification; an interrupted overwrite can retain old
+  trailing bytes. Treat a mismatch as a transfer failure, not a source defect.
 - Probe optional observability wrappers before putting them in the remote command.
   A missing wrapper must fail during launch preflight, not after the clean
   checkout is prepared; otherwise retain the resource summary supplied by the
