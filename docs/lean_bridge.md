@@ -1,21 +1,21 @@
 # Lean bridge formalization
 
-<!-- M260-CURRENT-SUMMARY:BEGIN -->
-## Current M260 boundary
+<!-- M261-CURRENT-SUMMARY:BEGIN -->
+## Current M261 boundary
 
-M260 computes incoming physical ports from actual gate-source occurrences, preserving the exact previous reference list including its order and coordinates. The general construction proves duplicate freedom and occurrence/output bounds of twice the physical gate count, independent of unused declared inputs, and is now the active extractor used by the existing support and zero/unary closure interfaces. These structural bounds do not prove total encoded-size polynomial runtime, global minimality, the full manuscript carrier or obligation calculus, complete Package E or unconditional ZeroSlack.
+M261 computes nested open-boundary substitutions from the actual larger-support evaluator, including wires that become internal. For every larger open-boundary valuation, selected gates and retained interface producers preserve their Boolean values. The complete maps satisfy identity, composition and equality of both support-square paths; retained outputs agree for extracted circuits, arbitrary valid realizations and actual canonical full and quotient local minima. This does not equate arbitrary observers, physically glue minimum circuits, derive coherent charge ownership, complete the obligation calculus or global routing, or prove unconditional ZeroSlack or polynomial PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 236 of 238 current scoped publication rows earned.
+Formal artefact coverage: 237 of 239 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [source-bounded physical boundary and limits](./lean_source_bounded_physical_boundary.md)
+See the [context-aware square transport and limits](./lean_context_aware_square_transport.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
-Earlier milestone notes retain their original module-specific scope. M260
-derives source-bounded physical ports with exact ordered reference equality and structural size bounds; complete encoded execution bounds, the full carrier and obligation calculus, Package E and exact polynomial PCCMin remain open.
+Earlier milestone notes retain their original module-specific scope. M261
+derives context-aware boundary substitutions and square-path equality with retained-output transport; arbitrary observer equality, physical minimum gluing, global routing and exact polynomial PCCMin remain open.
 No fixed weighted checkpoint or global proof gate closes.
-<!-- M260-CURRENT-SUMMARY:END -->
+<!-- M261-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

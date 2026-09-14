@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '50873cb273ee3af33e9519e97c2ef6c0293d6cf970bac4ee50e6fc0834199cde';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f09f9efa54e13e82612d54f7b046b0e0849ce35c475e31e946dd7717a22d6acc';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.Concrete.BitString.decodePair_pair',
@@ -663,6 +663,20 @@ export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   'PNP.DirectWire.terminalBoundaryPorts_length',
   'PNP.DirectWire.terminalBoundaryPorts_nodup',
   'PNP.DirectWire.terminalBoundaryPorts_ordered',
+  'PNP.DirectWire.terminalOpenGateEvaluation_pullback',
+  'PNP.DirectWire.terminalOpenSupportSemantics_pullback',
+  'PNP.DirectWire.terminalBoundaryPullback_identity',
+  'PNP.DirectWire.terminalBoundaryPullback_compose',
+  'PNP.DirectWire.TerminalOptimumLegTransport.selectedGateTransport',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_left',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_right',
+  'PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_square',
+  'PNP.DirectWire.TerminalOptimumLegTransport.extracted_retained_semantics',
+  'PNP.DirectWire.TerminalOptimumLegTransport.realization_retained_semantics',
+  'PNP.DirectWire.TerminalFourCornerOptimumFamily.full_retained_semantics',
+  'PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics',
+  'PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics',
   'PNP.DirectWire.terminalCandidateSaturateTrace_ambient_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_costSnapshot_eq',
   'PNP.DirectWire.terminalCandidateSaturateTrace_metadata_transparent',
@@ -3910,7 +3924,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-13-260') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-14-261') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

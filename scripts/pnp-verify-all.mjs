@@ -115,6 +115,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-wire-unary-support-search0.test.mjs',
   'audits/lean-wire-zero-unary-closure0.test.mjs',
   'audits/lean-source-bounded-physical-boundary0.test.mjs',
+  'audits/lean-context-aware-square-transport0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',

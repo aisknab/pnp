@@ -139,6 +139,13 @@ a small read-only way instead of adding branch-specific finalizer workflows.
 
 ### Workflow size and trigger maintenance
 
+- Before a workflow push, run the multiline-shell syntax and anchored axiom-filter
+  regressions in audits/lean-root-target0.test.mjs. They parse every literal
+  run block without executing it; changed commands still need their exact
+  targeted execution. Do not wait for a root build to reveal shell quoting errors.
+- Use literal replacement callbacks in mechanical JavaScript source rewrites;
+  replacement-string dollar expansions can silently alter shell regex anchors
+  and quotes. Review every resulting workflow delta, including inherited steps.
 - Keep every workflow below the tested 480,000-byte review budget, leaving
   headroom below the provider's 500 KiB launch limit. Run the workflow-size
   regression in `audits/lean-root-target0.test.mjs` before a publication push.
@@ -348,6 +355,11 @@ produce.
   name sets and generator inputs before compilation; derive hashes and emitted
   counts only from the successful compiled evidence, then reconcile downstream
   consumers before their checks. Never invent compiled evidence in advance.
+- For an edited Lean module, search every audit for its repository path as
+  well as its declaration names. Older milestone audits may retain complete
+  closed-interface lists for reused modules. Reconcile all such consumers and
+  run their positive and hostile source-only cases before inventory sealing
+  or a broad suite; checking only the new milestone audit is insufficient.
 
 ### Reconcile expected values before expensive verification
 

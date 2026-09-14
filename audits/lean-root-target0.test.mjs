@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -306,4 +307,134 @@ test('Lean workflow keeps current-milestone trigger families compact', async () 
   assert.equal((workflow.match(/^      - 'docs\/lean_\*\.md'$/gmu) ?? []).length, 2);
   assert.doesNotMatch(workflow, /^      - 'audits\/lean-[^/*]+\.test\.mjs'$/mu);
   assert.doesNotMatch(workflow, /^      - 'docs\/lean_[^/*]+\.md'$/mu);
+});
+
+// This deliberately parses only literal YAML run blocks, not arbitrary YAML.
+// Unsupported multiline styles fail closed instead of silently losing coverage.
+function literalWorkflowRunBlocks0(source) {
+  const lines = source.replaceAll('\r\n', '\n').split('\n');
+  const blocks = [];
+  for (let index = 0; index < lines.length; index += 1) {
+    const header = /^( *)(?:- +)?run: *([|>][^#]*)(?:#.*)?$/u.exec(lines[index]);
+    if (header === null) continue;
+    const style = header[2].trim();
+    assert.match(style, /^\|[+-]?$/u, 'unsupported multiline workflow run style');
+    const keyIndent = lines[index].indexOf('run:');
+    let bodyIndent = null;
+    let end = index + 1;
+    const body = [];
+    for (; end < lines.length; end += 1) {
+      if (lines[end].trim() === '') {
+        body.push('');
+        continue;
+      }
+      const indent = /^ */u.exec(lines[end])[0].length;
+      if (indent <= keyIndent) break;
+      bodyIndent ??= indent;
+      assert.ok(indent >= bodyIndent, 'inconsistent literal workflow block indentation');
+      body.push(lines[end].slice(bodyIndent));
+    }
+    assert.notEqual(bodyIndent, null, 'empty literal workflow run block');
+    let script = body.join('\n');
+    if (style !== '|+') script = script.replace(/\n+$/u, '');
+    if (style !== '|-') script += '\n';
+    blocks.push({ line: index + 1, script });
+    index = end - 1;
+  }
+  return blocks;
+}
+
+function bashSyntax0(script) {
+  return spawnSync('bash', ['--noprofile', '--norc', '-n'], {
+    input: script,
+    encoding: 'utf8',
+    timeout: 5_000,
+    maxBuffer: 64 * 1024,
+  });
+}
+
+function anchoredAxiomFilter0(line) {
+  return line.endsWith("\\]$' || true)\"");
+}
+
+test('all durable literal workflow run blocks pass Bash syntax before proof builds', async () => {
+  const entries = (await readdir(path.join(ROOT, '.github/workflows')))
+    .filter((name) => /\.ya?ml$/u.test(name)).sort();
+  let checked = 0;
+  for (const file of entries) {
+    const source = await text0('.github/workflows/' + file);
+    for (const match of source.matchAll(/^ *shell: *(.+)$/gmu)) {
+      assert.equal(match[1].trim(), 'bash', 'review non-Bash workflow syntax separately');
+    }
+    const blocks = literalWorkflowRunBlocks0(source);
+    for (const block of blocks) {
+      const result = bashSyntax0(block.script);
+      assert.equal(result.error, undefined, 'Bash syntax-check launch failed');
+      assert.equal(result.status, 0, file + ':' + block.line + '\n' + result.stderr);
+      checked += 1;
+    }
+  }
+  assert.ok(checked > 0, 'workflow syntax coverage must not be empty');
+});
+
+test('workflow block extraction preserves complete heredocs, nesting and boundaries', () => {
+  const body = [
+    'if true; then',
+    "  cat <<'TEXT'",
+    '  run: |',
+    'TEXT',
+    'fi',
+  ].join('\n');
+  const source = [
+    'steps:',
+    '  - run: |-',
+    ...body.split('\n').map((line) => '      ' + line),
+    '    env:',
+    '      MODE: regression',
+    '  - name: next',
+    '    run: |',
+    '      exit 97',
+    '',
+  ].join('\n');
+  const blocks = literalWorkflowRunBlocks0(source);
+  assert.equal(blocks.length, 2);
+  assert.equal(blocks[0].script, body);
+  assert.equal(blocks[1].script, 'exit 97\n');
+  assert.equal(bashSyntax0(blocks[0].script).status, 0);
+  // Syntax-only verification must not execute the workflow's commands.
+  assert.equal(bashSyntax0(blocks[1].script).status, 0);
+  assert.throws(() => literalWorkflowRunBlocks0('run: >\n  echo folded\n'),
+    /unsupported multiline workflow run style/u);
+  assert.throws(() => literalWorkflowRunBlocks0('run: |\n'),
+    /empty literal workflow run block/u);
+  assert.throws(() => literalWorkflowRunBlocks0('run: |\n    echo one\n  echo two\n'),
+    /inconsistent literal workflow block indentation/u);
+});
+
+test('workflow syntax guard rejects unmatched quotes, substitutions and incomplete branches', () => {
+  for (const script of [
+    "printf '%s\\n' 'unterminated\n",
+    'value="$(printf test"\n',
+    'if true; then\n  printf test\n',
+  ]) {
+    const result = bashSyntax0(script);
+    assert.equal(result.error, undefined);
+    assert.notEqual(result.status, 0);
+  }
+});
+
+test('standard-axiom exclusion filters retain their closing quote and end anchor', async () => {
+  const workflow = await text0('.github/workflows/lean-bridge.yml');
+  const filters = workflow.split('\n')
+    .filter((line) => line.includes("grep -Ev 'depends on axioms: "));
+  assert.ok(filters.length > 0, 'axiom-filter coverage must not be empty');
+  for (const line of filters) assert.equal(anchoredAxiomFilter0(line), true, line);
+  const valid = filters[0];
+  const unclosed = valid.replace("\\]$'", () => '\\]');
+  assert.equal(anchoredAxiomFilter0(unclosed), false);
+  assert.notEqual(bashSyntax0(unclosed).status, 0);
+  const unanchored = valid.replace("\\]$'", () => "\\]'");
+  assert.equal(bashSyntax0(unanchored).status, 0);
+  assert.equal(anchoredAxiomFilter0(unanchored), false,
+    'valid shell syntax must not excuse a weakened axiom filter');
 });

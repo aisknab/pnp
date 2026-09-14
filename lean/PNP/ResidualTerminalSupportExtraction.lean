@@ -1321,5 +1321,408 @@ theorem terminalOpenGateEvaluation_single_gate_prefix
   rw [portEqual] at earlier
   exact False.elim (Nat.lt_irrefl boundaryGate.val earlier)
 
+
+/-! ## Computed open-boundary transport for nested physical supports -/
+
+/-- Read a wire in an open support. Selected gates are computed internally;
+    external wires are read from the actual boundary, not invented inputs. -/
+def terminalOpenWireValue
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length) :
+    TerminalSupportWire inputs gates -> Bool
+  | .input index =>
+      terminalBoundaryValue (terminalBoundaryPorts candidate.program records)
+        valuation (.input index)
+  | .gate index =>
+      if terminalGateSelected records index then
+        terminalOpenGateEvaluation candidate records valuation index
+      else
+        terminalBoundaryValue (terminalBoundaryPorts candidate.program records)
+          valuation (.gate index)
+
+/-- Compute the smaller boundary from the larger open support. In particular,
+    a wire internalized by the larger support takes its computed gate value. -/
+def terminalBoundaryPullback
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length) :
+    Valuation (terminalBoundaryPorts candidate.program small).length :=
+  fun index => terminalOpenWireValue candidate large valuation
+    ((terminalBoundaryPorts candidate.program small).get index)
+
+private theorem terminalBoundaryValue_pullback
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length)
+    (wire : TerminalSupportWire inputs gates)
+    (member : wire ∈ terminalBoundaryPorts candidate.program small) :
+    terminalBoundaryValue (terminalBoundaryPorts candidate.program small)
+        (terminalBoundaryPullback candidate small large valuation) wire =
+      terminalOpenWireValue candidate large valuation wire := by
+  unfold terminalBoundaryValue
+  split
+  · rename_i found
+    change terminalOpenWireValue candidate large valuation
+        ((terminalBoundaryPorts candidate.program small).get
+          (memberIndex found)) = _
+    rw [get_memberIndex found]
+  · rename_i absent
+    exact False.elim (absent member)
+
+private theorem Source.evalTerminalOpen_nested
+    {wireInputs wireGates inputs gates : Nat}
+    (source : Source inputs gates)
+    (smallSelected largeSelected : Fin gates -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates -> TerminalSupportWire wireInputs wireGates)
+    (smallBoundary largeBoundary : List (TerminalSupportWire wireInputs wireGates))
+    (smallValuation : Valuation smallBoundary.length)
+    (largeValuation : Valuation largeBoundary.length)
+    (smallValues largeValues : Valuation gates)
+    (accounted :
+      source.terminalAccounted smallSelected inputWire gateWire smallBoundary)
+    (included : forall gate, smallSelected gate = true -> largeSelected gate = true)
+    (selectedCorrect : forall gate, smallSelected gate = true ->
+      smallValues gate = largeValues gate)
+    (inputAgreement : forall index, inputWire index ∈ smallBoundary ->
+      terminalBoundaryValue smallBoundary smallValuation (inputWire index) =
+        terminalBoundaryValue largeBoundary largeValuation (inputWire index))
+    (gateAgreement : forall index, gateWire index ∈ smallBoundary ->
+      terminalBoundaryValue smallBoundary smallValuation (gateWire index) =
+        if largeSelected index then largeValues index
+        else terminalBoundaryValue largeBoundary largeValuation (gateWire index)) :
+    source.evalTerminalOpen smallSelected inputWire gateWire smallBoundary
+        smallValuation smallValues =
+      source.evalTerminalOpen largeSelected inputWire gateWire largeBoundary
+        largeValuation largeValues := by
+  cases source with
+  | input index => exact inputAgreement index accounted
+  | constant value => rfl
+  | gate index =>
+      change smallSelected index = true ∨ gateWire index ∈ smallBoundary at accounted
+      cases selectedSmall : smallSelected index with
+      | false =>
+          have member : gateWire index ∈ smallBoundary := by
+            cases accounted with
+            | inl selected =>
+                rw [selectedSmall] at selected
+                cases selected
+            | inr boundary => exact boundary
+          simp only [Source.evalTerminalOpen, selectedSmall,
+            Bool.false_eq_true, if_false]
+          exact gateAgreement index member
+      | true =>
+          have selectedLarge := included index selectedSmall
+          simp only [Source.evalTerminalOpen, selectedSmall, selectedLarge, if_true]
+          exact selectedCorrect index selectedSmall
+
+private theorem Program.evalTerminalOpenAux_nested
+    {wireInputs wireGates inputs gates : Nat}
+    (program : Program inputs gates)
+    (smallSelected largeSelected : Fin gates -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates -> TerminalSupportWire wireInputs wireGates)
+    (smallBoundary largeBoundary : List (TerminalSupportWire wireInputs wireGates))
+    (smallValuation : Valuation smallBoundary.length)
+    (largeValuation : Valuation largeBoundary.length)
+    (accounted :
+      program.terminalSourcesAccounted smallSelected inputWire gateWire smallBoundary)
+    (included : forall gate, smallSelected gate = true -> largeSelected gate = true)
+    (inputAgreement : forall index, inputWire index ∈ smallBoundary ->
+      terminalBoundaryValue smallBoundary smallValuation (inputWire index) =
+        terminalBoundaryValue largeBoundary largeValuation (inputWire index))
+    (gateAgreement : forall index, gateWire index ∈ smallBoundary ->
+      terminalBoundaryValue smallBoundary smallValuation (gateWire index) =
+        if largeSelected index then
+          program.evalTerminalOpenAux largeBoundary largeValuation
+            largeSelected inputWire gateWire index
+        else terminalBoundaryValue largeBoundary largeValuation (gateWire index)) :
+    forall gate, smallSelected gate = true ->
+      program.evalTerminalOpenAux smallBoundary smallValuation
+          smallSelected inputWire gateWire gate =
+        program.evalTerminalOpenAux largeBoundary largeValuation
+          largeSelected inputWire gateWire gate := by
+  induction program with
+  | empty => intro gate; exact Fin.elim0 gate
+  | @snoc gates initial gate ih =>
+      let smallEarlier : Fin gates -> Bool :=
+        fun index => smallSelected index.castSucc
+      let largeEarlier : Fin gates -> Bool :=
+        fun index => largeSelected index.castSucc
+      let earlierWire : Fin gates -> TerminalSupportWire wireInputs wireGates :=
+        fun index => gateWire index.castSucc
+      have accountSplit :
+          initial.terminalSourcesAccounted smallEarlier inputWire
+              earlierWire smallBoundary ∧
+            (smallSelected (Fin.last gates) = true ->
+              gate.left.terminalAccounted smallEarlier inputWire
+                  earlierWire smallBoundary ∧
+                gate.right.terminalAccounted smallEarlier inputWire
+                  earlierWire smallBoundary) := accounted
+      have earlierIncluded : forall index, smallEarlier index = true ->
+          largeEarlier index = true := by
+        intro index selected
+        exact included index.castSucc selected
+      have earlierGateAgreement : forall index, earlierWire index ∈ smallBoundary ->
+          terminalBoundaryValue smallBoundary smallValuation (earlierWire index) =
+            if largeEarlier index then
+              initial.evalTerminalOpenAux largeBoundary largeValuation
+                largeEarlier inputWire earlierWire index
+            else terminalBoundaryValue largeBoundary largeValuation
+              (earlierWire index) := by
+        intro index member
+        have full := gateAgreement index.castSucc member
+        simpa only [Program.evalTerminalOpenAux_snoc_castSucc] using full
+      have earlierCorrect : forall index, smallEarlier index = true ->
+          initial.evalTerminalOpenAux smallBoundary smallValuation
+              smallEarlier inputWire earlierWire index =
+            initial.evalTerminalOpenAux largeBoundary largeValuation
+              largeEarlier inputWire earlierWire index :=
+        ih smallEarlier largeEarlier earlierWire accountSplit.1
+          earlierIncluded earlierGateAgreement
+      intro gateIndex
+      refine Fin.lastCases ?_ (fun earlierIndex => ?_) gateIndex
+      · intro selectedSmall
+        have selectedLarge := included (Fin.last gates) selectedSmall
+        change Valuation.snoc _ _ (Fin.last gates) =
+          Valuation.snoc _ _ (Fin.last gates)
+        rw [Valuation.snoc_last, Valuation.snoc_last,
+          if_pos selectedSmall, if_pos selectedLarge]
+        have currentAccount := accountSplit.2 selectedSmall
+        have leftEquality :=
+          (gate.left.evalTerminalOpen_nested smallEarlier largeEarlier
+            inputWire earlierWire smallBoundary largeBoundary
+            smallValuation largeValuation
+            (initial.evalTerminalOpenAux smallBoundary smallValuation
+              smallEarlier inputWire earlierWire)
+            (initial.evalTerminalOpenAux largeBoundary largeValuation
+              largeEarlier inputWire earlierWire)
+            currentAccount.1 earlierIncluded earlierCorrect
+            inputAgreement earlierGateAgreement)
+        have rightEquality :=
+          (gate.right.evalTerminalOpen_nested smallEarlier largeEarlier
+            inputWire earlierWire smallBoundary largeBoundary
+            smallValuation largeValuation
+            (initial.evalTerminalOpenAux smallBoundary smallValuation
+              smallEarlier inputWire earlierWire)
+            (initial.evalTerminalOpenAux largeBoundary largeValuation
+              largeEarlier inputWire earlierWire)
+            currentAccount.2 earlierIncluded earlierCorrect
+            inputAgreement earlierGateAgreement)
+        rw [leftEquality, rightEquality]
+      · intro selectedEarlier
+        rw [Program.evalTerminalOpenAux_snoc_castSucc,
+          Program.evalTerminalOpenAux_snoc_castSucc]
+        exact earlierCorrect earlierIndex selectedEarlier
+
+/-- Every selected smaller-support gate retains its value after the computed
+    boundary substitution, for every valuation of the larger open boundary. -/
+theorem terminalOpenGateEvaluation_pullback
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (included : forall gate, terminalGateSelected small gate = true ->
+      terminalGateSelected large gate = true)
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length)
+    (gate : Fin gates) (selected : terminalGateSelected small gate = true) :
+    terminalOpenGateEvaluation candidate small
+        (terminalBoundaryPullback candidate small large valuation) gate =
+      terminalOpenGateEvaluation candidate large valuation gate := by
+  unfold terminalOpenGateEvaluation
+  refine Program.evalTerminalOpenAux_nested candidate.program
+    (terminalGateSelected small) (terminalGateSelected large)
+    TerminalSupportWire.input TerminalSupportWire.gate
+    (terminalBoundaryPorts candidate.program small)
+    (terminalBoundaryPorts candidate.program large)
+    (terminalBoundaryPullback candidate small large valuation) valuation
+    (physicalTerminalSourcesAccounted candidate small) included ?_ ?_ gate selected
+  · intro index member
+    simpa only [terminalOpenWireValue] using
+      terminalBoundaryValue_pullback candidate small large valuation (.input index) member
+  · intro index member
+    simpa only [terminalOpenWireValue, terminalOpenGateEvaluation] using
+      terminalBoundaryValue_pullback candidate small large valuation (.gate index) member
+
+/-- Every ordered smaller-support interface output denotes its actual selected
+    gate in the larger open context, including internalized boundary wires. -/
+theorem terminalOpenSupportSemantics_pullback
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (included : forall gate, terminalGateSelected small gate = true ->
+      terminalGateSelected large gate = true)
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length)
+    (output : Fin (terminalInterfacePorts candidate small).length) :
+    terminalOpenSupportSemantics candidate small
+        (terminalBoundaryPullback candidate small large valuation) output =
+      terminalOpenGateEvaluation candidate large valuation
+        ((terminalInterfacePorts candidate small).get output) :=
+  terminalOpenGateEvaluation_pullback candidate small large included valuation _
+    (terminalInterfaceGet_selected candidate small output)
+
+
+private theorem boundary_get_injective_of_nodup {alpha : Type} {items : List alpha}
+    (distinct : items.Nodup) {left right : Fin items.length}
+    (equal : items.get left = items.get right) : left = right := by
+  apply Fin.ext
+  apply Nat.le_antisymm
+  · apply Nat.le_of_not_gt
+    intro rightBeforeLeft
+    have separated :=
+      (List.pairwise_iff_getElem.mp distinct) right.val left.val
+        right.isLt left.isLt rightBeforeLeft
+    change items.get right ≠ items.get left at separated
+    exact separated equal.symm
+  · apply Nat.le_of_not_gt
+    intro leftBeforeRight
+    have separated :=
+      (List.pairwise_iff_getElem.mp distinct) left.val right.val
+        left.isLt right.isLt leftBeforeRight
+    change items.get left ≠ items.get right at separated
+    exact separated equal
+
+private theorem terminalBoundaryValue_get
+    {inputs gates : Nat} (boundary : List (TerminalSupportWire inputs gates))
+    (distinct : boundary.Nodup) (valuation : Valuation boundary.length)
+    (index : Fin boundary.length) :
+    terminalBoundaryValue boundary valuation (boundary.get index) =
+      valuation index := by
+  unfold terminalBoundaryValue
+  split
+  · rename_i found
+    have same : memberIndex found = index :=
+      boundary_get_injective_of_nodup distinct (get_memberIndex found)
+    rw [same]
+  · rename_i absent
+    exact False.elim (absent (List.get_mem boundary index))
+
+private theorem terminalOpenWireValue_on_boundary
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (wire : TerminalSupportWire inputs gates)
+    (member : wire ∈ terminalBoundaryPorts candidate.program records) :
+    terminalOpenWireValue candidate records valuation wire =
+      terminalBoundaryValue (terminalBoundaryPorts candidate.program records)
+        valuation wire := by
+  cases wire with
+  | input index => rfl
+  | gate index =>
+      have external :=
+        ((terminalBoundaryWire_eq_true_iff candidate.program records (.gate index)).1
+          ((mem_terminalBoundaryPorts_iff candidate.program records (.gate index)).1
+            member)).1
+      change Bool.not (terminalGateSelected records index) = true at external
+      cases selected : terminalGateSelected records index with
+      | false =>
+          simp only [terminalOpenWireValue, selected, Bool.false_eq_true, if_false]
+      | true =>
+          rw [selected] at external
+          cases external
+
+/-- Pulling an open boundary back to the same support is the identity map. -/
+theorem terminalBoundaryPullback_identity
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length) :
+    terminalBoundaryPullback candidate records records valuation = valuation := by
+  funext index
+  change terminalOpenWireValue candidate records valuation
+      ((terminalBoundaryPorts candidate.program records).get index) = valuation index
+  rw [terminalOpenWireValue_on_boundary candidate records valuation _
+    (List.get_mem (terminalBoundaryPorts candidate.program records) index)]
+  exact terminalBoundaryValue_get _ (terminalBoundaryPorts_nodup _ _) valuation index
+
+private theorem terminalBoundaryPorts_nested_external
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (included : forall gate, terminalGateSelected small gate = true ->
+      terminalGateSelected large gate = true)
+    (wire : TerminalSupportWire inputs gates)
+    (member : wire ∈ terminalBoundaryPorts candidate.program small)
+    (external : terminalWireExternal large wire = true) :
+    wire ∈ terminalBoundaryPorts candidate.program large := by
+  obtain ⟨_smallExternal, consumer, enumerated, selected, uses⟩ :=
+    (terminalBoundaryWire_eq_true_iff candidate.program small wire).1
+      ((mem_terminalBoundaryPorts_iff candidate.program small wire).1 member)
+  apply (mem_terminalBoundaryPorts_iff candidate.program large wire).2
+  exact (terminalBoundaryWire_eq_true_iff candidate.program large wire).2
+    ⟨external, consumer, enumerated, included consumer selected, uses⟩
+
+
+private theorem terminalOpenWireValue_pullback_on_boundary
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small middle large :
+      List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (smallIncluded : forall gate, terminalGateSelected small gate = true ->
+      terminalGateSelected middle gate = true)
+    (middleIncluded : forall gate, terminalGateSelected middle gate = true ->
+      terminalGateSelected large gate = true)
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length)
+    (wire : TerminalSupportWire inputs gates)
+    (member : wire ∈ terminalBoundaryPorts candidate.program small) :
+    terminalOpenWireValue candidate middle
+        (terminalBoundaryPullback candidate middle large valuation) wire =
+      terminalOpenWireValue candidate large valuation wire := by
+  cases wire with
+  | input index =>
+      have retained :=
+        terminalBoundaryPorts_nested_external candidate small middle smallIncluded
+          (.input index) member rfl
+      rw [terminalOpenWireValue_on_boundary candidate middle _ (.input index) retained]
+      exact terminalBoundaryValue_pullback candidate middle large valuation
+        (.input index) retained
+  | gate index =>
+      cases selectedMiddle : terminalGateSelected middle index with
+      | false =>
+          have external : terminalWireExternal middle (.gate index) = true := by
+            change Bool.not (terminalGateSelected middle index) = true
+            rw [selectedMiddle]
+            rfl
+          have retained :=
+            terminalBoundaryPorts_nested_external candidate small middle smallIncluded
+              (.gate index) member external
+          rw [terminalOpenWireValue_on_boundary candidate middle _ (.gate index) retained]
+          exact terminalBoundaryValue_pullback candidate middle large valuation
+            (.gate index) retained
+      | true =>
+          have selectedLarge := middleIncluded index selectedMiddle
+          simp only [terminalOpenWireValue, selectedMiddle, selectedLarge, if_true]
+          exact terminalOpenGateEvaluation_pullback candidate middle large
+            middleIncluded valuation index selectedMiddle
+
+/-- Boundary substitutions compose for every three nested physical supports
+    and every open valuation, including wires internalized at either stage. -/
+theorem terminalBoundaryPullback_compose
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (small middle large :
+      List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (smallIncluded : forall gate, terminalGateSelected small gate = true ->
+      terminalGateSelected middle gate = true)
+    (middleIncluded : forall gate, terminalGateSelected middle gate = true ->
+      terminalGateSelected large gate = true)
+    (valuation : Valuation (terminalBoundaryPorts candidate.program large).length) :
+    terminalBoundaryPullback candidate small middle
+        (terminalBoundaryPullback candidate middle large valuation) =
+      terminalBoundaryPullback candidate small large valuation := by
+  funext index
+  change terminalOpenWireValue candidate middle
+      (terminalBoundaryPullback candidate middle large valuation)
+      ((terminalBoundaryPorts candidate.program small).get index) =
+    terminalOpenWireValue candidate large valuation
+      ((terminalBoundaryPorts candidate.program small).get index)
+  exact terminalOpenWireValue_pullback_on_boundary candidate small middle large
+    smallIncluded middleIncluded valuation _
+    (List.get_mem (terminalBoundaryPorts candidate.program small) index)
+
 end DirectWire
 end PNP

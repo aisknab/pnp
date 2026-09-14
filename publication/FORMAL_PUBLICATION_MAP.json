@@ -1,5 +1,5 @@
 {
-  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-13-260",
+  "coordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-14-261",
   "earnedMilestoneTheoremKernelTypeSha256": {
     "PNP.BCELContradictionCertificate.carrier_at_least_two": "ed0307a0b38e578db8dc43d64f796dfc058725db1fbd4ebba36c58310221a269",
     "PNP.BCELContradictionCertificate.no_positive_packet": "92c361ce259cc8f0024dcbe9c4785c7067a81858f93013f1b376e9eb7f99823c",
@@ -3596,7 +3596,21 @@
     "PNP.DirectWire.terminalBoundaryPorts_reference": "6833f172589ae02ed7b73f6853916e7101f12ed7adfe923272f648221736fe4a",
     "PNP.DirectWire.terminalBoundaryPorts_length": "ba62c4628cd68cb6bbbc0abb968f00d067f305738395d8e13378aaceabad89b1",
     "PNP.DirectWire.terminalBoundaryPorts_nodup": "9d59decf9fe49a6f8553d10b327e375c3f91c53879545748a5bdba607a146ee6",
-    "PNP.DirectWire.terminalBoundaryPorts_ordered": "c38618e05bb7e55cc5a952be125f3d089f7057336d3b0f981c5648e8c5eacd58"
+    "PNP.DirectWire.terminalBoundaryPorts_ordered": "c38618e05bb7e55cc5a952be125f3d089f7057336d3b0f981c5648e8c5eacd58",
+    "PNP.DirectWire.terminalOpenGateEvaluation_pullback": "35b9c3d02da43f951376e48ccd7d5ba97539be554d23a9d7dddff9cbefae8526",
+    "PNP.DirectWire.terminalOpenSupportSemantics_pullback": "8d84b0ca652c271d873986c35aeb5421bd37dd88fad0fae2cd7de521824ec1a4",
+    "PNP.DirectWire.terminalBoundaryPullback_identity": "71783e1a89e5a590fa9092e9c4af7f9cc28182317428be2530ca32cca13d93d0",
+    "PNP.DirectWire.terminalBoundaryPullback_compose": "e63b7f727d763163014f598b5e4f10b70938b885228aa7092f60f06924fb1f1e",
+    "PNP.DirectWire.TerminalOptimumLegTransport.selectedGateTransport": "393bcf57ffe9063520828c2e67f1216fd79cd810ae5867e3d961c81f278cba5e",
+    "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_left": "5f87fc82783c695cee293545700beacaddf310b740f32262449887be9a438eed",
+    "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_right": "114556b3dc918cb2593f4df380a0dd47df7bc85d14e16d30602810c6466453dc",
+    "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_square": "97f9a8f9208f99f55767cb101eda981fdc64d1dfa0345277fa0a34209ec247ad",
+    "PNP.DirectWire.TerminalOptimumLegTransport.extracted_retained_semantics": "4fd1fe7a44bec0d3dfc5b1cfe2bf20ff2e70c0e877feee6b196e6a39faaba6d3",
+    "PNP.DirectWire.TerminalOptimumLegTransport.realization_retained_semantics": "f68469c854249882dcdb32bf48257c27581d289dc7a7efc323a4ac3025707f70",
+    "PNP.DirectWire.TerminalFourCornerOptimumFamily.full_retained_semantics": "3c817f60b6078fc084d819793d47f4c1d1f8625c85540628c45d8089e71faf05",
+    "PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics": "11e22a080e7420cc7e6c10c2f6558588bb79bd9274bf7dacccbfba817e30f6d8",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics": "de03dff609d419f5ecc843e92ca627d0430f1407413e8722a16d0679a6fdeb13",
+    "PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics": "a8bcb2bb6dc0154959d37c2fdcb67eb451eea01759caa939b8072996811253d3"
   },
   "gate": {
     "allowedLeanStandardAxioms": [
@@ -3614,7 +3628,7 @@
     "standardComplexityModelEligible": true
   },
   "kind": "PNPFormalPublicationMap0",
-  "milestoneSourceClosureSha256": "dcf1e9940b03579f417990dcb2e42f211ebb725f40b719908468aa14f6d90a90",
+  "milestoneSourceClosureSha256": "87560808551fad7abfe8ac0a5132ef53c0978a48b04656e7311179a3ec385c57",
   "milestones": [
     {
       "classification": "formalized-foundation-only",
@@ -9590,6 +9604,29 @@
       ],
       "scope": "For arbitrary finite program dimensions and any list of terminal primitive records, M260 computes the incoming physical boundary from nonconstant sources of actual gates. It filters those occurrences with the existing physical crossing predicate, removes duplicates and sorts by the canonical primary-input-before-gate-output coordinate. Every boundary crossing is derived from an actual gate source. The resulting list is proved exactly equal, including order and multiplicity, to the former ambient-wire filtered reference. Source occurrences and the emitted boundary each have length at most twice the physical gate count, independent of unused declared input slots. The active terminalBoundaryPorts implementation uses this source-driven construction. Public reference, length, duplicate-free and order theorems preserve the existing physical extraction and downstream support interfaces. A generic finite-list canonicalizer proves exact equality with any ordered duplicate-free reference under an injective coordinate map, without enumerating the ambient type. Guarded execution exercises exact small reference lists and sparse programs with a billion declared inputs; those large fixtures do not execute the ambient reference.",
       "nonClaim": "Occurrence and output bounds are structural size bounds, not total encoded-input-size polynomial execution theorems. The reference equality preserves the existing physical semantics; it does not establish a new global minimization result. The old ambient enumeration remains only as a theorem-side specification, never the active boundary implementation. No caller-supplied boundary or completeness certificate is introduced. The full manuscript carrier, arbitrary obligation dependency DAGs, every normalization and gain interaction, complete Package E and global route coverage remain open. These results do not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total polynomial runtime, output and certificate bounds for the complete construction. Runtime execution is regression evidence, not theorem authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "context-aware-square-transport",
+      "title": "Context-aware nested open-support and four-corner transport",
+      "requiredTheorems": [
+        "PNP.DirectWire.terminalOpenGateEvaluation_pullback",
+        "PNP.DirectWire.terminalOpenSupportSemantics_pullback",
+        "PNP.DirectWire.terminalBoundaryPullback_identity",
+        "PNP.DirectWire.terminalBoundaryPullback_compose",
+        "PNP.DirectWire.TerminalOptimumLegTransport.selectedGateTransport",
+        "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_left",
+        "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_right",
+        "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_square",
+        "PNP.DirectWire.TerminalOptimumLegTransport.extracted_retained_semantics",
+        "PNP.DirectWire.TerminalOptimumLegTransport.realization_retained_semantics",
+        "PNP.DirectWire.TerminalFourCornerOptimumFamily.full_retained_semantics",
+        "PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics",
+        "PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics"
+      ],
+      "scope": "For arbitrary finite candidate dimensions, terminal record lists and ordinary selected-gate inclusions, M261 computes a smaller open boundary valuation from the larger support evaluator. A wire internalized in the larger support receives its computed gate value, not an independent ambient bit. For every valuation on the larger open boundary, selected gates and retained interface producers have exactly the same Boolean values after this substitution. The complete valuation maps satisfy identity and three-support composition. Actual support-square inclusions derive the four leg maps, and both join-to-meet paths agree as valuation functions. Retained output values agree for extracted implementations, arbitrary valid full realizations and the actual canonical full and quotient local-minimum families. These semantic maps come from the original open carrier, not invented internal gates of a minimum realization. The existing unconstrained-ambient coherence classifier and its exact mismatch results are preserved as a different relation.",
+      "nonClaim": "The theorem covers arbitrary larger open-boundary valuations, not only whole-circuit executions, and introduces no caller-supplied transport or correctness certificate. Retained Boolean-output transport does not prove equality of arbitrary implementation-dependent observers or profiles, physically glue minimum circuits, or establish coherent charge and obligation ownership. Canonical finite reference minima supply specification-level comparison objects, not an efficient executable minimizer. The full manuscript carrier, arbitrary obligation dependency DAGs, complete Package E and global route coverage remain open. This result does not prove unconditional SaturatePositive, BCELReady or ZeroSlack, exact general PCCMin, or total encoded-input-size polynomial runtime, output and certificate bounds for the complete construction. Runtime fixtures are regression evidence, not proof authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved."
     }
   ],
   "version": 0

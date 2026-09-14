@@ -3564,6 +3564,43 @@ jobs:
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPSourceBoundedPhysicalBoundary.lean
 
+      - name: Check context-aware square transport source contracts
+        run: node --test audits/lean-context-aware-square-transport0.test.mjs
+
+      - name: Audit context-aware square transport
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPContextAwareSquareTransportAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expectedNames = [
+            "PNP.DirectWire.terminalOpenGateEvaluation_pullback",
+            "PNP.DirectWire.terminalOpenSupportSemantics_pullback",
+            "PNP.DirectWire.terminalBoundaryPullback_identity",
+            "PNP.DirectWire.terminalBoundaryPullback_compose",
+            "PNP.DirectWire.TerminalOptimumLegTransport.selectedGateTransport",
+            "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_left",
+            "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_meet_join_right",
+            "PNP.DirectWire.TerminalFourCornerCarrier.boundaryPullback_square",
+            "PNP.DirectWire.TerminalOptimumLegTransport.extracted_retained_semantics",
+            "PNP.DirectWire.TerminalOptimumLegTransport.realization_retained_semantics",
+            "PNP.DirectWire.TerminalFourCornerOptimumFamily.full_retained_semantics",
+            "PNP.DirectWire.TerminalFourCornerOptimumFamily.quotient_retained_semantics",
+            "PNP.DirectWire.TerminalFourCornerCarrier.canonicalFull_retained_semantics",
+            "PNP.DirectWire.TerminalFourCornerCarrier.canonicalQuotient_retained_semantics"
+          ];
+          assert.deepEqual(rows.map(row => row[1]).sort(), expectedNames.sort());
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, ['Quot.sound', 'propext']);
+          }
+          console.log('M261: exact nested and square transport axiom closures passed.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalNestedOpenTransport.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOpenTransport.lean
+
 
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |

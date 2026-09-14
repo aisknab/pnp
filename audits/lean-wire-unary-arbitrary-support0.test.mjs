@@ -211,7 +211,13 @@ const SPECS = [
       "extractSaturatedTerminalSupport_induced",
       "extractTerminalSupport_eq_of_gateSelected_eq",
       "terminalOpenGateEvaluation_prefix_congr",
-      "terminalOpenGateEvaluation_single_gate_prefix"
+      "terminalOpenGateEvaluation_single_gate_prefix",
+      "terminalOpenWireValue",
+      "terminalBoundaryPullback",
+      "terminalOpenGateEvaluation_pullback",
+      "terminalOpenSupportSemantics_pullback",
+      "terminalBoundaryPullback_identity",
+      "terminalBoundaryPullback_compose"
     ]
   }
 ];
