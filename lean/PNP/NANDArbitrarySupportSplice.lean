@@ -12,6 +12,7 @@ Package E, unconditional ZeroSlack, or polynomial PCCMin.
 
 import PNP.NANDTopologicalCompiler
 import PNP.ResidualTerminalSaturatedSupportContext
+import PNP.NANDNormalizationCausalBounds
 
 namespace PNP
 namespace DirectWire
@@ -793,6 +794,191 @@ theorem graph_wellFounded_of_singleGateBoundary
   ⟨fun node => rank_accessible _ (singleGateRank records boundaryGate)
     (singleGateGraph_rank_decreases candidate records replacement boundaryGate
       single small early) node⟩
+
+/-- Original physical input positions, with primary inputs placed before every gate. -/
+def causalBoundaryLabels :
+    Fin (terminalBoundaryPorts candidate.program records).length → Nat :=
+  terminalBoundaryCausalLabels candidate records (fun _ => 0) (fun index => index.val + 1)
+
+/-- A numeric dependency bound, derived from extraction and actual history transport
+in the complete construction. Boolean equivalence alone does not imply it. -/
+def CausalInterfaceBound : Prop :=
+  ∀ port, CausalBound.outputLevel replacement (causalBoundaryLabels candidate records) port ≤
+    ((terminalInterfacePorts candidate records).get port).val + 1
+
+/-- Original causal position followed by a local slot; the stride fits every
+replacement gate and puts each exterior producer before its replacement consumers. -/
+def causalRank : Fin ((exterior records).length + replacementGates) → Nat :=
+  splitFin
+    (fun index => (((exterior records).get index).val + 1) * (replacementGates + 1))
+    (fun index => CausalBound.levels replacement.program
+      (causalBoundaryLabels candidate records) index * (replacementGates + 1) +
+        (index.val + 1))
+
+private theorem boundarySource_causal_rank
+    (port : Fin (terminalBoundaryPorts candidate.program records).length)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : boundarySource candidate records port = .gate node) :
+    causalRank candidate records replacement node =
+      causalBoundaryLabels candidate records port * (replacementGates + 1) := by
+  unfold boundarySource at same
+  split at same
+  · cases same
+  · rename_i gate found
+    have mapped := Source.gate.inj same
+    rw [← mapped, causalRank, splitFin_left, get_memberIndex]
+    unfold causalBoundaryLabels terminalBoundaryCausalLabels
+    rw [found]
+    rfl
+
+private theorem replacementSource_causal_rank_le
+    (wire : Source (terminalBoundaryPorts candidate.program records).length
+      replacementGates)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : replacementSource candidate records wire = .gate node) :
+    causalRank candidate records replacement node ≤
+      CausalBound.source wire (causalBoundaryLabels candidate records)
+        (CausalBound.levels replacement.program (causalBoundaryLabels candidate records)) *
+          (replacementGates + 1) + replacementGates := by
+  cases wire with
+  | input port =>
+      rw [boundarySource_causal_rank candidate records replacement port node same]
+      exact Nat.le_add_right _ _
+  | constant value => cases same
+  | gate index =>
+      have mapped : Fin.natAdd (exterior records).length index = node :=
+        Source.gate.inj same
+      rw [← mapped, causalRank, splitFin_right]
+      simp only [CausalBound.source]
+      have within := index.isLt
+      omega
+
+private theorem replacementSource_causal_rank_lt
+    (wire : Source (terminalBoundaryPorts candidate.program records).length
+      replacementGates) (consumer : Fin replacementGates)
+    (levelBound : CausalBound.source wire (causalBoundaryLabels candidate records)
+      (CausalBound.levels replacement.program (causalBoundaryLabels candidate records)) ≤
+        CausalBound.levels replacement.program (causalBoundaryLabels candidate records) consumer)
+    (earlier : ∀ prior, wire = .gate prior → prior.val < consumer.val)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : replacementSource candidate records wire = .gate node) :
+    causalRank candidate records replacement node <
+      CausalBound.levels replacement.program (causalBoundaryLabels candidate records) consumer *
+        (replacementGates + 1) + (consumer.val + 1) := by
+  have scaled := Nat.mul_le_mul_right (replacementGates + 1) levelBound
+  cases wire with
+  | input port =>
+      rw [boundarySource_causal_rank candidate records replacement port node same]
+      change causalBoundaryLabels candidate records port * (replacementGates + 1) ≤ _ at scaled
+      omega
+  | constant value => cases same
+  | gate index =>
+      have mapped : Fin.natAdd (exterior records).length index = node :=
+        Source.gate.inj same
+      rw [← mapped, causalRank, splitFin_right]
+      have before := earlier index rfl
+      change CausalBound.levels replacement.program
+        (causalBoundaryLabels candidate records) index * (replacementGates + 1) ≤ _ at scaled
+      omega
+
+private theorem originalSource_causal_rank_lt
+    (interfaceBound : CausalInterfaceBound candidate records replacement)
+    (wire : Source inputs gates) (visible : Visible candidate records wire)
+    (consumer : Fin gates)
+    (earlier : ∀ producer, wire = .gate producer → producer.val < consumer.val)
+    (node : Fin ((exterior records).length + replacementGates))
+    (same : originalSource candidate records replacement wire visible = .gate node) :
+    causalRank candidate records replacement node <
+      (consumer.val + 1) * (replacementGates + 1) := by
+  have expanded : (consumer.val + 1) * (replacementGates + 1) =
+      consumer.val * (replacementGates + 1) + (replacementGates + 1) := by
+    simp only [Nat.add_mul, Nat.one_mul]
+  rw [expanded]
+  cases wire with
+  | input index => cases same
+  | constant value => cases same
+  | gate producer =>
+      have before := earlier producer rfl
+      simp only [originalSource] at same
+      split at same
+      · rename_i selected
+        have portBound := interfaceBound (memberIndex (visible producer rfl selected))
+        rw [get_memberIndex] at portBound
+        have through := replacementSource_causal_rank_le candidate records replacement
+          (replacement.directWireWord.source
+            (memberIndex (visible producer rfl selected))) node same
+        have levelBound : CausalBound.outputLevel replacement
+            (causalBoundaryLabels candidate records)
+            (memberIndex (visible producer rfl selected)) ≤ consumer.val := by
+          omega
+        have scaled := Nat.mul_le_mul_right (replacementGates + 1) levelBound
+        unfold CausalBound.outputLevel at scaled
+        omega
+      · have mapped := Source.gate.inj same
+        rw [← mapped, causalRank, splitFin_left, get_memberIndex]
+        have bounded : producer.val + 1 ≤ consumer.val := by omega
+        have scaled := Nat.mul_le_mul_right (replacementGates + 1) bounded
+        omega
+
+/-- Every literal dependency decreases the source-derived causal order. -/
+theorem graph_causal_rank_decreases
+    (interfaceBound : CausalInterfaceBound candidate records replacement)
+    (producer consumer : Fin ((exterior records).length + replacementGates))
+    (edge : (graph candidate records replacement).Depends producer consumer) :
+    causalRank candidate records replacement producer <
+      causalRank candidate records replacement consumer := by
+  rcases finSum_decompose consumer with ⟨outside, rfl⟩ | ⟨inside, rfl⟩
+  · have consumerRank : causalRank candidate records replacement
+        (Fin.castAdd replacementGates outside) =
+          (((exterior records).get outside).val + 1) * (replacementGates + 1) := by
+      unfold causalRank
+      rw [splitFin_left]
+    rw [consumerRank]
+    dsimp only [RawNandGraph.Depends, graph] at edge
+    simp only [splitFin_left] at edge
+    rcases edge with leftAt | rightAt
+    · exact originalSource_causal_rank_lt candidate records replacement interfaceBound _ _
+        ((exterior records).get outside)
+        (fun prior atSource => sources_ordered candidate.program _ prior (Or.inl atSource))
+        producer leftAt
+    · exact originalSource_causal_rank_lt candidate records replacement interfaceBound _ _
+        ((exterior records).get outside)
+        (fun prior atSource => sources_ordered candidate.program _ prior (Or.inr atSource))
+        producer rightAt
+  · have consumerRank : causalRank candidate records replacement
+        (Fin.natAdd (exterior records).length inside) =
+          CausalBound.levels replacement.program (causalBoundaryLabels candidate records) inside *
+            (replacementGates + 1) + (inside.val + 1) := by
+      unfold causalRank
+      rw [splitFin_right]
+    rw [consumerRank]
+    dsimp only [RawNandGraph.Depends, graph] at edge
+    simp only [splitFin_right] at edge
+    have levels := CausalBound.terminal_sources_level replacement.program
+      (causalBoundaryLabels candidate records) inside
+    rcases edge with leftAt | rightAt
+    · apply replacementSource_causal_rank_lt candidate records replacement _ inside ?_
+        (fun prior atSource => sources_ordered replacement.program inside prior
+          (Or.inl atSource)) producer leftAt
+      omega
+    · apply replacementSource_causal_rank_lt candidate records replacement _ inside ?_
+        (fun prior atSource => sources_ordered replacement.program inside prior
+          (Or.inr atSource)) producer rightAt
+      omega
+
+theorem graph_wellFounded_of_causalInterfaceBound
+    (interfaceBound : CausalInterfaceBound candidate records replacement) :
+    WellFounded (graph candidate records replacement).Depends :=
+  ⟨fun node => rank_accessible _ (causalRank candidate records replacement)
+    (graph_causal_rank_decreases candidate records replacement interfaceBound) node⟩
+
+/-- The existing compiler computes an order whenever actual causal bounds hold.
+The history construction derives these bounds rather than requesting a certificate. -/
+theorem compile_of_causalInterfaceBound
+    (interfaceBound : CausalInterfaceBound candidate records replacement) :
+    ∃ compiled, compile candidate records replacement = some compiled :=
+  (compile_success_iff candidate records replacement).2
+    (graph_wellFounded_of_causalInterfaceBound candidate records replacement interfaceBound)
 
 end ArbitrarySupportSplice
 end DirectWire

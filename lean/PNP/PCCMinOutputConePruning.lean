@@ -369,5 +369,92 @@ theorem outputConeNormalizer_checked {inputs outputs : Nat}
     have accounting := outputConeImplementation_exact_accounting current
     exact ⟨trivial, by omega, by omega⟩
 
+private theorem outputConeBoundaryInput_causal
+    {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (labels : Fin inputs → Nat) (caps : Fin gates → Nat)
+    (index : Fin (terminalBoundaryPorts candidate.program
+      (outputConeRecords candidate)).length) :
+    labels (outputConeBoundaryInput candidate index) =
+      terminalBoundaryCausalLabels candidate (outputConeRecords candidate)
+        labels caps index := by
+  unfold outputConeBoundaryInput
+  split
+  · rename_i original wireEq
+    simp only [terminalBoundaryCausalLabels, wireEq, TerminalSupportWire.causalLevel]
+  · rename_i producer wireEq
+    exact False.elim (outputConeRecords_noExternalGate candidate producer
+      (wireEq ▸ List.get_mem _ index))
+
+/-- The full retained frontier respects the original producer's dependency level,
+including retained wires that feed removed consumers rather than global outputs. -/
+theorem outputConeFrontierCandidate_causal_bound
+    {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) (labels : Fin inputs → Nat)
+    (output : Fin (terminalInterfacePorts candidate (outputConeRecords candidate)).length) :
+    CausalBound.outputLevel (outputConeFrontierCandidate candidate) labels output ≤
+      CausalBound.levels candidate.program labels
+        ((terminalInterfacePorts candidate (outputConeRecords candidate)).get output) := by
+  have renamed := CausalBound.outputLevel_renameInputs
+    (outputConeBoundaryInput candidate)
+    (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate
+    labels output
+  have boundaryLevels :
+      (fun index => labels (outputConeBoundaryInput candidate index)) =
+        terminalBoundaryCausalLabels candidate (outputConeRecords candidate)
+          labels (CausalBound.levels candidate.program labels) := by
+    funext index
+    exact outputConeBoundaryInput_causal candidate labels _ index
+  have boundaryMatch := congrArg
+    (fun valuation => CausalBound.outputLevel
+      (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate
+      valuation output) boundaryLevels
+  calc
+    CausalBound.outputLevel (outputConeFrontierCandidate candidate) labels output =
+        CausalBound.outputLevel
+          (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate
+          (fun index => labels (outputConeBoundaryInput candidate index)) output := renamed
+    _ = CausalBound.outputLevel
+          (extractTerminalSupport candidate (outputConeRecords candidate)).extractedCandidate
+          (terminalBoundaryCausalLabels candidate (outputConeRecords candidate)
+            labels (CausalBound.levels candidate.program labels)) output := boundaryMatch
+    _ ≤ _ := extractTerminalSupport_causal_levels candidate (outputConeRecords candidate)
+      labels output
+
+private theorem outputConeOutputSource_causal
+    {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) (labels : Fin inputs → Nat)
+    (output : Fin outputs) :
+    CausalBound.source (outputConeOutputSource candidate output) labels
+        (CausalBound.levels (outputConeRenamedCandidate candidate).program labels) ≤
+      CausalBound.outputLevel candidate labels output := by
+  unfold outputConeOutputSource
+  split
+  · rename_i original wireEq
+    simp only [CausalBound.outputLevel, wireEq, CausalBound.source, Nat.le_refl]
+  · rename_i value wireEq
+    simp only [CausalBound.outputLevel, wireEq, CausalBound.source, Nat.le_refl]
+  · rename_i producer wireEq
+    let located := coneLocateMember producer
+      (terminalInterfacePorts candidate (outputConeRecords candidate))
+      (outputConeOutput_interface candidate output producer wireEq)
+    change CausalBound.outputLevel (outputConeFrontierCandidate candidate)
+      labels located.1 ≤ _
+    have bounded := outputConeFrontierCandidate_causal_bound candidate labels located.1
+    rw [located.2] at bounded
+    simpa only [CausalBound.outputLevel, wireEq, CausalBound.source] using bounded
+
+/-- Actual output-cone pruning does not increase any ordered output's syntactic
+dependency level, for every candidate and every assignment of input labels. -/
+theorem outputConeImplementation_causal_bound
+    {inputs outputs : Nat}
+    (current : Implementation inputs outputs) (labels : Fin inputs → Nat)
+    (output : Fin outputs) :
+    CausalBound.outputLevel (outputConeImplementation current).candidate labels output ≤
+      CausalBound.outputLevel current.candidate labels output := by
+  simpa only [CausalBound.outputLevel, outputConeImplementation,
+    Candidate.ofDirectWireWord_pointwise, Candidate.ofDirectWireWord_program] using
+    outputConeOutputSource_causal current.candidate labels output
+
 end DirectWire
 end PNP

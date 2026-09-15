@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 239 of 241 current scoped publication rows earned.
+Formal artefact coverage: 240 of 242 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-263`, 239 of 241
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-264`, 240 of 242
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -22,7 +22,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M263 |
+| Track | Available | Earned at M264 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -31,7 +31,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M263 risk-weighted proof completion estimate is therefore 40 percent, with
+The M264 risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -753,3 +753,9 @@ conflicting gate, axiom, root-theorem, or publication states.
 M263 closes the computed dependency-ordered physical history prerequisite for arbitrary finite raw events. The constructor validates identities and references, executes the actual evolving carrier, retains creation snapshots, requires strictly later full-value discharges and charges every appended materializer. Final physical gate balance is exact. Acyclicity is not semantic admissibility or confluence. This remains one computational R5/R6/R8 history component, not all manuscript rewrite and normalization families, noncomputational records, matched-kappa Pull/Expand, complete Package E, input-derived terminal families, global routes, unconditional ZeroSlack or full polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the proof estimate and uncertainty remain unchanged. Formal artefact coverage: 239 of 241 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 See the [computed history boundary](lean_wire_obligation_history.md). PNPLabs publication is deferred; its coherent M262 source pin remains unchanged.
+
+## M264 coverage review
+
+M264 closes the source-derived causal link from actual extraction and closed R5/R6/R8 histories to literal one-copy arbitrary-support replacement. Current and captured-snapshot bounds imply a decreasing graph rank, complete literal compilation, all ordered output semantics and the full removal/materializer-charge equation. The support and history are still input data, not an input-derived terminal family or globally successful rewrite strategy. Full manuscript rule families, Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 240 of 242 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+Publication decision: publish the source-derived history-to-literal-splice capability after the verified M264 core merge, batching the deferred M263 result. Website validation consumes the exact verified core artefacts without rerunning Lean. See [the M264 boundary](lean_wire_history_arbitrary_support.md).
