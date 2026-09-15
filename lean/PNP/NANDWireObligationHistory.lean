@@ -11,6 +11,7 @@ complete Package E, unconditional ZeroSlack or polynomial execution.
 
 import PNP.FiniteDependencyScheduler
 import PNP.NANDWireObligationHistoryState
+import PNP.NANDWireObligationHistoryR7
 
 namespace PNP.DirectWire.WireObligationHistory
 
@@ -20,6 +21,7 @@ inductive Action (fields : Nat) where
   | createR5 (field : Fin fields)
   | cancelR6 (creationID : Nat)
   | restoreR8 (creationID : Nat)
+  | realizeR7 (creationID : Nat) (records : List RawSupportRecord)
   | normalize
   | readFull (field : Fin fields)
   deriving Repr, DecidableEq
@@ -28,6 +30,7 @@ inductive Action (fields : Nat) where
 def Action.creationDependencies : Action fields → List Nat
   | .cancelR6 identity => [identity]
   | .restoreR8 identity => [identity]
+  | .realizeR7 identity _ => [identity]
   | _ => []
 
 structure RawEvent (fields : Nat) where

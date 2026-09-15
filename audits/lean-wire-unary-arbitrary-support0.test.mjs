@@ -133,6 +133,7 @@ const SPECS = [
     "prefix": "PNP.DirectWire.ArbitrarySupportSplice.",
     "imports": [
       "PNP.NANDTopologicalCompiler",
+      "PNP.NANDTopologicalCausalBounds",
       "PNP.ResidualTerminalSaturatedSupportContext",
       "PNP.NANDNormalizationCausalBounds"
     ],
@@ -179,7 +180,12 @@ const SPECS = [
       "causalRank",
       "graph_causal_rank_decreases",
       "graph_wellFounded_of_causalInterfaceBound",
-      "compile_of_causalInterfaceBound"
+      "compile_of_causalInterfaceBound",
+      "dependencyBoundaryLabels",
+      "dependencyCaps",
+      "DependencyInterfaceBound",
+      "graph_dependency_bounds",
+      "result_output_dependency_bound"
     ]
   },
   {

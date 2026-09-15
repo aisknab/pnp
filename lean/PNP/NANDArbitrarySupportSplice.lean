@@ -11,6 +11,7 @@ Package E, unconditional ZeroSlack, or polynomial PCCMin.
 -/
 
 import PNP.NANDTopologicalCompiler
+import PNP.NANDTopologicalCausalBounds
 import PNP.ResidualTerminalSaturatedSupportContext
 import PNP.NANDNormalizationCausalBounds
 
@@ -979,6 +980,143 @@ theorem compile_of_causalInterfaceBound
     ∃ compiled, compile candidate records replacement = some compiled :=
   (compile_success_iff candidate records replacement).2
     (graph_wellFounded_of_causalInterfaceBound candidate records replacement interfaceBound)
+
+variable (labels : Fin inputs → Nat)
+
+/-- Labels of the actual original wires entering the selected support. -/
+def dependencyBoundaryLabels :
+    Fin (terminalBoundaryPorts candidate.program records).length → Nat :=
+  terminalBoundaryCausalLabels candidate records labels
+    (CausalBound.levels candidate.program labels)
+
+/-- Actual source-program levels for the exterior and replacement nodes. -/
+def dependencyCaps : Fin ((exterior records).length + replacementGates) → Nat :=
+  splitFin
+    (fun index => CausalBound.levels candidate.program labels ((exterior records).get index))
+    (CausalBound.levels replacement.program (dependencyBoundaryLabels candidate records labels))
+
+/-- An intermediate proof predicate, derived by the concrete R7 constructor. -/
+def DependencyInterfaceBound : Prop :=
+  ∀ port, CausalBound.outputLevel replacement (dependencyBoundaryLabels candidate records labels)
+      port ≤ CausalBound.levels candidate.program labels
+        ((terminalInterfacePorts candidate records).get port)
+
+private theorem dependencyCaps_left (index : Fin (exterior records).length) :
+    dependencyCaps candidate records replacement labels (Fin.castAdd replacementGates index) =
+      CausalBound.levels candidate.program labels ((exterior records).get index) := by
+  unfold dependencyCaps
+  rw [splitFin_left]
+
+private theorem dependencyCaps_right (index : Fin replacementGates) :
+    dependencyCaps candidate records replacement labels
+        (Fin.natAdd (exterior records).length index) =
+      CausalBound.levels replacement.program
+        (dependencyBoundaryLabels candidate records labels) index := by
+  unfold dependencyCaps
+  rw [splitFin_right]
+
+private theorem boundarySource_dependency_level
+    (port : Fin (terminalBoundaryPorts candidate.program records).length) :
+    CausalBound.source
+        (boundarySource (replacementGates := replacementGates) candidate records port)
+        labels (dependencyCaps candidate records replacement labels) =
+      dependencyBoundaryLabels candidate records labels port := by
+  unfold boundarySource
+  split
+  · rename_i index found
+    change labels index = _
+    unfold dependencyBoundaryLabels terminalBoundaryCausalLabels
+    rw [found]
+    rfl
+  · rename_i gate found
+    dsimp only [CausalBound.source]
+    rw [dependencyCaps_left, get_memberIndex]
+    unfold dependencyBoundaryLabels terminalBoundaryCausalLabels
+    rw [found]
+    rfl
+
+private theorem replacementSource_dependency_level
+    (source : Source (terminalBoundaryPorts candidate.program records).length replacementGates) :
+    CausalBound.source (replacementSource candidate records source) labels
+        (dependencyCaps candidate records replacement labels) =
+      CausalBound.source source (dependencyBoundaryLabels candidate records labels)
+        (CausalBound.levels replacement.program (dependencyBoundaryLabels candidate records labels)) := by
+  cases source with
+  | input port => exact boundarySource_dependency_level candidate records replacement labels port
+  | constant value => rfl
+  | gate index => exact dependencyCaps_right candidate records replacement labels index
+
+private theorem originalSource_dependency_bound
+    (interfaceBound : DependencyInterfaceBound candidate records replacement labels)
+    (source : Source inputs gates) (visible : Visible candidate records source) :
+    CausalBound.source (originalSource candidate records replacement source visible) labels
+        (dependencyCaps candidate records replacement labels) ≤
+      CausalBound.source source labels (CausalBound.levels candidate.program labels) := by
+  cases source with
+  | input index => exact Nat.le_refl _
+  | constant value => exact Nat.le_refl _
+  | gate gate =>
+      simp only [originalSource]
+      split
+      · rename_i selected
+        rw [replacementSource_dependency_level]
+        have bounded := interfaceBound (memberIndex (visible gate rfl selected))
+        rw [get_memberIndex] at bounded
+        exact bounded
+      · dsimp only [CausalBound.source]
+        rw [dependencyCaps_left, get_memberIndex]
+        exact Nat.le_refl _
+
+/-- Every actual splice gate respects the source-derived dependency caps. -/
+theorem graph_dependency_bounds
+    (interfaceBound : DependencyInterfaceBound candidate records replacement labels) :
+    RawNandCausalBound.GraphBounds (graph candidate records replacement) labels
+      (dependencyCaps candidate records replacement labels) := by
+  intro node
+  rcases finSum_decompose node with ⟨outside, rfl⟩ | ⟨inside, rfl⟩
+  · dsimp only [graph]
+    rw [splitFin_left, dependencyCaps_left]
+    unfold exteriorGate
+    dsimp only
+    let original := (exterior records).get outside
+    let pair := candidate.program.terminalGateSources original
+    have leftBound := originalSource_dependency_bound candidate records replacement labels
+      interfaceBound pair.1 (exteriorSource_visible candidate records original
+        (exteriorGet_unselected records outside) pair.1 (Or.inl rfl))
+    have rightBound := originalSource_dependency_bound candidate records replacement labels
+      interfaceBound pair.2 (exteriorSource_visible candidate records original
+        (exteriorGet_unselected records outside) pair.2 (Or.inr rfl))
+    have exactLevel := CausalBound.terminal_sources_level candidate.program labels original
+    change max (CausalBound.source (originalSource candidate records replacement pair.1 _) labels
+      (dependencyCaps candidate records replacement labels))
+      (CausalBound.source (originalSource candidate records replacement pair.2 _) labels
+        (dependencyCaps candidate records replacement labels)) ≤
+      CausalBound.levels candidate.program labels original
+    dsimp only [pair] at leftBound rightBound ⊢
+    omega
+  · dsimp only [graph]
+    rw [splitFin_right, dependencyCaps_right]
+    unfold replacementGate
+    dsimp only
+    rw [replacementSource_dependency_level, replacementSource_dependency_level,
+      CausalBound.terminal_sources_level]
+    exact Nat.le_refl _
+
+/-- Bounds follow the actual accepted compiler result, not Boolean equivalence. -/
+theorem result_output_dependency_bound
+    (interfaceBound : DependencyInterfaceBound candidate records replacement labels)
+    (compiled : CompiledRawNandGraph (graph candidate records replacement))
+    (accepted : compile candidate records replacement = some compiled)
+    (output : Fin outputs) :
+    CausalBound.outputLevel (result candidate records replacement compiled) labels output ≤
+      CausalBound.outputLevel candidate labels output :=
+  Nat.le_trans
+    (RawNandCausalBound.candidate_bound (graph candidate records replacement) compiled accepted
+      labels (dependencyCaps candidate records replacement labels)
+      (graph_dependency_bounds candidate records replacement labels interfaceBound)
+      (word candidate records replacement) output)
+    (originalSource_dependency_bound candidate records replacement labels interfaceBound
+      (candidate.directWireWord.source output) (output_visible candidate records output))
 
 end ArbitrarySupportSplice
 end DirectWire

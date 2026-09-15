@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 240 of 242 current scoped publication rows earned.
+Formal artefact coverage: 241 of 243 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-264`, 240 of 242
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-265`, 241 of 243
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -22,7 +22,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M264 |
+| Track | Available | Earned at M265 |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -759,3 +759,9 @@ See the [computed history boundary](lean_wire_obligation_history.md). PNPLabs pu
 M264 closes the source-derived causal link from actual extraction and closed R5/R6/R8 histories to literal one-copy arbitrary-support replacement. Current and captured-snapshot bounds imply a decreasing graph rank, complete literal compilation, all ordered output semantics and the full removal/materializer-charge equation. The support and history are still input data, not an input-derived terminal family or globally successful rewrite strategy. Full manuscript rule families, Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 240 of 242 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 Publication decision: publish the source-derived history-to-literal-splice capability after the verified M264 core merge, batching the deferred M263 result. Website validation consumes the exact verified core artefacts without rerunning Lean. See [the M264 boundary](lean_wire_history_arbitrary_support.md).
+
+## M265 coverage review
+
+M265 closes the computed zero/unary R7 edge in raw computational histories. All support coordinates are decoded against the identified creation snapshot, and exact boundary recognition selects the actual source-derived realization. Full-field discharge, actual materializer charges, pending-snapshot bounds, source lifecycle and literal one-copy ambient splicing are kernel checked. Supports and histories remain input data, not derived terminal families or a globally successful rewrite strategy. Full manuscript R1-R9/N1-N10, observer/profile compatibility, complete Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 241 of 243 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+Publication decision: defer. The computed R7 edge completes this core integration, but the global support/history strategy, full manuscript calculus and weighted proof checkpoints remain open. Preserve the coherent M264 website pin and include M265 in the next major publication batch. See [the computed R7 history boundary](lean_computed_r7_history.md).

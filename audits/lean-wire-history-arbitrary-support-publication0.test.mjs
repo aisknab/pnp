@@ -310,8 +310,15 @@ test('M264 preflight: package, verifier and durable CI share the exact audited b
   assert.ok(workflow.includes(COMMAND));
   for (const file of [AUDIT, REGRESSION])
     assert.ok(workflow.includes('lake env lean -DwarningAsError=true ' + file), file);
-  for (const [name] of REVIEWED)
-    assert.equal(workflow.split('"' + name + '"').length - 1, 1, name);
+  const auditSteps = workflow.split(/^      - name:/mu).filter(step =>
+    step.includes('lake env lean -DwarningAsError=true ' + AUDIT));
+  assert.equal(auditSteps.length, 1);
+  assert.ok(auditSteps[0].includes("readFileSync('" + AUDIT + "', 'utf8')"));
+  for (const fragment of ["readFileSync('status/LEAN_THEOREM_INVENTORY.json', 'utf8')",
+    '.milestoneCandidates', 'const expected = names.map(name => {',
+    'const row = inventory.find(row => row.name === name);',
+    "assert.equal(row?.kind, 'theorem', name);", 'return [name, row.axioms];'])
+    assert.ok(auditSteps[0].includes(fragment), fragment);
 });
 
 let sourcesPromise;

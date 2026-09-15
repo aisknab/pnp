@@ -1,0 +1,44 @@
+import PNP
+
+-- Exact reviewed M265 theorem closures; no runtime fixture is proof authority.
+#print axioms PNP.DirectWire.RawNandCompilationState.finish_position
+#print axioms PNP.DirectWire.RawNandCausalBound.compile_bounds
+#print axioms PNP.DirectWire.RawNandCausalBound.candidate_bound
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_dependency_bounds
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.result_output_dependency_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.implementation_output_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.constantWord_output_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.localWord_output_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.arbitrary_replacement_output_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.compiled_spec
+#print axioms PNP.DirectWire.WireUnaryCausalBound.replacement_dependency_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.expanded_exposed_bound
+#print axioms PNP.DirectWire.WireUnaryCausalBound.expanded_causalBounds
+#print axioms PNP.DirectWire.WireUnaryCausalBound.attempt_causalBounds
+#print axioms PNP.DirectWire.WireObligationHistory.decodeRecord_encode
+#print axioms PNP.DirectWire.WireObligationHistory.decodeRecord_source
+#print axioms PNP.DirectWire.WireObligationHistory.decodeRecords_encode
+#print axioms PNP.DirectWire.WireObligationHistory.decodeRecords_source
+#print axioms PNP.DirectWire.WireObligationHistory.computeR7_isSome_iff
+#print axioms PNP.DirectWire.WireObligationHistory.R7Realization.full_field
+#print axioms PNP.DirectWire.WireObligationHistory.R7Realization.exact_charge
+#print axioms PNP.DirectWire.WireObligationHistory.R7Realization.causalBounds
+#print axioms PNP.DirectWire.WireObligationHistory.State.restoreR7_gate_charge
+#print axioms PNP.DirectWire.WireObligationHistory.State.restoreR7_full_value
+#print axioms PNP.DirectWire.WireObligationHistory.State.restoreR7_other_pending
+#print axioms PNP.DirectWire.WireObligationHistory.State.restoreR7_causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.Transition.causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.field_causal_bound
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.full_output
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.full_field
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.gate_balance
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.creation_lifecycle
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.dependency_before
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_compiles
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_semantics
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_exact_accounting
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_strict_gain
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_complete
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_sound
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_none_iff

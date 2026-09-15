@@ -250,6 +250,7 @@ const SPECS = [
       "create_causalInvariant",
       "normalize_causalInvariant",
       "restore_causalInvariant",
+      "restoreR7_causalInvariant",
       "cancel_causalInvariant",
       "Transition.causalInvariant",
       "Execution.causalInvariant",
@@ -274,6 +275,7 @@ const SPECS = [
       "end PNP.DirectWire.WireObligationHistory"
     ],
     "signatures": {
+      "restoreR7_causalInvariant": "theorem restoreR7_causalInvariant (state : State source) (field : Fin fields) (snapshot : Snapshot source field) (found : state.pending field = some snapshot) (raw : List RawSupportRecord) (realization : R7Realization snapshot.carrier raw) (labels : Fin inputs → Nat) (bounded : state.CausalInvariant labels) : (state.restoreR7 field snapshot found raw realization).CausalInvariant labels",
       "Transition.causalInvariant": "theorem Transition.causalInvariant {source : WireCarrier inputs outputs fields} {before after : State source} {event : RawEvent fields} (step : Transition source before event after) (labels : Fin inputs → Nat) : before.CausalInvariant labels → after.CausalInvariant labels",
       "Execution.causalInvariant": "theorem Execution.causalInvariant {source : WireCarrier inputs outputs fields} {before after : State source} {events : List (RawEvent fields)} (trace : Execution source before events after) (labels : Fin inputs → Nat) : before.CausalInvariant labels → after.CausalInvariant labels",
       "causalInvariant": "theorem causalInvariant (history : ClosedHistory source raw) (labels : Fin inputs → Nat) : history.state.CausalInvariant labels",
@@ -337,10 +339,16 @@ const SPECS = [
       "causalRank",
       "graph_causal_rank_decreases",
       "graph_wellFounded_of_causalInterfaceBound",
-      "compile_of_causalInterfaceBound"
+      "compile_of_causalInterfaceBound",
+      "dependencyBoundaryLabels",
+      "dependencyCaps",
+      "DependencyInterfaceBound",
+      "graph_dependency_bounds",
+      "result_output_dependency_bound"
     ],
     "imports": [
       "PNP.NANDTopologicalCompiler",
+      "PNP.NANDTopologicalCausalBounds",
       "PNP.ResidualTerminalSaturatedSupportContext",
       "PNP.NANDNormalizationCausalBounds"
     ],
@@ -352,6 +360,7 @@ const SPECS = [
       "variable (candidate : Candidate inputs gates outputs)",
       "variable (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))",
       "variable (replacement : Candidate (terminalBoundaryPorts candidate.program records).length replacementGates (terminalInterfacePorts candidate records).length)",
+      "variable (labels : Fin inputs → Nat)",
       "end ArbitrarySupportSplice",
       "end DirectWire",
       "end PNP"

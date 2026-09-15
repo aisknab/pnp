@@ -15,6 +15,8 @@ import {
 
 // Independently reviewed source/type boundary and compiled theorem fingerprints.
 // Do not regenerate these expectations merely to accept an unexplained change.
+// M265 extends the raw R7 action, actual execution and charged discharge records.
+// Only those source contracts change; the existing theorem fingerprints stay fixed.
 const CONTRACTS = {
   "FiniteDependencyScheduler": [
     35,
@@ -25,12 +27,12 @@ const CONTRACTS = {
     "6608e10b277c19ae0d45b3e885a7addfaeeacdaa86e180763c3d01e220d484b3"
   ],
   "NANDWireObligationHistory": [
-    26,
-    "75696e306b8fa1c0cb51a5ac413b6561240ce1c9d03d9f2d7319bb9bdebe00f5"
+    27,
+    "a343308e6e5085be258a6588fd6d6239625724dacdc9e5cc7e32425da5343abc"
   ],
   "NANDWireObligationHistoryExecution": [
     56,
-    "fb923a33a9ae016f35ce1595f18cdb94d0974522a528df65c8ed36a33def6b40"
+    "de095252d62d4a198c9df51686cc704f32677a6d46b414fb319bbcaf51534d2b"
   ]
 };
 const REVIEWED = [
@@ -194,6 +196,8 @@ test('M263 preflight: source review rejects supplied premises and changed physic
     ['NANDWireObligationHistory', 'predecessorIDs : List Nat', 'predecessorIDs : List Nat\n  supplied : True'],
     ['NANDWireObligationHistoryExecution', 'theorem full_field (history : ClosedHistory source raw)',
       'theorem full_field (history : ClosedHistory source raw) (supplied : True)'],
+    ['NANDWireObligationHistoryExecution', 'match computed : computeR7 entry.snapshot.carrier raw with',
+      'match computed : computeR7 state.current raw with'],
     ['NANDWireObligationHistoryExecution', 'step.created = some ⟨field, snapshot⟩ → tail.Discharged field snapshot',
       'step.created = some ⟨field, snapshot⟩ → True'],
   ]) {

@@ -27,6 +27,7 @@ const SOURCES = [
       "RawNandReadyStep.apply_remaining_lt": "theorem RawNandReadyStep.apply_remaining_lt {inputs nodes : Nat} {graph : RawNandGraph inputs nodes} {state : RawNandCompilationState graph} (step : RawNandReadyStep state) : step.apply.remaining.length < state.remaining.length",
       "RawNandCompilationStop.unresolved_predecessor": "theorem RawNandCompilationStop.unresolved_predecessor {inputs nodes : Nat} {graph : RawNandGraph inputs nodes} (stop : RawNandCompilationStop graph) (node : Fin nodes) (member : node ∈ stop.state.remaining) : ∃ producer, producer ∈ stop.state.remaining ∧ graph.Depends producer node",
       "RawNandCompilationStop.complete_of_wellFounded": "theorem RawNandCompilationStop.complete_of_wellFounded {inputs nodes : Nat} {graph : RawNandGraph inputs nodes} (stop : RawNandCompilationStop graph) (acyclic : WellFounded graph.Depends) : stop.state.remaining = []",
+      "RawNandCompilationState.finish_position": "theorem RawNandCompilationState.finish_position {inputs nodes : Nat} {graph : RawNandGraph inputs nodes} (state : RawNandCompilationState graph) (complete : state.remaining = []) (node : Fin nodes) : state.position node = some ((state.finish complete).position node)",
       "CompiledRawNandGraph.wellFounded": "theorem CompiledRawNandGraph.wellFounded {inputs nodes : Nat} {graph : RawNandGraph inputs nodes} (compiled : CompiledRawNandGraph graph) : WellFounded graph.Depends",
       "compileRawNandGraph_success_iff": "theorem compileRawNandGraph_success_iff {inputs nodes : Nat} (graph : RawNandGraph inputs nodes) : (∃ compiled, compileRawNandGraph graph = some compiled) ↔ WellFounded graph.Depends",
       "compileRawNandGraph_failure_iff": "theorem compileRawNandGraph_failure_iff {inputs nodes : Nat} (graph : RawNandGraph inputs nodes) : compileRawNandGraph graph = none ↔ ¬WellFounded graph.Depends",
@@ -54,6 +55,7 @@ const SOURCES = [
       "RawNandCompilationStop.complete_of_wellFounded",
       "CompiledRawNandGraph",
       "RawNandCompilationState.finish",
+      "RawNandCompilationState.finish_position",
       "CompiledRawNandGraph.wellFounded",
       "compileRawNandGraph",
       "compileRawNandGraph_success_iff",
@@ -71,6 +73,7 @@ const SOURCES = [
     "prefix": "PNP.DirectWire.ArbitrarySupportSplice.",
     "imports": [
       "PNP.NANDTopologicalCompiler",
+      "PNP.NANDTopologicalCausalBounds",
       "PNP.ResidualTerminalSaturatedSupportContext",
       "PNP.NANDNormalizationCausalBounds"
     ],
@@ -88,7 +91,9 @@ const SOURCES = [
       "graph_rank_decreases": "theorem graph_rank_decreases (primary : PrimaryBoundary candidate records) (producer consumer : Fin ((exterior records).length + replacementGates)) (edge : (graph candidate records replacement).Depends producer consumer) : rank records producer < rank records consumer",
       "graph_wellFounded_of_primaryBoundary": "theorem graph_wellFounded_of_primaryBoundary (primary : PrimaryBoundary candidate records) : WellFounded (graph candidate records replacement).Depends",
       "production_compiles": "theorem production_compiles (model : TerminalCandidateSaturationModel (profileWidth",
-      "production_agreement": "theorem production_agreement (model : TerminalCandidateSaturationModel (profileWidth"
+      "production_agreement": "theorem production_agreement (model : TerminalCandidateSaturationModel (profileWidth",
+      "graph_dependency_bounds": "theorem graph_dependency_bounds (interfaceBound : DependencyInterfaceBound candidate records replacement labels) : RawNandCausalBound.GraphBounds (graph candidate records replacement) labels (dependencyCaps candidate records replacement labels)",
+      "result_output_dependency_bound": "theorem result_output_dependency_bound (interfaceBound : DependencyInterfaceBound candidate records replacement labels) (compiled : CompiledRawNandGraph (graph candidate records replacement)) (accepted : compile candidate records replacement = some compiled) (output : Fin outputs) : CausalBound.outputLevel (result candidate records replacement compiled) labels output ≤ CausalBound.outputLevel candidate labels output"
     },
     "publicHeads": [
       "sources_eval",
@@ -130,7 +135,12 @@ const SOURCES = [
       "causalRank",
       "graph_causal_rank_decreases",
       "graph_wellFounded_of_causalInterfaceBound",
-      "compile_of_causalInterfaceBound"
+      "compile_of_causalInterfaceBound",
+      "dependencyBoundaryLabels",
+      "dependencyCaps",
+      "DependencyInterfaceBound",
+      "graph_dependency_bounds",
+      "result_output_dependency_bound"
     ]
   }
 ];
