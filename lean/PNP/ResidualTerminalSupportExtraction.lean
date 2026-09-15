@@ -14,6 +14,7 @@ positive support, or prove square legitimacy or projection compatibility.
 -/
 
 import PNP.ResidualTerminalPhysicalSupportCompletion
+import PNP.NANDCausalBounds
 
 namespace PNP
 namespace DirectWire
@@ -601,6 +602,16 @@ private structure TerminalExtractionState
     extractedProgram.eval boundaryValuation (gateIndex gate selectedGate) =
       program.evalTerminalOpenAux boundary boundaryValuation selected
         inputWire gateWire gate
+  causalBound : ∀ (boundaryLabels : Fin boundary.length → Nat)
+      (wireCaps : TerminalSupportWire wireInputs wireGates → Nat)
+      (labels : Fin inputs → Nat) (caps : Fin gates → Nat),
+    (∀ index, boundaryLabels index ≤ wireCaps (boundary.get index)) →
+    (∀ index, wireCaps (inputWire index) ≤ labels index) →
+    (∀ index, wireCaps (gateWire index) ≤ caps index) →
+    CausalBound.Bounds program labels caps →
+    ∀ index (selectedIndex : selected index = true),
+      CausalBound.levels extractedProgram boundaryLabels
+        (gateIndex index selectedIndex) ≤ caps index
 
 private def boundaryInputSource
     {wireInputs wireGates : Nat}
@@ -681,6 +692,70 @@ private theorem Source.extractTerminal_eval
         exact boundaryInputSource_eval boundary (gateWire index) state.gateCount
           boundaryValuation (state.extractedProgram.eval boundaryValuation)
 
+/-- The computed boundary-source lookup respects any pointwise wire caps.
+An absent wire becomes a literal constant, whose causal level is zero. -/
+private theorem boundaryInputSource_causal_bound
+    {wireInputs wireGates gateCount : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (wire : TerminalSupportWire wireInputs wireGates)
+    (boundaryLabels : Fin boundary.length → Nat)
+    (wireCaps : TerminalSupportWire wireInputs wireGates → Nat)
+    (boundaryLe : ∀ index, boundaryLabels index ≤ wireCaps (boundary.get index))
+    (gateLevels : Fin gateCount → Nat) :
+    CausalBound.source (boundaryInputSource boundary wire gateCount)
+      boundaryLabels gateLevels ≤ wireCaps wire := by
+  unfold boundaryInputSource
+  split
+  · rename_i member
+    change boundaryLabels (memberIndex member) ≤ wireCaps wire
+    have bounded := boundaryLe (memberIndex member)
+    rw [get_memberIndex] at bounded
+    exact bounded
+  · exact Nat.zero_le _
+
+/-- Transport caps through the actual source translation, using the already
+constructed bounds of selected predecessors. -/
+private theorem Source.extractTerminal_causal_bound
+    {wireInputs wireGates inputs priorGates : Nat}
+    {program : Program inputs priorGates}
+    {selected : Fin priorGates → Bool}
+    {inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates}
+    {gateWire : Fin priorGates → TerminalSupportWire wireInputs wireGates}
+    {boundary : List (TerminalSupportWire wireInputs wireGates)}
+    (state : TerminalExtractionState program selected inputWire gateWire boundary)
+    (wire : Source inputs priorGates)
+    (labels : Fin inputs → Nat) (caps : Fin priorGates → Nat)
+    (boundaryLabels : Fin boundary.length → Nat)
+    (wireCaps : TerminalSupportWire wireInputs wireGates → Nat)
+    (boundaryLe : ∀ index, boundaryLabels index ≤ wireCaps (boundary.get index))
+    (inputLe : ∀ index, wireCaps (inputWire index) ≤ labels index)
+    (gateLe : ∀ index, wireCaps (gateWire index) ≤ caps index)
+    (bounded : ∀ index (selectedIndex : selected index = true),
+      CausalBound.levels state.extractedProgram boundaryLabels
+        (state.gateIndex index selectedIndex) ≤ caps index) :
+    CausalBound.source (wire.extractTerminal state) boundaryLabels
+        (CausalBound.levels state.extractedProgram boundaryLabels) ≤
+      CausalBound.source wire labels caps := by
+  cases wire with
+  | input index =>
+      change CausalBound.source
+        (boundaryInputSource boundary (inputWire index) state.gateCount)
+        boundaryLabels (CausalBound.levels state.extractedProgram boundaryLabels) ≤ labels index
+      exact Nat.le_trans (boundaryInputSource_causal_bound boundary (inputWire index)
+        boundaryLabels wireCaps boundaryLe _) (inputLe index)
+  | constant value => exact Nat.le_refl _
+  | gate index =>
+      change CausalBound.source
+        (if selectedIndex : selected index = true then .gate (state.gateIndex index selectedIndex)
+          else boundaryInputSource boundary (gateWire index) state.gateCount)
+        boundaryLabels (CausalBound.levels state.extractedProgram boundaryLabels) ≤ caps index
+      by_cases selectedIndex : selected index = true
+      · rw [dif_pos selectedIndex]
+        exact bounded index selectedIndex
+      · rw [dif_neg selectedIndex]
+        exact Nat.le_trans (boundaryInputSource_causal_bound boundary (gateWire index)
+          boundaryLabels wireCaps boundaryLe _) (gateLe index)
+
 private def extractTerminalProgramAux
     {wireInputs wireGates : Nat}
     (boundary : List (TerminalSupportWire wireInputs wireGates)) :
@@ -694,7 +769,10 @@ private def extractTerminalProgramAux
         extractedProgram := .empty
         gateCount_eq := rfl
         gateIndex := fun gate => Fin.elim0 gate
-        correct := fun _ gate => Fin.elim0 gate }
+        correct := fun _ gate => Fin.elim0 gate
+        causalBound := by
+          intro _ _ _ _ _ _ _ _ index
+          exact Fin.elim0 index }
   | inputs, gates + 1, .snoc initial gate, selected, inputWire, gateWire =>
       let earlierSelected : Fin gates -> Bool :=
         fun index => selected index.castSucc
@@ -736,7 +814,32 @@ private def extractTerminalProgramAux
               rw [Program.eval_snoc_castSucc]
               unfold Program.evalTerminalOpenAux
               rw [Valuation.snoc_castSucc]
-              exact earlier.correct boundaryValuation earlierIndex selectedIndex }
+              exact earlier.correct boundaryValuation earlierIndex selectedIndex
+          causalBound := by
+            intro boundaryLabels wireCaps labels caps boundaryLe inputLe gateLe bounded
+            have earlierBound := earlier.causalBound boundaryLabels wireCaps labels
+              (fun index => caps index.castSucc) boundaryLe inputLe
+              (fun index => gateLe index.castSucc) bounded.1
+            intro index selectedIndex
+            rcases CausalBound.index_cases index with ⟨earlierIndex, rfl⟩ | rfl
+            · simp only [finLastCasesConstructive_castSucc,
+                CausalBound.levels_snoc_castSucc]
+              exact earlierBound earlierIndex selectedIndex
+            · simp only [finLastCasesConstructive_last, CausalBound.levels_snoc_last]
+              have leftBound := Source.extractTerminal_causal_bound earlier gate.left labels
+                (fun index => caps index.castSucc) boundaryLabels wireCaps boundaryLe inputLe
+                (fun index => gateLe index.castSucc) earlierBound
+              have rightBound := Source.extractTerminal_causal_bound earlier gate.right labels
+                (fun index => caps index.castSucc) boundaryLabels wireCaps boundaryLe inputLe
+                (fun index => gateLe index.castSucc) earlierBound
+              change max (CausalBound.source (gate.left.extractTerminal earlier)
+                  boundaryLabels (CausalBound.levels earlier.extractedProgram boundaryLabels))
+                (CausalBound.source (gate.right.extractTerminal earlier)
+                  boundaryLabels (CausalBound.levels earlier.extractedProgram boundaryLabels)) ≤
+                    caps (Fin.last gates)
+              exact Nat.max_le_of_le_of_le
+                (Nat.le_trans leftBound (Nat.max_le.mp bounded.2).1)
+                (Nat.le_trans rightBound (Nat.max_le.mp bounded.2).2) }
       else
         let lastFalse : selected (Fin.last gates) = false :=
           bool_eq_false_of_ne_true (selected (Fin.last gates)) lastSelected
@@ -764,7 +867,41 @@ private def extractTerminalProgramAux
               simp only [finLastCasesConstructive_castSucc]
               unfold Program.evalTerminalOpenAux
               rw [Valuation.snoc_castSucc]
-              exact earlier.correct boundaryValuation earlierIndex selectedIndex }
+              exact earlier.correct boundaryValuation earlierIndex selectedIndex
+          causalBound := by
+            intro boundaryLabels wireCaps labels caps boundaryLe inputLe gateLe bounded
+            have earlierBound := earlier.causalBound boundaryLabels wireCaps labels
+              (fun index => caps index.castSucc) boundaryLe inputLe
+              (fun index => gateLe index.castSucc) bounded.1
+            intro index selectedIndex
+            rcases CausalBound.index_cases index with ⟨earlierIndex, rfl⟩ | rfl
+            · simp only [finLastCasesConstructive_castSucc]
+              exact earlierBound earlierIndex selectedIndex
+            · exact False.elim (lastSelected selectedIndex) }
+
+/-- Bounds of the actual extraction accumulator, proved from its constructors.
+The public instances below derive every cap from the input program itself. -/
+private theorem extractTerminalProgramAux_causal_bound
+    {wireInputs wireGates inputs gates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (boundaryLabels : Fin boundary.length → Nat)
+    (wireCaps : TerminalSupportWire wireInputs wireGates → Nat)
+    (boundaryLe : ∀ index, boundaryLabels index ≤ wireCaps (boundary.get index))
+    (program : Program inputs gates) (selected : Fin gates → Bool)
+    (inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates → TerminalSupportWire wireInputs wireGates)
+    (labels : Fin inputs → Nat) (caps : Fin gates → Nat)
+    (inputLe : ∀ index, wireCaps (inputWire index) ≤ labels index)
+    (gateLe : ∀ index, wireCaps (gateWire index) ≤ caps index)
+    (bounded : CausalBound.Bounds program labels caps) :
+    ∀ index (selectedIndex : selected index = true),
+      CausalBound.levels
+          (extractTerminalProgramAux boundary program selected inputWire gateWire).extractedProgram
+          boundaryLabels
+          ((extractTerminalProgramAux boundary program selected inputWire gateWire).gateIndex
+            index selectedIndex) ≤ caps index := by
+  exact (extractTerminalProgramAux boundary program selected inputWire gateWire).causalBound
+    boundaryLabels wireCaps labels caps boundaryLe inputLe gateLe bounded
 
 /-- Extracted direct-wire support with exact computed dimensions. -/
 structure TerminalExtractedSupport
@@ -912,6 +1049,100 @@ def TerminalSupportWire.candidateValue
     (input : Valuation inputs) : TerminalSupportWire inputs gates -> Bool
   | .input index => input index
   | .gate index => candidate.program.eval input index
+
+/-- Assign levels to original physical wires from input labels and gate caps. -/
+def TerminalSupportWire.causalLevel
+    {inputs gates : Nat} (labels : Fin inputs → Nat) (caps : Fin gates → Nat) :
+    TerminalSupportWire inputs gates → Nat
+  | .input index => labels index
+  | .gate index => caps index
+
+/-- The canonical boundary carries the levels of its actual original wires. -/
+def terminalBoundaryCausalLabels
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (labels : Fin inputs → Nat) (caps : Fin gates → Nat) :
+    Fin (terminalBoundaryPorts candidate.program records).length → Nat :=
+  fun index =>
+    ((terminalBoundaryPorts candidate.program records).get index).causalLevel labels caps
+
+/-- Compute an extracted interface level from the actual extracted program and
+its canonical original-wire boundary labels, not from Boolean equivalence. -/
+def terminalExtractedInterfaceCausalLevel
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (labels : Fin inputs → Nat) (caps : Fin gates → Nat)
+    (output : Fin (terminalInterfacePorts candidate records).length) : Nat :=
+  let extracted := (extractTerminalSupport candidate records).extractedCandidate
+  let boundaryLabels := terminalBoundaryCausalLabels candidate records labels caps
+  CausalBound.source (extracted.directWireWord.source output) boundaryLabels
+    (CausalBound.levels extracted.program boundaryLabels)
+
+private theorem terminalExtractedInterfaceCausalLevel_le_caps
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (labels : Fin inputs → Nat) (caps : Fin gates → Nat)
+    (bounded : CausalBound.Bounds candidate.program labels caps)
+    (output : Fin (terminalInterfacePorts candidate records).length) :
+    terminalExtractedInterfaceCausalLevel candidate records labels caps output ≤
+      caps ((terminalInterfacePorts candidate records).get output) := by
+  have selected := terminalInterfaceGet_selected candidate records output
+  have outputSource :
+      (terminalExtractedCandidate candidate records).directWireWord.source output =
+        .gate ((terminalExtractionState candidate records).gateIndex
+          ((terminalInterfacePorts candidate records).get output) selected) := by
+    unfold terminalExtractedCandidate
+    rw [Candidate.ofDirectWireWord_pointwise]
+    exact dif_pos selected
+  change CausalBound.source
+      ((terminalExtractedCandidate candidate records).directWireWord.source output)
+      (terminalBoundaryCausalLabels candidate records labels caps)
+      (CausalBound.levels (terminalExtractionState candidate records).extractedProgram
+        (terminalBoundaryCausalLabels candidate records labels caps)) ≤ _
+  rw [outputSource]
+  exact extractTerminalProgramAux_causal_bound
+    (terminalBoundaryPorts candidate.program records)
+    (terminalBoundaryCausalLabels candidate records labels caps)
+    (TerminalSupportWire.causalLevel labels caps) (fun _ => Nat.le_refl _)
+    candidate.program (terminalGateSelected records)
+    TerminalSupportWire.input TerminalSupportWire.gate
+    labels caps (fun _ => Nat.le_refl _) (fun _ => Nat.le_refl _) bounded
+    ((terminalInterfacePorts candidate records).get output) selected
+
+/-- Every extracted interface has at most its original producer's causal level.
+All caps are computed from the original program; no correctness certificate,
+coverage certificate or acyclicity assumption is supplied by the caller. -/
+theorem extractTerminalSupport_causal_levels
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (labels : Fin inputs → Nat)
+    (output : Fin (terminalInterfacePorts candidate records).length) :
+    terminalExtractedInterfaceCausalLevel candidate records labels
+        (CausalBound.levels candidate.program labels) output ≤
+      CausalBound.levels candidate.program labels
+        ((terminalInterfacePorts candidate records).get output) :=
+  terminalExtractedInterfaceCausalLevel_le_caps candidate records labels
+    (CausalBound.levels candidate.program labels)
+    (CausalBound.bounds_levels candidate.program labels) output
+
+/-- With original gate j labelled j + 1 and primary inputs labelled zero,
+extraction never introduces dependence beyond its original interface producer.
+This structural bound is derived for every candidate and record list. -/
+theorem extractTerminalSupport_causal_index
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (output : Fin (terminalInterfacePorts candidate records).length) :
+    terminalExtractedInterfaceCausalLevel candidate records
+        (fun _ => 0) (fun index => index.val + 1) output ≤
+      ((terminalInterfacePorts candidate records).get output).val + 1 :=
+  terminalExtractedInterfaceCausalLevel_le_caps candidate records
+    (fun _ => 0) (fun index => index.val + 1)
+    (CausalBound.bounds_index candidate.program) output
 
 /-- Restrict a whole-circuit execution to the canonical incoming boundary. -/
 def terminalInducedBoundaryValuation

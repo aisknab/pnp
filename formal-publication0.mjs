@@ -5,9 +5,33 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '86ef2816ba1bb56d1c1f704d0bd0ab93bfd2374e02bdc9e1203dd7e87db81fa4';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'c6b4a88d93cfa10ae5ed1c2364fa5c2faa20cea5569d7f54462cb93dea2be105';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  'PNP.DirectWire.extractTerminalSupport_causal_levels',
+  'PNP.DirectWire.extractTerminalSupport_causal_index',
+  'PNP.DirectWire.CausalBound.physical_normalization_output_bound',
+  'PNP.DirectWire.WireCarrier.normalize_causalBounds',
+  'PNP.DirectWire.WireObligationRestoration.join_causalBounds',
+  'PNP.DirectWire.WireObligationHistory.Transition.causalInvariant',
+  'PNP.DirectWire.WireObligationHistory.Execution.causalInvariant',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.causalInvariant',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.field_causal_bound',
+  'PNP.DirectWire.WireObligationHistory.compileHistory_causal_bounds',
+  'PNP.DirectWire.ArbitrarySupportSplice.graph_causal_rank_decreases',
+  'PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_causalInterfaceBound',
+  'PNP.DirectWire.ArbitrarySupportSplice.compile_of_causalInterfaceBound',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.extractedCarrier_gateCount',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.extractedCarrier_fieldValue',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_equivalent',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_causalInterfaceBound',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_compiles',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_semantics',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_exact_accounting',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_strict_gain',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.compile_complete',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.compile_sound',
+  'PNP.DirectWire.WireHistoryArbitrarySupport.compile_none_iff',
   'PNP.DirectWire.WireObligationHistory.ClosedHistory.creation_lifecycle',
   'PNP.DirectWire.WireObligationHistory.ClosedHistory.dependency_before',
   'PNP.DirectWire.WireObligationHistory.ClosedHistory.executed_count',
@@ -3999,7 +4023,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-15-263') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-15-264') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

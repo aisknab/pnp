@@ -1,0 +1,26 @@
+import PNP
+
+#print axioms PNP.DirectWire.extractTerminalSupport_causal_levels
+#print axioms PNP.DirectWire.extractTerminalSupport_causal_index
+#print axioms PNP.DirectWire.CausalBound.physical_normalization_output_bound
+#print axioms PNP.DirectWire.WireCarrier.normalize_causalBounds
+#print axioms PNP.DirectWire.WireObligationRestoration.join_causalBounds
+#print axioms PNP.DirectWire.WireObligationHistory.Transition.causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.Execution.causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.causalInvariant
+#print axioms PNP.DirectWire.WireObligationHistory.ClosedHistory.field_causal_bound
+#print axioms PNP.DirectWire.WireObligationHistory.compileHistory_causal_bounds
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_causal_rank_decreases
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.graph_wellFounded_of_causalInterfaceBound
+#print axioms PNP.DirectWire.ArbitrarySupportSplice.compile_of_causalInterfaceBound
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.extractedCarrier_gateCount
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.extractedCarrier_fieldValue
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_equivalent
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_causalInterfaceBound
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_compiles
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_semantics
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_exact_accounting
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_result_strict_gain
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_complete
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_sound
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.compile_none_iff

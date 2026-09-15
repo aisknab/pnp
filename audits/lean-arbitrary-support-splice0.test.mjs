@@ -71,7 +71,8 @@ const SOURCES = [
     "prefix": "PNP.DirectWire.ArbitrarySupportSplice.",
     "imports": [
       "PNP.NANDTopologicalCompiler",
-      "PNP.ResidualTerminalSaturatedSupportContext"
+      "PNP.ResidualTerminalSaturatedSupportContext",
+      "PNP.NANDNormalizationCausalBounds"
     ],
     "signatures": {
       "result_gateCount": "theorem result_gateCount (compiled : CompiledRawNandGraph (graph candidate records replacement)) : (result candidate records replacement compiled).toImplementation.gateCount = (exterior records).length + replacementGates",
@@ -123,7 +124,13 @@ const SOURCES = [
       "graph_wellFounded_of_primaryBoundary",
       "production_compiles",
       "production_agreement",
-      "graph_wellFounded_of_singleGateBoundary"
+      "graph_wellFounded_of_singleGateBoundary",
+      "causalBoundaryLabels",
+      "CausalInterfaceBound",
+      "causalRank",
+      "graph_causal_rank_decreases",
+      "graph_wellFounded_of_causalInterfaceBound",
+      "compile_of_causalInterfaceBound"
     ]
   }
 ];

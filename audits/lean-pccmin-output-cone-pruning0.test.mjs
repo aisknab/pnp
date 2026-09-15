@@ -59,7 +59,9 @@ const PUBLIC_HEADS = [
   "outputConeImplementation_residualSlack",
   "outputConeImplementation_strictGain_iff",
   "outputConeNormalizer",
-  "outputConeNormalizer_checked"
+  "outputConeNormalizer_checked",
+  "outputConeFrontierCandidate_causal_bound",
+  "outputConeImplementation_causal_bound"
 ];
 const text0 = relative => readFile(new URL('../' + relative, import.meta.url), 'utf8');
 const compact0 = value => stripLeanCommentsAndStrings0(value).replace(/\s+/gu, ' ').trim();

@@ -1,20 +1,20 @@
 # Proof and Checker Pipeline
 
-<!-- M263-CURRENT-SUMMARY:BEGIN -->
-## Current M263 boundary
+<!-- M264-CURRENT-SUMMARY:BEGIN -->
+## Current M264 boundary
 
-M263 computes dependency-ordered physical obligation histories from arbitrary finite raw events. It validates identities and references, derives the event order, executes an evolving computational carrier, records actual creation snapshots and requires later full-value R6/R8 discharges before completion. Every original output and field is preserved, and final gates plus actual removals equal initial gates plus charged materializers. Acyclicity alone is not lifecycle validity. This does not complete all manuscript rewrite families, Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
+M264 connects actual support extraction and closed R5/R6/R8 histories to literal arbitrary-support replacement. Source-derived causal bounds survive physical normalization, cancellation and paid restoration, including captured pending snapshots. A decreasing graph rank guarantees one-copy splicing after every accepted closed history, with all ordered outputs preserved and every restored materializer included in the exact gate equation. No replacement, rank, order or semantic certificate is supplied. The support and raw history remain inputs; this does not derive terminal families, complete Package E, global routes, unconditional ZeroSlack or polynomial PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 239 of 241 current scoped publication rows earned.
+Formal artefact coverage: 240 of 242 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [computed physical histories and limits](lean_wire_obligation_history.md)
+See the [source-derived literal replacement and limits](lean_wire_history_arbitrary_support.md)
 and the [conditional final-report bridge](lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-No fixed weighted checkpoint or global proof gate closes. PNPLabs publication is deferred for this component.
-<!-- M263-CURRENT-SUMMARY:END -->
+No fixed weighted checkpoint or global proof gate closes. Publication decision: publish this end-to-end capability with the deferred M263 result after verified core integration.
+<!-- M264-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

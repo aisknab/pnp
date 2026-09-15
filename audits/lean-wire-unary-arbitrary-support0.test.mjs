@@ -133,7 +133,8 @@ const SPECS = [
     "prefix": "PNP.DirectWire.ArbitrarySupportSplice.",
     "imports": [
       "PNP.NANDTopologicalCompiler",
-      "PNP.ResidualTerminalSaturatedSupportContext"
+      "PNP.ResidualTerminalSaturatedSupportContext",
+      "PNP.NANDNormalizationCausalBounds"
     ],
     "signatures": {
       "graph_wellFounded_of_singleGateBoundary": "theorem graph_wellFounded_of_singleGateBoundary (boundaryGate : Fin gates) (single : terminalBoundaryPorts candidate.program records = [.gate boundaryGate]) (small : replacementGates ≤ 1) (early : ∀ port : Fin (terminalInterfacePorts candidate records).length, ((terminalInterfacePorts candidate records).get port).val < boundaryGate.val → ∃ value, replacement.directWireWord.source port = .constant value) : WellFounded (graph candidate records replacement).Depends"
@@ -172,7 +173,13 @@ const SPECS = [
       "graph_wellFounded_of_primaryBoundary",
       "production_compiles",
       "production_agreement",
-      "graph_wellFounded_of_singleGateBoundary"
+      "graph_wellFounded_of_singleGateBoundary",
+      "causalBoundaryLabels",
+      "CausalInterfaceBound",
+      "causalRank",
+      "graph_causal_rank_decreases",
+      "graph_wellFounded_of_causalInterfaceBound",
+      "compile_of_causalInterfaceBound"
     ]
   },
   {
@@ -180,7 +187,8 @@ const SPECS = [
     "path": "lean/PNP/ResidualTerminalSupportExtraction.lean",
     "prefix": "PNP.DirectWire.",
     "imports": [
-      "PNP.ResidualTerminalPhysicalSupportCompletion"
+      "PNP.ResidualTerminalPhysicalSupportCompletion",
+      "PNP.NANDCausalBounds"
     ],
     "signatures": {
       "terminalOpenGateEvaluation_prefix_congr": "theorem terminalOpenGateEvaluation_prefix_congr {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs) (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) (left right : Valuation (terminalBoundaryPorts candidate.program records).length) (cutoff : Nat) (agreement : forall port : Fin (terminalBoundaryPorts candidate.program records).length, (match (terminalBoundaryPorts candidate.program records).get port with | .input _ => True | .gate boundaryGate => boundaryGate.val < cutoff) -> left port = right port) (gate : Fin gates) (before : gate.val < cutoff) : terminalOpenGateEvaluation candidate records left gate = terminalOpenGateEvaluation candidate records right gate",
@@ -203,6 +211,11 @@ const SPECS = [
       "terminalOpenGateEvaluation",
       "terminalOpenSupportSemantics",
       "TerminalSupportWire.candidateValue",
+      "TerminalSupportWire.causalLevel",
+      "terminalBoundaryCausalLabels",
+      "terminalExtractedInterfaceCausalLevel",
+      "extractTerminalSupport_causal_levels",
+      "extractTerminalSupport_causal_index",
       "terminalInducedBoundaryValuation",
       "terminalOpenGateEvaluation_induced_selected",
       "terminalOpenSupportSemantics_induced",

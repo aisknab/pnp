@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-263",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-264",
   "lastReviewedDate": "2026-09-15",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 239,
-    "totalRows": 241,
+    "earnedRows": 240,
+    "totalRows": 242,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -2438,6 +2438,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M263 closes the computed dependency-ordered physical history prerequisite for arbitrary finite raw events. The constructor validates identities and references, executes the actual evolving carrier, retains creation snapshots, requires strictly later full-value discharges and charges every appended materializer. Final physical gate balance is exact. Acyclicity is not semantic admissibility or confluence. This remains one computational R5/R6/R8 history component, not all manuscript rewrite and normalization families, noncomputational records, matched-kappa Pull/Expand, complete Package E, input-derived terminal families, global routes, unconditional ZeroSlack or full polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, the proof estimate and uncertainty remain unchanged. Formal artefact coverage: 239 of 241 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-15-264",
+      "formalArtefactCoverage": {
+        "earnedRows": 240,
+        "totalRows": 242
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M264 closes the source-derived causal link from actual extraction and closed R5/R6/R8 histories to literal one-copy arbitrary-support replacement. Current and captured-snapshot bounds imply a decreasing graph rank, complete literal compilation, all ordered output semantics and the full removal/materializer-charge equation. The support and history are still input data, not an input-derived terminal family or globally successful rewrite strategy. Full manuscript rule families, Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 240 of 242 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
