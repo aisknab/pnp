@@ -5,9 +5,55 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '516a64f222526fb609c76760fcafe916f56c741aeb6461988459507b4f24721e';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '86ef2816ba1bb56d1c1f704d0bd0ab93bfd2374e02bdc9e1203dd7e87db81fa4';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.creation_lifecycle',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.dependency_before',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.executed_count',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.executed_identities_nodup',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.full_field',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.full_output',
+  'PNP.DirectWire.WireObligationHistory.ClosedHistory.gate_balance',
+  'PNP.DirectWire.WireObligationHistory.Execution.creationsClosed_of_finalClosed',
+  'PNP.DirectWire.WireObligationHistory.Execution.pending_persists_or_discharged',
+  'PNP.DirectWire.WireObligationHistory.Execution.record_identities',
+  'PNP.DirectWire.WireObligationHistory.Execution.total_charge',
+  'PNP.DirectWire.WireObligationHistory.Execution.total_removed',
+  'PNP.DirectWire.WireObligationHistory.State.isClosed_sound',
+  'PNP.DirectWire.WireObligationHistory.Transition.charged_eq',
+  'PNP.DirectWire.WireObligationHistory.Transition.created_pending',
+  'PNP.DirectWire.WireObligationHistory.Transition.dischargeRecord_binding',
+  'PNP.DirectWire.WireObligationHistory.Transition.pending_persists_or_discharged',
+  'PNP.DirectWire.WireObligationHistory.Transition.removed_eq',
+  'PNP.DirectWire.WireObligationHistory.OrderedEvents.identities_nodup',
+  'PNP.DirectWire.WireObligationHistory.OrderedEvents.order_complete',
+  'PNP.DirectWire.WireObligationHistory.OrderedEvents.order_length',
+  'PNP.DirectWire.WireObligationHistory.OrderedEvents.order_nodup',
+  'PNP.DirectWire.WireObligationHistory.completeReferences_iff',
+  'PNP.DirectWire.WireObligationHistory.graph_dependency_iff',
+  'PNP.DirectWire.WireObligationHistory.orderEvents_failure_iff',
+  'PNP.DirectWire.WireObligationHistory.orderEvents_success_iff',
+  'PNP.DirectWire.WireObligationHistory.uniqueIDs_iff',
+  'PNP.DirectWire.WireObligationHistory.State.cancel_full_value',
+  'PNP.DirectWire.WireObligationHistory.State.cancel_gateCount',
+  'PNP.DirectWire.WireObligationHistory.State.closed_field',
+  'PNP.DirectWire.WireObligationHistory.State.create_gateCount',
+  'PNP.DirectWire.WireObligationHistory.State.create_source_snapshot',
+  'PNP.DirectWire.WireObligationHistory.State.currentAgreement',
+  'PNP.DirectWire.WireObligationHistory.State.normalize_gate_balance',
+  'PNP.DirectWire.WireObligationHistory.State.restore_full_value',
+  'PNP.DirectWire.WireObligationHistory.State.restore_gate_charge',
+  'PNP.DependencyScheduler.ReadyStep.remaining_lt',
+  'PNP.DependencyScheduler.Schedule.at_injective',
+  'PNP.DependencyScheduler.Schedule.order_complete',
+  'PNP.DependencyScheduler.Schedule.order_length',
+  'PNP.DependencyScheduler.Schedule.order_nodup',
+  'PNP.DependencyScheduler.Schedule.wellFounded',
+  'PNP.DependencyScheduler.Stop.complete_of_wellFounded',
+  'PNP.DependencyScheduler.Stop.unresolved_predecessor',
+  'PNP.DependencyScheduler.compile_failure_iff',
+  'PNP.DependencyScheduler.compile_success_iff',
   'PNP.Concrete.BitString.decodePair_pair',
   'PNP.Concrete.CNFSourceParser.allInput_exact',
   'PNP.Concrete.CNFSourceParser.compiledBoundedDecide_ne_timeout',
@@ -3953,7 +3999,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-14-262') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-15-263') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

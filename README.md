@@ -1,20 +1,20 @@
 # pnp
 
-<!-- M262-CURRENT-SUMMARY:BEGIN -->
-## Current M262 boundary
+<!-- M263-CURRENT-SUMMARY:BEGIN -->
+## Current M263 boundary
 
-M262 constructs a total source-ordered physical expansion for arbitrary computational supports and incoming-boundary widths. Compilation needs no supplied rank, order or success certificate. Under complete local open-function agreement, the result preserves all ordered outputs and full computational fields, repeated literal-source sharing and existing R5 source values. Every actual gate is owned and charged: cost is E + K * R, and strict original-size saving holds exactly when K * R < S; properness S < G is separate. This does not prove matched-kappa Pull/Expand, arbitrary observer equality, the complete obligation calculus or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
+M263 computes dependency-ordered physical obligation histories from arbitrary finite raw events. It validates identities and references, derives the event order, executes an evolving computational carrier, records actual creation snapshots and requires later full-value R6/R8 discharges before completion. Every original output and field is preserved, and final gates plus actual removals equal initial gates plus charged materializers. Acyclicity alone is not lifecycle validity. This does not complete all manuscript rewrite families, Package E, global routing, unconditional ZeroSlack or polynomial PCCMin.
 
 M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
 
-Formal artefact coverage: 238 of 240 current scoped publication rows earned.
+Formal artefact coverage: 239 of 241 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
-See the [source-ordered physical expansion and limits](./docs/lean_wire_causal_expansion.md)
+See the [computed physical histories and limits](./docs/lean_wire_obligation_history.md)
 and the [conditional final-report bridge](./docs/lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-No fixed weighted checkpoint or global proof gate closes.
-<!-- M262-CURRENT-SUMMARY:END -->
+No fixed weighted checkpoint or global proof gate closes. PNPLabs publication is deferred for this component.
+<!-- M263-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -38,12 +38,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M262 constructs a total source-ordered physical expansion for arbitrary computational supports and incoming-boundary widths. Compilation needs no supplied rank, order or success certificate. Under complete local open-function agreement, the result preserves all ordered outputs and full computational fields, repeated literal-source sharing and existing R5 source values. Every actual gate is owned and charged: cost is E + K * R, and strict original-size saving holds exactly when K * R < S; properness S < G is separate. This does not prove matched-kappa Pull/Expand, arbitrary observer equality, the complete obligation calculus or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
+| **What is the current verification status?** | The complete all-input polynomial Cook-Levin builder and concrete CNF-SAT NP-completeness are kernel checked. M263 computes dependency-ordered physical obligation histories from arbitrary finite raw events. It validates identities and references, derives the event order, executes an evolving computational carrier, records actual creation snapshots and requires later full-value R6/R8 discharges before completion. Every original output and field is preserved, and final gates plus actual removals equal initial gates plus charged materializers. Acyclicity alone is not lifecycle validity. This does not complete all manuscript rewrite families, Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. The current report remains non-claiming: deterministic CNF-SAT membership in P and the eligible root theorem are absent, and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 238 of 240 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 239 of 241 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

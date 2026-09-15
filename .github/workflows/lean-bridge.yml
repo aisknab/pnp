@@ -3653,6 +3653,76 @@ jobs:
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireCausalExpansion.lean
 
+
+      - name: Check wire obligation history source and publication contracts
+        run: node --test audits/lean-finite-dependency-scheduler0.test.mjs audits/lean-wire-obligation-history-state0.test.mjs audits/lean-wire-obligation-history0.test.mjs audits/lean-wire-obligation-history-execution0.test.mjs audits/lean-wire-obligation-history-publication0.test.mjs
+
+      - name: Audit wire obligation history
+        run: |
+          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireObligationHistoryAxiomAudit.lean 2>&1)"
+          printf '%s\n' "$audit_output"
+          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
+          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
+          const expected = [
+            ["PNP.DependencyScheduler.ReadyStep.remaining_lt",["Quot.sound","propext"]],
+            ["PNP.DependencyScheduler.Schedule.at_injective",[]],
+            ["PNP.DependencyScheduler.Schedule.order_complete",["Quot.sound","propext"]],
+            ["PNP.DependencyScheduler.Schedule.order_length",["propext"]],
+            ["PNP.DependencyScheduler.Schedule.order_nodup",["Quot.sound","propext"]],
+            ["PNP.DependencyScheduler.Schedule.wellFounded",[]],
+            ["PNP.DependencyScheduler.Stop.complete_of_wellFounded",[]],
+            ["PNP.DependencyScheduler.Stop.unresolved_predecessor",[]],
+            ["PNP.DependencyScheduler.compile_failure_iff",["Quot.sound","propext"]],
+            ["PNP.DependencyScheduler.compile_success_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.cancel_full_value",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.cancel_gateCount",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.closed_field",[]],
+            ["PNP.DirectWire.WireObligationHistory.State.create_gateCount",["propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.create_source_snapshot",["propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.currentAgreement",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.normalize_gate_balance",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.restore_full_value",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.restore_gate_charge",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.OrderedEvents.identities_nodup",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.OrderedEvents.order_complete",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.OrderedEvents.order_length",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.OrderedEvents.order_nodup",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.completeReferences_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.graph_dependency_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.orderEvents_failure_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.orderEvents_success_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.uniqueIDs_iff",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.creation_lifecycle",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.dependency_before",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.executed_count",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.executed_identities_nodup",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.full_field",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.full_output",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.ClosedHistory.gate_balance",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Execution.creationsClosed_of_finalClosed",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Execution.pending_persists_or_discharged",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Execution.record_identities",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Execution.total_charge",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Execution.total_removed",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.State.isClosed_sound",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Transition.charged_eq",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Transition.created_pending",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Transition.dischargeRecord_binding",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Transition.pending_persists_or_discharged",["Quot.sound","propext"]],
+            ["PNP.DirectWire.WireObligationHistory.Transition.removed_eq",["Quot.sound","propext"]]
+          ];
+          assert.deepEqual(rows.map(row => row[1]).sort(), expected.map(row => row[0]).sort());
+          const expectedAxioms = new Map(expected);
+          for (const row of rows) {
+            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
+            assert.deepEqual(actual, expectedAxioms.get(row[1]), row[1]);
+          }
+          console.log('M263: exact computed physical history axiom closures passed.');
+          NODE
+          lake env lean -DwarningAsError=true lean-regression/PNPWireObligationHistory.lean
+
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"
