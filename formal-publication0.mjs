@@ -5,9 +5,35 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'c6b4a88d93cfa10ae5ed1c2364fa5c2faa20cea5569d7f54462cb93dea2be105';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'bf522562df92af41c95ecc2a00109c0d0e12e8904e31f212f2ef106317bbf209';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.RawNandCompilationState.finish_position",
+  "PNP.DirectWire.RawNandCausalBound.compile_bounds",
+  "PNP.DirectWire.RawNandCausalBound.candidate_bound",
+  "PNP.DirectWire.ArbitrarySupportSplice.graph_dependency_bounds",
+  "PNP.DirectWire.ArbitrarySupportSplice.result_output_dependency_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.implementation_output_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.constantWord_output_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.localWord_output_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.arbitrary_replacement_output_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.compiled_spec",
+  "PNP.DirectWire.WireUnaryCausalBound.replacement_dependency_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.expanded_exposed_bound",
+  "PNP.DirectWire.WireUnaryCausalBound.expanded_causalBounds",
+  "PNP.DirectWire.WireUnaryCausalBound.attempt_causalBounds",
+  "PNP.DirectWire.WireObligationHistory.decodeRecord_encode",
+  "PNP.DirectWire.WireObligationHistory.decodeRecord_source",
+  "PNP.DirectWire.WireObligationHistory.decodeRecords_encode",
+  "PNP.DirectWire.WireObligationHistory.decodeRecords_source",
+  "PNP.DirectWire.WireObligationHistory.computeR7_isSome_iff",
+  "PNP.DirectWire.WireObligationHistory.R7Realization.full_field",
+  "PNP.DirectWire.WireObligationHistory.R7Realization.exact_charge",
+  "PNP.DirectWire.WireObligationHistory.R7Realization.causalBounds",
+  "PNP.DirectWire.WireObligationHistory.State.restoreR7_gate_charge",
+  "PNP.DirectWire.WireObligationHistory.State.restoreR7_full_value",
+  "PNP.DirectWire.WireObligationHistory.State.restoreR7_other_pending",
+  "PNP.DirectWire.WireObligationHistory.State.restoreR7_causalInvariant",
   'PNP.DirectWire.extractTerminalSupport_causal_levels',
   'PNP.DirectWire.extractTerminalSupport_causal_index',
   'PNP.DirectWire.CausalBound.physical_normalization_output_bound',
@@ -4023,7 +4049,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-15-264') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-16-265') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

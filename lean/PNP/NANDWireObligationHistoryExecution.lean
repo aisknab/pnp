@@ -6,7 +6,7 @@ creation, read and full discharge retains its actual source binding. Reject
 invalid lifecycles and any nonempty final obligation ledger. Trace charges are
 actual appended materializers and trace savings are actual normalizations.
 
-This computational R5/R6/R8 history is not all manuscript rewrite families,
+This computational R5/R6/R7/R8 history is not all manuscript rewrite families,
 complete Package E, global route coverage, ZeroSlack or polynomial PCCMin.
 -/
 
@@ -47,6 +47,11 @@ inductive Transition (source : WireCarrier inputs outputs fields) :
   | restore (state : State source) (event : RawEvent fields) (identity : Nat)
       (kind : event.action = .restoreR8 identity) (entry : PendingEntry state identity) :
       Transition source state event (state.restore entry.field entry.snapshot entry.found)
+  | realize (state : State source) (event : RawEvent fields) (identity : Nat)
+      (raw : List RawSupportRecord) (kind : event.action = .realizeR7 identity raw)
+      (entry : PendingEntry state identity) (realization : R7Realization entry.snapshot.carrier raw)
+      (computed : computeR7 entry.snapshot.carrier raw = some realization) :
+      Transition source state event (state.restoreR7 entry.field entry.snapshot entry.found raw realization)
   | cancel (state : State source) (event : RawEvent fields) (identity : Nat)
       (kind : event.action = .cancelR6 identity) (entry : PendingEntry state identity)
       (alias : WireMatchedCancellation.Representative source state.keep entry.field)
@@ -71,6 +76,15 @@ def applyEvent (state : State source) (event : RawEvent fields) :
       | none => none
       | some entry => some ⟨state.restore entry.field entry.snapshot entry.found,
           .restore state event identity kind entry⟩
+  | .realizeR7 identity raw =>
+      match findPending state identity with
+      | none => none
+      | some entry =>
+          match computed : computeR7 entry.snapshot.carrier raw with
+          | none => none
+          | some realization =>
+              some ⟨state.restoreR7 entry.field entry.snapshot entry.found raw realization,
+                .realize state event identity raw kind entry realization computed⟩
   | .cancelR6 identity =>
       match findPending state identity with
       | none => none
@@ -93,6 +107,8 @@ def charged (step : Transition source before event after) : Nat :=
   match step with
   | .restore _ _ _ _ entry =>
       (materializer entry.snapshot.carrier (keepExcept entry.field)).implementation.gateCount
+  | .realize _ _ _ _ _ entry realization _ =>
+      (materializer realization.carrier (keepExcept entry.field)).implementation.gateCount
   | _ => 0
 
 def removed (step : Transition source before event after) : Nat :=
@@ -118,6 +134,7 @@ def discharged (step : Transition source before event after) :
     Option ((field : Fin fields) × Snapshot source field) :=
   match step with
   | .restore _ _ _ _ entry => some ⟨entry.field, entry.snapshot⟩
+  | .realize _ _ _ _ _ entry _ _ => some ⟨entry.field, entry.snapshot⟩
   | .cancel _ _ _ _ entry _ _ => some ⟨entry.field, entry.snapshot⟩
   | _ => none
 
@@ -150,6 +167,16 @@ theorem pending_persists_or_discharged (step : Transition source before event af
         rw [exactSnapshot]
       · left
         exact (setPending_other before.pending entry.field none field same).trans pending
+  | realize identity raw kind entry realization computed =>
+      by_cases same : field = entry.field
+      · subst field
+        right
+        have exactSnapshot := Option.some.inj (entry.found.symm.trans pending)
+        change (some ⟨entry.field, entry.snapshot⟩ :
+          Option ((field : Fin fields) × Snapshot source field)) = some ⟨entry.field, snapshot⟩
+        rw [exactSnapshot]
+      · left
+        exact (setPending_other before.pending entry.field none field same).trans pending
   | cancel identity kind entry alias computed =>
       by_cases same : field = entry.field
       · subst field
@@ -173,6 +200,7 @@ theorem created_pending (step : Transition source before event after)
       cases same
       exact setPending_self before.pending _ _
   | restore identity kind entry => cases created
+  | realize identity raw kind entry realization computed => cases created
   | cancel identity kind entry alias computed => cases created
   | normalize kind => cases created
   | read readField kind available => cases created
@@ -194,6 +222,10 @@ def Transition.dischargeRecord {before after : State source} {event : RawEvent f
       { field := entry.field, creation := entry.snapshot
         carrier := (before.restore entry.field entry.snapshot entry.found).current
         fullWitness := before.restore_full_value entry.field entry.snapshot entry.found }
+  | .realize _ _ _ raw _ entry realization _ => some
+      { field := entry.field, creation := entry.snapshot
+        carrier := (before.restoreR7 entry.field entry.snapshot entry.found raw realization).current
+        fullWitness := before.restoreR7_full_value entry.field entry.snapshot entry.found raw realization }
   | .cancel _ _ _ _ entry alias _ => some
       { field := entry.field, creation := entry.snapshot
         carrier := (before.cancel entry.field entry.snapshot entry.found alias).current

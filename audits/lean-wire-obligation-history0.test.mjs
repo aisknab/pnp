@@ -16,7 +16,8 @@ function inspect(source) {
   require(!hasUnauditedLeanDeclarationForm0(source), 'audited-declarations');
   require(!/\b(?:sorry|admit|unsafe|native_decide|noncomputable|Classical)\b/u.test(text), 'no-shortcuts');
   require(text.includes('structure RawEvent (fields : Nat) where identity : Nat predecessorIDs : List Nat action : Action fields deriving Repr, DecidableEq'), 'raw-only-inputs');
-  require(text.includes('| .cancelR6 identity => [identity] | .restoreR8 identity => [identity]'), 'intrinsic-discharge-dependency');
+  require(text.includes('| realizeR7 (creationID : Nat) (records : List RawSupportRecord) | normalize'), 'raw-r7-only-inputs');
+  require(text.includes('| .cancelR6 identity => [identity] | .restoreR8 identity => [identity] | .realizeR7 identity _ => [identity]'), 'intrinsic-discharge-dependency');
   require(text.includes('event.predecessorIDs ++ event.action.creationDependencies'), 'complete-dependency-list');
   require(text.includes('decide ((raw.get left).identity = (raw.get right).identity → left = right)'), 'global-identity-injectivity');
   require(text.includes('(raw.get consumer).dependencies.all fun identity => (allFin raw.length).any fun producer'), 'every-reference-present');
@@ -37,7 +38,9 @@ test('M263 raw event ordering rejects missing guards and supplied ordering', asy
   const source = await readFile(sourceURL, 'utf8');
   for (const [before, after, category] of [
     ['predecessorIDs : List Nat', 'predecessorIDs : List Nat\n  suppliedWitness : True', 'raw-only-inputs'],
+    ['| realizeR7 (creationID : Nat) (records : List RawSupportRecord)', '| realizeR7 (creationID : Nat) (records : List RawSupportRecord) (supplied : True)', 'raw-r7-only-inputs'],
     ['| .restoreR8 identity => [identity]', '| .restoreR8 identity => []', 'intrinsic-discharge-dependency'],
+    ['| .realizeR7 identity _ => [identity]', '| .realizeR7 identity _ => []', 'intrinsic-discharge-dependency'],
     ['event.predecessorIDs ++ event.action.creationDependencies', 'event.predecessorIDs', 'complete-dependency-list'],
     ['(raw.get left).identity = (raw.get right).identity → left = right', 'left = left', 'global-identity-injectivity'],
     ['(raw.get consumer).dependencies.all fun identity', '(raw.get consumer).dependencies.any fun identity', 'every-reference-present'],

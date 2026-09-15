@@ -505,6 +505,13 @@ def RawNandCompilationState.finish {inputs nodes : Nat}
       exact state.sound input values equations node _
         (state.completedPosition_spec complete node) }
 
+/-- Finishing retains the actual computed position of every original node. -/
+theorem RawNandCompilationState.finish_position {inputs nodes : Nat}
+    {graph : RawNandGraph inputs nodes} (state : RawNandCompilationState graph)
+    (complete : state.remaining = []) (node : Fin nodes) :
+    state.position node = some ((state.finish complete).position node) :=
+  state.completedPosition_spec complete node
+
 private theorem rawNandRank_accessible {inputs nodes : Nat}
     {graph : RawNandGraph inputs nodes} (rank : Fin nodes → Nat)
     (decreases : ∀ producer consumer, graph.Depends producer consumer →
