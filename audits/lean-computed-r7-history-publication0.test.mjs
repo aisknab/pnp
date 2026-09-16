@@ -447,17 +447,20 @@ test('M265 preflight: package, verifier and durable CI share the exact audited b
   assert.ok(surface.includes("'audit:m265': '" + COMMAND + "'"));
   for (const file of TEST_FILES) assert.ok(verifier.includes("'" + file + "'"), file);
   assert.ok(workflow.includes(COMMAND));
-  for (const file of [AUDIT, REGRESSION, "lean-regression/PNPComputedR7CausalBounds.lean"])
+  for (const file of [REGRESSION, "lean-regression/PNPComputedR7CausalBounds.lean"])
     assert.ok(workflow.includes('lake env lean -DwarningAsError=true ' + file), file);
   const auditSteps = workflow.split(/^      - name:/mu).filter(step =>
-    step.includes('lake env lean -DwarningAsError=true ' + AUDIT));
+    step.includes('node scripts/check-lean-axioms.mjs ' + AUDIT));
   assert.equal(auditSteps.length, 1);
-  assert.ok(auditSteps[0].includes("readFileSync('" + AUDIT + "', 'utf8')"));
-  for (const fragment of ["readFileSync('status/LEAN_THEOREM_INVENTORY.json', 'utf8')",
-    '.milestoneCandidates', 'const expected = names.map(name => {',
-    'const row = inventory.find(row => row.name === name);',
-    "assert.equal(row?.kind, 'theorem', name);", 'return [name, row.axioms];'])
-    assert.ok(auditSteps[0].includes(fragment), fragment);
+  const helper = await text0('scripts/check-lean-axioms.mjs');
+  for (const fragment of ["'status/LEAN_THEOREM_INVENTORY.json'", '.milestoneCandidates',
+    'const expected=names.map(name=>{', 'inventory.filter(row=>row.name===name)',
+    "assert.equal(row.kind,'theorem',name);", 'return [name,row.axioms];',
+    "spawnSync('lake',['env','lean','-DwarningAsError=true',audit]",
+    'CheckLeanAxiomTranscript0(result.stdout,auditSource,inventory)'])
+    assert.ok(helper.includes(fragment), fragment);
+  assert.ok(workflow.includes('node --test audits/lean-axiom-transcript0.test.mjs'));
+  assert.ok(verifier.includes("'audits/lean-axiom-transcript0.test.mjs'"));
 });
 
 let sourcesPromise;

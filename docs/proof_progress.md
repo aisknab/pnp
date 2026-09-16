@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 241 of 243 current scoped publication rows earned.
+Formal artefact coverage: 242 of 244 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-265`, 241 of 243
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-266`, 242 of 244
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -22,7 +22,7 @@ results can add valuable evidence without retiring a global proof obligation.
 
 The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 
-| Track | Available | Earned at M265 |
+| Track | Available | Current earned points |
 | --- | ---: | ---: |
 | Formal foundations and proof infrastructure | 15 | 13 |
 | Concrete reductions and locked-NAND route | 20 | 20 |
@@ -31,7 +31,7 @@ The version 0 model assigns 100 fixed points to load-bearing checkpoints:
 | Root theorem and project-axiom elimination | 10 | 4 |
 | **Total** | **100** | **40** |
 
-The M264 risk-weighted proof completion estimate is therefore 40 percent, with
+The current risk-weighted proof completion estimate is therefore 40 percent, with
 a current uncertainty range of 20 to 40 percent. This is a conservative estimate
 of how much of the complete formal proof burden has been retired. It is not the
 probability that `P = NP`, confidence that the proposed route is correct, or an
@@ -765,3 +765,9 @@ Publication decision: publish the source-derived history-to-literal-splice capab
 M265 closes the computed zero/unary R7 edge in raw computational histories. All support coordinates are decoded against the identified creation snapshot, and exact boundary recognition selects the actual source-derived realization. Full-field discharge, actual materializer charges, pending-snapshot bounds, source lifecycle and literal one-copy ambient splicing are kernel checked. Supports and histories remain input data, not derived terminal families or a globally successful rewrite strategy. Full manuscript R1-R9/N1-N10, observer/profile compatibility, complete Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 241 of 243 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 Publication decision: defer. The computed R7 edge completes this core integration, but the global support/history strategy, full manuscript calculus and weighted proof checkpoints remain open. Preserve the coherent M264 website pin and include M265 in the next major publication batch. See [the computed R7 history boundary](lean_computed_r7_history.md).
+
+## M266 coverage review
+
+M266 derives physical ownership from the literal computational history and ambient splice. Actual normalizer origins, executing-event allocation labels, exact live/removed/historical-charge partitions, the compiler-position inverse and one-copy exterior transport are kernel checked. Derived disjoint event requests reuse the existing ownership kernel for support-stable membership, extracted piece sizes and exact charges without supplied ownership or partition proofs. Removing an allocated gate does not erase its historical charge. Supports and raw events remain inputs, not terminal-derived families or a globally successful history. The complete manuscript carrier/profile universe, remaining rule families, full Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 242 of 244 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+Publication decision: defer. This connects source-derived ownership to the existing computational accounting route, but does not close a fixed weighted checkpoint or global gate or change the published global bottom line. Preserve the coherent M264 website pin and batch M265 and M266 into the next major publication. See [the source-derived physical ownership boundary](lean_source_derived_history_ownership.md).

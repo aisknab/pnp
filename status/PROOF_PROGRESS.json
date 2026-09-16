@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-265",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-266",
   "lastReviewedDate": "2026-09-16",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 241,
-    "totalRows": 243,
+    "earnedRows": 242,
+    "totalRows": 244,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -36,9 +36,19 @@
           "points": 4,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "concrete-machine-cost-kernel" },
-            { "kind": "milestone-earned", "id": "concrete-complexity-classes" },
-            { "kind": "status-field", "field": "leanConcreteCNFVerifierCorrectnessFormalized", "expected": true }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-machine-cost-kernel"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-complexity-classes"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFVerifierCorrectnessFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The concrete finite machine, complexity-class interfaces, verifier correctness and reduction interface are present in the checked status.",
@@ -51,9 +61,21 @@
           "points": 4,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcretePipelineAllInputCompilationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcretePipelineRawRefinementFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcretePipelineExternalInputSizePolynomialFormalized", "expected": true }
+            {
+              "kind": "status-field",
+              "field": "leanConcretePipelineAllInputCompilationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcretePipelineRawRefinementFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcretePipelineExternalInputSizePolynomialFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The checked status records all-input pipeline compilation, recursive raw refinement and its external-input size bound.",
@@ -66,9 +88,21 @@
           "points": 3,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanTheoremInventoryGeneratedFromCompiledEnvironment", "expected": true },
-            { "kind": "status-field", "field": "leanTheoremInventoryUsesCollectAxioms", "expected": true },
-            { "kind": "status-field", "field": "concretePublicationGate.unsetFingerprintIsIntentionalFailClosedMigrationGate", "expected": true }
+            {
+              "kind": "status-field",
+              "field": "leanTheoremInventoryGeneratedFromCompiledEnvironment",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanTheoremInventoryUsesCollectAxioms",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "concretePublicationGate.unsetFingerprintIsIntentionalFailClosedMigrationGate",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The theorem inventory is compiler-derived, records axiom closures and is consumed by an explicitly fail-closed publication gate.",
@@ -81,8 +115,16 @@
           "points": 2,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFSATMembershipFormalized", "expected": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.FinalUniversalDesign.cnfSATInNP", "expectedPresent": true }
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFSATMembershipFormalized",
+              "expected": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.FinalUniversalDesign.cnfSATInNP",
+              "expectedPresent": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The exact concrete CNFSAT-in-NP declaration is present in the compiled inventory and named by the checked status.",
@@ -95,8 +137,16 @@
           "points": 2,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "rootLeanTheoremPresent", "expected": false },
-            { "kind": "status-field", "field": "concretePublicationGate.passed", "expected": false }
+            {
+              "kind": "status-field",
+              "field": "rootLeanTheoremPresent",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "concretePublicationGate.passed",
+              "expected": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The eligible root is absent and the concrete publication gate is still closed.",
@@ -117,9 +167,18 @@
           "points": 3,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-tableau-cnf-semantics" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-formula-size" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-formula-schedule" }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-tableau-cnf-semantics"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-formula-size"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-formula-schedule"
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The finite Cook-Levin semantics, external formula-size bound and fixed schedule rows are all earned.",
@@ -132,8 +191,15 @@
           "points": 3,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "concrete-cnf-to-nand-polynomial-reduction" },
-            { "kind": "status-field", "field": "leanConcreteCNFToNANDPolynomialReductionFormalized", "expected": true }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cnf-to-nand-polynomial-reduction"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFToNANDPolynomialReductionFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The checked all-input CNF-to-NAND machine reduction and its polynomial bound are formalized.",
@@ -146,9 +212,19 @@
           "points": 4,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "global-locked-nand-threshold" },
-            { "kind": "milestone-earned", "id": "concrete-locked-nand-polynomial-reduction" },
-            { "kind": "status-field", "field": "leanConcreteLockedNANDPolynomialReductionFormalized", "expected": true }
+            {
+              "kind": "milestone-earned",
+              "id": "global-locked-nand-threshold"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-locked-nand-polynomial-reduction"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteLockedNANDPolynomialReductionFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The finite semantic threshold and strict-v0 encoded polynomial reduction are both checked.",
@@ -161,31 +237,107 @@
           "points": 2,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-first-clause-prefix" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-full-schedule-cursor-controller" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-header-router" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-divider" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-launch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-header-raw-tape-bridge" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-divider-raw-route-classifier" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-post-divider-selected-token-launch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-complete-schedule-iteration" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-optional-token-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-dispatch-schedule" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-finish-request" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-pipeline" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-request" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-terminal-join" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": true }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-first-clause-prefix"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-full-schedule-cursor-controller"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-arbitrary-slot-header-router"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-arbitrary-slot-post-header-decoder"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-post-header-raw-divider"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-post-header-raw-launch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-post-header-raw-tape-bridge"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-post-divider-raw-route-classifier"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-post-divider-selected-token-launch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-complete-schedule-iteration"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-optional-token-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-dispatch-schedule"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-finish-request"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-pipeline"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-request"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-terminal-join"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinFormulaBuilderFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The originally earned literal finite-machine builder prefixes retain their two-point baseline credit. M230 completes the general construction under the separate fixed complete-builder checkpoint; no additional prefix points are awarded.",
@@ -198,8 +350,16 @@
           "points": 2,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFToNANDAllInputExactFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCNFToNANDLockedReductionCompositionFormalized", "expected": true }
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFToNANDAllInputExactFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFToNANDLockedReductionCompositionFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The report-facing reduction is linked over all bitstrings to the concrete locked-NAND route.",
@@ -212,264 +372,1282 @@
           "points": 3,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerRawBodyTokenEmissionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchExactHandoffFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchAllRoutesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchLiteralTapeBridgeFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchRawBodyTokenEmissionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeExactRouterTapeInputsFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeLiteralTapeBridgeFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeArbitraryWorkspacePreservedFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeShieldedDividerTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAllRoutesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeCompiledSimulationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeRawBodyTokenEmissionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierExactDividerTapeInputsFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierProblemClauseCountSidecarDerivedFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierArbitraryWorkspacePreservedFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierShieldedComparatorTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierAllCoordinateBodyFinishAgreementFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierCompiledSimulationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierRawBodyTokenEmissionFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCanonicalScheduleSelectionFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchPaddingBodyFinishTransitionFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCanonicalSelectedTokenLaunchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCompiledSimulationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchLiteralRawSelectionHandoffFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchScheduleIterationFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationAllCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationCompleteEncodedFormulaTokensFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationAggregateSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationRawStageHandoffFormalized", "expected": false },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-optional-token-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-dispatch-schedule" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-finish-request" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-pipeline" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-request" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestCanonicalFinishCoordinateDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestProtectedBuilderSuffixFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralFinishRequestWritten", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestFixedComposedMachineRuleCount", "expected": 137 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestPrecedingClassifierSuffixHandoffFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAuditedDeclarationCount", "expected": 63 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAllCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineFixedComposedMachineRuleCount", "expected": 711 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExactStageHandoffsFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineRouteAgreementFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestAuditedDeclarationCount", "expected": 36 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFixedComposedMachineRuleCount", "expected": 721 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFinishCoordinateDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestClassifierVerdictSwapFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExactRequestCellFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestWorkspacePreservationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestDispatcherConnected", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestLiteralRawLoopFormalized", "expected": false },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAuditedDeclarationCount", "expected": 57 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFixedComposedMachineRuleCount", "expected": 740 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFinishCoordinateDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationClassifierPrefixDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationClassifierPrefixBlankFreeFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationBlankSentinelFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationWorkspaceOrientationFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationMirroredDispatcherEntryFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationMirroredDispatcherExecuted", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleAllCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleCompleteEncodedFormulaTokensFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleExactPerCoordinateTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleAggregateSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleRawCoordinateRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleRawStageHandoffFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFiveRequestAlphabetFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralRequestTapeHandoffFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchCanonicalAllCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchExactCompiledTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchMalformedRequestTimeoutFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchOneStepShortTimeoutFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchSourceSizePolynomialBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchRawCoordinateSelectorFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralScheduleLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinFormulaBuilderFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized", "expected": true },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAuditedDeclarationCount", "expected": 51 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFixedMirroredDispatcherRuleCount", "expected": 64 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFixedComposedMachineRuleCount", "expected": 813 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchGenericMachineReflectionFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFullClassifierFinishMirroredDispatcherExecuted", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchCompleteCanonicalCNFOutputFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAllClassifierRoutesConnected", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAuditedDeclarationCount", "expected": 121 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedRequestWriterRuleCount", "expected": 2 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedOrientationRuleCount", "expected": 10 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedMirroredDispatcherRuleCount", "expected": 64 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedComposedMachineRuleCount", "expected": 814 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFirstBodyIndexDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchSeparatorRequestDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExactNextCanonicalPrefixFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchArbitraryBodyOrPaddingRequestDerived", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAllClassifierRoutesConnected", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchLiteralRawLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAuditedDeclarationCount", "expected": 82 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedRequestRelayRuleCount", "expected": 14 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedClassifierRelayMachineRuleCount", "expected": 734 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedMirroredDispatcherRuleCount", "expected": 64 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedComposedMachineRuleCount", "expected": 807 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAllBodyCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAllBodyAndPaddingRequestsStagedAndDispatched", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCanonicalRequestStagedOnProtectedTape", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchRawRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCombinedBodyFinishLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExactNextCanonicalPrefixFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-terminal-join" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAuditedDeclarationCount", "expected": 34 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFixedRedirectRuleCount", "expected": 9 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFixedComposedMachineRuleCount", "expected": 720 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAllPostHeaderCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinArbitraryWorkspaceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinBodyZeroAdditionalStepsFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFinishOneAdditionalStepFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinCommonContinuationStateFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinTapePreservingTerminalJoinFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRawRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRequestDispatchFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRepeatedBuilderLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split" },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split" },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAuditedDeclarationCount", "expected": 65 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedRequestRelayRuleCount", "expected": 14 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedClassifierRelayMachineRuleCount", "expected": 743 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedMirroredDispatcherRuleCount", "expected": 64 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedComposedMachineRuleCount", "expected": 816 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAllPostHeaderCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchBodyAndFinishRoutesDispatched", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchCanonicalRequestStagedOnProtectedTape", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchRawRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchSuccessiveConfigurationsFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchRepeatedBuilderLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExactNextCanonicalPrefixFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAuditPassed", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAuditedDeclarationCount", "expected": 91 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedRouteRelayRuleCount", "expected": 20 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedClassifierRelayMachineRuleCount", "expected": 749 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedConditionalDispatcherRuleCount", "expected": 65 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedComposedMachineRuleCount", "expected": 823 },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAllPostHeaderCoordinatesFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCanonicalRequestStagedOnProtectedTape", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPhysicalBodyFinishRouteDerived", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyPendingMarkerFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFinishRequestDerivedFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPaddingRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRawRequestSynthesisFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitSuccessiveConfigurationsFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRepeatedBuilderLoopFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalFinishPrefixFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalBodyPrefixFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactWorkTraceFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCompiledRawMachineFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitOneStepShortNonhaltingFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExternalInputSizePolynomialFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderDynamicCursorFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanConcreteCookLevinBuilderRawRefinementFormalized", "expected": true },
-            { "kind": "milestone-earned", "id": "concrete-cook-levin-complete-builder" },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_accept", "expectedPresent": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_output", "expectedPresent": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.formulaBuilder_output", "expectedPresent": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.formulaBuilder_rawRefinement_output", "expectedPresent": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.polynomialReduction_output", "expectedPresent": true },
-            { "kind": "inventory-declaration", "name": "PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete", "expectedPresent": true }
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderFullScheduleCursorControllerFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotHeaderRouterDecodesPostHeaderCoordinate",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAllCoordinateSemanticDecoderFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawDivisionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderRawBodyTokenEmissionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerExactRawTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawDividerRawBodyTokenEmissionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchExactHandoffFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchAllRoutesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchLiteralTapeBridgeFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawLaunchRawBodyTokenEmissionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeExactRouterTapeInputsFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeLiteralTapeBridgeFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeArbitraryWorkspacePreservedFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeShieldedDividerTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeAllRoutesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeCompiledSimulationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostHeaderRawTapeBridgeRawBodyTokenEmissionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierExactDividerTapeInputsFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierProblemClauseCountSidecarDerivedFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierArbitraryWorkspacePreservedFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierShieldedComparatorTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierAllCoordinateBodyFinishAgreementFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierCompiledSimulationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerRawRouteClassifierRawBodyTokenEmissionFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCanonicalScheduleSelectionFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchPaddingBodyFinishTransitionFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCanonicalSelectedTokenLaunchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchCompiledSimulationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchLiteralRawSelectionHandoffFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPostDividerSelectedTokenLaunchScheduleIterationFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationAllCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationCompleteEncodedFormulaTokensFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationAggregateSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderCompleteScheduleIterationRawStageHandoffFormalized",
+              "expected": false
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-optional-token-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-dispatch-schedule"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-finish-request"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-pipeline"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-request"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestCanonicalFinishCoordinateDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestProtectedBuilderSuffixFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralFinishRequestWritten",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestFixedComposedMachineRuleCount",
+              "expected": 137
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestPrecedingClassifierSuffixHandoffFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalFinishRequestLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAuditedDeclarationCount",
+              "expected": 63
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineAllCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineFixedComposedMachineRuleCount",
+              "expected": 711
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExactStageHandoffsFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineRouteAgreementFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierPipelineLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestAuditedDeclarationCount",
+              "expected": 36
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFixedComposedMachineRuleCount",
+              "expected": 721
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestFinishCoordinateDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestClassifierVerdictSwapFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExactRequestCellFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestWorkspacePreservationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestDispatcherConnected",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishRequestLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-workspace-orientation"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAuditedDeclarationCount",
+              "expected": 57
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFixedComposedMachineRuleCount",
+              "expected": 740
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationFinishCoordinateDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationClassifierPrefixDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationClassifierPrefixBlankFreeFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationBlankSentinelFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationWorkspaceOrientationFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationMirroredDispatcherEntryFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationMirroredDispatcherExecuted",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleAllCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleCompleteEncodedFormulaTokensFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleExactPerCoordinateTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleAggregateSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleRawCoordinateRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalDispatchScheduleRawStageHandoffFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchFiveRequestAlphabetFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralRequestTapeHandoffFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchCanonicalAllCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchExactCompiledTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchMalformedRequestTimeoutFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchOneStepShortTimeoutFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchSourceSizePolynomialBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchRawCoordinateSelectorFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalOptionalTokenDispatchLiteralScheduleLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinFormulaBuilderFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPolynomialReductionFormalized",
+              "expected": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-finish-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-first-body-separator-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-body-staged-request-mirrored-dispatch"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAuditedDeclarationCount",
+              "expected": 51
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFixedMirroredDispatcherRuleCount",
+              "expected": 64
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFixedComposedMachineRuleCount",
+              "expected": 813
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchGenericMachineReflectionFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchFullClassifierFinishMirroredDispatcherExecuted",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchCompleteCanonicalCNFOutputFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAllClassifierRoutesConnected",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAuditedDeclarationCount",
+              "expected": 121
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedRequestWriterRuleCount",
+              "expected": 2
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedOrientationRuleCount",
+              "expected": 10
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedMirroredDispatcherRuleCount",
+              "expected": 64
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFixedComposedMachineRuleCount",
+              "expected": 814
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchFirstBodyIndexDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchSeparatorRequestDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExactNextCanonicalPrefixFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchArbitraryBodyOrPaddingRequestDerived",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAllClassifierRoutesConnected",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchLiteralRawLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAuditedDeclarationCount",
+              "expected": 82
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedRequestRelayRuleCount",
+              "expected": 14
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedClassifierRelayMachineRuleCount",
+              "expected": 734
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedMirroredDispatcherRuleCount",
+              "expected": 64
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchFixedComposedMachineRuleCount",
+              "expected": 807
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAllBodyCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAllBodyAndPaddingRequestsStagedAndDispatched",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCanonicalRequestStagedOnProtectedTape",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchRawRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCombinedBodyFinishLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExactNextCanonicalPrefixFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-terminal-join"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAuditedDeclarationCount",
+              "expected": 34
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFixedRedirectRuleCount",
+              "expected": 9
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFixedComposedMachineRuleCount",
+              "expected": 720
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAllPostHeaderCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinArbitraryWorkspaceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinBodyZeroAdditionalStepsFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinFinishOneAdditionalStepFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinCommonContinuationStateFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinTapePreservingTerminalJoinFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRawRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRequestDispatchFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinRepeatedBuilderLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierTerminalJoinExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-staged-request-mirrored-dispatch"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-derived-finish-split"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAuditedDeclarationCount",
+              "expected": 65
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedRequestRelayRuleCount",
+              "expected": 14
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedClassifierRelayMachineRuleCount",
+              "expected": 743
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedMirroredDispatcherRuleCount",
+              "expected": 64
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchFixedComposedMachineRuleCount",
+              "expected": 816
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAllPostHeaderCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchBodyAndFinishRoutesDispatched",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchCanonicalRequestStagedOnProtectedTape",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchRawRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchSuccessiveConfigurationsFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchRepeatedBuilderLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExactNextCanonicalPrefixFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAuditPassed",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAuditedDeclarationCount",
+              "expected": 91
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedRouteRelayRuleCount",
+              "expected": 20
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedClassifierRelayMachineRuleCount",
+              "expected": 749
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedConditionalDispatcherRuleCount",
+              "expected": 65
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFixedComposedMachineRuleCount",
+              "expected": 823
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAllPostHeaderCoordinatesFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCanonicalRequestStagedOnProtectedTape",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPhysicalBodyFinishRouteDerived",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyPendingMarkerFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitFinishRequestDerivedFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitBodyRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitPaddingRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRawRequestSynthesisFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitSuccessiveConfigurationsFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitRepeatedBuilderLoopFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalFinishPrefixFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactNextCanonicalBodyPrefixFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExactWorkTraceFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitCompiledRawMachineFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitOneStepShortNonhaltingFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitExternalInputSizePolynomialFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderDynamicCursorFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCookLevinBuilderRawRefinementFormalized",
+              "expected": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-cook-levin-complete-builder"
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_accept",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.formulaBuilderMachine_output",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.formulaBuilder_output",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.formulaBuilder_rawRefinement_output",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.polynomialReduction_output",
+              "expectedPresent": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Concrete.CookLevin.cook_levin_formula_builder_checked_complete",
+              "expectedPresent": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-10-230",
           "justification": "One finite source-derived machine now constructs the complete original canonical Cook-Levin formula for every raw input, including empty and odd lengths, with total polynomial runtime and encoded-output-size bounds and exact recursive raw refinement. The compiled PolynomialReduction uses the original formula semantics without a supplied trace or correctness certificate. This retires the full builder dependency, not another prefix or finite fixture.",
@@ -523,9 +1701,20 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "concrete-legacy-locked-nand-compatibility" },
-            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized", "expected": true },
-            { "kind": "inventory-declaration", "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete", "expectedPresent": true }
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-legacy-locked-nand-compatibility"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized",
+              "expected": true
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete",
+              "expectedPresent": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "justification": "The active report-facing SAT and locked-NAND endpoints are definitionally the concrete languages, and the bridge consumes the compiled all-bitstring polynomial reduction without a caller-supplied trust edge.",
@@ -546,9 +1735,19 @@
           "points": 2,
           "status": "earned",
           "evidence": [
-            { "kind": "milestone-earned", "id": "residual-gain-chain-bound" },
-            { "kind": "milestone-earned", "id": "residual-gain-stopping-specification" },
-            { "kind": "status-field", "field": "leanResidualGainChainGlobalStoppingConsequenceFormalized", "expected": true }
+            {
+              "kind": "milestone-earned",
+              "id": "residual-gain-chain-bound"
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "residual-gain-stopping-specification"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanResidualGainChainGlobalStoppingConsequenceFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "Finite strict-gain chains, semantic stopping and their terminal consequence are checked.",
@@ -561,8 +1760,15 @@
           "points": 5,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanResidualBandMinimizerFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
+            {
+              "kind": "status-field",
+              "field": "leanResidualBandMinimizerFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ResidualBandMinimizer"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The residual-band minimizer is not formalized and the relevant global blocker remains open.",
@@ -575,8 +1781,14 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" },
-            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ResidualBandMinimizer"
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ZeroSlack"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The global residual-minimizer and ZeroSlack blockers remain open despite substantial finite PkgC and BN rows.",
@@ -589,7 +1801,10 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ZeroSlack"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "Checked finite dependency tables and sidecars do not close the unconditional ZeroSlack blocker.",
@@ -602,8 +1817,15 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanResidualRoutesGlobalGainCompletenessFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+            {
+              "kind": "status-field",
+              "field": "leanResidualRoutesGlobalGainCompletenessFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ZeroSlack"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "Global gain-route completeness is explicitly false.",
@@ -616,7 +1838,11 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanSaturatePositiveFormalized", "expected": false }
+            {
+              "kind": "status-field",
+              "field": "leanSaturatePositiveFormalized",
+              "expected": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The manuscript-level SaturatePositive field is false.",
@@ -629,7 +1855,11 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanBCELReadyFormalized", "expected": false }
+            {
+              "kind": "status-field",
+              "field": "leanBCELReadyFormalized",
+              "expected": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The manuscript-level BCELReady field is false.",
@@ -642,8 +1872,15 @@
           "points": 8,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ZeroSlack" }
+            {
+              "kind": "status-field",
+              "field": "leanZeroSlackCompletenessFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ZeroSlack"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "ZeroSlack completeness is false and the named global blocker remains open.",
@@ -664,8 +1901,16 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "status-field", "field": "leanResidualGainChainVerifierFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanResidualGainStoppingSpecificationFormalized", "expected": true }
+            {
+              "kind": "status-field",
+              "field": "leanResidualGainChainVerifierFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanResidualGainStoppingSpecificationFormalized",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
           "justification": "The strict-gain and semantic stopping scaffold needed by a future loop is formalized.",
@@ -678,16 +1923,56 @@
           "points": 3,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsResolvers", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false }
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleConstructsResolvers",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinLoopExactnessFormalized",
+              "expected": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "M191 reconstructs the manuscript's ordered HResolve, BudgetResolve, and complete finite-rank selector control flow inside the total oracle boundary, but the checked status still has no constructed component algorithms or complete PCCMin implementation.",
@@ -700,16 +1985,55 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopGainIterationBoundFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionLiftedGainFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleCanonicalAllRanksFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsResolvers", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ResidualBandMinimizer" }
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopGainIterationBoundFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionLiftedGainFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleCanonicalAllRanksFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleConstructsResolvers",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleConstructsSelectorRows",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinLoopExactnessFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ResidualBandMinimizer"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "M191 ensures every resolver or selector gain in the ordered oracle is proof-bearing and feeds the existing strict-slack loop, but it does not construct the route algorithms or prove their semantic completeness.",
@@ -722,15 +2046,51 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopExactnessUnderOracleFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinTotalOracleLoopConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleCompleteSilenceRequired", "expected": true },
-            { "kind": "status-field", "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure", "expected": false },
-            { "kind": "status-field", "field": "leanPCCMinLoopExactnessFormalized", "expected": false },
-            { "kind": "status-field", "field": "leanZeroSlackCompletenessFormalized", "expected": false }
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopExactnessUnderOracleFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinTotalOracleLoopConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionExactEndpointTransportFormalized",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsNormalizer",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinNormalizeOracleCompositionConstructsOracle",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleCompleteSilenceRequired",
+              "expected": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinRankOrderedOracleProvesZeroSlackClosure",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinLoopExactnessFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanZeroSlackCompletenessFormalized",
+              "expected": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "M191 permits the terminal ZeroSlack branch only after complete typed silence across every supplied finite rank row, but the implication from that ledger to genuine ZeroSlack remains an explicit supplied closure.",
@@ -743,8 +2103,15 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanPCCMinPolynomialRuntimeFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.PolynomialRuntimeAndCertificateBounds" }
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinPolynomialRuntimeFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.PolynomialRuntimeAndCertificateBounds"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The polynomial-runtime field is false and the size-and-runtime blocker remains open.",
@@ -757,8 +2124,15 @@
           "points": 4,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanPCCMinPolynomialRuntimeFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.PolynomialRuntimeAndCertificateBounds" }
+            {
+              "kind": "status-field",
+              "field": "leanPCCMinPolynomialRuntimeFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.PolynomialRuntimeAndCertificateBounds"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "No complete encoded-input polynomial runtime theorem is present.",
@@ -779,10 +2153,25 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": false },
-            { "kind": "inventory-declaration", "name": "PNP.GeneratePCCPack", "expectedPresent": true },
-            { "kind": "milestone-earned", "id": "typed-pccpack-reflection" },
-            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.GeneratePCCPack",
+              "expectedPresent": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.GeneratePCCPack",
+              "expectedPresent": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "typed-pccpack-reflection"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
           "justification": "GeneratePCCPack is now a transparent typed constructor from an explicit PCCMin loop certificate, and the compiled inventory no longer lists it as project-specific proof authority.",
@@ -795,10 +2184,25 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": false },
-            { "kind": "inventory-declaration", "name": "PNP.CheckPCCPackexp", "expectedPresent": true },
-            { "kind": "milestone-earned", "id": "typed-pccpack-reflection" },
-            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.CheckPCCPackexp",
+              "expectedPresent": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.CheckPCCPackexp",
+              "expectedPresent": true
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "typed-pccpack-reflection"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
           "justification": "CheckPCCPackexp is now a transparent structural identifier check with compiled acceptance and mismatched-identifier rejection theorems, and the inventory no longer lists it as a project axiom.",
@@ -811,9 +2215,20 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": false },
-            { "kind": "milestone-earned", "id": "concrete-legacy-locked-nand-compatibility" },
-            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.LockedNANDThreshold",
+              "expectedPresent": false
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-legacy-locked-nand-compatibility"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "justification": "LockedNANDThreshold is now a concrete definition used by the active bridge, and the compiled theorem inventory no longer lists it as an axiom.",
@@ -826,9 +2241,20 @@
           "points": 1,
           "status": "earned",
           "evidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": false },
-            { "kind": "milestone-earned", "id": "concrete-residual-band-compatibility" },
-            { "kind": "status-field", "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.ResidualBandExactMinimization",
+              "expectedPresent": false
+            },
+            {
+              "kind": "milestone-earned",
+              "id": "concrete-residual-band-compatibility"
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "awardedAtCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
           "justification": "ResidualBandExactMinimization is now the concrete fail-closed direct-wire minimum-threshold language, the active compatibility edge is an identity reduction, and the compiled inventory no longer lists the former language axiom.",
@@ -841,8 +2267,15 @@
           "points": 2,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "leanConcreteCNFSATInPFormalized", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.ConcreteSAT" }
+            {
+              "kind": "status-field",
+              "field": "leanConcreteCNFSATInPFormalized",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.ConcreteSAT"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The concrete CNFSAT-in-P field is false.",
@@ -876,9 +2309,21 @@
           "points": 2,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "rootLeanTheoremPresent", "expected": false },
-            { "kind": "status-field", "field": "rootLeanTheoremBuilt", "expected": false },
-            { "kind": "inventory-declaration", "name": "PNP.Main.p_eq_np", "expectedPresent": false }
+            {
+              "kind": "status-field",
+              "field": "rootLeanTheoremPresent",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "rootLeanTheoremBuilt",
+              "expected": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.Main.p_eq_np",
+              "expectedPresent": false
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The exact eligible root theorem is absent from both status and compiled inventory.",
@@ -891,9 +2336,20 @@
           "points": 1,
           "status": "open",
           "evidence": [
-            { "kind": "status-field", "field": "rootLeanTheoremAxiomAuditPassed", "expected": false },
-            { "kind": "status-field", "field": "concretePublicationGate.passed", "expected": false },
-            { "kind": "status-blocker-open", "id": "Formal.RootTheoremAndAxiomAudit" }
+            {
+              "kind": "status-field",
+              "field": "rootLeanTheoremAxiomAuditPassed",
+              "expected": false
+            },
+            {
+              "kind": "status-field",
+              "field": "concretePublicationGate.passed",
+              "expected": false
+            },
+            {
+              "kind": "status-blocker-open",
+              "id": "Formal.RootTheoremAndAxiomAudit"
+            }
           ],
           "awardedAtCoordinate": null,
           "justification": "The root axiom audit and publication gate are both false.",
@@ -965,7 +2421,10 @@
     {
       "kind": "baseline",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-184",
-      "formalArtefactCoverage": { "earnedRows": 160, "totalRows": 162 },
+      "formalArtefactCoverage": {
+        "earnedRows": 160,
+        "totalRows": 162
+      },
       "riskWeightedProofCompletionPercent": 30,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -976,7 +2435,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-185",
-      "formalArtefactCoverage": { "earnedRows": 161, "totalRows": 163 },
+      "formalArtefactCoverage": {
+        "earnedRows": 161,
+        "totalRows": 163
+      },
       "riskWeightedProofCompletionPercent": 30,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -989,7 +2451,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
-      "formalArtefactCoverage": { "earnedRows": 162, "totalRows": 164 },
+      "formalArtefactCoverage": {
+        "earnedRows": 162,
+        "totalRows": 164
+      },
       "riskWeightedProofCompletionPercent": 32,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1006,8 +2471,16 @@
           "oldStatus": "open",
           "newStatus": "earned",
           "compiledEvidence": [
-            { "kind": "inventory-declaration", "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete", "expectedPresent": true },
-            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized", "expected": true }
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.concrete_legacy_locked_nand_compatibility_checked_complete",
+              "expectedPresent": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteLegacyLockedNANDCompatibilityFormalized",
+              "expected": true
+            }
           ],
           "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "loadBearingRationale": "The report-facing SAT and locked-NAND endpoints now inhabit the exact concrete finite-pipeline model and the active bridge reuses the compiled all-bitstring polynomial reduction without caller-supplied reduction trust.",
@@ -1028,8 +2501,16 @@
           "oldStatus": "open",
           "newStatus": "earned",
           "compiledEvidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.LockedNANDThreshold", "expectedPresent": false },
-            { "kind": "status-field", "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.LockedNANDThreshold",
+              "expectedPresent": false
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteLegacyLockedNANDCompatibilityEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-23-186",
           "loadBearingRationale": "The active LockedNANDThreshold endpoint is now a concrete definition rather than project-specific proof authority, and the compiled inventory removes that axiom from the active source closure.",
@@ -1051,7 +2532,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
-      "formalArtefactCoverage": { "earnedRows": 163, "totalRows": 165 },
+      "formalArtefactCoverage": {
+        "earnedRows": 163,
+        "totalRows": 165
+      },
       "riskWeightedProofCompletionPercent": 33,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1067,9 +2551,21 @@
           "oldStatus": "open",
           "newStatus": "earned",
           "compiledEvidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.ResidualBandExactMinimization", "expectedPresent": false },
-            { "kind": "inventory-declaration", "name": "PNP.concrete_residual_band_compatibility_checked_complete", "expectedPresent": true },
-            { "kind": "status-field", "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.ResidualBandExactMinimization",
+              "expectedPresent": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.concrete_residual_band_compatibility_checked_complete",
+              "expectedPresent": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanConcreteResidualBandCompatibilityEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-187",
           "loadBearingRationale": "The report-facing residual-band endpoint is now a concrete encoded candidate/threshold language, its exact arbitrary-candidate semantics are compiled, and the active locked-to-residual edge is an identity polynomial reduction rather than project-specific proof authority.",
@@ -1091,7 +2587,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
-      "formalArtefactCoverage": { "earnedRows": 164, "totalRows": 166 },
+      "formalArtefactCoverage": {
+        "earnedRows": 164,
+        "totalRows": 166
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1108,9 +2607,21 @@
           "oldStatus": "open",
           "newStatus": "earned",
           "compiledEvidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.GeneratePCCPack", "expectedPresent": false },
-            { "kind": "inventory-declaration", "name": "PNP.GeneratePCCPack", "expectedPresent": true },
-            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.GeneratePCCPack",
+              "expectedPresent": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.GeneratePCCPack",
+              "expectedPresent": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
           "loadBearingRationale": "The active package generator is now a transparent typed constructor from an explicit loop certificate, so it no longer contributes project-specific proof authority.",
@@ -1131,9 +2642,21 @@
           "oldStatus": "open",
           "newStatus": "earned",
           "compiledEvidence": [
-            { "kind": "inventory-project-axiom", "name": "PNP.CheckPCCPackexp", "expectedPresent": false },
-            { "kind": "inventory-declaration", "name": "PNP.CheckPCCPackexp", "expectedPresent": true },
-            { "kind": "status-field", "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree", "expected": true }
+            {
+              "kind": "inventory-project-axiom",
+              "name": "PNP.CheckPCCPackexp",
+              "expectedPresent": false
+            },
+            {
+              "kind": "inventory-declaration",
+              "name": "PNP.CheckPCCPackexp",
+              "expectedPresent": true
+            },
+            {
+              "kind": "status-field",
+              "field": "leanTypedPCCPackReflectionEndpointProjectAssumptionFree",
+              "expected": true
+            }
           ],
           "sourceCoordinateOrCommit": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-188",
           "loadBearingRationale": "The active package checker is now a transparent structural check with compiled generated-package acceptance and mismatched-identifier rejection theorems, so it no longer contributes project-specific proof authority.",
@@ -1155,7 +2678,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-24-189",
-      "formalArtefactCoverage": { "earnedRows": 165, "totalRows": 167 },
+      "formalArtefactCoverage": {
+        "earnedRows": 165,
+        "totalRows": 167
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1169,7 +2695,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-190",
-      "formalArtefactCoverage": { "earnedRows": 166, "totalRows": 168 },
+      "formalArtefactCoverage": {
+        "earnedRows": 166,
+        "totalRows": 168
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1183,7 +2712,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-191",
-      "formalArtefactCoverage": { "earnedRows": 167, "totalRows": 169 },
+      "formalArtefactCoverage": {
+        "earnedRows": 167,
+        "totalRows": 169
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1197,7 +2729,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-192",
-      "formalArtefactCoverage": { "earnedRows": 168, "totalRows": 170 },
+      "formalArtefactCoverage": {
+        "earnedRows": 168,
+        "totalRows": 170
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1211,7 +2746,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-193",
-      "formalArtefactCoverage": { "earnedRows": 169, "totalRows": 171 },
+      "formalArtefactCoverage": {
+        "earnedRows": 169,
+        "totalRows": 171
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1225,7 +2763,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-25-194",
-      "formalArtefactCoverage": { "earnedRows": 170, "totalRows": 172 },
+      "formalArtefactCoverage": {
+        "earnedRows": 170,
+        "totalRows": 172
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1239,7 +2780,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-195",
-      "formalArtefactCoverage": { "earnedRows": 171, "totalRows": 173 },
+      "formalArtefactCoverage": {
+        "earnedRows": 171,
+        "totalRows": 173
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1253,7 +2797,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-196",
-      "formalArtefactCoverage": { "earnedRows": 172, "totalRows": 174 },
+      "formalArtefactCoverage": {
+        "earnedRows": 172,
+        "totalRows": 174
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1267,7 +2814,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-26-197",
-      "formalArtefactCoverage": { "earnedRows": 173, "totalRows": 175 },
+      "formalArtefactCoverage": {
+        "earnedRows": 173,
+        "totalRows": 175
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1281,7 +2831,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-198",
-      "formalArtefactCoverage": { "earnedRows": 174, "totalRows": 176 },
+      "formalArtefactCoverage": {
+        "earnedRows": 174,
+        "totalRows": 176
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1295,7 +2848,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-199",
-      "formalArtefactCoverage": { "earnedRows": 175, "totalRows": 177 },
+      "formalArtefactCoverage": {
+        "earnedRows": 175,
+        "totalRows": 177
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1309,7 +2865,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-200",
-      "formalArtefactCoverage": { "earnedRows": 176, "totalRows": 178 },
+      "formalArtefactCoverage": {
+        "earnedRows": 176,
+        "totalRows": 178
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1323,7 +2882,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-27-201",
-      "formalArtefactCoverage": { "earnedRows": 177, "totalRows": 179 },
+      "formalArtefactCoverage": {
+        "earnedRows": 177,
+        "totalRows": 179
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1337,7 +2899,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-202",
-      "formalArtefactCoverage": { "earnedRows": 178, "totalRows": 180 },
+      "formalArtefactCoverage": {
+        "earnedRows": 178,
+        "totalRows": 180
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1351,7 +2916,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-203",
-      "formalArtefactCoverage": { "earnedRows": 179, "totalRows": 181 },
+      "formalArtefactCoverage": {
+        "earnedRows": 179,
+        "totalRows": 181
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1365,7 +2933,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-204",
-      "formalArtefactCoverage": { "earnedRows": 180, "totalRows": 182 },
+      "formalArtefactCoverage": {
+        "earnedRows": 180,
+        "totalRows": 182
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1379,7 +2950,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-28-205",
-      "formalArtefactCoverage": { "earnedRows": 181, "totalRows": 183 },
+      "formalArtefactCoverage": {
+        "earnedRows": 181,
+        "totalRows": 183
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1393,7 +2967,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-206",
-      "formalArtefactCoverage": { "earnedRows": 182, "totalRows": 184 },
+      "formalArtefactCoverage": {
+        "earnedRows": 182,
+        "totalRows": 184
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1407,7 +2984,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-207",
-      "formalArtefactCoverage": { "earnedRows": 183, "totalRows": 185 },
+      "formalArtefactCoverage": {
+        "earnedRows": 183,
+        "totalRows": 185
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1421,7 +3001,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-208",
-      "formalArtefactCoverage": { "earnedRows": 184, "totalRows": 186 },
+      "formalArtefactCoverage": {
+        "earnedRows": 184,
+        "totalRows": 186
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1435,7 +3018,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-29-209",
-      "formalArtefactCoverage": { "earnedRows": 185, "totalRows": 187 },
+      "formalArtefactCoverage": {
+        "earnedRows": 185,
+        "totalRows": 187
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1449,7 +3035,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-210",
-      "formalArtefactCoverage": { "earnedRows": 186, "totalRows": 188 },
+      "formalArtefactCoverage": {
+        "earnedRows": 186,
+        "totalRows": 188
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1463,7 +3052,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-211",
-      "formalArtefactCoverage": { "earnedRows": 187, "totalRows": 189 },
+      "formalArtefactCoverage": {
+        "earnedRows": 187,
+        "totalRows": 189
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1477,7 +3069,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-212",
-      "formalArtefactCoverage": { "earnedRows": 188, "totalRows": 190 },
+      "formalArtefactCoverage": {
+        "earnedRows": 188,
+        "totalRows": 190
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1491,7 +3086,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-30-213",
-      "formalArtefactCoverage": { "earnedRows": 189, "totalRows": 191 },
+      "formalArtefactCoverage": {
+        "earnedRows": 189,
+        "totalRows": 191
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1505,7 +3103,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-214",
-      "formalArtefactCoverage": { "earnedRows": 190, "totalRows": 192 },
+      "formalArtefactCoverage": {
+        "earnedRows": 190,
+        "totalRows": 192
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1519,7 +3120,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-215",
-      "formalArtefactCoverage": { "earnedRows": 191, "totalRows": 193 },
+      "formalArtefactCoverage": {
+        "earnedRows": 191,
+        "totalRows": 193
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1533,7 +3137,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-08-31-216",
-      "formalArtefactCoverage": { "earnedRows": 192, "totalRows": 194 },
+      "formalArtefactCoverage": {
+        "earnedRows": 192,
+        "totalRows": 194
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1547,7 +3154,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-217",
-      "formalArtefactCoverage": { "earnedRows": 193, "totalRows": 195 },
+      "formalArtefactCoverage": {
+        "earnedRows": 193,
+        "totalRows": 195
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1561,7 +3171,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-218",
-      "formalArtefactCoverage": { "earnedRows": 194, "totalRows": 196 },
+      "formalArtefactCoverage": {
+        "earnedRows": 194,
+        "totalRows": 196
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1575,7 +3188,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-219",
-      "formalArtefactCoverage": { "earnedRows": 195, "totalRows": 197 },
+      "formalArtefactCoverage": {
+        "earnedRows": 195,
+        "totalRows": 197
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1589,7 +3205,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-01-220",
-      "formalArtefactCoverage": { "earnedRows": 196, "totalRows": 198 },
+      "formalArtefactCoverage": {
+        "earnedRows": 196,
+        "totalRows": 198
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1603,7 +3222,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-221",
-      "formalArtefactCoverage": { "earnedRows": 197, "totalRows": 199 },
+      "formalArtefactCoverage": {
+        "earnedRows": 197,
+        "totalRows": 199
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1617,7 +3239,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-222",
-      "formalArtefactCoverage": { "earnedRows": 198, "totalRows": 200 },
+      "formalArtefactCoverage": {
+        "earnedRows": 198,
+        "totalRows": 200
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1631,7 +3256,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-02-223",
-      "formalArtefactCoverage": { "earnedRows": 199, "totalRows": 201 },
+      "formalArtefactCoverage": {
+        "earnedRows": 199,
+        "totalRows": 201
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1645,7 +3273,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-224",
-      "formalArtefactCoverage": { "earnedRows": 200, "totalRows": 202 },
+      "formalArtefactCoverage": {
+        "earnedRows": 200,
+        "totalRows": 202
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1659,7 +3290,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-225",
-      "formalArtefactCoverage": { "earnedRows": 201, "totalRows": 203 },
+      "formalArtefactCoverage": {
+        "earnedRows": 201,
+        "totalRows": 203
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1673,7 +3307,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-03-226",
-      "formalArtefactCoverage": { "earnedRows": 202, "totalRows": 204 },
+      "formalArtefactCoverage": {
+        "earnedRows": 202,
+        "totalRows": 204
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -1687,7 +3324,10 @@
     {
       "kind": "milestone-review",
       "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-04-227",
-      "formalArtefactCoverage": { "earnedRows": 203, "totalRows": 205 },
+      "formalArtefactCoverage": {
+        "earnedRows": 203,
+        "totalRows": 205
+      },
       "riskWeightedProofCompletionPercent": 35,
       "uncertaintyLowPercent": 20,
       "uncertaintyHighPercent": 40,
@@ -2472,6 +4112,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M265 closes the computed zero/unary R7 edge in raw computational histories. All support coordinates are decoded against the identified creation snapshot, and exact boundary recognition selects the actual source-derived realization. Full-field discharge, actual materializer charges, pending-snapshot bounds, source lifecycle and literal one-copy ambient splicing are kernel checked. Supports and histories remain input data, not derived terminal families or a globally successful rewrite strategy. Full manuscript R1-R9/N1-N10, observer/profile compatibility, complete Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 241 of 243 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-266",
+      "formalArtefactCoverage": {
+        "earnedRows": 242,
+        "totalRows": 244
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M266 derives physical ownership from the literal computational history and ambient splice. Actual normalizer origins, executing-event allocation labels, exact live/removed/historical-charge partitions, the compiler-position inverse and one-copy exterior transport are kernel checked. Derived disjoint event requests reuse the existing ownership kernel for support-stable membership, extracted piece sizes and exact charges without supplied ownership or partition proofs. Removing an allocated gate does not erase its historical charge. Supports and raw events remain inputs, not terminal-derived families or a globally successful history. The complete manuscript carrier/profile universe, remaining rule families, full Package E, global routes, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 242 of 244 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

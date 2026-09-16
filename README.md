@@ -1,22 +1,22 @@
 # pnp
 
-<!-- M265-CURRENT-SUMMARY:BEGIN -->
-## Current M265 boundary
+<!-- M266-CURRENT-SUMMARY:BEGIN -->
+## Current M266 boundary
 
-M265 adds computed zero/unary R7 discharge to arbitrary finite raw computational histories. Every support coordinate is checked against the identified creation snapshot, and recognition is exact for its completed zero/unary boundary. The actual source-derived realization restores the full field, charges every appended materializer gate and preserves other pending snapshots and causal bounds. Accepted closed R5/R6/R7/R8 histories retain literal one-copy splicing and exact removal/charge accounting without extra supplied correctness or ordering data. Support lists and raw events remain inputs, not a derived terminal family or globally successful strategy.
+M266 derives unique physical owners from the actual computational history and ambient splice. Original gates retain their source coordinates; every appended gate is labelled by its executing event and local allocation coordinate. The verified record distinguishes surviving gates, removals and all historical allocations, so later deletion cannot hide earlier work. Origins follow the actual normalizer and topological compiler, with each exterior gate retained once. Derived disjoint requests reuse the existing ownership kernel for support-stable membership and exact extracted charges, without supplied owners, partitions, amounts or ordering certificates.
 
-M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Full manuscript R7 and the remaining rule families, deterministic SAT, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin and the eligible root theorem remain open.
+M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Support lists and raw events remain input data. The complete manuscript carrier/profile universe and rule families, a globally successful history, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin, deterministic SAT and the eligible root theorem remain open.
 
-Formal artefact coverage: 241 of 243 current scoped publication rows earned.
+Formal artefact coverage: 242 of 244 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [computed R7 history boundary and limits](./docs/lean_computed_r7_history.md)
+See the [source-derived physical ownership boundary and limits](./docs/lean_source_derived_history_ownership.md)
 and the [conditional final-report bridge](./docs/lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-No fixed weighted checkpoint or global proof gate closes. Publication decision: defer a separate PNPLabs cycle; retain the coherent M264 website pin until the next major publication batch.
-<!-- M265-CURRENT-SUMMARY:END -->
+Publication decision: defer. This connects source-derived ownership to the existing computational accounting route, but does not close a fixed weighted checkpoint or global gate or change the published global bottom line. Preserve the coherent M264 website pin and batch M265 and M266 into the next major publication.
+<!-- M266-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -45,7 +45,7 @@ mathematical validation.
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 241 of 243 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 242 of 244 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
