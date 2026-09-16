@@ -15,6 +15,7 @@ on:
       - 'pcc-formal-public-surface0.mjs'
       - 'package.json'
       - 'scripts/export-lean-theorem-inventory.mjs'
+      - 'scripts/check-lean-axioms.mjs'
       - 'scripts/generate-formal-publication.mjs'
       - 'scripts/build-canonical-report.mjs'
       - 'scripts/pnp-verify-all.mjs'
@@ -64,6 +65,7 @@ on:
       - 'pcc-formal-public-surface0.mjs'
       - 'package.json'
       - 'scripts/export-lean-theorem-inventory.mjs'
+      - 'scripts/check-lean-axioms.mjs'
       - 'scripts/generate-formal-publication.mjs'
       - 'scripts/build-canonical-report.mjs'
       - 'scripts/pnp-verify-all.mjs'
@@ -3756,31 +3758,25 @@ jobs:
       - name: Check computed R7 raw-history contracts
         run: node --test audits/lean-computed-r7-causal-contracts0.test.mjs audits/lean-computed-r7-history0.test.mjs audits/lean-computed-r7-history-publication0.test.mjs
 
+      - name: Check source-derived physical history ownership
+        run: npm run audit:m266
+
+      - name: Audit source-derived physical history ownership
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPSourceDerivedHistoryOwnershipAxiomAudit.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPPhysicalGateProvenance.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPWireHistoryPhysicalOwnership.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPCompiledGateProvenance.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPWireHistoryAmbientOwnership.lean
+
+      - name: Check shared Lean axiom transcript validator
+        run: node --test audits/lean-axiom-transcript0.test.mjs
+
       - name: Audit computed R7 raw-history discharge
         run: |
           set -euo pipefail
-          audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPComputedR7HistoryAxiomAudit.lean 2>&1)"
-          printf '%s\n' "$audit_output"
-          AUDIT_OUTPUT="$audit_output" node --input-type=module - <<'NODE'
-          import assert from 'node:assert/strict';
-          import {readFileSync} from 'node:fs';
-          const output = process.env.AUDIT_OUTPUT.replace(/\n[ \t]+/gu, ' ');
-          const rows = [...output.matchAll(/^'([^']+)' (?:depends on axioms: \[([^\]]*)\]|does not depend on any axioms)$/gmu)];
-          const names = [...readFileSync('lean-audit/PNPComputedR7HistoryAxiomAudit.lean', 'utf8').matchAll(/^#print axioms\s+(\S+)\s*$/gmu)].map(match => match[1]);
-          const inventory = JSON.parse(readFileSync('status/LEAN_THEOREM_INVENTORY.json', 'utf8')).milestoneCandidates;
-          const expected = names.map(name => {
-            const row = inventory.find(row => row.name === name);
-            assert.equal(row?.kind, 'theorem', name);
-            return [name, row.axioms];
-          });
-          assert.deepEqual(rows.map(row => row[1]).sort(), expected.map(row => row[0]).sort());
-          const expectedAxioms = new Map(expected);
-          for (const row of rows) {
-            const actual = row[2] === undefined ? [] : row[2].split(',').map(value => value.trim()).sort();
-            assert.deepEqual(actual, expectedAxioms.get(row[1]), row[1]);
-          }
-          console.log('M265: exact computed R7 raw-history axiom closures passed.');
-          NODE
+          node scripts/check-lean-axioms.mjs lean-audit/PNPComputedR7HistoryAxiomAudit.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7History.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7CausalBounds.lean
 

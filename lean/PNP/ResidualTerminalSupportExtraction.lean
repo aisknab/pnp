@@ -879,6 +879,130 @@ private def extractTerminalProgramAux
               exact earlierBound earlierIndex selectedIndex
             · exact False.elim (lastSelected selectedIndex) }
 
+/-- A computed two-sided inverse for the actual extractor's gate positions.
+This record is built from the scan, never supplied by the caller. -/
+private structure TerminalExtractionOrigins
+    {wireInputs wireGates inputs gates : Nat}
+    {program : Program inputs gates} {selected : Fin gates → Bool}
+    {inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates}
+    {gateWire : Fin gates → TerminalSupportWire wireInputs wireGates}
+    {boundary : List (TerminalSupportWire wireInputs wireGates)}
+    (state : TerminalExtractionState program selected inputWire gateWire boundary) where
+  origin : Fin state.gateCount → Fin gates
+  selected_origin : ∀ position, selected (origin position) = true
+  index_origin : ∀ position,
+    state.gateIndex (origin position) (selected_origin position) = position
+  origin_index : ∀ gate (selectedGate : selected gate = true),
+    origin (state.gateIndex gate selectedGate) = gate
+
+/-- Follow the same append and skip branches as the physical extraction scan. -/
+private def extractTerminalOriginsAux
+    {wireInputs wireGates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates)) :
+    {inputs gates : Nat} → (program : Program inputs gates) →
+      (selected : Fin gates → Bool) →
+      (inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates) →
+      (gateWire : Fin gates → TerminalSupportWire wireInputs wireGates) →
+      TerminalExtractionOrigins
+        (extractTerminalProgramAux boundary program selected inputWire gateWire)
+  | _inputs, 0, .empty, _selected, _inputWire, _gateWire =>
+      { origin := Fin.elim0
+        selected_origin := fun position => Fin.elim0 position
+        index_origin := fun position => Fin.elim0 position
+        origin_index := fun gate _selectedGate => Fin.elim0 gate }
+  | inputs, gates + 1, .snoc initial gate, selected, inputWire, gateWire => by
+      let earlierSelected : Fin gates → Bool := fun index => selected index.castSucc
+      let earlierGateWire : Fin gates → TerminalSupportWire wireInputs wireGates :=
+        fun index => gateWire index.castSucc
+      let earlier := extractTerminalOriginsAux boundary initial earlierSelected
+        inputWire earlierGateWire
+      simp only [extractTerminalProgramAux]
+      split
+      · rename_i lastSelected
+        let prior := extractTerminalProgramAux boundary initial earlierSelected
+          inputWire earlierGateWire
+        let origin (position : Fin (prior.gateCount + 1)) : Fin (gates + 1) :=
+          finLastCasesConstructive (motive := fun _ => Fin (gates + 1))
+            (Fin.last gates) (fun previous => (earlier.origin previous).castSucc) position
+        have originEarlier (position : Fin prior.gateCount) :
+            origin position.castSucc = (earlier.origin position).castSucc :=
+          finLastCasesConstructive_castSucc (motive := fun _ => Fin (gates + 1))
+            (Fin.last gates) (fun previous => (earlier.origin previous).castSucc) position
+        have originLast : origin (Fin.last prior.gateCount) = Fin.last gates :=
+          finLastCasesConstructive_last (motive := fun _ => Fin (gates + 1))
+            (Fin.last gates) (fun previous => (earlier.origin previous).castSucc)
+        have selectedOrigin (position : Fin (prior.gateCount + 1)) :
+            selected (origin position) = true := by
+          rcases CausalBound.index_cases position with ⟨previous, rfl⟩ | rfl
+          · rw [originEarlier]
+            exact earlier.selected_origin previous
+          · rw [originLast]
+            exact lastSelected
+        let reindex (index : Fin (gates + 1)) (selectedIndex : selected index = true) :
+            Fin (prior.gateCount + 1) :=
+          finLastCasesConstructive
+            (motive := fun index => selected index = true → Fin (prior.gateCount + 1))
+            (fun _ => Fin.last prior.gateCount)
+            (fun previous selectedPrevious =>
+              (prior.gateIndex previous selectedPrevious).castSucc) index selectedIndex
+        have reindexEarlier (index : Fin gates)
+            (selectedIndex : selected index.castSucc = true) :
+            reindex index.castSucc selectedIndex =
+              (prior.gateIndex index selectedIndex).castSucc := by
+          dsimp only [reindex]
+          rw [finLastCasesConstructive_castSucc]
+        have reindexLast : reindex (Fin.last gates) lastSelected =
+            Fin.last prior.gateCount := by
+          dsimp only [reindex]
+          rw [finLastCasesConstructive_last]
+        have inverse (position : Fin (prior.gateCount + 1)) :
+            reindex (origin position) (selectedOrigin position) = position := by
+          rcases CausalBound.index_cases position with ⟨previous, rfl⟩ | rfl
+          · have arguments :
+                (⟨origin previous.castSucc, selectedOrigin previous.castSucc⟩ :
+                  {index : Fin (gates + 1) // selected index = true}) =
+                ⟨(earlier.origin previous).castSucc, earlier.selected_origin previous⟩ :=
+              Subtype.ext (originEarlier previous)
+            calc
+              reindex (origin previous.castSucc) (selectedOrigin previous.castSucc) =
+                  reindex (earlier.origin previous).castSucc
+                    (earlier.selected_origin previous) :=
+                congrArg (fun argument => reindex argument.val argument.property) arguments
+              _ = (prior.gateIndex (earlier.origin previous)
+                  (earlier.selected_origin previous)).castSucc := reindexEarlier _ _
+              _ = previous.castSucc := congrArg Fin.castSucc (earlier.index_origin previous)
+          · have arguments :
+                (⟨origin (Fin.last prior.gateCount), selectedOrigin (Fin.last prior.gateCount)⟩ :
+                  {index : Fin (gates + 1) // selected index = true}) =
+                ⟨Fin.last gates, lastSelected⟩ := Subtype.ext originLast
+            exact (congrArg (fun argument => reindex argument.val argument.property)
+              arguments).trans reindexLast
+        refine
+          { origin := origin
+            selected_origin := selectedOrigin
+            index_origin := inverse
+            origin_index := ?_ }
+        intro index selectedIndex
+        change origin (reindex index selectedIndex) = index
+        rcases CausalBound.index_cases index with ⟨previous, rfl⟩ | rfl
+        · rw [reindexEarlier, originEarlier]
+          exact congrArg Fin.castSucc (earlier.origin_index previous selectedIndex)
+        · rw [reindexLast, originLast]
+      · rename_i lastUnselected
+        refine
+          { origin := fun position => (earlier.origin position).castSucc
+            selected_origin := fun position => earlier.selected_origin position
+            index_origin := ?_
+            origin_index := ?_ }
+        · intro position
+          simp only [finLastCasesConstructive_castSucc]
+          exact earlier.index_origin position
+        · intro index selectedIndex
+          rcases CausalBound.index_cases index with ⟨previous, rfl⟩ | rfl
+          · simp only [finLastCasesConstructive_castSucc]
+            exact congrArg Fin.castSucc (earlier.origin_index previous selectedIndex)
+          · exact False.elim (lastUnselected selectedIndex)
+
 /-- Bounds of the actual extraction accumulator, proved from its constructors.
 The public instances below derive every cap from the input program itself. -/
 private theorem extractTerminalProgramAux_causal_bound
@@ -1014,6 +1138,80 @@ theorem extractTerminalSupport_gateCount
     (extractTerminalSupport candidate records).gateCount =
       (terminalSelectedGates records).length :=
   (extractTerminalSupport candidate records).gateCount_eq_selected
+
+/-- The actual position used by the extractor for a selected original gate. -/
+def terminalExtractionGateIndex
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (gate : Fin gates) (selectedGate : terminalGateSelected records gate = true) :
+    Fin (extractTerminalSupport candidate records).gateCount :=
+  (terminalExtractionState candidate records).gateIndex gate selectedGate
+
+/-- Recover an original gate from its actual physical extracted position.
+The inverse is computed from the extractor's append/skip scan. -/
+def terminalExtractionOrigin
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (position : Fin (extractTerminalSupport candidate records).gateCount) : Fin gates :=
+  (extractTerminalOriginsAux (terminalBoundaryPorts candidate.program records)
+    candidate.program (terminalGateSelected records)
+    TerminalSupportWire.input TerminalSupportWire.gate).origin position
+
+theorem terminalExtractionOrigin_selected
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (position : Fin (extractTerminalSupport candidate records).gateCount) :
+    terminalGateSelected records (terminalExtractionOrigin candidate records position) = true :=
+  (extractTerminalOriginsAux (terminalBoundaryPorts candidate.program records)
+    candidate.program (terminalGateSelected records)
+    TerminalSupportWire.input TerminalSupportWire.gate).selected_origin position
+
+/-- The recovered origin names this exact physical extracted gate. -/
+theorem terminalExtractionGateIndex_origin
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (position : Fin (extractTerminalSupport candidate records).gateCount) :
+    terminalExtractionGateIndex candidate records
+        (terminalExtractionOrigin candidate records position)
+        (terminalExtractionOrigin_selected candidate records position) = position :=
+  (extractTerminalOriginsAux (terminalBoundaryPorts candidate.program records)
+    candidate.program (terminalGateSelected records)
+    TerminalSupportWire.input TerminalSupportWire.gate).index_origin position
+
+/-- No selected original gate is lost or silently exchanged for another one. -/
+theorem terminalExtractionOrigin_gateIndex
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (gate : Fin gates) (selectedGate : terminalGateSelected records gate = true) :
+    terminalExtractionOrigin candidate records
+      (terminalExtractionGateIndex candidate records gate selectedGate) = gate :=
+  (extractTerminalOriginsAux (terminalBoundaryPorts candidate.program records)
+    candidate.program (terminalGateSelected records)
+    TerminalSupportWire.input TerminalSupportWire.gate).origin_index gate selectedGate
+
+theorem terminalExtractionOrigin_injective
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    {left right : Fin (extractTerminalSupport candidate records).gateCount}
+    (same : terminalExtractionOrigin candidate records left =
+      terminalExtractionOrigin candidate records right) : left = right := by
+  have arguments :
+      (⟨terminalExtractionOrigin candidate records left,
+        terminalExtractionOrigin_selected candidate records left⟩ :
+        {gate : Fin gates // terminalGateSelected records gate = true}) =
+      ⟨terminalExtractionOrigin candidate records right,
+        terminalExtractionOrigin_selected candidate records right⟩ := Subtype.ext same
+  have positions := congrArg
+    (fun argument : {gate : Fin gates // terminalGateSelected records gate = true} =>
+      terminalExtractionGateIndex candidate records argument.val argument.property) arguments
+  exact (terminalExtractionGateIndex_origin candidate records left).symm.trans
+    (positions.trans (terminalExtractionGateIndex_origin candidate records right))
 
 /-- Independent open evaluation at every original gate coordinate.  Selected
     gates are computed; unselected coordinates are inert and are consulted
