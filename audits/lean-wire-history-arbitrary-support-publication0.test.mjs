@@ -308,18 +308,18 @@ test('M264 preflight: package, verifier and durable CI share the exact audited b
   assert.ok(surface.includes("'audit:m264': '" + COMMAND + "'"));
   for (const file of TEST_FILES) assert.ok(verifier.includes("'" + file + "'"), file);
   assert.ok(workflow.includes(COMMAND));
-  for (const file of [AUDIT, REGRESSION])
-    assert.ok(workflow.includes('lake env lean -DwarningAsError=true ' + file), file);
+  assert.ok(workflow.includes('lake env lean -DwarningAsError=true ' + REGRESSION));
   const auditSteps = workflow.split(/^      - name:/mu).filter(step =>
-    step.includes('lake env lean -DwarningAsError=true ' + AUDIT));
+    step.includes('node scripts/check-lean-axioms.mjs ' + AUDIT));
   assert.equal(auditSteps.length, 1);
-  assert.ok(auditSteps[0].includes("readFileSync('" + AUDIT + "', 'utf8')"));
-  for (const fragment of ["readFileSync('status/LEAN_THEOREM_INVENTORY.json', 'utf8')",
-    '.milestoneCandidates', 'const expected = names.map(name => {',
-    'const row = inventory.find(row => row.name === name);',
-    "assert.equal(row?.kind, 'theorem', name);", 'return [name, row.axioms];'])
-    assert.ok(auditSteps[0].includes(fragment), fragment);
+  const block = auditSteps[0].split('        run: |\n')[1];
+  assert.ok(block);
+  assert.equal(block.trimEnd().split('\n').map(line => line.slice(10)).join('\n') + '\n',
+    'set -euo pipefail\nnode scripts/check-lean-axioms.mjs ' + AUDIT +
+    '\nlake env lean -DwarningAsError=true ' + REGRESSION + '\n');
+  assert.ok(workflow.includes('node --test audits/lean-axiom-transcript0.test.mjs'));
 });
+
 
 let sourcesPromise;
 function sources0() {

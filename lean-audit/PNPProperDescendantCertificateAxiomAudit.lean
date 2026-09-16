@@ -1,0 +1,35 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_dependencyInterfaceBound
+#print axioms PNP.DirectWire.WireDescendantHistory.StageCompilation.output_dependency_bound
+#print axioms PNP.DirectWire.WireDescendantHistory.CompiledRun.output_dependency_bound
+#print axioms PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_causalInterfaceBound
+#print axioms PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_compiles
+#print axioms PNP.DirectWire.WireDescendantProperSupport.proper_iff_exterior_positive
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.open_equivalent
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.output
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.field
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gateCount
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.charge_accounting
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_local_gain
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_net_charges
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictGain
+#print axioms PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictResidualDescent
+#print axioms PNP.DirectWire.WireDescendantProperSupport.compile_complete
+#print axioms PNP.DirectWire.WireDescendantProperSupport.compile_exists_iff
+#print axioms PNP.DirectWire.WireDescendantProperSupport.compile_none_iff
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.records_source
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.proper_support
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.output
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.field
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.gateCount
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.charge_accounting
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictGain
+#print axioms PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictResidualDescent
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_complete
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_exists_iff
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_sound
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_decode_none
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_run_none
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_not_proper
+#print axioms PNP.DirectWire.WireDescendantCertificate.verify_no_gain

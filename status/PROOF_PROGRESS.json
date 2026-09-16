@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-267",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268",
   "lastReviewedDate": "2026-09-17",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 243,
-    "totalRows": 245,
+    "earnedRows": 244,
+    "totalRows": 246,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4146,6 +4146,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M267 derives persistent physical ownership through arbitrary finite raw stage sequences. Every stage uses the actual preceding descendant, while stage/event/local allocation identities follow literal compiler positions. The arbitrary-program conservation theorem uses actual execution totals, retains historical charges after later removal and derives disjoint support-stable owners from the raw input event family. The complete-program final gain adapter permits intermediate expansion and uses structural semantics rather than an oracle. Each local history remains closed; cross-support open-obligation transport, the full manuscript carrier/profile and rule universe, full ChargeSoundness, complete Package E, global route coverage, terminal-derived families, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 243 of 245 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268",
+      "formalArtefactCoverage": {
+        "earnedRows": 244,
+        "totalRows": 246
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M268 verifies source-only proper-support certificates for arbitrary finite computational descendant programs. Execution-derived causal bounds make literal outer compilation total for every accepted complete local run. Exact acceptance requires complete decoding, complete local execution, proper physical support and strict final local saving. All ordinary outputs, literal fields and actual historical costs are preserved; intermediate expansion is allowed. This retires the computational offered-program acceptance edge, not certificate discovery for every nonminimal input, full manuscript profiles and rules, full VerifyDW or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 244 of 246 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

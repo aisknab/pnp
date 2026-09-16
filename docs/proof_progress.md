@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 243 of 245 current scoped publication rows earned.
+Formal artefact coverage: 244 of 246 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-267`, 243 of 245
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268`, 244 of 246
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -777,3 +777,9 @@ Publication decision: defer. This connects source-derived ownership to the exist
 M267 derives persistent physical ownership through arbitrary finite raw stage sequences. Every stage uses the actual preceding descendant, while stage/event/local allocation identities follow literal compiler positions. The arbitrary-program conservation theorem uses actual execution totals, retains historical charges after later removal and derives disjoint support-stable owners from the raw input event family. The complete-program final gain adapter permits intermediate expansion and uses structural semantics rather than an oracle. Each local history remains closed; cross-support open-obligation transport, the full manuscript carrier/profile and rule universe, full ChargeSoundness, complete Package E, global route coverage, terminal-derived families, unconditional SaturatePositive/BCELReady/ZeroSlack and complete polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 243 of 245 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 Publication decision: defer. Persistent descendant ownership advances the existing computational accounting route without closing a fixed weighted checkpoint or global gate or changing the published global bottom line. Preserve the coherent M264 website pin and batch M265 through M267 into the next major publication. See [the descendant ownership boundary](lean_descendant_history_ownership.md).
+
+## M268 coverage review
+
+M268 verifies source-only proper-support certificates for arbitrary finite computational descendant programs. Execution-derived causal bounds make literal outer compilation total for every accepted complete local run. Exact acceptance requires complete decoding, complete local execution, proper physical support and strict final local saving. All ordinary outputs, literal fields and actual historical costs are preserved; intermediate expansion is allowed. This retires the computational offered-program acceptance edge, not certificate discovery for every nonminimal input, full manuscript profiles and rules, full VerifyDW or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 244 of 246 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+Publication decision: defer. The source-only proper-support verifier closes the computational offered-program acceptance edge, not full manuscript VerifyDW or certificate discovery for arbitrary nonminimal inputs. No fixed weighted checkpoint or global gate changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication. See [the proper-support certificate boundary](lean_proper_descendant_certificates.md).

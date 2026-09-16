@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-16-267",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,54 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanProperDescendantCertificatesFormalized": true,
+  "leanProperDescendantCertificatesAxiomAuditPassed": true,
+  "leanProperDescendantCertificatesAuditedDeclarationCount": 33,
+  "leanProperDescendantCertificatesArbitraryLabelCausalBoundTheorem": "PNP.DirectWire.WireDescendantHistory.CompiledRun.output_dependency_bound",
+  "leanProperDescendantCertificatesDerivedOuterCompilationTheorem": "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_compiles",
+  "leanProperDescendantCertificatesCompleteOuterCompilationTheorem": "PNP.DirectWire.WireDescendantProperSupport.compile_complete",
+  "leanProperDescendantCertificatesProperSupportIffTheorem": "PNP.DirectWire.WireDescendantProperSupport.proper_iff_exterior_positive",
+  "leanProperDescendantCertificatesAmbientHistoricalAccountingTheorem": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.charge_accounting",
+  "leanProperDescendantCertificatesCompleteAcceptanceIffTheorem": "PNP.DirectWire.WireDescendantCertificate.verify_exists_iff",
+  "leanProperDescendantCertificatesSourceRoundTripTheorem": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.records_source",
+  "leanProperDescendantCertificatesOrdinaryOutputPreservationTheorem": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.output",
+  "leanProperDescendantCertificatesLiteralFieldPreservationTheorem": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.field",
+  "leanProperDescendantCertificatesStrictGainTheorem": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictGain",
+  "leanProperDescendantCertificatesStrictResidualDescentTheorem": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictResidualDescent",
+  "leanProperDescendantCertificatesFailedCompleteProgramRejectionTheorem": "PNP.DirectWire.WireDescendantCertificate.verify_run_none",
+  "leanProperDescendantCertificatesWholeSupportRejectionTheorem": "PNP.DirectWire.WireDescendantCertificate.verify_not_proper",
+  "leanProperDescendantCertificatesNondecreaseRejectionTheorem": "PNP.DirectWire.WireDescendantCertificate.verify_no_gain",
+  "leanProperDescendantCertificatesArbitraryFiniteDimensionsAndProgramsCovered": true,
+  "leanProperDescendantCertificatesRawSourceOnlyCertificate": true,
+  "leanProperDescendantCertificatesCompleteProgramRequired": true,
+  "leanProperDescendantCertificatesOuterAcyclicityDerivedFromExecution": true,
+  "leanProperDescendantCertificatesProperPhysicalSupportRequired": true,
+  "leanProperDescendantCertificatesStrictFinalLocalSavingRequired": true,
+  "leanProperDescendantCertificatesAllOrdinaryOutputsAndLiteralFieldsPreserved": true,
+  "leanProperDescendantCertificatesExteriorOccursExactlyOnce": true,
+  "leanProperDescendantCertificatesActualHistoricalChargeRemovalBalancePreserved": true,
+  "leanProperDescendantCertificatesIntermediateExpansionAllowed": true,
+  "leanProperDescendantCertificatesCallerSuppliedCorrectnessOrIntermediateCircuitRequired": false,
+  "leanProperDescendantCertificatesCallerSuppliedOrderOrSuccessfulSpliceRequired": false,
+  "leanProperDescendantCertificatesCallerSuppliedCostsOrOwnersRequired": false,
+  "leanProperDescendantCertificatesAcceptedPrefixReturnedAfterLaterRejection": false,
+  "leanProperDescendantCertificatesRejectedCertificateProvesLocalMinimality": false,
+  "leanProperDescendantCertificatesAcceptedCertificateForEveryNonminimalInputProved": false,
+  "leanProperDescendantCertificatesGloballySuccessfulStrategyDerived": false,
+  "leanProperDescendantCertificatesFullManuscriptVerifyDWProved": false,
+  "leanProperDescendantCertificatesFullManuscriptProfilesAndRuleFamiliesProved": false,
+  "leanProperDescendantCertificatesOpenObligationsTransportedAcrossSupports": false,
+  "leanProperDescendantCertificatesCompleteChargeSoundnessProved": false,
+  "leanProperDescendantCertificatesCompletePackageEProved": false,
+  "leanProperDescendantCertificatesTerminalFamiliesDerived": false,
+  "leanProperDescendantCertificatesGlobalRouteCoverageProved": false,
+  "leanProperDescendantCertificatesUnconditionalSaturatePositiveProved": false,
+  "leanProperDescendantCertificatesUnconditionalBCELReadyProved": false,
+  "leanProperDescendantCertificatesUnconditionalZeroSlackProved": false,
+  "leanProperDescendantCertificatesExactGeneralPCCMinProved": false,
+  "leanProperDescendantCertificatesPolynomialRuntimeOutputAndCertificateBoundsProved": false,
+  "leanProperDescendantCertificatesRuntimeExecutionIsProofAuthority": false,
+  "leanProperDescendantCertificatesScope": "arbitrary-finite-computational-wire-carriers-source-only-raw-records-and-complete-descendant-programs-derived-causal-literal-splice-proper-support-strict-final-saving-all-output-and-field-preservation-exact-historical-costs-intermediate-expansion-no-global-certificate-discovery-or-full-manuscript-profiles-or-polynomial-runtime",
   "leanDescendantHistoryOwnershipFormalized": true,
   "leanDescendantHistoryOwnershipAxiomAuditPassed": true,
   "leanDescendantHistoryOwnershipAuditedDeclarationCount": 84,
@@ -3708,7 +3756,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "01d12a2ca301568002c1bb2be250ab1c488a2f89499f3c4717ed0c4530cfb332",
+    "actualSourceClosureSha256": "1ba6cf64b67ae60cdfa849e1cf97c2ca6ee0bc3e4cc96a6b5c99e16f34f4030c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -3741,19 +3789,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "120a8b237b78d97913e177c8cc8e7b4c6330e2bc768668d391695285cf103d82",
+  "leanTheoremInventorySha256": "989dd2481822a36e759ff3b2f49e999612439e1d09e88c9a34f2276258cf6c80",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 49794,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20745,
-  "leanTheoremInventoryTheoremCount": 27150,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11522,
-  "leanTheoremInventorySourceClosureModuleCount": 552,
-  "leanSourceClosureSha256": "01d12a2ca301568002c1bb2be250ab1c488a2f89499f3c4717ed0c4530cfb332",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-16-267",
+  "leanTheoremInventoryDeclarationCount": 49908,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20758,
+  "leanTheoremInventoryTheoremCount": 27208,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11527,
+  "leanTheoremInventorySourceClosureModuleCount": 555,
+  "leanSourceClosureSha256": "1ba6cf64b67ae60cdfa849e1cf97c2ca6ee0bc3e4cc96a6b5c99e16f34f4030c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-17-268",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "5619ff7964d13a8063f969bc92eb43c712ef4bfad5de8d24f163966b232c6d9f",
+  "formalPublicationMapSha256": "1013191576e83888de67e2a1d0235a0c6022b53fbcb2485674b0844f193dbf4e",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -59700,9 +59748,456 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "proper-descendant-certificates",
+      "title": "Source-only proper-support certificates for descendant programs",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_dependencyInterfaceBound",
+        "PNP.DirectWire.WireDescendantHistory.StageCompilation.output_dependency_bound",
+        "PNP.DirectWire.WireDescendantHistory.CompiledRun.output_dependency_bound",
+        "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_causalInterfaceBound",
+        "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_compiles",
+        "PNP.DirectWire.WireDescendantProperSupport.proper_iff_exterior_positive",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.open_equivalent",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.output",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.field",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gateCount",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.charge_accounting",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_local_gain",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_net_charges",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictGain",
+        "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictResidualDescent",
+        "PNP.DirectWire.WireDescendantProperSupport.compile_complete",
+        "PNP.DirectWire.WireDescendantProperSupport.compile_exists_iff",
+        "PNP.DirectWire.WireDescendantProperSupport.compile_none_iff",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.records_source",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.proper_support",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.output",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.field",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.gateCount",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.charge_accounting",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictGain",
+        "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictResidualDescent",
+        "PNP.DirectWire.WireDescendantCertificate.verify_complete",
+        "PNP.DirectWire.WireDescendantCertificate.verify_exists_iff",
+        "PNP.DirectWire.WireDescendantCertificate.verify_sound",
+        "PNP.DirectWire.WireDescendantCertificate.verify_decode_none",
+        "PNP.DirectWire.WireDescendantCertificate.verify_run_none",
+        "PNP.DirectWire.WireDescendantCertificate.verify_not_proper",
+        "PNP.DirectWire.WireDescendantCertificate.verify_no_gain"
+      ],
+      "scope": "For arbitrary finite computational wire-carrier dimensions, raw outer support records and raw descendant programs, source-only verification decodes every outer coordinate and executes the complete local program on the extracted source. Arbitrary-label dependency bounds follow actual execution and derive literal outer compilation without a supplied wiring order or successful-splice premise. Acceptance is exactly complete decoding, successful complete local execution, proper physical support and strict final local saving. The constructed one-copy ambient splice preserves all ordinary outputs and literal fields, retains the actual run and compiler receipts, and satisfies exact historical charge/removal accounting. Intermediate expansion is permitted; invalid coordinates, a failed later stage, whole support and final nondecrease reject. Every accepted certificate yields StrictEquivalentGain and strict residual descent without supplied intermediate circuits, correctness, owners, costs, ranks or semantic oracles.",
+      "nonClaim": "This verifies offered finite programs in the existing closed computational wire-carrier language. It does not prove that every nonminimal input has an accepted certificate, construct a globally successful strategy, derive terminal families or establish local minimality after rejection. Full manuscript profiles, all R1-R9 and N1-N10 rule families, cross-support transport of open obligations, matched-kappa arbitrary-support Pull/Expand, full manuscript VerifyDW, ChargeSoundness and Package E remain open. No bound on temporary growth, encoded-input polynomial runtime, output size or certificate size is proved. Global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin, deterministic CNFSAT in P and the eligible root remain open. Runtime fixtures are regression evidence, not theorem authority. No fixed weighted checkpoint or global gate closes, and P = NP is not proved.",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_dependencyInterfaceBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7e91a6ba071a60d7acf5537dbbbe7b92588c7600b8794ff29854f641389e8269",
+          "expectedKernelTypeSha256": "7e91a6ba071a60d7acf5537dbbbe7b92588c7600b8794ff29854f641389e8269",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantHistory.StageCompilation.output_dependency_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6e06d53b0ca176147a923beda5e13fc201257842680b13b7eb0f4e21223d0a5a",
+          "expectedKernelTypeSha256": "6e06d53b0ca176147a923beda5e13fc201257842680b13b7eb0f4e21223d0a5a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantHistory.CompiledRun.output_dependency_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3bdab1852a89654374cec56b8b06c23c1d5cc963d33ff2842a254db07836af98",
+          "expectedKernelTypeSha256": "3bdab1852a89654374cec56b8b06c23c1d5cc963d33ff2842a254db07836af98",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_causalInterfaceBound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9df4cab63a5443ed3c4383553ff5ab1cd7e5a3983b2010d83240b1070703e5d3",
+          "expectedKernelTypeSha256": "9df4cab63a5443ed3c4383553ff5ab1cd7e5a3983b2010d83240b1070703e5d3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_compiles",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "47a4a1c20244f1b93aa6fa03c58b88b07ccd74498e37eb645adcf966d095f65e",
+          "expectedKernelTypeSha256": "47a4a1c20244f1b93aa6fa03c58b88b07ccd74498e37eb645adcf966d095f65e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.proper_iff_exterior_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d9d08cfb9dadac80b033e39f4954d427cc8003d8cd3d11aae930bb0b6aabb20c",
+          "expectedKernelTypeSha256": "d9d08cfb9dadac80b033e39f4954d427cc8003d8cd3d11aae930bb0b6aabb20c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.open_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1554f92d8ccf86c4c94a7040f18a301073fd5f2b22e704da9e7c3d2652b2a9fe",
+          "expectedKernelTypeSha256": "1554f92d8ccf86c4c94a7040f18a301073fd5f2b22e704da9e7c3d2652b2a9fe",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3d4007aa676175bca9da0e38c0fa81c4f55bba457806bbb6d8e76ff919f74b98",
+          "expectedKernelTypeSha256": "3d4007aa676175bca9da0e38c0fa81c4f55bba457806bbb6d8e76ff919f74b98",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "1c982a9e13a376f2b044aa8e95655cea80ea5b09b61717cb7c91612d6bdf67d7",
+          "expectedKernelTypeSha256": "1c982a9e13a376f2b044aa8e95655cea80ea5b09b61717cb7c91612d6bdf67d7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "33ddeedba50fed2e7aeaf3b1d6fdb85128563c912e933424241f611ee8559003",
+          "expectedKernelTypeSha256": "33ddeedba50fed2e7aeaf3b1d6fdb85128563c912e933424241f611ee8559003",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.charge_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "43cf1de7e6f4a89dac1ecaca41999c83bfb01c5c210adc9c82f9ca8a9b93665f",
+          "expectedKernelTypeSha256": "43cf1de7e6f4a89dac1ecaca41999c83bfb01c5c210adc9c82f9ca8a9b93665f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_local_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f2e0f4bf14a3821fd89e9c15ed3ebaa66038e58d2022e7162257f22cb3d9f6ae",
+          "expectedKernelTypeSha256": "f2e0f4bf14a3821fd89e9c15ed3ebaa66038e58d2022e7162257f22cb3d9f6ae",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_net_charges",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "254edea2db6faf6de9ff5991a1101fa5e98da7f95c4f249d54bf545b1c8de7b5",
+          "expectedKernelTypeSha256": "254edea2db6faf6de9ff5991a1101fa5e98da7f95c4f249d54bf545b1c8de7b5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictGain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d52506d1fa99a40e31e1f65e2f346737f9650244c325df8e11db6053f5edc84c",
+          "expectedKernelTypeSha256": "d52506d1fa99a40e31e1f65e2f346737f9650244c325df8e11db6053f5edc84c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictResidualDescent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9e078fc6943070e2127e757c87e5128553104a268aa22d0d44a8072ff0d9d99c",
+          "expectedKernelTypeSha256": "9e078fc6943070e2127e757c87e5128553104a268aa22d0d44a8072ff0d9d99c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.compile_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f4fbc6327c464ccd90383ce7238d5fb48985e9d1075e44e99ee14febd197f77d",
+          "expectedKernelTypeSha256": "f4fbc6327c464ccd90383ce7238d5fb48985e9d1075e44e99ee14febd197f77d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.compile_exists_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3595a28d541c127f3f9d1c1de45133e52de421ee6dedf8a6ba4b4d2bb70d89c1",
+          "expectedKernelTypeSha256": "3595a28d541c127f3f9d1c1de45133e52de421ee6dedf8a6ba4b4d2bb70d89c1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantProperSupport.compile_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "14ee8d6504fbb3d36d05a30c16804bb64c150c8cd1ffb3650c089d072e9e9e59",
+          "expectedKernelTypeSha256": "14ee8d6504fbb3d36d05a30c16804bb64c150c8cd1ffb3650c089d072e9e9e59",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.records_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "438bd94195840fc2351650b23668de3ba131db36ca00a0afb7cb2edd51957d35",
+          "expectedKernelTypeSha256": "438bd94195840fc2351650b23668de3ba131db36ca00a0afb7cb2edd51957d35",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.proper_support",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e65ada18451c48e87f3809e321a796e32610f9c00d5bcefee226644ef366aa59",
+          "expectedKernelTypeSha256": "e65ada18451c48e87f3809e321a796e32610f9c00d5bcefee226644ef366aa59",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "613f0f18269563e29aba6060065e1b52e3c6becc1e8da84472f6491519266eb7",
+          "expectedKernelTypeSha256": "613f0f18269563e29aba6060065e1b52e3c6becc1e8da84472f6491519266eb7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "60e21b2c8a882cb82bf741e7692504669c9b5e9bd293e11ed11e23edb9ac2d65",
+          "expectedKernelTypeSha256": "60e21b2c8a882cb82bf741e7692504669c9b5e9bd293e11ed11e23edb9ac2d65",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7d350b53d51481dc1fe2d5cb4155b5c7aaf6b613052aa6112b9f1174d066ab07",
+          "expectedKernelTypeSha256": "7d350b53d51481dc1fe2d5cb4155b5c7aaf6b613052aa6112b9f1174d066ab07",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.charge_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "adb98588ffdceb1296a68ddd61343e8d7939ffca2f812a5d44028ea8f5e9a401",
+          "expectedKernelTypeSha256": "adb98588ffdceb1296a68ddd61343e8d7939ffca2f812a5d44028ea8f5e9a401",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictGain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d285a884b421f2610155e13482363543697a2250a40c1c302c7c46b4016f4732",
+          "expectedKernelTypeSha256": "d285a884b421f2610155e13482363543697a2250a40c1c302c7c46b4016f4732",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictResidualDescent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b48c42a7f286f32d4c890f51d3c74b020fb19f9f3a24185e58fe5438a3855b46",
+          "expectedKernelTypeSha256": "b48c42a7f286f32d4c890f51d3c74b020fb19f9f3a24185e58fe5438a3855b46",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_complete",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b9601cb040f7386418b4a280b37d283aecdf0792bee24994e9cc194583976d34",
+          "expectedKernelTypeSha256": "b9601cb040f7386418b4a280b37d283aecdf0792bee24994e9cc194583976d34",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_exists_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9eef87d6e1313ff9dda9650d8ef55854860a6b3f63686952b60d79caaeaf36a4",
+          "expectedKernelTypeSha256": "9eef87d6e1313ff9dda9650d8ef55854860a6b3f63686952b60d79caaeaf36a4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a5ed083668d903a2e924c74f98357e3a846172464fa52e82eca97baee2e9a25b",
+          "expectedKernelTypeSha256": "a5ed083668d903a2e924c74f98357e3a846172464fa52e82eca97baee2e9a25b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_decode_none",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "67515c26c4d5ea9d26bb89b38dea576d8697c0986dea37797c608fd550c67837",
+          "expectedKernelTypeSha256": "67515c26c4d5ea9d26bb89b38dea576d8697c0986dea37797c608fd550c67837",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_run_none",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "23b902698feb58606e2b576acb188dffc1d3517874bf49a8a892be7c851df74a",
+          "expectedKernelTypeSha256": "23b902698feb58606e2b576acb188dffc1d3517874bf49a8a892be7c851df74a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_not_proper",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "6ae7df30920172cc87b581bb315bbd8fba9db594b35e52f85f30f03dc33b0389",
+          "expectedKernelTypeSha256": "6ae7df30920172cc87b581bb315bbd8fba9db594b35e52f85f30f03dc33b0389",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireDescendantCertificate.verify_no_gain",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5de9ff869d71ff419c095435550f6276df8087016ebd6bf1da647f65743930c4",
+          "expectedKernelTypeSha256": "5de9ff869d71ff419c095435550f6276df8087016ebd6bf1da647f65743930c4",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-16-267",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-17-268",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

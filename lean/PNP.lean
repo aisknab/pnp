@@ -294,3 +294,6 @@ import PNP.NANDWireDescendantOwnership
 import PNP.NANDWireDescendantEvents
 import PNP.NANDWireDescendantCharges
 import PNP.NANDWireDescendantGain
+import PNP.NANDWireDescendantCausalBounds
+import PNP.NANDWireDescendantProperSupport
+import PNP.NANDWireDescendantCertificate

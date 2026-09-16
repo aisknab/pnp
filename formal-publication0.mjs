@@ -5,9 +5,42 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '00c3cf3c72d73cff36c0bc34d517f4c7fed24f00346ce23f8b320ca9d858a14c';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '9b0d2c5ee0f784746bde66bc0b7bdf04ecb4255d7d10dd4dc4bec2af1df9a665';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.WireHistoryArbitrarySupport.closedHistory_dependencyInterfaceBound",
+  "PNP.DirectWire.WireDescendantHistory.StageCompilation.output_dependency_bound",
+  "PNP.DirectWire.WireDescendantHistory.CompiledRun.output_dependency_bound",
+  "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_causalInterfaceBound",
+  "PNP.DirectWire.WireDescendantHistory.CompiledRun.extracted_compiles",
+  "PNP.DirectWire.WireDescendantProperSupport.proper_iff_exterior_positive",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.open_equivalent",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.output",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.field",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gateCount",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.charge_accounting",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_local_gain",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.gain_iff_net_charges",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictGain",
+  "PNP.DirectWire.WireDescendantProperSupport.SplicedRun.strictResidualDescent",
+  "PNP.DirectWire.WireDescendantProperSupport.compile_complete",
+  "PNP.DirectWire.WireDescendantProperSupport.compile_exists_iff",
+  "PNP.DirectWire.WireDescendantProperSupport.compile_none_iff",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.records_source",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.proper_support",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.output",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.field",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.gateCount",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.charge_accounting",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictGain",
+  "PNP.DirectWire.WireDescendantCertificate.CheckedCertificate.strictResidualDescent",
+  "PNP.DirectWire.WireDescendantCertificate.verify_complete",
+  "PNP.DirectWire.WireDescendantCertificate.verify_exists_iff",
+  "PNP.DirectWire.WireDescendantCertificate.verify_sound",
+  "PNP.DirectWire.WireDescendantCertificate.verify_decode_none",
+  "PNP.DirectWire.WireDescendantCertificate.verify_run_none",
+  "PNP.DirectWire.WireDescendantCertificate.verify_not_proper",
+  "PNP.DirectWire.WireDescendantCertificate.verify_no_gain",
   "PNP.DirectWire.WireDescendantHistory.decodeRecord_encode",
   "PNP.DirectWire.WireDescendantHistory.decodeRecord_source",
   "PNP.DirectWire.WireDescendantHistory.decodeRecords_encode",
@@ -4211,7 +4244,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-16-267') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-17-268') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
