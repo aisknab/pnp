@@ -240,7 +240,7 @@ test('Lean workflow pins the installer and performs one real explicit-root build
   assert.match(inventoryExporter, /const BUILD_TIMEOUT_MS = 1_800_000;/u);
   assert.match(inventoryExporter, /const PROBE_TIMEOUT_MS = 600_000;/u);
   assert.match(inventoryExporter,
-    /const INVENTORY_MAX_BUFFER_BYTES = 64 \* 1024 \* 1024;/u);
+    /export const INVENTORY_MAX_BUFFER_BYTES = 128 \* 1024 \* 1024;/u);
   assert.match(inventoryExporter,
     /\['build', 'PNP'\][\s\S]*?timeout: BUILD_TIMEOUT_MS/u);
   assert.equal((inventoryExporter.match(/maxBuffer: INVENTORY_MAX_BUFFER_BYTES/gu)

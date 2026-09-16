@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, readdir, rm, symlink } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm, stat, symlink } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -13,9 +13,21 @@ import {
   stableStringify0,
   REQUIRED_MILESTONE_THEOREMS0,
 } from '../formal-publication0.mjs';
-import { ParseLeanInventoryProbe0 } from '../scripts/export-lean-theorem-inventory.mjs';
+import { INVENTORY_MAX_BUFFER_BYTES, ParseLeanInventoryProbe0 } from '../scripts/export-lean-theorem-inventory.mjs';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
+
+test('inventory probe output buffer remains bounded and fits the current canonical artifact', async () => {
+  assert.equal(INVENTORY_MAX_BUFFER_BYTES, 128 * 1024 * 1024);
+  const bytes = (await stat(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url))).size;
+  assert.ok(bytes < INVENTORY_MAX_BUFFER_BYTES, 'compiled inventory exceeds the reviewed output buffer');
+  assert.throws(() => ParseLeanInventoryProbe0({
+    stdout: '', stderr: 'stdout maxBuffer length exceeded', exitCode: 1, timedOut: false,
+  }), /stdout maxBuffer length exceeded/u);
+  const source = await readFile(new URL('../scripts/export-lean-theorem-inventory.mjs', import.meta.url), 'utf8');
+  assert.ok(source.includes('stderr: error.stderr || error.message'),
+    'an empty stderr must not hide the process or output-limit diagnostic');
+});
 
 function compareNames0(left, right) {
   return left.name < right.name ? -1 : left.name > right.name ? 1 : 0;
