@@ -286,3 +286,11 @@ import PNP.NANDWireObligationHistory
 import PNP.NANDWireObligationHistoryExecution
 import PNP.NANDWireHistoryArbitrarySupport
 import PNP.NANDWireHistoryOwnershipCharges
+import PNP.NANDWireDescendantInput
+import PNP.NANDWireDescendantStage
+import PNP.NANDWireDescendantRun
+import PNP.NANDWireDescendantLedger
+import PNP.NANDWireDescendantOwnership
+import PNP.NANDWireDescendantEvents
+import PNP.NANDWireDescendantCharges
+import PNP.NANDWireDescendantGain

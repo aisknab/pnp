@@ -1,22 +1,22 @@
 # Formal reconstruction notice
 
-<!-- M266-CURRENT-SUMMARY:BEGIN -->
-## Current M266 boundary
+<!-- M267-CURRENT-SUMMARY:BEGIN -->
+## Current M267 boundary
 
-M266 derives unique physical owners from the actual computational history and ambient splice. Original gates retain their source coordinates; every appended gate is labelled by its executing event and local allocation coordinate. The verified record distinguishes surviving gates, removals and all historical allocations, so later deletion cannot hide earlier work. Origins follow the actual normalizer and topological compiler, with each exterior gate retained once. Derived disjoint requests reuse the existing ownership kernel for support-stable membership and exact extracted charges, without supplied owners, partitions, amounts or ordering certificates.
+M267 carries source-derived physical ownership through an arbitrary finite sequence of raw computational histories. Each stage decodes against the actual preceding descendant; initial gate identities persist, and fresh allocations use stage, event and local-gate coordinates. The complete-program theorem preserves outputs and an exact duplicate-free live/removed/charged partition, retaining every historical allocation after later deletion. Derived owners remain fixed under support restriction. A computed final gain may follow temporarily expanding stages; a failed later stage rejects the whole program. No intermediate implementation, owner map, rank, successful-history certificate or semantic oracle is supplied.
 
-M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-hardness and NP-completeness remain kernel checked. Support lists and raw events remain input data. The complete manuscript carrier/profile universe and rule families, a globally successful history, unconditional SaturatePositive/BCELReady/ZeroSlack, full polynomial PCCMin, deterministic SAT and the eligible root theorem remain open.
+M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-completeness remain kernel checked. Raw supports and events remain inputs, and each local history is closed. The full manuscript carrier/profile universe, cross-support open-obligation transport, complete ChargeSoundness and Package E, globally successful routes, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root theorem remain open.
 
-Formal artefact coverage: 242 of 244 current scoped publication rows earned.
+Formal artefact coverage: 243 of 245 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [source-derived physical ownership boundary and limits](lean_source_derived_history_ownership.md)
+See the [descendant ownership boundary and limits](lean_descendant_history_ownership.md)
 and the [conditional final-report bridge](lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This connects source-derived ownership to the existing computational accounting route, but does not close a fixed weighted checkpoint or global gate or change the published global bottom line. Preserve the coherent M264 website pin and batch M265 and M266 into the next major publication.
-<!-- M266-CURRENT-SUMMARY:END -->
+Publication decision: defer. Persistent descendant ownership advances the existing computational accounting route without closing a fixed weighted checkpoint or global gate or changing the published global bottom line. Preserve the coherent M264 website pin and batch M265 through M267 into the next major publication.
+<!-- M267-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

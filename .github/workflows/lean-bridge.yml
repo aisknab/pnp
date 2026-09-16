@@ -3758,6 +3758,17 @@ jobs:
       - name: Check computed R7 raw-history contracts
         run: node --test audits/lean-computed-r7-causal-contracts0.test.mjs audits/lean-computed-r7-history0.test.mjs audits/lean-computed-r7-history-publication0.test.mjs
 
+      - name: Check descendant ownership
+        run: npm run audit:m267
+
+      - name: Audit descendant ownership
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPDescendantHistoryOwnershipAxiomAudit.lean
+          for part in Input Stage Run Ledger Ownership Events Charges Gain; do
+            lake env lean -DwarningAsError=true "lean-regression/PNPWireDescendant${part}.lean"
+          done
+
       - name: Check source-derived physical history ownership
         run: npm run audit:m266
 

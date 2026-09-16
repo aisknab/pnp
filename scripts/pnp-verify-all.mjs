@@ -130,6 +130,8 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-axiom-transcript0.test.mjs',
   'audits/lean-source-derived-history-ownership0.test.mjs',
   'audits/lean-source-derived-history-ownership-publication0.test.mjs',
+  'audits/lean-descendant-history-ownership0.test.mjs',
+  'audits/lean-descendant-history-ownership-publication0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs',
   'audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs',
