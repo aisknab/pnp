@@ -3751,6 +3751,17 @@ jobs:
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
 
+      - name: Check complete open-obligation programs
+        run: npm run audit:m269
+
+      - name: Audit complete open-obligation programs
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPOpenObligationProgramAxiomAudit.lean
+          for part in SupportSplice Program SupportOwnership PrimitiveOwnership ProgramOwnership ProperSupport ProperOwnership Certificate; do
+            lake env lean -DwarningAsError=true "lean-regression/PNPWireOpen${part}.lean"
+          done
+
       - name: Audit proper-support descendant certificates
         run: |
           set -euo pipefail

@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-269",
   "lastReviewedDate": "2026-09-17",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 244,
-    "totalRows": 246,
+    "earnedRows": 245,
+    "totalRows": 247,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4163,6 +4163,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M268 verifies source-only proper-support certificates for arbitrary finite computational descendant programs. Execution-derived causal bounds make literal outer compilation total for every accepted complete local run. Exact acceptance requires complete decoding, complete local execution, proper physical support and strict final local saving. All ordinary outputs, literal fields and actual historical costs are preserved; intermediate expansion is allowed. This retires the computational offered-program acceptance edge, not certificate discovery for every nonminimal input, full manuscript profiles and rules, full VerifyDW or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 244 of 246 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-269",
+      "formalArtefactCoverage": {
+        "earnedRows": 245,
+        "totalRows": 247
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M269 verifies source-only proper-support certificates for complete mixed computational programs whose ambient obligations can remain open across actual descendant support changes. The computed complete schedule includes intrinsic creation references; the same captured snapshots persist until genuine full-mode discharge, and final closure restores the complete interface. Actual compiler positions determine unique physical ownership and retain all historical allocation charges and removals, including later-deleted allocations. Proper support and strict final saving are checked without supplied correctness, initial state, schedule, snapshots, ownership, costs or splice witnesses. This retires the computational mixed-program lifecycle and accounting edge, not global certificate discovery, full manuscript profiles and rules, full VerifyDW or Package E, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 245 of 247 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
