@@ -315,3 +315,8 @@ import PNP.NANDReindexedOpenSemantics
 import PNP.NANDReindexedReplacement
 import PNP.NANDReindexedSplice
 import PNP.NANDReindexedCompiledSplice
+import PNP.NANDReindexingCausalBounds
+import PNP.NANDWireStructuralReindexing
+import PNP.NANDWireStructuralState
+import PNP.NANDWireStructuralOwnership
+import PNP.NANDWireStructuralProgram

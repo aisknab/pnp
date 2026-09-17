@@ -373,7 +373,19 @@ verification. Then run `node scripts/generate-formal-publication.mjs` to derive
 the metrics in every marked current summary and the README FAQ table from that
 ledger. Inspect other active progress explanations separately; preserve history.
 Run the inexpensive current-document preflight before any broad suite:
-`node --test --test-name-pattern='current progress' audits/formal-publication0.test.mjs`.
+
+```bash
+node --test --test-name-pattern='current (progress|documentation)' \
+  audits/formal-publication0.test.mjs \
+  audits/lean-concrete-cook-levin-complete-builder0.test.mjs \
+  audits/lean-concrete-cook-levin-np-completeness0.test.mjs
+```
+
+Current summaries retain the M230 complete-builder and M231 NP-completeness
+provenance anchors while those earned dependencies remain active. Before a
+narrative rewrite, search existing current-authority tests for every edited
+document path, not just the new milestone or old numeric value. Include those
+document contracts in the focused preflight before another broad run.
 Finding a correct value once in a document is insufficient: each active summary,
 FAQ and status table must agree independently. A missed current copy is a
 preparation error, not a reason to weaken a stale-value test.

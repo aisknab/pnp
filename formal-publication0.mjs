@@ -5,9 +5,42 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '3d382da1c44b89a08e194ff8604947187d8c0f7c64decc3f6a7c40bbe2c4d27c';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'cfeacb6d3d8aa067f0ebd0f716e94d6cb55161701e8f5399529c06067845010f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.StructuralReindexing.result_gate_level",
+  "PNP.DirectWire.StructuralReindexing.result_source_level",
+  "PNP.DirectWire.StructuralReindexing.result_output_level",
+  "PNP.DirectWire.WireCarrier.reindex_exposed",
+  "PNP.DirectWire.WireCarrier.reindex_gateCount",
+  "PNP.DirectWire.WireCarrier.reindex_backward_forward",
+  "PNP.DirectWire.WireCarrier.reindex_forward_backward",
+  "PNP.DirectWire.WireCarrier.reindex_output",
+  "PNP.DirectWire.WireCarrier.reindex_field",
+  "PNP.DirectWire.WireCarrier.reindex_field_source",
+  "PNP.DirectWire.WireCarrier.reindex_exposed_level",
+  "PNP.DirectWire.WireCarrier.reindex_output_level",
+  "PNP.DirectWire.WireCarrier.reindex_field_level",
+  "PNP.DirectWire.WireCarrier.reindex_causalBounds",
+  "PNP.DirectWire.WireObligationHistory.State.reindex_pending",
+  "PNP.DirectWire.WireObligationHistory.State.reindex_charged",
+  "PNP.DirectWire.WireObligationHistory.State.reindex_removed",
+  "PNP.DirectWire.WireObligationHistory.State.reindex_gateCount",
+  "PNP.DirectWire.WireObligationHistory.State.reindex_causalInvariant",
+  "PNP.DirectWire.WireStructuralState.execute_isSome",
+  "PNP.DirectWire.WireStructuralState.execute_failure_iff",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_origin",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_origin_forward",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_origin_injective",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_live_members",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_not_allocated",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_charged",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_removed",
+  "PNP.DirectWire.WireStructuralState.Receipt.ownership_wellFormed",
+  "PNP.DirectWire.WireStructuralState.Receipt.physical_ownership",
+  "PNP.DirectWire.WireOpenProgram.ProgramOwnership.advance_structural_origin",
+  "PNP.DirectWire.WireOpenProgram.ProgramOwnership.advance_structural_charged",
+  "PNP.DirectWire.WireOpenProgram.ProgramOwnership.advance_structural_removed",
   "PNP.DirectWire.RawNandWireStructure.initial_faithful",
   "PNP.DirectWire.RawNandWireStructure.apply_faithful",
   "PNP.DirectWire.RawNandWireStructure.run_faithful",
@@ -4496,7 +4529,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-17-270') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-17-271') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

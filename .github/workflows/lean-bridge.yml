@@ -3741,6 +3741,15 @@ jobs:
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
 
+      - name: Check structural-action programs
+        run: npm run audit:m271
+      - name: Audit structural-action programs
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPStructuralProgramsAxiomAudit.lean
+          for part in ReindexingCausalBounds WireStructuralState WireStructuralOwnership WireStructuralProgram WireStructuralCertificate; do
+            lake env lean -DwarningAsError=true "lean-regression/PNP${part}.lean"
+          done
       - name: Check structural reordering and support transport
         run: npm run audit:m270
       - name: Audit structural reordering and support transport

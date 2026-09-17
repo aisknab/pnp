@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-270",
-  "lastReviewedDate": "2026-09-17",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-271",
+  "lastReviewedDate": "2026-09-18",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 246,
-    "totalRows": 248,
+    "earnedRows": 247,
+    "totalRows": 249,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4197,6 +4197,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M270 reconstructs computational structural reordering with arbitrary descendant-support transport. Actual compiler placement derives canonical boundary, interface and ownership maps; all independent open values, literal replacement sources and ordered outputs are preserved. Both matched signed surcharges are zero, exact local and whole savings agree, and raw dependency, acyclicity and compiler rejection correspond in both directions. An actually accepted compatible descendant splice computes its predecessor without a supplied order or transport witness. This retires the computational reordering component, not full profile semantics, remaining materializer rules, global certificate discovery or an unconditional residual theorem. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 246 of 248 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-271",
+      "formalArtefactCoverage": {
+        "earnedRows": 247,
+        "totalRows": 249
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M271 integrates computed structural reordering into complete source-only replacement programs. Literal field wires, exact causal labels and pending snapshots are preserved. Local physical ownership uses the actual backward bijection with no allocation or removal, and the complete ledger retains earlier global identities and charge/removal history. Proper-support verification still requires complete acceptance, a closed final ledger and actual strict saving; invalid tails and reordering without gain receive no certificate. This retires a computational integration edge, not full manuscript profiles, all normalization/materializer rules, global certificate discovery, unconditional residual theorems or polynomial bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 247 of 249 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
