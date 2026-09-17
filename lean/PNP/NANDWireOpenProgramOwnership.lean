@@ -13,6 +13,7 @@ unconditional ZeroSlack or polynomial execution.
 -/
 
 import PNP.NANDWireOpenPrimitiveOwnership
+import PNP.NANDWireStructuralOwnership
 
 namespace PNP.DirectWire.WireOpenProgram
 
@@ -26,12 +27,13 @@ namespace Transition
 
 variable {before after : State source} {event : RawEvent}
 
-/-- The local map comes from the actual primitive or nested compiler receipt. -/
+/-- The local map comes from the actual primitive, nested or reordering receipt. -/
 def localLedger (step : Transition source before event after) :
     PersistentOwnership before.current.implementation.gateCount after.current.implementation.gateCount :=
   match step with
   | .primitive _ _ _ _ _ _ inner => PrimitiveOwnership.labelled inner
   | .support _ _ _ _ receipt => receipt.ownership
+  | .structural _ _ _ _ receipt => receipt.ownership
 
 theorem local_physical_ownership (step : Transition source before event after) :
     step.localLedger.live.length = after.current.implementation.gateCount ∧
@@ -43,6 +45,7 @@ theorem local_physical_ownership (step : Transition source before event after) :
   cases step with
   | primitive raw kind action decoded inner => exact PrimitiveOwnership.labelled_physical_ownership inner
   | support raw kind receipt => exact receipt.physical_ownership
+  | structural raw kind receipt => exact receipt.physical_ownership
 
 theorem local_charged_origin (step : Transition source before event after)
     (origin : DescendantOrigin before.current.implementation.gateCount)

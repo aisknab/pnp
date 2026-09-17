@@ -100,7 +100,7 @@ const SPECS = [
   {
     "part": "ProgramInput",
     "path": "lean/PNP/NANDWireOpenProgramInput.lean",
-    "sourceContractSha256": "95dbaf7f45bad61d4752d7ea9b2b10967916f1314f4a0857b8c0e54a5d5690a4",
+    "sourceContractSha256": "39c6252386d583adba8b51f1edc3d6fefe56fd36dfacc7a1da789e04ae03f2eb",
     "heads": [
       {
         "kind": "inductive",
@@ -191,7 +191,7 @@ const SPECS = [
   {
     "part": "Program",
     "path": "lean/PNP/NANDWireOpenProgram.lean",
-    "sourceContractSha256": "83b8bebb86c5558b8e91b9a999ca7bade513eb6ed7e73a379e9b0911828d6201",
+    "sourceContractSha256": "2742e9169efac1295fe3030eafe2eb0eeef7a4fe0674557e76769f06392748dd",
     "heads": [
       {
         "kind": "def",
@@ -524,7 +524,7 @@ const SPECS = [
   {
     "part": "ProgramOwnership",
     "path": "lean/PNP/NANDWireOpenProgramOwnership.lean",
-    "sourceContractSha256": "36b3cbd0814d5e6c367a50bdd19f022371710a1b306150ec7e3467bb1b9ddc30",
+    "sourceContractSha256": "95d499f4e1e11a1417c5c6a2246bdd336e3387d41757e598b5e1c069c95d1b82",
     "heads": [
       {
         "kind": "def",
@@ -1411,6 +1411,27 @@ test('M269 source: whole-program ownership preserves history and computed namesp
       'step.localLedger.removed.map (ledger.liftOrigin position)'],
     ['actual nested ledger','| .support _ _ _ _ receipt => receipt.ownership',
       '| .support _ _ _ _ receipt => suppliedOwnership'],
+  ]);
+});
+
+test('M271 source: structural actions use actual current decoding and ownership',async()=>{
+  await rejectMutations0('ProgramInput',[
+    ['raw swaps only','| structural (swaps : List (Nat × Nat))',
+      '| structural (swaps : List (Nat × Nat)) (suppliedCorrectness : Prop)'],
+  ]);
+  await rejectMutations0('Program',[
+    ['decode every actual swap','match WireStructuralState.execute before raw with',
+      'match WireStructuralState.execute before (raw.take 1) with'],
+    ['reject invalid coordinates','| some receipt => some ⟨receipt.next, .structural before event raw kind receipt⟩',
+      '| some receipt => suppliedSuccess'],
+    ['no invented structural cost','| .structural _ _ _ _ _ => 0',
+      '| .structural _ _ _ _ _ => 1'],
+    ['no fabricated snapshot event','| .structural _ _ _ _ _ => none',
+      '| .structural _ _ _ _ _ => suppliedCreation'],
+  ]);
+  await rejectMutations0('ProgramOwnership',[
+    ['actual structural owner map','| .structural _ _ _ _ receipt => receipt.ownership',
+      '| .structural _ _ _ _ receipt => suppliedOwnership'],
   ]);
 });
 

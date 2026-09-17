@@ -93,16 +93,20 @@ test('M231 report cover derives current proof facts and rejects obsolete builder
   ]);
   const cover = template.split('\\end{titlepage}')[0];
   const validCover = text => text.includes('@@COVER_STATUS_ROWS@@')
-    && text.includes('@@LATEST_MILESTONE_TITLE@@')
+    && text.includes('@@ARTEFACT_EARNED@@')
+    && text.includes('@@PROOF_ESTIMATE@@')
+    && !text.includes('Latest earned evidence:')
     && !compact0(text).includes('there is no complete raw polynomial-time Cook');
   assert.ok(validCover(cover));
+  assert.equal(validCover(cover + '\nLatest earned evidence: arbitrary last ledger row'), false);
   assert.equal(validCover(cover.replace('@@COVER_STATUS_ROWS@@',
     'there is no complete raw polynomial-time Cook--Levin formula builder')), false);
   for (const field of ['leanConcreteCNFSATMembershipFormalized',
     'leanConcreteCookLevinFormulaBuilderFormalized', 'leanConcreteCNFNPCompletenessFormalized',
     'leanConcreteCNFSATInPFormalized', 'rootLeanTheoremPresent']) assert.ok(generator.includes(field));
   assert.ok(generator.includes("typeof status[field] !== 'boolean'"));
-  assert.ok(generator.includes('publication.milestones.filter(row => row.earned === true)'));
+  assert.ok(generator.includes('String(progress.formalArtefactCoverage.earnedRows)'));
+  assert.ok(!generator.includes('latestEarned'));
   assert.ok(template.includes('M231 now packages concrete CNF-SAT NP-completeness'));
   assert.equal(JSON.parse(packageText).scripts['audit:m231'],
     'node --test audits/lean-concrete-cook-levin-np-completeness0.test.mjs');
