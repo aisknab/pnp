@@ -306,3 +306,12 @@ import PNP.NANDWireOpenProgramOwnership
 import PNP.NANDWireOpenProperSupport
 import PNP.NANDWireOpenProperOwnership
 import PNP.NANDWireOpenCertificate
+import PNP.NANDTopologicalWireStructure
+import PNP.NANDGateRenaming
+import PNP.NANDStructuralReindexing
+import PNP.NANDReindexedSupport
+import PNP.NANDReindexedPorts
+import PNP.NANDReindexedOpenSemantics
+import PNP.NANDReindexedReplacement
+import PNP.NANDReindexedSplice
+import PNP.NANDReindexedCompiledSplice

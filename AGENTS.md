@@ -368,6 +368,16 @@ produce.
 
 ### Reconcile expected values before expensive verification
 
+Prepare current narrative and reconcile `status/PROOF_PROGRESS.json` before
+verification. Then run `node scripts/generate-formal-publication.mjs` to derive
+the metrics in every marked current summary and the README FAQ table from that
+ledger. Inspect other active progress explanations separately; preserve history.
+Run the inexpensive current-document preflight before any broad suite:
+`node --test --test-name-pattern='current progress' audits/formal-publication0.test.mjs`.
+Finding a correct value once in a document is insufficient: each active summary,
+FAQ and status table must agree independently. A missed current copy is a
+preparation error, not a reason to weaken a stale-value test.
+
 When a source or generator change predictably changes a count, page total,
 coordinate, byte size, digest, or similar checked value, update the complete
 expectation chain before running a broad test:

@@ -185,7 +185,11 @@ const SPECS = [
       "dependencyCaps",
       "DependencyInterfaceBound",
       "graph_dependency_bounds",
-      "result_output_dependency_bound"
+      "result_output_dependency_bound",
+      "boundarySource_input",
+      "boundarySource_gate",
+      "originalSource_exterior",
+      "originalSource_interface"
     ]
   },
   {
@@ -246,7 +250,11 @@ const SPECS = [
       "terminalOpenGateEvaluation_pullback",
       "terminalOpenSupportSemantics_pullback",
       "terminalBoundaryPullback_identity",
-      "terminalBoundaryPullback_compose"
+      "terminalBoundaryPullback_compose",
+      "terminalOpenSourceValue",
+      "terminalOpenGateEvaluation_sourceEquation",
+      "terminalOpenWireValue_boundary_get",
+      "terminalOpenWireValue_external_absent"
     ]
   }
 ];

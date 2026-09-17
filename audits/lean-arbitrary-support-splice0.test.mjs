@@ -140,7 +140,11 @@ const SOURCES = [
       "dependencyCaps",
       "DependencyInterfaceBound",
       "graph_dependency_bounds",
-      "result_output_dependency_bound"
+      "result_output_dependency_bound",
+      "boundarySource_input",
+      "boundarySource_gate",
+      "originalSource_exterior",
+      "originalSource_interface"
     ]
   }
 ];

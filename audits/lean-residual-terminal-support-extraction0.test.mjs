@@ -110,7 +110,11 @@ const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   "PNP.DirectWire.terminalOpenGateEvaluation_pullback",
   "PNP.DirectWire.terminalOpenSupportSemantics_pullback",
   "PNP.DirectWire.terminalBoundaryPullback_identity",
-  "PNP.DirectWire.terminalBoundaryPullback_compose"
+  "PNP.DirectWire.terminalBoundaryPullback_compose",
+  "PNP.DirectWire.terminalOpenSourceValue",
+  "PNP.DirectWire.terminalOpenGateEvaluation_sourceEquation",
+  "PNP.DirectWire.terminalOpenWireValue_boundary_get",
+  "PNP.DirectWire.terminalOpenWireValue_external_absent"
 ]);
 
 const MILESTONE_THEOREMS = Object.freeze([
@@ -188,7 +192,9 @@ const PRIVATE_HELPERS = Object.freeze([
   "terminalBoundaryValue_get",
   "terminalOpenWireValue_on_boundary",
   "terminalBoundaryPorts_nested_external",
-  "terminalOpenWireValue_pullback_on_boundary"
+  "terminalOpenWireValue_pullback_on_boundary",
+  "Source.evalTerminalOpen_weaken_snoc",
+  "Program.evalTerminalOpenAux_sources"
 ]);
 
 async function text0(relativePath) {

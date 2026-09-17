@@ -5,11 +5,78 @@ import { fileURLToPath } from 'node:url';
 
 import { CheckFormalReconstructionStatus0 } from '../pcc-formal-reconstruction-status0.mjs';
 import { sha256Text0, stableStringify0 } from '../formal-publication0.mjs';
-import { BuildFormalPublication0 } from '../scripts/generate-formal-publication.mjs';
+import {
+  BuildFormalPublication0, CURRENT_PROGRESS_SUMMARY_PATHS0, RenderCurrentProgressSummary0,
+} from '../scripts/generate-formal-publication.mjs';
 
 async function status0() {
   return JSON.parse(await readFile(new URL('../status/FORMAL_RECONSTRUCTION_STATUS.json', import.meta.url), 'utf8'));
 }
+
+const SUMMARY_PROGRESS = {
+  asOfCoordinate: 'PNP-FORMAL-RECONSTRUCTION-STATUS-2099-01-01-900',
+  formalArtefactCoverage: { earnedRows: 8, totalRows: 10 },
+  proofCompletion: { percent: 30, uncertaintyLowPercent: 20, uncertaintyHighPercent: 40 },
+  globalGates: [{ status: 'closed' }, ...Array.from({ length: 4 }, () => ({ status: 'open' }))],
+};
+const STALE_SUMMARY_METRICS = [
+  'Formal artefact coverage: 7 of 9 current scoped publication rows earned.',
+  'Risk-weighted proof completion estimate: 29%.',
+  'Uncertainty range: 19% to 39%.',
+  'Global gates closed: 0 of 5.',
+];
+const EXPECTED_SUMMARY_METRICS = [
+  'Formal artefact coverage: 8 of 10 current scoped publication rows earned.',
+  'Risk-weighted proof completion estimate: 30%.',
+  'Uncertainty range: 20% to 40%.',
+  'Global gates closed: 1 of 5.',
+];
+function summaryFixture0(relative) {
+  const block = '<!-- M900-CURRENT-SUMMARY:BEGIN -->\nReviewed claim boundary.\n'
+    + STALE_SUMMARY_METRICS.join('\n') + '\n<!-- M900-CURRENT-SUMMARY:END -->\n';
+  const table = relative === 'README.md'
+    ? '| **How is progress measured?** | ' + STALE_SUMMARY_METRICS.join(' ') + ' |\n' : '';
+  return block + table + 'Historical record:\n' + STALE_SUMMARY_METRICS.join('\n') + '\n';
+}
+
+test('current progress rendering derives every summary region and the FAQ from one ledger', () => {
+  for (const relative of CURRENT_PROGRESS_SUMMARY_PATHS0) {
+    const actual = RenderCurrentProgressSummary0(relative, summaryFixture0(relative), SUMMARY_PROGRESS);
+    const current = actual.split('Historical record:')[0];
+    for (const metric of EXPECTED_SUMMARY_METRICS) {
+      assert.equal(current.split(metric).length - 1, relative === 'README.md' ? 2 : 1, relative + ': ' + metric);
+    }
+    assert.ok(actual.includes('Reviewed claim boundary.'));
+    assert.ok(actual.endsWith('Historical record:\n' + STALE_SUMMARY_METRICS.join('\n') + '\n'));
+    assert.equal(RenderCurrentProgressSummary0(relative, actual, SUMMARY_PROGRESS), actual);
+  }
+});
+
+test('current progress rendering fails closed on missing or ambiguous current regions', () => {
+  const fixture = summaryFixture0('README.md');
+  const mutations = [
+    fixture.replace('M900-CURRENT-SUMMARY:BEGIN', 'M899-CURRENT-SUMMARY:BEGIN'),
+    fixture.replace('M900-CURRENT-SUMMARY:END', 'M899-CURRENT-SUMMARY:END'),
+    fixture + '<!-- M900-CURRENT-SUMMARY:BEGIN -->',
+    fixture.replace(STALE_SUMMARY_METRICS[0], 'Proof completion: 98%.'),
+    fixture.replace(STALE_SUMMARY_METRICS[0], STALE_SUMMARY_METRICS[0] + STALE_SUMMARY_METRICS[0]),
+    fixture.replace('| **How is progress measured?** |', '| **Historical progress?** |'),
+    fixture + '| **How is progress measured?** | duplicate |\n',
+  ];
+  for (const mutated of mutations) assert.throws(() =>
+    RenderCurrentProgressSummary0('README.md', mutated, SUMMARY_PROGRESS));
+  assert.throws(() => RenderCurrentProgressSummary0('archive/release.md', fixture, SUMMARY_PROGRESS));
+  assert.throws(() => RenderCurrentProgressSummary0('README.md', fixture,
+    { ...SUMMARY_PROGRESS, asOfCoordinate: 'invalid' }));
+});
+
+test('current progress documentation is already reconciled with the canonical ledger', async () => {
+  const progress = JSON.parse(await readFile(new URL('../status/PROOF_PROGRESS.json', import.meta.url), 'utf8'));
+  for (const relative of CURRENT_PROGRESS_SUMMARY_PATHS0) {
+    const text = await readFile(new URL('../' + relative, import.meta.url), 'utf8');
+    assert.equal(RenderCurrentProgressSummary0(relative, text, progress), text, relative);
+  }
+});
 
 test('status, public payload, and canonical TeX are exact generated publication outputs', async () => {
   const built = await BuildFormalPublication0(fileURLToPath(new URL('../', import.meta.url)));

@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 245 of 247 current scoped publication rows earned.
+Formal artefact coverage: 246 of 248 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-269`, 245 of 247
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-270`, 246 of 248
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -787,3 +787,7 @@ Publication decision: defer. The source-only proper-support verifier closes the 
 ## M269 coverage review
 
 M269 verifies source-only proper-support certificates for complete mixed computational programs whose ambient obligations can remain open across actual descendant support changes. The computed complete schedule includes intrinsic creation references; the same captured snapshots persist until genuine full-mode discharge, and final closure restores the complete interface. Actual compiler positions determine unique physical ownership and retain all historical allocation charges and removals, including later-deleted allocations. Proper support and strict final saving are checked without supplied correctness, initial state, schedule, snapshots, ownership, costs or splice witnesses. This retires the computational mixed-program lifecycle and accounting edge, not global certificate discovery, full manuscript profiles and rules, full VerifyDW or Package E, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 245 of 247 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+## M270 coverage review
+
+M270 reconstructs computational structural reordering with arbitrary descendant-support transport. Actual compiler placement derives canonical boundary, interface and ownership maps; all independent open values, literal replacement sources and ordered outputs are preserved. Both matched signed surcharges are zero, exact local and whole savings agree, and raw dependency, acyclicity and compiler rejection correspond in both directions. An actually accepted compatible descendant splice computes its predecessor without a supplied order or transport witness. This retires the computational reordering component, not full profile semantics, remaining materializer rules, global certificate discovery or an unconditional residual theorem. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 246 of 248 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.

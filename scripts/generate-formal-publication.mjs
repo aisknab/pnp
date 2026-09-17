@@ -19,9 +19,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-269';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-270';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-17-269';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-17-270';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -117,7 +117,7 @@ export async function BuildFormalPublication0(root) {
   const progress = JSON.parse(progressBytes);
   validateProofProgress0(progress, status, inventory);
   const reportOutput = Buffer.from(renderReport0(template, status, inventory, publication, progress), 'utf8');
-  return { status, publication, inventory, statusOutput, reportOutput };
+  return { status, publication, inventory, progress, statusOutput, reportOutput };
 }
 
 function renderReport0(template, status, inventory, publication, progress) {
@@ -225,6 +225,56 @@ async function assertSafeTarget0(root, relative) {
   return absolute;
 }
 
+export const CURRENT_PROGRESS_SUMMARY_PATHS0 = Object.freeze([
+  'README.md', 'docs/FORMAL_RECONSTRUCTION.md', 'docs/lean_bridge.md',
+  'docs/proof_pipeline.md', 'docs/audit_questions.md',
+]);
+
+// Only explicitly current regions are generated. Narrative and history are
+// author-reviewed; a missing or ambiguous region fails before any output write.
+export function RenderCurrentProgressSummary0(relative, text, progress) {
+  if (!CURRENT_PROGRESS_SUMMARY_PATHS0.includes(relative)) {
+    throw new Error('unsupported current progress document');
+  }
+  const milestone = /^PNP-FORMAL-RECONSTRUCTION-STATUS-\d{4}-\d{2}-\d{2}-(\d+)$/u
+    .exec(progress.asOfCoordinate)?.[1];
+  if (!milestone) throw new Error('current progress coordinate is invalid');
+  const begin = '<!-- M' + milestone + '-CURRENT-SUMMARY:BEGIN -->';
+  const end = '<!-- M' + milestone + '-CURRENT-SUMMARY:END -->';
+  const start = text.indexOf(begin), stop = text.indexOf(end);
+  if (start < 0 || stop < start || text.split(begin).length !== 2 || text.split(end).length !== 2) {
+    throw new Error(relative + ': prepare the current summary narrative before generating progress');
+  }
+  const p = progress.proofCompletion, a = progress.formalArtefactCoverage;
+  const replacements = [
+    [/Formal artefact coverage: \d+ of \d+ current scoped publication rows earned\./gu,
+      'Formal artefact coverage: ' + a.earnedRows + ' of ' + a.totalRows + ' current scoped publication rows earned.'],
+    [/Risk-weighted proof completion estimate: \d+(?:\.\d+)?%\./gu,
+      'Risk-weighted proof completion estimate: ' + p.percent + '%.'],
+    [/Uncertainty range: \d+(?:\.\d+)?% to \d+(?:\.\d+)?%\./gu,
+      'Uncertainty range: ' + p.uncertaintyLowPercent + '% to ' + p.uncertaintyHighPercent + '%.'],
+    [/Global gates closed: \d+ of \d+\./gu,
+      'Global gates closed: ' + progress.globalGates.filter(gate => gate.status === 'closed').length
+        + ' of ' + progress.globalGates.length + '.'],
+  ];
+  const render = region => {
+    for (const [pattern, replacement] of replacements) {
+      if ([...region.matchAll(pattern)].length !== 1) {
+        throw new Error(relative + ': current progress region must contain each metric exactly once');
+      }
+      region = region.replace(pattern, () => replacement);
+    }
+    return region;
+  };
+  let result = text.slice(0, start) + render(text.slice(start, stop)) + text.slice(stop);
+  if (relative === 'README.md') {
+    const rows = result.split('\n').filter(row => row.startsWith('| **How is progress measured?** |'));
+    if (rows.length !== 1) throw new Error('README current progress table must occur exactly once');
+    result = result.replace(rows[0], () => render(rows[0]));
+  }
+  return result;
+}
+
 async function main0() {
   const args = process.argv.slice(2);
   const check = args.includes('--check');
@@ -236,6 +286,10 @@ async function main0() {
     [SITE_PATH, built.statusOutput],
     [REPORT_TEX_PATH, built.reportOutput],
   ];
+  for (const relative of CURRENT_PROGRESS_SUMMARY_PATHS0) {
+    const actual = await readFile(path.join(root, relative), 'utf8');
+    outputs.push([relative, Buffer.from(RenderCurrentProgressSummary0(relative, actual, built.progress))]);
+  }
   for (const [relative, expected] of outputs) {
     const absolute = await assertSafeTarget0(root, relative);
     if (check) {
