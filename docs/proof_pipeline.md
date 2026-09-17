@@ -1,22 +1,22 @@
 # Proof and Checker Pipeline
 
-<!-- M269-CURRENT-SUMMARY:BEGIN -->
-## Current M269 boundary
+<!-- M270-CURRENT-SUMMARY:BEGIN -->
+## Current M270 boundary
 
-M269 verifies complete offered programs on arbitrary proper computational supports while the same outstanding obligations survive actual changes of support. It computes the complete operation order, requires genuine full-value discharge and final closure, derives the literal outer splice, and checks properness and strict final saving. Every ordinary output and literal field is preserved. Physical ownership and the full history of charges and removals follow the actual compiled operations, including allocated gates later removed; temporary expansion is permitted.
+M270 proves that checked structural reordering preserves arbitrary computational supports and their compatible replacements. Actual compiler positions determine the predecessor support, canonical ports and physical ownership. Independent open values, literal gate sources and ordered outputs agree; replacement rewiring needs no padding, both matched surcharges are zero, and exact signed savings are preserved. Raw dependency and cycle rejection correspond in both directions. An accepted descendant splice computes its own accepted predecessor.
 
-M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. Support records and finite programs remain offered inputs: this result does not find a successful certificate for every nonminimal input or a polynomial search method. Full manuscript profiles and remaining rule families, full VerifyDW, ChargeSoundness and Package E, terminal families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open. Earlier closed-history modules retain their own narrower scopes.
+M230’s all-input polynomial Cook-Levin builder, M231’s concrete CNF-SAT NP-completeness and M269’s offered mixed-program verification remain kernel checked. Structural transport is not full manuscript profile semantics or all normalization/materializer rules; semantic preservation requires open compatibility, and compiled pullback requires actual descendant acceptance. It does not find a successful certificate for every nonminimal input or prove encoded polynomial bounds. Full VerifyDW, ChargeSoundness and Package E, terminal families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
 
-Formal artefact coverage: 245 of 247 current scoped publication rows earned.
+Formal artefact coverage: 246 of 248 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [complete open-obligation program boundary and limits](./lean_open_obligation_programs.md)
-and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
+See the [structural-reordering transport boundary and limits](lean_structural_reindexing.md)
+and the [complete open-obligation program boundary](lean_open_obligation_programs.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This closes the computational mixed-program obligation-lifecycle and physical-accounting edge for offered certificates, but does not establish full manuscript VerifyDW, global certificate discovery or an unconditional checkpoint. No global proof gate or fixed weighted checkpoint changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M269-CURRENT-SUMMARY:END -->
+Publication decision: defer. This closes the computational structural-reordering and literal arbitrary-support replacement-transport edge, but not full manuscript profiles, materializer transport or a global proof obligation. No fixed weighted checkpoint or global gate changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M270-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release

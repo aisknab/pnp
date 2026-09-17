@@ -30,20 +30,9 @@ on:
       - 'audits/lean-*.test.mjs'
       - 'audits/formal-publication0.test.mjs'
       - 'docs/lean_*.md'
+      - 'docs/plans/*.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
-      - 'docs/plans/2026-08-21-residual-terminal-budget-envelope-resolver.md'
-      - 'docs/plans/2026-08-21-residual-terminal-budget-no-lower-ledger.md'
-      - 'docs/plans/2026-08-21-residual-terminal-packet-budget-no-lower-composition.md'
-      - 'docs/plans/2026-08-21-residual-terminal-hresolve-maximal-h-disjoint-family.md'
-      - 'docs/plans/2026-08-21-residual-terminal-hn-bwl-certified-path-minimum.md'
-      - 'docs/plans/2026-08-21-residual-terminal-hresolve-certified-path-family.md'
-      - 'docs/plans/2026-08-22-residual-terminal-hresolve-zeroslack-sidecar.md'
-      - 'docs/plans/2026-08-22-residual-terminal-budget-zeroslack-sidecar.md'
-      - 'docs/plans/2026-08-22-residual-terminal-selector-hb-zeroslack-sidecar.md'
-      - 'docs/plans/2026-08-22-residual-terminal-packet-budget-no-lower-zeroslack-sidecar.md'
-      - 'docs/plans/2026-08-22-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar.md'
-      - 'docs/plans/2026-08-23-zeroslack-packet-selector-hb-coherence.md'
       - 'docs/proof_pipeline.md'
       - 'docs/FORMAL_RECONSTRUCTION.md'
       - 'docs/github_actions_audit.md'
@@ -80,6 +69,7 @@ on:
       - 'audits/lean-*.test.mjs'
       - 'audits/formal-publication0.test.mjs'
       - 'docs/lean_*.md'
+      - 'docs/plans/*.md'
       - 'audits/formal-reconstruction-status0.test.mjs'
       - 'audits/formal-public-surface0.test.mjs'
       - 'docs/proof_pipeline.md'
@@ -3751,6 +3741,15 @@ jobs:
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
 
+      - name: Check structural reordering and support transport
+        run: npm run audit:m270
+      - name: Audit structural reordering and support transport
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPStructuralReindexingAxiomAudit.lean
+          for part in TopologicalWireStructure StructuralReindexing ReindexedSupport ReindexedPorts TerminalOpenEquations ReindexedOpenSemantics ReindexedReplacement SpliceWireEquations ReindexedSplice ReindexedCompiledSplice; do
+            lake env lean -DwarningAsError=true "lean-regression/PNP${part}.lean"
+          done
       - name: Check complete open-obligation programs
         run: npm run audit:m269
 

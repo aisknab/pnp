@@ -2153,5 +2153,162 @@ theorem terminalBoundaryPullback_compose
     smallIncluded middleIncluded valuation _
     (List.get_mem (terminalBoundaryPorts candidate.program small) index)
 
+/-! ## Literal source equations for independent open evaluation -/
+
+private theorem Source.evalTerminalOpen_weaken_snoc
+    {wireInputs wireGates inputs gates : Nat}
+    (source : Source inputs gates) (initial : Program inputs gates) (gate : Gate inputs gates)
+    (selected : Fin (gates + 1) -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin (gates + 1) -> TerminalSupportWire wireInputs wireGates)
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (valuation : Valuation boundary.length) :
+    (source.weakenGates 1).evalTerminalOpen selected inputWire gateWire boundary valuation
+        ((initial.snoc gate).evalTerminalOpenAux boundary valuation selected inputWire gateWire) =
+      source.evalTerminalOpen (fun index => selected index.castSucc) inputWire
+        (fun index => gateWire index.castSucc) boundary valuation
+        (initial.evalTerminalOpenAux boundary valuation
+          (fun index => selected index.castSucc) inputWire (fun index => gateWire index.castSucc)) := by
+  cases source with
+  | input index => rfl
+  | constant value => rfl
+  | gate index =>
+      change (if selected index.castSucc then
+        (initial.snoc gate).evalTerminalOpenAux boundary valuation selected inputWire gateWire
+          index.castSucc
+        else terminalBoundaryValue boundary valuation (gateWire index.castSucc)) = _
+      rw [Program.evalTerminalOpenAux_snoc_castSucc]
+      rfl
+
+private theorem Program.evalTerminalOpenAux_sources
+    {wireInputs wireGates inputs gates : Nat} (program : Program inputs gates)
+    (selected : Fin gates -> Bool)
+    (inputWire : Fin inputs -> TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates -> TerminalSupportWire wireInputs wireGates)
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (valuation : Valuation boundary.length) (node : Fin gates) :
+    program.evalTerminalOpenAux boundary valuation selected inputWire gateWire node =
+      if selected node then
+        boolNand
+          ((program.terminalGateSources node).1.evalTerminalOpen selected inputWire gateWire
+            boundary valuation
+            (program.evalTerminalOpenAux boundary valuation selected inputWire gateWire))
+          ((program.terminalGateSources node).2.evalTerminalOpen selected inputWire gateWire
+            boundary valuation
+            (program.evalTerminalOpenAux boundary valuation selected inputWire gateWire))
+      else false := by
+  induction program with
+  | empty => exact Fin.elim0 node
+  | @snoc gates initial gate ih =>
+      refine finLastCasesConstructive (motive := fun position =>
+        (initial.snoc gate).evalTerminalOpenAux boundary valuation
+            selected inputWire gateWire position =
+          if selected position then
+            boolNand
+              (((initial.snoc gate).terminalGateSources position).1.evalTerminalOpen
+                selected inputWire gateWire boundary valuation
+                ((initial.snoc gate).evalTerminalOpenAux boundary valuation
+                  selected inputWire gateWire))
+              (((initial.snoc gate).terminalGateSources position).2.evalTerminalOpen
+                selected inputWire gateWire boundary valuation
+                ((initial.snoc gate).evalTerminalOpenAux boundary valuation
+                  selected inputWire gateWire))
+          else false) ?_ (fun earlier => ?_) node
+      · rw [Program.terminalGateSources_snoc_last]
+        rw [Source.evalTerminalOpen_weaken_snoc, Source.evalTerminalOpen_weaken_snoc]
+        change Valuation.snoc _ _ (Fin.last gates) = _
+        rw [Valuation.snoc_last]
+      · rw [Program.evalTerminalOpenAux_snoc_castSucc,
+          Program.terminalGateSources_snoc_castSucc]
+        rw [Source.evalTerminalOpen_weaken_snoc, Source.evalTerminalOpen_weaken_snoc]
+        exact ih (fun index => selected index.castSucc)
+          (fun index => gateWire index.castSucc) earlier
+
+/-- Read a literal source using the independently supplied boundary valuation.
+    Constants remain local and selected gates use their computed open value. -/
+def terminalOpenSourceValue
+    {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length) :
+    Source inputs gates -> Bool
+  | .input index => terminalOpenWireValue candidate records valuation (.input index)
+  | .constant value => value
+  | .gate index => terminalOpenWireValue candidate records valuation (.gate index)
+
+/-- The actual evaluator satisfies the literal gate equation for every open
+    valuation; unselected coordinates stay inert. No whole-input premise appears. -/
+theorem terminalOpenGateEvaluation_sourceEquation
+    {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (node : Fin gates) :
+    terminalOpenGateEvaluation candidate records valuation node =
+      if terminalGateSelected records node then
+        boolNand
+          (terminalOpenSourceValue candidate records valuation
+            (candidate.program.terminalGateSources node).1)
+          (terminalOpenSourceValue candidate records valuation
+            (candidate.program.terminalGateSources node).2)
+      else false := by
+  have sourceEquation (source : Source inputs gates) :
+      source.evalTerminalOpen (terminalGateSelected records)
+        TerminalSupportWire.input TerminalSupportWire.gate
+        (terminalBoundaryPorts candidate.program records) valuation
+        (terminalOpenGateEvaluation candidate records valuation) =
+      terminalOpenSourceValue candidate records valuation source := by
+    cases source <;> rfl
+  have equation := Program.evalTerminalOpenAux_sources candidate.program
+    (terminalGateSelected records) TerminalSupportWire.input TerminalSupportWire.gate
+    (terminalBoundaryPorts candidate.program records) valuation node
+  change terminalOpenGateEvaluation candidate records valuation node =
+    if terminalGateSelected records node then
+      boolNand
+        ((candidate.program.terminalGateSources node).1.evalTerminalOpen
+          (terminalGateSelected records) TerminalSupportWire.input TerminalSupportWire.gate
+          (terminalBoundaryPorts candidate.program records) valuation
+          (terminalOpenGateEvaluation candidate records valuation))
+        ((candidate.program.terminalGateSources node).2.evalTerminalOpen
+          (terminalGateSelected records) TerminalSupportWire.input TerminalSupportWire.gate
+          (terminalBoundaryPorts candidate.program records) valuation
+          (terminalOpenGateEvaluation candidate records valuation))
+    else false at equation
+  rw [sourceEquation, sourceEquation] at equation
+  exact equation
+
+/-- Canonical boundary lookup reads the corresponding independently chosen bit. -/
+theorem terminalOpenWireValue_boundary_get
+    {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (index : Fin (terminalBoundaryPorts candidate.program records).length) :
+    terminalOpenWireValue candidate records valuation
+        ((terminalBoundaryPorts candidate.program records).get index) = valuation index := by
+  rw [terminalOpenWireValue_on_boundary candidate records valuation _
+    (List.get_mem (terminalBoundaryPorts candidate.program records) index)]
+  exact terminalBoundaryValue_get _ (terminalBoundaryPorts_nodup candidate.program records)
+    valuation index
+
+/-- An external wire absent from the actual boundary takes only the evaluator's
+    inert fallback value; internal selected gate values are not covered here. -/
+theorem terminalOpenWireValue_external_absent
+    {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (valuation : Valuation (terminalBoundaryPorts candidate.program records).length)
+    (wire : TerminalSupportWire inputs gates)
+    (external : terminalWireExternal records wire = true)
+    (absent : wire ∉ terminalBoundaryPorts candidate.program records) :
+    terminalOpenWireValue candidate records valuation wire = false := by
+  cases wire with
+  | input index =>
+      change terminalBoundaryValue (terminalBoundaryPorts candidate.program records)
+        valuation (.input index) = false
+      unfold terminalBoundaryValue
+      rw [dif_neg absent]
+  | gate index =>
+      have unselected := (terminalWireExternal_eq_true_iff records (.gate index)).mp external
+      simp only [terminalOpenWireValue, unselected, Bool.false_eq_true, if_false]
+      unfold terminalBoundaryValue
+      rw [dif_neg absent]
+
 end DirectWire
 end PNP

@@ -305,6 +305,8 @@ test('Lean workflow keeps current-milestone trigger families compact', async () 
   const workflow = await text0('.github/workflows/lean-bridge.yml');
   assert.equal((workflow.match(/^      - 'audits\/lean-\*\.test\.mjs'$/gmu) ?? []).length, 2);
   assert.equal((workflow.match(/^      - 'docs\/lean_\*\.md'$/gmu) ?? []).length, 2);
+  assert.equal((workflow.match(/^      - 'docs\/plans\/\*\.md'$/gmu) ?? []).length, 2);
+  assert.doesNotMatch(workflow, /^      - 'docs\/plans\/[^*'\n]+\.md'$/mu);
   assert.doesNotMatch(workflow, /^      - 'audits\/lean-[^/*]+\.test\.mjs'$/mu);
   assert.doesNotMatch(workflow, /^      - 'docs\/lean_[^/*]+\.md'$/mu);
 });

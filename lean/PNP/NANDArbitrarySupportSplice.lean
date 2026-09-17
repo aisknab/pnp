@@ -1118,6 +1118,104 @@ theorem result_output_dependency_bound
     (originalSource_dependency_bound candidate records replacement labels interfaceBound
       (candidate.directWireWord.source output) (output_visible candidate records output))
 
+
+/-! ## Literal coordinate equations for the actual splice wiring -/
+
+private theorem memberIndex_of_get {alpha : Type} [DecidableEq alpha]
+    (items : List alpha) (distinct : items.Nodup) (index : Fin items.length)
+    (member : items.get index ∈ items) : memberIndex member = index := by
+  have equal := get_memberIndex member
+  apply Fin.ext
+  apply Nat.le_antisymm
+  · apply Nat.le_of_not_gt
+    intro earlier
+    have different := (List.pairwise_iff_getElem.mp distinct) index.val
+      (memberIndex member).val index.isLt (memberIndex member).isLt earlier
+    change items.get index ≠ items.get (memberIndex member) at different
+    exact different equal.symm
+  · apply Nat.le_of_not_gt
+    intro earlier
+    have different := (List.pairwise_iff_getElem.mp distinct) (memberIndex member).val
+      index.val (memberIndex member).isLt index.isLt earlier
+    change items.get (memberIndex member) ≠ items.get index at different
+    exact different equal
+
+private theorem splice_allFin_nodup (width : Nat) : (allFin width).Nodup := by
+  induction width with
+  | zero => exact List.nodup_nil
+  | succ width ih =>
+      change (0 :: (allFin width).map Fin.succ).Nodup
+      apply List.nodup_cons.mpr
+      constructor
+      · intro member
+        obtain ⟨index, _, same⟩ := List.mem_map.mp member
+        have impossible := congrArg Fin.val same
+        change index.val + 1 = 0 at impossible
+        exact Nat.noConfusion impossible
+      · exact List.Pairwise.map Fin.succ
+          (fun left right different same =>
+            different (Fin.ext (Nat.succ.inj (congrArg Fin.val same)))) ih
+
+/-- A primary input at an actual boundary position is wired to that input. -/
+theorem boundarySource_input
+    (port : Fin (terminalBoundaryPorts candidate.program records).length)
+    (input : Fin inputs)
+    (atPort : (terminalBoundaryPorts candidate.program records).get port = .input input) :
+    boundarySource (replacementGates := replacementGates) candidate records port = .input input := by
+  unfold boundarySource
+  split
+  · rename_i actual found
+    exact congrArg Source.input (TerminalSupportWire.input.inj (found.symm.trans atPort))
+  · rename_i actual found
+    cases found.symm.trans atPort
+
+/-- A boundary gate is wired to its unique physical exterior position. -/
+theorem boundarySource_gate
+    (port : Fin (terminalBoundaryPorts candidate.program records).length)
+    (outside : Fin (exterior records).length)
+    (atPort : (terminalBoundaryPorts candidate.program records).get port =
+      .gate ((exterior records).get outside)) :
+    boundarySource candidate records port = .gate (Fin.castAdd replacementGates outside) := by
+  unfold boundarySource
+  split
+  · rename_i actual found
+    cases found.symm.trans atPort
+  · rename_i actual found
+    have same := TerminalSupportWire.gate.inj (found.symm.trans atPort)
+    subst actual
+    rw [memberIndex_of_get (exterior records) (terminalSelectedGateIndices_nodup _) outside]
+
+/-- An original exterior source keeps exactly its canonical exterior coordinate. -/
+theorem originalSource_exterior
+    (outside : Fin (exterior records).length)
+    (visible : Visible candidate records (.gate ((exterior records).get outside))) :
+    originalSource candidate records replacement (.gate ((exterior records).get outside)) visible =
+      .gate (Fin.castAdd replacementGates outside) := by
+  have unselected := exteriorGet_unselected records outside
+  simp only [originalSource]
+  split
+  · rename_i selected
+    rw [unselected] at selected
+    cases selected
+  · rw [memberIndex_of_get (exterior records) (terminalSelectedGateIndices_nodup _) outside]
+
+/-- A selected outgoing source uses exactly its corresponding replacement output. -/
+theorem originalSource_interface
+    (port : Fin (terminalInterfacePorts candidate records).length)
+    (visible : Visible candidate records
+      (.gate ((terminalInterfacePorts candidate records).get port))) :
+    originalSource candidate records replacement
+        (.gate ((terminalInterfacePorts candidate records).get port)) visible =
+      replacementSource candidate records (replacement.directWireWord.source port) := by
+  have selected : terminalGateSelected records
+      ((terminalInterfacePorts candidate records).get port) = true :=
+    ((terminalInterfaceGate_eq_true_iff candidate records _).mp
+      ((mem_terminalInterfacePorts_iff candidate records _).mp (List.get_mem _ _))).1
+  simp only [originalSource]
+  rw [dif_pos selected]
+  rw [memberIndex_of_get (terminalInterfacePorts candidate records)
+    (List.Pairwise.filter _ (splice_allFin_nodup gates)) port]
+
 end ArbitrarySupportSplice
 end DirectWire
 end PNP
