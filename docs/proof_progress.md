@@ -3,14 +3,14 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 244 of 246 current scoped publication rows earned.
+Formal artefact coverage: 245 of 247 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-268`, 244 of 246
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-269`, 245 of 247
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -783,3 +783,7 @@ Publication decision: defer. Persistent descendant ownership advances the existi
 M268 verifies source-only proper-support certificates for arbitrary finite computational descendant programs. Execution-derived causal bounds make literal outer compilation total for every accepted complete local run. Exact acceptance requires complete decoding, complete local execution, proper physical support and strict final local saving. All ordinary outputs, literal fields and actual historical costs are preserved; intermediate expansion is allowed. This retires the computational offered-program acceptance edge, not certificate discovery for every nonminimal input, full manuscript profiles and rules, full VerifyDW or Package E, global routing, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 244 of 246 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
 
 Publication decision: defer. The source-only proper-support verifier closes the computational offered-program acceptance edge, not full manuscript VerifyDW or certificate discovery for arbitrary nonminimal inputs. No fixed weighted checkpoint or global gate changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication. See [the proper-support certificate boundary](lean_proper_descendant_certificates.md).
+
+## M269 coverage review
+
+M269 verifies source-only proper-support certificates for complete mixed computational programs whose ambient obligations can remain open across actual descendant support changes. The computed complete schedule includes intrinsic creation references; the same captured snapshots persist until genuine full-mode discharge, and final closure restores the complete interface. Actual compiler positions determine unique physical ownership and retain all historical allocation charges and removals, including later-deleted allocations. Proper support and strict final saving are checked without supplied correctness, initial state, schedule, snapshots, ownership, costs or splice witnesses. This retires the computational mixed-program lifecycle and accounting edge, not global certificate discovery, full manuscript profiles and rules, full VerifyDW or Package E, unconditional ZeroSlack or polynomial PCCMin. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 245 of 247 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.

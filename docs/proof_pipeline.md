@@ -1,22 +1,22 @@
 # Proof and Checker Pipeline
 
-<!-- M268-CURRENT-SUMMARY:BEGIN -->
-## Current M268 boundary
+<!-- M269-CURRENT-SUMMARY:BEGIN -->
+## Current M269 boundary
 
-M268 constructs a source-only certificate verifier for arbitrary proper computational supports and complete descendant programs. Execution-derived dependency bounds guarantee the actual literal outer splice; acceptance requires valid complete decoding, a successful complete local run, proper physical support and strict final local saving. The result preserves every ordinary output and literal field with one exterior copy and exact historical charge/removal accounting. Intermediate expansion is permitted, while a failed later stage rejects the whole program. No correctness certificate, intermediate circuit, owner map, cost, rank or semantic oracle is supplied.
+M269 verifies complete offered programs on arbitrary proper computational supports while the same outstanding obligations survive actual changes of support. It computes the complete operation order, requires genuine full-value discharge and final closure, derives the literal outer splice, and checks properness and strict final saving. Every ordinary output and literal field is preserved. Physical ownership and the full history of charges and removals follow the actual compiled operations, including allocated gates later removed; temporary expansion is permitted.
 
-M230's complete all-input polynomial Cook-Levin builder and M231's concrete CNF-SAT NP-completeness remain kernel checked. Supports and raw programs remain offered inputs; acceptance does not prove that every nonminimal input has a successful certificate or a polynomial method to find one. Full manuscript profiles and rule families, cross-support open-obligation transport, full VerifyDW, ChargeSoundness and Package E, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
+M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. Support records and finite programs remain offered inputs: this result does not find a successful certificate for every nonminimal input or a polynomial search method. Full manuscript profiles and remaining rule families, full VerifyDW, ChargeSoundness and Package E, terminal families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open. Earlier closed-history modules retain their own narrower scopes.
 
-Formal artefact coverage: 244 of 246 current scoped publication rows earned.
+Formal artefact coverage: 245 of 247 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [source-only proper-support certificate boundary and limits](./lean_proper_descendant_certificates.md)
+See the [complete open-obligation program boundary and limits](./lean_open_obligation_programs.md)
 and the [conditional final-report bridge](./lean_concrete_final_report_bridge.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. The source-only proper-support verifier closes the computational offered-program acceptance edge, not full manuscript VerifyDW or certificate discovery for arbitrary nonminimal inputs. No fixed weighted checkpoint or global gate changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M268-CURRENT-SUMMARY:END -->
+Publication decision: defer. This closes the computational mixed-program obligation-lifecycle and physical-accounting edge for offered certificates, but does not establish full manuscript VerifyDW, global certificate discovery or an unconditional checkpoint. No global proof gate or fixed weighted checkpoint changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M269-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release
