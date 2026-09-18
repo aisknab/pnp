@@ -2,7 +2,7 @@
 Copyright (c) 2026 PNP Labs.
 
 Execute complete mixed programs from the actual initial carrier. An ambient
-obligation may stay open across arbitrarily many support and reordering
+obligation may stay open across arbitrarily many support, reordering and recoding
 operations, but only an actual full-mode primitive discharge closes it. The
 final ledger must be empty. Failed tails never return successful prefixes.
 
@@ -42,6 +42,11 @@ inductive Transition (source : WireCarrier inputs outputs fields) :
       (raw : List (Nat × Nat)) (kind : event.action = .structural raw)
       (receipt : WireStructuralState.Receipt before raw) :
       Transition source before event receipt.next
+  | recoding (before : State source) (event : RawEvent)
+      (rawEncoder rawDecoder : Concrete.LockedNAND.RawCandidate)
+      (kind : event.action = .recoding rawEncoder rawDecoder)
+      (receipt : WireRecodingInput.Receipt before rawEncoder rawDecoder) :
+      Transition source before event receipt.next
 
 def applyEvent (before : State source) (event : RawEvent) :
     Option (Σ next, Transition source before event next) :=
@@ -61,6 +66,11 @@ def applyEvent (before : State source) (event : RawEvent) :
       match WireStructuralState.execute before raw with
       | none => none
       | some receipt => some ⟨receipt.next, .structural before event raw kind receipt⟩
+  | .recoding rawEncoder rawDecoder =>
+      match WireRecodingInput.execute before rawEncoder rawDecoder with
+      | none => none
+      | some receipt =>
+          some ⟨receipt.next, .recoding before event rawEncoder rawDecoder kind receipt⟩
 
 namespace Transition
 
@@ -71,12 +81,14 @@ def charged (step : Transition source before event after) : Nat :=
   | .primitive _ _ _ _ _ _ inner => inner.charged
   | .support _ _ _ _ receipt => receipt.executed.run.chargedCount
   | .structural _ _ _ _ _ => 0
+  | .recoding _ _ _ _ _ receipt => receipt.charged
 
 def removed (step : Transition source before event after) : Nat :=
   match step with
   | .primitive _ _ _ _ _ _ inner => inner.removed
   | .support _ _ _ _ receipt => receipt.executed.run.removedCount
   | .structural _ _ _ _ _ => 0
+  | .recoding _ _ _ _ _ receipt => receipt.removed
 
 theorem charged_eq (step : Transition source before event after) :
     after.charged = before.charged + step.charged := by
@@ -84,6 +96,7 @@ theorem charged_eq (step : Transition source before event after) :
   | primitive raw kind action decoded inner => exact inner.charged_eq
   | support raw kind receipt => rfl
   | structural raw kind receipt => rfl
+  | recoding rawEncoder rawDecoder kind receipt => exact receipt.charged_eq
 
 theorem removed_eq (step : Transition source before event after) :
     after.removed = before.removed + step.removed := by
@@ -91,6 +104,7 @@ theorem removed_eq (step : Transition source before event after) :
   | primitive raw kind action decoded inner => exact inner.removed_eq
   | support raw kind receipt => rfl
   | structural raw kind receipt => rfl
+  | recoding rawEncoder rawDecoder kind receipt => exact receipt.removed_eq
 
 def created (step : Transition source before event after) :
     Option ((field : Fin fields) × Snapshot source field) :=
@@ -98,6 +112,7 @@ def created (step : Transition source before event after) :
   | .primitive _ _ _ _ _ _ inner => inner.created
   | .support _ _ _ _ _ => none
   | .structural _ _ _ _ _ => none
+  | .recoding _ _ _ _ _ _ => none
 
 def discharged (step : Transition source before event after) :
     Option ((field : Fin fields) × Snapshot source field) :=
@@ -105,6 +120,7 @@ def discharged (step : Transition source before event after) :
   | .primitive _ _ _ _ _ _ inner => inner.discharged
   | .support _ _ _ _ _ => none
   | .structural _ _ _ _ _ => none
+  | .recoding _ _ _ _ _ _ => none
 
 def dischargeRecord (step : Transition source before event after) :
     Option (WireObligationHistory.DischargeRecord source) :=
@@ -112,6 +128,7 @@ def dischargeRecord (step : Transition source before event after) :
   | .primitive _ _ _ _ _ _ inner => inner.dischargeRecord
   | .support _ _ _ _ _ => none
   | .structural _ _ _ _ _ => none
+  | .recoding _ _ _ _ _ _ => none
 
 def fullRead (step : Transition source before event after) :
     Option ((field : Fin fields) × Snapshot source field) :=
@@ -119,6 +136,7 @@ def fullRead (step : Transition source before event after) :
   | .primitive _ _ _ _ _ _ inner => inner.fullRead
   | .support _ _ _ _ _ => none
   | .structural _ _ _ _ _ => none
+  | .recoding _ _ _ _ _ _ => none
 
 theorem dischargeRecord_binding (step : Transition source before event after) :
     (step.dischargeRecord.map (fun (record : WireObligationHistory.DischargeRecord source) =>
@@ -127,8 +145,9 @@ theorem dischargeRecord_binding (step : Transition source before event after) :
   | primitive raw kind action decoded inner => exact inner.dischargeRecord_binding
   | support raw kind receipt => rfl
   | structural raw kind receipt => rfl
+  | recoding rawEncoder rawDecoder kind receipt => rfl
 
-/-- A splice or reordering preserves the exact snapshot; neither is a discharge. -/
+/-- Splicing, reordering and recoding retain the exact snapshot; none is a discharge. -/
 theorem pending_persists_or_discharged (step : Transition source before event after)
     (field : Fin fields) (snapshot : Snapshot source field)
     (pending : before.pending field = some snapshot) :
@@ -138,6 +157,7 @@ theorem pending_persists_or_discharged (step : Transition source before event af
       exact inner.pending_persists_or_discharged field snapshot pending
   | support raw kind receipt => exact Or.inl pending
   | structural raw kind receipt => exact Or.inl pending
+  | recoding rawEncoder rawDecoder kind receipt => exact Or.inl pending
 
 theorem created_pending (step : Transition source before event after)
     (field : Fin fields) (snapshot : Snapshot source field)
@@ -146,6 +166,7 @@ theorem created_pending (step : Transition source before event after)
   | primitive raw kind action decoded inner => exact inner.created_pending field snapshot created
   | support raw kind receipt => cases created
   | structural raw kind receipt => cases created
+  | recoding rawEncoder rawDecoder kind receipt => cases created
 
 theorem causalInvariant (step : Transition source before event after) (labels : Fin inputs → Nat) :
     before.CausalInvariant labels → after.CausalInvariant labels := by
@@ -157,6 +178,7 @@ theorem causalInvariant (step : Transition source before event after) (labels : 
         receipt.executed labels bounded
   | structural raw kind receipt =>
       exact before.reindex_causalInvariant receipt.relabeling labels bounded
+  | recoding rawEncoder rawDecoder kind receipt => exact receipt.causalInvariant labels bounded
 
 def record (step : Transition source before event after) : WireObligationHistory.EventRecord source where
   identity := event.identity
