@@ -5,9 +5,28 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '049e48eed54731b069dd7fb4a822d989ba1d924dcf1770bf6ca5a147ac1a7dd3';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '927d83a8cd43f6b9b42aebd1158a19d61760acfe9556fd7966919bfe46dc0415';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.WireProfileRestoration.quotientAgreement_iff",
+  "PNP.DirectWire.WireProfileRestoration.expanded_fullEquivalent",
+  "PNP.DirectWire.WireProfileRestoration.paidWitness_fullEquivalent",
+  "PNP.DirectWire.WireProfileRestoration.paidWitness_gateCount",
+  "PNP.DirectWire.WireProfileRestoration.fullMinimum_le_quotientMinimum_add_charge",
+  "PNP.DirectWire.WireProfileRestoration.projectionDefect_le_charge",
+  "PNP.DirectWire.WireProfileRestoration.paidWitness_exact_overhead",
+  "PNP.DirectWire.WireProfileRestoration.paidWitness_smaller_iff",
+  "PNP.DirectWire.WireProfileRestoration.paidWitness_optimal_iff",
+  "PNP.DirectWire.WireProfileRestoration.normalizedWitness_fullEquivalent",
+  "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_accounting",
+  "PNP.DirectWire.WireProfileRestoration.reclaimed_le_overhead",
+  "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_overhead",
+  "PNP.DirectWire.WireProfileRestoration.normalizedWitness_smaller_iff",
+  "PNP.DirectWire.WireProfileRestoration.normalizedWitness_optimal_iff",
+  "PNP.DirectWire.WireProfileRestoration.checkedGain_isSome_iff",
+  "PNP.DirectWire.WireProfileRestoration.CheckedGain.checked",
+  "PNP.DirectWire.WireProfileRestoration.unary_fullMinimum",
+  "PNP.DirectWire.WireProfileRestoration.unary_smaller_iff_fullSlack_positive",
   "PNP.DirectWire.WireProfile.mask_implementation",
   "PNP.DirectWire.WireProfile.mask_fieldValue",
   "PNP.DirectWire.WireProfile.full_iff",
@@ -4636,7 +4655,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-274') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-275') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
