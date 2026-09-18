@@ -1,0 +1,37 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireProfile.mask_implementation
+#print axioms PNP.DirectWire.WireProfile.mask_fieldValue
+#print axioms PNP.DirectWire.WireProfile.full_iff
+#print axioms PNP.DirectWire.WireProfile.quotient_iff
+#print axioms PNP.DirectWire.WireProfile.full_to_quotient
+#print axioms PNP.DirectWire.WireProfile.full_lift_iff
+#print axioms PNP.DirectWire.WireProfile.fullWitness_gateCount
+#print axioms PNP.DirectWire.WireProfile.fullWitness_matches
+#print axioms PNP.DirectWire.WireProfile.fullMinimum_le_physical
+#print axioms PNP.DirectWire.WireProfile.quotientMinimum_le_full
+#print axioms PNP.DirectWire.WireProfile.quotientWitness_gateCount
+#print axioms PNP.DirectWire.WireProfile.quotientWitness_matches
+#print axioms PNP.DirectWire.WireProfile.quotient_candidate_lower_bound
+#print axioms PNP.DirectWire.WireProfile.full_candidate_lower_bound
+#print axioms PNP.DirectWire.WireProfile.fullSlack_add_projectionDefect
+#print axioms PNP.DirectWire.WireProfile.exposure_balance
+#print axioms PNP.DirectWire.WireProfile.exposure_preserves_positive_alternative
+#print axioms PNP.DirectWire.WireProfile.quotient_minimum_cannot_lift_of_positive_defect
+#print axioms PNP.DirectWire.WireProfile.exposure_loss_has_unliftable_quotient_witness
+#print axioms PNP.DirectWire.WireProfile.allGateFields_value
+#print axioms PNP.DirectWire.WireProfile.allGateFields_positive_alternative
+#print axioms PNP.DirectWire.WireProfile.quotientMinimum_forget_all
+#print axioms PNP.DirectWire.WireProfile.source_slack_balance
+#print axioms PNP.DirectWire.WireProfile.source_positive_alternative
+#print axioms PNP.DirectWire.WireProfile.mask_absorb_equivalent
+#print axioms PNP.DirectWire.WireProfile.quotientMinimum_mask_active
+#print axioms PNP.DirectWire.WireProfile.fullMinimum_mask_mono
+#print axioms PNP.DirectWire.WireProfile.exposure_states_balance
+#print axioms PNP.DirectWire.WireProfile.exposure_moves_exact_slack_to_defect
+#print axioms PNP.DirectWire.WireProfile.normalize_fullEquivalent
+#print axioms PNP.DirectWire.WireProfile.fullMinimum_normalize
+#print axioms PNP.DirectWire.WireProfile.quotientMinimum_normalize
+#print axioms PNP.DirectWire.WireProfile.splice_fullEquivalent
+#print axioms PNP.DirectWire.WireProfile.fullMinimum_splice
+#print axioms PNP.DirectWire.WireProfile.quotientMinimum_splice

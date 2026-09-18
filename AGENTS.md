@@ -65,6 +65,12 @@ limits in private user-level instructions rather than this public file.
 - Give long remote commands phase markers or retain their full log in the remote
   temporary directory. Return concise success markers; on failure, return the
   failing phase and a useful tail of its log.
+- Stream large generated diffs and content scans instead of capturing them in a
+  fixed-size child-process buffer. If buffering is necessary, inspect the input
+  sizes and bound the expected expansion first. A small source change can rewrite
+  a large serialized inventory. Catch child-process failures and report a compact
+  phase, exit status and retained-log path; never print the full thrown process
+  object, which can embed the entire captured report or inventory.
 - Size `TasksMax` for the command being run, not just for a single Lean process.
   Node's test runner may create one worker process per test file; either give
   that bounded fan-out explicit headroom or cap test concurrency deliberately.
@@ -421,6 +427,12 @@ run fail merely because an unchanged sentence was reflowed across Markdown
 lines.
 
 ### Cross-repository audit preflight
+
+- After the final workflow edit, run `audits/lean-root-target0.test.mjs`
+  before a broad suite. Its byte-size and literal-shell guards must check the
+  final workflow, not an earlier source-only preflight. Preserve every command
+  when compacting orchestration; do not raise the review budget to hide growth.
+
 
 - Before running `npm test` in any fresh core-repository clone, enumerate the
   annotated tag names in `archive/legacy-v0/ARCHIVE.json`, fetch those exact

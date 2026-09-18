@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-273",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,38 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanWireProfileExposureFormalized": true,
+  "leanWireProfileExposureAxiomAuditPassed": true,
+  "leanWireProfileExposureAuditedDeclarationCount": 35,
+  "leanWireProfileExposureFullComparisonTheorem": "PNP.DirectWire.WireProfile.full_iff",
+  "leanWireProfileExposureQuotientComparisonTheorem": "PNP.DirectWire.WireProfile.quotient_iff",
+  "leanWireProfileExposureFullLiftTheorem": "PNP.DirectWire.WireProfile.full_lift_iff",
+  "leanWireProfileExposureAttainedQuotientWitnessTheorem": "PNP.DirectWire.WireProfile.quotientWitness_matches",
+  "leanWireProfileExposureExposureBalanceTheorem": "PNP.DirectWire.WireProfile.exposure_states_balance",
+  "leanWireProfileExposureExactTransferTheorem": "PNP.DirectWire.WireProfile.exposure_moves_exact_slack_to_defect",
+  "leanWireProfileExposureNonLiftabilityTheorem": "PNP.DirectWire.WireProfile.exposure_loss_has_unliftable_quotient_witness",
+  "leanWireProfileExposureOrdinarySlackTheorem": "PNP.DirectWire.WireProfile.source_slack_balance",
+  "leanWireProfileExposureNormalizationTheorem": "PNP.DirectWire.WireProfile.normalize_fullEquivalent",
+  "leanWireProfileExposureCheckedSpliceTheorem": "PNP.DirectWire.WireProfile.splice_fullEquivalent",
+  "leanWireProfileExposureArbitraryFiniteDimensionsCovered": true,
+  "leanWireProfileExposureOrdinaryOutputsPreservedInBothModes": true,
+  "leanWireProfileExposureActualWireValuesAtAllValuations": true,
+  "leanWireProfileExposureMinimaAndAttainedWitnessesDerived": true,
+  "leanWireProfileExposureExposureTransfersSlackToDefect": true,
+  "leanWireProfileExposureCallerSuppliedObserverOrMinimumRequired": false,
+  "leanWireProfileExposureQuotientWitnessAloneIsFullReplacement": false,
+  "leanWireProfileExposureAllGateFieldsAreCanonicalTerminalFamily": false,
+  "leanWireProfileExposureCompleteManuscriptProfileGrammarProved": false,
+  "leanWireProfileExposureForcedCostTransparencyProved": false,
+  "leanWireProfileExposureCompletePackageEOrGlobalRoutesProved": false,
+  "leanWireProfileExposureTerminalFamiliesDerived": false,
+  "leanWireProfileExposureUnconditionalSaturatePositiveProved": false,
+  "leanWireProfileExposureUnconditionalBCELReadyProved": false,
+  "leanWireProfileExposureUnconditionalZeroSlackProved": false,
+  "leanWireProfileExposureExactPolynomialPCCMinProved": false,
+  "leanWireProfileExposurePolynomialRuntimeOutputAndCertificateBoundsProved": false,
+  "leanWireProfileExposureReferenceMinimizationIsExhaustive": true,
+  "leanWireProfileExposureScope": "arbitrary-finite-actual-wire-profile-values-all-input-valuations-mandatory-ordinary-outputs-full-quotient-lift-attained-minima-exact-exposure-slack-defect-transfer-checked-normalization-splice-no-full-manuscript-global-route-or-polynomial-claim",
   "leanSourceDerivedZeroCostExposureFormalized": true,
   "leanSourceDerivedZeroCostExposureAxiomAuditPassed": true,
   "leanSourceDerivedZeroCostExposureAuditedDeclarationCount": 22,
@@ -3098,6 +3130,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m274",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPWireProfileExposureAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPWireProfileExposure.lean",
     "npm run audit:m273",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPZeroCostExposureAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPZeroCostExposure.lean",
@@ -3762,6 +3797,7 @@
     "npm run report:check"
   ],
   "nonClaims": [
+    "M274: This is a proposed reconstruction of computational profile comparison, not the complete manuscript ten-role grammar or a derived governed terminal family. Ordinary outgoing Boolean interface wires cannot be forgotten. The all-gate field tuple is source-derived but is not asserted to be a canonical terminal profile. Conservation of full slack plus projection defect proves neither forced-cost transparency nor a Package E route, positive-slack activation, global rank decrease or route coverage. A quotient witness cannot be used as a full replacement without restoring every omitted field. Checked splicing still requires an equivalent open replacement and successful compilation; global discovery is not proved. Reference minima and attained witnesses use exhaustive finite minimization, not a polynomial algorithm. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, encoded-input runtime, output and certificate bounds, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
     "M273: This covers the literal input/constant/old-output alias class, not every semantically free exposure or arbitrary hidden internal wire. Refusal proves neither semantic impossibility nor a Package E gain or route. Adding no physical gates need not preserve the semantic minimum, and unique physical ownership or an extra recorded charge does not force an equal minimum increase. The concrete counterexamples are regression and obstruction evidence, not new global progress. The existing fresh-independent-input materializer theorem is reused, not re-awarded. Full manuscript profiles, positive-cost transparency for arbitrary materializers, terminal-family derivation, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-input polynomial runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global proof gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
     "M272: This checks offered computational programs, not a successful certificate-discovery strategy for every input. The inverse checker enumerates all field valuations; finite termination and a bounded structural swap list do not establish uniformly polynomial encoded runtime or certificate size. Semantic reversibility does not imply physical cancellation or strict saving. Full manuscript profiles, all R1-R9 and N1-N10 rules, full VerifyDW, ChargeSoundness and Package E remain open. Terminal-family derivation, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
     "M271: This is integration of checked offered programs, not a successful certificate-discovery strategy for every input. Finite executions are regression evidence, not theorem authority. The computational carrier does not establish full manuscript profile semantics or all R1-R9 and N1-N10 rules. Full manuscript VerifyDW, ChargeSoundness and Package E, global certificate discovery, terminal-family derivation and global route coverage remain open. There is no encoded-input polynomial runtime, output-size or certificate-size theorem for the complete construction. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes, and P = NP is not proved.",
@@ -4031,7 +4067,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "25677ee9fb9862dcaa6026fae1f09d5a8f07c36e813685f34154277fd2cd6004",
+    "actualSourceClosureSha256": "8c6e7372a54038acc098cc9c113b94ff3f8a7326caeaa5f273cdcb29903d3f59",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4064,20 +4100,444 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "a3e7a9c0ef7ce930eb17789ae0fc171bf6dcc485efcb75240cdbb5b6dbf5304f",
+  "leanTheoremInventorySha256": "3ad6e475036f23824d1bbc6bdde9886c8af5dfe2a521ec8d72715619dfc763ef",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 51093,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20980,
-  "leanTheoremInventoryTheoremCount": 27835,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11679,
-  "leanTheoremInventorySourceClosureModuleCount": 586,
-  "leanSourceClosureSha256": "25677ee9fb9862dcaa6026fae1f09d5a8f07c36e813685f34154277fd2cd6004",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-18-273",
+  "leanTheoremInventoryDeclarationCount": 51144,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20981,
+  "leanTheoremInventoryTheoremCount": 27876,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11694,
+  "leanTheoremInventorySourceClosureModuleCount": 587,
+  "leanSourceClosureSha256": "8c6e7372a54038acc098cc9c113b94ff3f8a7326caeaa5f273cdcb29903d3f59",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-19-274",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "7e1d495aae03639ad11ce54bfc712698e60f46bd43f767315d16acc51a4b70c0",
+  "formalPublicationMapSha256": "2d9724342b35ec8d5ab0cfb6c0633c3d2147cf108927543cdfc982ca05e856bd",
   "formalPublicationMilestones": [
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-profile-exposure-balance",
+      "nonClaim": "This is a proposed reconstruction of computational profile comparison, not the complete manuscript ten-role grammar or a derived governed terminal family. Ordinary outgoing Boolean interface wires cannot be forgotten. The all-gate field tuple is source-derived but is not asserted to be a canonical terminal profile. Conservation of full slack plus projection defect proves neither forced-cost transparency nor a Package E route, positive-slack activation, global rank decrease or route coverage. A quotient witness cannot be used as a full replacement without restoring every omitted field. Checked splicing still requires an equivalent open replacement and successful compilation; global discovery is not proved. Reference minima and attained witnesses use exhaustive finite minimization, not a polynomial algorithm. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, encoded-input runtime, output and certificate bounds, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireProfile.mask_implementation",
+        "PNP.DirectWire.WireProfile.mask_fieldValue",
+        "PNP.DirectWire.WireProfile.full_iff",
+        "PNP.DirectWire.WireProfile.quotient_iff",
+        "PNP.DirectWire.WireProfile.full_to_quotient",
+        "PNP.DirectWire.WireProfile.full_lift_iff",
+        "PNP.DirectWire.WireProfile.fullWitness_gateCount",
+        "PNP.DirectWire.WireProfile.fullWitness_matches",
+        "PNP.DirectWire.WireProfile.fullMinimum_le_physical",
+        "PNP.DirectWire.WireProfile.quotientMinimum_le_full",
+        "PNP.DirectWire.WireProfile.quotientWitness_gateCount",
+        "PNP.DirectWire.WireProfile.quotientWitness_matches",
+        "PNP.DirectWire.WireProfile.quotient_candidate_lower_bound",
+        "PNP.DirectWire.WireProfile.full_candidate_lower_bound",
+        "PNP.DirectWire.WireProfile.fullSlack_add_projectionDefect",
+        "PNP.DirectWire.WireProfile.exposure_balance",
+        "PNP.DirectWire.WireProfile.exposure_preserves_positive_alternative",
+        "PNP.DirectWire.WireProfile.quotient_minimum_cannot_lift_of_positive_defect",
+        "PNP.DirectWire.WireProfile.exposure_loss_has_unliftable_quotient_witness",
+        "PNP.DirectWire.WireProfile.allGateFields_value",
+        "PNP.DirectWire.WireProfile.allGateFields_positive_alternative",
+        "PNP.DirectWire.WireProfile.quotientMinimum_forget_all",
+        "PNP.DirectWire.WireProfile.source_slack_balance",
+        "PNP.DirectWire.WireProfile.source_positive_alternative",
+        "PNP.DirectWire.WireProfile.mask_absorb_equivalent",
+        "PNP.DirectWire.WireProfile.quotientMinimum_mask_active",
+        "PNP.DirectWire.WireProfile.fullMinimum_mask_mono",
+        "PNP.DirectWire.WireProfile.exposure_states_balance",
+        "PNP.DirectWire.WireProfile.exposure_moves_exact_slack_to_defect",
+        "PNP.DirectWire.WireProfile.normalize_fullEquivalent",
+        "PNP.DirectWire.WireProfile.fullMinimum_normalize",
+        "PNP.DirectWire.WireProfile.quotientMinimum_normalize",
+        "PNP.DirectWire.WireProfile.splice_fullEquivalent",
+        "PNP.DirectWire.WireProfile.fullMinimum_splice",
+        "PNP.DirectWire.WireProfile.quotientMinimum_splice"
+      ],
+      "scope": "For arbitrary finite input, ordinary-output and computational-field widths, full comparison preserves the ordinary Boolean outputs and every actual wire-backed field at every input valuation. Quotient comparison masks only selected profile constraints and still preserves every ordinary output. Exact characterization, full-lift, attained-witness and universal lower-bound theorems establish quotient minimum <= full minimum <= physical gate count. Full slack plus projection defect equals physical size minus quotient minimum. Exposure masks that both retain a fixed comparison mask preserve that quotient minimum and the combined measure; nested masks transfer exactly the lost full slack into projection defect. Loss of positive full slack to zero yields an attained quotient witness with a strict deficit that cannot be used as a full witness. Forgetting all profile constraints recovers the ordinary semantic minimum. The actual all-gate source tuple, checked normalization and checked splicing connect this model to computational wire carriers without a supplied observer, semantic minimum or correctness certificate for the comparison model.",
+      "title": "Wire-backed computational profiles and exposure balance",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.WireProfile.mask_implementation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "a5e99322915e0ca88895287bf073d302b2b29df82ebdcdf7a84982461d861a05",
+          "expectedKernelTypeSha256": "a5e99322915e0ca88895287bf073d302b2b29df82ebdcdf7a84982461d861a05",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.mask_fieldValue",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "02bd6191dfb811c25056a049e8e86fa16ada2242ad981e9d302c3be1da8df54e",
+          "expectedKernelTypeSha256": "02bd6191dfb811c25056a049e8e86fa16ada2242ad981e9d302c3be1da8df54e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.full_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "5d698934e56bdcf88b7dcf60eafac3eab9e7db32ea6bf3f9d38f5fa1ff31ff8f",
+          "expectedKernelTypeSha256": "5d698934e56bdcf88b7dcf60eafac3eab9e7db32ea6bf3f9d38f5fa1ff31ff8f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotient_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "fccf2f775e403e158d93d6139963ae4158be4993b4d8f377e840eb0733e2d928",
+          "expectedKernelTypeSha256": "fccf2f775e403e158d93d6139963ae4158be4993b4d8f377e840eb0733e2d928",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.full_to_quotient",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "48950dc3e4b866af61a3e6444bd32cbceae0a46c0957f77cb4fa5e9d54f0f989",
+          "expectedKernelTypeSha256": "48950dc3e4b866af61a3e6444bd32cbceae0a46c0957f77cb4fa5e9d54f0f989",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.full_lift_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "aaa96b36a3742f3fbf460ac282c6dcea4aa6b136e03c129162f243d303ba25d5",
+          "expectedKernelTypeSha256": "aaa96b36a3742f3fbf460ac282c6dcea4aa6b136e03c129162f243d303ba25d5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullWitness_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "099dc96ab5aaa8b8f55d148aae45bf022e4a6d4bfa2d72183f93cd91edf7e188",
+          "expectedKernelTypeSha256": "099dc96ab5aaa8b8f55d148aae45bf022e4a6d4bfa2d72183f93cd91edf7e188",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullWitness_matches",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "b7afccdcdb9354ae51800ae53cd96073283c7994b327a4b6a28618dc7c8b2969",
+          "expectedKernelTypeSha256": "b7afccdcdb9354ae51800ae53cd96073283c7994b327a4b6a28618dc7c8b2969",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullMinimum_le_physical",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0d3ec56776d0c9c8f43c66d71bf0209cf5080d34347aca3d0eedeaae9bd975f2",
+          "expectedKernelTypeSha256": "0d3ec56776d0c9c8f43c66d71bf0209cf5080d34347aca3d0eedeaae9bd975f2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientMinimum_le_full",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "bc1adee3880f8b44318713263f3b979a747c83c909a77a5b9c58357d010b54d0",
+          "expectedKernelTypeSha256": "bc1adee3880f8b44318713263f3b979a747c83c909a77a5b9c58357d010b54d0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientWitness_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "652ff627431bbb569f5e42ca2d542dd1424e11a522427ae3040d546825e8e7ed",
+          "expectedKernelTypeSha256": "652ff627431bbb569f5e42ca2d542dd1424e11a522427ae3040d546825e8e7ed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientWitness_matches",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "eebcc528071e48f3c185e9e70535081af327c58a3294bc6ad14583cfbf39ddad",
+          "expectedKernelTypeSha256": "eebcc528071e48f3c185e9e70535081af327c58a3294bc6ad14583cfbf39ddad",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotient_candidate_lower_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "834f4fc9ffa0ba6d873d5ddd4bbad11e4f3a7f93a5ae9bd0cea1670a65f827c7",
+          "expectedKernelTypeSha256": "834f4fc9ffa0ba6d873d5ddd4bbad11e4f3a7f93a5ae9bd0cea1670a65f827c7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.full_candidate_lower_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2b3886e4849ac17ef8565b28f1bd0907293a8a46dd7a922f14689cd3a4d63348",
+          "expectedKernelTypeSha256": "2b3886e4849ac17ef8565b28f1bd0907293a8a46dd7a922f14689cd3a4d63348",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullSlack_add_projectionDefect",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "19fe9cf0cbb7a6364face3057ca7d7007fb703836df32eb59ad9efe7b6a7e132",
+          "expectedKernelTypeSha256": "19fe9cf0cbb7a6364face3057ca7d7007fb703836df32eb59ad9efe7b6a7e132",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.exposure_balance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f687b4f65e9d51beb3024edb123c1ff2204fed3b8adbd26df53cc12ffca3a439",
+          "expectedKernelTypeSha256": "f687b4f65e9d51beb3024edb123c1ff2204fed3b8adbd26df53cc12ffca3a439",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.exposure_preserves_positive_alternative",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c54845f73cc4c477d4335448949eafb39c53c853ce1da97b9d522d634a50ce32",
+          "expectedKernelTypeSha256": "c54845f73cc4c477d4335448949eafb39c53c853ce1da97b9d522d634a50ce32",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotient_minimum_cannot_lift_of_positive_defect",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "edb1bb6409b16c4bc54f0b3ef32d76a35ccf551487d39a41642d7973fee1f43c",
+          "expectedKernelTypeSha256": "edb1bb6409b16c4bc54f0b3ef32d76a35ccf551487d39a41642d7973fee1f43c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.exposure_loss_has_unliftable_quotient_witness",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7f3d9d4c895acc696bc99ac5648a6c49e5ab20c9f19553031d12c27fe53b57ed",
+          "expectedKernelTypeSha256": "7f3d9d4c895acc696bc99ac5648a6c49e5ab20c9f19553031d12c27fe53b57ed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.allGateFields_value",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "54b34f81e456e694484f290a71c634f4a45b016993e8208744b7a096b59b27b9",
+          "expectedKernelTypeSha256": "54b34f81e456e694484f290a71c634f4a45b016993e8208744b7a096b59b27b9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.allGateFields_positive_alternative",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e9281676603a9b4eb5d0739ca3bf71e44a0fe8623f6f7d8ba4015ae0c41be575",
+          "expectedKernelTypeSha256": "e9281676603a9b4eb5d0739ca3bf71e44a0fe8623f6f7d8ba4015ae0c41be575",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientMinimum_forget_all",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "edd5a27a002e25340fe7ca068bd95007b60d9e4c5a703d0034b0e1e9a26ded26",
+          "expectedKernelTypeSha256": "edd5a27a002e25340fe7ca068bd95007b60d9e4c5a703d0034b0e1e9a26ded26",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.source_slack_balance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ff2ba7a5fb4b772b4ee011f7ef07f7170de32acbdf025fb7e342d7934c8fad12",
+          "expectedKernelTypeSha256": "ff2ba7a5fb4b772b4ee011f7ef07f7170de32acbdf025fb7e342d7934c8fad12",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.source_positive_alternative",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "285b87162a99076953ebe58aeeb633e9feba45114f232ad4b00d6202411714c6",
+          "expectedKernelTypeSha256": "285b87162a99076953ebe58aeeb633e9feba45114f232ad4b00d6202411714c6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.mask_absorb_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2cf73c7192313cbdbd76735b7b77042b777f74f8b5e649976c8069093a876e46",
+          "expectedKernelTypeSha256": "2cf73c7192313cbdbd76735b7b77042b777f74f8b5e649976c8069093a876e46",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientMinimum_mask_active",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "b79c9065239510e20587a22cb40b765d2201744deb19f5607789d1fa44858a23",
+          "expectedKernelTypeSha256": "b79c9065239510e20587a22cb40b765d2201744deb19f5607789d1fa44858a23",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullMinimum_mask_mono",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "43029536c1d99c3cfec5ca745449d974a430bf361fefd2b93e2ffceb236e1576",
+          "expectedKernelTypeSha256": "43029536c1d99c3cfec5ca745449d974a430bf361fefd2b93e2ffceb236e1576",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.exposure_states_balance",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e654e8bd8a28e49091b5bb146f72a4f9268c497b82839c77a542aa3a3b4bbae6",
+          "expectedKernelTypeSha256": "e654e8bd8a28e49091b5bb146f72a4f9268c497b82839c77a542aa3a3b4bbae6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.exposure_moves_exact_slack_to_defect",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7b4fbd1ffde330cac1106dfce09549e1c44646f640e9d9c3f1cbf132a20c61e3",
+          "expectedKernelTypeSha256": "7b4fbd1ffde330cac1106dfce09549e1c44646f640e9d9c3f1cbf132a20c61e3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.normalize_fullEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "aae04d9117416a78c56fb98de5f4181f7fe92fd593051bc841c2e02f7161b78b",
+          "expectedKernelTypeSha256": "aae04d9117416a78c56fb98de5f4181f7fe92fd593051bc841c2e02f7161b78b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullMinimum_normalize",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7ab5397d66beaca752e9f08856b3b8746e2bcffcc9637d923abde103af56fe5e",
+          "expectedKernelTypeSha256": "7ab5397d66beaca752e9f08856b3b8746e2bcffcc9637d923abde103af56fe5e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientMinimum_normalize",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "019da02696fa365128110df9065f50101439921957a98b46c6397b9f34d67045",
+          "expectedKernelTypeSha256": "019da02696fa365128110df9065f50101439921957a98b46c6397b9f34d67045",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.splice_fullEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2c6287494db7ca5d8bdfb46f0aa27f842ac5c7fd2927f8c687ca9ced370d77d1",
+          "expectedKernelTypeSha256": "2c6287494db7ca5d8bdfb46f0aa27f842ac5c7fd2927f8c687ca9ced370d77d1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.fullMinimum_splice",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f1ca47b85073fa3b09587f992d21cb51635fdf7831d9536bbea7f4b9be28b564",
+          "expectedKernelTypeSha256": "f1ca47b85073fa3b09587f992d21cb51635fdf7831d9536bbea7f4b9be28b564",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfile.quotientMinimum_splice",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7fc79932a7744ce1ff140a2c4df84342b54cd79fae1b4a3380a78b73da3b2634",
+          "expectedKernelTypeSha256": "7fc79932a7744ce1ff140a2c4df84342b54cd79fae1b4a3380a78b73da3b2634",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
     {
       "classification": "formalized-foundation-only",
       "id": "source-derived-zero-cost-exposure",
@@ -65979,7 +66439,7 @@
       "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-18-273",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-19-274",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

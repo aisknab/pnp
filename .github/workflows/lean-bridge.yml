@@ -616,7 +616,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 10
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputPrefix.lean
-      - name: Print Cook-Levin builder token-appender axiom closure
+      - name: Audit Cook-Levin builder token-appender
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderTokenAppenderAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -636,7 +636,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderTokenAppender.lean
-      - name: Print Cook-Levin builder first-token-prefix axiom closure
+      - name: Audit Cook-Levin builder first-token-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstTokenPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -697,7 +697,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 36
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderCompleteHeader.lean
-      - name: Print Cook-Levin body-start-prefix builder axiom closure
+      - name: Audit Cook-Levin body-start-prefix builder
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderBodyStartPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -717,7 +717,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 5
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 25
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderBodyStartPrefix.lean
-      - name: Print Cook-Levin first-literal-prefix builder axiom closure
+      - name: Audit Cook-Levin first-literal-prefix builder
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -737,7 +737,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 50
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstLiteralPrefix.lean
-      - name: Print Cook-Levin first-clause-prefix builder axiom closure
+      - name: Audit Cook-Levin first-clause-prefix builder
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -757,7 +757,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 29
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePrefix.lean
-      - name: Print Cook-Levin dynamic-token-cursor-step axiom closure
+      - name: Audit Cook-Levin dynamic-token-cursor-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderDynamicTokenCursorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -777,7 +777,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 7
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 26
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderDynamicTokenCursorStep.lean
-      - name: Print Cook-Levin first-clause-padding-run axiom closure
+      - name: Audit Cook-Levin first-clause-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -798,7 +798,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 36
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePaddingRun.lean
-      - name: Print Cook-Levin full-schedule cursor-controller axiom closure
+      - name: Audit Cook-Levin full-schedule cursor-controller
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -815,7 +815,7 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean
-      - name: Print Cook-Levin arbitrary-slot header-router axiom closure
+      - name: Audit Cook-Levin arbitrary-slot header-router
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -835,7 +835,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 18
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean
-      - name: Print Cook-Levin arbitrary-slot post-header-decoder axiom closure
+      - name: Audit Cook-Levin arbitrary-slot post-header-decoder
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -855,7 +855,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 5
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 12
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoder.lean
-      - name: Print Cook-Levin post-header raw-divider axiom closure
+      - name: Audit Cook-Levin post-header raw-divider
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawDividerAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -875,7 +875,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawDivider.lean
-      - name: Print Cook-Levin post-header raw-launch axiom closure
+      - name: Audit Cook-Levin post-header raw-launch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawLaunchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -895,7 +895,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 0
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean
-      - name: Print Cook-Levin post-header raw-tape-bridge axiom closure
+      - name: Audit Cook-Levin post-header raw-tape-bridge
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -915,7 +915,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 19
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean
-      - name: Print Cook-Levin post-divider raw-route-classifier axiom closure
+      - name: Audit Cook-Levin post-divider raw-route-classifier
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifierAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -935,7 +935,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 24
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifier.lean
-      - name: Print Cook-Levin post-divider selected-token-launch axiom closure
+      - name: Audit Cook-Levin post-divider selected-token-launch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -955,7 +955,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 20
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunch.lean
-      - name: Print Cook-Levin complete-schedule-iteration axiom closure
+      - name: Audit Cook-Levin complete-schedule-iteration
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderCompleteScheduleIterationAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -975,7 +975,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 8
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderCompleteScheduleIteration.lean
-      - name: Print Cook-Levin physical-optional-token-dispatch axiom closure
+      - name: Audit Cook-Levin physical-optional-token-dispatch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -995,7 +995,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatch.lean
-      - name: Print Cook-Levin physical-dispatch-schedule axiom closure
+      - name: Audit Cook-Levin physical-dispatch-schedule
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalDispatchScheduleAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1014,7 +1014,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalDispatchSchedule.lean
-      - name: Print Cook-Levin physical-Finish-request axiom closure
+      - name: Audit Cook-Levin physical-Finish-request
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalFinishRequestAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1034,7 +1034,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 20
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalFinishRequest.lean
-      - name: Print Cook-Levin physical-classifier-pipeline axiom closure
+      - name: Audit Cook-Levin physical-classifier-pipeline
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierPipelineAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1054,7 +1054,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 15
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierPipeline.lean
-      - name: Print Cook-Levin physical-classifier Finish-request axiom closure
+      - name: Audit Cook-Levin physical-classifier Finish-request
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequestAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1074,7 +1074,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 24
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequest.lean
-      - name: Print Cook-Levin classifier Finish-workspace orientation axiom closure
+      - name: Audit Cook-Levin classifier Finish-workspace orientation
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1094,7 +1094,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 0
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 30
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientation.lean
-      - name: Print Cook-Levin classifier Finish mirrored-dispatch axiom closure
+      - name: Audit Cook-Levin classifier Finish mirrored-dispatch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1114,7 +1114,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 7
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatch.lean
-      - name: Print Cook-Levin first-body separator mirrored-dispatch axiom closure
+      - name: Audit Cook-Levin first-body separator mirrored-dispatch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1134,7 +1134,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 67
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.lean
-      - name: Print Cook-Levin all-body staged-request mirrored-dispatch axiom closure
+      - name: Audit Cook-Levin all-body staged-request mirrored-dispatch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1154,7 +1154,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 40
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.lean
-      - name: Print Cook-Levin physical classifier terminal-join axiom closure
+      - name: Audit Cook-Levin physical classifier terminal-join
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1174,7 +1174,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 9
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoin.lean
-      - name: Print Cook-Levin all-route staged-request mirrored-dispatch axiom closure
+      - name: Audit Cook-Levin all-route staged-request mirrored-dispatch
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1194,7 +1194,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 38
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.lean
-      - name: Print Cook-Levin all-route derived-Finish request-split axiom closure
+      - name: Audit Cook-Levin all-route derived-Finish request-split
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1216,7 +1216,7 @@ jobs:
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean
       - name: Check Cook-Levin physical body-remainder contracts
         run: node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs
-      - name: Print Cook-Levin all-route physical body-remainder-split axiom closure
+      - name: Audit Cook-Levin all-route physical body-remainder-split
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -1238,7 +1238,7 @@ jobs:
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplit.lean
       - name: Check complete all-input Cook-Levin builder contracts
         run: node --test audits/lean-concrete-cook-levin-complete-builder0.test.mjs
-      - name: Print complete all-input Cook-Levin builder axiom closure
+      - name: Audit complete all-input Cook-Levin builder
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinCompleteBuilderAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3534,6 +3534,13 @@ jobs:
           done
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
+      - name: Check wire-backed computational profiles
+        run: npm run audit:m274
+      - name: Audit wire-backed computational profiles
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPWireProfileExposureAxiomAudit.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPWireProfileExposure.lean
       - name: Check source-derived zero-cost exposure
         run: npm run audit:m273
       - name: Audit source-derived zero-cost exposure
@@ -3602,7 +3609,7 @@ jobs:
           node scripts/check-lean-axioms.mjs lean-audit/PNPComputedR7HistoryAxiomAudit.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7History.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7CausalBounds.lean
-      - name: Print Cook-Levin second-clause-separator-step axiom closure
+      - name: Audit Cook-Levin second-clause-separator-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3623,7 +3630,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 30
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean
-      - name: Print Cook-Levin second-clause-first-literal-prefix axiom closure
+      - name: Audit Cook-Levin second-clause-first-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3644,7 +3651,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 44
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefix.lean
-      - name: Print Cook-Levin second-clause-second-literal-prefix axiom closure
+      - name: Audit Cook-Levin second-clause-second-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3665,7 +3672,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 25
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 56
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSecondLiteralPrefix.lean
-      - name: Print Cook-Levin complete second-clause-prefix axiom closure
+      - name: Audit Cook-Levin complete second-clause-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3686,7 +3693,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 32
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePrefix.lean
-      - name: Print Cook-Levin second-clause-padding-run axiom closure
+      - name: Audit Cook-Levin second-clause-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3707,7 +3714,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePaddingRun.lean
-      - name: Print Cook-Levin third-clause-separator-step axiom closure
+      - name: Audit Cook-Levin third-clause-separator-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSeparatorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3729,7 +3736,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSeparatorStep.lean
-      - name: Print Cook-Levin third-clause-first-literal-prefix axiom closure
+      - name: Audit Cook-Levin third-clause-first-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3752,7 +3759,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 45
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefix.lean
-      - name: Print Cook-Levin third-clause-second-literal-prefix axiom closure
+      - name: Audit Cook-Levin third-clause-second-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3772,7 +3779,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 32
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 67
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefix.lean
-      - name: Print Cook-Levin complete third-clause-prefix axiom closure
+      - name: Audit Cook-Levin complete third-clause-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3793,7 +3800,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePrefix.lean
-      - name: Print Cook-Levin third-clause-padding-run axiom closure
+      - name: Audit Cook-Levin third-clause-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3814,7 +3821,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePaddingRun.lean
-      - name: Print Cook-Levin fourth-clause-separator-step axiom closure
+      - name: Audit Cook-Levin fourth-clause-separator-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSeparatorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3836,7 +3843,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSeparatorStep.lean
-      - name: Print Cook-Levin fourth-clause-first-literal-prefix axiom closure
+      - name: Audit Cook-Levin fourth-clause-first-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3858,7 +3865,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 25
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 57
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefix.lean
-      - name: Print Cook-Levin fourth-clause-second-literal-prefix axiom closure
+      - name: Audit Cook-Levin fourth-clause-second-literal-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3880,7 +3887,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 32
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 69
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSecondLiteralPrefix.lean
-      - name: Print Cook-Levin complete-fourth-clause-prefix axiom closure
+      - name: Audit Cook-Levin complete-fourth-clause-prefix
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClausePrefixAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3901,7 +3908,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClausePrefix.lean
-      - name: Print Cook-Levin fourth-clause-padding-run axiom closure
+      - name: Audit Cook-Levin fourth-clause-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClausePaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3922,7 +3929,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClausePaddingRun.lean
-      - name: Print Cook-Levin fifth-clause-padding-run axiom closure
+      - name: Audit Cook-Levin fifth-clause-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFifthClausePaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3943,7 +3950,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFifthClausePaddingRun.lean
-      - name: Print Cook-Levin first-constraint-padding-run axiom closure
+      - name: Audit Cook-Levin first-constraint-padding-run
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstConstraintPaddingRunAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3964,7 +3971,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstConstraintPaddingRun.lean
-      - name: Print Cook-Levin second-constraint-separator-step axiom closure
+      - name: Audit Cook-Levin second-constraint-separator-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSeparatorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -3986,7 +3993,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSeparatorStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-sign-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-sign-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSignStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4008,7 +4015,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSignStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-first-unary-unit-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-first-unary-unit-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralFirstUnaryUnitStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4030,7 +4037,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralFirstUnaryUnitStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-second-unary-unit-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-second-unary-unit-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSecondUnaryUnitStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4052,7 +4059,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSecondUnaryUnitStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-third-unary-unit-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-third-unary-unit-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralThirdUnaryUnitStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4074,7 +4081,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-terminator-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-terminator-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4096,7 +4103,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean
-      - name: Print Cook-Levin second-constraint-first-literal-successor-token-step axiom closure
+      - name: Audit Cook-Levin second-constraint-first-literal-successor-token-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4117,7 +4124,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStep.lean
-      - name: Print Cook-Levin second-constraint-padding-or-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-padding-or-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4138,7 +4145,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-second-padding-or-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-second-padding-or-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4160,7 +4167,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-third-padding-or-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-third-padding-or-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintThirdPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4182,7 +4189,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintThirdPaddingOrUnaryOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-fourth-padding-or-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-fourth-padding-or-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFourthPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4204,7 +4211,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-fifth-padding-or-terminator-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-fifth-padding-or-terminator-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4227,7 +4234,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-sixth-padding-or-opening-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-sixth-padding-or-opening-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
@@ -4249,7 +4256,7 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStep.lean
-      - name: Print Cook-Levin second-constraint-seventh-padding-or-unary-opportunity-step axiom closure
+      - name: Audit Cook-Levin second-constraint-seventh-padding-or-unary-opportunity-step
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
           printf '%s\n' "$audit_output"
