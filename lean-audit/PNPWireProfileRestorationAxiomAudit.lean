@@ -1,0 +1,21 @@
+import PNP
+
+#print axioms PNP.DirectWire.WireProfileRestoration.quotientAgreement_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.expanded_fullEquivalent
+#print axioms PNP.DirectWire.WireProfileRestoration.paidWitness_fullEquivalent
+#print axioms PNP.DirectWire.WireProfileRestoration.paidWitness_gateCount
+#print axioms PNP.DirectWire.WireProfileRestoration.fullMinimum_le_quotientMinimum_add_charge
+#print axioms PNP.DirectWire.WireProfileRestoration.projectionDefect_le_charge
+#print axioms PNP.DirectWire.WireProfileRestoration.paidWitness_exact_overhead
+#print axioms PNP.DirectWire.WireProfileRestoration.paidWitness_smaller_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.paidWitness_optimal_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.normalizedWitness_fullEquivalent
+#print axioms PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_accounting
+#print axioms PNP.DirectWire.WireProfileRestoration.reclaimed_le_overhead
+#print axioms PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_overhead
+#print axioms PNP.DirectWire.WireProfileRestoration.normalizedWitness_smaller_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.normalizedWitness_optimal_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.checkedGain_isSome_iff
+#print axioms PNP.DirectWire.WireProfileRestoration.CheckedGain.checked
+#print axioms PNP.DirectWire.WireProfileRestoration.unary_fullMinimum
+#print axioms PNP.DirectWire.WireProfileRestoration.unary_smaller_iff_fullSlack_positive

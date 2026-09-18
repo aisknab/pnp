@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-275",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,44 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanWireProfileRestorationFormalized": true,
+  "leanWireProfileRestorationAxiomAuditPassed": true,
+  "leanWireProfileRestorationAuditedDeclarationCount": 19,
+  "leanWireProfileRestorationQuotientAgreementTheorem": "PNP.DirectWire.WireProfileRestoration.quotientAgreement_iff",
+  "leanWireProfileRestorationFullRestorationTheorem": "PNP.DirectWire.WireProfileRestoration.paidWitness_fullEquivalent",
+  "leanWireProfileRestorationChargeBoundTheorem": "PNP.DirectWire.WireProfileRestoration.projectionDefect_le_charge",
+  "leanWireProfileRestorationPaidOverheadTheorem": "PNP.DirectWire.WireProfileRestoration.paidWitness_exact_overhead",
+  "leanWireProfileRestorationReclaimedBoundTheorem": "PNP.DirectWire.WireProfileRestoration.reclaimed_le_overhead",
+  "leanWireProfileRestorationNormalizedOverheadTheorem": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_overhead",
+  "leanWireProfileRestorationStrictGainTheorem": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_smaller_iff",
+  "leanWireProfileRestorationCheckedGainTheorem": "PNP.DirectWire.WireProfileRestoration.CheckedGain.checked",
+  "leanWireProfileRestorationUnaryMinimumTheorem": "PNP.DirectWire.WireProfileRestoration.unary_fullMinimum",
+  "leanWireProfileRestorationUnaryGainTheorem": "PNP.DirectWire.WireProfileRestoration.unary_smaller_iff_fullSlack_positive",
+  "leanWireProfileRestorationArbitraryFiniteDimensionsCovered": true,
+  "leanWireProfileRestorationOrdinaryOutputsAndActualFieldsPreserved": true,
+  "leanWireProfileRestorationExistingSharedMaterializerReused": true,
+  "leanWireProfileRestorationActualPhysicalChargeAndSavingsComputed": true,
+  "leanWireProfileRestorationExactRemainingOverheadDerived": true,
+  "leanWireProfileRestorationStrictOriginalSizeComparisonChecked": true,
+  "leanWireProfileRestorationExistingUnaryMinimumCompatibilityProved": true,
+  "leanWireProfileRestorationUnaryCompatibilityHasArbitraryOutputAndFieldWidths": true,
+  "leanWireProfileRestorationPositiveSlackRefusalAndUnaryRecoveryKernelChecked": true,
+  "leanWireProfileRestorationCallerSuppliedWitnessMinimumOrCorrectnessRequired": false,
+  "leanWireProfileRestorationChargeEqualsProjectionDefectProved": false,
+  "leanWireProfileRestorationNormalizerIsSemanticallyComplete": false,
+  "leanWireProfileRestorationNoGainImpliesZeroSlack": false,
+  "leanWireProfileRestorationUnaryCompletenessExtendedToArbitraryInputs": false,
+  "leanWireProfileRestorationCompleteManuscriptProfileGrammarProved": false,
+  "leanWireProfileRestorationTerminalFamiliesDerived": false,
+  "leanWireProfileRestorationCompletePackageEOrGlobalRoutesProved": false,
+  "leanWireProfileRestorationUnconditionalSaturatePositiveProved": false,
+  "leanWireProfileRestorationUnconditionalBCELReadyProved": false,
+  "leanWireProfileRestorationUnconditionalZeroSlackProved": false,
+  "leanWireProfileRestorationExactPolynomialPCCMinProved": false,
+  "leanWireProfileRestorationPolynomialRuntimeOutputAndCertificateBoundsProved": false,
+  "leanWireProfileRestorationReferenceMinimizationIsExhaustive": true,
+  "leanWireProfileRestorationRuntimeExecutionIsProofAuthority": false,
+  "leanWireProfileRestorationScope": "arbitrary-finite-actual-wire-full-restoration-shared-materializer-charge-defect-upper-bound-paid-and-normalized-exact-overhead-checked-strict-gain-existing-one-input-minimum-compatibility-no-general-completeness-or-polynomial-claim",
   "leanWireProfileExposureFormalized": true,
   "leanWireProfileExposureAxiomAuditPassed": true,
   "leanWireProfileExposureAuditedDeclarationCount": 35,
@@ -3130,6 +3168,10 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m275",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPWireProfileRestorationAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true --run lean-regression/PNPWireProfileRestoration.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPWireProfileRestorationObstruction.lean",
     "npm run audit:m274",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPWireProfileExposureAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPWireProfileExposure.lean",
@@ -4067,7 +4109,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "8c6e7372a54038acc098cc9c113b94ff3f8a7326caeaa5f273cdcb29903d3f59",
+    "actualSourceClosureSha256": "b0ee7a1b235f6cf1f66d5f0adc62725293f2f58d19738ec3e3aa525c1fdf3c4c",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4100,19 +4142,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "3ad6e475036f23824d1bbc6bdde9886c8af5dfe2a521ec8d72715619dfc763ef",
+  "leanTheoremInventorySha256": "a9235056c1e8da507b48246e18e5720c844aab713006e9cd50d27800cf260b9e",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 51144,
+  "leanTheoremInventoryDeclarationCount": 51199,
   "leanTheoremInventoryExcludedPrivateDeclarationCount": 20981,
-  "leanTheoremInventoryTheoremCount": 27876,
+  "leanTheoremInventoryTheoremCount": 27912,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11694,
-  "leanTheoremInventorySourceClosureModuleCount": 587,
-  "leanSourceClosureSha256": "8c6e7372a54038acc098cc9c113b94ff3f8a7326caeaa5f273cdcb29903d3f59",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-19-274",
+  "leanTheoremInventorySourceClosureModuleCount": 588,
+  "leanSourceClosureSha256": "b0ee7a1b235f6cf1f66d5f0adc62725293f2f58d19738ec3e3aa525c1fdf3c4c",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-19-275",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "2d9724342b35ec8d5ab0cfb6c0633c3d2147cf108927543cdfc982ca05e856bd",
+  "formalPublicationMapSha256": "0dcde934b7bfd637e132c457b0d0ed9389e86fc4cd13a93cf75f981f7f717dac",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -66437,9 +66479,274 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "wire-profile-restoration-cost",
+      "nonClaim": "This is a cost and compatibility interface for computational wire profiles, not complete manuscript profiles or a terminal-derived family. The materializer charge only upper-bounds projection defect; equality and forced-cost transparency are not established. Physical normalization is not a semantic minimizer. A kernel-checked positive-slack example is refused by restoration plus normalization, while the existing unary route recovers it; this limits that component, not every route or the manuscript's complete route family. Returning no gain does not establish ZeroSlack. Unary completeness is restricted to one input and is reused, not newly proved for arbitrary inputs. Reference minimization is exhaustive, not a polynomial PCCMin algorithm. Complete Package E, global route coverage and rank decrease, unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, encoded runtime, output and certificate bounds, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.DirectWire.WireProfileRestoration.quotientAgreement_iff",
+        "PNP.DirectWire.WireProfileRestoration.expanded_fullEquivalent",
+        "PNP.DirectWire.WireProfileRestoration.paidWitness_fullEquivalent",
+        "PNP.DirectWire.WireProfileRestoration.paidWitness_gateCount",
+        "PNP.DirectWire.WireProfileRestoration.fullMinimum_le_quotientMinimum_add_charge",
+        "PNP.DirectWire.WireProfileRestoration.projectionDefect_le_charge",
+        "PNP.DirectWire.WireProfileRestoration.paidWitness_exact_overhead",
+        "PNP.DirectWire.WireProfileRestoration.paidWitness_smaller_iff",
+        "PNP.DirectWire.WireProfileRestoration.paidWitness_optimal_iff",
+        "PNP.DirectWire.WireProfileRestoration.normalizedWitness_fullEquivalent",
+        "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_accounting",
+        "PNP.DirectWire.WireProfileRestoration.reclaimed_le_overhead",
+        "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_overhead",
+        "PNP.DirectWire.WireProfileRestoration.normalizedWitness_smaller_iff",
+        "PNP.DirectWire.WireProfileRestoration.normalizedWitness_optimal_iff",
+        "PNP.DirectWire.WireProfileRestoration.checkedGain_isSome_iff",
+        "PNP.DirectWire.WireProfileRestoration.CheckedGain.checked",
+        "PNP.DirectWire.WireProfileRestoration.unary_fullMinimum",
+        "PNP.DirectWire.WireProfileRestoration.unary_smaller_iff_fullSlack_positive"
+      ],
+      "scope": "For arbitrary finite input, ordinary-output and computational-field widths, the existing concrete quotient agreement is equivalent to wire-profile quotient comparison. The actual shared hidden-wire materializer restores the computed quotient-minimum witness into a full-equivalent carrier, preserving every ordinary output and actual field at every input valuation. If F is the full minimum, Q the quotient minimum, C the actual materializer charge, D = F - Q and S the actual full-field normalization saving, the theorems prove F <= Q + C, D <= C, paid cost = F + (C - D), S <= C - D and normalized cost = F + (C - D - S). Strict improvement against the original carrier is equivalent to the remaining overhead being smaller than its full slack; the executable acceptance test checks the actual final size and yields a sound strict equivalent gain. The existing complete one-input constructor has gate count exactly F for arbitrary output and field widths, and improves the original exactly when full slack is positive. No full replacement, minimum, charge or correctness certificate is supplied to the constructed route.",
+      "title": "Constructive wire-profile restoration cost and exact gain boundary",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.quotientAgreement_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ac36df8e2914ca2ce3b3ac0d5194e7a44198896040c925ef6043ac2f22fb3aa8",
+          "expectedKernelTypeSha256": "ac36df8e2914ca2ce3b3ac0d5194e7a44198896040c925ef6043ac2f22fb3aa8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.expanded_fullEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "152cc0a4a34040eefc769049f57dcc7aaf507acf0c24c01eec7bfa5ab6196db3",
+          "expectedKernelTypeSha256": "152cc0a4a34040eefc769049f57dcc7aaf507acf0c24c01eec7bfa5ab6196db3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.paidWitness_fullEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "91fcd87a05266afd4d59445e508f39356e1e965d285ef0b60cc4f56c4a4dd9ed",
+          "expectedKernelTypeSha256": "91fcd87a05266afd4d59445e508f39356e1e965d285ef0b60cc4f56c4a4dd9ed",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.paidWitness_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e65c828f6ba184573026592c22c615ae9f0fe922aff384f9f2f9fbc71ff11e2c",
+          "expectedKernelTypeSha256": "e65c828f6ba184573026592c22c615ae9f0fe922aff384f9f2f9fbc71ff11e2c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.fullMinimum_le_quotientMinimum_add_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e2f252b82be65ebb18a0e0c5ace67f3caabe1dc7a5f05ea2c0764a2a140d3dc2",
+          "expectedKernelTypeSha256": "e2f252b82be65ebb18a0e0c5ace67f3caabe1dc7a5f05ea2c0764a2a140d3dc2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.projectionDefect_le_charge",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d13d80014d1eb15d43b0a481ec8410b545b7d5a4da81db03642497e4a9adc34a",
+          "expectedKernelTypeSha256": "d13d80014d1eb15d43b0a481ec8410b545b7d5a4da81db03642497e4a9adc34a",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.paidWitness_exact_overhead",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d6e074081f87063d2ad6b713ea09e5b94f40b36fc757d0e6f0380a845a181bc8",
+          "expectedKernelTypeSha256": "d6e074081f87063d2ad6b713ea09e5b94f40b36fc757d0e6f0380a845a181bc8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.paidWitness_smaller_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2d72664e0872f27c3be711951c70a4bde84886e8d534ba832e6cb064fada4110",
+          "expectedKernelTypeSha256": "2d72664e0872f27c3be711951c70a4bde84886e8d534ba832e6cb064fada4110",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.paidWitness_optimal_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "604ebe08bd50792b3dbe74affbc0492bf2a02f32ed646c9516b750d6d4ab6f70",
+          "expectedKernelTypeSha256": "604ebe08bd50792b3dbe74affbc0492bf2a02f32ed646c9516b750d6d4ab6f70",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_fullEquivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b37fe38d1f18d15b720080ce5e292b25c8e54a38828f1c680c79c8e2d61ca99c",
+          "expectedKernelTypeSha256": "b37fe38d1f18d15b720080ce5e292b25c8e54a38828f1c680c79c8e2d61ca99c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ccec14b81c029475f4a7caad3f9b3ba495fb09ca36775702d4136fe61f96802e",
+          "expectedKernelTypeSha256": "ccec14b81c029475f4a7caad3f9b3ba495fb09ca36775702d4136fe61f96802e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.reclaimed_le_overhead",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c3969ffe2a61b71d46de269c9fe5f133acd8e70ad4ce790bacc2c3ea0679bf30",
+          "expectedKernelTypeSha256": "c3969ffe2a61b71d46de269c9fe5f133acd8e70ad4ce790bacc2c3ea0679bf30",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_exact_overhead",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9bd7117014ca4004f05332c0799bb8e826688013cfc98ad10753be970beb3792",
+          "expectedKernelTypeSha256": "9bd7117014ca4004f05332c0799bb8e826688013cfc98ad10753be970beb3792",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_smaller_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e881bf24f9e1fbe5127979e5c6f5e5c2ec61332e3dbdcbf51a33073fd74e4139",
+          "expectedKernelTypeSha256": "e881bf24f9e1fbe5127979e5c6f5e5c2ec61332e3dbdcbf51a33073fd74e4139",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.normalizedWitness_optimal_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cbdfbb757e43dc5d2f937f0df5b89af7a810ec01e5959945386694abba9892ae",
+          "expectedKernelTypeSha256": "cbdfbb757e43dc5d2f937f0df5b89af7a810ec01e5959945386694abba9892ae",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.checkedGain_isSome_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "04233de3e6c6d5992d8c268e06c05f122e8ec5be9f2b628eead4590c7e3f3c5d",
+          "expectedKernelTypeSha256": "04233de3e6c6d5992d8c268e06c05f122e8ec5be9f2b628eead4590c7e3f3c5d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.CheckedGain.checked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f4d34bc65c13885b7f892e5ecaad086bb0d53ea2a7208656998c0f1754fc8b90",
+          "expectedKernelTypeSha256": "f4d34bc65c13885b7f892e5ecaad086bb0d53ea2a7208656998c0f1754fc8b90",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.unary_fullMinimum",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ac5222a3652828c7cffb92f14906304bb4e1d65b250e533093b217fea53bb4e4",
+          "expectedKernelTypeSha256": "ac5222a3652828c7cffb92f14906304bb4e1d65b250e533093b217fea53bb4e4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireProfileRestoration.unary_smaller_iff_fullSlack_positive",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7533c99f91b3438644083adba00c92b4e89522c9e45b65e14b8f65f11bac5df3",
+          "expectedKernelTypeSha256": "7533c99f91b3438644083adba00c92b4e89522c9e45b65e14b8f65f11bac5df3",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-19-274",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-19-275",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

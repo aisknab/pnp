@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-275",
   "lastReviewedDate": "2026-09-19",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 250,
-    "totalRows": 252,
+    "earnedRows": 251,
+    "totalRows": 253,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4265,6 +4265,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M274 derives full and quotient computational profile semantics from actual wire sources at every valuation, with mandatory ordinary outputs in both modes. Constructed exhaustive minima and attained witnesses prove the exact full-lift boundary, universal cost bounds and conservation of full slack plus projection defect. Nested exposure masks transfer exactly the lost full slack to defect; an attained deficient quotient witness cannot silently become full replacement evidence. Source-derived all-gate fields and checked normalization and splicing connect the model to actual carriers. This closes a general computational comparison/accounting edge, not the full manuscript grammar, canonical terminal-family construction, forced-cost transparency, Package E, global routing or polynomial minimization. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 250 of 252 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-275",
+      "formalArtefactCoverage": {
+        "earnedRows": 251,
+        "totalRows": 253
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M275 connects the existing actual shared hidden-wire materializer to wire-profile full and quotient minima. It proves exact paid and normalized overhead and the strict original-size gain boundary without a supplied replacement, minimum, charge or correctness certificate. A kernel-checked positive-slack refusal records the limit of restoration alone; the already complete one-input constructor recovers that example, and its general output/field-width minimum is identified with the current full minimum. This reuses existing construction and unary completeness rather than awarding duplicate progress. Reference minimization remains exhaustive. Complete profile grammar, derived terminal families, forced-cost transparency, global route coverage and polynomial minimization remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 251 of 253 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

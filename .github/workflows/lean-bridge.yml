@@ -3534,6 +3534,14 @@ jobs:
           done
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
+      - name: Check profile restoration
+        run: npm run audit:m275
+      - name: Audit profile restoration
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPWireProfileRestorationAxiomAudit.lean
+          lake env lean -DwarningAsError=true --run lean-regression/PNPWireProfileRestoration.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPWireProfileRestorationObstruction.lean
       - name: Check wire-backed computational profiles
         run: npm run audit:m274
       - name: Audit wire-backed computational profiles
