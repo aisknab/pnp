@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-272",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-273",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,39 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanSourceDerivedZeroCostExposureFormalized": true,
+  "leanSourceDerivedZeroCostExposureAxiomAuditPassed": true,
+  "leanSourceDerivedZeroCostExposureAuditedDeclarationCount": 22,
+  "leanSourceDerivedZeroCostExposureMinimumTheorem": "PNP.DirectWire.ZeroCostExposure.referenceMinimum_extend",
+  "leanSourceDerivedZeroCostExposureSlackTheorem": "PNP.DirectWire.ZeroCostExposure.residualSlack_extend",
+  "leanSourceDerivedZeroCostExposureRecognitionTheorem": "PNP.DirectWire.ZeroCostExposure.recognize_success_iff",
+  "leanSourceDerivedZeroCostExposureGateRefusalTheorem": "PNP.DirectWire.ZeroCostExposure.recognize_gate_none_iff",
+  "leanSourceDerivedZeroCostExposureTupleAcceptanceTheorem": "PNP.DirectWire.ZeroCostExposure.compileLayout_available_iff",
+  "leanSourceDerivedZeroCostExposureCarrierMinimumTheorem": "PNP.DirectWire.WireCarrier.exposed_referenceMinimum_of_checkLayout",
+  "leanSourceDerivedZeroCostExposureCarrierSlackTheorem": "PNP.DirectWire.WireCarrier.exposed_residualSlack_of_checkLayout",
+  "leanSourceDerivedZeroCostExposureCarrierPreservationTheorem": "PNP.DirectWire.WireCarrier.checked_exposure_preserves_problem",
+  "leanSourceDerivedZeroCostExposureArbitraryFiniteDimensionsCovered": true,
+  "leanSourceDerivedZeroCostExposureLiteralInputConstantAndOldOutputAliasesCovered": true,
+  "leanSourceDerivedZeroCostExposureBothRealizationTransfersProved": true,
+  "leanSourceDerivedZeroCostExposureActualSourceRecognitionComputed": true,
+  "leanSourceDerivedZeroCostExposureEveryRequestedFieldChecked": true,
+  "leanSourceDerivedZeroCostExposureActualCarrierMinimumAndSlackPreserved": true,
+  "leanSourceDerivedZeroCostExposureCallerSuppliedObserverMinimumOrCorrectnessRequired": false,
+  "leanSourceDerivedZeroCostExposureConstructorOrRecognizerEnumeratesSemanticMinima": false,
+  "leanSourceDerivedZeroCostExposureAllSemanticallyFreeExposuresRecognized": false,
+  "leanSourceDerivedZeroCostExposureRefusalImpliesPackageERoute": false,
+  "leanSourceDerivedZeroCostExposureNoPhysicalGateIncreaseAloneImpliesZeroCost": false,
+  "leanSourceDerivedZeroCostExposureUniquePhysicalChargeAloneForcesMinimumIncrease": false,
+  "leanSourceDerivedZeroCostExposureArbitraryPositiveCostTransparencyProved": false,
+  "leanSourceDerivedZeroCostExposureFullManuscriptProfileSemanticsProved": false,
+  "leanSourceDerivedZeroCostExposureTerminalFamiliesDerived": false,
+  "leanSourceDerivedZeroCostExposureGlobalRouteCoverageProved": false,
+  "leanSourceDerivedZeroCostExposureUnconditionalSaturatePositiveProved": false,
+  "leanSourceDerivedZeroCostExposureUnconditionalBCELReadyProved": false,
+  "leanSourceDerivedZeroCostExposureUnconditionalZeroSlackProved": false,
+  "leanSourceDerivedZeroCostExposureExactGeneralPCCMinProved": false,
+  "leanSourceDerivedZeroCostExposurePolynomialRuntimeOutputAndCertificateBoundsProved": false,
+  "leanSourceDerivedZeroCostExposureScope": "arbitrary-finite-literal-input-constant-old-output-alias-extension-projection-exact-minimum-slack-source-derived-tuple-recognition-actual-carrier-no-semantic-completeness-positive-cost-global-route-or-polynomial-claim",
   "leanComputationalRecodingFormalized": true,
   "leanComputationalRecodingAxiomAuditPassed": true,
   "leanComputationalRecodingAuditedDeclarationCount": 88,
@@ -3065,6 +3098,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m273",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPZeroCostExposureAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPZeroCostExposure.lean",
     "npm run audit:m272",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPComputationalRecodingAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPGateRenamingEncoding.lean",
@@ -3726,6 +3762,7 @@
     "npm run report:check"
   ],
   "nonClaims": [
+    "M273: This covers the literal input/constant/old-output alias class, not every semantically free exposure or arbitrary hidden internal wire. Refusal proves neither semantic impossibility nor a Package E gain or route. Adding no physical gates need not preserve the semantic minimum, and unique physical ownership or an extra recorded charge does not force an equal minimum increase. The concrete counterexamples are regression and obstruction evidence, not new global progress. The existing fresh-independent-input materializer theorem is reused, not re-awarded. Full manuscript profiles, positive-cost transparency for arbitrary materializers, terminal-family derivation, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-input polynomial runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global proof gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
     "M272: This checks offered computational programs, not a successful certificate-discovery strategy for every input. The inverse checker enumerates all field valuations; finite termination and a bounded structural swap list do not establish uniformly polynomial encoded runtime or certificate size. Semantic reversibility does not imply physical cancellation or strict saving. Full manuscript profiles, all R1-R9 and N1-N10 rules, full VerifyDW, ChargeSoundness and Package E remain open. Terminal-family derivation, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
     "M271: This is integration of checked offered programs, not a successful certificate-discovery strategy for every input. Finite executions are regression evidence, not theorem authority. The computational carrier does not establish full manuscript profile semantics or all R1-R9 and N1-N10 rules. Full manuscript VerifyDW, ChargeSoundness and Package E, global certificate discovery, terminal-family derivation and global route coverage remain open. There is no encoded-input polynomial runtime, output-size or certificate-size theorem for the complete construction. Unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global gate closes, and P = NP is not proved.",
     "M263: This is the computational R5/R6/R8 history component, not the complete manuscript obligation calculus or Package E. Acyclicity guarantees a computed order, not a valid lifecycle or confluence of underspecified event graphs. R5 projection alone removes no physical gates; repeated restorations receive no free cross-snapshot sharing, and restoration can increase physical size. Quotient-only agreement cannot discharge a full obligation. Full R7 and other R1-R9 semantics, all N1-N10 transports, arbitrary observers and profile histories, noncomputational carrier records, matched-kappa Pull/Expand, complete Package E, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-input-size polynomial runtime, output and certificate bounds remain open. Runtime fixtures are regression evidence, not proof authority. No fixed weighted checkpoint or global gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
@@ -3994,7 +4031,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "3dfe0474861862bd377511eb9a0d29d781cb2c183a92bb9366338889f1456ca0",
+    "actualSourceClosureSha256": "25677ee9fb9862dcaa6026fae1f09d5a8f07c36e813685f34154277fd2cd6004",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4027,20 +4064,271 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "ee9e8d4fdce49b229fc28def9daa3cb4ac368184e0976b3849663c28412cb5eb",
+  "leanTheoremInventorySha256": "a3e7a9c0ef7ce930eb17789ae0fc171bf6dcc485efcb75240cdbb5b6dbf5304f",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 50975,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20966,
-  "leanTheoremInventoryTheoremCount": 27778,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11633,
-  "leanTheoremInventorySourceClosureModuleCount": 584,
-  "leanSourceClosureSha256": "3dfe0474861862bd377511eb9a0d29d781cb2c183a92bb9366338889f1456ca0",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-17-271",
+  "leanTheoremInventoryDeclarationCount": 51093,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 20980,
+  "leanTheoremInventoryTheoremCount": 27835,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 11679,
+  "leanTheoremInventorySourceClosureModuleCount": 586,
+  "leanSourceClosureSha256": "25677ee9fb9862dcaa6026fae1f09d5a8f07c36e813685f34154277fd2cd6004",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-18-273",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "10da98a69427d3c6b150b3c2be4231ea0c08f40ff17779bf32ac281df5b38c3b",
+  "formalPublicationMapSha256": "7e1d495aae03639ad11ce54bfc712698e60f46bd43f767315d16acc51a4b70c0",
   "formalPublicationMilestones": [
+    {
+      "classification": "formalized-foundation-only",
+      "id": "source-derived-zero-cost-exposure",
+      "nonClaim": "This covers the literal input/constant/old-output alias class, not every semantically free exposure or arbitrary hidden internal wire. Refusal proves neither semantic impossibility nor a Package E gain or route. Adding no physical gates need not preserve the semantic minimum, and unique physical ownership or an extra recorded charge does not force an equal minimum increase. The concrete counterexamples are regression and obstruction evidence, not new global progress. The existing fresh-independent-input materializer theorem is reused, not re-awarded. Full manuscript profiles, positive-cost transparency for arbitrary materializers, terminal-family derivation, global route coverage, unconditional SaturatePositive, BCELReady and ZeroSlack, exact general PCCMin and complete encoded-input polynomial runtime, output and certificate bounds remain open. No fixed weighted checkpoint or global proof gate closes. Deterministic CNFSAT in P and the eligible root remain absent, and P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.DirectWire.ZeroCostExposure.Reference.toSource_eval",
+        "PNP.DirectWire.ZeroCostExposure.extend_gateCount",
+        "PNP.DirectWire.ZeroCostExposure.project_gateCount",
+        "PNP.DirectWire.ZeroCostExposure.extend_original",
+        "PNP.DirectWire.ZeroCostExposure.extend_field",
+        "PNP.DirectWire.ZeroCostExposure.project_semantics",
+        "PNP.DirectWire.ZeroCostExposure.extend_equivalent",
+        "PNP.DirectWire.ZeroCostExposure.project_equivalent",
+        "PNP.DirectWire.ZeroCostExposure.project_extend_equivalent",
+        "PNP.DirectWire.ZeroCostExposure.referenceMinimum_extend",
+        "PNP.DirectWire.ZeroCostExposure.residualSlack_extend",
+        "PNP.DirectWire.ZeroCostExposure.compileLayout_success_iff",
+        "PNP.DirectWire.ZeroCostExposure.compileLayout_sound",
+        "PNP.DirectWire.ZeroCostExposure.recognize_success_iff",
+        "PNP.DirectWire.ZeroCostExposure.recognize_isSome_iff",
+        "PNP.DirectWire.ZeroCostExposure.recognize_none_iff",
+        "PNP.DirectWire.ZeroCostExposure.recognize_gate_none_iff",
+        "PNP.DirectWire.ZeroCostExposure.checkLayout_iff",
+        "PNP.DirectWire.ZeroCostExposure.compileLayout_available_iff",
+        "PNP.DirectWire.WireCarrier.exposed_referenceMinimum_of_checkLayout",
+        "PNP.DirectWire.WireCarrier.exposed_residualSlack_of_checkLayout",
+        "PNP.DirectWire.WireCarrier.checked_exposure_preserves_problem"
+      ],
+      "scope": "For arbitrary finite input, ordinary-output and extra-field widths, a literal output extension adds only input, constant or existing-output aliases and a literal projection recovers the original outputs without allocating gates. Both constructions transfer arbitrary equivalent realizations, proving exact equality of the semantic reference minimum and residual slack. A source-derived recognizer scans the actual output wires; a gate field is accepted exactly when an ordinary output names that same wire. The tuple compiler derives every alias and accepts exactly when all requested fields have such literal references. The actual WireCarrier exposure therefore preserves physical gate count, semantic minimum and slack whenever this executable source check accepts. Constructors and recognition do not enumerate truth tables or minimum implementations and do not receive an observer, semantic minimum, route or correctness certificate from the caller.",
+      "title": "Source-derived zero-cost alias exposure",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.Reference.toSource_eval",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "18a33b06fc291b34cb074d9688282210f4c21a2708a0c4ab924f8dd985335bab",
+          "expectedKernelTypeSha256": "18a33b06fc291b34cb074d9688282210f4c21a2708a0c4ab924f8dd985335bab",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.extend_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "668882a9bee592090a6cec5f6f2c005121d7682ffb9daa2c5996f8c4d68dee42",
+          "expectedKernelTypeSha256": "668882a9bee592090a6cec5f6f2c005121d7682ffb9daa2c5996f8c4d68dee42",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.project_gateCount",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "315753fe80872380b5de8fdca1acf5d866c46416b5e009aeeda8fcc0522f68ae",
+          "expectedKernelTypeSha256": "315753fe80872380b5de8fdca1acf5d866c46416b5e009aeeda8fcc0522f68ae",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.extend_original",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f735eb48df9890020c841808534c329a72147c759c301d871f21553788157c1f",
+          "expectedKernelTypeSha256": "f735eb48df9890020c841808534c329a72147c759c301d871f21553788157c1f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.extend_field",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e9c748c782da7b3b5800c4720fe32cc1fc2d064c15a57ad05109aa844805e6ec",
+          "expectedKernelTypeSha256": "e9c748c782da7b3b5800c4720fe32cc1fc2d064c15a57ad05109aa844805e6ec",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.project_semantics",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "5cb6faa5210bc24c6aeaabeb999b2a3927da180a0fbf7be9c07cd10b7119bf38",
+          "expectedKernelTypeSha256": "5cb6faa5210bc24c6aeaabeb999b2a3927da180a0fbf7be9c07cd10b7119bf38",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.extend_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "aa61a3a9de83ed22b63685b40b6252144097ae47ce12e57379c69b4e0ae4b74d",
+          "expectedKernelTypeSha256": "aa61a3a9de83ed22b63685b40b6252144097ae47ce12e57379c69b4e0ae4b74d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.project_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "1cb9297b40140397fc91a2ce4e347ec69b6a9fbe3eee1850d3c1e2a4ed029949",
+          "expectedKernelTypeSha256": "1cb9297b40140397fc91a2ce4e347ec69b6a9fbe3eee1850d3c1e2a4ed029949",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.project_extend_equivalent",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "95ed0c663bfa2ce81f7763f170bab6e3ff26cf9ac9f0e5ce87ff7e8c084f1f41",
+          "expectedKernelTypeSha256": "95ed0c663bfa2ce81f7763f170bab6e3ff26cf9ac9f0e5ce87ff7e8c084f1f41",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.referenceMinimum_extend",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "e70b4f616f47d81708dfa5b8531191b6942b71ba7c98a2512597416aa98fce55",
+          "expectedKernelTypeSha256": "e70b4f616f47d81708dfa5b8531191b6942b71ba7c98a2512597416aa98fce55",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.residualSlack_extend",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "11201b09ca4b92710181dde08fb4fbded4bfb4287ad300290472eb7a090a2cdd",
+          "expectedKernelTypeSha256": "11201b09ca4b92710181dde08fb4fbded4bfb4287ad300290472eb7a090a2cdd",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.compileLayout_success_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "0a80a0b6ab49c9d96899615f2bfea720c3c609b514fa2c2909fa7ab0aa892f25",
+          "expectedKernelTypeSha256": "0a80a0b6ab49c9d96899615f2bfea720c3c609b514fa2c2909fa7ab0aa892f25",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.compileLayout_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "f62382d60b18888943122868a9e6fbe45f4ec8574fa71dfc4d159b8aba448f11",
+          "expectedKernelTypeSha256": "f62382d60b18888943122868a9e6fbe45f4ec8574fa71dfc4d159b8aba448f11",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.recognize_success_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "7ab1cec4a649def55ddef0b39b50192de5909625fdc73ad330ed49c521f0fbb1",
+          "expectedKernelTypeSha256": "7ab1cec4a649def55ddef0b39b50192de5909625fdc73ad330ed49c521f0fbb1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.recognize_isSome_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "e86ee10c9054890003e5c6b8e9ef7c53b0d1c4ade0eb1238011988ea4506b60d",
+          "expectedKernelTypeSha256": "e86ee10c9054890003e5c6b8e9ef7c53b0d1c4ade0eb1238011988ea4506b60d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.recognize_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "c1dd878bb5e68de979dd4a96d5f25d1aefc035ed17e2fcf7408b976de6d936ef",
+          "expectedKernelTypeSha256": "c1dd878bb5e68de979dd4a96d5f25d1aefc035ed17e2fcf7408b976de6d936ef",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.recognize_gate_none_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e877cd0cdd33656f9b03cfedab16e3416385a5fba0ff74e177ba6687471da183",
+          "expectedKernelTypeSha256": "e877cd0cdd33656f9b03cfedab16e3416385a5fba0ff74e177ba6687471da183",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.checkLayout_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "bb17be20fa7299b6c7eaf7ac27f95bae162d39fe6099a07d46e1eba7d69be8d4",
+          "expectedKernelTypeSha256": "bb17be20fa7299b6c7eaf7ac27f95bae162d39fe6099a07d46e1eba7d69be8d4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ZeroCostExposure.compileLayout_available_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound"
+          ],
+          "actualKernelTypeSha256": "32b03086b0cb2a74ad96b70307963768468c8e43f39e4ac11fb0ea655e6febae",
+          "expectedKernelTypeSha256": "32b03086b0cb2a74ad96b70307963768468c8e43f39e4ac11fb0ea655e6febae",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCarrier.exposed_referenceMinimum_of_checkLayout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "df88d190913b101113192fbe892aef9f7109efaf2717c40433ca0833867d1dfa",
+          "expectedKernelTypeSha256": "df88d190913b101113192fbe892aef9f7109efaf2717c40433ca0833867d1dfa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCarrier.exposed_residualSlack_of_checkLayout",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2b0c5ec9087e8f70a023a82fbb930615453c26be4b9addefb45b3b1fb20cba95",
+          "expectedKernelTypeSha256": "2b0c5ec9087e8f70a023a82fbb930615453c26be4b9addefb45b3b1fb20cba95",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.WireCarrier.checked_exposure_preserves_problem",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [],
+          "actualKernelTypeSha256": "2ed10a640a706bb5f1965313859d77148125723d97ea25fb117286ffce7f691c",
+          "expectedKernelTypeSha256": "2ed10a640a706bb5f1965313859d77148125723d97ea25fb117286ffce7f691c",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
+    },
     {
       "classification": "formalized-foundation-only",
       "id": "structural-open-program-integration",
@@ -65691,7 +65979,7 @@
       "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-18-272",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-18-273",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

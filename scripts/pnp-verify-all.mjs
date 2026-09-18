@@ -132,6 +132,8 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-source-derived-history-ownership-publication0.test.mjs',
   'audits/lean-descendant-history-ownership0.test.mjs',
   'audits/lean-descendant-history-ownership-publication0.test.mjs',
+  'audits/lean-zero-cost-exposure0.test.mjs',
+  'audits/lean-zero-cost-exposure-publication0.test.mjs',
   'audits/lean-computational-recoding0.test.mjs',
   'audits/lean-computational-recoding-publication0.test.mjs',
   'audits/lean-structural-programs0.test.mjs',

@@ -81,6 +81,7 @@ const CURRENT_PACKAGE_SCRIPTS_BASE0 = Object.freeze({
   'audit:m266': 'node --test audits/lean-source-derived-history-ownership0.test.mjs audits/lean-source-derived-history-ownership-publication0.test.mjs',
   'audit:m267': 'node --test audits/lean-descendant-history-ownership0.test.mjs audits/lean-descendant-history-ownership-publication0.test.mjs',
   'audit:m268': 'node --test audits/lean-proper-descendant-certificates0.test.mjs audits/lean-proper-descendant-certificates-publication0.test.mjs',
+  'audit:m273': 'node --test audits/lean-zero-cost-exposure0.test.mjs audits/lean-zero-cost-exposure-publication0.test.mjs',
   'audit:m272': 'node --test audits/lean-computational-recoding0.test.mjs audits/lean-computational-recoding-publication0.test.mjs',
   'audit:m271': 'node --test audits/lean-structural-programs0.test.mjs audits/lean-structural-programs-publication0.test.mjs',
   'audit:m270': 'node --test audits/lean-structural-reindexing0.test.mjs audits/lean-structural-reindexing-publication0.test.mjs',

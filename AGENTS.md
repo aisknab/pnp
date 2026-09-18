@@ -595,30 +595,41 @@ branch.
   general proof stops the milestone; it must not be replaced by another finite
   prefix or by an added assumption.
 
-### Legacy-theory reconstruction priority
+### Legacy-theory reconstruction and independent research
 
 - Treat the canonical manuscript pinned by
   `archive/legacy-v0/ARCHIVE.json`, especially the document tag
-  `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, as the project's
-  intended correct mathematical route, construction specification, and default
-  dependency order for the Lean reconstruction.
-- Reconstruct its definitions, carrier conventions, objects, and theorem
-  dependencies faithfully. Do not silently replace the manuscript route merely
-  because a different statement or construction is easier to formalize.
-- The manuscript and its historical checker remain specification and provenance
-  evidence, not Lean theorem authority. Only the kernel-checked Lean statements
-  establish the reconstructed results.
-- An innovative alternative is allowed when Lean gives a concrete counterexample,
-  proves a conflicting statement, exposes an ill-typed or inconsistent
-  definition, or demonstrates that a stated step is false under its stated
-  premises. Difficulty finding a proof is not by itself such evidence.
-- Before departing from the manuscript, record the exact section or theorem,
-  the minimal formal failure, whether the issue is a transcription error,
-  missing premise, or mathematical contradiction, the replacement construction,
-  and every new proof obligation. Preserve the intended external theorem
-  interface where it remains coherent, and rerun the complete axiom and
-  publication audits. Never bridge a discrepancy with a project axiom, `sorry`,
-  `admit`, a weakened theorem, or a caller-supplied correctness certificate.
+  `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, as the intended route
+  and a legacy specification, not as an established proof of the final claim.
+- Reconstruct definitions, carrier conventions, objects and dependencies
+  faithfully where they are precise. Record ambiguities and gaps explicitly;
+  do not silently replace the intended theorem with an easier one.
+- Omitted or underspecified definitions are research obligations, not a
+  requirement for additional unpublished notes. Develop explicit candidate
+  constructions, test their invariants and counterexamples, and prove the
+  surviving general statements. Do not stop solely because fuller notes are
+  unavailable.
+- Distinguish a proposed reconstruction from a manuscript definition and from a
+  kernel-checked result. State each candidate's representation, semantics,
+  admissibility conditions, physical cost, dependency effects and remaining
+  obligations. A new definition must not hide the desired correctness,
+  completeness, cost lower bound or polynomial runtime in an input premise.
+- The manuscript and historical checker provide specification and provenance,
+  not theorem authority. Unique physical ownership or exact accounting does
+  not by itself prove a lower bound on every semantically equivalent circuit.
+- Repair an underspecified step or investigate an alternative when needed to
+  advance the intended result. Record the exact legacy anchor, the gap or
+  formal failure, the proposed replacement, its compatibility with the final
+  target, and every new proof obligation. Difficulty finding a proof is not
+  evidence of a contradiction; bounded experiments are not general proofs.
+- Preserve historical statements and the intended external target. Never
+  bridge a gap with a project axiom, `sorry`, `admit`, a weakened theorem,
+  caller-supplied correctness authority or unproved polynomial bound. Reuse
+  existing general interfaces instead of awarding duplicate local progress.
+- Verify changed proof dependencies and the relevant axiom/publication
+  boundaries under the existing no-duplicate-work policy. Keep speculative
+  research out of earned milestones and fixed-weight progress until the exact
+  checkpoint obligation is actually proved.
 
 ## Workflow Version And Permission Rules
 

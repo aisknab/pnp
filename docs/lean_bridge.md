@@ -1,22 +1,24 @@
 # Lean bridge formalization
 
-<!-- M272-CURRENT-SUMMARY:BEGIN -->
-## Current M272 boundary
+<!-- M273-CURRENT-SUMMARY:BEGIN -->
+## Current M273 boundary
 
-M272 integrates literal computational recoding into complete source-only replacement programs. The existing raw codec checks both actual circuits and dimensions; computed inverse and syntactic dependency checks cover full fields and arbitrary causal labels. Every real encoder/decoder gate is charged, only actual normalizer deletions are removed, and previous owners and charges remain in the historical ledger. Pending snapshots survive recoding until actual restoration. Proper-support verification still requires complete accepted execution, a closed final ledger and strict signed saving; failed tails and reversibility alone earn no certificate.
+M273 constructs a source-derived zero-cost exposure branch for arbitrary finite circuits. Requested fields must be literal inputs, constants or wires already named by ordinary outputs. Extension and projection transfer arbitrary equivalent realizations without adding gates, proving exact preservation of the semantic minimum and residual slack. An executable tuple check derives each alias from the actual source; the result applies to the actual carrier exposure. No observer, semantic minimum or correctness certificate is supplied by the caller.
 
-M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. This integration checks offered computational programs; it does not provide global certificate discovery, full manuscript profile semantics, all normalization/materializer rules, or encoded polynomial bounds. The inverse check enumerates all field valuations. Full VerifyDW, ChargeSoundness and Package E, terminal-derived families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
+Kernel-checked counterexamples separate physical gate accounting from semantic minimum cost: adding no gates can still change the problem being minimized, and separately charged duplicate gates need not force an equal minimum increase. Refusal is exact only for this syntactic alias class; it does not establish semantic impossibility or a Package E route.
 
-Formal artefact coverage: 248 of 250 current scoped publication rows earned.
+M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M272’s checked computational recoding remains available. Full manuscript profiles, arbitrary positive-cost materializers, terminal-derived families, global route coverage, unconditional SaturatePositive/BCELReady/ZeroSlack, exact general PCCMin and complete encoded polynomial bounds remain open. Deterministic CNF-SAT membership in P and the eligible root remain absent; the publication gate is false.
+
+Formal artefact coverage: 249 of 251 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [complete computational recoding boundary and limits](./lean_computational_recoding.md)
-and the [structural-action program boundary](./lean_structural_programs.md).
+See the [zero-cost exposure boundary and limits](./lean_zero_cost_exposure.md)
+and the [computational recoding boundary](./lean_computational_recoding.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This extends checked offered computational replacement programs with literal recoding, but does not establish global certificate discovery, full manuscript profiles or a polynomial algorithm. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M272-CURRENT-SUMMARY:END -->
+Publication decision: defer. This establishes a source-derived literal-alias branch with exact minimum and slack preservation, not all semantic exposure, full manuscript profiles or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M273-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 
