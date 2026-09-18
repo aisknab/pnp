@@ -1,22 +1,22 @@
 # Lean bridge formalization
 
-<!-- M271-CURRENT-SUMMARY:BEGIN -->
-## Current M271 boundary
+<!-- M272-CURRENT-SUMMARY:BEGIN -->
+## Current M272 boundary
 
-M271 integrates checked structural reordering into complete source-only replacement programs. Each operation checks raw swaps against the current carrier, preserves literal field wires, exact causal labels and pending snapshots, and adds no charge or removal. Physical ownership follows the actual reindexing and retains earlier allocated identities and their full history. The complete certificate checker still requires proper support, a fully accepted program, a closed final ledger and strict signed saving; failed tails and reordering alone earn no certificate.
+M272 integrates literal computational recoding into complete source-only replacement programs. The existing raw codec checks both actual circuits and dimensions; computed inverse and syntactic dependency checks cover full fields and arbitrary causal labels. Every real encoder/decoder gate is charged, only actual normalizer deletions are removed, and previous owners and charges remain in the historical ledger. Pending snapshots survive recoding until actual restoration. Proper-support verification still requires complete accepted execution, a closed final ledger and strict signed saving; failed tails and reversibility alone earn no certificate.
 
-M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. This integration checks offered computational programs; it does not discover a successful certificate for every input, establish full manuscript profile semantics or all normalization/materializer rules, or prove encoded polynomial bounds. Full VerifyDW, ChargeSoundness and Package E, terminal-derived families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
+M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. This integration checks offered computational programs; it does not provide global certificate discovery, full manuscript profile semantics, all normalization/materializer rules, or encoded polynomial bounds. The inverse check enumerates all field valuations. Full VerifyDW, ChargeSoundness and Package E, terminal-derived families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
 
-Formal artefact coverage: 247 of 249 current scoped publication rows earned.
+Formal artefact coverage: 248 of 250 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [complete structural-action program boundary and limits](./lean_structural_programs.md)
-and the [structural support-transport construction](./lean_structural_reindexing.md).
+See the [complete computational recoding boundary and limits](./lean_computational_recoding.md)
+and the [structural-action program boundary](./lean_structural_programs.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This integrates computed structural actions into complete offered replacement programs, but does not establish a global discovery strategy, full manuscript profiles or a polynomial algorithm. No fixed weighted checkpoint or global gate changes, and the published global bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M271-CURRENT-SUMMARY:END -->
+Publication decision: defer. This extends checked offered computational replacement programs with literal recoding, but does not establish global certificate discovery, full manuscript profiles or a polynomial algorithm. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M272-CURRENT-SUMMARY:END -->
 
 This directory contains the Lean formalization track for the PNP proof-certificate stack.
 

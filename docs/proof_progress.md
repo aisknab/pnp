@@ -3,7 +3,7 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 247 of 249 current scoped publication rows earned.
+Formal artefact coverage: 248 of 250 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
@@ -12,7 +12,7 @@ Global gates closed: 0 of 5.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-17-271`, 247 of 249
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-272`, 248 of 250
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -797,3 +797,7 @@ M270 reconstructs computational structural reordering with arbitrary descendant-
 ## M271 coverage review
 
 M271 integrates computed structural reordering into complete source-only replacement programs. Literal field wires, exact causal labels and pending snapshots are preserved. Local physical ownership uses the actual backward bijection with no allocation or removal, and the complete ledger retains earlier global identities and charge/removal history. Proper-support verification still requires complete acceptance, a closed final ledger and actual strict saving; invalid tails and reordering without gain receive no certificate. This retires a computational integration edge, not full manuscript profiles, all normalization/materializer rules, global certificate discovery, unconditional residual theorems or polynomial bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 247 of 249 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+## M272 coverage review
+
+M272 integrates literal computational recoding into complete source-only replacement programs and proper-support verification. The existing raw codec checks both actual circuits and dimensions; computed inverse and syntactic dependency checks cover full fields and arbitrary causal labels. Real additions, deletions and derived encoder/decoder allocation identities remain in the complete historical ledger, and pending snapshots survive until actual restoration. Complete execution, final closure and strict saving remain mandatory. A constructive structural-code completeness theorem supports the existing route. This retires a computational integration edge, not full manuscript profiles, all rules, global discovery, unconditional residual theorems or polynomial bounds. The inverse check remains exhaustive over field valuations. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 248 of 250 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.

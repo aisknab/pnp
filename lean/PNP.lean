@@ -320,3 +320,9 @@ import PNP.NANDWireStructuralReindexing
 import PNP.NANDWireStructuralState
 import PNP.NANDWireStructuralOwnership
 import PNP.NANDWireStructuralProgram
+import PNP.NANDGateRenamingEncoding
+import PNP.NANDWireCarrierRecoding
+import PNP.NANDCausalGuard
+import PNP.NANDWireRecodingState
+import PNP.NANDWireRecodingOwnership
+import PNP.NANDWireRecodingInput

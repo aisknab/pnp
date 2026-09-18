@@ -100,7 +100,7 @@ const SPECS = [
   {
     "part": "ProgramInput",
     "path": "lean/PNP/NANDWireOpenProgramInput.lean",
-    "sourceContractSha256": "39c6252386d583adba8b51f1edc3d6fefe56fd36dfacc7a1da789e04ae03f2eb",
+    "sourceContractSha256": "87c282a9c32aaf2d1c52474e78e1f0589ec416b672d5cf49956405bd0645ccbb",
     "heads": [
       {
         "kind": "inductive",
@@ -191,7 +191,7 @@ const SPECS = [
   {
     "part": "Program",
     "path": "lean/PNP/NANDWireOpenProgram.lean",
-    "sourceContractSha256": "2742e9169efac1295fe3030eafe2eb0eeef7a4fe0674557e76769f06392748dd",
+    "sourceContractSha256": "832aaa7220fb82f2c5b81c390c76e2a4423f8b83f13d17c61c3c1f983765f8a0",
     "heads": [
       {
         "kind": "def",
@@ -524,7 +524,7 @@ const SPECS = [
   {
     "part": "ProgramOwnership",
     "path": "lean/PNP/NANDWireOpenProgramOwnership.lean",
-    "sourceContractSha256": "95d499f4e1e11a1417c5c6a2246bdd336e3387d41757e598b5e1c069c95d1b82",
+    "sourceContractSha256": "95ed1d03ac3764d4b761192f8bb3ee8055cd141f7b70f0b1aa400df334bb507d",
     "heads": [
       {
         "kind": "def",
@@ -1432,6 +1432,32 @@ test('M271 source: structural actions use actual current decoding and ownership'
   await rejectMutations0('ProgramOwnership',[
     ['actual structural owner map','| .structural _ _ _ _ receipt => receipt.ownership',
       '| .structural _ _ _ _ receipt => suppliedOwnership'],
+  ]);
+});
+
+
+test('recoding source: literal decodes, causal guards and historical ownership are mandatory',async()=>{
+  await rejectMutations0('ProgramInput',[
+    ['raw programs only','| recoding (encoder decoder : Concrete.LockedNAND.RawCandidate)',
+      '| recoding (encoder decoder : Concrete.LockedNAND.RawCandidate) (suppliedCorrectness : Prop)'],
+  ]);
+  await rejectMutations0('Program',[
+    ['decode both actual programs','match WireRecodingInput.execute before rawEncoder rawDecoder with',
+      'match WireRecodingInput.execute before rawEncoder rawEncoder with'],
+    ['actual accepted receipt','.recoding before event rawEncoder rawDecoder kind receipt',
+      '.recoding before event rawEncoder rawDecoder kind suppliedReceipt'],
+    ['charge both literal programs','| .recoding _ _ _ _ _ receipt => receipt.charged',
+      '| .recoding _ _ _ _ _ receipt => 0'],
+    ['derive real deletion count','| .recoding _ _ _ _ _ receipt => receipt.removed',
+      '| .recoding _ _ _ _ _ receipt => suppliedRemoved'],
+    ['no fabricated discharge or creation','| .recoding _ _ _ _ _ _ => none',
+      '| .recoding _ _ _ _ _ _ => suppliedDischarge'],
+    ['retain the all-label causal guard','exact receipt.causalInvariant labels bounded',
+      'exact suppliedCausality'],
+  ]);
+  await rejectMutations0('ProgramOwnership',[
+    ['computed physical owner map','| .recoding _ _ _ _ _ receipt => receipt.checked.ownership',
+      '| .recoding _ _ _ _ _ receipt => suppliedOwnership'],
   ]);
 });
 

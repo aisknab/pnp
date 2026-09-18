@@ -2,7 +2,7 @@
 Copyright (c) 2026 PNP Labs.
 
 Raw mixed programs interleave primitive obligation operations, computed
-structural reordering and complete descendant-support programs. The global
+structural reordering, recoding and complete descendant-support programs. The global
 dependency graph includes intrinsic creation references. Nested event identities
 stay local and are never interpreted as ambient creation identities.
 
@@ -11,6 +11,7 @@ full manuscript profiles, unconditional ZeroSlack or polynomial execution.
 -/
 
 import PNP.NANDWireOpenSupportSplice
+import PNP.NANDWireRecodingInput
 
 namespace PNP.DirectWire.WireOpenProgram
 
@@ -18,6 +19,7 @@ inductive Action where
   | primitive (action : WireDescendantHistory.RawAction)
   | support (program : WireDescendantCertificate.RawCertificate)
   | structural (swaps : List (Nat × Nat))
+  | recoding (encoder decoder : Concrete.LockedNAND.RawCandidate)
   deriving Repr, DecidableEq
 
 /-- Intrinsic discharge references are required even when the caller omits them. -/

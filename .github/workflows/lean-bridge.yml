@@ -97,7 +97,6 @@ jobs:
           show-progress: false
           persist-credentials: false
           set-safe-directory: false
-
       - name: Install hosted-runner report dependencies
         run: |
           sudo apt-get update
@@ -107,7 +106,6 @@ jobs:
             poppler-utils \
             texlive-latex-base \
             texlive-latex-recommended
-
       - name: Install pinned Elan and Lean
         env:
           ELAN_ARCHIVE_SHA256: df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2
@@ -120,7 +118,6 @@ jobs:
           tar --no-same-owner -xzf "$archive" -C "$RUNNER_TEMP" elan-init
           "$RUNNER_TEMP/elan-init" -y --no-modify-path --default-toolchain "$(cat lean-toolchain)"
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-
       - name: Verify exact tool versions
         run: |
           elan --version | tee /tmp/elan-version.txt
@@ -130,190 +127,128 @@ jobs:
           grep -F 'Lean (version 4.31.0' /tmp/lean-version.txt
           grep -F '68218e876d2a38b1985b8590fff244a83c321783' /tmp/lean-version.txt
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
-
       - name: Audit explicit root and assumption inventory
         run: node --test audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-tape-blank-equivalence0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-compiler0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-concrete-cook-levin-layout0.test.mjs audits/lean-concrete-cook-levin-tableau0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-locked-nand-carrier-trace0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-residual-gain-chain0.test.mjs audits/lean-residual-gain-stopping0.test.mjs audits/lean-residual-terminal-full-bridge0.test.mjs audits/lean-residual-terminal-mode-firewall0.test.mjs audits/lean-residual-terminal-projection-minimum0.test.mjs audits/lean-residual-terminal-projection-transfer0.test.mjs audits/lean-residual-terminal-saturation0.test.mjs audits/lean-residual-terminal-physical-support-completion0.test.mjs audits/lean-residual-terminal-support-extraction0.test.mjs audits/lean-residual-terminal-proper-support0.test.mjs audits/lean-residual-terminal-support-square-closure0.test.mjs audits/lean-residual-terminal-governed-support-completion0.test.mjs audits/lean-residual-terminal-frontier-pushout0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
-
       - name: Audit uniform bounded verifier-tableau source
         run: node --test audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs
-
       - name: Audit finite local Cook-Levin CNF compiler source
         run: node --test audits/lean-concrete-cook-levin-local-cnf0.test.mjs
-
       - name: Audit finite whole-tableau Cook-Levin CNF source
         run: node --test audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs
-
       - name: Audit finite whole-tableau Cook-Levin CNF semantics
         run: node --test audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs
-
       - name: Audit finite Cook-Levin raw-tape bridge
         run: node --test audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs
-
       - name: Audit external Cook-Levin formula-size bound
         run: node --test audits/lean-concrete-cook-levin-formula-size0.test.mjs
-
       - name: Audit rectangular Cook-Levin formula schedule
         run: node --test audits/lean-concrete-cook-levin-formula-schedule0.test.mjs
-
       - name: Audit direct Cook-Levin formula cursor
         run: node --test audits/lean-concrete-cook-levin-formula-cursor0.test.mjs
-
       - name: Audit literal Cook-Levin builder input-length tally
         run: node --test audits/lean-concrete-cook-levin-builder-input-length0.test.mjs
-
       - name: Audit executable Cook-Levin builder input prefix
         run: node --test audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs
-
       - name: Audit standalone Cook-Levin builder token appender
         run: node --test audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs
-
       - name: Audit composed Cook-Levin builder first-token prefix
         run: node --test audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs
-
       - name: Audit composed Cook-Levin complete width header
         run: node --test audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs
-
       - name: Audit composed Cook-Levin body-start prefix
         run: node --test audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs
-
       - name: Audit composed Cook-Levin first-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs
-
       - name: Audit composed Cook-Levin first-clause prefix
         run: node --test audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs
-
       - name: Audit Cook-Levin dynamic token-cursor step
         run: node --test audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs
-
       - name: Audit Cook-Levin first-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs
-
       - name: Audit Cook-Levin full-schedule cursor controller
         run: node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs
-
       - name: Audit Cook-Levin arbitrary-slot header router
         run: node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs
-
       - name: Audit Cook-Levin arbitrary-slot post-header decoder
         run: node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs
-
       - name: Audit Cook-Levin post-header raw divider
         run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs
-
       - name: Audit Cook-Levin post-header raw launch
         run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs
-
       - name: Audit Cook-Levin post-header raw tape bridge
         run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs
-
       - name: Audit Cook-Levin post-divider raw route classifier
         run: node --test audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs
-
       - name: Audit Cook-Levin post-divider selected-token launch
         run: node --test audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs
-
       - name: Audit Cook-Levin complete schedule iteration
         run: node --test audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs
-
       - name: Audit Cook-Levin physical optional-token dispatch
         run: node --test audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs
-
       - name: Audit Cook-Levin physical dispatch schedule
         run: node --test audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs
-
       - name: Audit Cook-Levin second-clause separator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs
-
       - name: Audit Cook-Levin second-clause first-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin second-clause second-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin complete second-clause prefix
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs
-
       - name: Audit Cook-Levin second-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs
-
       - name: Audit Cook-Levin third-clause separator step
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs
-
       - name: Audit Cook-Levin third-clause first-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin third-clause second-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin complete third-clause prefix
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs
-
       - name: Audit Cook-Levin third-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs
-
       - name: Audit Cook-Levin fourth-clause separator step
         run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs
-
       - name: Audit Cook-Levin fourth-clause first-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin fourth-clause second-literal prefix
         run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-second-literal-prefix0.test.mjs
-
       - name: Audit Cook-Levin complete fourth-clause prefix
         run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-prefix0.test.mjs
-
       - name: Audit Cook-Levin fourth-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs
-
       - name: Audit Cook-Levin fifth-clause padding run
         run: node --test audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs
-
       - name: Audit Cook-Levin first-constraint padding run
         run: node --test audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs
-
       - name: Audit Cook-Levin second-constraint separator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal sign step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-sign-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal first unary-unit step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-first-unary-unit-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal second unary-unit step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal third unary-unit step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal terminator step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint first-literal successor-token step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint padding-or-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint second padding-or-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint third padding-or-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint fourth padding-or-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint fifth padding-or-terminator opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-fifth-padding-or-terminator-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint sixth padding-or-opening-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs
-
       - name: Audit Cook-Levin second-constraint seventh padding-or-unary opportunity step
         run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs
-
       - name: Audit locked-NAND global carrier and trace equivalence
         run: node --test audits/lean-locked-nand-carrier-trace0.test.mjs
 
@@ -322,16 +257,12 @@ jobs:
       # only repeat the same package gate.
       - name: Build explicit PNP root and verify compiled theorem inventory
         run: npm run formal:inventory:check
-
       - name: Verify generated publication status and report source
         run: npm run formal:publication:check
-
       - name: Rebuild and verify canonical report PDF
         run: npm run report:check
-
       - name: Print root and conditional-bridge axioms
         run: lake env lean -DwarningAsError=true lean-audit/PNPBridgeAxiomAudit.lean
-
       - name: Print concrete bitstring and polynomial-kernel axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteBitStringAxiomAudit.lean 2>&1)"
@@ -341,7 +272,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 41
-
       - name: Print concrete finite-rule machine axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteMachineAxiomAudit.lean 2>&1)"
@@ -351,7 +281,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 38
-
       - name: Print concrete complexity axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteComplexityAxiomAudit.lean 2>&1)"
@@ -361,7 +290,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 48
-
       - name: Print blank-delimited output and pure handoff axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeHandoffAxiomAudit.lean 2>&1)"
@@ -371,7 +299,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 14
-
       - name: Print blank-materialization equivalence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTapeBlankEquivalenceAxiomAudit.lean 2>&1)"
@@ -382,7 +309,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteTapeBlankEquivalence.lean
-
       - name: Print boundary-marked pipeline tape geometry axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTapeGeometryAxiomAudit.lean 2>&1)"
@@ -392,7 +318,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 20
-
       - name: Print executable all-input framer axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineInputFramerAxiomAudit.lean 2>&1)"
@@ -402,7 +327,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 70
-
       - name: Print executable internal output-handoff axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineOutputHandoffAxiomAudit.lean 2>&1)"
@@ -412,7 +336,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 23
-
       - name: Print collision-free pipeline state-namespace axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStateNamespaceAxiomAudit.lean 2>&1)"
@@ -422,7 +345,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 39
-
       - name: Print sequential pipeline state-namespace axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineSequentialStateNamespaceAxiomAudit.lean 2>&1)"
@@ -432,7 +354,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 26
-
       - name: Print uniform two-machine sequential compiler axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineSequentialCompilerAxiomAudit.lean 2>&1)"
@@ -443,7 +364,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineSequentialCompiler.lean
-
       - name: Print executable pipeline stage-bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineStageBridgesAxiomAudit.lean 2>&1)"
@@ -453,7 +373,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 56
-
       - name: Print executable terminal raw-output packer axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTerminalOutputPackerAxiomAudit.lean 2>&1)"
@@ -463,7 +382,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 69
-
       - name: Print executable handoff-to-terminal bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineTerminalBridgeAxiomAudit.lean 2>&1)"
@@ -473,7 +391,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 59
-
       - name: Print uniform canonical-pair pipeline compiler axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelinePairedCompilerAxiomAudit.lean 2>&1)"
@@ -484,7 +401,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 28
           lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelinePairedCompiler.lean
-
       - name: Print uniform all-input pipeline compiler axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineCompilerAxiomAudit.lean 2>&1)"
@@ -495,7 +411,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 29
           lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineCompiler.lean
-
       - name: Print framed raw-machine simulation axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineMachineSimulationAxiomAudit.lean 2>&1)"
@@ -505,7 +420,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 96
-
       - name: Print recursive raw-pipeline refinement axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcretePipelineRefinementAxiomAudit.lean 2>&1)"
@@ -516,7 +430,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 16
           lake env lean -DwarningAsError=true lean-regression/PNPConcretePipelineRefinementRecursive.lean
-
       - name: Print concrete publication-target axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteTargetAxiomAudit.lean 2>&1)"
@@ -526,7 +439,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 2
-
       - name: Print concrete CNF semantics and codec axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFAxiomAudit.lean 2>&1)"
@@ -536,7 +448,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 80
-
       - name: Print concrete Cook-Levin layout axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinLayoutAxiomAudit.lean 2>&1)"
@@ -546,7 +457,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 86
-
       - name: Print concrete fixed Cook-Levin tableau axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinTableauAxiomAudit.lean 2>&1)"
@@ -556,7 +466,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 30
-
       - name: Print uniform bounded verifier-tableau axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinVerifierTableauAxiomAudit.lean 2>&1)"
@@ -566,7 +475,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 41
-
       - name: Print finite local Cook-Levin CNF compiler axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinLocalCNFAxiomAudit.lean 2>&1)"
@@ -576,7 +484,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 75
-
       - name: Print finite whole-tableau Cook-Levin CNF axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinTableauCNFAxiomAudit.lean 2>&1)"
@@ -586,7 +493,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 81
-
       - name: Print finite whole-tableau Cook-Levin CNF semantic axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinTableauCNFSemanticsAxiomAudit.lean 2>&1)"
@@ -603,7 +509,6 @@ jobs:
             echo 'Tableau-CNF semantics reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Print finite Cook-Levin raw-tape bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinRawTapeBridgeAxiomAudit.lean 2>&1)"
@@ -620,7 +525,6 @@ jobs:
             echo 'Cook-Levin raw-tape bridge reached a forbidden project axiom.' >&2
             exit 1
           fi
-
       - name: Print external Cook-Levin formula-size axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinFormulaSizeAxiomAudit.lean 2>&1)"
@@ -638,7 +542,6 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinFormulaSize.lean
-
       - name: Print rectangular Cook-Levin formula-schedule axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinFormulaScheduleAxiomAudit.lean 2>&1)"
@@ -656,7 +559,6 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinFormulaSchedule.lean
-
       - name: Print direct Cook-Levin formula-cursor axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinFormulaCursorAxiomAudit.lean 2>&1)"
@@ -674,7 +576,6 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinFormulaCursor.lean
-
       - name: Print literal Cook-Levin builder input-length axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderInputLengthAxiomAudit.lean 2>&1)"
@@ -695,7 +596,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 6
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputLength.lean
-
       - name: Print executable Cook-Levin builder input-prefix axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderInputPrefixAxiomAudit.lean 2>&1)"
@@ -716,7 +616,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 10
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderInputPrefix.lean
-
       - name: Print Cook-Levin builder token-appender axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderTokenAppenderAxiomAudit.lean 2>&1)"
@@ -737,7 +636,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderTokenAppender.lean
-
       - name: Print Cook-Levin builder first-token-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstTokenPrefixAxiomAudit.lean 2>&1)"
@@ -758,7 +656,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstTokenPrefix.lean
-
       - name: Print Cook-Levin unary polynomial evaluator axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderUnaryPolynomialAxiomAudit.lean 2>&1)"
@@ -780,7 +677,6 @@ jobs:
           }
           console.log('Unary evaluator and register operations: all ' + expected.length + ' public declarations axiom-audited.');
           NODE
-
       - name: Print Cook-Levin complete-header builder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderCompleteHeaderAxiomAudit.lean 2>&1)"
@@ -801,7 +697,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 36
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderCompleteHeader.lean
-
       - name: Print Cook-Levin body-start-prefix builder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderBodyStartPrefixAxiomAudit.lean 2>&1)"
@@ -822,7 +717,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 5
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 25
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderBodyStartPrefix.lean
-
       - name: Print Cook-Levin first-literal-prefix builder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -843,7 +737,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 50
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstLiteralPrefix.lean
-
       - name: Print Cook-Levin first-clause-prefix builder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePrefixAxiomAudit.lean 2>&1)"
@@ -864,7 +757,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 29
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePrefix.lean
-
       - name: Print Cook-Levin dynamic-token-cursor-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderDynamicTokenCursorStepAxiomAudit.lean 2>&1)"
@@ -885,7 +777,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 7
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 26
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderDynamicTokenCursorStep.lean
-
       - name: Print Cook-Levin first-clause-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstClausePaddingRunAxiomAudit.lean 2>&1)"
@@ -907,7 +798,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 36
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstClausePaddingRun.lean
-
       - name: Print Cook-Levin full-schedule cursor-controller axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFullScheduleCursorControllerAxiomAudit.lean 2>&1)"
@@ -925,7 +815,6 @@ jobs:
             exit 1
           fi
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFullScheduleCursorController.lean
-
       - name: Print Cook-Levin arbitrary-slot header-router axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouterAxiomAudit.lean 2>&1)"
@@ -946,7 +835,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 18
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotHeaderRouter.lean
-
       - name: Print Cook-Levin arbitrary-slot post-header-decoder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoderAxiomAudit.lean 2>&1)"
@@ -967,7 +855,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 5
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 12
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderArbitrarySlotPostHeaderDecoder.lean
-
       - name: Print Cook-Levin post-header raw-divider axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawDividerAxiomAudit.lean 2>&1)"
@@ -988,7 +875,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawDivider.lean
-
       - name: Print Cook-Levin post-header raw-launch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawLaunchAxiomAudit.lean 2>&1)"
@@ -1009,7 +895,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 0
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawLaunch.lean
-
       - name: Print Cook-Levin post-header raw-tape-bridge axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridgeAxiomAudit.lean 2>&1)"
@@ -1030,7 +915,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 19
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostHeaderRawTapeBridge.lean
-
       - name: Print Cook-Levin post-divider raw-route-classifier axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifierAxiomAudit.lean 2>&1)"
@@ -1051,7 +935,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 24
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostDividerRawRouteClassifier.lean
-
       - name: Print Cook-Levin post-divider selected-token-launch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunchAxiomAudit.lean 2>&1)"
@@ -1072,7 +955,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 20
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPostDividerSelectedTokenLaunch.lean
-
       - name: Print Cook-Levin complete-schedule-iteration axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderCompleteScheduleIterationAxiomAudit.lean 2>&1)"
@@ -1093,7 +975,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 8
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderCompleteScheduleIteration.lean
-
       - name: Print Cook-Levin physical-optional-token-dispatch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatchAxiomAudit.lean 2>&1)"
@@ -1114,7 +995,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 13
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalOptionalTokenDispatch.lean
-
       - name: Print Cook-Levin physical-dispatch-schedule axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalDispatchScheduleAxiomAudit.lean 2>&1)"
@@ -1134,7 +1014,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 14
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalDispatchSchedule.lean
-
       - name: Print Cook-Levin physical-Finish-request axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalFinishRequestAxiomAudit.lean 2>&1)"
@@ -1155,7 +1034,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 6
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 20
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalFinishRequest.lean
-
       - name: Print Cook-Levin physical-classifier-pipeline axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierPipelineAxiomAudit.lean 2>&1)"
@@ -1176,7 +1054,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 15
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierPipeline.lean
-
       - name: Print Cook-Levin physical-classifier Finish-request axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequestAxiomAudit.lean 2>&1)"
@@ -1197,7 +1074,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 24
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishRequest.lean
-
       - name: Print Cook-Levin classifier Finish-workspace orientation axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientationAxiomAudit.lean 2>&1)"
@@ -1218,7 +1094,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 0
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 30
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishWorkspaceOrientation.lean
-
       - name: Print Cook-Levin classifier Finish mirrored-dispatch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatchAxiomAudit.lean 2>&1)"
@@ -1239,7 +1114,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 7
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 21
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFinishMirroredDispatch.lean
-
       - name: Print Cook-Levin first-body separator mirrored-dispatch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatchAxiomAudit.lean 2>&1)"
@@ -1260,7 +1134,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 1
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 67
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierFirstBodySeparatorMirroredDispatch.lean
-
       - name: Print Cook-Levin all-body staged-request mirrored-dispatch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatchAxiomAudit.lean 2>&1)"
@@ -1281,7 +1154,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 40
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllBodyStagedRequestMirroredDispatch.lean
-
       - name: Print Cook-Levin physical classifier terminal-join axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoinAxiomAudit.lean 2>&1)"
@@ -1302,7 +1174,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 3
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 9
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierTerminalJoin.lean
-
       - name: Print Cook-Levin all-route staged-request mirrored-dispatch axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatchAxiomAudit.lean 2>&1)"
@@ -1323,7 +1194,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 4
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 38
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteStagedRequestMirroredDispatch.lean
-
       - name: Print Cook-Levin all-route derived-Finish request-split axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplitAxiomAudit.lean 2>&1)"
@@ -1344,10 +1214,8 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 23
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteDerivedFinishSplit.lean
-
       - name: Check Cook-Levin physical body-remainder contracts
         run: node --test audits/lean-concrete-cook-levin-builder-physical-classifier-all-route-body-remainder-split0.test.mjs
-
       - name: Print Cook-Levin all-route physical body-remainder-split axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplitAxiomAudit.lean 2>&1)"
@@ -1368,10 +1236,8 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 23
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderPhysicalClassifierAllRouteBodyRemainderSplit.lean
-
       - name: Check complete all-input Cook-Levin builder contracts
         run: node --test audits/lean-concrete-cook-levin-complete-builder0.test.mjs
-
       - name: Print complete all-input Cook-Levin builder axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinCompleteBuilderAxiomAudit.lean 2>&1)"
@@ -1403,10 +1269,8 @@ jobs:
           console.log('M230 complete builder: all 10 public declarations axiom-audited.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinCompleteBuilder.lean
-
       - name: Check concrete CNFSAT NP-completeness contracts
         run: node --test audits/lean-concrete-cook-levin-np-completeness0.test.mjs
-
       - name: Audit concrete CNFSAT NP-completeness and unbounded regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinNPCompletenessAxiomAudit.lean 2>&1)"
@@ -1426,10 +1290,8 @@ jobs:
           console.log('M231: both closed theorem interfaces use only the reviewed standard axioms.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinNPCompleteness.lean
-
       - name: Check terminal profile-dependency semantics contracts
         run: node --test audits/lean-residual-terminal-profile-dependency-semantics0.test.mjs
-
       - name: Audit terminal profile-dependency semantics and interaction regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProfileDependencySemanticsAxiomAudit.lean 2>&1)"
@@ -1451,10 +1313,8 @@ jobs:
           console.log('M232: all four candidate-profile declarations have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProfileDependencySemantics.lean
-
       - name: Check retained ambient-profile locality contracts
         run: node --test audits/lean-residual-terminal-profile-locality0.test.mjs
-
       - name: Audit retained ambient-profile locality and preservation regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProfileLocalityAxiomAudit.lean 2>&1)"
@@ -1477,10 +1337,8 @@ jobs:
           console.log('M233: all five retained ambient-profile theorem interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProfileLocality.lean
-
       - name: Check saturation trace fidelity and metadata cost contracts
         run: node --test audits/lean-residual-terminal-saturation-trace-fidelity0.test.mjs
-
       - name: Audit saturation trace fidelity and metadata cost regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationTraceFidelityAxiomAudit.lean 2>&1)"
@@ -1503,10 +1361,8 @@ jobs:
           console.log('M234: all five trace-fidelity theorem interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturationTraceFidelity.lean
-
       - name: Check actual physical saturation accounting contracts
         run: node --test audits/lean-residual-terminal-physical-saturation-accounting0.test.mjs
-
       - name: Audit actual physical saturation accounting and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSaturationAccountingAxiomAudit.lean 2>&1)"
@@ -1529,10 +1385,8 @@ jobs:
           console.log('M235: all five actual physical-accounting interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSaturationAccounting.lean
-
       - name: Check computed physical charge ledger contracts
         run: node --test audits/lean-residual-terminal-physical-charge-ledger0.test.mjs
-
       - name: Audit computed physical charge ledger and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalChargeLedgerAxiomAudit.lean 2>&1)"
@@ -1555,10 +1409,8 @@ jobs:
           console.log('M236: all five physical-charge-ledger interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalChargeLedger.lean
-
       - name: Check computed saturated-support context contracts
         run: node --test audits/lean-residual-terminal-saturated-support-context0.test.mjs
-
       - name: Audit computed saturated-support context and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturatedSupportContextAxiomAudit.lean 2>&1)"
@@ -1581,10 +1433,8 @@ jobs:
           console.log('M237: all five computed support-context interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturatedSupportContext.lean
-
       - name: Check computed proper-support physical gain contracts
         run: node --test audits/lean-residual-terminal-physical-gain0.test.mjs
-
       - name: Audit computed proper-support physical gain and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalGainAxiomAudit.lean 2>&1)"
@@ -1607,10 +1457,8 @@ jobs:
           console.log('M238: all five computed physical-gain interfaces have the reviewed axiom closure.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalGain.lean
-
       - name: Check computed full-profile gain firewall contracts
         run: node --test audits/lean-residual-terminal-gain-profile-firewall0.test.mjs
-
       - name: Audit computed full-profile gain firewall and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalGainProfileFirewallAxiomAudit.lean 2>&1)"
@@ -1655,10 +1503,8 @@ jobs:
           console.log('M239: all seven full-profile gain interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalGainProfileFirewall.lean
-
       - name: Check independent materializer cost contracts
         run: node --test audits/lean-residual-independent-materializer-cost0.test.mjs
-
       - name: Audit independent materializer cost and regressions
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualIndependentMaterializerCostAxiomAudit.lean 2>&1)"
@@ -1701,10 +1547,8 @@ jobs:
           console.log('M240: all seven independent materializer cost interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualIndependentMaterializerCost.lean
-
       - name: Check support-independent physical ownership contracts
         run: node --test audits/lean-residual-terminal-physical-ownership0.test.mjs
-
       - name: Audit support-independent physical ownership and materializers
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalOwnershipAxiomAudit.lean 2>&1)"
@@ -1760,10 +1604,8 @@ jobs:
           console.log('M241: all ten physical ownership and materializer interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalOwnership.lean
-
       - name: Check constructive NAND sharing contracts
         run: node --test audits/lean-pccmin-constructive-nand-sharing0.test.mjs
-
       - name: Audit constructive NAND sharing and normalizer
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinConstructiveNANDSharingAxiomAudit.lean 2>&1)"
@@ -1818,10 +1660,8 @@ jobs:
           console.log('M242: all nine constructive NAND-sharing interfaces have their exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPPCCMinConstructiveNANDSharing.lean
-
       - name: Check concrete final-report bridge contracts
         run: node --test audits/lean-concrete-final-report-bridge0.test.mjs
-
       - name: Audit concrete final-report bridge
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteFinalReportBridgeAxiomAudit.lean 2>&1)"
@@ -1860,10 +1700,8 @@ jobs:
           console.log('M243: the active conditional bridge consumes checked SAT hardness with exact reviewed standard axioms.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteFinalReportBridge.lean
-
       - name: Check computed output-cone pruning contracts
         run: node --test audits/lean-pccmin-output-cone-pruning0.test.mjs
-
       - name: Audit computed output-cone pruning
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPOutputConePruningAxiomAudit.lean 2>&1)"
@@ -1926,10 +1764,8 @@ jobs:
           console.log('M244: all eleven computed output-cone and pruning interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPOutputConePruning.lean
-
       - name: Check computed dead-support context contracts
         run: node --test audits/lean-pccmin-dead-support-context0.test.mjs
-
       - name: Audit computed dead-support context
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPDeadSupportContextAxiomAudit.lean 2>&1)"
@@ -2028,10 +1864,8 @@ jobs:
           console.log('M245: all twenty computed dead-support context and proper replacement interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPDeadSupportContext.lean
-
       - name: Check computed dead-support full-mode contracts
         run: node --test audits/lean-pccmin-dead-support-full-mode0.test.mjs
-
       - name: Audit computed dead-support full-mode acceptance
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPDeadSupportFullModeAxiomAudit.lean 2>&1)"
@@ -2082,10 +1916,8 @@ jobs:
           console.log('M246: all eight computed dead-support full-mode acceptance interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPDeadSupportFullMode.lean
-
       - name: Check computed NAND constant propagation contracts
         run: node --test audits/lean-pccmin-constant-propagation0.test.mjs
-
       - name: Audit computed NAND constant propagation
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConstantPropagationAxiomAudit.lean 2>&1)"
@@ -2141,10 +1973,8 @@ jobs:
           console.log('M247: all ten computed constant-propagation interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPConstantPropagation.lean
-
       - name: Check computed physical normalization closure contracts
         run: node --test audits/lean-pccmin-physical-normalization-closure0.test.mjs
-
       - name: Audit computed physical normalization closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPhysicalNormalizationClosureAxiomAudit.lean 2>&1)"
@@ -2211,10 +2041,8 @@ jobs:
           console.log('M248: all twelve computed physical-closure interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPPhysicalNormalizationClosure.lean
-
       - name: Check computed arbitrary-support splice contracts
         run: node --test audits/lean-arbitrary-support-splice0.test.mjs
-
       - name: Audit computed arbitrary-support splice
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPArbitrarySupportSpliceAxiomAudit.lean 2>&1)"
@@ -2316,10 +2144,8 @@ jobs:
           console.log('M249: all twenty-four arbitrary-support splice interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPArbitrarySupportSplice.lean
-
       - name: Check computed wire-backed carrier contracts
         run: node --test audits/lean-wire-carrier0.test.mjs
-
       - name: Audit computed wire-backed carrier transport
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireCarrierAxiomAudit.lean 2>&1)"
@@ -2400,10 +2226,8 @@ jobs:
           console.log('M250: all sixteen wire-backed carrier interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireCarrier.lean
-
       - name: Check computed wire-obligation restoration contracts
         run: node --test audits/lean-wire-obligation-restoration0.test.mjs
-
       - name: Audit computed wire-obligation restoration
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireObligationRestorationAxiomAudit.lean 2>&1)"
@@ -2500,10 +2324,8 @@ jobs:
           console.log('M251: all twenty-two wire-obligation restoration interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireObligationRestoration.lean
-
       - name: Check computed quotient replacement lift contracts
         run: node --test audits/lean-wire-quotient-lift0.test.mjs
-
       - name: Audit computed quotient replacement lift
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireQuotientLiftAxiomAudit.lean 2>&1)"
@@ -2590,10 +2412,8 @@ jobs:
           console.log('M252: all seventeen quotient replacement lift interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireQuotientLift.lean
-
       - name: Check computed original-accounted frontier lift source contracts
         run: node --test audits/lean-wire-frontier-lift0.test.mjs
-
       - name: Audit computed original-accounted frontier lift
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireFrontierLiftAxiomAudit.lean 2>&1)"
@@ -2684,10 +2504,8 @@ jobs:
           console.log('M253: all eighteen original-accounted frontier lift interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireFrontierLift.lean
-
       - name: Check computed full-mode wire cancellation source contracts
         run: node --test audits/lean-wire-matched-cancellation0.test.mjs
-
       - name: Audit computed full-mode wire cancellation
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireMatchedCancellationAxiomAudit.lean 2>&1)"
@@ -2809,10 +2627,8 @@ jobs:
           console.log('M254: all twenty-six computed full-mode cancellation interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireMatchedCancellation.lean
-
       - name: Check computed unary full-word realization source contracts
         run: node --test audits/lean-wire-unary-realization0.test.mjs
-
       - name: Audit computed unary full-word realization
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryRealizationAxiomAudit.lean 2>&1)"
@@ -2888,10 +2704,8 @@ jobs:
           console.log('M255: all eighteen computed unary full-word interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryRealization.lean
-
       - name: Check computed unary frontier source contracts
         run: node --test audits/lean-wire-unary-frontier0.test.mjs
-
       - name: Audit computed unary frontier replacement
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryFrontierAxiomAudit.lean 2>&1)"
@@ -3023,10 +2837,8 @@ jobs:
           console.log('M256: all thirty computed unary frontier interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryFrontier.lean
-
       - name: Check computed unary arbitrary-support source contracts
         run: node --test audits/lean-wire-unary-arbitrary-support0.test.mjs
-
       - name: Audit computed unary arbitrary-support replacement
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnaryArbitrarySupportAxiomAudit.lean 2>&1)"
@@ -3165,10 +2977,8 @@ jobs:
           console.log('M257: 31 computed unary arbitrary-support interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnaryArbitrarySupport.lean
-
       - name: Check computed unary support-search source contracts
         run: node --test audits/lean-wire-unary-support-search0.test.mjs
-
       - name: Audit computed unary support search
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireUnarySupportSearchAxiomAudit.lean 2>&1)"
@@ -3325,10 +3135,8 @@ jobs:
           console.log('M258: 36 computed unary support-search interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireUnarySupportSearch.lean
-
       - name: Check computed zero/unary descent-closure source contracts
         run: node --test audits/lean-wire-zero-unary-closure0.test.mjs
-
       - name: Audit computed full-field zero/unary descent closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireZeroUnaryClosureAxiomAudit.lean 2>&1)"
@@ -3455,10 +3263,8 @@ jobs:
           console.log('M259: 27 computed full-field zero/unary descent-closure interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireZeroUnaryClosure.lean
-
       - name: Check source-bounded physical-boundary source contracts
         run: node --test audits/lean-source-bounded-physical-boundary0.test.mjs
-
       - name: Audit source-bounded physical boundary
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPSourceBoundedPhysicalBoundaryAxiomAudit.lean 2>&1)"
@@ -3555,10 +3361,8 @@ jobs:
           console.log('M260: 23 source-bounded physical-boundary interfaces have exact reviewed axiom closures.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPSourceBoundedPhysicalBoundary.lean
-
       - name: Check context-aware square transport source contracts
         run: node --test audits/lean-context-aware-square-transport0.test.mjs
-
       - name: Audit context-aware square transport
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPContextAwareSquareTransportAxiomAudit.lean 2>&1)"
@@ -3593,10 +3397,8 @@ jobs:
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalNestedOpenTransport.lean
           lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOpenTransport.lean
 
-
       - name: Check wire causal expansion source contracts
         run: node --test audits/lean-wire-causal-expansion0.test.mjs
-
       - name: Audit wire causal expansion
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireCausalExpansionAxiomAudit.lean 2>&1)"
@@ -3645,10 +3447,8 @@ jobs:
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireCausalExpansion.lean
 
-
       - name: Check wire obligation history source and publication contracts
         run: node --test audits/lean-finite-dependency-scheduler0.test.mjs audits/lean-wire-obligation-history-state0.test.mjs audits/lean-wire-obligation-history0.test.mjs audits/lean-wire-obligation-history-execution0.test.mjs audits/lean-wire-obligation-history-publication0.test.mjs
-
       - name: Audit wire obligation history
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPWireObligationHistoryAxiomAudit.lean 2>&1)"
@@ -3714,22 +3514,17 @@ jobs:
           console.log('M263: exact computed physical history axiom closures passed.');
           NODE
           lake env lean -DwarningAsError=true lean-regression/PNPWireObligationHistory.lean
-
       - name: Check source-derived history literal-splice contracts
         run: node --test audits/lean-wire-history-arbitrary-support0.test.mjs audits/lean-wire-history-arbitrary-support-publication0.test.mjs
-
       - name: Audit source-derived history literal splice
         run: |
           set -euo pipefail
           node scripts/check-lean-axioms.mjs lean-audit/PNPWireHistoryArbitrarySupportAxiomAudit.lean
           lake env lean -DwarningAsError=true lean-regression/PNPWireHistoryArbitrarySupport.lean
-
       - name: Check computed R7 raw-history contracts
         run: node --test audits/lean-computed-r7-causal-contracts0.test.mjs audits/lean-computed-r7-history0.test.mjs audits/lean-computed-r7-history-publication0.test.mjs
-
       - name: Check descendant ownership
         run: npm run audit:m267
-
       - name: Audit descendant ownership
         run: |
           set -euo pipefail
@@ -3737,10 +3532,17 @@ jobs:
           for part in Input Stage Run Ledger Ownership Events Charges Gain; do
             lake env lean -DwarningAsError=true "lean-regression/PNPWireDescendant${part}.lean"
           done
-
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
-
+      - name: Check computational recoding programs
+        run: npm run audit:m272
+      - name: Audit computational recoding programs
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPComputationalRecodingAxiomAudit.lean
+          for part in GateRenamingEncoding WireCarrierRecoding WireRecodingState WireRecodingOwnership WireRecodingInput WireRecodingProgram WireRecodingCertificate; do
+            lake env lean -DwarningAsError=true "lean-regression/PNP${part}.lean"
+          done
       - name: Check structural-action programs
         run: npm run audit:m271
       - name: Audit structural-action programs
@@ -3761,7 +3563,6 @@ jobs:
           done
       - name: Check complete open-obligation programs
         run: npm run audit:m269
-
       - name: Audit complete open-obligation programs
         run: |
           set -euo pipefail
@@ -3769,7 +3570,6 @@ jobs:
           for part in SupportSplice Program SupportOwnership PrimitiveOwnership ProgramOwnership ProperSupport ProperOwnership Certificate; do
             lake env lean -DwarningAsError=true "lean-regression/PNPWireOpen${part}.lean"
           done
-
       - name: Audit proper-support descendant certificates
         run: |
           set -euo pipefail
@@ -3777,10 +3577,8 @@ jobs:
           for part in CausalBounds ProperSupport Certificate; do
             lake env lean -DwarningAsError=true "lean-regression/PNPWireDescendant${part}.lean"
           done
-
       - name: Check source-derived physical history ownership
         run: npm run audit:m266
-
       - name: Audit source-derived physical history ownership
         run: |
           set -euo pipefail
@@ -3789,17 +3587,14 @@ jobs:
           lake env lean -DwarningAsError=true lean-regression/PNPWireHistoryPhysicalOwnership.lean
           lake env lean -DwarningAsError=true lean-regression/PNPCompiledGateProvenance.lean
           lake env lean -DwarningAsError=true lean-regression/PNPWireHistoryAmbientOwnership.lean
-
       - name: Check shared Lean axiom transcript validator
         run: node --test audits/lean-axiom-transcript0.test.mjs
-
       - name: Audit computed R7 raw-history discharge
         run: |
           set -euo pipefail
           node scripts/check-lean-axioms.mjs lean-audit/PNPComputedR7HistoryAxiomAudit.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7History.lean
           lake env lean -DwarningAsError=true lean-regression/PNPComputedR7CausalBounds.lean
-
       - name: Print Cook-Levin second-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSeparatorStepAxiomAudit.lean 2>&1)"
@@ -3821,7 +3616,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 30
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSeparatorStep.lean
-
       - name: Print Cook-Levin second-clause-first-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -3843,7 +3637,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 44
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseFirstLiteralPrefix.lean
-
       - name: Print Cook-Levin second-clause-second-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -3865,7 +3658,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 25
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 56
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClauseSecondLiteralPrefix.lean
-
       - name: Print Cook-Levin complete second-clause-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePrefixAxiomAudit.lean 2>&1)"
@@ -3887,7 +3679,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 32
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePrefix.lean
-
       - name: Print Cook-Levin second-clause-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondClausePaddingRunAxiomAudit.lean 2>&1)"
@@ -3909,7 +3700,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondClausePaddingRun.lean
-
       - name: Print Cook-Levin third-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSeparatorStepAxiomAudit.lean 2>&1)"
@@ -3932,7 +3722,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSeparatorStep.lean
-
       - name: Print Cook-Levin third-clause-first-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -3956,7 +3745,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 18
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 45
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseFirstLiteralPrefix.lean
-
       - name: Print Cook-Levin third-clause-second-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -3977,7 +3765,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 32
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 67
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClauseSecondLiteralPrefix.lean
-
       - name: Print Cook-Levin complete third-clause-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePrefixAxiomAudit.lean 2>&1)"
@@ -3999,7 +3786,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePrefix.lean
-
       - name: Print Cook-Levin third-clause-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderThirdClausePaddingRunAxiomAudit.lean 2>&1)"
@@ -4021,7 +3807,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderThirdClausePaddingRun.lean
-
       - name: Print Cook-Levin fourth-clause-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSeparatorStepAxiomAudit.lean 2>&1)"
@@ -4044,7 +3829,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSeparatorStep.lean
-
       - name: Print Cook-Levin fourth-clause-first-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -4067,7 +3851,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 25
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 57
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseFirstLiteralPrefix.lean
-
       - name: Print Cook-Levin fourth-clause-second-literal-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClauseSecondLiteralPrefixAxiomAudit.lean 2>&1)"
@@ -4090,7 +3873,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 32
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 69
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClauseSecondLiteralPrefix.lean
-
       - name: Print Cook-Levin complete-fourth-clause-prefix axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClausePrefixAxiomAudit.lean 2>&1)"
@@ -4112,7 +3894,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 10
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClausePrefix.lean
-
       - name: Print Cook-Levin fourth-clause-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFourthClausePaddingRunAxiomAudit.lean 2>&1)"
@@ -4134,7 +3915,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFourthClausePaddingRun.lean
-
       - name: Print Cook-Levin fifth-clause-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFifthClausePaddingRunAxiomAudit.lean 2>&1)"
@@ -4156,7 +3936,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFifthClausePaddingRun.lean
-
       - name: Print Cook-Levin first-constraint-padding-run axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderFirstConstraintPaddingRunAxiomAudit.lean 2>&1)"
@@ -4178,7 +3957,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 9
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderFirstConstraintPaddingRun.lean
-
       - name: Print Cook-Levin second-constraint-separator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSeparatorStepAxiomAudit.lean 2>&1)"
@@ -4201,7 +3979,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSeparatorStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-sign-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSignStepAxiomAudit.lean 2>&1)"
@@ -4224,7 +4001,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSignStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-first-unary-unit-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralFirstUnaryUnitStepAxiomAudit.lean 2>&1)"
@@ -4247,7 +4023,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralFirstUnaryUnitStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-second-unary-unit-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSecondUnaryUnitStepAxiomAudit.lean 2>&1)"
@@ -4270,7 +4045,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSecondUnaryUnitStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-third-unary-unit-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralThirdUnaryUnitStepAxiomAudit.lean 2>&1)"
@@ -4293,7 +4067,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralThirdUnaryUnitStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-terminator-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStepAxiomAudit.lean 2>&1)"
@@ -4316,7 +4089,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 11
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 31
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralTerminatorStep.lean
-
       - name: Print Cook-Levin second-constraint-first-literal-successor-token-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStepAxiomAudit.lean 2>&1)"
@@ -4338,7 +4110,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFirstLiteralSuccessorTokenStep.lean
-
       - name: Print Cook-Levin second-constraint-padding-or-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4360,7 +4131,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintPaddingOrUnaryOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-second-padding-or-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4383,7 +4153,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSecondPaddingOrUnaryOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-third-padding-or-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintThirdPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4406,7 +4175,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintThirdPaddingOrUnaryOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-fourth-padding-or-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFourthPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4429,7 +4197,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFourthPaddingOrUnaryOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-fifth-padding-or-terminator-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4453,7 +4220,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintFifthPaddingOrTerminatorOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-sixth-padding-or-opening-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4476,7 +4242,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSixthPaddingOrOpeningUnaryOpportunityStep.lean
-
       - name: Print Cook-Levin second-constraint-seventh-padding-or-unary-opportunity-step axiom closure
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStepAxiomAudit.lean 2>&1)"
@@ -4499,7 +4264,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 12
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 33
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteCookLevinBuilderSecondConstraintSeventhPaddingOrUnaryOpportunityStep.lean
-
       - name: Print concrete CNF work-input bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkInputAxiomAudit.lean 2>&1)"
@@ -4509,7 +4273,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 20
-
       - name: Print direct concrete CNF verifier bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFVerifierAxiomAudit.lean 2>&1)"
@@ -4519,7 +4282,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 8
-
       - name: Print complete concrete CNF work-correctness axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFWorkAxiomAudit.lean 2>&1)"
@@ -4529,7 +4291,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 766
-
       - name: Print direct-wire NAND semantics axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDSemanticsAxiomAudit.lean 2>&1)"
@@ -4539,7 +4300,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 57
-
       - name: Print exact-width NAND enumerator axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDEnumeratorAxiomAudit.lean 2>&1)"
@@ -4549,7 +4309,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 41
-
       - name: Print NAND truth-table equivalence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDTruthTableAxiomAudit.lean 2>&1)"
@@ -4559,7 +4318,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 29
-
       - name: Print exhaustive NAND reference-minimum axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDMinimumAxiomAudit.lean 2>&1)"
@@ -4569,7 +4327,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 27
-
       - name: Print concrete framed-composition axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDCompositionAxiomAudit.lean 2>&1)"
@@ -4579,7 +4336,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 50
-
       - name: Print concrete framed-slack axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPNANDSlackAxiomAudit.lean 2>&1)"
@@ -4589,7 +4345,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 15
-
       - name: Print typed local locked-NAND candidate axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDDirectAxiomAudit.lean 2>&1)"
@@ -4599,7 +4354,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 48
-
       - name: Print direct-wire output-lower-bound axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPDirectWireBaselineAxiomAudit.lean 2>&1)"
@@ -4609,7 +4363,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 25
-
       - name: Print source-derived locked-NAND accounting axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDBaselineAxiomAudit.lean 2>&1)"
@@ -4619,7 +4372,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 23
-
       - name: Print finite local locked-NAND baseline axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDLocalBaselineAxiomAudit.lean 2>&1)"
@@ -4629,7 +4381,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 30
-
       - name: Print conditional locked-NAND threshold-boundary axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDThresholdBoundaryAxiomAudit.lean 2>&1)"
@@ -4639,7 +4390,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 32
-
       - name: Print locked-NAND carrier and trace-equivalence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDCarrierTraceAxiomAudit.lean 2>&1)"
@@ -4660,7 +4410,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 13
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 40
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDCarrierTrace.lean
-
       - name: Print locked-NAND global candidate assembly axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalCandidatesAxiomAudit.lean 2>&1)"
@@ -4681,7 +4430,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 2
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 63
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalCandidates.lean
-
       - name: Print locked-NAND global BaselineDistinct axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalBaselineDistinctAxiomAudit.lean 2>&1)"
@@ -4700,7 +4448,6 @@ jobs:
           fi
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 5
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalBaselineDistinct.lean
-
       - name: Print locked-NAND global unsatisfiable final-zero axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalUnsatisfiableFinalZeroAxiomAudit.lean 2>&1)"
@@ -4720,7 +4467,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 2
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalUnsatisfiableFinalZero.lean
           node --test audits/lean-locked-nand-global-unsatisfiable-final-zero0.test.mjs
-
       - name: Print locked-NAND global semantic-threshold axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDGlobalSemanticThresholdAxiomAudit.lean 2>&1)"
@@ -4740,7 +4486,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 8
           lake env lean -DwarningAsError=true lean-regression/PNPLockedNANDGlobalSemanticThreshold.lean
           node --test audits/lean-locked-nand-global-semantic-threshold0.test.mjs
-
       - name: Print encoded locked-NAND semantic-boundary axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSemanticReductionAxiomAudit.lean 2>&1)"
@@ -4762,7 +4507,6 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 7
           lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSemanticReduction.lean
           node --test audits/lean-concrete-locked-nand-semantic-reduction0.test.mjs
-
       - name: Print strict-v0 locked-NAND source-parser axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDSourceParserAxiomAudit.lean 2>&1)"
@@ -4782,13 +4526,10 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 247
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 58
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 75
-
       - name: Run strict-v0 locked-NAND source-parser regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDSourceParser.lean
-
       - name: Run strict-v0 locked-NAND source-parser hostile audit
         run: node --test audits/lean-concrete-locked-nand-source-parser0.test.mjs
-
       - name: Print strict-v0 locked-NAND target-emitter axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDTargetEmitterAxiomAudit.lean 2>&1)"
@@ -4808,13 +4549,10 @@ jobs:
           test "$(printf '%s\n' "$normalized" | grep -Fc 'does not depend on any axioms')" -eq 2224
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext]')" -eq 429
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms: [propext, Quot.sound]')" -eq 642
-
       - name: Run strict-v0 locked-NAND target-emitter regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDTargetEmitter.lean
-
       - name: Run strict-v0 locked-NAND target-emitter hostile audit
         run: node --test audits/lean-concrete-locked-nand-target-emitter0.test.mjs
-
       - name: Print strict-v0 locked-NAND polynomial-reduction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDPolynomialReductionAxiomAudit.lean 2>&1)"
@@ -4832,13 +4570,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq 16
-
       - name: Run strict-v0 locked-NAND polynomial-reduction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLockedNANDPolynomialReduction.lean
-
       - name: Run strict-v0 locked-NAND polynomial-reduction hostile audit
         run: node --test audits/lean-concrete-locked-nand-polynomial-reduction0.test.mjs
-
       - name: Print CNF-to-NAND semantic-compiler axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDAxiomAudit.lean 2>&1)"
@@ -4857,13 +4592,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq "$expected_count"
-
       - name: Run CNF-to-NAND semantic-compiler regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNAND.lean
-
       - name: Run CNF-to-NAND semantic-compiler hostile audit
         run: node --test audits/lean-concrete-cnf-to-nand0.test.mjs
-
       - name: Print all-input CNF-to-NAND polynomial-reduction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteCNFToNANDPolynomialReductionAxiomAudit.lean 2>&1)"
@@ -4882,13 +4614,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms:')" -eq "$expected_count"
-
       - name: Run all-input CNF-to-NAND polynomial-reduction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteCNFToNANDPolynomialReduction.lean
-
       - name: Run all-input CNF-to-NAND polynomial-reduction hostile audit
         run: node --test audits/lean-concrete-cnf-to-nand-polynomial-reduction0.test.mjs
-
       - name: Print report-facing concrete locked-NAND threshold axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLockedNANDThresholdPublicationAxiomAudit.lean 2>&1)"
@@ -4897,10 +4626,8 @@ jobs:
           unexpected="$(printf '%s\n' "$normalized" | grep -F 'depends on axioms:' | grep -Ev 'depends on axioms: \[(propext|Quot\.sound|propext, Quot\.sound|Quot\.sound, propext)\]$' || true)"
           test -z "$unexpected"
           test "$(printf '%s\n' "$audit_output" | grep -Fc "'PNP.Main.locked_nand_threshold'")" -eq 1
-
       - name: Run report-facing concrete locked-NAND threshold hostile audit
         run: node --test audits/lean-concrete-locked-nand-threshold-publication0.test.mjs
-
       - name: Print explicit-list residual-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualRoutesAxiomAudit.lean 2>&1)"
@@ -4910,7 +4637,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 30
-
       - name: Print universal residual-gain-chain axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualGainChainAxiomAudit.lean 2>&1)"
@@ -4920,7 +4646,6 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 12
-
       - name: Print locked residual-gain-chain axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPLockedNANDResidualGainBoundAxiomAudit.lean 2>&1)"
@@ -4938,13 +4663,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Fc 'depends on axioms:')" -eq 4
-
       - name: Run residual-gain-chain regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualGainChain.lean
-
       - name: Run residual-gain-chain hostile audit
         run: node --test audits/lean-residual-gain-chain0.test.mjs
-
       - name: Print global strict-gain stopping axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualGainStoppingAxiomAudit.lean 2>&1)"
@@ -4954,13 +4676,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 12
-
       - name: Run global strict-gain stopping regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualGainStopping.lean
-
       - name: Run global strict-gain stopping hostile audit
         run: node --test audits/lean-residual-gain-stopping0.test.mjs
-
       - name: Print terminal full-carrier residual bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFullBridgeAxiomAudit.lean 2>&1)"
@@ -4970,13 +4689,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 22
-
       - name: Run terminal full-carrier residual bridge regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFullBridge.lean
-
       - name: Run terminal full-carrier residual bridge hostile audit
         run: node --test audits/lean-residual-terminal-full-bridge0.test.mjs
-
       - name: Print terminal quotient mode firewall axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalModeFirewallAxiomAudit.lean 2>&1)"
@@ -4986,13 +4702,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$audit_output" | grep -Fc 'does not depend on any axioms')" -eq 29
-
       - name: Run terminal quotient mode firewall regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalModeFirewall.lean
-
       - name: Run terminal quotient mode firewall hostile audit
         run: node --test audits/lean-residual-terminal-mode-firewall0.test.mjs
-
       - name: Print terminal projection-minimum axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionMinimumAxiomAudit.lean 2>&1)"
@@ -5010,13 +4723,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[propext\]')" -eq 27
-
       - name: Run terminal projection-minimum regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionMinimum.lean
-
       - name: Run terminal projection-minimum hostile audit
         run: node --test audits/lean-residual-terminal-projection-minimum0.test.mjs
-
       - name: Print terminal projection-transfer axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionTransferAxiomAudit.lean 2>&1)"
@@ -5034,13 +4744,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 8
-
       - name: Run terminal projection-transfer regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionTransfer.lean
-
       - name: Run terminal projection-transfer hostile audit
         run: node --test audits/lean-residual-terminal-projection-transfer0.test.mjs
-
       - name: Print terminal saturation axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationAxiomAudit.lean 2>&1)"
@@ -5058,13 +4765,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 18
-
       - name: Run terminal saturation regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturation.lean
-
       - name: Run terminal saturation hostile audit
         run: node --test audits/lean-residual-terminal-saturation0.test.mjs
-
       - name: Print terminal physical-support completion axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPhysicalSupportCompletionAxiomAudit.lean 2>&1)"
@@ -5082,13 +4786,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 40
-
       - name: Run terminal physical-support completion regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPhysicalSupportCompletion.lean
-
       - name: Run terminal physical-support completion hostile audit
         run: node --test audits/lean-residual-terminal-physical-support-completion0.test.mjs
-
       - name: Print terminal support extraction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSupportExtractionAxiomAudit.lean 2>&1)"
@@ -5106,13 +4807,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 34
-
       - name: Run terminal support extraction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSupportExtraction.lean
-
       - name: Run terminal support extraction hostile audit
         run: node --test audits/lean-residual-terminal-support-extraction0.test.mjs
-
       - name: Print terminal proper-positive support axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProperSupportAxiomAudit.lean 2>&1)"
@@ -5130,13 +4828,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 37
-
       - name: Run terminal proper-positive support regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProperSupport.lean
-
       - name: Run terminal proper-positive support hostile audit
         run: node --test audits/lean-residual-terminal-proper-support0.test.mjs
-
       - name: Print terminal saturated support-square axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSupportSquareClosureAxiomAudit.lean 2>&1)"
@@ -5154,13 +4849,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 40
-
       - name: Run terminal saturated support-square regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSupportSquareClosure.lean
-
       - name: Run terminal saturated support-square hostile audit
         run: node --test audits/lean-residual-terminal-support-square-closure0.test.mjs
-
       - name: Print terminal governed support-completion axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalGovernedSupportCompletionAxiomAudit.lean 2>&1)"
@@ -5178,13 +4870,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 42
-
       - name: Run terminal governed support-completion regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalGovernedSupportCompletion.lean
-
       - name: Run terminal governed support-completion hostile audit
         run: node --test audits/lean-residual-terminal-governed-support-completion0.test.mjs
-
       - name: Print terminal governed frontier-pushout axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFrontierPushoutAxiomAudit.lean 2>&1)"
@@ -5202,13 +4891,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 39
-
       - name: Run terminal governed frontier-pushout regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFrontierPushout.lean
-
       - name: Run terminal governed frontier-pushout hostile audit
         run: node --test audits/lean-residual-terminal-frontier-pushout0.test.mjs
-
       - name: Print terminal governed projection-square axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalProjectionSquareAxiomAudit.lean 2>&1)"
@@ -5226,13 +4912,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 33
-
       - name: Run terminal governed projection-square regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalProjectionSquare.lean
-
       - name: Run terminal governed projection-square hostile audit
         run: node --test audits/lean-residual-terminal-projection-square0.test.mjs
-
       - name: Print terminal side-tight minimum axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSideTightMinimumAxiomAudit.lean 2>&1)"
@@ -5250,13 +4933,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 43
-
       - name: Run terminal side-tight minimum regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSideTightMinimum.lean
-
       - name: Run terminal side-tight minimum hostile audit
         run: node --test audits/lean-residual-terminal-side-tight-minimum0.test.mjs
-
       - name: Print terminal four-corner carrier axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerCarrierAxiomAudit.lean 2>&1)"
@@ -5274,13 +4954,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 38
-
       - name: Run terminal four-corner carrier regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerCarrier.lean
-
       - name: Run terminal four-corner carrier hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-carrier0.test.mjs
-
       - name: Print terminal four-corner optimum compatibility axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerOptimumCompatibilityAxiomAudit.lean 2>&1)"
@@ -5298,13 +4975,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 57
-
       - name: Run terminal four-corner optimum compatibility regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCompatibility.lean
-
       - name: Run terminal four-corner optimum compatibility hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-optimum-compatibility0.test.mjs
-
       - name: Print terminal four-corner optimum coherence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerOptimumCoherenceAxiomAudit.lean 2>&1)"
@@ -5322,13 +4996,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 40
-
       - name: Run terminal four-corner optimum coherence regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerOptimumCoherence.lean
-
       - name: Run terminal four-corner optimum coherence hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-optimum-coherence0.test.mjs
-
       - name: Print terminal four-corner side-tight completion axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerSideTightCompletionAxiomAudit.lean 2>&1)"
@@ -5346,13 +5017,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 28
-
       - name: Run terminal four-corner side-tight completion regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerSideTightCompletion.lean
-
       - name: Run terminal four-corner side-tight completion hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-side-tight-completion0.test.mjs
-
       - name: Print terminal four-corner tight-basis maximum axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFourCornerTightBasisMaximumAxiomAudit.lean 2>&1)"
@@ -5370,13 +5038,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 45
-
       - name: Run terminal four-corner tight-basis maximum regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFourCornerTightBasisMaximum.lean
-
       - name: Run terminal four-corner tight-basis maximum hostile audit
         run: node --test audits/lean-residual-terminal-four-corner-tight-basis-maximum0.test.mjs
-
       - name: Print computed terminal BN2 square legitimacy axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN2SquareLegitimacyAxiomAudit.lean 2>&1)"
@@ -5394,13 +5059,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 23
-
       - name: Run computed terminal BN2 square legitimacy regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN2SquareLegitimacy.lean
-
       - name: Run computed terminal BN2 square legitimacy hostile audit
         run: node --test audits/lean-residual-terminal-bn2-square-legitimacy0.test.mjs
-
       - name: Print computed terminal BCEL anchor nucleus axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBCELAnchorNucleusAxiomAudit.lean 2>&1)"
@@ -5418,13 +5080,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 79
-
       - name: Run computed terminal BCEL anchor nucleus regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBCELAnchorNucleus.lean
-
       - name: Run computed terminal BCEL anchor nucleus hostile audit
         run: node --test audits/lean-residual-terminal-bcel-anchor-nucleus0.test.mjs
-
       - name: Print computed terminal saturation-positivity firewall axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationPositivityFirewallAxiomAudit.lean 2>&1)"
@@ -5442,13 +5101,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 20
-
       - name: Run computed terminal saturation-positivity firewall regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturationPositivityFirewall.lean
-
       - name: Run computed terminal saturation-positivity firewall hostile audit
         run: node --test audits/lean-residual-terminal-saturation-positivity-firewall0.test.mjs
-
       - name: Print candidate-derived terminal saturation cost-balance axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSaturationCostBalanceAxiomAudit.lean 2>&1)"
@@ -5466,13 +5122,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 53
-
       - name: Run candidate-derived terminal saturation cost-balance regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSaturationCostBalance.lean
-
       - name: Run candidate-derived terminal saturation cost-balance hostile audit
         run: node --test audits/lean-residual-terminal-saturation-cost-balance0.test.mjs
-
       - name: Print finite terminal interface-exposure routing axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalInterfaceExposureRoutingAxiomAudit.lean 2>&1)"
@@ -5490,13 +5143,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 28
-
       - name: Run finite terminal interface-exposure routing regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalInterfaceExposureRouting.lean
-
       - name: Run finite terminal interface-exposure routing hostile audit
         run: node --test audits/lean-residual-terminal-interface-exposure-routing0.test.mjs
-
       - name: Print finite terminal SaturatePositive composition axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteSaturatePositiveAxiomAudit.lean 2>&1)"
@@ -5514,13 +5164,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 37
-
       - name: Run finite terminal SaturatePositive composition regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteSaturatePositive.lean
-
       - name: Run finite terminal SaturatePositive composition hostile audit
         run: node --test audits/lean-residual-terminal-finite-saturate-positive0.test.mjs
-
       - name: Print checked finite SaturatePositive-to-BCEL-ready axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELReadyAxiomAudit.lean 2>&1)"
@@ -5538,13 +5185,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 6
-
       - name: Run checked finite SaturatePositive-to-BCEL-ready regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELReady.lean
-
       - name: Run checked finite SaturatePositive-to-BCEL-ready hostile audit
         run: node --test audits/lean-residual-terminal-finite-bcel-ready0.test.mjs
-
       - name: Print residual terminal RankWF axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalRankWFAxiomAudit.lean 2>&1)"
@@ -5562,13 +5206,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 39
-
       - name: Run residual terminal RankWF regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalRankWF.lean
-
       - name: Run residual terminal RankWF hostile audit
         run: node --test audits/lean-residual-terminal-rank-wf0.test.mjs
-
       - name: Print finite BN3 request-envelope axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN3RequestEnvelopeAxiomAudit.lean 2>&1)"
@@ -5586,19 +5227,14 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 21
-
       - name: Run finite BN3 request-envelope regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN3RequestEnvelope.lean
-
       - name: Run finite BN3 request-envelope hostile audit
         run: node --test audits/lean-residual-terminal-bn3-request-envelope0.test.mjs
-
       - name: Check BN3 joint-realizability logical boundary
         run: lake env lean -DwarningAsError=true lean-regression/PNPBN3JointRealizabilityGap.lean
-
       - name: Run BN3 joint-realizability gap audit
         run: node --test audits/bn3-joint-realizability-gap0.test.mjs
-
       - name: Print finite BN4 activation-cancellation axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN4ActivationCancellationAxiomAudit.lean 2>&1)"
@@ -5616,13 +5252,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 33
-
       - name: Run finite BN4 activation-cancellation regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN4ActivationCancellation.lean
-
       - name: Run finite BN4 activation-cancellation hostile audit
         run: node --test audits/lean-residual-terminal-bn4-activation-cancellation0.test.mjs
-
       - name: Print finite BN5 full-shadow localization axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN5FullShadowLocalizationAxiomAudit.lean 2>&1)"
@@ -5640,13 +5273,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 40
-
       - name: Run finite BN5 full-shadow localization regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN5FullShadowLocalization.lean
-
       - name: Run finite BN5 full-shadow localization hostile audit
         run: node --test audits/lean-residual-terminal-bn5-full-shadow-localization0.test.mjs
-
       - name: Print finite PkgC separating-consumer restoration axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCSeparatingConsumersAxiomAudit.lean 2>&1)"
@@ -5664,13 +5294,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 27
-
       - name: Run finite PkgC separating-consumer restoration regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCSeparatingConsumers.lean
-
       - name: Run finite PkgC separating-consumer restoration hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-separating-consumers0.test.mjs
-
       - name: Print finite PkgC typed-restoration axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCTypedRestorationAxiomAudit.lean 2>&1)"
@@ -5688,13 +5315,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 17
-
       - name: Run finite PkgC typed-restoration regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCTypedRestoration.lean
-
       - name: Run finite PkgC typed-restoration hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-typed-restoration0.test.mjs
-
       - name: Print finite PkgC same-key cancellation axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCSameKeyCancellationAxiomAudit.lean 2>&1)"
@@ -5712,13 +5336,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 21
-
       - name: Run finite PkgC same-key cancellation regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCSameKeyCancellation.lean
-
       - name: Run finite PkgC same-key cancellation hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-same-key-cancellation0.test.mjs
-
       - name: Print finite PkgC ambient BN4 ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCAmbientBN4LedgerAxiomAudit.lean 2>&1)"
@@ -5736,13 +5357,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 17
-
       - name: Run finite PkgC ambient BN4 ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCAmbientBN4Ledger.lean
-
       - name: Run finite PkgC ambient BN4 ledger hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-ambient-bn4-ledger0.test.mjs
-
       - name: Print finite PkgC ambient BN4 residual-reduction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCAmbientBN4ResidualReductionAxiomAudit.lean 2>&1)"
@@ -5760,13 +5378,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 13
-
       - name: Run finite PkgC ambient BN4 residual-reduction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCAmbientBN4ResidualReduction.lean
-
       - name: Run finite PkgC ambient BN4 residual-reduction hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-ambient-bn4-residual-reduction0.test.mjs
-
       - name: Print V54 consumer-antichain normal-form axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConsumerAntichainNormalFormAxiomAudit.lean 2>&1)"
@@ -5784,13 +5399,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 28
-
       - name: Run V54 consumer-antichain normal-form regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConsumerAntichainNormalForm.lean
-
       - name: Run V54 consumer-antichain normal-form hostile audit
         run: node --test audits/lean-residual-terminal-consumer-antichain-normal-form0.test.mjs
-
       - name: Print V53 constant-cut hypergraph rigidity axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalConstantCutHypergraphRigidityAxiomAudit.lean 2>&1)"
@@ -5808,13 +5420,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 58
-
       - name: Run V53 constant-cut hypergraph rigidity regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalConstantCutHypergraphRigidity.lean
-
       - name: Run V53 constant-cut hypergraph rigidity hostile audit
         run: node --test audits/lean-residual-terminal-constant-cut-hypergraph-rigidity0.test.mjs
-
       - name: Print finite BN6 hypergraph-packet axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBN6HypergraphPacketAxiomAudit.lean 2>&1)"
@@ -5832,13 +5441,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 21
-
       - name: Run finite BN6 hypergraph-packet regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBN6HypergraphPacket.lean
-
       - name: Run finite BN6 hypergraph-packet hostile audit
         run: node --test audits/lean-residual-terminal-bn6-hypergraph-packet0.test.mjs
-
       - name: Print finite Packet selector-seed axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorSeedsAxiomAudit.lean 2>&1)"
@@ -5856,13 +5462,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 5
-
       - name: Run finite Packet selector-seed regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorSeeds.lean
-
       - name: Run finite Packet selector-seed hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-seeds0.test.mjs
-
       - name: Print finite Packet payload-selector universe axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorUniverseAxiomAudit.lean 2>&1)"
@@ -5880,13 +5483,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 9
-
       - name: Run finite Packet payload-selector universe regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorUniverse.lean
-
       - name: Run finite Packet payload-selector universe hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-universe0.test.mjs
-
       - name: Print canonical finite Packet selector-handle axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorHandlesAxiomAudit.lean 2>&1)"
@@ -5904,13 +5504,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 16
-
       - name: Run canonical finite Packet selector-handle regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorHandles.lean
-
       - name: Run canonical finite Packet selector-handle hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-handles0.test.mjs
-
       - name: Print canonical Packet selector-codec axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorCodecAxiomAudit.lean 2>&1)"
@@ -5928,13 +5525,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq 16
-
       - name: Run canonical Packet selector-codec regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorCodec.lean
-
       - name: Run canonical Packet selector-codec hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-codec0.test.mjs
-
       - name: Print fail-closed Packet source-payload realization axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorPayloadRealizationAxiomAudit.lean 2>&1)"
@@ -5954,13 +5548,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run fail-closed Packet source-payload realization regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorPayloadRealization.lean
-
       - name: Run fail-closed Packet source-payload realization hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-payload-realization0.test.mjs
-
       - name: Print checked Packet selector candidate-gain scan axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorGainScanAxiomAudit.lean 2>&1)"
@@ -5979,13 +5570,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked Packet selector candidate-gain scan regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorGainScan.lean
-
       - name: Run checked Packet selector candidate-gain scan hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-gain-scan0.test.mjs
-
       - name: Print exhaustive Packet selector-universe gain-scan axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorUniverseGainScanAxiomAudit.lean 2>&1)"
@@ -6004,13 +5592,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run exhaustive Packet selector-universe gain-scan regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorUniverseGainScan.lean
-
       - name: Run exhaustive Packet selector-universe gain-scan hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-universe-gain-scan0.test.mjs
-
       - name: Print conditional Packet selector gain-coverage axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorGainCoverageAxiomAudit.lean 2>&1)"
@@ -6029,13 +5614,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run conditional Packet selector gain-coverage regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorGainCoverage.lean
-
       - name: Run conditional Packet selector gain-coverage hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-gain-coverage0.test.mjs
-
       - name: Print finite Packet charge-surplus axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketChargeSurplusAxiomAudit.lean 2>&1)"
@@ -6054,13 +5636,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run finite Packet charge-surplus regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketChargeSurplus.lean
-
       - name: Run finite Packet charge-surplus hostile audit
         run: node --test audits/lean-residual-terminal-packet-charge-surplus0.test.mjs
-
       - name: Print checked Packet unit-charge blueprint realizer axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketUnitChargeBlueprintRealizerAxiomAudit.lean 2>&1)"
@@ -6080,13 +5659,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked Packet unit-charge blueprint realizer regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketUnitChargeBlueprintRealizer.lean
-
       - name: Run checked Packet unit-charge blueprint realizer hostile audit
         run: node --test audits/lean-residual-terminal-packet-unit-charge-blueprint-realizer0.test.mjs
-
       - name: Print checked Packet typed-realizer contract axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketTypedRealizerContractAxiomAudit.lean 2>&1)"
@@ -6106,13 +5682,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked Packet typed-realizer contract regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketTypedRealizerContract.lean
-
       - name: Run checked Packet typed-realizer contract hostile audit
         run: node --test audits/lean-residual-terminal-packet-typed-realizer-contract0.test.mjs
-
       - name: Print checked HB blocker-graph acyclicity axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBBlockerGraphAcyclicityAxiomAudit.lean 2>&1)"
@@ -6132,13 +5705,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked HB blocker-graph acyclicity regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBBlockerGraphAcyclicity.lean
-
       - name: Run checked HB blocker-graph acyclicity hostile audit
         run: node --test audits/lean-residual-terminal-hb-blocker-graph-acyclicity0.test.mjs
-
       - name: Print checked total-table HB dependency closure axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBDependencyTableClosureAxiomAudit.lean 2>&1)"
@@ -6158,13 +5728,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked total-table HB dependency closure regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBDependencyTableClosure.lean
-
       - name: Run checked total-table HB dependency closure hostile audit
         run: node --test audits/lean-residual-terminal-hb-dependency-table-closure0.test.mjs
-
       - name: Print checked HB active-dependency closure axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBActiveDependencyClosureAxiomAudit.lean 2>&1)"
@@ -6184,13 +5751,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run checked HB active-dependency closure regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBActiveDependencyClosure.lean
-
       - name: Run checked HB active-dependency closure hostile audit
         run: node --test audits/lean-residual-terminal-hb-active-dependency-closure0.test.mjs
-
       - name: Print conditional HB selector-silence rank-closure axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBSelectorSilenceClosureAxiomAudit.lean 2>&1)"
@@ -6210,13 +5774,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run conditional HB selector-silence rank-closure regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBSelectorSilenceClosure.lean
-
       - name: Run conditional HB selector-silence rank-closure hostile audit
         run: node --test audits/lean-residual-terminal-hb-selector-silence-closure0.test.mjs
-
       - name: Print executable HB selector-silence induction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHBExecutableSelectorSilenceInductionAxiomAudit.lean 2>&1)"
@@ -6236,13 +5797,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run executable HB selector-silence induction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHBExecutableSelectorSilenceInduction.lean
-
       - name: Run executable HB selector-silence induction hostile audit
         run: node --test audits/lean-residual-terminal-hb-executable-selector-silence-induction0.test.mjs
-
       - name: Print Packet selector-faithfulness routing axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessRoutingAxiomAudit.lean 2>&1)"
@@ -6262,13 +5820,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run Packet selector-faithfulness routing regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessRouting.lean
-
       - name: Run Packet selector-faithfulness routing hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-faithfulness-routing0.test.mjs
-
       - name: Print canonical Packet faithfulness-table axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFaithfulnessTableAxiomAudit.lean 2>&1)"
@@ -6288,13 +5843,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet faithfulness-table regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFaithfulnessTable.lean
-
       - name: Run canonical Packet faithfulness-table hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-faithfulness-table0.test.mjs
-
       - name: Print total Packet selector first-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFirstRouteOutcomeAxiomAudit.lean 2>&1)"
@@ -6314,13 +5866,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run total Packet selector first-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFirstRouteOutcome.lean
-
       - name: Run total Packet selector first-route hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-first-route-outcome0.test.mjs
-
       - name: Print exact Packet first-route semantics axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSelectorFirstRouteSemanticsAxiomAudit.lean 2>&1)"
@@ -6340,13 +5889,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run exact Packet first-route semantics regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSelectorFirstRouteSemantics.lean
-
       - name: Run exact Packet first-route semantics hostile audit
         run: node --test audits/lean-residual-terminal-packet-selector-first-route-semantics0.test.mjs
-
       - name: Print rank-reflected Packet descent-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketDescentRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6366,13 +5912,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run rank-reflected Packet descent-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketDescentRouteReflection.lean
-
       - name: Run rank-reflected Packet descent-route hostile audit
         run: node --test audits/lean-residual-terminal-packet-descent-route-reflection0.test.mjs
-
       - name: Print canonical Packet rank-tag route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketRankRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6392,13 +5935,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet rank-tag route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketRankRouteReflection.lean
-
       - name: Run canonical Packet rank-tag route hostile audit
         run: node --test audits/lean-residual-terminal-packet-rank-route-reflection0.test.mjs
-
       - name: Print canonical Packet exact-route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketExactRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6418,13 +5958,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet exact-route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketExactRouteReflection.lean
-
       - name: Run canonical Packet exact-route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-exact-route-reflection0.test.mjs
-
       - name: Print canonical Packet charge-route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketChargeRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6444,13 +5981,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet charge-route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketChargeRouteReflection.lean
-
       - name: Run canonical Packet charge-route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-charge-route-reflection0.test.mjs
-
       - name: Print canonical Packet colour-route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketColourRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6470,13 +6004,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet colour-route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketColourRouteReflection.lean
-
       - name: Run canonical Packet colour-route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-colour-route-reflection0.test.mjs
-
       - name: Print canonical Packet typed-frontier route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketFrontierRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6496,13 +6027,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run canonical Packet typed-frontier route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketFrontierRouteReflection.lean
-
       - name: Run canonical Packet typed-frontier route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-frontier-route-reflection0.test.mjs
-
       - name: Print BN5-bound Packet frontier and obligation route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN5ObligationRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6522,13 +6050,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run BN5-bound Packet frontier and obligation route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN5ObligationRouteReflection.lean
-
       - name: Run BN5-bound Packet frontier and obligation route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-bn5-obligation-route-reflection0.test.mjs
-
       - name: Print BN4 activation-exact Packet route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBN4ActivationRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6548,13 +6073,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run BN4 activation-exact Packet route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBN4ActivationRouteReflection.lean
-
       - name: Run BN4 activation-exact Packet route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-bn4-activation-route-reflection0.test.mjs
-
       - name: Print typed-direction Packet route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketDirectionRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6574,13 +6096,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run typed-direction Packet route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketDirectionRouteReflection.lean
-
       - name: Run typed-direction Packet route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-direction-route-reflection0.test.mjs
-
       - name: Print typed-budget Packet route reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetRouteReflectionAxiomAudit.lean 2>&1)"
@@ -6600,13 +6119,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run typed-budget Packet route reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetRouteReflection.lean
-
       - name: Run typed-budget Packet route reflection hostile audit
         run: node --test audits/lean-residual-terminal-packet-budget-route-reflection0.test.mjs
-
       - name: Print Packet budget/HB activity binding axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetHBActivityBindingAxiomAudit.lean 2>&1)"
@@ -6626,13 +6142,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run Packet budget/HB activity binding regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetHBActivityBinding.lean
-
       - name: Run Packet budget/HB activity binding hostile audit
         run: node --test audits/lean-residual-terminal-packet-budget-hb-activity-binding0.test.mjs
-
       - name: Print Packet semantic/HN activity binding axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketSemanticHNActivityBindingAxiomAudit.lean 2>&1)"
@@ -6652,13 +6165,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run Packet semantic/HN activity binding regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketSemanticHNActivityBinding.lean
-
       - name: Run Packet semantic/HN activity binding hostile audit
         run: node --test audits/lean-residual-terminal-packet-semantic-hn-activity-binding0.test.mjs
-
       - name: Print Packet descent no-lower binding axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketDescentNoLowerBindingAxiomAudit.lean 2>&1)"
@@ -6678,13 +6188,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run Packet descent no-lower binding regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketDescentNoLowerBinding.lean
-
       - name: Run Packet descent no-lower binding hostile audit
         run: node --test audits/lean-residual-terminal-packet-descent-no-lower-binding0.test.mjs
-
       - name: Print Packet no-lower ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketNoLowerLedgerAxiomAudit.lean 2>&1)"
@@ -6704,13 +6211,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run Packet no-lower ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketNoLowerLedger.lean
-
       - name: Run Packet no-lower ledger hostile audit
         run: node --test audits/lean-residual-terminal-packet-no-lower-ledger0.test.mjs
-
       - name: Print HResolve coverage ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveCoverageLedgerAxiomAudit.lean 2>&1)"
@@ -6730,13 +6234,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run HResolve coverage ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveCoverageLedger.lean
-
       - name: Run HResolve coverage ledger hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-coverage-ledger0.test.mjs
-
       - name: Print terminal HResolve support resolver axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveSupportResolverAxiomAudit.lean 2>&1)"
@@ -6756,13 +6257,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal HResolve support resolver regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveSupportResolver.lean
-
       - name: Run terminal HResolve support resolver hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-support-resolver0.test.mjs
-
       - name: Print terminal budget-envelope resolver axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetEnvelopeResolverAxiomAudit.lean 2>&1)"
@@ -6782,13 +6280,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal budget-envelope resolver regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetEnvelopeResolver.lean
-
       - name: Run terminal budget-envelope resolver hostile audit
         run: node --test audits/lean-residual-terminal-budget-envelope-resolver0.test.mjs
-
       - name: Print terminal budget no-lower ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetNoLowerLedgerAxiomAudit.lean 2>&1)"
@@ -6808,13 +6303,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal budget no-lower ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetNoLowerLedger.lean
-
       - name: Run terminal budget no-lower ledger hostile audit
         run: node --test audits/lean-residual-terminal-budget-no-lower-ledger0.test.mjs
-
       - name: Print terminal Packet-budget no-lower composition axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerCompositionAxiomAudit.lean 2>&1)"
@@ -6834,13 +6326,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal Packet-budget no-lower composition regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerComposition.lean
-
       - name: Run terminal Packet-budget no-lower composition hostile audit
         run: node --test audits/lean-residual-terminal-packet-budget-no-lower-composition0.test.mjs
-
       - name: Print terminal HResolve maximal H-disjoint-family axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveHDisjointFamilyAxiomAudit.lean 2>&1)"
@@ -6860,13 +6349,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal HResolve maximal H-disjoint-family regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveHDisjointFamily.lean
-
       - name: Run terminal HResolve maximal H-disjoint-family hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-maximal-h-disjoint-family0.test.mjs
-
       - name: Print terminal HN BWL certified-path-minimum axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHNBWLCertifiedPathMinimumAxiomAudit.lean 2>&1)"
@@ -6886,13 +6372,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal HN BWL certified-path-minimum regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHNBWLCertifiedPathMinimum.lean
-
       - name: Run terminal HN BWL certified-path-minimum hostile audit
         run: node --test audits/lean-residual-terminal-hn-bwl-certified-path-minimum0.test.mjs
-
       - name: Print terminal HResolve certified-path-family axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveCertifiedPathFamilyAxiomAudit.lean 2>&1)"
@@ -6912,13 +6395,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run terminal HResolve certified-path-family regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveCertifiedPathFamily.lean
-
       - name: Run terminal HResolve certified-path-family hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-certified-path-family0.test.mjs
-
       - name: Print proof-bearing HResolve ZeroSlack sidecar axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalHResolveZeroSlackSidecarAxiomAudit.lean 2>&1)"
@@ -6938,13 +6418,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run proof-bearing HResolve ZeroSlack sidecar regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalHResolveZeroSlackSidecar.lean
-
       - name: Run proof-bearing HResolve ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-hresolve-zeroslack-sidecar0.test.mjs
-
       - name: Print proof-bearing Budget ZeroSlack sidecar axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBudgetZeroSlackSidecarAxiomAudit.lean 2>&1)"
@@ -6964,13 +6441,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run proof-bearing Budget ZeroSlack sidecar regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBudgetZeroSlackSidecar.lean
-
       - name: Run proof-bearing Budget ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-budget-zeroslack-sidecar0.test.mjs
-
       - name: Print proof-bearing Selector/HB ZeroSlack sidecar axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalSelectorHBZeroSlackSidecarAxiomAudit.lean 2>&1)"
@@ -6990,13 +6464,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run proof-bearing Selector/HB ZeroSlack sidecar regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalSelectorHBZeroSlackSidecar.lean
-
       - name: Run proof-bearing Selector/HB ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-selector-hb-zeroslack-sidecar0.test.mjs
-
       - name: Print proof-bearing Packet/budget no-lower ZeroSlack sidecar axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecarAxiomAudit.lean 2>&1)"
@@ -7016,13 +6487,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run proof-bearing Packet/budget no-lower ZeroSlack sidecar regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPacketBudgetNoLowerZeroSlackSidecar.lean
-
       - name: Run proof-bearing Packet/budget no-lower ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-packet-budget-no-lower-zeroslack-sidecar0.test.mjs
-
       - name: Print proof-bearing BCEL/Packet no-lower ZeroSlack sidecar axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecarAxiomAudit.lean 2>&1)"
@@ -7042,13 +6510,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run proof-bearing BCEL/Packet no-lower ZeroSlack sidecar regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalBCELPacketNoLowerZeroSlackSidecar.lean
-
       - name: Run proof-bearing BCEL/Packet no-lower ZeroSlack sidecar hostile audit
         run: node --test audits/lean-residual-terminal-bcel-packet-no-lower-zeroslack-sidecar0.test.mjs
-
       - name: Print same-family Selector/HB, Packet, and BCEL ZeroSlack coherence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalZeroSlackPacketSelectorHBCoherenceAxiomAudit.lean 2>&1)"
@@ -7068,13 +6533,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run same-family Selector/HB, Packet, and BCEL ZeroSlack coherence regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalZeroSlackPacketSelectorHBCoherence.lean
-
       - name: Run same-family Selector/HB, Packet, and BCEL ZeroSlack coherence hostile audit
         run: node --test audits/lean-residual-terminal-zeroslack-packet-selector-hb-coherence0.test.mjs
-
       - name: Print same-candidate finite BCEL-ready and Packet carrier coherence axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketCarrierCoherenceAxiomAudit.lean 2>&1)"
@@ -7094,13 +6556,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run same-candidate finite BCEL-ready and Packet carrier coherence regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketCarrierCoherence.lean
-
       - name: Run same-candidate finite BCEL-ready and Packet carrier coherence hostile audit
         run: node --test audits/lean-residual-terminal-finite-bcel-packet-carrier-coherence0.test.mjs
-
       - name: Print finite BCEL/Packet activation-coherence obstruction axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalFiniteBCELPacketActivationObstructionAxiomAudit.lean 2>&1)"
@@ -7120,13 +6579,10 @@ jobs:
             exit 1
           fi
           test "$(printf '%s\n' "$normalized" | grep -Ec 'does not depend on any axioms|depends on axioms: \[(propext|Quot\.sound)(, (propext|Quot\.sound))*\]')" -eq "$expected_count"
-
       - name: Run finite BCEL/Packet activation-coherence obstruction regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalFiniteBCELPacketActivationObstruction.lean
-
       - name: Run finite BCEL/Packet activation-coherence obstruction hostile audit
         run: node --test audits/lean-residual-terminal-finite-bcel-packet-activation-obstruction0.test.mjs
-
       - name: Print concrete report-facing locked-NAND compatibility axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteLegacyLockedNANDCompatibilityAxiomAudit.lean 2>&1)"
@@ -7149,13 +6605,10 @@ jobs:
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
-
       - name: Run concrete report-facing locked-NAND compatibility regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteLegacyLockedNANDCompatibility.lean
-
       - name: Run concrete report-facing locked-NAND compatibility hostile audit
         run: node --test audits/lean-concrete-legacy-locked-nand-compatibility0.test.mjs
-
       - name: Print concrete residual-band compatibility axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPConcreteResidualBandCompatibilityAxiomAudit.lean 2>&1)"
@@ -7183,13 +6636,10 @@ jobs:
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
-
       - name: Run concrete residual-band compatibility regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPConcreteResidualBandCompatibility.lean
-
       - name: Run concrete residual-band compatibility hostile audit
         run: node --test audits/lean-concrete-residual-band-compatibility0.test.mjs
-
       - name: Print typed PCCPack reflection axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPTypedPCCPackReflectionAxiomAudit.lean 2>&1)"
@@ -7206,13 +6656,10 @@ jobs:
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
-
       - name: Run typed PCCPack reflection regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPTypedPCCPackReflection.lean
-
       - name: Run typed PCCPack reflection hostile audit
         run: node --test audits/lean-typed-pccpack-reflection0.test.mjs
-
       - name: Print proof-bearing PCCMin total-oracle loop axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinTotalOracleLoopAxiomAudit.lean 2>&1)"
@@ -7226,13 +6673,10 @@ jobs:
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
-
       - name: Run proof-bearing PCCMin total-oracle loop regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinTotalOracleLoop.lean
-
       - name: Run proof-bearing PCCMin total-oracle loop hostile audit
         run: node --test audits/lean-pccmin-total-oracle-loop0.test.mjs
-
       - name: Print proof-bearing PCCMin normalization/oracle composition axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinNormalizeOracleCompositionAxiomAudit.lean 2>&1)"
@@ -7246,13 +6690,10 @@ jobs:
             printf '%s\n' "$normalized" >&2
             exit 1
           fi
-
       - name: Run proof-bearing PCCMin normalization/oracle composition regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinNormalizeOracleComposition.lean
-
       - name: Run proof-bearing PCCMin normalization/oracle composition hostile audit
         run: node --test audits/lean-pccmin-normalize-oracle-composition0.test.mjs
-
       - name: Print rank-ordered PCCOracle axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinRankOrderedOracleAxiomAudit.lean 2>&1)"
@@ -7271,13 +6712,10 @@ jobs:
             echo 'Rank-ordered PCCOracle reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run rank-ordered PCCOracle regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinRankOrderedOracle.lean
-
       - name: Run rank-ordered PCCOracle hostile audit
         run: node --test audits/lean-pccmin-rank-ordered-oracle0.test.mjs
-
       - name: Print checked Packet ranked-selector axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketRankedSelectorAxiomAudit.lean 2>&1)"
@@ -7296,13 +6734,10 @@ jobs:
             echo 'Checked Packet ranked-selector reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet ranked-selector regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketRankedSelector.lean
-
       - name: Run checked Packet ranked-selector hostile audit
         run: node --test audits/lean-pccmin-checked-packet-ranked-selector0.test.mjs
-
       - name: Print checked Packet/HB ZeroSlack bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketHBZeroSlackBridgeAxiomAudit.lean 2>&1)"
@@ -7321,13 +6756,10 @@ jobs:
             echo 'Checked Packet/HB ZeroSlack bridge reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/HB ZeroSlack bridge regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketHBZeroSlackBridge.lean
-
       - name: Run checked Packet/HB ZeroSlack bridge hostile audit
         run: node --test audits/lean-pccmin-checked-packet-hb-zeroslack-bridge0.test.mjs
-
       - name: Print checked Packet/BN6/HB ZeroSlack bridge axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6HBZeroSlackBridgeAxiomAudit.lean 2>&1)"
@@ -7346,13 +6778,10 @@ jobs:
             echo 'Checked Packet/BN6/HB ZeroSlack bridge reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/HB ZeroSlack bridge regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6HBZeroSlackBridge.lean
-
       - name: Run checked Packet/BN6/HB ZeroSlack bridge hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-hb-zeroslack-bridge0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL activation-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELActivationRouteAxiomAudit.lean 2>&1)"
@@ -7371,13 +6800,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL activation route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL activation-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELActivationRoute.lean
-
       - name: Run checked Packet/BN6/BCEL activation-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-activation-route0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL derived-family axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELDerivedFamilyAxiomAudit.lean 2>&1)"
@@ -7396,13 +6822,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL derived family reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL derived-family regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELDerivedFamily.lean
-
       - name: Run checked Packet/BN6/BCEL derived-family hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-derived-family0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL canonical-grouping axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalGroupingAxiomAudit.lean 2>&1)"
@@ -7421,13 +6844,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL canonical grouping reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL canonical-grouping regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalGrouping.lean
-
       - name: Run checked Packet/BN6/BCEL canonical-grouping hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-canonical-grouping0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL canonical cut-ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedgerAxiomAudit.lean 2>&1)"
@@ -7446,13 +6866,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL canonical cut ledger reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL canonical cut-ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalCutLedger.lean
-
       - name: Run checked Packet/BN6/BCEL canonical cut-ledger hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-canonical-cut-ledger0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL canonical constant-cut-basis axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasisAxiomAudit.lean 2>&1)"
@@ -7471,13 +6888,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL canonical constant-cut basis reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL canonical constant-cut-basis regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELCanonicalConstantCutBasis.lean
-
       - name: Run checked Packet/BN6/BCEL canonical constant-cut-basis hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-canonical-constant-cut-basis0.test.mjs
-
       - name: Print checked Packet/BN6/BCEL sparse activation-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketBN6BCELSparseActivationRouteAxiomAudit.lean 2>&1)"
@@ -7496,13 +6910,10 @@ jobs:
             echo 'Checked Packet/BN6/BCEL sparse activation route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/BN6/BCEL sparse activation-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketBN6BCELSparseActivationRoute.lean
-
       - name: Run checked Packet/BN6/BCEL sparse activation-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-bn6-bcel-sparse-activation-route0.test.mjs
-
       - name: Print residual terminal PkgC-to-BN6 positive-cellization axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCBN6PositiveCellizationAxiomAudit.lean 2>&1)"
@@ -7521,13 +6932,10 @@ jobs:
             echo 'Residual terminal PkgC-to-BN6 positive cellization reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run residual terminal PkgC-to-BN6 positive-cellization regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCBN6PositiveCellization.lean
-
       - name: Run residual terminal PkgC-to-BN6 positive-cellization hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-bn6-positive-cellization0.test.mjs
-
       - name: Print checked Packet/PkgC/BN6/BCEL source-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRouteAxiomAudit.lean 2>&1)"
@@ -7546,13 +6954,10 @@ jobs:
             echo 'Checked Packet/PkgC/BN6/BCEL source route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/PkgC/BN6/BCEL source-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketPkgCBN6BCELSourceRoute.lean
-
       - name: Run checked Packet/PkgC/BN6/BCEL source-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-pkgc-bn6-bcel-source-route0.test.mjs
-
       - name: Print checked Packet/PkgC ambient-BN4 extraction-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketPkgCAmbientBN4ExtractionRouteAxiomAudit.lean 2>&1)"
@@ -7571,13 +6976,10 @@ jobs:
             echo 'Checked Packet/PkgC ambient-BN4 extraction route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run checked Packet/PkgC ambient-BN4 extraction-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketPkgCAmbientBN4ExtractionRoute.lean
-
       - name: Run checked Packet/PkgC ambient-BN4 extraction-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-pkgc-ambient-bn4-extraction-route0.test.mjs
-
       - name: Print PkgC restoration-coverage ambient-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCRestorationCoverageAmbientRouteAxiomAudit.lean 2>&1)"
@@ -7596,13 +6998,10 @@ jobs:
             echo 'PkgC restoration-coverage ambient route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run PkgC restoration-coverage ambient-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCRestorationCoverageAmbientRoute.lean
-
       - name: Run PkgC restoration-coverage ambient-route hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-restoration-coverage-ambient-route0.test.mjs
-
       - name: Print PkgC restoration-coverage BN6-ledger axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPResidualTerminalPkgCRestorationCoverageBN6LedgerAxiomAudit.lean 2>&1)"
@@ -7621,13 +7020,10 @@ jobs:
             echo 'PkgC restoration-coverage BN6 ledger reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run PkgC restoration-coverage BN6-ledger regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPResidualTerminalPkgCRestorationCoverageBN6Ledger.lean
-
       - name: Run PkgC restoration-coverage BN6-ledger hostile audit
         run: node --test audits/lean-residual-terminal-pkgc-restoration-coverage-bn6-ledger0.test.mjs
-
       - name: Print candidate-bound PkgC restoration-coverage BN6/BCEL-route axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRouteAxiomAudit.lean 2>&1)"
@@ -7646,13 +7042,10 @@ jobs:
             echo 'Candidate-bound PkgC restoration-coverage BN6/BCEL route reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run candidate-bound PkgC restoration-coverage BN6/BCEL-route regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketPkgCRestorationCoverageBN6BCELRoute.lean
-
       - name: Run candidate-bound PkgC restoration-coverage BN6/BCEL-route hostile audit
         run: node --test audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-bn6-bcel-route0.test.mjs
-
       - name: Print PkgC restoration-coverage charge-descent axioms
         run: |
           audit_output="$(lake env lean -DwarningAsError=true lean-audit/PNPPCCMinCheckedPacketPkgCRestorationCoverageChargeDescentAxiomAudit.lean 2>&1)"
@@ -7671,9 +7064,7 @@ jobs:
             echo 'PkgC restoration-coverage charge descent reached a forbidden project or choice axiom.' >&2
             exit 1
           fi
-
       - name: Run PkgC restoration-coverage charge-descent regression
         run: lake env lean -DwarningAsError=true lean-regression/PNPPCCMinCheckedPacketPkgCRestorationCoverageChargeDescent.lean
-
       - name: Run PkgC restoration-coverage charge-descent hostile audit
         run: node --test audits/lean-pccmin-checked-packet-pkgc-restoration-coverage-charge-descent0.test.mjs
