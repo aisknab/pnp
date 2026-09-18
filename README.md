@@ -1,22 +1,24 @@
 # pnp
 
-<!-- M272-CURRENT-SUMMARY:BEGIN -->
-## Current M272 boundary
+<!-- M273-CURRENT-SUMMARY:BEGIN -->
+## Current M273 boundary
 
-M272 integrates literal computational recoding into complete source-only replacement programs. The existing raw codec checks both actual circuits and dimensions; computed inverse and syntactic dependency checks cover full fields and arbitrary causal labels. Every real encoder/decoder gate is charged, only actual normalizer deletions are removed, and previous owners and charges remain in the historical ledger. Pending snapshots survive recoding until actual restoration. Proper-support verification still requires complete accepted execution, a closed final ledger and strict signed saving; failed tails and reversibility alone earn no certificate.
+M273 constructs a source-derived zero-cost exposure branch for arbitrary finite circuits. Requested fields must be literal inputs, constants or wires already named by ordinary outputs. Extension and projection transfer arbitrary equivalent realizations without adding gates, proving exact preservation of the semantic minimum and residual slack. An executable tuple check derives each alias from the actual source; the result applies to the actual carrier exposure. No observer, semantic minimum or correctness certificate is supplied by the caller.
 
-M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. This integration checks offered computational programs; it does not provide global certificate discovery, full manuscript profile semantics, all normalization/materializer rules, or encoded polynomial bounds. The inverse check enumerates all field valuations. Full VerifyDW, ChargeSoundness and Package E, terminal-derived families, global routing, unconditional SaturatePositive/BCELReady/ZeroSlack, complete polynomial PCCMin, deterministic SAT and the eligible root remain open.
+Kernel-checked counterexamples separate physical gate accounting from semantic minimum cost: adding no gates can still change the problem being minimized, and separately charged duplicate gates need not force an equal minimum increase. Refusal is exact only for this syntactic alias class; it does not establish semantic impossibility or a Package E route.
 
-Formal artefact coverage: 248 of 250 current scoped publication rows earned.
+M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M272’s checked computational recoding remains available. Full manuscript profiles, arbitrary positive-cost materializers, terminal-derived families, global route coverage, unconditional SaturatePositive/BCELReady/ZeroSlack, exact general PCCMin and complete encoded polynomial bounds remain open. Deterministic CNF-SAT membership in P and the eligible root remain absent; the publication gate is false.
+
+Formal artefact coverage: 249 of 251 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [complete computational recoding boundary and limits](./docs/lean_computational_recoding.md)
-and the [structural-action program boundary](./docs/lean_structural_programs.md).
+See the [zero-cost exposure boundary and limits](./docs/lean_zero_cost_exposure.md)
+and the [computational recoding boundary](./docs/lean_computational_recoding.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This extends checked offered computational replacement programs with literal recoding, but does not establish global certificate discovery, full manuscript profiles or a polynomial algorithm. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M272-CURRENT-SUMMARY:END -->
+Publication decision: defer. This establishes a source-derived literal-alias branch with exact minimum and slack preservation, not all semantic exposure, full manuscript profiles or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M273-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -40,12 +42,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | M230’s complete all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M272 integrates checked literal recoding into complete offered replacement programs while preserving pending obligations, causal bounds and historical physical ownership. Both actual recoders and inverse equations are checked; all real gates are charged. Proper-support acceptance still requires complete execution, a closed final ledger and strict signed saving. The inverse check is exhaustive, not a polynomial algorithm. Full profile semantics, remaining materializer rules, global certificate discovery, full manuscript VerifyDW and Package E, unconditional ZeroSlack and polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root remain absent; the publication gate is false. |
+| **What is the current verification status?** | M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M273 derives and checks literal input, constant and old-output aliases, proving exact semantic-minimum and slack preservation for the actual carrier exposure. It does not cover every semantically free exposure: refusal supplies no positive route, and physical gate accounting alone supplies no semantic lower bound. Full manuscript profiles, arbitrary materializers, global route coverage, unconditional ZeroSlack and polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root remain absent; the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 248 of 250 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
+| **How is progress measured?** | Formal artefact coverage: 249 of 251 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage is only evidence-ledger coverage, not proof completion; its denominator can grow. The fixed-weight estimate is not confidence, a probability of success or a time estimate. See [the canonical progress ledger](status/PROOF_PROGRESS.json). |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

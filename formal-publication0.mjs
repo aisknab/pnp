@@ -5,9 +5,31 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'cd1ea8edbe8defd732a7621fe3509253a299fc70a92a0c8cc4210904b7964e89';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '9f409577c56b9f68b17a1fd245c824baa24b0bef94f95da5361de378693573a4';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.ZeroCostExposure.Reference.toSource_eval",
+  "PNP.DirectWire.ZeroCostExposure.extend_gateCount",
+  "PNP.DirectWire.ZeroCostExposure.project_gateCount",
+  "PNP.DirectWire.ZeroCostExposure.extend_original",
+  "PNP.DirectWire.ZeroCostExposure.extend_field",
+  "PNP.DirectWire.ZeroCostExposure.project_semantics",
+  "PNP.DirectWire.ZeroCostExposure.extend_equivalent",
+  "PNP.DirectWire.ZeroCostExposure.project_equivalent",
+  "PNP.DirectWire.ZeroCostExposure.project_extend_equivalent",
+  "PNP.DirectWire.ZeroCostExposure.referenceMinimum_extend",
+  "PNP.DirectWire.ZeroCostExposure.residualSlack_extend",
+  "PNP.DirectWire.ZeroCostExposure.compileLayout_success_iff",
+  "PNP.DirectWire.ZeroCostExposure.compileLayout_sound",
+  "PNP.DirectWire.ZeroCostExposure.recognize_success_iff",
+  "PNP.DirectWire.ZeroCostExposure.recognize_isSome_iff",
+  "PNP.DirectWire.ZeroCostExposure.recognize_none_iff",
+  "PNP.DirectWire.ZeroCostExposure.recognize_gate_none_iff",
+  "PNP.DirectWire.ZeroCostExposure.checkLayout_iff",
+  "PNP.DirectWire.ZeroCostExposure.compileLayout_available_iff",
+  "PNP.DirectWire.WireCarrier.exposed_referenceMinimum_of_checkLayout",
+  "PNP.DirectWire.WireCarrier.exposed_residualSlack_of_checkLayout",
+  "PNP.DirectWire.WireCarrier.checked_exposure_preserves_problem",
   "PNP.DirectWire.StructuralReindexing.GateRenaming.decode_encode",
   "PNP.DirectWire.StructuralReindexing.GateRenaming.encode_length_le",
   "PNP.DirectWire.StructuralReindexing.GateRenaming.validCode_encode",
@@ -4579,7 +4601,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-17-271') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-18-273') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

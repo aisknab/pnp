@@ -3,7 +3,7 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 248 of 250 current scoped publication rows earned.
+Formal artefact coverage: 249 of 251 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
@@ -12,7 +12,7 @@ Global gates closed: 0 of 5.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-272`, 248 of 250
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-273`, 249 of 251
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -801,3 +801,12 @@ M271 integrates computed structural reordering into complete source-only replace
 ## M272 coverage review
 
 M272 integrates literal computational recoding into complete source-only replacement programs and proper-support verification. The existing raw codec checks both actual circuits and dimensions; computed inverse and syntactic dependency checks cover full fields and arbitrary causal labels. Real additions, deletions and derived encoder/decoder allocation identities remain in the complete historical ledger, and pending snapshots survive until actual restoration. Complete execution, final closure and strict saving remain mandatory. A constructive structural-code completeness theorem supports the existing route. This retires a computational integration edge, not full manuscript profiles, all rules, global discovery, unconditional residual theorems or polynomial bounds. The inverse check remains exhaustive over field valuations. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 248 of 250 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5.
+
+## M273 coverage review
+
+M273 constructs and checks the literal input/constant/old-output alias branch of zero-cost exposure for arbitrary finite circuits. Two-way transfer of arbitrary realizations proves exact semantic-minimum and slack preservation, and the source-derived tuple recognizer connects that guarantee to actual computational carrier fields. Refusal is exact only for the syntactic alias class and does not provide a positive route. Kernel-checked counterexamples prevent equating zero new gates with zero semantic cost or unique physical charging with a forced minimum increase. Existing independent-materializer work is reused. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Full profiles, arbitrary materializers, global routes, unconditional residual theorems and polynomial bounds remain open.
+
+Formal artefact coverage: 249 of 251 current scoped publication rows earned.
+Risk-weighted proof completion estimate: 40%.
+Uncertainty range: 20% to 40%.
+Global gates closed: 0 of 5.

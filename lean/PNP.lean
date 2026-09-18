@@ -326,3 +326,5 @@ import PNP.NANDCausalGuard
 import PNP.NANDWireRecodingState
 import PNP.NANDWireRecodingOwnership
 import PNP.NANDWireRecodingInput
+import PNP.NANDZeroCostExposure
+import PNP.NANDWireCarrierZeroCostExposure

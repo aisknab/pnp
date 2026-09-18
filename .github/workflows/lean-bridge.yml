@@ -89,7 +89,7 @@ concurrency:
 jobs:
   lean-bridge:
     runs-on: ubuntu-24.04
-    timeout-minutes: 120
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -3534,6 +3534,13 @@ jobs:
           done
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
+      - name: Check source-derived zero-cost exposure
+        run: npm run audit:m273
+      - name: Audit source-derived zero-cost exposure
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPZeroCostExposureAxiomAudit.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPZeroCostExposure.lean
       - name: Check computational recoding programs
         run: npm run audit:m272
       - name: Audit computational recoding programs
