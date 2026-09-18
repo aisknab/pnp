@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-273",
-  "lastReviewedDate": "2026-09-18",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274",
+  "lastReviewedDate": "2026-09-19",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 249,
-    "totalRows": 251,
+    "earnedRows": 250,
+    "totalRows": 252,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4248,6 +4248,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M273 constructs and checks the literal input/constant/old-output alias branch of zero-cost exposure for arbitrary finite circuits. Two-way transfer of arbitrary realizations proves exact semantic-minimum and slack preservation, and the source-derived tuple recognizer connects that guarantee to actual computational carrier fields. Refusal is exact only for the syntactic alias class and does not provide a positive route. Kernel-checked counterexamples prevent equating zero new gates with zero semantic cost or unique physical charging with a forced minimum increase. Existing independent-materializer work is reused. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Full profiles, arbitrary materializers, global routes, unconditional residual theorems and polynomial bounds remain open. Formal artefact coverage: 249 of 251 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274",
+      "formalArtefactCoverage": {
+        "earnedRows": 250,
+        "totalRows": 252
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M274 derives full and quotient computational profile semantics from actual wire sources at every valuation, with mandatory ordinary outputs in both modes. Constructed exhaustive minima and attained witnesses prove the exact full-lift boundary, universal cost bounds and conservation of full slack plus projection defect. Nested exposure masks transfer exactly the lost full slack to defect; an attained deficient quotient witness cannot silently become full replacement evidence. Source-derived all-gate fields and checked normalization and splicing connect the model to actual carriers. This closes a general computational comparison/accounting edge, not the full manuscript grammar, canonical terminal-family construction, forced-cost transparency, Package E, global routing or polynomial minimization. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 250 of 252 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

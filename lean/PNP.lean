@@ -328,3 +328,4 @@ import PNP.NANDWireRecodingOwnership
 import PNP.NANDWireRecodingInput
 import PNP.NANDZeroCostExposure
 import PNP.NANDWireCarrierZeroCostExposure
+import PNP.NANDWireProfileExposure

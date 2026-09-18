@@ -5,9 +5,44 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '9f409577c56b9f68b17a1fd245c824baa24b0bef94f95da5361de378693573a4';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '049e48eed54731b069dd7fb4a822d989ba1d924dcf1770bf6ca5a147ac1a7dd3';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.WireProfile.mask_implementation",
+  "PNP.DirectWire.WireProfile.mask_fieldValue",
+  "PNP.DirectWire.WireProfile.full_iff",
+  "PNP.DirectWire.WireProfile.quotient_iff",
+  "PNP.DirectWire.WireProfile.full_to_quotient",
+  "PNP.DirectWire.WireProfile.full_lift_iff",
+  "PNP.DirectWire.WireProfile.fullWitness_gateCount",
+  "PNP.DirectWire.WireProfile.fullWitness_matches",
+  "PNP.DirectWire.WireProfile.fullMinimum_le_physical",
+  "PNP.DirectWire.WireProfile.quotientMinimum_le_full",
+  "PNP.DirectWire.WireProfile.quotientWitness_gateCount",
+  "PNP.DirectWire.WireProfile.quotientWitness_matches",
+  "PNP.DirectWire.WireProfile.quotient_candidate_lower_bound",
+  "PNP.DirectWire.WireProfile.full_candidate_lower_bound",
+  "PNP.DirectWire.WireProfile.fullSlack_add_projectionDefect",
+  "PNP.DirectWire.WireProfile.exposure_balance",
+  "PNP.DirectWire.WireProfile.exposure_preserves_positive_alternative",
+  "PNP.DirectWire.WireProfile.quotient_minimum_cannot_lift_of_positive_defect",
+  "PNP.DirectWire.WireProfile.exposure_loss_has_unliftable_quotient_witness",
+  "PNP.DirectWire.WireProfile.allGateFields_value",
+  "PNP.DirectWire.WireProfile.allGateFields_positive_alternative",
+  "PNP.DirectWire.WireProfile.quotientMinimum_forget_all",
+  "PNP.DirectWire.WireProfile.source_slack_balance",
+  "PNP.DirectWire.WireProfile.source_positive_alternative",
+  "PNP.DirectWire.WireProfile.mask_absorb_equivalent",
+  "PNP.DirectWire.WireProfile.quotientMinimum_mask_active",
+  "PNP.DirectWire.WireProfile.fullMinimum_mask_mono",
+  "PNP.DirectWire.WireProfile.exposure_states_balance",
+  "PNP.DirectWire.WireProfile.exposure_moves_exact_slack_to_defect",
+  "PNP.DirectWire.WireProfile.normalize_fullEquivalent",
+  "PNP.DirectWire.WireProfile.fullMinimum_normalize",
+  "PNP.DirectWire.WireProfile.quotientMinimum_normalize",
+  "PNP.DirectWire.WireProfile.splice_fullEquivalent",
+  "PNP.DirectWire.WireProfile.fullMinimum_splice",
+  "PNP.DirectWire.WireProfile.quotientMinimum_splice",
   "PNP.DirectWire.ZeroCostExposure.Reference.toSource_eval",
   "PNP.DirectWire.ZeroCostExposure.extend_gateCount",
   "PNP.DirectWire.ZeroCostExposure.project_gateCount",
@@ -4601,7 +4636,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-18-273') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-274') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

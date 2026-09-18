@@ -3,7 +3,7 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 249 of 251 current scoped publication rows earned.
+Formal artefact coverage: 250 of 252 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
@@ -12,13 +12,19 @@ Global gates closed: 0 of 5.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-18-273`, 249 of 251
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-274`, 250 of 252
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
 difficulty, and the denominator can grow when a dependency is discovered or an
 obligation is decomposed. New finite, local, conditional, or supplied-data
 results can add valuable evidence without retiring a global proof obligation.
+
+M274 adds actual wire-backed full/quotient comparison, attained semantic minima
+and exact exposure accounting while preserving ordinary outputs in both modes.
+The comparison model does not establish full manuscript profiles, a terminal
+family, a global route or polynomial minimization. No fixed checkpoint or global
+gate changes. See the [component boundary](./lean_wire_profile_exposure.md).
 
 ## Risk-weighted proof completion estimate
 
