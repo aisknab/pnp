@@ -248,6 +248,17 @@ artefact coverage distinct from the risk-weighted proof-completion estimate.
   immutable objects or environments.
 - Prefer the smallest targeted check that can reject the current change before
   a broad suite. Do not repeat an expensive green command merely for ceremony.
+- Before using `--skip-unit-tests` or an equivalent shortcut, compare the exact
+  required test-file set with the successful evidence being reused. Include
+  npm lifecycle hooks (`pretest`, `test`, `posttest`) and delegated commands.
+  A name-filtered run is not full-file coverage.
+  `npm test` and `CURRENT_VERIFICATION_TESTS0` in
+  `scripts/pnp-verify-all.mjs` are not interchangeable coverage.
+  Run the union once, or run only the uncovered complement after checking
+  unchanged source, fixtures and environment. Record that coverage calculation;
+  a green smaller suite never authorizes skipping a larger verifier test set.
+  Reconcile every older closed-interface consumer of a changed Lean module,
+  including tests absent from the default npm test command.
 
 ### Verification ownership matrix
 

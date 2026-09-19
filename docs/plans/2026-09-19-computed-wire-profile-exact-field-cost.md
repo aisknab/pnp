@@ -1,9 +1,10 @@
 # Computed wire-profile models and exact independent-field cost
 
-Status: implementation, explicit-root build, permanent regressions and exact
-axiom closure checks passed. Compiled publication interfaces are sealed; current
-report, focused publication checks, broad validation and review remain required.
-No fixed checkpoint credit is awarded.
+Status: implementation, explicit-root build, permanent regressions, exact axiom
+closure checks, report generation and complete required test-file coverage
+passed. The draft review's stale extraction-consumer expectations are repaired.
+Normal PR checks, manual merge and exact-merge release verification remain
+required. No fixed checkpoint credit is awarded.
 
 ## Legacy anchor and dependency
 
@@ -62,6 +63,19 @@ discharges rather than asking the caller to supply a correctness certificate.
 This is a computed model for actual computational wire fields, not the complete manuscript profile grammar or a terminal-derived governed family. The extracted support is field-preserving but is not asserted to be proper, smaller or optimal. The exact additive cost theorem concerns the explicit independent fresh-input NAND family, not arbitrary correlated, duplicated or supplied manuscript fields. The semantic retraction helper has an explicit uniform constant-value hypothesis, discharged for that family; it is not a general polynomial semantic-constant detector. The existing shared materializer charge is only bounded below by the family's projection defect, not proved equal to it. Availability checks enumerate valuations and reference minima remain exhaustive; no complete polynomial minimizer follows. Complete Package E, global route coverage and rank decrease, unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, encoded runtime, output and certificate bounds, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.
 
 Publication decision: defer. This supplies a computed computational-profile model and exact costs for an explicit independent-field family, not the complete manuscript profile grammar, terminal-derived families, complete Package E or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+
+## Consumer-coverage review before the repaired push
+
+The first draft's CI exposed an incomplete pre-push coverage calculation:
+the default npm test list and the one-command verifier's required test list
+are different. Skipping the verifier's tests after the smaller npm suite
+omitted older consumers of the two new extraction lemmas. Reconcile both
+closed declaration lists without changing their rejection rules. Run those
+focused contracts and the still-uncovered verifier files, including the
+coverage already provided by npm lifecycle hooks and delegated commands. Reuse
+unchanged proof, inventory and report evidence. Repeat the exact-feature checkout check
+for the repaired commit and require every normal PR check before merging.
+No theorem, axiom boundary, progress checkpoint or publication claim changes.
 
 See the [component review](../lean_computed_wire_profile.md),
 [canonical progress ledger](../../status/PROOF_PROGRESS.json) and
