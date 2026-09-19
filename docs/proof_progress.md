@@ -3,7 +3,7 @@
 The project reports two independent measurements. They answer different
 questions and must never be combined.
 
-Formal artefact coverage: 251 of 253 current scoped publication rows earned.
+Formal artefact coverage: 252 of 254 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
@@ -12,7 +12,7 @@ Global gates closed: 0 of 5.
 
 Formal artefact coverage counts earned rows in the current formal publication
 milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-275`, 251 of 253
+`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-276`, 252 of 254
 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical
@@ -20,12 +20,11 @@ difficulty, and the denominator can grow when a dependency is discovered or an
 obligation is decomposed. New finite, local, conditional, or supplied-data
 results can add valuable evidence without retiring a global proof obligation.
 
-M275 connects actual restoration cost to full and quotient minima and derives
-the exact strict-gain boundary. A checked positive-slack refusal records the
-limit of restoration plus physical normalization; the existing complete unary
-route recovers the example without extending completeness to arbitrary inputs.
-Reference minimization remains exhaustive. No fixed checkpoint or global gate
-changes. See the [component boundary](./lean_wire_profile_restoration.md).
+M276 supplies a computed computational-profile model and exact cost for an
+arbitrary-width independent-field family. It does not establish arbitrary-field
+transparency, proper-support discovery, global routes or polynomial minimization.
+No fixed checkpoint or global gate changes. See the
+[component boundary](./lean_computed_wire_profile.md).
 
 ## Risk-weighted proof completion estimate
 

@@ -1479,6 +1479,36 @@ theorem extractTerminalSupport_induced
     (terminalInducedBoundaryValuation candidate records input) output).trans
       (terminalOpenSupportSemantics_induced candidate records input output)
 
+/-- Every selected internal gate, including one absent from the ordinary
+    output interface, retains its exact open-support value after extraction. -/
+theorem extractTerminalSupport_gate_evaluation
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (boundaryValuation :
+      Valuation (terminalBoundaryPorts candidate.program records).length)
+    (gate : Fin gates) (selected : terminalGateSelected records gate = true) :
+    (extractTerminalSupport candidate records).extractedCandidate.program.eval
+        boundaryValuation (terminalExtractionGateIndex candidate records gate selected) =
+      terminalOpenGateEvaluation candidate records boundaryValuation gate :=
+  (terminalExtractionState candidate records).correct boundaryValuation gate selected
+
+/-- At the induced boundary, an internal extracted gate recovers the actual
+    original gate value, without requiring it to be an ordinary output. -/
+theorem extractTerminalSupport_gate_induced
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (input : Valuation inputs)
+    (gate : Fin gates) (selected : terminalGateSelected records gate = true) :
+    (extractTerminalSupport candidate records).extractedCandidate.program.eval
+        (terminalInducedBoundaryValuation candidate records input)
+        (terminalExtractionGateIndex candidate records gate selected) =
+      candidate.program.eval input gate :=
+  (extractTerminalSupport_gate_evaluation candidate records
+    (terminalInducedBoundaryValuation candidate records input) gate selected).trans
+      (terminalOpenGateEvaluation_induced_selected candidate records input gate selected)
+
 /-- Execute terminal saturation and then extract the resulting arbitrary gate
     support. -/
 def extractSaturatedTerminalSupport

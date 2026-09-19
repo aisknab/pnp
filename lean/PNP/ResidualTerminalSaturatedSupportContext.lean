@@ -165,6 +165,26 @@ private theorem physicalComplement_gateCount_partition
   rw [selector]
   exact selectedGateCount_partition (terminalGateSelected records)
 
+/-- The canonical physical complement selects exactly the unselected gates. -/
+theorem terminalPhysicalComplementRecords_selected
+    {inputs gates outputs profileWidth : Nat}
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (gate : Fin gates) :
+    terminalGateSelected (terminalPhysicalComplementRecords records) gate =
+      !(terminalGateSelected records gate) :=
+  physicalComplement_selected records gate
+
+/-- An arbitrary physical support and its canonical complement partition the
+    original gates exactly; saturation is not a premise. -/
+theorem terminalPhysicalComplementRecords_gateCount_partition
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    (extractTerminalSupport candidate records).gateCount +
+      (extractTerminalSupport candidate
+        (terminalPhysicalComplementRecords records)).gateCount = gates :=
+  physicalComplement_gateCount_partition candidate records
+
 private theorem complementBoundary_gate_in_supportInterface
     {inputs gates outputs profileWidth : Nat}
     (candidate : Candidate inputs gates outputs)

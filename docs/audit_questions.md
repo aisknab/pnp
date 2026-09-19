@@ -1,38 +1,37 @@
 # Reviewer Audit Questions
 
-<!-- M275-CURRENT-SUMMARY:BEGIN -->
-## Current M275 boundary
+<!-- M276-CURRENT-SUMMARY:BEGIN -->
+## Current M276 boundary
 
-M275 connects the existing shared hidden-wire materializer to actual full and
-quotient computational profiles. Restoring a relaxed witness preserves every
-ordinary output and profile field, but the restoration cost matters. General
-theorems identify the exact paid and normalized overhead and prove precisely
-when the computed candidate is strictly smaller than the original.
+M276 constructs a computational-profile model from actual circuit sources.
+Each available field uses one source valid for every input valuation; padding
+and output rewording preserve the observer, and actual field dependencies
+derive a support that preserves every field. No caller supplies that model or
+field support. The support is not claimed to be proper, smaller or optimal.
 
-A kernel-checked positive-slack example shows that restoration plus physical
-normalization can find no improvement even when one exists. The already complete
-one-input constructor recovers that case; its minimum agrees with the current
-full minimum for arbitrary output and field widths. This does not extend unary
-completeness to arbitrary inputs. Reference minimization remains exhaustive,
-not polynomial.
+For any old implementation and any number of independent fresh NAND fields,
+a lower-bound argument and a matching construction establish the exact added
+semantic cost. The full minimum, relaxed minimum and their difference agree
+inside the computed model. This is an arbitrary-width family theorem, not a
+claim about arbitrary correlated manuscript fields. Availability and reference
+minimization remain exhaustive, not polynomial.
 
 M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT
 NP-completeness remain kernel checked. Full manuscript profiles,
-terminal-derived families, forced-cost transparency, global route coverage,
+terminal-derived families, arbitrary-field cost transparency, global route coverage,
 unconditional SaturatePositive/BCELReady/ZeroSlack, exact polynomial PCCMin and
 complete encoded polynomial bounds remain open. Deterministic CNF-SAT membership
 in P and the eligible root remain absent; the publication gate is false.
 
-Formal artefact coverage: 251 of 253 current scoped publication rows earned.
+Formal artefact coverage: 252 of 254 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [restoration cost and limits](./lean_wire_profile_restoration.md)
-and the [wire-backed comparison model](./lean_wire_profile_exposure.md).
+See the [computed model and exact independent-field costs](./lean_computed_wire_profile.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This establishes a general restoration-cost interface and its checked limitations, not terminal-derived families, complete Package E or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M275-CURRENT-SUMMARY:END -->
+Publication decision: defer. This supplies a computed computational-profile model and exact costs for an explicit independent-field family, not the complete manuscript profile grammar, terminal-derived families, complete Package E or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M276-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

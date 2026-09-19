@@ -97,6 +97,8 @@ const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   "PNP.DirectWire.terminalOpenSupportSemantics_induced",
   "PNP.DirectWire.extractTerminalSupport_semantics",
   "PNP.DirectWire.extractTerminalSupport_induced",
+  "PNP.DirectWire.extractTerminalSupport_gate_evaluation",
+  "PNP.DirectWire.extractTerminalSupport_gate_induced",
   "PNP.DirectWire.extractSaturatedTerminalSupport",
   "PNP.DirectWire.extractSaturatedTerminalSupport_records",
   "PNP.DirectWire.extractSaturatedTerminalSupport_gateCount",

@@ -61,6 +61,8 @@ function validateSource0(source) {
     .test(compact0(source)), 'shortcut-or-certificate');
   require0(JSON.stringify(explicitLeanDeclarationHeads0(source).map(head => head.name)) ===
     JSON.stringify([NAMES[0], 'terminalPhysicalComplementRecords',
+      'terminalPhysicalComplementRecords_selected',
+      'terminalPhysicalComplementRecords_gateCount_partition',
       'terminalCandidateSaturatePhysicalContext', ...NAMES.slice(1)]), 'public-interface');
   for (const [index, name] of NAMES.entries())
     require0(declarationHeader0(block0(source, name)) === SIGNATURES[index], 'signature:' + name);
