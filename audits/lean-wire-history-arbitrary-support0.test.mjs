@@ -82,6 +82,8 @@ const SPECS = [
       "terminalOpenSupportSemantics_induced",
       "extractTerminalSupport_semantics",
       "extractTerminalSupport_induced",
+      "extractTerminalSupport_gate_evaluation",
+      "extractTerminalSupport_gate_induced",
       "extractSaturatedTerminalSupport",
       "extractSaturatedTerminalSupport_records",
       "extractSaturatedTerminalSupport_gateCount",
