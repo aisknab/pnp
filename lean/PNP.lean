@@ -338,3 +338,7 @@ import PNP.NANDFreshFieldCost
 import PNP.NANDFreshFieldExtension
 import PNP.NANDFreshFieldProfile
 import PNP.NANDComputedWireProfileCost
+import PNP.NANDClosedSupportObservation
+import PNP.NANDClosedSupportUnion
+import PNP.NANDClosedSupportProfile
+import PNP.NANDClosedSupportSquare

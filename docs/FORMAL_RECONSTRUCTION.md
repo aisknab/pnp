@@ -1,37 +1,40 @@
 # Formal reconstruction notice
 
-<!-- M276-CURRENT-SUMMARY:BEGIN -->
-## Current M276 boundary
+<!-- M277-CURRENT-SUMMARY:BEGIN -->
+## Current M277 boundary
 
-M276 constructs a computational-profile model from actual circuit sources.
-Each available field uses one source valid for every input valuation; padding
-and output rewording preserve the observer, and actual field dependencies
-derive a support that preserves every field. No caller supplies that model or
-field support. The support is not claimed to be proper, smaller or optimal.
+M277 identifies exactly which computational fields are observable in an actual
+computed dependency-closed support. Its source table requires one original
+source to match a field uniformly over every input valuation. Observations
+compose across arbitrary seed unions and finite families.
 
-For any old implementation and any number of independent fresh NAND fields,
-a lower-bound argument and a matching construction establish the exact added
-semantic cost. The full minimum, relaxed minimum and their difference agree
-inside the computed model. This is an arbitrary-width family theorem, not a
-claim about arbitrary correlated manuscript fields. Availability and reference
-minimization remain exhaustive, not polynomial.
+Seeding the requested profile records derives preservation of those fields.
+The actual meet, left, right and join supports agree on their requested field
+values for every ambient input. Existing extraction, structural square laws
+and profile locality are reused. This is not ordinary-output equivalence,
+a complete manuscript projection square or proper-positive support discovery.
+
+A checked positive-slack duplicate example bounds the support claim, but the
+existing physical normalizer removes its duplicate. It is not a counterexample
+to a theorem restricted to normalized terminal candidates. Source matching
+and influence remain exhaustive; no polynomial construction follows.
 
 M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT
-NP-completeness remain kernel checked. Full manuscript profiles,
-terminal-derived families, arbitrary-field cost transparency, global route coverage,
-unconditional SaturatePositive/BCELReady/ZeroSlack, exact polynomial PCCMin and
-complete encoded polynomial bounds remain open. Deterministic CNF-SAT membership
+NP-completeness remain kernel checked. Complete manuscript profiles,
+terminal-derived families, forced-cost transparency, global route coverage,
+unconditional SaturatePositive/BCELReady/ZeroSlack, exact polynomial PCCMin
+and encoded polynomial bounds remain open. Deterministic CNF-SAT membership
 in P and the eligible root remain absent; the publication gate is false.
 
-Formal artefact coverage: 252 of 254 current scoped publication rows earned.
+Formal artefact coverage: 253 of 255 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [computed model and exact independent-field costs](./lean_computed_wire_profile.md).
+See the [computed closed-support compatibility boundary](./lean_closed_support_profile.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This supplies a computed computational-profile model and exact costs for an explicit independent-field family, not the complete manuscript profile grammar, terminal-derived families, complete Package E or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M276-CURRENT-SUMMARY:END -->
+Publication decision: defer. This establishes computational-field compatibility for derived closed supports and their actual squares, not ordinary-output reconstruction, complete manuscript profiles, terminal-derived families, proper-positive discovery or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M277-CURRENT-SUMMARY:END -->
 
 **Effective: 16 July 2026**
 

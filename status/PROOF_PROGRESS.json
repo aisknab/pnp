@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-276",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-277",
   "lastReviewedDate": "2026-09-19",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 252,
-    "totalRows": 254,
+    "earnedRows": 253,
+    "totalRows": 255,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4299,6 +4299,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M276 combines the source-derived computational-profile model with an exact independent-field cost family, then proves their general coupling. One uniformly valid actual source is computed for each available field; arbitrary input padding and output rewording preserve the observer, and actual field seeds derive a preserving support. A semantic gate-retraction argument and matching extension prove the exact additional cost for arbitrary old implementations and arbitrary widths of independent fresh NAND fields. This retires those bounded model and cost interfaces, not arbitrary manuscript-field transparency, proper-support discovery, terminal-family derivation, global routing or polynomial minimization. The two prepared components are integrated and reviewed as one milestone rather than separate release cycles. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 252 of 254 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-277",
+      "formalArtefactCoverage": {
+        "earnedRows": 253,
+        "totalRows": 255
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M277 derives the computational observations of actual closed supports and proves uniform preservation of requested fields at every corner of a constructed support square. The source table, arbitrary-family union law and profile-seeded construction close that bounded compatibility interface without supplied correctness data. Existing extraction, structural square laws and profile locality are reused, not awarded again. The positive-slack duplicate obstruction is explicitly candidate-level: the existing physical normalizer removes it, so it is not evidence against a normalized-terminal manuscript theorem. Ordinary-output reconstruction, the complete profile grammar, proper-positive support discovery, terminal-derived families, global routing and polynomial minimization remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 253 of 255 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

@@ -5,9 +5,33 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '436635aaf7b3a49b3c9ee27d71dd87a7997617fbce7b8f28cba2fcf28bf701bf';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '70a373c7f859e751f808b532e6bd5890c34f14fb23eb7749e36fe5e77775987b';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.ClosedSupportObservation.available_eq_tableAvailable",
+  "PNP.DirectWire.ClosedSupportObservation.available_iff_retained_source",
+  "PNP.DirectWire.ClosedSupportObservation.available_of_retained_source",
+  "PNP.DirectWire.ClosedSupportObservation.boundary_isInput",
+  "PNP.DirectWire.ClosedSupportObservation.gate_value",
+  "PNP.DirectWire.ClosedSupportObservation.lift_retained_source",
+  "PNP.DirectWire.ClosedSupportObservation.mem_matchingSources",
+  "PNP.DirectWire.ClosedSupportObservation.retract_support_source",
+  "PNP.DirectWire.ClosedSupportObservation.tableAvailable_iff",
+  "PNP.DirectWire.ClosedSupportProfile.profile_available",
+  "PNP.DirectWire.ClosedSupportProfile.projected_available",
+  "PNP.DirectWire.ClosedSupportProfile.projected_fieldValue",
+  "PNP.DirectWire.ClosedSupportProfile.projected_tableAvailable",
+  "PNP.DirectWire.ClosedSupportSquare.corner_available",
+  "PNP.DirectWire.ClosedSupportSquare.corner_fieldValue",
+  "PNP.DirectWire.ClosedSupportSquare.corner_profileMember",
+  "PNP.DirectWire.ClosedSupportSquare.corners_fieldValue_equal",
+  "PNP.DirectWire.ClosedSupportUnion.available_append",
+  "PNP.DirectWire.ClosedSupportUnion.available_flatten",
+  "PNP.DirectWire.ClosedSupportUnion.available_mono",
+  "PNP.DirectWire.ClosedSupportUnion.mem_records_append",
+  "PNP.DirectWire.ClosedSupportUnion.records_mono",
+  "PNP.DirectWire.ClosedSupportUnion.retained_append",
+  "PNP.DirectWire.ClosedSupportUnion.tableAvailable_append",
   "PNP.DirectWire.ComputedWireProfileCost.full_minimum",
   "PNP.DirectWire.ComputedWireProfileCost.minimum_gap",
   "PNP.DirectWire.ComputedWireProfileCost.quotient_minimum",
@@ -4727,7 +4751,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-276') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-277') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

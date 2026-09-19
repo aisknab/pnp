@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-276",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-277",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,33 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanClosedSupportProfileFormalized": true,
+  "leanClosedSupportProfileAxiomAuditPassed": true,
+  "leanClosedSupportProfileAuditedDeclarationCount": 24,
+  "leanClosedSupportProfileRetainedSourceTheorem": "PNP.DirectWire.ClosedSupportObservation.available_iff_retained_source",
+  "leanClosedSupportProfileComputedTableTheorem": "PNP.DirectWire.ClosedSupportObservation.available_eq_tableAvailable",
+  "leanClosedSupportProfileSeedUnionTheorem": "PNP.DirectWire.ClosedSupportUnion.available_append",
+  "leanClosedSupportProfileFiniteFamilyTheorem": "PNP.DirectWire.ClosedSupportUnion.available_flatten",
+  "leanClosedSupportProfileRequestedFieldsTheorem": "PNP.DirectWire.ClosedSupportProfile.projected_fieldValue",
+  "leanClosedSupportProfileActualCornerTheorem": "PNP.DirectWire.ClosedSupportSquare.corner_fieldValue",
+  "leanClosedSupportProfileCornerAgreementTheorem": "PNP.DirectWire.ClosedSupportSquare.corners_fieldValue_equal",
+  "leanClosedSupportProfileArbitraryFiniteDimensionsCovered": true,
+  "leanClosedSupportProfileComputedSupportAndMatchingTable": true,
+  "leanClosedSupportProfileUniformFieldValuesAtActualCornersProved": true,
+  "leanClosedSupportProfileCallerSuppliedClosureOrCorrectnessRequired": false,
+  "leanClosedSupportProfileOrdinaryOutputEquivalenceProved": false,
+  "leanClosedSupportProfileCompleteManuscriptProjectionSquareProved": false,
+  "leanClosedSupportProfileProperPositiveSupportProved": false,
+  "leanClosedSupportProfileDuplicateIsNormalizedTerminalCounterexample": false,
+  "leanClosedSupportProfileCompletePackageEOrGlobalRoutesProved": false,
+  "leanClosedSupportProfileUnconditionalSaturatePositiveProved": false,
+  "leanClosedSupportProfileUnconditionalBCELReadyProved": false,
+  "leanClosedSupportProfileUnconditionalZeroSlackProved": false,
+  "leanClosedSupportProfileExactPolynomialPCCMinProved": false,
+  "leanClosedSupportProfilePolynomialRuntimeOutputAndCertificateBoundsProved": false,
+  "leanClosedSupportProfileSourceMatchingAndInfluenceAreExhaustive": true,
+  "leanClosedSupportProfileRuntimeExecutionIsProofAuthority": false,
+  "leanClosedSupportProfileScope": "arbitrary-finite-computed-closed-support-observations-source-alternatives-union-and-profile-seeded-actual-square-corner-compatibility-no-ordinary-output-proper-positive-full-profile-or-polynomial-claim",
   "leanComputedWireProfileFormalized": true,
   "leanComputedWireProfileAxiomAuditPassed": true,
   "leanComputedWireProfileAuditedDeclarationCount": 72,
@@ -3204,6 +3231,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m277",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPClosedSupportProfileSquareAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true --run lean-regression/PNPClosedSupportProfileSquare.lean",
     "npm run audit:m276",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPComputedWireProfileAxiomAudit.lean",
     "lake env lean -DwarningAsError=true --run lean-regression/PNPWireProfileAvailability.lean",
@@ -4155,7 +4185,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "852898d50113384ca198c5da231ed704e3f97e8016d1f4ce03b9fc85411e41b0",
+    "actualSourceClosureSha256": "eac2e63ce3754618153495d7724e1e02c3227d9ae3cf595b002ba7d162e75732",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4188,19 +4218,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "0943634f8ed82c8a126c6cec994696a249368c5608500b1147fb91f7ceaef7b5",
+  "leanTheoremInventorySha256": "eca21f9fa84a5a1cb1eab5828d017efc27743c29b95fa75820390864cd1129bd",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 51341,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 21000,
-  "leanTheoremInventoryTheoremCount": 28002,
+  "leanTheoremInventoryDeclarationCount": 51375,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 21007,
+  "leanTheoremInventoryTheoremCount": 28026,
   "leanTheoremInventoryAssumptionFreeTheoremCount": 11725,
-  "leanTheoremInventorySourceClosureModuleCount": 596,
-  "leanSourceClosureSha256": "852898d50113384ca198c5da231ed704e3f97e8016d1f4ce03b9fc85411e41b0",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-19-276",
+  "leanTheoremInventorySourceClosureModuleCount": 600,
+  "leanSourceClosureSha256": "eac2e63ce3754618153495d7724e1e02c3227d9ae3cf595b002ba7d162e75732",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-19-277",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "16aa6ccdcf09de4fdedb07e8859d5ff38cb11edb77bdb690f62c3d1ae955d121",
+  "formalPublicationMapSha256": "5f8d7f26d640344de55b0e13f850beca2b3842dbb22ec15114391abb5d6be2bb",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -67676,9 +67706,338 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "computed-closed-support-profile-squares",
+      "nonClaim": "This is computational-field compatibility, not ordinary-output equivalence, the complete manuscript profile grammar, a terminal-derived governed family, or a legitimate full projection square. Field preservation does not imply a proper, smaller, minimum or positive support. A kernel-checked duplicate-circuit example has positive full slack but no proper seed in the computed model; the existing sharing pass removes that duplicate, so the example is not a normalized terminal counterexample and does not refute a manuscript theorem with additional terminal or admissibility hypotheses. Source matching and influence remain finite exhaustive computations, not polynomial algorithms. Complete Package E, forced-cost transparency, global route coverage and rank decrease, unconditional SaturatePositive, BCELReady and ZeroSlack, exact polynomial PCCMin, encoded runtime, output and certificate bounds, deterministic CNFSAT in P and the eligible root remain open. No fixed weighted checkpoint or global proof gate closes, and P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.DirectWire.ClosedSupportObservation.available_eq_tableAvailable",
+        "PNP.DirectWire.ClosedSupportObservation.available_iff_retained_source",
+        "PNP.DirectWire.ClosedSupportObservation.available_of_retained_source",
+        "PNP.DirectWire.ClosedSupportObservation.boundary_isInput",
+        "PNP.DirectWire.ClosedSupportObservation.gate_value",
+        "PNP.DirectWire.ClosedSupportObservation.lift_retained_source",
+        "PNP.DirectWire.ClosedSupportObservation.mem_matchingSources",
+        "PNP.DirectWire.ClosedSupportObservation.retract_support_source",
+        "PNP.DirectWire.ClosedSupportObservation.tableAvailable_iff",
+        "PNP.DirectWire.ClosedSupportProfile.profile_available",
+        "PNP.DirectWire.ClosedSupportProfile.projected_available",
+        "PNP.DirectWire.ClosedSupportProfile.projected_fieldValue",
+        "PNP.DirectWire.ClosedSupportProfile.projected_tableAvailable",
+        "PNP.DirectWire.ClosedSupportSquare.corner_available",
+        "PNP.DirectWire.ClosedSupportSquare.corner_fieldValue",
+        "PNP.DirectWire.ClosedSupportSquare.corner_profileMember",
+        "PNP.DirectWire.ClosedSupportSquare.corners_fieldValue_equal",
+        "PNP.DirectWire.ClosedSupportUnion.available_append",
+        "PNP.DirectWire.ClosedSupportUnion.available_flatten",
+        "PNP.DirectWire.ClosedSupportUnion.available_mono",
+        "PNP.DirectWire.ClosedSupportUnion.mem_records_append",
+        "PNP.DirectWire.ClosedSupportUnion.records_mono",
+        "PNP.DirectWire.ClosedSupportUnion.retained_append",
+        "PNP.DirectWire.ClosedSupportUnion.tableAvailable_append"
+      ],
+      "scope": "For arbitrary finite input, ordinary-output and computational-field widths, the actual computed dependency-closed support observes a field exactly when it retains an original constant, input or gate source whose value agrees with that field uniformly over every input valuation. The matching table and support are computed from the circuit and ordinary seed data. For arbitrary seed pairs, observations of the computed union are the Boolean union of the separate observations. This extends to arbitrary finite families, with the empty support's observation as the base, and to seed-inclusion monotonicity. Seeding the requested profile records derives availability and uniform field-value preservation without injecting their literal original gate bindings. The actual meet, left, right and join of the constructed support square all preserve those requested computational fields and agree pairwise on their values at every ambient input valuation. Existing source extraction, structural square laws and arbitrary-context profile locality are reused, not newly claimed.",
+      "title": "Computed closed-support observations and profile-compatible squares",
+      "theoremRows": [
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.available_eq_tableAvailable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "36284860f3182440dcc3da9997bd6ed38ead391b387a68fadc80ed25afac84d0",
+          "expectedKernelTypeSha256": "36284860f3182440dcc3da9997bd6ed38ead391b387a68fadc80ed25afac84d0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.available_iff_retained_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fb3cb40786c80fcf013c7f3b416afde3aa2387726e22d9e9493e31e029509a9e",
+          "expectedKernelTypeSha256": "fb3cb40786c80fcf013c7f3b416afde3aa2387726e22d9e9493e31e029509a9e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.available_of_retained_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f313f1f1d7ee09299706e95e0f60c23bbb7ef276e2eb5258128d2ed374e08d66",
+          "expectedKernelTypeSha256": "f313f1f1d7ee09299706e95e0f60c23bbb7ef276e2eb5258128d2ed374e08d66",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.boundary_isInput",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "e5d2bdf2e64b60135b2d4e6252234b5243512f5cd8e53856081b30ee9569e790",
+          "expectedKernelTypeSha256": "e5d2bdf2e64b60135b2d4e6252234b5243512f5cd8e53856081b30ee9569e790",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.gate_value",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "950413f4c8ad24ce9d900ad8e199be263bc32bc12bf90cbdd9d59baa82503ad0",
+          "expectedKernelTypeSha256": "950413f4c8ad24ce9d900ad8e199be263bc32bc12bf90cbdd9d59baa82503ad0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.lift_retained_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4e8768c53b537b640523e5c1d0611fb537c87246605a8c092c02e964abe9f4b",
+          "expectedKernelTypeSha256": "c4e8768c53b537b640523e5c1d0611fb537c87246605a8c092c02e964abe9f4b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.mem_matchingSources",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2b64c44c843b773cc956648fcd42c136cf5ee3bf16145ca09ca5d996fbbdba15",
+          "expectedKernelTypeSha256": "2b64c44c843b773cc956648fcd42c136cf5ee3bf16145ca09ca5d996fbbdba15",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.retract_support_source",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "13d83a42f5ffa140fff436423e6c8f6970d29f3edfb0a19934e6817f96475210",
+          "expectedKernelTypeSha256": "13d83a42f5ffa140fff436423e6c8f6970d29f3edfb0a19934e6817f96475210",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportObservation.tableAvailable_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "70a629b8bf4422a67cc1d98a7439d27894a786f3aa7d27f6f5c12d7de06a3e1f",
+          "expectedKernelTypeSha256": "70a629b8bf4422a67cc1d98a7439d27894a786f3aa7d27f6f5c12d7de06a3e1f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportProfile.profile_available",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "0c747b559a85a56a1bec444232dce9fa606376204c01ea1e7fc95942017c6ce2",
+          "expectedKernelTypeSha256": "0c747b559a85a56a1bec444232dce9fa606376204c01ea1e7fc95942017c6ce2",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportProfile.projected_available",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9c9c8563bcb49b2ec9d6b9ab3adeacd1c7cd478a192a667b65f33ed5ee74cfb9",
+          "expectedKernelTypeSha256": "9c9c8563bcb49b2ec9d6b9ab3adeacd1c7cd478a192a667b65f33ed5ee74cfb9",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportProfile.projected_fieldValue",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d4667a897c89db1f6be34087132d22ee064e589dddfce16ee9c2e3a9958051d6",
+          "expectedKernelTypeSha256": "d4667a897c89db1f6be34087132d22ee064e589dddfce16ee9c2e3a9958051d6",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportProfile.projected_tableAvailable",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "86a59577ff0afb9bd2fa697503a95050a44b2b898886d539749522c129c92e89",
+          "expectedKernelTypeSha256": "86a59577ff0afb9bd2fa697503a95050a44b2b898886d539749522c129c92e89",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportSquare.corner_available",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "be838c5b6f99217989f84aa11a754ed1d1525ee873c4849d805bf4859f886d8e",
+          "expectedKernelTypeSha256": "be838c5b6f99217989f84aa11a754ed1d1525ee873c4849d805bf4859f886d8e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportSquare.corner_fieldValue",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4f09121aaf481d01c80e32facf4824f2b9da76e056e472f264157ecd313934a0",
+          "expectedKernelTypeSha256": "4f09121aaf481d01c80e32facf4824f2b9da76e056e472f264157ecd313934a0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportSquare.corner_profileMember",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "ef29c2d6dbf0afbd1fcb21f82f2fa23afd42478e9240a817813932c0aaf1cad4",
+          "expectedKernelTypeSha256": "ef29c2d6dbf0afbd1fcb21f82f2fa23afd42478e9240a817813932c0aaf1cad4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportSquare.corners_fieldValue_equal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c4b49f95b5d857ed5a1b166c77ce9b7cb072cfaab7ce97b0651f002ec90855b8",
+          "expectedKernelTypeSha256": "c4b49f95b5d857ed5a1b166c77ce9b7cb072cfaab7ce97b0651f002ec90855b8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.available_append",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "cf59906f789c5a7c18e811d8dd05fd878ea337c3f934b17f4237df8ee8063488",
+          "expectedKernelTypeSha256": "cf59906f789c5a7c18e811d8dd05fd878ea337c3f934b17f4237df8ee8063488",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.available_flatten",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "826ace2bec3532d1c43ed0f33596c8c873a0c7b86c93607936066eb2ba39a15b",
+          "expectedKernelTypeSha256": "826ace2bec3532d1c43ed0f33596c8c873a0c7b86c93607936066eb2ba39a15b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.available_mono",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "43c2830b54c41efa14a24e72c51d53c9d3e0683c48aa8b16e7daba77164fdba7",
+          "expectedKernelTypeSha256": "43c2830b54c41efa14a24e72c51d53c9d3e0683c48aa8b16e7daba77164fdba7",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.mem_records_append",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "85c496b68303cc018de0098c6cf542f56d757ad95079bc9730e33f06853cb5bc",
+          "expectedKernelTypeSha256": "85c496b68303cc018de0098c6cf542f56d757ad95079bc9730e33f06853cb5bc",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.records_mono",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "365f866fe74f2f178e8beadce47d4efbdd5d34d4f1207118081c8a47ddcc1b58",
+          "expectedKernelTypeSha256": "365f866fe74f2f178e8beadce47d4efbdd5d34d4f1207118081c8a47ddcc1b58",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.retained_append",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "88acde589597fc8632407c9035e7d569998125775d3e4860e9bff33687720c18",
+          "expectedKernelTypeSha256": "88acde589597fc8632407c9035e7d569998125775d3e4860e9bff33687720c18",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.DirectWire.ClosedSupportUnion.tableAvailable_append",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d97244bbc85ab3df8ac32c368da9c1fc1eb61d943845c974a74a02ed320f96ef",
+          "expectedKernelTypeSha256": "d97244bbc85ab3df8ac32c368da9c1fc1eb61d943845c974a74a02ed320f96ef",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-19-276",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-19-277",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
