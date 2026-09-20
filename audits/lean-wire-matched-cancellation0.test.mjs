@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { assertLeanWorkflowPathCoverage0 } from './lean-workflow-paths0.mjs';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import {
@@ -403,7 +404,7 @@ test('M254 durable workflow retains source checks, exact audit and bounded regre
   assert.ok(verifier.includes(auditPath));
   assert.ok(workflow.includes('run: node --test '+auditPath));
   for(const path of [auditPath,'docs/lean_wire_matched_cancellation.md'])
-    assert.equal(workflow.split("      - '"+path.replace(/^audits\/lean-[^/]+\.test\.mjs$/u,'audits/lean-*.test.mjs').replace(/^docs\/lean_[^/]+\.md$/u,'docs/lean_*.md').replace(/^lean\/.*$/u,'lean/**').replace(/^lean-audit\/.*$/u,'lean-audit/**').replace(/^lean-regression\/.*$/u,'lean-regression/**')+"'").length-1,2);
+    assertLeanWorkflowPathCoverage0(workflow, path);
   assert.ok(workflow.includes(AUDIT));
   assert.ok(workflow.includes(REGRESSION));
 });

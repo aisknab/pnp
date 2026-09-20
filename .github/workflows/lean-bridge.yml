@@ -2,7 +2,7 @@ name: lean-bridge
 
 on:
   pull_request:
-    paths:
+    paths: &pnp_source_paths
       - 'lean-toolchain'
       - 'lakefile.lean'
       - 'lake-manifest.json'
@@ -41,42 +41,7 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'lean-toolchain'
-      - 'lakefile.lean'
-      - 'lake-manifest.json'
-      - 'lean/**'
-      - 'lean-audit/**'
-      - 'lean-regression/**'
-      - 'formal-publication0.mjs'
-      - 'pcc-formal-reconstruction-status0.mjs'
-      - 'pcc-proof-progress0.mjs'
-      - 'pcc-formal-public-surface0.mjs'
-      - 'package.json'
-      - 'scripts/export-lean-theorem-inventory.mjs'
-      - 'scripts/check-lean-axioms.mjs'
-      - 'scripts/generate-formal-publication.mjs'
-      - 'scripts/build-canonical-report.mjs'
-      - 'scripts/pnp-verify-all.mjs'
-      - 'publication/**'
-      - 'status/LEAN_THEOREM_INVENTORY.json'
-      - 'status/FORMAL_RECONSTRUCTION_STATUS.json'
-      - 'status/PROOF_PROGRESS.json'
-      - 'public/pnp-theorem-inventory.json'
-      - 'public/pnp-status.json'
-      - 'canonical_proof_report.tex'
-      - 'canonical_proof_report.pdf'
-      - 'audits/lean-*.test.mjs'
-      - 'audits/formal-publication0.test.mjs'
-      - 'docs/lean_*.md'
-      - 'docs/plans/*.md'
-      - 'audits/formal-reconstruction-status0.test.mjs'
-      - 'audits/formal-public-surface0.test.mjs'
-      - 'docs/proof_pipeline.md'
-      - 'docs/FORMAL_RECONSTRUCTION.md'
-      - 'docs/github_actions_audit.md'
-      - 'README.md'
-      - '.github/workflows/lean-bridge.yml'
+    paths: *pnp_source_paths
   workflow_dispatch:
 
 permissions:
@@ -3534,6 +3499,13 @@ jobs:
           done
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
+      - name: Check nested-support cost and positivity
+        run: npm run audit:m280
+      - name: Audit nested-support cost and positivity
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPClosedSupportNestedGainAxiomAudit.lean
+          lake env lean -DwarningAsError=true --run lean-regression/PNPClosedSupportNestedGain.lean
       - name: Check whole-support minimum bridge
         run: npm run audit:m279
       - name: Audit whole-support minimum bridge

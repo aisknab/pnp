@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { assertLeanWorkflowPathCoverage0 } from './lean-workflow-paths0.mjs';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import {
@@ -439,7 +440,7 @@ test('M260 durable workflow audits the compiled root and bounded runtime', async
   ]) assert.ok(workflow.includes(token), token);
   for (const name of NAMES) assert.ok(workflow.includes('"' + name + '"'), name);
   for (const pattern of ['audits/lean-*.test.mjs', 'docs/lean_*.md'])
-    assert.equal(workflow.split("      - '" + pattern + "'").length - 1, 2);
+    assertLeanWorkflowPathCoverage0(workflow, pattern);
 });
 
 const M260_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-13-260';

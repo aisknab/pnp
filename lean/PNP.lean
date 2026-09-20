@@ -344,5 +344,12 @@ import PNP.NANDClosedSupportProfile
 import PNP.NANDClosedSupportSquare
 import PNP.NANDClosedSupportFullGainPrefix
 import PNP.NANDClosedSupportFullGain
+import PNP.NANDClosedSupportNestedCandidate
+import PNP.NANDClosedSupportNestedCost
+import PNP.NANDClosedSupportNestedGain
+import PNP.NANDClosedSupportNestedOrigin
+import PNP.NANDClosedSupportNestedProfile
+import PNP.NANDClosedSupportNestedProgram
+import PNP.NANDClosedSupportNestedSelection
 import PNP.NANDClosedWholeMinimumPrefix
 import PNP.NANDClosedWholeMinimum
