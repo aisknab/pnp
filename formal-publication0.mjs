@@ -5,9 +5,45 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd4a5129495e60a278518fb2c850c0f6f96fcdd4426d6be120dee91f188b0353a';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '4716947ff3d9bc7a36f59cb0fdb62cff87e6c0ac9add90cf43dffd8bd4b8143f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.ClosedSupportNestedGain.ambient_output_absent",
+  "PNP.DirectWire.ClosedSupportNestedGain.append_positive",
+  "PNP.DirectWire.ClosedSupportNestedGain.available_from_large",
+  "PNP.DirectWire.ClosedSupportNestedGain.available_from_prefix",
+  "PNP.DirectWire.ClosedSupportNestedGain.available_mono",
+  "PNP.DirectWire.ClosedSupportNestedGain.available_to_large",
+  "PNP.DirectWire.ClosedSupportNestedGain.boundarySource_value",
+  "PNP.DirectWire.ClosedSupportNestedGain.difference_boundary_interface",
+  "PNP.DirectWire.ClosedSupportNestedGain.difference_gate_value",
+  "PNP.DirectWire.ClosedSupportNestedGain.difference_selected",
+  "PNP.DirectWire.ClosedSupportNestedGain.difference_selected_iff",
+  "PNP.DirectWire.ClosedSupportNestedGain.extended_available",
+  "PNP.DirectWire.ClosedSupportNestedGain.extended_gateCount",
+  "PNP.DirectWire.ClosedSupportNestedGain.extended_source_origin",
+  "PNP.DirectWire.ClosedSupportNestedGain.full_minimum_cost_balance",
+  "PNP.DirectWire.ClosedSupportNestedGain.full_minimum_extension_bound",
+  "PNP.DirectWire.ClosedSupportNestedGain.full_minimum_le_support",
+  "PNP.DirectWire.ClosedSupportNestedGain.full_slack_le",
+  "PNP.DirectWire.ClosedSupportNestedGain.included_of_seed_subset",
+  "PNP.DirectWire.ClosedSupportNestedGain.larger_interface_in_smaller",
+  "PNP.DirectWire.ClosedSupportNestedGain.outputSource_value",
+  "PNP.DirectWire.ClosedSupportNestedGain.positive_iff_quotient_slack",
+  "PNP.DirectWire.ClosedSupportNestedGain.positive_mono",
+  "PNP.DirectWire.ClosedSupportNestedGain.prefix_source_value",
+  "PNP.DirectWire.ClosedSupportNestedGain.quotient_minimum_cost_balance",
+  "PNP.DirectWire.ClosedSupportNestedGain.quotient_minimum_extension_bound",
+  "PNP.DirectWire.ClosedSupportNestedGain.quotient_minimum_le_full",
+  "PNP.DirectWire.ClosedSupportNestedGain.quotient_slack_le",
+  "PNP.DirectWire.ClosedSupportNestedGain.retained_mono",
+  "PNP.DirectWire.ClosedSupportNestedGain.seed_full_cost_balance",
+  "PNP.DirectWire.ClosedSupportNestedGain.seed_full_slack_le",
+  "PNP.DirectWire.ClosedSupportNestedGain.seed_positive",
+  "PNP.DirectWire.ClosedSupportNestedGain.seed_quotient_cost_balance",
+  "PNP.DirectWire.ClosedSupportNestedGain.slack_decomposition",
+  "PNP.DirectWire.ClosedSupportNestedGain.support_count_decomposition",
+  "PNP.DirectWire.ClosedSupportNestedGain.support_size_le",
   "PNP.DirectWire.ClosedWholeMinimum.ambient_output_absent",
   "PNP.DirectWire.ClosedWholeMinimum.available_all",
   "PNP.DirectWire.ClosedWholeMinimum.forward_available",
@@ -4800,7 +4836,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-20-279') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-20-280') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

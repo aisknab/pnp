@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { assertLeanWorkflowPathCoverage0 } from './lean-workflow-paths0.mjs';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import {
@@ -134,7 +135,7 @@ test('M243 reviewed-name producers and durable source/type/axiom checks are conn
   assert.ok(verifier.includes(path));
   assert.ok(workflow.includes('run: node --test '+path));
   for(const file of [path,'docs/lean_concrete_final_report_bridge.md'])
-    assert.equal(workflow.split("      - '"+file.replace(/^audits\/lean-[^/]+\.test\.mjs$/u,'audits/lean-*.test.mjs').replace(/^docs\/lean_[^/]+\.md$/u,'docs/lean_*.md').replace(/^lean\/.*$/u,'lean/**').replace(/^lean-audit\/.*$/u,'lean-audit/**').replace(/^lean-regression\/.*$/u,'lean-regression/**')+"'").length-1,2);
+    assertLeanWorkflowPathCoverage0(workflow, file);
   for(const name of ['PNPConcreteFinalReportBridgeAxiomAudit.lean',
     'PNPConcreteFinalReportBridge.lean'])assert.ok(workflow.includes(name),name);
   for(const name of ['PNP.accepted_generated_package_implies_p_eq_np','PNP.final_report_bridge'])

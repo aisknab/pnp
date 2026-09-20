@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { assertLeanWorkflowPathCoverage0, leanTriggerPaths0 } from './lean-workflow-paths0.mjs';
 import { spawnSync } from 'node:child_process';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
@@ -301,14 +302,83 @@ test('workflow size guard counts encoded bytes and rejects oversized input', () 
   assert.equal(workflowSizeAccepted0('é'.repeat(WORKFLOW_REVIEW_BYTES / 2 + 1)), false);
 });
 
-test('Lean workflow keeps current-milestone trigger families compact', async () => {
+// This is a deliberately narrow contract for the reviewed shared trigger list,
+// not a general YAML parser. Anchors and aliases are supported by GitHub Actions.
+const EXPECTED_LEAN_TRIGGER_PATHS0 = Object.freeze([
+  "lean-toolchain",
+  "lakefile.lean",
+  "lake-manifest.json",
+  "lean/**",
+  "lean-audit/**",
+  "lean-regression/**",
+  "formal-publication0.mjs",
+  "pcc-formal-reconstruction-status0.mjs",
+  "pcc-proof-progress0.mjs",
+  "pcc-formal-public-surface0.mjs",
+  "package.json",
+  "scripts/export-lean-theorem-inventory.mjs",
+  "scripts/check-lean-axioms.mjs",
+  "scripts/generate-formal-publication.mjs",
+  "scripts/build-canonical-report.mjs",
+  "scripts/pnp-verify-all.mjs",
+  "publication/**",
+  "status/LEAN_THEOREM_INVENTORY.json",
+  "status/FORMAL_RECONSTRUCTION_STATUS.json",
+  "status/PROOF_PROGRESS.json",
+  "public/pnp-theorem-inventory.json",
+  "public/pnp-status.json",
+  "canonical_proof_report.tex",
+  "canonical_proof_report.pdf",
+  "audits/lean-*.test.mjs",
+  "audits/formal-publication0.test.mjs",
+  "docs/lean_*.md",
+  "docs/plans/*.md",
+  "audits/formal-reconstruction-status0.test.mjs",
+  "audits/formal-public-surface0.test.mjs",
+  "docs/proof_pipeline.md",
+  "docs/FORMAL_RECONSTRUCTION.md",
+  "docs/github_actions_audit.md",
+  "README.md",
+  ".github/workflows/lean-bridge.yml"
+]);
+
+
+function assertLeanTriggerPaths0(workflow) {
+  const paths = leanTriggerPaths0(workflow);
+  assert.deepEqual(paths.pull_request, EXPECTED_LEAN_TRIGGER_PATHS0);
+  assert.deepEqual(paths.push, EXPECTED_LEAN_TRIGGER_PATHS0);
+  return paths;
+}
+
+test('Lean workflow shares the complete reviewed trigger paths without losing coverage', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
-  assert.equal((workflow.match(/^      - 'audits\/lean-\*\.test\.mjs'$/gmu) ?? []).length, 2);
-  assert.equal((workflow.match(/^      - 'docs\/lean_\*\.md'$/gmu) ?? []).length, 2);
-  assert.equal((workflow.match(/^      - 'docs\/plans\/\*\.md'$/gmu) ?? []).length, 2);
+  const paths = assertLeanTriggerPaths0(workflow);
+  for (const event of ['pull_request', 'push']) {
+    for (const family of ['audits/lean-*.test.mjs', 'docs/lean_*.md', 'docs/plans/*.md']) {
+      assert.equal(paths[event].filter((entry) => entry === family).length, 1);
+    }
+  }
   assert.doesNotMatch(workflow, /^      - 'docs\/plans\/[^*'\n]+\.md'$/mu);
   assert.doesNotMatch(workflow, /^      - 'audits\/lean-[^/*]+\.test\.mjs'$/mu);
   assert.doesNotMatch(workflow, /^      - 'docs\/lean_[^/*]+\.md'$/mu);
+});
+
+test('shared trigger contract rejects unresolved aliases, altered filters and ambiguous layouts', async () => {
+  const workflow = await text0('.github/workflows/lean-bridge.yml');
+  const mutations = [
+    workflow.replace('paths: *pnp_source_paths', 'paths: *undefined_paths'),
+    workflow.replace('paths: &pnp_source_paths', 'paths: &different_paths'),
+    workflow.replace("      - 'lean/**'\n", ''),
+    workflow.replace("      - 'lean/**'\n", "      - 'lean/**'\n      - 'lean/**'\n"),
+    workflow.replace('      - main\n', '      - unreviewed_branch\n'),
+    workflow.replace('    paths: *pnp_source_paths\n', "    paths:\n      - 'lean/**'\n"),
+    workflow.replace('  workflow_dispatch:\n', '  workflow_dispatch:\n  push:\n    paths: *pnp_source_paths\n'),
+  ];
+  for (const mutation of mutations) {
+    assert.notEqual(mutation, workflow, 'hostile fixture must change the workflow');
+    assert.throws(() => assertLeanTriggerPaths0(mutation));
+  }
+  assert.throws(() => assertLeanWorkflowPathCoverage0(workflow, 'uncovered/new-source.mjs'));
 });
 
 // This deliberately parses only literal YAML run blocks, not arbitrary YAML.

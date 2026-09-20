@@ -1,40 +1,43 @@
 # Reviewer Audit Questions
 
-<!-- M279-CURRENT-SUMMARY:BEGIN -->
-## Current M279 boundary
+<!-- M280-CURRENT-SUMMARY:BEGIN -->
+## Current M280 boundary
 
-M279 identifies the computed whole-support full-profile reference minimum
-with the independent whole-circuit minimum that preserves every ordinary
-output and computational field. The whole-support seed, padded interface
-and field availability are derived from the actual circuit. Size-preserving
-constructions prove both comparisons without supplied minimum equality.
+M280 constructs full and selected-field comparison circuits for any pair
+of computed, completed dependency-closed supports whose physical gates
+are nested. It rebuilds only the larger-minus-smaller gate difference,
+derives the crossing bindings and padded ordinary outputs, and preserves
+the exact computational-field observations, including unavailable fields.
 
-The computed whole-span replacement attains that reference minimum. Its
-remaining full slack is zero, and its optional strict-gain branch returns
-no improvement exactly when the source whole-circuit full slack is zero.
-These statements cover arbitrary finite dimensions and every keep mask.
+The full and quotient reference minima grow by at most the added physical
+gates. Full slack and support size minus quotient minimum are monotone;
+positive full slack or projection defect therefore survives enlargement.
+Raw-seed inclusion derives the required physical inclusion. The bounds
+are proved from actual constructed comparisons, not supplied cost data.
 
-This whole-span branch still uses exhaustive reference minimization.
-Zero slack after that search is not the manuscript’s unconditional ZeroSlack
-theorem, proper-local VerifyDW eligibility or a polynomial algorithm.
+This starts from already completed supports. It does not show that
+completing an arbitrary raw positive witness preserves its initial
+positivity, or that every intermediate saturation event is transparent.
+Projection-defect monotonicity alone is not asserted. Reference minimum
+search and semantic matching remain exhaustive rather than polynomial.
 
 M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT
 NP-completeness remain kernel checked. Complete manuscript profiles,
-proper-positive support discovery, terminal-derived families, forced-cost
-transparency, global route coverage, unconditional SaturatePositive/BCELReady/
+proper-positive support discovery, terminal-derived families, initial
+completion, global route coverage, unconditional SaturatePositive/BCELReady/
 ZeroSlack, exact polynomial PCCMin and encoded polynomial bounds remain open.
 Deterministic CNF-SAT membership in P and the eligible root remain absent;
 the publication gate is false.
 
-Formal artefact coverage: 255 of 257 current scoped publication rows earned.
+Formal artefact coverage: 256 of 258 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [computed whole-support minimum bridge](./lean_closed_whole_minimum.md).
+See the [computed nested-support cost and positivity transport](./lean_closed_support_nested_gain.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This identifies two finite reference minima and the exact whole-span reference branch, not a new polynomial construction, proper-positive support discovery, complete manuscript profiles or global route closure. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M279-CURRENT-SUMMARY:END -->
+Publication decision: defer. The result proves general preservation between computed completed supports, not the unresolved initial-completion boundary or a global saturation theorem. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M280-CURRENT-SUMMARY:END -->
 
 > **Current authority:** This worksheet is for auditing the author's intended argument and the
 > historical 7072f8d assertion-checker release. It is not evidence that `P = NP` is established and

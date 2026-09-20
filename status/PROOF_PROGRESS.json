@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-279",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280",
   "lastReviewedDate": "2026-09-20",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 255,
-    "totalRows": 257,
+    "earnedRows": 256,
+    "totalRows": 258,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4350,6 +4350,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M279 closes the concrete whole-support compatibility edge between the candidate-derived ambient support minimum and the independent whole-carrier output-and-computational-field minimum. The proof uses actual size-preserving translations in both directions, not a supplied equality or an assumed optimal replacement. The resulting exact whole-span branch still performs exhaustive reference minimization and supplies neither proper-local rewrite discovery nor global route coverage or polynomial bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 255 of 257 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280",
+      "formalArtefactCoverage": {
+        "earnedRows": 256,
+        "totalRows": 258
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M280 derives actual full and quotient comparison circuits for every pair of computed nested completed supports, replacing a supplied cost-balance premise with a physical construction and exact field observations. It closes the completed-support enlargement edge of positive-slack preservation, but not raw-witness completion, manuscript-wide profile semantics, global route completeness or polynomial minimization. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 256 of 258 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

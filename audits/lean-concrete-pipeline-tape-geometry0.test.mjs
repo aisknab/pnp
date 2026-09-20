@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { assertLeanWorkflowPathCoverage0 } from './lean-workflow-paths0.mjs';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { test } from 'node:test';
@@ -154,7 +155,7 @@ test('package verifier and workflow enforce the complete geometry audit', async 
   assert.ok(surface.includes(auditCommand));
   assert.ok(verifier.includes(`'${auditCommand}'`));
   assert.equal((workflow.match(/audits\/lean-concrete-pipeline-tape-geometry0\.test\.mjs/g) ?? []).length, 1);
-  assert.equal((workflow.match(/^      - 'audits\/lean-\*\.test\.mjs'$/gm) ?? []).length, 2);
+  assertLeanWorkflowPathCoverage0(workflow, auditCommand);
   assert.match(workflow,
     /PNPConcretePipelineTapeGeometryAxiomAudit\.lean[\s\S]{0,900}grep -Fc 'does not depend on any axioms'\)" -eq 20/u);
 });
