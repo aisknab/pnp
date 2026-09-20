@@ -5,9 +5,31 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ab13b67fa6d54afef20758c1d9e636910b7ab13f2f85a5251ef3e394d5c225f5';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'd4a5129495e60a278518fb2c850c0f6f96fcdd4426d6be120dee91f188b0353a';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.DirectWire.ClosedWholeMinimum.ambient_output_absent",
+  "PNP.DirectWire.ClosedWholeMinimum.available_all",
+  "PNP.DirectWire.ClosedWholeMinimum.forward_available",
+  "PNP.DirectWire.ClosedWholeMinimum.forward_equivalent",
+  "PNP.DirectWire.ClosedWholeMinimum.forward_gateCount",
+  "PNP.DirectWire.ClosedWholeMinimum.forward_output_none",
+  "PNP.DirectWire.ClosedWholeMinimum.forward_output_some",
+  "PNP.DirectWire.ClosedWholeMinimum.fullSlack_eq",
+  "PNP.DirectWire.ClosedWholeMinimum.full_minimum",
+  "PNP.DirectWire.ClosedWholeMinimum.gate_selected",
+  "PNP.DirectWire.ClosedWholeMinimum.global_minimum_le",
+  "PNP.DirectWire.ClosedWholeMinimum.improvement_none_iff",
+  "PNP.DirectWire.ClosedWholeMinimum.interface_iff_output",
+  "PNP.DirectWire.ClosedWholeMinimum.outputIndex_exists",
+  "PNP.DirectWire.ClosedWholeMinimum.outputIndex_none_not_interface",
+  "PNP.DirectWire.ClosedWholeMinimum.outputIndex_sound",
+  "PNP.DirectWire.ClosedWholeMinimum.result_gateCount",
+  "PNP.DirectWire.ClosedWholeMinimum.result_optimal",
+  "PNP.DirectWire.ClosedWholeMinimum.result_zero_fullSlack",
+  "PNP.DirectWire.ClosedWholeMinimum.source_retained",
+  "PNP.DirectWire.ClosedWholeMinimum.support_gateCount",
+  "PNP.DirectWire.ClosedWholeMinimum.support_minimum_le",
   "PNP.DirectWire.ClosedSupportFullGain.ambient_output",
   "PNP.DirectWire.ClosedSupportFullGain.boundarySource_value",
   "PNP.DirectWire.ClosedSupportFullGain.complement_gate_value",
@@ -4778,7 +4800,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-19-278') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-20-279') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
