@@ -3534,6 +3534,13 @@ jobs:
           done
       - name: Check proper-support descendant certificates
         run: npm run audit:m268
+      - name: Check closed-support full-profile gain
+        run: npm run audit:m278
+      - name: Audit closed-support full-profile gain
+        run: |
+          set -euo pipefail
+          node scripts/check-lean-axioms.mjs lean-audit/PNPClosedSupportFullGainAxiomAudit.lean
+          lake env lean -DwarningAsError=true --run lean-regression/PNPClosedSupportFullGain.lean
       - name: Check closed-support profile squares
         run: npm run audit:m277
       - name: Audit closed-support profile squares

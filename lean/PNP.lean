@@ -342,3 +342,5 @@ import PNP.NANDClosedSupportObservation
 import PNP.NANDClosedSupportUnion
 import PNP.NANDClosedSupportProfile
 import PNP.NANDClosedSupportSquare
+import PNP.NANDClosedSupportFullGainPrefix
+import PNP.NANDClosedSupportFullGain
