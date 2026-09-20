@@ -2,7 +2,7 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-277",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-278",
   "lastReviewedDate": "2026-09-19",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 253,
-    "totalRows": 255,
+    "earnedRows": 254,
+    "totalRows": 256,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4316,6 +4316,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M277 derives the computational observations of actual closed supports and proves uniform preservation of requested fields at every corner of a constructed support square. The source table, arbitrary-family union law and profile-seeded construction close that bounded compatibility interface without supplied correctness data. Existing extraction, structural square laws and profile locality are reused, not awarded again. The positive-slack duplicate obstruction is explicitly candidate-level: the existing physical normalizer removes it, so it is not evidence against a normalized-terminal manuscript theorem. Ordinary-output reconstruction, the complete profile grammar, proper-positive support discovery, terminal-derived families, global routing and polynomial minimization remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 253 of 255 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-19-278",
+      "formalArtefactCoverage": {
+        "earnedRows": 254,
+        "totalRows": 256
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M278 connects an actual computed closed support to a full-profile-preserving whole-circuit replacement, with an exact gate saving and exact retirement of whole-carrier full slack. The reference minimum, physical complement, input bindings and field sources are derived rather than supplied as correctness premises. This closes a bounded positive-branch reconstruction dependency, but not proper-positive support discovery, the complete manuscript profile grammar, terminal-derived families, global route coverage or polynomial minimization. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 254 of 256 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

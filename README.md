@@ -1,23 +1,22 @@
 # pnp
 
-<!-- M277-CURRENT-SUMMARY:BEGIN -->
-## Current M277 boundary
+<!-- M278-CURRENT-SUMMARY:BEGIN -->
+## Current M278 boundary
 
-M277 identifies exactly which computational fields are observable in an actual
-computed dependency-closed support. Its source table requires one original
-source to match a field uniformly over every input valuation. Observations
-compose across arbitrary seed unions and finite families.
+M278 computes a replacement for an actual dependency-closed circuit support
+and reconnects it to the physical complement. The resulting whole circuit
+preserves every ordinary output and computational field for every input.
+Its minimum, input bindings, field sources and complement are derived,
+not supplied as correctness certificates.
 
-Seeding the requested profile records derives preservation of those fields.
-The actual meet, left, right and join supports agree on their requested field
-values for every ambient input. Existing extraction, structural square laws
-and profile locality are reused. This is not ordinary-output equivalence,
-a complete manuscript projection square or proper-positive support discovery.
+The gate saving equals the computed local full slack, and the same amount
+is retired from whole-circuit full slack. Positive local full slack gives
+a checked strict improvement; zero local full slack returns no improvement.
+This covers arbitrary finite dimensions, not only the regression examples.
 
-A checked positive-slack duplicate example bounds the support claim, but the
-existing physical normalizer removes its duplicate. It is not a counterexample
-to a theorem restricted to normalized terminal candidates. Source matching
-and influence remain exhaustive; no polynomial construction follows.
+The minimum search, semantic matching and influence tests remain exhaustive.
+The result does not discover a proper positive support, make a whole-span
+replacement locally admissible, or prove a polynomial construction.
 
 M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT
 NP-completeness remain kernel checked. Complete manuscript profiles,
@@ -26,15 +25,15 @@ unconditional SaturatePositive/BCELReady/ZeroSlack, exact polynomial PCCMin
 and encoded polynomial bounds remain open. Deterministic CNF-SAT membership
 in P and the eligible root remain absent; the publication gate is false.
 
-Formal artefact coverage: 253 of 255 current scoped publication rows earned.
+Formal artefact coverage: 254 of 256 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [computed closed-support compatibility boundary](./docs/lean_closed_support_profile.md).
+See the [computed full-profile gain boundary](./docs/lean_closed_support_full_gain.md).
 Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. This establishes computational-field compatibility for derived closed supports and their actual squares, not ordinary-output reconstruction, complete manuscript profiles, terminal-derived families, proper-positive discovery or global route coverage. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M277-CURRENT-SUMMARY:END -->
+Publication decision: defer. This completes the physical reconstruction of a computational-field-preserving finite reference improvement, not proper-positive support discovery, complete manuscript profiles, terminal-derived families, global route coverage or polynomial construction. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
+<!-- M278-CURRENT-SUMMARY:END -->
 
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
@@ -58,12 +57,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M277 derives computational-field observations of closed supports and preserves requested fields at the actual support-square corners. Ordinary-output reconstruction, complete manuscript profiles, proper-positive support discovery, terminal-derived families, global route coverage and polynomial minimization remain open. The eligible root is absent and the publication gate is false. |
+| **What is the current verification status?** | M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT NP-completeness remain kernel checked. M278 computes a whole-circuit replacement preserving ordinary outputs and computational fields, with exact local-to-global gate and full-slack balance. Complete manuscript profiles, proper-positive support discovery, terminal-derived families, global route coverage and polynomial minimization remain open. The eligible root is absent and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 253 of 255 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Formal artefact coverage measures the evidence ledger, not proof completion. The risk-weighted estimate is not a probability or a time estimate. |
+| **How is progress measured?** | Formal artefact coverage: 254 of 256 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Formal artefact coverage measures the evidence ledger, not proof completion. The risk-weighted estimate is not a probability or a time estimate. |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 
