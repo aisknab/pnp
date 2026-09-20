@@ -344,3 +344,5 @@ import PNP.NANDClosedSupportProfile
 import PNP.NANDClosedSupportSquare
 import PNP.NANDClosedSupportFullGainPrefix
 import PNP.NANDClosedSupportFullGain
+import PNP.NANDClosedWholeMinimumPrefix
+import PNP.NANDClosedWholeMinimum

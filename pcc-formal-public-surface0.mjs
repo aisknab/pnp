@@ -81,6 +81,7 @@ const CURRENT_PACKAGE_SCRIPTS_BASE0 = Object.freeze({
   'audit:m266': 'node --test audits/lean-source-derived-history-ownership0.test.mjs audits/lean-source-derived-history-ownership-publication0.test.mjs',
   'audit:m267': 'node --test audits/lean-descendant-history-ownership0.test.mjs audits/lean-descendant-history-ownership-publication0.test.mjs',
   'audit:m268': 'node --test audits/lean-proper-descendant-certificates0.test.mjs audits/lean-proper-descendant-certificates-publication0.test.mjs',
+  'audit:m279': 'node --test audits/lean-closed-whole-minimum0.test.mjs audits/lean-closed-whole-minimum-publication0.test.mjs',
   'audit:m278': 'node --test audits/lean-closed-support-full-gain0.test.mjs audits/lean-closed-support-full-gain-publication0.test.mjs',
   'audit:m277': 'node --test audits/lean-closed-support-profile0.test.mjs audits/lean-closed-support-profile-publication0.test.mjs',
   'audit:m276': 'node --test audits/lean-computed-wire-profile0.test.mjs audits/lean-computed-wire-profile-publication0.test.mjs',
