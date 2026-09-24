@@ -19,6 +19,8 @@ const VERSION = 0;
 const OUTPUT = 'artifacts/pnp-verify-all/latest-verdict.json';
 
 export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
+  'audits/lean-compatible-support-slack-obstruction0.test.mjs',
+  'audits/lean-compatible-support-slack-obstruction-publication0.test.mjs',
   'audits/formal-reconstruction-status0.test.mjs',
   'audits/formal-public-surface0.test.mjs',
   'audits/lean-theorem-inventory0.test.mjs',

@@ -14,7 +14,7 @@ import {pathToFileURL} from 'node:url';
 export function CheckLeanAxiomTranscript0(output,auditSource,inventory) {
   assert.equal(typeof output,'string','Lean transcript must be text');
   assert.equal(typeof auditSource,'string','Lean audit source must be text');
-  assert.ok(Array.isArray(inventory),'compiled milestone inventory is required');
+  assert.ok(Array.isArray(inventory),'compiled theorem inventory is required');
   const names=[...auditSource.matchAll(/^#print axioms\s+(\S+)\s*$/gmu)]
     .map(match=>match[1]);
   assert.ok(names.length>0,'audit must print at least one exact theorem');
@@ -55,7 +55,7 @@ function main0(args) {
   const audit=CheckLeanAuditPath0(args[0]);
   const auditSource=readFileSync(audit,'utf8');
   const inventory=JSON.parse(readFileSync('status/LEAN_THEOREM_INVENTORY.json','utf8'))
-    .milestoneCandidates;
+    .declarations;
   const result=spawnSync('lake',['env','lean','-DwarningAsError=true',audit],{
     cwd:process.cwd(),encoding:'utf8',timeout:600_000,maxBuffer:4*1024*1024,
   });

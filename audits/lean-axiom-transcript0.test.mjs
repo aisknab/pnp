@@ -74,7 +74,7 @@ test('shared Lean axiom runner retains warning errors, bounded execution and no 
     "spawnSync('lake',['env','lean','-DwarningAsError=true',audit]",
     'timeout:600_000,maxBuffer:4*1024*1024',
     "assert.equal(result.status,0","assert.equal(result.stderr,''",
-    "'status/LEAN_THEOREM_INVENTORY.json'",'.milestoneCandidates',
+    "'status/LEAN_THEOREM_INVENTORY.json'",'.declarations',
   ])assert.ok(runner.includes(fragment),fragment);
   assert.doesNotMatch(runner,/['"]build['"]|shell\s*:\s*true/u);
 });

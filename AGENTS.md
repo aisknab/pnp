@@ -601,6 +601,23 @@ branch.
 
 ### Mathematical milestone selection
 
+- Select the highest-impact unresolved proof obligation on the critical path,
+  not the easiest theorem, fastest merge, or most convenient next ledger row.
+  Compare plausible candidates by the load-bearing dependency they retire,
+  the downstream obligations they unblock, and the mathematical risk they resolve.
+  Record that rationale before choosing the next milestone.
+- A necessary supporting lemma may be the next implementation step without
+  becoming a standalone earned milestone. Group such work under the substantive
+  general obligation it enables; do not promote wrappers, compatibility links,
+  finite cases, or repeated local steps merely to keep releases moving.
+- Prefer sustained work on the consequential general blocker even when a nearby
+  easier result is available. If that proof fails, investigate the exact gap and
+  revise the construction honestly rather than replacing the milestone with an
+  easier statement. Difficulty alone is not a reason to narrow the target.
+- Use fixed checkpoints to identify load-bearing obligations, not to optimize
+  displayed points. Preserve the full theorem, assumption, and complexity
+  requirements when ranking impact.
+
 - Ground each new mathematical milestone in a named theorem, lemma, or blocker
   from the pinned legacy report, and state exactly which dependency edge it
   closes.

@@ -12,6 +12,13 @@
 > now at the repository root. For current authority, start with
 > [`lean_theorem_inventory.md`](lean_theorem_inventory.md).
 
+> **Subsequent formal correction (24 September 2026):** The historical
+> unrestricted raw-port-complete slack law has a
+> [kernel-checked counterexample](./lean_compatible_support_slack_obstruction.md).
+> The terminology below preserves the historical claim; port completeness alone
+> does not make every equivalent replacement acyclic. Restricted checked
+> replacement theorems are not revoked.
+
 ## Purpose and scope
 
 This document translates the claim-critical terminology used by the canonical report and the proof/checker source into conventional complexity-theory, proof-engineering, formal-methods, and software-assurance language.
