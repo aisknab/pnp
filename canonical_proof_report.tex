@@ -83,15 +83,15 @@ Eligible root theorem present & \statusfalse \\
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 51526 \\
-Theorem-kind declarations & 28136 \\
-Assumption-free theorem-kind declarations & 11731 \\
+Compiled declarations & 51586 \\
+Theorem-kind declarations & 28180 \\
+Assumption-free theorem-kind declarations & 11734 \\
 Project-specific axioms & 0 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{2eaecf3d611a60eaed05d83f93628c285b9ecac54f0f15d95860b95424f86cb8}\par}
+{\small Inventory SHA-256: \code{8b7aa5bbc065daad79691e8fda26e5e6a6db3b90c8be4e6be93baf7fb37b3f18}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -111,6 +111,20 @@ The target remains $P=NP$, but target wording---including the new inactive defin
 Boolean fields, JSON strings, historical release records, report prose, and external review cannot
 activate a theorem. Only the separately derived concrete publication gate may control theorem
 emission, and that gate is currently false.
+
+\subsection{Verified correction to the unrestricted support rule}
+
+The raw-port-complete compatible-support slack law in the historical manuscript
+has a kernel-checked counterexample. An eleven-gate whole circuit is semantically
+minimum, but its actual proper nine-gate cut has independent open minimum eight.
+Thus local slack is one while whole-circuit slack is zero. The smaller equivalent
+open replacement becomes cyclic when reconnected to the exterior.
+
+This corrects the unrestricted reading of section 2.2, not the checked acyclic
+framed law or a properly restricted admissible-support law. Complete source-derived
+full-profile admissibility and first-loss routing remain open. No positive
+publication row or fixed proof-completion checkpoint is awarded for this finding.
+The historical manuscript is preserved unchanged.
 
 The completed direct CNF verifier consumes the literal canonical pair of an encoded formula and
 assignment certificate. Lean proves universal acceptance equivalence, rejection equivalence, and
@@ -1638,8 +1652,8 @@ Computed nested-support cost and positivity transport & formalized-foundation-on
 
 \section{Compiled inventory summary}
 
-The inventory contains 51526 exported \code{PNP.*} kernel declarations from
-611 modules. It excludes 21024 private compiler auxiliaries.
+The inventory contains 51586 exported \code{PNP.*} kernel declarations from
+614 modules. It excludes 21142 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -2039,6 +2053,9 @@ PNP.\allowbreak{}NANDClosed\allowbreak{}Support\allowbreak{}Square & 6 & 4 \\
 PNP.\allowbreak{}NANDClosed\allowbreak{}Support\allowbreak{}Union & 7 & 7 \\
 PNP.\allowbreak{}NANDClosed\allowbreak{}Whole\allowbreak{}Minimum & 16 & 12 \\
 PNP.\allowbreak{}NANDClosed\allowbreak{}Whole\allowbreak{}Minimum\allowbreak{}Prefix & 15 & 11 \\
+PNP.\allowbreak{}NANDCompatible\allowbreak{}Support\allowbreak{}Slack\allowbreak{}Comparison & 19 & 15 \\
+PNP.\allowbreak{}NANDCompatible\allowbreak{}Support\allowbreak{}Slack\allowbreak{}Minimum & 37 & 25 \\
+PNP.\allowbreak{}NANDCompatible\allowbreak{}Support\allowbreak{}Slack\allowbreak{}Obstruction & 4 & 4 \\
 PNP.\allowbreak{}NANDCompiled\allowbreak{}Gate\allowbreak{}Provenance & 11 & 9 \\
 PNP.\allowbreak{}NANDComposition & 77 & 38 \\
 PNP.\allowbreak{}NANDComputed\allowbreak{}Wire\allowbreak{}Profile\allowbreak{}Cost & 3 & 3 \\
@@ -2322,9 +2339,9 @@ npm run report:check
 }
 
 The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230}. Its exact byte digest is
-\code{2eaecf3d611a60eaed05d83f93628c285b9ecac54f0f15d95860b95424f86cb8}. The report is regenerated from that inventory and the reviewed
+\code{8b7aa5bbc065daad79691e8fda26e5e6a6db3b90c8be4e6be93baf7fb37b3f18}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{dd4b72ce2070a67cc523f43bbcc976c4335f9d2d8e099d2b5998b98e61f0b53c}; the computed and pinned values match. Successful regeneration
+\code{096e81bccb4196ac53f7f7bb70266b1ff7615e55742172b13a083adfe2728789}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

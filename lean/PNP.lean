@@ -353,3 +353,6 @@ import PNP.NANDClosedSupportNestedProgram
 import PNP.NANDClosedSupportNestedSelection
 import PNP.NANDClosedWholeMinimumPrefix
 import PNP.NANDClosedWholeMinimum
+import PNP.NANDCompatibleSupportSlackMinimum
+import PNP.NANDCompatibleSupportSlackComparison
+import PNP.NANDCompatibleSupportSlackObstruction

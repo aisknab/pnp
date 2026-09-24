@@ -1,0 +1,20 @@
+import PNP
+
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.formula_exact
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.baseline
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.no_output_is_first_nand
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.gate_lower_bound
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.original_is_minimum
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.original_reference_minimum
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.global_slack_zero
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.boundary_exact
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.interface_exact
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.selected_gate_count
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.smaller_formula_exact
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.same_open_function
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.comparison_reference_minimum
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.open_baseline
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.local_reference_minimum
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.local_slack_one
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.global_slack_law_violation
+#print axioms PNP.DirectWire.CompatibleSupportSlackObstruction.literal_splice_is_cyclic

@@ -453,7 +453,7 @@ test('M265 preflight: package, verifier and durable CI share the exact audited b
     step.includes('node scripts/check-lean-axioms.mjs ' + AUDIT));
   assert.equal(auditSteps.length, 1);
   const helper = await text0('scripts/check-lean-axioms.mjs');
-  for (const fragment of ["'status/LEAN_THEOREM_INVENTORY.json'", '.milestoneCandidates',
+  for (const fragment of ["'status/LEAN_THEOREM_INVENTORY.json'", '.declarations',
     'const expected=names.map(name=>{', 'inventory.filter(row=>row.name===name)',
     "assert.equal(row.kind,'theorem',name);", 'return [name,row.axioms];',
     "spawnSync('lake',['env','lean','-DwarningAsError=true',audit]",

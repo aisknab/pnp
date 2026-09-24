@@ -39,6 +39,19 @@ Earlier milestone notes retain their original module-specific scope.
 Publication decision: defer. The result proves general preservation between computed completed supports, not the unresolved initial-completion boundary or a global saturation theorem. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
 <!-- M280-CURRENT-SUMMARY:END -->
 
+## Subsequent correction — 24 September 2026
+
+A kernel-checked counterexample refutes the unrestricted raw-port-complete
+compatible-support slack law in the historical manuscript. The whole circuit
+is minimum, but its actual proper cut has positive independent open slack;
+the smaller equivalent replacement becomes cyclic when reconnected. The
+checked acyclic framed and restricted replacement results remain valid.
+
+This correction supersedes the M280-only publication deferral above and is
+selected for the next verified release. It adds no positive publication row
+or weighted checkpoint credit. Full-profile admissibility and first-loss
+routing remain open. See the [exact finding and limits](./docs/lean_compatible_support_slack_obstruction.md).
+
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
 > [!IMPORTANT]
