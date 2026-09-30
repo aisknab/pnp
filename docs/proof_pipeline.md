@@ -52,6 +52,22 @@ selected for the next verified release. It adds no positive publication row
 or weighted checkpoint credit. Full-profile admissibility and first-loss
 routing remain open. See the [exact finding and limits](./lean_compatible_support_slack_obstruction.md).
 
+## Subsequent correction — 30 September 2026
+
+No fixed circuit-independent support cap certifies global minimality through
+the current local search. A general guarded-circuit family has a strictly
+smaller equivalent whole circuit, while every proper extracted support is
+minimum even against independent-boundary replacements with sharing and
+constants. The actual complete bounded scan is quiet for every fixed cap.
+
+This does not decide P versus NP or exclude growing windows or global
+transformations. It identifies a missing global coverage argument; fixed-cap
+candidate-count bounds are not complete polynomial-runtime bounds. The finding
+is selected for publication after integrated release checks. It earns no
+positive publication row or weighted checkpoint credit. The separate coverage,
+proof estimate, uncertainty and gate figures above remain the current baseline.
+See the [general theorem and its limits](./lean_fixed_window_coverage_obstruction.md).
+
 > **Current authority:** This document maps the author's intended argument and the historical
 > JavaScript assertion-checker pipeline. It does not establish `P = NP` and is not an active release
 > gate. Current status and remaining formal obligations are in

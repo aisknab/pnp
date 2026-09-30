@@ -19,6 +19,12 @@
 > does not make every equivalent replacement acyclic. Restricted checked
 > replacement theorems are not revoked.
 
+> **Further formal correction (30 September 2026):** No fixed physical support
+> cap turns local search quietness into global minimality. The
+> [general guarded-family theorem](./lean_fixed_window_coverage_obstruction.md)
+> covers arbitrary proper supports, not only consecutive windows. Growing
+> windows and other global transformations are not excluded.
+
 ## Purpose and scope
 
 This document translates the claim-critical terminology used by the canonical report and the proof/checker source into conventional complexity-theory, proof-engineering, formal-methods, and software-assurance language.

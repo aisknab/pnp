@@ -105,6 +105,8 @@ const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   "PNP.DirectWire.extractSaturatedTerminalSupport_semantics",
   "PNP.DirectWire.extractSaturatedTerminalSupport_induced",
   "PNP.DirectWire.extractTerminalSupport_eq_of_gateSelected_eq",
+  "PNP.DirectWire.TerminalExtractedSupport.withRecords",
+  "PNP.DirectWire.extractTerminalSupport_withRecords_of_gateSelected_eq",
   "PNP.DirectWire.terminalOpenGateEvaluation_prefix_congr",
   "PNP.DirectWire.terminalOpenGateEvaluation_single_gate_prefix",
   "PNP.DirectWire.terminalOpenWireValue",
@@ -116,7 +118,17 @@ const CURRENT_PUBLIC_DECLARATIONS = Object.freeze([
   "PNP.DirectWire.terminalOpenSourceValue",
   "PNP.DirectWire.terminalOpenGateEvaluation_sourceEquation",
   "PNP.DirectWire.terminalOpenWireValue_boundary_get",
-  "PNP.DirectWire.terminalOpenWireValue_external_absent"
+  "PNP.DirectWire.terminalOpenWireValue_external_absent",
+  "PNP.DirectWire.terminalExtractionSource",
+  "PNP.DirectWire.extractTerminalSupport_gate_sources",
+  "PNP.DirectWire.extractTerminalSupport_position_sources",
+  "PNP.DirectWire.extractTerminalSupport_output_source",
+  "PNP.DirectWire.terminalExtractionOriginalSource",
+  "PNP.DirectWire.extractTerminalSupport_original_sources",
+  "PNP.DirectWire.extractTerminalSupport_original_output_source",
+  "PNP.DirectWire.Program.terminalGateSources_renameInputs",
+  "PNP.DirectWire.terminalExtractionGateIndex_val_eq_of_selected_eq",
+  "PNP.DirectWire.terminalExtractionOrigin_eq_of_selected_eq"
 ]);
 
 const MILESTONE_THEOREMS = Object.freeze([
@@ -196,7 +208,15 @@ const PRIVATE_HELPERS = Object.freeze([
   "terminalBoundaryPorts_nested_external",
   "terminalOpenWireValue_pullback_on_boundary",
   "Source.evalTerminalOpen_weaken_snoc",
-  "Program.evalTerminalOpenAux_sources"
+  "Program.evalTerminalOpenAux_sources",
+  "fin_castAdd_one_literal",
+  "boundaryInputSource_weaken",
+  "Source.extractTerminal_weaken_selected",
+  "Source.extractTerminal_weaken_skipped",
+  "extractTerminalProgramAux_sources",
+  "terminalExtractionSource_restore",
+  "sourceRenameInputs_weaken_one",
+  "extractTerminalProgramAux_gateIndex_val_eq"
 ]);
 
 async function text0(relativePath) {

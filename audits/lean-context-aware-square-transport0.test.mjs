@@ -39,7 +39,17 @@ const SPECS = [
       "terminalOpenSourceValue",
       "terminalOpenGateEvaluation_sourceEquation",
       "terminalOpenWireValue_boundary_get",
-      "terminalOpenWireValue_external_absent"
+      "terminalOpenWireValue_external_absent",
+      "terminalExtractionSource",
+      "extractTerminalSupport_gate_sources",
+      "extractTerminalSupport_position_sources",
+      "extractTerminalSupport_output_source",
+      "terminalExtractionOriginalSource",
+      "extractTerminalSupport_original_sources",
+      "extractTerminalSupport_original_output_source",
+      "Program.terminalGateSources_renameInputs",
+      "terminalExtractionGateIndex_val_eq_of_selected_eq",
+      "terminalExtractionOrigin_eq_of_selected_eq"
     ],
     "signatures": {
       "terminalOpenGateEvaluation_pullback": "theorem terminalOpenGateEvaluation_pullback {inputs gates outputs profileWidth : Nat} (candidate : Candidate inputs gates outputs) (small large : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) (included : forall gate, terminalGateSelected small gate = true -> terminalGateSelected large gate = true) (valuation : Valuation (terminalBoundaryPorts candidate.program large).length) (gate : Fin gates) (selected : terminalGateSelected small gate = true) : terminalOpenGateEvaluation candidate small (terminalBoundaryPullback candidate small large valuation) gate = terminalOpenGateEvaluation candidate large valuation gate",
