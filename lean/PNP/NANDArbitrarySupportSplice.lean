@@ -1216,6 +1216,222 @@ theorem originalSource_interface
   rw [memberIndex_of_get (terminalInterfacePorts candidate records)
     (List.Pairwise.filter _ (splice_allFin_nodup gates)) port]
 
+/-- Physical splice data depend only on the selector, ordered ports, exterior and offer.
+The equalities concern computed data; they are not semantic correctness certificates. -/
+theorem graph_word_heq_of_physical_data
+    {otherWidth : Nat}
+    (otherRecords : List (TerminalPrimitiveRecord inputs gates outputs otherWidth))
+    (sameSelection : terminalGateSelected records = terminalGateSelected otherRecords)
+    (sameBoundary : terminalBoundaryPorts candidate.program records =
+      terminalBoundaryPorts candidate.program otherRecords)
+    (sameInterface : terminalInterfacePorts candidate records = terminalInterfacePorts candidate otherRecords)
+    (sameExterior : exterior records = exterior otherRecords)
+    (other : Candidate (terminalBoundaryPorts candidate.program otherRecords).length replacementGates
+      (terminalInterfacePorts candidate otherRecords).length)
+    (sameOffer : HEq replacement other) :
+    HEq (graph candidate records replacement) (graph candidate otherRecords other) ∧
+      HEq (word candidate records replacement) (word candidate otherRecords other) := by
+  let bindBoundary
+      (boundary : List (TerminalSupportWire inputs gates)) (outside : List (Fin gates))
+      (valid : ∀ gate, TerminalSupportWire.gate gate ∈ boundary → gate ∈ outside)
+      (port : Fin boundary.length) : Source inputs (outside.length + replacementGates) :=
+    match found : boundary.get port with
+    | .input index => .input index
+    | .gate gate =>
+        .gate (Fin.castAdd replacementGates (memberIndex
+          (valid gate (by rw [← found]; exact List.get_mem _ _))))
+  let bindReplacement
+      (boundary : List (TerminalSupportWire inputs gates)) (outside : List (Fin gates))
+      (valid : ∀ gate, TerminalSupportWire.gate gate ∈ boundary → gate ∈ outside) :
+      Source boundary.length replacementGates → Source inputs (outside.length + replacementGates)
+    | .input port => bindBoundary boundary outside valid port
+    | .constant value => .constant value
+    | .gate index => .gate (Fin.natAdd outside.length index)
+  let bindOriginal (selection : Fin gates → Bool)
+      (boundary : List (TerminalSupportWire inputs gates)) (interface outside : List (Fin gates))
+      (boundaryOK : ∀ gate, TerminalSupportWire.gate gate ∈ boundary → gate ∈ outside)
+      (outsideOK : ∀ gate, selection gate = false → gate ∈ outside)
+      (offer : Candidate boundary.length replacementGates interface.length) :
+      (source : Source inputs gates) →
+        (∀ gate, source = .gate gate → selection gate = true → gate ∈ interface) →
+        Source inputs (outside.length + replacementGates)
+    | .input index, _visible => .input index
+    | .constant value, _visible => .constant value
+    | .gate gate, visible =>
+        if selected : selection gate = true then
+          bindReplacement boundary outside boundaryOK
+            (offer.directWireWord.source (memberIndex (visible gate rfl selected)))
+        else
+          .gate (Fin.castAdd replacementGates (memberIndex
+            (outsideOK gate (by
+              cases value : selection gate with
+              | false => rfl
+              | true => exact False.elim (selected value)))))
+  let assemble (selection : Fin gates → Bool)
+      (boundary : List (TerminalSupportWire inputs gates)) (interface outside : List (Fin gates))
+      (boundaryOK : ∀ gate, TerminalSupportWire.gate gate ∈ boundary → gate ∈ outside)
+      (outsideOK : ∀ gate, selection gate = false → gate ∈ outside)
+      (gateVisible : ∀ (index : Fin outside.length) gate,
+        (candidate.program.terminalGateSources (outside.get index)).1 = .gate gate ∨
+          (candidate.program.terminalGateSources (outside.get index)).2 = .gate gate →
+        selection gate = true → gate ∈ interface)
+      (outputVisible : ∀ output gate, candidate.directWireWord.source output = .gate gate →
+        selection gate = true → gate ∈ interface)
+      (offer : Candidate boundary.length replacementGates interface.length) :
+      RawNandGraph inputs (outside.length + replacementGates) ×
+        DirectWireWord inputs (outside.length + replacementGates) outputs :=
+    (⟨splitFin
+      (fun index =>
+        let pair := candidate.program.terminalGateSources (outside.get index)
+        ⟨bindOriginal selection boundary interface outside boundaryOK outsideOK offer pair.1
+            (fun gate found active => gateVisible index gate (Or.inl found) active),
+          bindOriginal selection boundary interface outside boundaryOK outsideOK offer pair.2
+            (fun gate found active => gateVisible index gate (Or.inr found) active)⟩)
+      (fun index =>
+        let pair := offer.program.terminalGateSources index
+        ⟨bindReplacement boundary outside boundaryOK pair.1,
+          bindReplacement boundary outside boundaryOK pair.2⟩)⟩,
+      ⟨fun output => bindOriginal selection boundary interface outside boundaryOK outsideOK offer
+        (candidate.directWireWord.source output) (outputVisible output)⟩)
+  have replacementActual {width : Nat}
+      (rs : List (TerminalPrimitiveRecord inputs gates outputs width))
+      (valid : ∀ gate, TerminalSupportWire.gate gate ∈ terminalBoundaryPorts candidate.program rs →
+        gate ∈ exterior rs)
+      (source : Source (terminalBoundaryPorts candidate.program rs).length replacementGates) :
+      bindReplacement (terminalBoundaryPorts candidate.program rs) (exterior rs) valid source =
+        replacementSource candidate rs source := by
+    cases source with
+    | input port =>
+        cases found : (terminalBoundaryPorts candidate.program rs).get port <;>
+          simp only [bindReplacement, bindBoundary, replacementSource, boundarySource]
+    | constant value => rfl
+    | gate index => rfl
+  have originalActual {width : Nat}
+      (rs : List (TerminalPrimitiveRecord inputs gates outputs width))
+      (boundaryOK : ∀ gate, TerminalSupportWire.gate gate ∈ terminalBoundaryPorts candidate.program rs →
+        gate ∈ exterior rs)
+      (outsideOK : ∀ gate, terminalGateSelected rs gate = false → gate ∈ exterior rs)
+      (offer : Candidate (terminalBoundaryPorts candidate.program rs).length replacementGates
+        (terminalInterfacePorts candidate rs).length)
+      (source : Source inputs gates) (visible : Visible candidate rs source) :
+      bindOriginal (terminalGateSelected rs) (terminalBoundaryPorts candidate.program rs)
+        (terminalInterfacePorts candidate rs) (exterior rs) boundaryOK outsideOK offer source visible =
+      originalSource candidate rs offer source visible := by
+    cases source with
+    | input index => rfl
+    | constant value => rfl
+    | gate gate =>
+        by_cases active : terminalGateSelected rs gate = true
+        · simp only [bindOriginal, originalSource, dif_pos active]
+          exact replacementActual rs boundaryOK _
+        · simp only [bindOriginal, originalSource, dif_neg active]
+  have actual {width : Nat}
+      (rs : List (TerminalPrimitiveRecord inputs gates outputs width))
+      (boundaryOK : ∀ gate, TerminalSupportWire.gate gate ∈ terminalBoundaryPorts candidate.program rs →
+        gate ∈ exterior rs)
+      (outsideOK : ∀ gate, terminalGateSelected rs gate = false → gate ∈ exterior rs)
+      (gateVisible : ∀ (index : Fin (exterior rs).length) gate,
+        (candidate.program.terminalGateSources ((exterior rs).get index)).1 = .gate gate ∨
+          (candidate.program.terminalGateSources ((exterior rs).get index)).2 = .gate gate →
+        terminalGateSelected rs gate = true → gate ∈ terminalInterfacePorts candidate rs)
+      (outputVisible : ∀ output gate, candidate.directWireWord.source output = .gate gate →
+        terminalGateSelected rs gate = true → gate ∈ terminalInterfacePorts candidate rs)
+      (offer : Candidate (terminalBoundaryPorts candidate.program rs).length replacementGates
+        (terminalInterfacePorts candidate rs).length) :
+      (assemble (terminalGateSelected rs) (terminalBoundaryPorts candidate.program rs)
+        (terminalInterfacePorts candidate rs) (exterior rs) boundaryOK outsideOK gateVisible outputVisible offer).1 =
+        graph candidate rs offer ∧
+      (assemble (terminalGateSelected rs) (terminalBoundaryPorts candidate.program rs)
+        (terminalInterfacePorts candidate rs) (exterior rs) boundaryOK outsideOK gateVisible outputVisible offer).2 =
+        word candidate rs offer := by
+    constructor
+    · apply congrArg RawNandGraph.mk
+      funext node
+      rcases finSum_decompose node with ⟨outside, rfl⟩ | ⟨inside, rfl⟩
+      · dsimp only [assemble, graph]
+        rw [splitFin_left, splitFin_left]
+        dsimp only [exteriorGate]
+        rw [originalActual, originalActual]
+      · dsimp only [assemble, graph]
+        rw [splitFin_right, splitFin_right]
+        dsimp only [replacementGate]
+        rw [replacementActual, replacementActual]
+    · apply congrArg DirectWireWord.mk
+      funext output
+      exact originalActual rs boundaryOK outsideOK offer _ _
+  have congruent
+      (selectFirst selectLast : Fin gates → Bool) (selections : selectFirst = selectLast)
+      (boundaryFirst boundaryLast : List (TerminalSupportWire inputs gates))
+      (boundaries : boundaryFirst = boundaryLast)
+      (interfaceFirst interfaceLast : List (Fin gates)) (interfaces : interfaceFirst = interfaceLast)
+      (outsideFirst outsideLast : List (Fin gates)) (outsides : outsideFirst = outsideLast)
+      (boundaryFirstOK : ∀ gate, TerminalSupportWire.gate gate ∈ boundaryFirst → gate ∈ outsideFirst)
+      (boundaryLastOK : ∀ gate, TerminalSupportWire.gate gate ∈ boundaryLast → gate ∈ outsideLast)
+      (outsideFirstOK : ∀ gate, selectFirst gate = false → gate ∈ outsideFirst)
+      (outsideLastOK : ∀ gate, selectLast gate = false → gate ∈ outsideLast)
+      (gateFirstVisible : ∀ (index : Fin outsideFirst.length) gate,
+        (candidate.program.terminalGateSources (outsideFirst.get index)).1 = .gate gate ∨
+          (candidate.program.terminalGateSources (outsideFirst.get index)).2 = .gate gate →
+        selectFirst gate = true → gate ∈ interfaceFirst)
+      (gateLastVisible : ∀ (index : Fin outsideLast.length) gate,
+        (candidate.program.terminalGateSources (outsideLast.get index)).1 = .gate gate ∨
+          (candidate.program.terminalGateSources (outsideLast.get index)).2 = .gate gate →
+        selectLast gate = true → gate ∈ interfaceLast)
+      (outputFirstVisible : ∀ output gate, candidate.directWireWord.source output = .gate gate →
+        selectFirst gate = true → gate ∈ interfaceFirst)
+      (outputLastVisible : ∀ output gate, candidate.directWireWord.source output = .gate gate →
+        selectLast gate = true → gate ∈ interfaceLast)
+      (offerFirst : Candidate boundaryFirst.length replacementGates interfaceFirst.length)
+      (offerLast : Candidate boundaryLast.length replacementGates interfaceLast.length)
+      (offers : HEq offerFirst offerLast) :
+      HEq (assemble selectFirst boundaryFirst interfaceFirst outsideFirst boundaryFirstOK
+        outsideFirstOK gateFirstVisible outputFirstVisible offerFirst).1
+        (assemble selectLast boundaryLast interfaceLast outsideLast boundaryLastOK
+          outsideLastOK gateLastVisible outputLastVisible offerLast).1 ∧
+      HEq (assemble selectFirst boundaryFirst interfaceFirst outsideFirst boundaryFirstOK
+        outsideFirstOK gateFirstVisible outputFirstVisible offerFirst).2
+        (assemble selectLast boundaryLast interfaceLast outsideLast boundaryLastOK
+          outsideLastOK gateLastVisible outputLastVisible offerLast).2 := by
+    cases selections
+    cases boundaries
+    cases interfaces
+    cases outsides
+    have equal := eq_of_heq offers
+    cases equal
+    exact ⟨HEq.rfl, HEq.rfl⟩
+  have combined := congruent _ _ sameSelection _ _ sameBoundary _ _ sameInterface _ _ sameExterior
+    (fun gate member => (mem_exterior_iff records gate).2
+      (boundaryGate_unselected candidate records gate member))
+    (fun gate member => (mem_exterior_iff otherRecords gate).2
+      (boundaryGate_unselected candidate otherRecords gate member))
+    (fun gate => (mem_exterior_iff records gate).2)
+    (fun gate => (mem_exterior_iff otherRecords gate).2)
+    (fun index gate occurs active =>
+      exteriorSource_visible candidate records ((exterior records).get index)
+        (exteriorGet_unselected records index) (.gate gate) occurs gate rfl active)
+    (fun index gate occurs active =>
+      exteriorSource_visible candidate otherRecords ((exterior otherRecords).get index)
+        (exteriorGet_unselected otherRecords index) (.gate gate) occurs gate rfl active)
+    (output_visible candidate records) (output_visible candidate otherRecords) replacement other sameOffer
+  have firstActual := actual records
+    (fun gate member => (mem_exterior_iff records gate).2
+      (boundaryGate_unselected candidate records gate member))
+    (fun gate => (mem_exterior_iff records gate).2)
+    (fun index gate occurs active =>
+      exteriorSource_visible candidate records ((exterior records).get index)
+        (exteriorGet_unselected records index) (.gate gate) occurs gate rfl active)
+    (output_visible candidate records) replacement
+  have lastActual := actual otherRecords
+    (fun gate member => (mem_exterior_iff otherRecords gate).2
+      (boundaryGate_unselected candidate otherRecords gate member))
+    (fun gate => (mem_exterior_iff otherRecords gate).2)
+    (fun index gate occurs active =>
+      exteriorSource_visible candidate otherRecords ((exterior otherRecords).get index)
+        (exteriorGet_unselected otherRecords index) (.gate gate) occurs gate rfl active)
+    (output_visible candidate otherRecords) other
+  exact ⟨(heq_of_eq firstActual.1.symm).trans (combined.1.trans (heq_of_eq lastActual.1)),
+    (heq_of_eq firstActual.2.symm).trans (combined.2.trans (heq_of_eq lastActual.2))⟩
+
 end ArbitrarySupportSplice
 end DirectWire
 end PNP

@@ -456,5 +456,119 @@ theorem outputConeImplementation_causal_bound
     Candidate.ofDirectWireWord_pointwise, Candidate.ofDirectWireWord_program] using
     outputConeOutputSource_causal current.candidate labels output
 
+/-- Restore a retained physical literal through the actual extraction origin.
+Primary inputs and constants keep their identities. -/
+def outputConeOriginalSource {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs) :
+    Source inputs (extractTerminalSupport candidate (outputConeRecords candidate)).gateCount →
+      Source inputs gates
+  | .input index => .input index
+  | .constant value => .constant value
+  | .gate position =>
+      .gate (terminalExtractionOrigin candidate (outputConeRecords candidate) position)
+
+private theorem outputConeOriginalSource_renamed {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (literal : Source (terminalBoundaryPorts candidate.program (outputConeRecords candidate)).length
+      (extractTerminalSupport candidate (outputConeRecords candidate)).gateCount) :
+    outputConeOriginalSource candidate (literal.renameInputs (outputConeBoundaryInput candidate)) =
+      terminalExtractionOriginalSource candidate (outputConeRecords candidate) literal := by
+  cases literal with
+  | input port =>
+      simp only [Source.renameInputs, outputConeOriginalSource, terminalExtractionOriginalSource]
+      unfold outputConeBoundaryInput
+      split
+      · rename_i original wireEq
+        rw [wireEq]
+      · rename_i producer wireEq
+        exact False.elim (outputConeRecords_noExternalGate candidate producer
+          (wireEq ▸ List.get_mem _ port))
+  | constant value => rfl
+  | gate position => rfl
+
+private theorem outputConeImplementation_program {inputs outputs : Nat}
+    (current : Implementation inputs outputs) :
+    (outputConeImplementation current).candidate.program =
+      (extractTerminalSupport current.candidate
+        (outputConeRecords current.candidate)).extractedCandidate.program.renameInputs
+          (outputConeBoundaryInput current.candidate) := by
+  change (Candidate.ofDirectWireWord _ _).program = _
+  rw [Candidate.ofDirectWireWord_program]
+  unfold outputConeRenamedCandidate Candidate.renameInputs
+  rw [Candidate.ofDirectWireWord_program]
+
+/-- Every NAND source pair in the actual pruned circuit restores to the pair at
+its computed original gate. No supplied correspondence or Boolean alias is used. -/
+theorem outputConeImplementation_original_sources {inputs outputs : Nat}
+    (current : Implementation inputs outputs)
+    (position : Fin (outputConeImplementation current).gateCount) :
+    let pair := (outputConeImplementation current).candidate.program.terminalGateSources position
+    (outputConeOriginalSource current.candidate pair.1,
+     outputConeOriginalSource current.candidate pair.2) =
+      current.candidate.program.terminalGateSources
+        (terminalExtractionOrigin current.candidate (outputConeRecords current.candidate) position) := by
+  let extracted := extractTerminalSupport current.candidate (outputConeRecords current.candidate)
+  have programPair := congrArg
+    (fun program : Program inputs (outputConeImplementation current).gateCount =>
+      program.terminalGateSources position) (outputConeImplementation_program current)
+  have renamedPair := Program.terminalGateSources_renameInputs
+    extracted.extractedCandidate.program (outputConeBoundaryInput current.candidate) position
+  have pair := programPair.trans renamedPair
+  have restoredLeft := outputConeOriginalSource_renamed current.candidate
+    (extracted.extractedCandidate.program.terminalGateSources position).1
+  have restoredRight := outputConeOriginalSource_renamed current.candidate
+    (extracted.extractedCandidate.program.terminalGateSources position).2
+  exact (congrArg
+    (fun pair : Source inputs (outputConeImplementation current).gateCount ×
+        Source inputs (outputConeImplementation current).gateCount =>
+      (outputConeOriginalSource current.candidate pair.1,
+       outputConeOriginalSource current.candidate pair.2)) pair).trans
+    ((Prod.ext restoredLeft restoredRight).trans
+      (extractTerminalSupport_original_sources current.candidate
+        (outputConeRecords current.candidate) position))
+
+/-- The complete retained frontier restores its actual original producers,
+including retained wires with consumers that the pass deletes. -/
+theorem outputConeFrontierCandidate_original_source {inputs gates outputs : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (output : Fin (terminalInterfacePorts candidate (outputConeRecords candidate)).length) :
+    outputConeOriginalSource candidate
+      ((outputConeFrontierCandidate candidate).directWireWord.source output) =
+        .gate ((terminalInterfacePorts candidate (outputConeRecords candidate)).get output) := by
+  let extracted := extractTerminalSupport candidate (outputConeRecords candidate)
+  have literal := Candidate.ofDirectWireWord_pointwise
+    (extracted.extractedCandidate.program.renameInputs (outputConeBoundaryInput candidate))
+    (extracted.extractedCandidate.directWireWord.renameInputs (outputConeBoundaryInput candidate)) output
+  exact (congrArg (outputConeOriginalSource candidate) literal).trans
+    ((outputConeOriginalSource_renamed candidate
+      (extracted.extractedCandidate.directWireWord.source output)).trans
+      (extractTerminalSupport_original_output_source candidate (outputConeRecords candidate) output))
+
+/-- Every actual ordered output restores its exact original source, including
+primary inputs, constants and repeated gate outputs. -/
+theorem outputConeImplementation_original_output_source {inputs outputs : Nat}
+    (current : Implementation inputs outputs) (output : Fin outputs) :
+    outputConeOriginalSource current.candidate
+      ((outputConeImplementation current).candidate.directWireWord.source output) =
+        current.candidate.directWireWord.source output := by
+  change outputConeOriginalSource current.candidate
+    ((Candidate.ofDirectWireWord _ _).directWireWord.source output) = _
+  rw [Candidate.ofDirectWireWord_pointwise]
+  change outputConeOriginalSource current.candidate (outputConeOutputSource current.candidate output) = _
+  unfold outputConeOutputSource
+  split
+  · rename_i original wireEq
+    exact wireEq.symm
+  · rename_i value wireEq
+    exact wireEq.symm
+  · rename_i producer wireEq
+    let located := coneLocateMember producer
+      (terminalInterfacePorts current.candidate (outputConeRecords current.candidate))
+      (outputConeOutput_interface current.candidate output producer wireEq)
+    change outputConeOriginalSource current.candidate
+      ((outputConeFrontierCandidate current.candidate).directWireWord.source located.1) = _
+    exact (outputConeFrontierCandidate_original_source current.candidate located.1).trans
+      ((congrArg Source.gate located.2).trans wireEq.symm)
+
 end DirectWire
 end PNP

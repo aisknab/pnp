@@ -145,7 +145,8 @@ const SOURCES = [
       "boundarySource_input",
       "boundarySource_gate",
       "originalSource_exterior",
-      "originalSource_interface"
+      "originalSource_interface",
+      "graph_word_heq_of_physical_data"
     ]
   }
 ];

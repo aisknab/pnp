@@ -90,6 +90,8 @@ const SPECS = [
       "extractSaturatedTerminalSupport_semantics",
       "extractSaturatedTerminalSupport_induced",
       "extractTerminalSupport_eq_of_gateSelected_eq",
+      "TerminalExtractedSupport.withRecords",
+      "extractTerminalSupport_withRecords_of_gateSelected_eq",
       "terminalOpenGateEvaluation_prefix_congr",
       "terminalOpenGateEvaluation_single_gate_prefix",
       "terminalOpenWireValue",
@@ -101,7 +103,17 @@ const SPECS = [
       "terminalOpenSourceValue",
       "terminalOpenGateEvaluation_sourceEquation",
       "terminalOpenWireValue_boundary_get",
-      "terminalOpenWireValue_external_absent"
+      "terminalOpenWireValue_external_absent",
+      "terminalExtractionSource",
+      "extractTerminalSupport_gate_sources",
+      "extractTerminalSupport_position_sources",
+      "extractTerminalSupport_output_source",
+      "terminalExtractionOriginalSource",
+      "extractTerminalSupport_original_sources",
+      "extractTerminalSupport_original_output_source",
+      "Program.terminalGateSources_renameInputs",
+      "terminalExtractionGateIndex_val_eq_of_selected_eq",
+      "terminalExtractionOrigin_eq_of_selected_eq"
     ],
     "imports": [
       "PNP.ResidualTerminalPhysicalSupportCompletion",
@@ -147,7 +159,11 @@ const SPECS = [
       "outputConeNormalizer",
       "outputConeNormalizer_checked",
       "outputConeFrontierCandidate_causal_bound",
-      "outputConeImplementation_causal_bound"
+      "outputConeImplementation_causal_bound",
+      "outputConeOriginalSource",
+      "outputConeImplementation_original_sources",
+      "outputConeFrontierCandidate_original_source",
+      "outputConeImplementation_original_output_source"
     ],
     "imports": [
       "PNP.PCCMinNormalizeOracleComposition",
@@ -360,7 +376,8 @@ const SPECS = [
       "boundarySource_input",
       "boundarySource_gate",
       "originalSource_exterior",
-      "originalSource_interface"
+      "originalSource_interface",
+      "graph_word_heq_of_physical_data"
     ],
     "imports": [
       "PNP.NANDTopologicalCompiler",

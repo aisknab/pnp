@@ -1637,6 +1637,74 @@ theorem extractTerminalSupport_eq_of_gateSelected_eq
       (terminalInterfacePorts candidate right) (terminalGateSelected right)
   rw [boundaryEqual, interfaceEqual, selectedEqual]
 
+/-- Replace the stored record type without changing any physical extraction
+field. This is representation transport, not profile-observer equivalence. -/
+def TerminalExtractedSupport.withRecords
+    {inputs gates outputs fromWidth toWidth : Nat}
+    {candidate : Candidate inputs gates outputs}
+    (support : TerminalExtractedSupport (profileWidth := fromWidth) candidate)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs toWidth)) :
+    TerminalExtractedSupport (profileWidth := toWidth) candidate where
+  records := records
+  boundary := support.boundary
+  selectedGates := support.selectedGates
+  interface := support.interface
+  gateCount := support.gateCount
+  gateCount_eq_selected := support.gateCount_eq_selected
+  extractedCandidate := support.extractedCandidate
+
+/-- The actual extractor depends only on selected gates even across different
+record profile widths. The right record list is retained exactly, and all
+physical fields, including the computed candidate, agree. -/
+theorem extractTerminalSupport_withRecords_of_gateSelected_eq
+    {inputs gates outputs fromWidth toWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (left : List (TerminalPrimitiveRecord inputs gates outputs fromWidth))
+    (right : List (TerminalPrimitiveRecord inputs gates outputs toWidth))
+    (selectedEqual : terminalGateSelected left = terminalGateSelected right) :
+    (extractTerminalSupport candidate left).withRecords right =
+      extractTerminalSupport candidate right := by
+  have boundaryEqual :
+      terminalBoundaryPorts candidate.program left =
+        terminalBoundaryPorts candidate.program right := by
+    rw [terminalBoundaryPorts_reference, terminalBoundaryPorts_reference]
+    apply congrArg (fun predicate =>
+      (allTerminalSupportWires inputs gates).filter predicate)
+    funext wire
+    unfold terminalBoundaryWire
+    cases wire <;> simp only [terminalWireExternal, selectedEqual]
+  have interfaceEqual :
+      terminalInterfacePorts candidate left = terminalInterfacePorts candidate right := by
+    unfold terminalInterfacePorts
+    apply congrArg (fun predicate => (allFin gates).filter predicate)
+    funext producer
+    simp only [terminalInterfaceGate, terminalGateHasExternalConsumer, selectedEqual]
+  let assemble
+      (boundary : List (TerminalSupportWire inputs gates))
+      (interface : List (Fin gates))
+      (selected : Fin gates → Bool) :
+      TerminalExtractedSupport (profileWidth := toWidth) candidate :=
+    let state := extractTerminalProgramAux boundary candidate.program selected
+      TerminalSupportWire.input TerminalSupportWire.gate
+    { records := right
+      boundary := boundary
+      selectedGates := terminalSelectedGateIndices selected
+      interface := interface
+      gateCount := state.gateCount
+      gateCount_eq_selected := state.gateCount_eq
+      extractedCandidate :=
+        Candidate.ofDirectWireWord state.extractedProgram
+          { source := fun output =>
+              let producer := interface.get output
+              if checked : selected producer = true then
+                .gate (state.gateIndex producer checked)
+              else .constant false } }
+  change assemble (terminalBoundaryPorts candidate.program left)
+      (terminalInterfacePorts candidate left) (terminalGateSelected left) =
+    assemble (terminalBoundaryPorts candidate.program right)
+      (terminalInterfacePorts candidate right) (terminalGateSelected right)
+  rw [boundaryEqual, interfaceEqual, selectedEqual]
+
 /-- Open-source evaluation is extensional in the boundary and preceding values. -/
 private theorem Source.evalTerminalOpen_congr
     {wireInputs wireGates inputs gates : Nat}
@@ -2340,5 +2408,414 @@ theorem terminalOpenWireValue_external_absent
       unfold terminalBoundaryValue
       rw [dif_neg absent]
 
+private theorem fin_castAdd_one_literal {count : Nat} (index : Fin count) :
+    Fin.castAdd 1 index = index.castSucc := Fin.ext rfl
+
+/-- Appending one physical slot leaves a boundary input's literal identity unchanged. -/
+private theorem boundaryInputSource_weaken
+    {wireInputs wireGates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (wire : TerminalSupportWire wireInputs wireGates) (count : Nat) :
+    (boundaryInputSource boundary wire count).weakenGates 1 =
+      boundaryInputSource boundary wire (count + 1) := by
+  unfold boundaryInputSource
+  split <;> rfl
+
+private theorem Source.extractTerminal_weaken_selected
+    {wireInputs wireGates inputs gates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (initial : Program inputs gates) (gate : Gate inputs gates)
+    (selected : Fin (gates + 1) → Bool)
+    (inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin (gates + 1) → TerminalSupportWire wireInputs wireGates)
+    (lastSelected : selected (Fin.last gates) = true) (literal : Source inputs gates) :
+    HEq ((literal.weakenGates 1).extractTerminal
+        (extractTerminalProgramAux boundary (.snoc initial gate) selected inputWire gateWire))
+      ((literal.extractTerminal (extractTerminalProgramAux boundary initial
+        (fun index => selected index.castSucc) inputWire
+        (fun index => gateWire index.castSucc))).weakenGates 1) := by
+  rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+    dif_pos lastSelected]
+  cases literal with
+  | input index =>
+      simp only [Source.weakenGates, fin_castAdd_one_literal, Source.extractTerminal, heq_eq_eq]
+      exact (boundaryInputSource_weaken boundary (inputWire index) _).symm
+  | constant value => rfl
+  | gate index =>
+      by_cases selectedIndex : selected index.castSucc = true
+      · simp only [Source.weakenGates, fin_castAdd_one_literal, Source.extractTerminal, dif_pos selectedIndex, finLastCasesConstructive_castSucc, heq_eq_eq]
+      · simp only [Source.weakenGates, fin_castAdd_one_literal, Source.extractTerminal, dif_neg selectedIndex, heq_eq_eq]
+        exact (boundaryInputSource_weaken boundary (gateWire index.castSucc) _).symm
+
+private theorem Source.extractTerminal_weaken_skipped
+    {wireInputs wireGates inputs gates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (initial : Program inputs gates) (gate : Gate inputs gates)
+    (selected : Fin (gates + 1) → Bool)
+    (inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin (gates + 1) → TerminalSupportWire wireInputs wireGates)
+    (lastSkipped : selected (Fin.last gates) ≠ true) (literal : Source inputs gates) :
+    HEq ((literal.weakenGates 1).extractTerminal
+        (extractTerminalProgramAux boundary (.snoc initial gate) selected inputWire gateWire))
+      (literal.extractTerminal (extractTerminalProgramAux boundary initial
+        (fun index => selected index.castSucc) inputWire
+        (fun index => gateWire index.castSucc))) := by
+  rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+    dif_neg lastSkipped]
+  cases literal with
+  | input index => rfl
+  | constant value => rfl
+  | gate index =>
+      by_cases selectedIndex : selected index.castSucc = true
+      · simp only [Source.weakenGates, fin_castAdd_one_literal, Source.extractTerminal, dif_pos selectedIndex, finLastCasesConstructive_castSucc, heq_eq_eq]
+      · simp only [Source.weakenGates, fin_castAdd_one_literal, Source.extractTerminal, dif_neg selectedIndex, heq_eq_eq]
+
+/-- The scan copies actual NAND input literals. This is stronger than Boolean
+equivalence and applies to arbitrary supports, including gaps in the gate order. -/
+private theorem extractTerminalProgramAux_sources
+    {wireInputs wireGates inputs gates : Nat}
+    (boundary : List (TerminalSupportWire wireInputs wireGates))
+    (program : Program inputs gates) (selected : Fin gates → Bool)
+    (inputWire : Fin inputs → TerminalSupportWire wireInputs wireGates)
+    (gateWire : Fin gates → TerminalSupportWire wireInputs wireGates) :
+    ∀ node (selectedNode : selected node = true),
+      let state := extractTerminalProgramAux boundary program selected inputWire gateWire
+      state.extractedProgram.terminalGateSources (state.gateIndex node selectedNode) =
+        ((program.terminalGateSources node).1.extractTerminal state,
+         (program.terminalGateSources node).2.extractTerminal state) := by
+  induction program with
+  | empty => exact fun node => Fin.elim0 node
+  | @snoc gates initial gate ih =>
+      intro node selectedNode
+      rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate]
+      by_cases lastSelected : selected (Fin.last gates) = true
+      · rw [dif_pos lastSelected]
+        rcases CausalBound.index_cases node with ⟨previous, rfl⟩ | rfl
+        · simp only [finLastCasesConstructive_castSucc, Program.terminalGateSources_snoc_castSucc]
+          rw [ih (fun index => selected index.castSucc)
+            (fun index => gateWire index.castSucc) previous selectedNode]
+          apply Prod.ext
+          · have copied := Source.extractTerminal_weaken_selected boundary initial gate selected
+              inputWire gateWire lastSelected (initial.terminalGateSources previous).1
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_pos lastSelected] at copied
+            exact (eq_of_heq copied).symm
+          · have copied := Source.extractTerminal_weaken_selected boundary initial gate selected
+              inputWire gateWire lastSelected (initial.terminalGateSources previous).2
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_pos lastSelected] at copied
+            exact (eq_of_heq copied).symm
+        · simp only [finLastCasesConstructive_last, Program.terminalGateSources_snoc_last]
+          apply Prod.ext
+          · have copied := Source.extractTerminal_weaken_selected boundary initial gate selected
+              inputWire gateWire lastSelected gate.left
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_pos lastSelected] at copied
+            exact (eq_of_heq copied).symm
+          · have copied := Source.extractTerminal_weaken_selected boundary initial gate selected
+              inputWire gateWire lastSelected gate.right
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_pos lastSelected] at copied
+            exact (eq_of_heq copied).symm
+      · rw [dif_neg lastSelected]
+        rcases CausalBound.index_cases node with ⟨previous, rfl⟩ | rfl
+        · simp only [finLastCasesConstructive_castSucc, Program.terminalGateSources_snoc_castSucc]
+          rw [ih (fun index => selected index.castSucc)
+            (fun index => gateWire index.castSucc) previous selectedNode]
+          apply Prod.ext
+          · have copied := Source.extractTerminal_weaken_skipped boundary initial gate selected
+              inputWire gateWire lastSelected (initial.terminalGateSources previous).1
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_neg lastSelected] at copied
+            exact (eq_of_heq copied).symm
+          · have copied := Source.extractTerminal_weaken_skipped boundary initial gate selected
+              inputWire gateWire lastSelected (initial.terminalGateSources previous).2
+            rw [extractTerminalProgramAux.eq_2 boundary inputs inputWire gates selected gateWire initial gate,
+              dif_neg lastSelected] at copied
+            exact (eq_of_heq copied).symm
+        · exact False.elim (lastSelected selectedNode)
+
+/-- The actual extractor's literal binding. An undeclared, unused external
+literal retains the existing inert fallback; selected-gate source completeness
+is established by the physical support constructor. -/
+def terminalExtractionSource
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (literal : Source inputs gates) :
+    Source (terminalBoundaryPorts candidate.program records).length
+      (extractTerminalSupport candidate records).gateCount :=
+  literal.extractTerminal (terminalExtractionState candidate records)
+
+theorem extractTerminalSupport_gate_sources
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (node : Fin gates) (selectedNode : terminalGateSelected records node = true) :
+    (extractTerminalSupport candidate records).extractedCandidate.program.terminalGateSources
+        (terminalExtractionGateIndex candidate records node selectedNode) =
+      (terminalExtractionSource candidate records (candidate.program.terminalGateSources node).1,
+       terminalExtractionSource candidate records (candidate.program.terminalGateSources node).2) := by
+  change (terminalExtractedCandidate candidate records).program.terminalGateSources _ = _
+  unfold terminalExtractedCandidate
+  rw [Candidate.ofDirectWireWord_program]
+  exact extractTerminalProgramAux_sources
+    (terminalBoundaryPorts candidate.program records) candidate.program
+    (terminalGateSelected records) TerminalSupportWire.input TerminalSupportWire.gate node selectedNode
+
+theorem extractTerminalSupport_position_sources
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (position : Fin (extractTerminalSupport candidate records).gateCount) :
+    (extractTerminalSupport candidate records).extractedCandidate.program.terminalGateSources position =
+      (terminalExtractionSource candidate records
+        (candidate.program.terminalGateSources (terminalExtractionOrigin candidate records position)).1,
+       terminalExtractionSource candidate records
+        (candidate.program.terminalGateSources (terminalExtractionOrigin candidate records position)).2) := by
+  have copied := extractTerminalSupport_gate_sources candidate records
+    (terminalExtractionOrigin candidate records position)
+    (terminalExtractionOrigin_selected candidate records position)
+  rw [terminalExtractionGateIndex_origin] at copied
+  exact copied
+
+theorem extractTerminalSupport_output_source
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (output : Fin (terminalInterfacePorts candidate records).length) :
+    (extractTerminalSupport candidate records).extractedCandidate.directWireWord.source output =
+      terminalExtractionSource candidate records
+        (.gate ((terminalInterfacePorts candidate records).get output)) := by
+  change (terminalExtractedCandidate candidate records).directWireWord.source output = _
+  unfold terminalExtractedCandidate
+  rw [Candidate.ofDirectWireWord_pointwise]
+  simp only [terminalExtractionSource, Source.extractTerminal,
+    dif_pos (terminalInterfaceGet_selected candidate records output)]
+
+
+/-- Restore an extracted literal to its physical input or gate identity in the
+original circuit. This is a syntax map, not an equality of Boolean values. -/
+def terminalExtractionOriginalSource
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth)) :
+    Source (terminalBoundaryPorts candidate.program records).length
+      (extractTerminalSupport candidate records).gateCount → Source inputs gates
+  | .input port =>
+      match (terminalBoundaryPorts candidate.program records).get port with
+      | .input index => .input index
+      | .gate index => .gate index
+  | .constant value => .constant value
+  | .gate position => .gate (terminalExtractionOrigin candidate records position)
+
+private theorem terminalExtractionSource_restore
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (literal : Source inputs gates)
+    (accounted : literal.terminalAccounted (terminalGateSelected records)
+      TerminalSupportWire.input TerminalSupportWire.gate
+      (terminalBoundaryPorts candidate.program records)) :
+    terminalExtractionOriginalSource candidate records
+      (terminalExtractionSource candidate records literal) = literal := by
+  cases literal with
+  | input index =>
+      change TerminalSupportWire.input index ∈ terminalBoundaryPorts candidate.program records at accounted
+      simp only [terminalExtractionSource, Source.extractTerminal, boundaryInputSource,
+        dif_pos accounted, terminalExtractionOriginalSource, get_memberIndex]
+  | constant value => rfl
+  | gate index =>
+      by_cases selected : terminalGateSelected records index = true
+      · simp only [terminalExtractionSource, Source.extractTerminal, dif_pos selected,
+          terminalExtractionOriginalSource]
+        exact congrArg Source.gate (terminalExtractionOrigin_gateIndex candidate records index selected)
+      · have member : TerminalSupportWire.gate index ∈
+            terminalBoundaryPorts candidate.program records := accounted.resolve_left selected
+        simp only [terminalExtractionSource, Source.extractTerminal, dif_neg selected,
+          boundaryInputSource, dif_pos member, terminalExtractionOriginalSource, get_memberIndex]
+
+/-- Every actual extracted NAND pair restores to the exact original source pair.
+The required boundary completeness is derived from the physical support. -/
+theorem extractTerminalSupport_original_sources
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (position : Fin (extractTerminalSupport candidate records).gateCount) :
+    let pair := (extractTerminalSupport candidate records).extractedCandidate.program.terminalGateSources position
+    (terminalExtractionOriginalSource candidate records pair.1,
+     terminalExtractionOriginalSource candidate records pair.2) =
+      candidate.program.terminalGateSources (terminalExtractionOrigin candidate records position) := by
+  dsimp only
+  rw [extractTerminalSupport_position_sources]
+  have incoming := completeTerminalPhysicalSupport_incoming_complete candidate records
+    (terminalExtractionOrigin candidate records position)
+    (terminalExtractionOrigin_selected candidate records position)
+  apply Prod.ext
+  · exact terminalExtractionSource_restore candidate records _
+      ((physicalSourceAccounted_iff_terminalAccounted candidate records _).1 incoming.1)
+  · exact terminalExtractionSource_restore candidate records _
+      ((physicalSourceAccounted_iff_terminalAccounted candidate records _).1 incoming.2)
+
+/-- Ordered outgoing slots restore their exact original producer, including
+duplicate Boolean values and arbitrary gaps in the selected physical support. -/
+theorem extractTerminalSupport_original_output_source
+    {inputs gates outputs profileWidth : Nat}
+    (candidate : Candidate inputs gates outputs)
+    (records : List (TerminalPrimitiveRecord inputs gates outputs profileWidth))
+    (output : Fin (terminalInterfacePorts candidate records).length) :
+    terminalExtractionOriginalSource candidate records
+      ((extractTerminalSupport candidate records).extractedCandidate.directWireWord.source output) =
+        .gate ((terminalInterfacePorts candidate records).get output) := by
+  rw [extractTerminalSupport_output_source]
+  exact terminalExtractionSource_restore candidate records _
+    (Or.inl (terminalInterfaceGet_selected candidate records output))
+
+/-- Input renaming commutes with adding one physical gate slot. -/
+private theorem sourceRenameInputs_weaken_one
+    {fromInputs toInputs gates : Nat}
+    (source : Source fromInputs gates) (rename : Fin fromInputs → Fin toInputs) :
+    (source.renameInputs rename).weakenGates 1 =
+      (source.weakenGates 1).renameInputs rename := by
+  cases source <;> rfl
+
+/-- Renaming primary inputs preserves every physical gate index and changes
+exactly the input literals in each actual NAND source pair. -/
+theorem Program.terminalGateSources_renameInputs
+    {fromInputs toInputs gates : Nat}
+    (program : Program fromInputs gates) (rename : Fin fromInputs → Fin toInputs)
+    (node : Fin gates) :
+    (program.renameInputs rename).terminalGateSources node =
+      ((program.terminalGateSources node).1.renameInputs rename,
+       (program.terminalGateSources node).2.renameInputs rename) := by
+  induction program with
+  | empty => exact Fin.elim0 node
+  | @snoc gates initial gate ih =>
+      by_cases earlier : node.val < gates
+      · simp only [Program.renameInputs, Program.terminalGateSources, dif_pos earlier]
+        rw [ih]
+        exact Prod.ext (sourceRenameInputs_weaken_one _ _) (sourceRenameInputs_weaken_one _ _)
+      · simp only [Program.renameInputs, Program.terminalGateSources, dif_neg earlier,
+          Gate.renameInputs]
+        exact Prod.ext (sourceRenameInputs_weaken_one _ _) (sourceRenameInputs_weaken_one _ _)
+
+
+/-- Extracted positions depend on the selected original indices, not on NAND
+sources, boundary size, or boundary labels. This compares the actual scan. -/
+private theorem extractTerminalProgramAux_gateIndex_val_eq
+    {leftWireInputs leftWireGates rightWireInputs rightWireGates
+      leftInputs rightInputs gates : Nat}
+    (leftBoundary : List (TerminalSupportWire leftWireInputs leftWireGates))
+    (rightBoundary : List (TerminalSupportWire rightWireInputs rightWireGates))
+    (left : Program leftInputs gates) (right : Program rightInputs gates)
+    (selected : Fin gates → Bool)
+    (leftInput : Fin leftInputs → TerminalSupportWire leftWireInputs leftWireGates)
+    (rightInput : Fin rightInputs → TerminalSupportWire rightWireInputs rightWireGates)
+    (leftGate : Fin gates → TerminalSupportWire leftWireInputs leftWireGates)
+    (rightGate : Fin gates → TerminalSupportWire rightWireInputs rightWireGates)
+    (index : Fin gates) (selectedIndex : selected index = true) :
+    ((extractTerminalProgramAux leftBoundary left selected leftInput leftGate).gateIndex
+        index selectedIndex).val =
+      ((extractTerminalProgramAux rightBoundary right selected rightInput rightGate).gateIndex
+        index selectedIndex).val := by
+  induction left with
+  | empty => exact Fin.elim0 index
+  | @snoc gates initial gate ih =>
+      cases right with
+      | snoc other otherGate =>
+          generalize leftStep : extractTerminalProgramAux leftBoundary
+            (.snoc initial gate) selected leftInput leftGate = leftState
+          generalize rightStep : extractTerminalProgramAux rightBoundary
+            (.snoc other otherGate) selected rightInput rightGate = rightState
+          by_cases lastSelected : selected (Fin.last gates) = true
+          · simp only [extractTerminalProgramAux, dif_pos lastSelected] at leftStep rightStep
+            subst leftState
+            subst rightState
+            rcases CausalBound.index_cases index with ⟨previous, rfl⟩ | rfl
+            · simp only [finLastCasesConstructive_castSucc, Fin.val_castSucc]
+              exact ih other (fun j => selected j.castSucc)
+                (fun j => leftGate j.castSucc) (fun j => rightGate j.castSucc)
+                previous selectedIndex
+            · simp only [finLastCasesConstructive_last, Fin.val_last]
+              exact
+                (extractTerminalProgramAux leftBoundary initial
+                  (fun j => selected j.castSucc) leftInput
+                  (fun j => leftGate j.castSucc)).gateCount_eq |>.trans
+                (extractTerminalProgramAux rightBoundary other
+                  (fun j => selected j.castSucc) rightInput
+                  (fun j => rightGate j.castSucc)).gateCount_eq.symm
+          · simp only [extractTerminalProgramAux, dif_neg lastSelected] at leftStep rightStep
+            subst leftState
+            subst rightState
+            rcases CausalBound.index_cases index with ⟨previous, rfl⟩ | rfl
+            · simp only [finLastCasesConstructive_castSucc]
+              exact ih other (fun j => selected j.castSucc)
+                (fun j => leftGate j.castSucc) (fun j => rightGate j.castSucc)
+                previous selectedIndex
+            · exact False.elim (lastSelected selectedIndex)
+
+/-- Equal selected original indices give equal actual extracted positions,
+even when programs, input domains, physical boundaries, and records differ. -/
+theorem terminalExtractionGateIndex_val_eq_of_selected_eq
+    {leftInputs rightInputs gates leftOutputs rightOutputs leftWidth rightWidth : Nat}
+    (left : Candidate leftInputs gates leftOutputs)
+    (right : Candidate rightInputs gates rightOutputs)
+    (leftRecords : List (TerminalPrimitiveRecord leftInputs gates leftOutputs leftWidth))
+    (rightRecords : List (TerminalPrimitiveRecord rightInputs gates rightOutputs rightWidth))
+    (selectedEq : ∀ gate, terminalGateSelected leftRecords gate =
+      terminalGateSelected rightRecords gate)
+    (gate : Fin gates)
+    (leftSelected : terminalGateSelected leftRecords gate = true)
+    (rightSelected : terminalGateSelected rightRecords gate = true) :
+    (terminalExtractionGateIndex left leftRecords gate leftSelected).val =
+      (terminalExtractionGateIndex right rightRecords gate rightSelected).val := by
+  have same : terminalGateSelected leftRecords = terminalGateSelected rightRecords :=
+    funext selectedEq
+  have compare (first second : Fin gates → Bool) (sameSelection : first = second)
+      (firstSelected : first gate = true) (secondSelected : second gate = true) :
+      ((extractTerminalProgramAux (terminalBoundaryPorts left.program leftRecords)
+        left.program first TerminalSupportWire.input TerminalSupportWire.gate).gateIndex
+          gate firstSelected).val =
+      ((extractTerminalProgramAux (terminalBoundaryPorts right.program rightRecords)
+        right.program second TerminalSupportWire.input TerminalSupportWire.gate).gateIndex
+          gate secondSelected).val := by
+    cases sameSelection
+    exact extractTerminalProgramAux_gateIndex_val_eq
+      (terminalBoundaryPorts left.program leftRecords)
+      (terminalBoundaryPorts right.program rightRecords)
+      left.program right.program first
+      TerminalSupportWire.input TerminalSupportWire.input
+      TerminalSupportWire.gate TerminalSupportWire.gate gate firstSelected
+  exact compare _ _ same leftSelected rightSelected
+
+/-- At equal actual positions, equal selection recovers the same original
+gate. This is stronger than equal selected sets or equal retained counts. -/
+theorem terminalExtractionOrigin_eq_of_selected_eq
+    {leftInputs rightInputs gates leftOutputs rightOutputs leftWidth rightWidth : Nat}
+    (left : Candidate leftInputs gates leftOutputs)
+    (right : Candidate rightInputs gates rightOutputs)
+    (leftRecords : List (TerminalPrimitiveRecord leftInputs gates leftOutputs leftWidth))
+    (rightRecords : List (TerminalPrimitiveRecord rightInputs gates rightOutputs rightWidth))
+    (selectedEq : ∀ gate, terminalGateSelected leftRecords gate =
+      terminalGateSelected rightRecords gate)
+    (leftPosition : Fin (extractTerminalSupport left leftRecords).gateCount)
+    (rightPosition : Fin (extractTerminalSupport right rightRecords).gateCount)
+    (positionEq : leftPosition.val = rightPosition.val) :
+    terminalExtractionOrigin left leftRecords leftPosition =
+      terminalExtractionOrigin right rightRecords rightPosition := by
+  let gate := terminalExtractionOrigin left leftRecords leftPosition
+  have leftSelected := terminalExtractionOrigin_selected left leftRecords leftPosition
+  have rightSelected : terminalGateSelected rightRecords gate = true :=
+    (selectedEq gate).symm.trans leftSelected
+  have sameIndex := terminalExtractionGateIndex_val_eq_of_selected_eq
+    left right leftRecords rightRecords selectedEq gate leftSelected rightSelected
+  have actualIndex : terminalExtractionGateIndex right rightRecords gate rightSelected =
+      rightPosition := by
+    apply Fin.ext
+    exact sameIndex.symm.trans
+      ((congrArg Fin.val (terminalExtractionGateIndex_origin left leftRecords leftPosition)).trans positionEq)
+  have origin := terminalExtractionOrigin_gateIndex right rightRecords gate rightSelected
+  rw [actualIndex] at origin
+  exact origin.symm
 end DirectWire
 end PNP

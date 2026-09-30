@@ -618,9 +618,10 @@ branch.
   displayed points. Preserve the full theorem, assumption, and complexity
   requirements when ranking impact.
 
-- Ground each new mathematical milestone in a named theorem, lemma, or blocker
-  from the pinned legacy report, and state exactly which dependency edge it
-  closes.
+- Ground each new mathematical milestone in a named load-bearing obligation of
+  the final theorem, and state exactly which dependency edge it closes. Cite the
+  relevant legacy anchor when following or correcting that route; an alternative
+  route need not reproduce unsupported manuscript steps.
 - Prefer one theorem over an arbitrary finite family to a sequence of
   hard-coded instance coordinates. A proposed next step must have a finite path
   to a named global obligation; if the same shape can be repeated indefinitely
@@ -639,8 +640,11 @@ branch.
 
 - Treat the canonical manuscript pinned by
   `archive/legacy-v0/ARCHIVE.json`, especially the document tag
-  `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, as the intended route
-  and a legacy specification, not as an established proof of the final claim.
+  `final-pnp-proof-report-docs-hardened-7072f8d-sealed`, as a fallible research
+  reference and historical specification, not as an established proof or a route
+  presumed to be correct. Use independent mathematical judgment to correct,
+  strengthen or replace its definitions, arguments and constructions when needed
+  to achieve the intended final theorem.
 - Reconstruct definitions, carrier conventions, objects and dependencies
   faithfully where they are precise. Record ambiguities and gaps explicitly;
   do not silently replace the intended theorem with an easier one.
@@ -657,11 +661,13 @@ branch.
 - The manuscript and historical checker provide specification and provenance,
   not theorem authority. Unique physical ownership or exact accounting does
   not by itself prove a lower bound on every semantically equivalent circuit.
-- Repair an underspecified step or investigate an alternative when needed to
-  advance the intended result. Record the exact legacy anchor, the gap or
-  formal failure, the proposed replacement, its compatibility with the final
-  target, and every new proof obligation. Difficulty finding a proof is not
-  evidence of a contradiction; bounded experiments are not general proofs.
+- Repair an unsupported or underspecified step, or develop a better justified
+  alternative, when needed to advance the intended result. Fidelity must not
+  preserve an error or make the legacy route mandatory. Record the relevant
+  legacy anchor, gap or limitation, the proposed replacement, its compatibility
+  with the final target, and every new proof and complexity obligation.
+  Difficulty finding a proof is not evidence of a contradiction; bounded
+  experiments are not general proofs.
 - Preserve historical statements and the intended external target. Never
   bridge a gap with a project axiom, `sorry`, `admit`, a weakened theorem,
   caller-supplied correctness authority or unproved polynomial bound. Reuse
