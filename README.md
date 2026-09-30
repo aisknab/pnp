@@ -68,6 +68,14 @@ positive publication row or weighted checkpoint credit. The separate coverage,
 proof estimate, uncertainty and gate figures above remain the current baseline.
 See the [general theorem and its limits](./docs/lean_fixed_window_coverage_obstruction.md).
 
+A further [checked size bound](./docs/lean_growing_window_universe_bound.md)
+addresses the full-list growing-window repair: a complete selection of successful
+windows in this family cannot retain candidate universes bounded by a polynomial
+in the actual encoded query length. This is a materialized-list bound, not a
+runtime lower bound for every search strategy. No positive milestone row or
+proof-completion credit is awarded; a separate website publication of this
+supporting result is deferred.
+
 **Public source and checker repository for a claimed proof that `P = NP`.**
 
 > [!IMPORTANT]

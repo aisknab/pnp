@@ -451,6 +451,13 @@ lines.
   A `--single-branch` or filtered clone can omit these required historical
   refs; treat that as a clone-preflight failure rather than a product
   regression.
+- Tag and tree identity do not establish archived-byte availability. A local
+  copy of a filtered clone can retain promisor packs without the remote metadata
+  needed to fetch missing blobs. Verify the intended origin and repair only the
+  clone-local promisor configuration or fetch the required objects. Require
+  `npm run legacy:v0:check` to pass before every fresh-checkout broad suite,
+  including a combined lifecycle/current-verifier run. Never change pinned
+  archives or weaken their tests to accommodate missing Git objects.
 - Remember that a normal fresh clone records remote branches under
   `refs/remotes/origin/...`; it does not create a matching local
   `refs/heads/...` branch until one is checked out. Verify a pushed feature tip

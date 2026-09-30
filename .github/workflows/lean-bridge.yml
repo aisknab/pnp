@@ -3505,11 +3505,11 @@ jobs:
           node --test audits/lean-compatible-support-slack-obstruction0.test.mjs audits/lean-compatible-support-slack-obstruction-publication0.test.mjs
           node scripts/check-lean-axioms.mjs lean-audit/PNPCompatibleSupportSlackObstructionAxiomAudit.lean
           lake env lean -DwarningAsError=true lean-regression/PNPCompatibleSupportSlackObstructionProbe.lean
-          for name in JointAsymmetricBound GuardedSpineSupportMinimum GuardedSpineBoundedQuiet; do
+          for name in JointAsymmetricBound GuardedSpineSupportMinimum GuardedSpineBoundedQuiet GrowingWindowUniverseBound; do
             node scripts/check-lean-axioms.mjs "lean-audit/PNP${name}AxiomAudit.lean"
             lake env lean -DwarningAsError=true "lean-regression/PNP${name}Probe.lean"
           done
-          node --test audits/lean-fixed-window-coverage-obstruction{0,-publication0}.test.mjs
+          node --test audits/lean-{fixed-window-coverage-obstruction,growing-window-universe-bound}{0,-publication0}.test.mjs
       - name: Check nested-support cost and positivity
         run: npm run audit:m280
       - name: Audit nested-support cost and positivity
