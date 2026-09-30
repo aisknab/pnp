@@ -156,8 +156,9 @@ root theorem and does not activate publication.
 
 The compiled-inventory generator supplies the exact declaration, theorem, module, private-
 auxiliary, and reviewed-candidate counts after each source-closure regeneration; this prose does
-not duplicate those moving totals. The current Lean source closure contains two project-specific
-axioms. Five global blockers remain, beginning with `Formal.ConcreteSAT`.
+not duplicate those moving totals. Consult the [canonical progress ledger](../status/PROOF_PROGRESS.json)
+for the current project-specific axiom inventory. Five global blockers remain,
+beginning with `Formal.ConcreteSAT`.
 
 ## Audit
 

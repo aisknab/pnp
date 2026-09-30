@@ -495,6 +495,101 @@ test('workflow syntax guard rejects unmatched quotes, substitutions and incomple
   }
 });
 
+
+// These source-only contracts formerly ran both in the initial batch and in
+// their dedicated steps. Keep one complete invocation; compiled-byte checks,
+// Lean regressions and axiom transcripts retain their separate evidence roles.
+const SINGLE_OWNER_SOURCE_AUDITS0 = Object.freeze([
+  'audits/lean-locked-nand-carrier-trace0.test.mjs',
+  'audits/lean-residual-gain-chain0.test.mjs',
+  'audits/lean-residual-gain-stopping0.test.mjs',
+  'audits/lean-residual-terminal-full-bridge0.test.mjs',
+  'audits/lean-residual-terminal-mode-firewall0.test.mjs',
+  'audits/lean-residual-terminal-projection-minimum0.test.mjs',
+  'audits/lean-residual-terminal-projection-transfer0.test.mjs',
+  'audits/lean-residual-terminal-saturation0.test.mjs',
+  'audits/lean-residual-terminal-physical-support-completion0.test.mjs',
+  'audits/lean-residual-terminal-support-extraction0.test.mjs',
+  'audits/lean-residual-terminal-proper-support0.test.mjs',
+  'audits/lean-residual-terminal-support-square-closure0.test.mjs',
+  'audits/lean-residual-terminal-governed-support-completion0.test.mjs',
+  'audits/lean-residual-terminal-frontier-pushout0.test.mjs',
+]);
+
+// A narrow literal-command contract, not a general YAML or shell interpreter.
+// Comments, echoed text and dynamic file names cannot satisfy a required owner.
+function assertSourceAuditOwners0(workflow, files = SINGLE_OWNER_SOURCE_AUDITS0) {
+  const scripts = literalWorkflowRunBlocks0(workflow).map(({ script }) => script);
+  for (const match of workflow.matchAll(/^ *(?:- +)?run: *(node --test [^\n]+)$/gmu)) {
+    scripts.push(match[1]);
+  }
+  const counts = new Map(files.map((file) => [file, 0]));
+  for (const script of scripts) {
+    const joined = script.replace(/\\\n[ \t]*/gu, ' ');
+    for (const line of joined.split('\n')) {
+      const match = /^\s*node --test\s+(.+?)\s*$/u.exec(line);
+      if (match === null) continue;
+      const args = match[1].split(/\s+/u);
+      const owned = args.filter((arg) => counts.has(arg));
+      if (owned.length === 0) continue;
+      for (const arg of args) {
+        assert.match(arg,
+          /^(?:audits\/[\w.-]+\.test\.mjs|--test-concurrency=[1-9]\d*)$/u,
+          'source-audit ownership requires complete files, not filters or dynamic arguments');
+      }
+      for (const file of owned) counts.set(file, counts.get(file) + 1);
+    }
+  }
+  for (const [file, count] of counts) {
+    assert.equal(count, 1, file + ' must have exactly one complete literal invocation');
+  }
+  return counts;
+}
+
+test('reviewed source audits have one complete literal workflow invocation', async () => {
+  assertSourceAuditOwners0(await text0('.github/workflows/lean-bridge.yml'));
+});
+
+test('source audit ownership rejects missing, repeated and filtered calls', async () => {
+  const workflow = await text0('.github/workflows/lean-bridge.yml');
+  const file = SINGLE_OWNER_SOURCE_AUDITS0[0];
+  const command = 'run: node --test ' + file;
+  const missing = workflow.replace(command, () => 'run: true # omitted audit');
+  const mutations = [
+    missing,
+    missing + '\n# node --test ' + file + '\n',
+    missing + '\n      - run: echo node --test ' + file + '\n',
+    workflow + '\n      - run: node --test ' + file + '\n',
+    workflow.replace(command, () => 'run: node --test --test-name-pattern=absent ' + file),
+    workflow.replace(command, () => 'run: node --test --test-skip-pattern=all ' + file),
+  ];
+  for (const mutation of mutations) {
+    assert.notEqual(mutation, workflow, 'ownership fixture must change the workflow');
+    assert.throws(() => assertSourceAuditOwners0(mutation));
+  }
+});
+
+test('source audit ownership preserves wrapped full-file invocations', () => {
+  const file = SINGLE_OWNER_SOURCE_AUDITS0[0];
+  const fixture = [
+    'steps:',
+    '  - run: |',
+    '      # node --test ' + file,
+    '      echo node --test ' + file,
+    '      node --test --test-concurrency=2 \\',
+    '        ' + file,
+    '',
+  ].join('\n');
+  assert.equal(assertSourceAuditOwners0(fixture, [file]).get(file), 1);
+});
+
+test('concrete complexity documentation delegates the current axiom inventory', async () => {
+  const source = (await text0('docs/lean_concrete_complexity.md')).replace(/\s+/gu, ' ');
+  assert.match(source, /\[canonical progress ledger\]\(\.\.\/status\/PROOF_PROGRESS\.json\)/u);
+  assert.doesNotMatch(source,
+    /current Lean source closure contains [^.]*project-specific axioms/u);
+});
+
 test('standard-axiom exclusion filters retain their closing quote and end anchor', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
   const filters = workflow.split('\n')
