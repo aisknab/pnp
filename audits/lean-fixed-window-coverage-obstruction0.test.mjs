@@ -549,10 +549,10 @@ test('fixed-window obstruction remains in durable read-only verification', async
     'audits/lean-fixed-window-coverage-obstruction-publication0.test.mjs',
   ]) assert.ok(verifier.CURRENT_VERIFICATION_TESTS0.includes(file), file);
   for (const command of [
-    'for name in JointAsymmetricBound GuardedSpineSupportMinimum GuardedSpineBoundedQuiet; do',
+    'for name in JointAsymmetricBound GuardedSpineSupportMinimum GuardedSpineBoundedQuiet GrowingWindowUniverseBound; do',
     'node scripts/check-lean-axioms.mjs "lean-audit/PNP${name}AxiomAudit.lean"',
     'lake env lean -DwarningAsError=true "lean-regression/PNP${name}Probe.lean"',
-    'node --test audits/lean-fixed-window-coverage-obstruction{0,-publication0}.test.mjs',
+    'node --test audits/lean-{fixed-window-coverage-obstruction,growing-window-universe-bound}{0,-publication0}.test.mjs',
   ]) assert.ok(workflow.includes(command), command);
 });
 test('fixed-window obstruction documentation preserves the exact limitation and awards no credit', async () => {

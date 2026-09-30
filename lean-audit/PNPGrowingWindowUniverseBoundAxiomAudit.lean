@@ -1,0 +1,11 @@
+import PNP
+
+set_option autoImplicit false
+set_option Elab.async false
+
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.programs_tail_length_le
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.smallerCandidates_exceeds_polynomial
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.query_length_le
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.valid_requires_full_budget
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.valid_universe_exceeds_encoded_polynomial
+#print axioms PNP.DirectWire.GrowingWindowUniverseBound.no_uniform_polynomial_complete_universe
