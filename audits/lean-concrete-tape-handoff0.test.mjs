@@ -130,15 +130,78 @@ test('axiom transcript covers all fourteen output/handoff declarations exactly o
   assert.ok(imports0(root).includes('PNP.Concrete.TapeHandoff'));
 });
 
-test('outputBits has one authoritative definition and machineOutput consumes it', async () => {
+// Compare Lean names, not unqualified spellings: the NAND frontend also has an
+// outputBits definition, but it is not the tape decoder used by machineOutput.
+function qualifiedOutputDefinitions0(source) {
+  const heads = explicitLeanDeclarationHeads0(source).filter(({ kind, name }) =>
+    kind === 'def' && (name === 'outputBits' || name.endsWith('.outputBits')));
+  if (heads.length === 0) return [];
+  const scopes = [];
+  const definitions = [];
+  for (const line of stripLeanCommentsAndStrings0(source).split('\n')) {
+    const scope = /^[ \t]*(namespace|section)(?:[ \t]+([^\s]+))?[ \t]*$/u.exec(line);
+    if (scope !== null) {
+      assert.ok(scope[1] === 'section' || scope[2], 'namespace needs a name');
+      scopes.push({ kind: scope[1], name: scope[2] ?? '' });
+      continue;
+    }
+    if (/^[ \t]*end(?:[ \t]+[^\s]+)?[ \t]*$/u.test(line)) {
+      assert.notEqual(scopes.length, 0, 'unbalanced source scope');
+      scopes.pop();
+      continue;
+    }
+    const declaration = explicitLeanDeclarationHeads0(line)
+      .find(({ kind, name }) =>
+        kind === 'def' && (name === 'outputBits' || name.endsWith('.outputBits')));
+    if (declaration === undefined) continue;
+    const { name } = declaration;
+    definitions.push(name.startsWith('_root_.') ? name.slice('_root_.'.length)
+      : [...scopes.filter(({ kind }) => kind === 'namespace').map(({ name }) => name),
+        name].join('.'));
+  }
+  assert.equal(scopes.length, 0, 'unclosed source scope');
+  assert.equal(definitions.length, heads.length, 'every output definition must be qualified');
+  return definitions;
+}
+
+test('output definition scan distinguishes namespaces and retains duplicate qualified names', () => {
+  const source = [
+    'namespace PNP.Concrete',
+    'section',
+    'namespace Tape',
+    'def outputBits : Nat := 0',
+    'end Tape',
+    'end',
+    'namespace NANDFrontend',
+    'def outputBits : Nat := 1',
+    'end NANDFrontend',
+    'end PNP.Concrete',
+    'def PNP.Concrete.Tape.outputBits : Nat := 2',
+    'namespace Other',
+    'def _root_.PNP.Concrete.Tape.outputBits : Nat := 3',
+    'end Other',
+    '/- namespace Fake',
+    'def outputBits : Nat := 4',
+    'end Fake -/',
+  ].join('\n');
+  assert.deepEqual(qualifiedOutputDefinitions0(source), [
+    'PNP.Concrete.Tape.outputBits',
+    'PNP.Concrete.NANDFrontend.outputBits',
+    'PNP.Concrete.Tape.outputBits',
+    'PNP.Concrete.Tape.outputBits',
+  ]);
+});
+
+test('Tape.outputBits has one authoritative definition and machineOutput consumes it', async () => {
   const files = (await filesBelow0(path.join(ROOT, 'lean')))
     .filter((file) => file.endsWith('.lean'));
   const definitions = [];
   for (const file of files) {
     const source = await readFile(file, 'utf8');
-    const matches = [...stripLeanCommentsAndStrings0(source)
-      .matchAll(/^\s*def\s+outputBits\b/gmu)];
-    for (const _ of matches) definitions.push(path.relative(ROOT, file));
+    for (const name of qualifiedOutputDefinitions0(source)) {
+      if (name === 'PNP.Concrete.Tape.outputBits')
+        definitions.push(path.relative(ROOT, file));
+    }
   }
   assert.deepEqual(definitions, [SOURCE_PATH]);
   const complexity = compactLean0(await text0('lean/PNP/Concrete/Complexity.lean'));

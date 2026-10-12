@@ -19,9 +19,9 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const TEMPLATE_PATH = 'publication/canonical_proof_report.template.tex';
 const REPORT_TEX_PATH = 'canonical_proof_report.tex';
-const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280';
+const STATUS_COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281';
 const PUBLIC_SURFACE_COORDINATE = 'PUBLIC-SURFACE-BASELINE-2026-08-10-CONCRETE-LOCKED-NAND-THRESHOLD-121';
-const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-20-280';
+const REPORT_COORDINATE = 'PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-13-281';
 
 const NEW_NON_CLAIMS = Object.freeze([
   'The compiled Lean theorem inventory is declaration and axiom-dependency evidence; it does not widen any theorem beyond its exact type and stated scope.',
@@ -125,6 +125,7 @@ function renderReport0(template, status, inventory, publication, progress) {
     ['CNF-SAT membership in NP', 'leanConcreteCNFSATMembershipFormalized'],
     ['Complete all-input Cook-Levin builder', 'leanConcreteCookLevinFormulaBuilderFormalized'],
     ['Concrete CNF-SAT NP-completeness', 'leanConcreteCNFNPCompletenessFormalized'],
+    ['Complete polynomial serialized normalizer', 'leanSerializedNormalizerFormalized'],
     ['Deterministic CNF-SAT membership in P', 'leanConcreteCNFSATInPFormalized'],
     ['Eligible root theorem present', 'rootLeanTheoremPresent'],
   ];

@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280",
-  "lastReviewedDate": "2026-09-20",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281",
+  "lastReviewedDate": "2026-10-13",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 256,
-    "totalRows": 258,
+    "earnedRows": 257,
+    "totalRows": 259,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4367,6 +4367,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M280 derives actual full and quotient comparison circuits for every pair of computed nested completed supports, replacing a supplied cost-balance premise with a physical construction and exact field observations. It closes the completed-support enlargement edge of positive-slack preservation, but not raw-witness completion, manuscript-wide profile semantics, global route completeness or polynomial minimization. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 256 of 258 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281",
+      "formalArtefactCoverage": {
+        "earnedRows": 257,
+        "totalRows": 259
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M281 closes the complete source-to-serialized-residual construction edge: one input-derived finite machine has exact packet semantics and encoded-input polynomial runtime and output bounds. It does not discover a certificate or decide arbitrary residual systems, and does not reconstruct manuscript semantic minimization. The fixed reduction track was already earned; normalizer bounds do not retire the complete PCCMin runtime obligation. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 257 of 259 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [

@@ -15,6 +15,7 @@ const PINNED_TOOLCHAIN_IMPORTS = new Set([
   'Init.Data.List.Erase',
   'Init.Data.List.FinRange',
   'Init.Data.List.Sort.Lemmas',
+  'Std',
 ]);
 
 async function text0(relativePath) {
@@ -178,7 +179,7 @@ test('PNP root import closure covers every tracked Lean source module', async ()
 
 test('root closure separates reviewed pinned-toolchain imports from project source', () => {
   const sources = {
-    'lean/PNP.lean': 'import PNP.Leaf\nimport Init.Data.List.FinRange\n',
+    'lean/PNP.lean': 'import PNP.Leaf\nimport Init.Data.List.FinRange\nimport Std\n',
     'lean/PNP/Leaf.lean': 'import Init.Data.List.Erase\nimport Init.Data.List.FinRange\n',
   };
   assert.deepEqual(importClosure0(sources, 'PNP'), Object.keys(sources).sort());
@@ -330,6 +331,7 @@ const EXPECTED_LEAN_TRIGGER_PATHS0 = Object.freeze([
   "canonical_proof_report.tex",
   "canonical_proof_report.pdf",
   "audits/lean-*.test.mjs",
+  "audits/fixtures/serialized-normalizer-source-contract0.json",
   "audits/formal-publication0.test.mjs",
   "docs/lean_*.md",
   "docs/plans/*.md",

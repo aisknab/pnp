@@ -391,44 +391,45 @@ test('inventory source uses the compiled environment and collectAxioms rather th
 });
 
 test('positive Lean probe parser rejects empty, malformed, noisy, failed, or noncanonical output', async () => {
-  const { inventoryBytes, inventory } = await fixture0();
-  const valid = ParseLeanInventoryProbe0({
-    stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: false,
-  });
-  assert.equal(valid.inventory.declarationCount, inventory.declarationCount);
-  for (const input of [
-    { stdout: '', stderr: '', exitCode: 0, timedOut: false },
-    { stdout: '{}\n', stderr: '', exitCode: 0, timedOut: false },
-    { stdout: inventoryBytes.toString('utf8'), stderr: 'warning', exitCode: 0, timedOut: false },
-    { stdout: inventoryBytes.toString('utf8'), stderr: ' ', exitCode: 0, timedOut: false },
-    { stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 1, timedOut: false },
-    { stdout: inventoryBytes.toString('utf8'), stderr: '', exitCode: 0, timedOut: true },
-    { stdout: `${JSON.stringify(JSON.parse(inventoryBytes), null, 2)}\n`, stderr: '', exitCode: 0, timedOut: false },
-    { stdout: ` ${inventoryBytes.toString('utf8')}`, stderr: '', exitCode: 0, timedOut: false },
-    { stdout: `${inventoryBytes.toString('utf8')}{}\n`, stderr: '', exitCode: 0, timedOut: false },
-  ]) assert.throws(() => ParseLeanInventoryProbe0(input));
+  const stdout = await readFile(new URL('../status/LEAN_THEOREM_INVENTORY.json', import.meta.url), 'utf8');
+  const declarationCount = JSON.parse(stdout).declarationCount;
+  const success = { stdout, stderr: '', exitCode: 0, timedOut: false };
+  assert.equal(ParseLeanInventoryProbe0(success).inventory.declarationCount, declarationCount);
+  // Keep only one hostile payload live. Eager copies of the growing complete
+  // inventory make a parser-contract test consume many times the artifact size.
+  for (const [label, input] of [
+    ['empty', () => ({ ...success, stdout: '' })],
+    ['missing fields', () => ({ ...success, stdout: '{}\n' })],
+    ['warning', () => ({ ...success, stderr: 'warning' })],
+    ['stderr whitespace', () => ({ ...success, stderr: ' ' })],
+    ['failed process', () => ({ ...success, exitCode: 1 })],
+    ['timeout', () => ({ ...success, timedOut: true })],
+    ['pretty JSON', () => ({ ...success, stdout: `${JSON.stringify(JSON.parse(stdout), null, 2)}\n` })],
+    ['leading whitespace', () => ({ ...success, stdout: ` ${stdout}` })],
+    ['trailing JSON', () => ({ ...success, stdout: `${stdout}{}\n` })],
+  ]) assert.throws(() => ParseLeanInventoryProbe0(input()), undefined, label);
 });
 
 test('inventory validation rejects forged axioms, vacuous rows, stale coordinates, and unsorted declarations', async () => {
   const { inventory } = await fixture0();
-  const mutations = [];
-  const forged = structuredClone(inventory);
-  forged.projectAxioms = ['PNP.ForgedProjectAxiom'];
-  mutations.push(forged);
-  const vacuous = structuredClone(inventory);
-  vacuous.declarations = [];
-  vacuous.declarationCount = 0;
-  vacuous.theoremCount = 0;
-  vacuous.assumptionFreeTheoremCount = 0;
-  vacuous.axiomCount = 0;
-  mutations.push(vacuous);
-  const stale = structuredClone(inventory);
-  stale.coordinate = 'PNP-LEAN-THEOREM-INVENTORY-STALE';
-  mutations.push(stale);
-  const unsorted = structuredClone(inventory);
-  [unsorted.declarations[0], unsorted.declarations[1]] = [unsorted.declarations[1], unsorted.declarations[0]];
-  mutations.push(unsorted);
-  for (const mutation of mutations) assert.throws(() => ValidateLeanTheoremInventory0(mutation));
+  for (const mutate of [
+    (copy) => { copy.projectAxioms = ['PNP.ForgedProjectAxiom']; },
+    (copy) => {
+      copy.declarations = [];
+      copy.declarationCount = 0;
+      copy.theoremCount = 0;
+      copy.assumptionFreeTheoremCount = 0;
+      copy.axiomCount = 0;
+    },
+    (copy) => { copy.coordinate = 'PNP-LEAN-THEOREM-INVENTORY-STALE'; },
+    (copy) => {
+      [copy.declarations[0], copy.declarations[1]] = [copy.declarations[1], copy.declarations[0]];
+    },
+  ]) {
+    const mutation = structuredClone(inventory);
+    mutate(mutation);
+    assert.throws(() => ValidateLeanTheoremInventory0(mutation));
+  }
 });
 
 test('publication derivation binds the validated inventory to its exact canonical bytes', async () => {
