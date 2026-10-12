@@ -230,6 +230,7 @@ test('Lean workflow pins the installer and performs one real explicit-root build
     text0('scripts/export-lean-theorem-inventory.mjs'),
   ]);
   assert.match(workflow, /runs-on: ubuntu-24\.04/u);
+  assert.match(workflow, /timeout-minutes: 180/u);
   assert.match(workflow, /actions\/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0/u);
   assert.match(workflow, /leanprover\/elan\/releases\/download\/v4\.2\.3\/elan-x86_64-unknown-linux-gnu\.tar\.gz/u);
   assert.match(workflow, /df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2/u);
@@ -239,7 +240,7 @@ test('Lean workflow pins the installer and performs one real explicit-root build
   assert.match(workflow, /run: npm run formal:inventory:check/u);
   assert.match(inventoryExporter,
     /execFileAsync\('lake', \['build', 'PNP'\]/u);
-  assert.match(inventoryExporter, /const BUILD_TIMEOUT_MS = 1_800_000;/u);
+  assert.match(inventoryExporter, /const BUILD_TIMEOUT_MS = 3_600_000;/u);
   assert.match(inventoryExporter, /const PROBE_TIMEOUT_MS = 600_000;/u);
   assert.match(inventoryExporter,
     /export const INVENTORY_MAX_BUFFER_BYTES = 128 \* 1024 \* 1024;/u);
