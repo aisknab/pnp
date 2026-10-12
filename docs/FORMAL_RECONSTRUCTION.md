@@ -1,43 +1,22 @@
 # Formal reconstruction notice
 
-<!-- M280-CURRENT-SUMMARY:BEGIN -->
-## Current M280 boundary
+<!-- M281-CURRENT-SUMMARY:BEGIN -->
+## Current M281 boundary
 
-M280 constructs full and selected-field comparison circuits for any pair
-of computed, completed dependency-closed supports whose physical gates
-are nested. It rebuilds only the larger-minus-smaller gate difference,
-derives the crossing bindings and padded ordinary outputs, and preserves
-the exact computational-field observations, including unavailable fields.
+M281 constructs the complete source-derived serialized normalizer for every input bitstring. The actual finite machine halts within an encoded-input polynomial bound and emits the exact checked packet, with a polynomial output bound and strict decoding. Its certificate language is equivalent to source CNF-SAT, and satisfiable inputs have short certificates.
 
-The full and quotient reference minima grow by at most the added physical
-gates. Full slack and support size minus quotient minimum are monotone;
-positive full slack or projection defect therefore survives enlargement.
-Raw-seed inclusion derives the required physical inclusion. The bounds
-are proved from actual constructed comparisons, not supplied cost data.
+A residual system packet is not an unsatisfiability answer. Certificate existence is not certificate discovery. The general residual solver, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open; the normalizer does not prove the manuscript minimum-preserving `NormalizeOrGain` theorem. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
 
-This starts from already completed supports. It does not show that
-completing an arbitrary raw positive witness preserves its initial
-positivity, or that every intermediate saturation event is transparent.
-Projection-defect monotonicity alone is not asserted. Reference minimum
-search and semantic matching remain exhaustive rather than polynomial.
+M230’s complete Cook-Levin builder and M231’s concrete NP-completeness remain checked. The subsequent support-slack and fixed-window counterexamples retain their exact scope.
 
-M230’s all-input polynomial Cook-Levin builder and M231’s concrete CNF-SAT
-NP-completeness remain kernel checked. Complete manuscript profiles,
-proper-positive support discovery, terminal-derived families, initial
-completion, global route coverage, unconditional SaturatePositive/BCELReady/
-ZeroSlack, exact polynomial PCCMin and encoded polynomial bounds remain open.
-Deterministic CNF-SAT membership in P and the eligible root remain absent;
-the publication gate is false.
-
-Formal artefact coverage: 256 of 258 current scoped publication rows earned.
+Formal artefact coverage: 257 of 259 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [computed nested-support cost and positivity transport](./lean_closed_support_nested_gain.md).
-Earlier milestone notes retain their original module-specific scope.
-Publication decision: defer. The result proves general preservation between computed completed supports, not the unresolved initial-completion boundary or a global saturation theorem. No fixed weighted checkpoint or global gate changes, and the public global-proof bottom line remains unchanged. Preserve the coherent M264 website pin and batch pending core evidence at the next major publication.
-<!-- M280-CURRENT-SUMMARY:END -->
+See the [complete serialized normalizer](./lean_serialized_normalizer.md). Earlier milestone notes retain their original scope.
+Publication decision: publish after verified core merge. This is one complete all-input construction with literal-machine runtime and encoding guarantees, not another fixed prefix or local sidecar. Batch pending core evidence and preserve the published corrections. The website must distinguish this new general capability from the still-open solver and retain the unchanged risk-weighted estimate.
+<!-- M281-CURRENT-SUMMARY:END -->
 
 ## Subsequent correction — 24 September 2026
 
@@ -47,8 +26,8 @@ is minimum, but its actual proper cut has positive independent open slack;
 the smaller equivalent replacement becomes cyclic when reconnected. The
 checked acyclic framed and restricted replacement results remain valid.
 
-This correction supersedes the M280-only publication deferral above and is
-selected for the next verified release. It adds no positive publication row
+This correction superseded the earlier M280-only publication deferral and
+remains part of the current publication boundary. It adds no positive publication row
 or weighted checkpoint credit. Full-profile admissibility and first-loss
 routing remain open. See the [exact finding and limits](./lean_compatible_support_slack_obstruction.md).
 

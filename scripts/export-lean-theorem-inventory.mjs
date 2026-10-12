@@ -15,7 +15,7 @@ import {
 
 const execFileAsync = promisify(execFile);
 const PROBE = 'lean-audit/PNPTheoremInventory.lean';
-const BUILD_TIMEOUT_MS = 1_800_000;
+export const BUILD_TIMEOUT_MS = 3_600_000;
 const PROBE_TIMEOUT_MS = 600_000;
 export const INVENTORY_MAX_BUFFER_BYTES = 128 * 1024 * 1024;
 
@@ -47,13 +47,31 @@ export function ParseLeanInventoryProbe0(result) {
   return { inventory, bytes: Buffer.from(canonical, 'utf8') };
 }
 
-export async function RunLeanInventoryProbe0(root) {
-  await execFileAsync('lake', ['build', 'PNP'], {
-    cwd: root,
-    encoding: 'utf8',
-    timeout: BUILD_TIMEOUT_MS,
-    maxBuffer: INVENTORY_MAX_BUFFER_BYTES,
+export function FormatLeanRootBuildFailure0(error) {
+  const outputLimit = error.code === 'ERR_CHILD_PROCESS_STDIO_MAXBUFFER';
+  const summary = outputLimit
+    ? 'Lean root build exceeded the bounded output buffer'
+    : error.killed === true
+      ? `Lean root build timed out after ${BUILD_TIMEOUT_MS / 60_000} minutes`
+      : `Lean root build failed (exit ${error.code ?? 'unknown'}${error.signal ? `, signal ${error.signal}` : ''})`;
+  const tails = ['stderr', 'stdout'].flatMap((stream) => {
+    const text = typeof error[stream] === 'string' ? error[stream].trim() : '';
+    return text === '' ? [] : [`${stream} tail:\n${text.slice(-4000)}`];
   });
+  return [summary, ...tails].join('\n');
+}
+
+export async function RunLeanInventoryProbe0(root) {
+  try {
+    await execFileAsync('lake', ['build', 'PNP'], {
+      cwd: root,
+      encoding: 'utf8',
+      timeout: BUILD_TIMEOUT_MS,
+      maxBuffer: INVENTORY_MAX_BUFFER_BYTES,
+    });
+  } catch (error) {
+    throw new Error(FormatLeanRootBuildFailure0(error));
+  }
   try {
     const { stdout, stderr } = await execFileAsync('lake', [
       'env', 'lean', '-DwarningAsError=true', PROBE,

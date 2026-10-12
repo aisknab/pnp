@@ -1,31 +1,20 @@
 # Proof progress model
 
-The project reports two independent measurements. They answer different
-questions and must never be combined.
+The project reports two independent measurements. They answer different questions and must never be combined.
 
-Formal artefact coverage: 256 of 258 current scoped publication rows earned.
+Formal artefact coverage: 257 of 259 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
-Formal artefact coverage counts earned rows in the current formal publication
-milestone ledger. At
-`PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280`, 256 of 258
-current scoped rows are earned, or 99.2 percent of that evidence ledger.
+At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281`, 257 of 259 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
-This is not proof completion. Rows are not equal units of mathematical
-difficulty, and the denominator can grow when a dependency is discovered or an
-obligation is decomposed. New finite, local, conditional, or supplied-data
-results can add valuable evidence without retiring a global proof obligation.
+This is not proof completion. Rows are not equal units of mathematical difficulty, and the denominator can grow when dependencies are discovered or decomposed.
 
-M280 derives cost-bounded comparison circuits and positivity preservation
-between computed completed nested supports. This does not establish the
-initial completion of arbitrary raw positive witnesses, full manuscript
-profile semantics, global route coverage or a polynomial minimizer.
-No fixed checkpoint or global gate changes.
-See the [component boundary](./lean_closed_support_nested_gain.md).
+M281 closes the complete source-to-serialized-residual construction edge: one input-derived finite machine has exact packet semantics and encoded-input polynomial runtime and output bounds. It does not discover a certificate or decide arbitrary residual systems, and does not reconstruct manuscript semantic minimization. The fixed reduction track was already earned; normalizer bounds do not retire the complete PCCMin runtime obligation. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
+See the [complete construction and its limits](./lean_serialized_normalizer.md).
 
 ## Risk-weighted proof completion estimate
 

@@ -94,6 +94,11 @@ Concrete publication gate passed & \statusfalse \\
 \tableofcontents
 \newpage
 
+\section{Complete source-derived serialized normalization}
+The complete source-derived normalizer now has a concrete finite-machine implementation with polynomial encoded-input runtime and output bounds. Its exact serialized certificate language is equivalent to CNF-SAT on every source bitstring, including the checked malformed-input convention. All residual equations are retained. Satisfiable inputs admit short certificates, but certificate discovery is not provided.
+
+A residual system packet is a problem to solve, not an unsatisfiability verdict. This construction does not prove the manuscript minimum-preserving NormalizeOrGain theorem, a general residual solver, unconditional ZeroSlack, exact polynomial PCCMin, or deterministic CNF-SAT membership in P. The fixed-weight proof estimate is unchanged. The publication ledger below pins the exact compiled interfaces and conservative scope.
+
 \section{Current authority and claim boundary}
 
 This report is the current repository report surface. Its factual theorem inventory comes from the

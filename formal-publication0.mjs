@@ -5,9 +5,21 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '1869466db65a4c114b0759434724bec2eea105e70aea28f538786bd472deb099';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '7d2c0b4bb64e856ca9e11ac46f0e7bc97668e96fe10cd77e67a273734a7ce15b';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.Concrete.SerializedNormalizer.certificate_bound",
+  "PNP.Concrete.SerializedNormalizer.decode_output",
+  "PNP.Concrete.SerializedNormalizer.halts",
+  "PNP.Concrete.SerializedNormalizer.malformed_output",
+  "PNP.Concrete.SerializedNormalizer.model_sound",
+  "PNP.Concrete.SerializedNormalizer.output_eq",
+  "PNP.Concrete.SerializedNormalizer.output_size",
+  "PNP.Concrete.SerializedNormalizer.reduction_correct",
+  "PNP.Concrete.SerializedNormalizer.reduction_output",
+  "PNP.Concrete.SerializedNormalizer.residual_system_iff",
+  "PNP.Concrete.SerializedNormalizer.satisfiability_iff",
+  "PNP.Concrete.SerializedNormalizer.sparse_output_size",
   "PNP.DirectWire.ClosedSupportNestedGain.ambient_output_absent",
   "PNP.DirectWire.ClosedSupportNestedGain.append_positive",
   "PNP.DirectWire.ClosedSupportNestedGain.available_from_large",
@@ -4836,7 +4848,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-09-20-280') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-13-281') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

@@ -64,6 +64,18 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 set_option maxRecDepth 100000 in
 private def reviewedMilestoneTheoremNames : Array Name := #[
+  `PNP.Concrete.SerializedNormalizer.certificate_bound,
+  `PNP.Concrete.SerializedNormalizer.decode_output,
+  `PNP.Concrete.SerializedNormalizer.halts,
+  `PNP.Concrete.SerializedNormalizer.malformed_output,
+  `PNP.Concrete.SerializedNormalizer.model_sound,
+  `PNP.Concrete.SerializedNormalizer.output_eq,
+  `PNP.Concrete.SerializedNormalizer.output_size,
+  `PNP.Concrete.SerializedNormalizer.reduction_correct,
+  `PNP.Concrete.SerializedNormalizer.reduction_output,
+  `PNP.Concrete.SerializedNormalizer.residual_system_iff,
+  `PNP.Concrete.SerializedNormalizer.satisfiability_iff,
+  `PNP.Concrete.SerializedNormalizer.sparse_output_size,
   `PNP.DirectWire.ClosedSupportNestedGain.ambient_output_absent,
   `PNP.DirectWire.ClosedSupportNestedGain.append_positive,
   `PNP.DirectWire.ClosedSupportNestedGain.available_from_large,

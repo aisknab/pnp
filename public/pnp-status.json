@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-09-20-280",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,37 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanSerializedNormalizerFormalized": true,
+  "leanSerializedNormalizerAxiomAuditPassed": true,
+  "leanSerializedNormalizerAuditedDeclarationCount": 12,
+  "leanSerializedNormalizerExactMachineOutputTheorem": "PNP.Concrete.SerializedNormalizer.output_eq",
+  "leanSerializedNormalizerPolynomialHaltingTheorem": "PNP.Concrete.SerializedNormalizer.halts",
+  "leanSerializedNormalizerOutputSizeTheorem": "PNP.Concrete.SerializedNormalizer.output_size",
+  "leanSerializedNormalizerSparseEncodedSizeTheorem": "PNP.Concrete.SerializedNormalizer.sparse_output_size",
+  "leanSerializedNormalizerStrictPacketRoundtripTheorem": "PNP.Concrete.SerializedNormalizer.decode_output",
+  "leanSerializedNormalizerSatisfiabilityTheorem": "PNP.Concrete.SerializedNormalizer.satisfiability_iff",
+  "leanSerializedNormalizerShortCertificateTheorem": "PNP.Concrete.SerializedNormalizer.certificate_bound",
+  "leanSerializedNormalizerMalformedInputsTheorem": "PNP.Concrete.SerializedNormalizer.malformed_output",
+  "leanSerializedNormalizerCompleteSystemTheorem": "PNP.Concrete.SerializedNormalizer.residual_system_iff",
+  "leanSerializedNormalizerSourceModelTheorem": "PNP.Concrete.SerializedNormalizer.model_sound",
+  "leanSerializedNormalizerReductionMachineCorrespondenceTheorem": "PNP.Concrete.SerializedNormalizer.reduction_output",
+  "leanSerializedNormalizerConcreteReductionTheorem": "PNP.Concrete.SerializedNormalizer.reduction_correct",
+  "leanSerializedNormalizerAllSourceBitstringsCovered": true,
+  "leanSerializedNormalizerDataDerivedFromSource": true,
+  "leanSerializedNormalizerCompletePacketSerialized": true,
+  "leanSerializedNormalizerLiteralFiniteMachineRefinement": true,
+  "leanSerializedNormalizerEncodedInputPolynomialRuntimeProved": true,
+  "leanSerializedNormalizerEncodedOutputBoundProved": true,
+  "leanSerializedNormalizerShortCertificateExistenceProved": true,
+  "leanSerializedNormalizerCertificateDiscoveryAlgorithmProved": false,
+  "leanSerializedNormalizerCallerSuppliedConstructionOrCorrectnessRequired": false,
+  "leanSerializedNormalizerGeneralResidualSolverProved": false,
+  "leanSerializedNormalizerManuscriptResidualMinimizerProved": false,
+  "leanSerializedNormalizerUnconditionalZeroSlackProved": false,
+  "leanSerializedNormalizerExactPolynomialPCCMinProved": false,
+  "leanSerializedNormalizerConcreteCNFSATInPProved": false,
+  "leanSerializedNormalizerRuntimeExecutionIsProofAuthority": false,
+  "leanSerializedNormalizerScope": "all-source-bitstrings-complete-derived-serialized-packet-literal-machine-encoded-polynomial-runtime-output-bound-exact-sat-certificate-language-no-certificate-discovery-residual-solver-manuscript-minimization-or-p-equals-np",
   "leanClosedSupportNestedGainFormalized": true,
   "leanClosedSupportNestedGainAxiomAuditPassed": true,
   "leanClosedSupportNestedGainAuditedDeclarationCount": 36,
@@ -3322,6 +3353,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m281",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPSerializedNormalizerAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPSerializedNormalizer.lean",
     "npm run audit:m280",
     "npm run audit:m279",
     "npm run audit:m278",
@@ -4286,7 +4320,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "4b004d48abf664301c558ac4420aca2fb3d71e06ee260e20237acb74ca6137c2",
+    "actualSourceClosureSha256": "74e468b5d0b56a3eeb98794e81848300677a8412a2fc6d58733f856e452702ed",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4319,19 +4353,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "c1528b92a9168f276050d7efd772ab13b0ba74a619f5dce8bb85dbc500bebded",
+  "leanTheoremInventorySha256": "49cfcf6de14f560842766adef7fe9e54437ce57ac2a6c4ace650308164be890a",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 52556,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 21652,
-  "leanTheoremInventoryTheoremCount": 28803,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 11841,
-  "leanTheoremInventorySourceClosureModuleCount": 644,
-  "leanSourceClosureSha256": "4b004d48abf664301c558ac4420aca2fb3d71e06ee260e20237acb74ca6137c2",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-09-20-280",
+  "leanTheoremInventoryDeclarationCount": 68079,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 23202,
+  "leanTheoremInventoryTheoremCount": 37662,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 13972,
+  "leanTheoremInventorySourceClosureModuleCount": 1110,
+  "leanSourceClosureSha256": "74e468b5d0b56a3eeb98794e81848300677a8412a2fc6d58733f856e452702ed",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-10-13-281",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "58bfacd324474864d0a8c00efef9511396166697ee1e09cd9fadd36c26e1acf0",
+  "formalPublicationMapSha256": "df6630f534b9832214e55ca2e95ffc81e142bc028d145392389b1d60e068226b",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -69281,9 +69315,183 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "complete-serialized-source-normalizer",
+      "nonClaim": "This constructs and encodes an equivalent residual problem; a system packet is not an unsatisfiability verdict. Short certificate existence does not provide certificate discovery. The result does not implement the manuscript NormalizeOrGain minimizer, solve all residual systems, establish global route coverage or unconditional ZeroSlack, or prove exact polynomial PCCMin. Its polynomial bounds cover the complete normalizer, not a complete SAT solver. Deterministic CNFSAT membership in P and the eligible root theorem remain absent; P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.Concrete.SerializedNormalizer.certificate_bound",
+        "PNP.Concrete.SerializedNormalizer.decode_output",
+        "PNP.Concrete.SerializedNormalizer.halts",
+        "PNP.Concrete.SerializedNormalizer.malformed_output",
+        "PNP.Concrete.SerializedNormalizer.model_sound",
+        "PNP.Concrete.SerializedNormalizer.output_eq",
+        "PNP.Concrete.SerializedNormalizer.output_size",
+        "PNP.Concrete.SerializedNormalizer.reduction_correct",
+        "PNP.Concrete.SerializedNormalizer.reduction_output",
+        "PNP.Concrete.SerializedNormalizer.residual_system_iff",
+        "PNP.Concrete.SerializedNormalizer.satisfiability_iff",
+        "PNP.Concrete.SerializedNormalizer.sparse_output_size"
+      ],
+      "scope": "For every source bitstring, a concrete finite-machine refinement computes the complete source-derived serialized normalization packet and halts within a polynomial in the encoded input length. The packet has a polynomial encoded-size bound, strict decode roundtrip and malformed-input convention. Its encoded certificate language is equivalent to CNFSAT on that same input; satisfiable inputs have a certificate of at most 30 times the input length plus 12 bits. Every system packet retains all residual equations, and every model packet yields a satisfying source assignment. The packaged polynomial reduction uses the actual serialized machine output. No construction, completeness or correctness certificate is supplied by a caller.",
+      "title": "Complete polynomial source-derived serialized normalizer",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.certificate_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "656bbbe55cd7255d0872c586a6ed36d5d109df6f392dd3c116ffa4b39822b7d1",
+          "expectedKernelTypeSha256": "656bbbe55cd7255d0872c586a6ed36d5d109df6f392dd3c116ffa4b39822b7d1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.decode_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7f3dafa95c79e7c7022025d22e6cac37279dacc0204185bdfca7b98d161cad52",
+          "expectedKernelTypeSha256": "7f3dafa95c79e7c7022025d22e6cac37279dacc0204185bdfca7b98d161cad52",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.halts",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "fd65f0cfea9b32bc1c710a159344869e569f5bd15233efbdd77aaaa700ab7361",
+          "expectedKernelTypeSha256": "fd65f0cfea9b32bc1c710a159344869e569f5bd15233efbdd77aaaa700ab7361",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.malformed_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3a8ae268d526f5b8135f3f7fed8e416b65552d98396d566907d9558066469437",
+          "expectedKernelTypeSha256": "3a8ae268d526f5b8135f3f7fed8e416b65552d98396d566907d9558066469437",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.model_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "096788fa93b78b5c9c56ff979747ad8507c4f346f9d948916d7b454e876c85b3",
+          "expectedKernelTypeSha256": "096788fa93b78b5c9c56ff979747ad8507c4f346f9d948916d7b454e876c85b3",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.output_eq",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bbc924774cc8542e63b4d46ace598eb0029f00bc423a10f5830419f2f00de860",
+          "expectedKernelTypeSha256": "bbc924774cc8542e63b4d46ace598eb0029f00bc423a10f5830419f2f00de860",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.output_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "da55366f36cef5ad1bb917c377e7a68b4e9497773c544be2fe2ee74e9697d7fa",
+          "expectedKernelTypeSha256": "da55366f36cef5ad1bb917c377e7a68b4e9497773c544be2fe2ee74e9697d7fa",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.reduction_correct",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "5085e9b0fc9be9894b78e6c84da5c2995d40d7352edeabb12857d999199bc078",
+          "expectedKernelTypeSha256": "5085e9b0fc9be9894b78e6c84da5c2995d40d7352edeabb12857d999199bc078",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.reduction_output",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "50cd8db031d4e01f16259750f15a0b685d520cc1328415f3bc7e33e0ad411777",
+          "expectedKernelTypeSha256": "50cd8db031d4e01f16259750f15a0b685d520cc1328415f3bc7e33e0ad411777",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.residual_system_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "9b037e351a17b5d6fd8b1f3e6bd053bacd98602314cd717778555ceeb2ee064b",
+          "expectedKernelTypeSha256": "9b037e351a17b5d6fd8b1f3e6bd053bacd98602314cd717778555ceeb2ee064b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.satisfiability_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "936aa81b54397bb6a89b928b28c67babaca208f1334687c25f599c68721f72ce",
+          "expectedKernelTypeSha256": "936aa81b54397bb6a89b928b28c67babaca208f1334687c25f599c68721f72ce",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.SerializedNormalizer.sparse_output_size",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "847c715bb6396f60bf652a09c127becc897d5b25f6280e0228fa6e217c86ac00",
+          "expectedKernelTypeSha256": "847c715bb6396f60bf652a09c127becc897d5b25f6280e0228fa6e217c86ac00",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-09-20-280",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-13-281",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
