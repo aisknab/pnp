@@ -46,7 +46,7 @@
 \vspace{0.45cm}
 {\Large Compiled Lean theorem inventory and current claim boundary\par}
 \vspace{0.8cm}
-{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281}\par}
+{\large Coordinate \code{PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282}\par}
 \vfill
 \fcolorbox{statusred}{statusgrey}{
   \begin{minipage}{0.88\textwidth}
@@ -64,12 +64,13 @@
 Complete all-input Cook-Levin builder & \statustrue \\
 Concrete CNF-SAT NP-completeness & \statustrue \\
 Complete polynomial serialized normalizer & \statustrue \\
+Source-bound partial residual reduction & \statustrue \\
 Deterministic CNF-SAT membership in P & \statusfalse \\
 Eligible root theorem present & \statusfalse \\
   \end{tabular}
 
   \vspace{0.2cm}
-  Formal artefact coverage: 257 of 259 current
+  Formal artefact coverage: 258 of 260 current
   scoped publication rows. This is not proof completion.
 
   Risk-weighted proof completion estimate: 40 percent.
@@ -84,15 +85,15 @@ Eligible root theorem present & \statusfalse \\
 \vfill
 \begin{tabular}{@{}ll@{}}
 \toprule
-Compiled declarations & 68079 \\
-Theorem-kind declarations & 37662 \\
-Assumption-free theorem-kind declarations & 13972 \\
+Compiled declarations & 69490 \\
+Theorem-kind declarations & 38440 \\
+Assumption-free theorem-kind declarations & 14185 \\
 Project-specific axioms & 0 \\
 Concrete publication gate passed & \statusfalse \\
 \bottomrule
 \end{tabular}
 \vfill
-{\small Inventory SHA-256: \code{49cfcf6de14f560842766adef7fe9e54437ce57ac2a6c4ace650308164be890a}\par}
+{\small Inventory SHA-256: \code{cdb856c37a386ca99570dcdb1ade8f406fd21bf60d93dbdfb886086446d42fa1}\par}
 {\small Generated from the pinned compiled Lean environment, not from source-text parsing.\par}
 \end{titlepage}
 
@@ -190,7 +191,7 @@ Both closures use only the existing Lean standard axioms \code{Classical.choice}
 supplied, and no deterministic CNFSAT-in-P result follows.
 
 \subsection*{Separate progress measurements}
-Formal artefact coverage: 257 of 259 current
+Formal artefact coverage: 258 of 260 current
 scoped publication rows earned. This is evidence-ledger coverage, not proof
 completion; its denominator can grow.
 The risk-weighted proof completion estimate is 40 percent,
@@ -1402,7 +1403,7 @@ publication fingerprints are unset and the publication gate remains false.
 
 Each earned row requires exact compiled names and theorem kinds, an axiom closure
 contained in the reviewed Lean standard-axiom allowlist, and per-name
-domain-separated kernel-type SHA-256 matches for 4534 detailed candidates, and the pinned whole-Lean
+domain-separated kernel-type SHA-256 matches for 4550 detailed candidates, and the pinned whole-Lean
 source closure. No project-specific axiom is allowed; an earned row need not have
 an empty axiom closure. Human-readable scope remains conservative: type or source drift revokes credit.
 
@@ -1673,14 +1674,15 @@ Computed closed-support full-profile physical gain & formalized-foundation-only 
 Computed whole-support minimum bridge & formalized-foundation-only & For arbitrary finite wire carriers and keep masks, the physical whole-support seed is derived from all original gates. Its computed saturated interface contains exactly the original gate-valued ordinary outputs, while every computational field is available. Explicit size-preserving comparisons identify its full-profile reference minimum with the independent whole-carrier output-and-field minimum. The actual computed full-profile replacement attains that minimum, has zero remaining whole-carrier full slack, and returns no strict improvement exactly when the original whole-carrier full slack is zero. The seed, interface, observer, minimum and replacement are derived rather than supplied correctness data. & The whole-span reference branch remains exhaustive, including minimum search, source matching and saturation influence. Zero slack after exhaustive reference minimization is not the manuscript's unconditional ZeroSlack theorem or a polynomial PCCMin algorithm. This does not discover a proper positive support, compile arbitrary minima into proper-local VerifyDW histories, reconstruct the complete noncomputational profile grammar, derive global route coverage or unconditional SaturatePositive and BCELReady, or establish complete polynomial runtime, output-size or certificate bounds. The eligible root theorem remains absent and P = NP is not proved. \\
 Computed nested-support cost and positivity transport & formalized-foundation-only & For arbitrary finite wire carriers, keep masks and two raw seed lists whose computed completed supports are physically nested, derive the exact gate difference and crossing bindings. Extend the actual full or quotient reference minimum inside the common ambient input domain, preserving the larger padded ordinary interface and exact required computational-field availability, including false values. The derived comparisons prove that either minimum grows by at most the added physical gates, that full slack and support size minus quotient minimum are monotone, and that positive full slack or projection defect remains positive in the completed larger support. Raw-seed inclusion derives the physical inclusion. No cost inequality, field-equality certificate or optimizer is supplied to the final theorem. & This compares already completed dependency-closed supports in the computational-wire-profile model. It does not prove preservation of an arbitrary raw witness's initial positivity during completion, transparency of every intermediate event, monotonicity of projection defect alone, complete manuscript profile semantics, discovery of a proper positive support, global routing or unconditional SaturatePositive, BCELReady or ZeroSlack. Reference minimization, matching and influence computations remain exhaustive; complete polynomial PCCMin runtime, output-size and certificate bounds are not proved. The eligible root theorem remains absent and P = NP is not proved. \\
 Complete polynomial source-derived serialized normalizer & formalized-foundation-only & For every source bitstring, a concrete finite-machine refinement computes the complete source-derived serialized normalization packet and halts within a polynomial in the encoded input length. The packet has a polynomial encoded-size bound, strict decode roundtrip and malformed-input convention. Its encoded certificate language is equivalent to CNFSAT on that same input; satisfiable inputs have a certificate of at most 30 times the input length plus 12 bits. Every system packet retains all residual equations, and every model packet yields a satisfying source assignment. The packaged polynomial reduction uses the actual serialized machine output. No construction, completeness or correctness certificate is supplied by a caller. & This constructs and encodes an equivalent residual problem; a system packet is not an unsatisfiability verdict. Short certificate existence does not provide certificate discovery. The result does not implement the manuscript NormalizeOrGain minimizer, solve all residual systems, establish global route coverage or unconditional ZeroSlack, or prove exact polynomial PCCMin. Its polynomial bounds cover the complete normalizer, not a complete SAT solver. Deterministic CNFSAT membership in P and the eligible root theorem remain absent; P = NP is not proved. \\
+Source-bound partial residual reduction and certificate recovery & formalized-foundation-only & For every native sparse residual system, a computed translation retains all positive, linear and product constraints, including duplicate-term parity and coordinate order. A dimension-decreasing source-derived chain preserves models, links every step to its preceding residual, preserves the row count, and supplies inverse parameter and satisfying-source maps. For every original bitstring whose actual serialized normalizer output decodes to a system, the remaining core is satisfiable exactly when that original input is in CNFSAT; a remaining model reconstructs a correctly sized encoded certificate accepted by the actual output checker. The original-input partial verdict is sound for both true and false answers and returns unknown when positive dimension remains. At most 30 times the source bitstring length plus 12 reductions occur; this bounds steps, not execution work. No chosen contraction, family, route coverage certificate or correctness premise is supplied by a caller. & Stopping exhausts the computed finite affine/line/plane selector menu, not the whole class of possible contractions. An unknown core can be satisfiable or unsatisfiable; useful reduction on every instance and all-input decision are not proved. The chain-length bound is not a polynomial bound on total encoded construction, storage or runtime. This is not the completed manuscript residual-band minimizer, unconditional SaturatePositive, BCELReady or ZeroSlack, exact polynomial PCCMin, deterministic CNFSAT membership in P, or the eligible root theorem. P = NP is not proved. \\
 \bottomrule
 \end{longtable}
 }
 
 \section{Compiled inventory summary}
 
-The inventory contains 68079 exported \code{PNP.*} kernel declarations from
-1110 modules. It excludes 23202 private compiler auxiliaries.
+The inventory contains 69490 exported \code{PNP.*} kernel declarations from
+1151 modules. It excludes 23401 private compiler auxiliaries.
 Counts describe the compiled environment; they do not measure mathematical completeness.
 
 {\footnotesize
@@ -1718,7 +1720,7 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Bit\allowbreak{}String & 123 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNF & 247 & 60 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Bits & 35 & 19 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Execution & 26 & 22 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Grammar & 57 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Grammar & 46 & 39 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Model & 117 & 51 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Polynomial & 10 & 8 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFDecoder\allowbreak{}Program & 19 & 14 \\
@@ -1726,7 +1728,7 @@ PNP.\allowbreak{}Concrete.\allowbreak{}CNFSource\allowbreak{}Parser\allowbreak{}
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFSource\allowbreak{}Parser\allowbreak{}Correctness & 198 & 133 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFSource\allowbreak{}Parser\allowbreak{}Machine & 106 & 44 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFSource\allowbreak{}Parser\allowbreak{}Spec & 18 & 15 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NAND & 189 & 102 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NAND & 212 & 125 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NANDCarrier\allowbreak{}Encoder & 571 & 264 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NANDCarrier\allowbreak{}Token\allowbreak{}Reader & 70 & 27 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}CNFTo\allowbreak{}NANDCompiler\allowbreak{}Compiled & 15 & 10 \\
@@ -1975,13 +1977,13 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Tablea
 PNP.\allowbreak{}Concrete.\allowbreak{}Cook\allowbreak{}Levin\allowbreak{}Verifier\allowbreak{}Tableau & 58 & 25 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDEncoding & 611 & 215 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDPolynomial\allowbreak{}Reduction & 8 & 6 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDRaw\allowbreak{}Builder & 292 & 169 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDRaw\allowbreak{}Builder & 291 & 168 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDReduction & 24 & 15 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Compiled & 15 & 11 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Correctness & 23 & 20 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Failure\allowbreak{}Shapes & 124 & 44 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Machine & 207 & 32 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Semantics & 33 & 33 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Semantics & 25 & 25 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Spec & 17 & 14 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Total\allowbreak{}Trace & 54 & 28 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDSource\allowbreak{}Parser\allowbreak{}Valid\allowbreak{}Trace & 353 & 232 \\
@@ -2049,11 +2051,11 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDTarget\allowbreak{
 PNP.\allowbreak{}Concrete.\allowbreak{}Locked\allowbreak{}NANDThreshold\allowbreak{}Publication & 1 & 1 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Machine & 284 & 67 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Bounds & 19 & 13 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Canonical & 11 & 11 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Canonical & 10 & 10 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Clause & 14 & 11 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Closed & 19 & 11 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Constants & 17 & 13 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Data & 44 & 30 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Data & 41 & 27 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Gate & 15 & 13 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Gate\allowbreak{}Loop & 31 & 18 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Gate\allowbreak{}Read & 18 & 14 \\
@@ -2070,9 +2072,9 @@ PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Polynomial & 28 
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Program & 82 & 25 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Read & 102 & 38 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Source & 139 & 76 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Unary & 84 & 48 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}NANDFrontend\allowbreak{}Unary & 81 & 45 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}CNFCompact & 31 & 24 \\
-PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}CNFCore & 63 & 50 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}CNFCore & 67 & 54 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}CNFTransport & 42 & 32 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}Coefficient\allowbreak{}Bridge & 29 & 23 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Native\allowbreak{}Normalization.\allowbreak{}Frontend\allowbreak{}Bridge & 9 & 8 \\
@@ -2497,6 +2499,47 @@ PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}Stage\allowbreak{}Br
 PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}State\allowbreak{}Namespace & 77 & 34 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}Tape\allowbreak{}Geometry & 20 & 12 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Pipeline\allowbreak{}Terminal\allowbreak{}Bridge & 73 & 62 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reducer & 20 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Affine\allowbreak{}Bilinear\allowbreak{}Search & 26 & 17 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Affine\allowbreak{}Solution\allowbreak{}Maps & 53 & 24 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Bilinear\allowbreak{}Pullback & 28 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Bilinear\allowbreak{}Selection & 86 & 44 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Binary\allowbreak{}Linear\allowbreak{}Solver & 42 & 18 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Binary\allowbreak{}Solution\allowbreak{}Space & 18 & 14 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Boolean\allowbreak{}Coefficients & 148 & 62 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Checked\allowbreak{}Contraction & 51 & 25 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Constrained\allowbreak{}Bilinear & 19 & 13 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Factored\allowbreak{}Contraction & 80 & 36 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Kernel\allowbreak{}Coefficient\allowbreak{}Maps & 11 & 8 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Linear\allowbreak{}Equations & 31 & 17 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Native\allowbreak{}Source\allowbreak{}Coordinates & 52 & 28 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Native\allowbreak{}Source\allowbreak{}Reduction & 26 & 20 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Native\allowbreak{}Source\allowbreak{}System & 28 & 19 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Point\allowbreak{}Support & 36 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Activity\allowbreak{}Matrix & 16 & 5 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Affine\allowbreak{}Prelude & 24 & 18 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Computed\allowbreak{}Contract & 13 & 10 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Constructed\allowbreak{}Step & 37 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Direction\allowbreak{}Chart & 23 & 17 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Direction\allowbreak{}Space & 14 & 10 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Dual\allowbreak{}Span & 9 & 7 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Global\allowbreak{}Selector & 30 & 18 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Linear\allowbreak{}Coordinates & 57 & 34 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Matrix\allowbreak{}Storage & 30 & 4 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Normal\allowbreak{}Menu & 51 & 34 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Plane\allowbreak{}Closure & 10 & 10 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Polar & 20 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Query\allowbreak{}Chart & 35 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Rank\allowbreak{}One\allowbreak{}Equations & 38 & 29 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Rank\allowbreak{}One\allowbreak{}Matrices & 17 & 13 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Rank\allowbreak{}One\allowbreak{}Query & 30 & 10 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Rank\allowbreak{}Two\allowbreak{}Equations & 20 & 16 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Rank\allowbreak{}Two\allowbreak{}Query & 15 & 8 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Reduction\allowbreak{}Chain & 86 & 31 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Row\allowbreak{}Difference & 14 & 12 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Scalar\allowbreak{}Tail & 28 & 23 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Selected\allowbreak{}Scalar & 29 & 19 \\
+PNP.\allowbreak{}Concrete.\allowbreak{}Residual\allowbreak{}Reduction.\allowbreak{}Source\allowbreak{}Witness\allowbreak{}Balance & 10 & 9 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Serialized\allowbreak{}Normalizer & 19 & 14 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Tape\allowbreak{}Blank\allowbreak{}Equivalence & 25 & 17 \\
 PNP.\allowbreak{}Concrete.\allowbreak{}Tape\allowbreak{}Handoff & 18 & 11 \\
@@ -2862,9 +2905,9 @@ npm run report:check
 }
 
 The inventory coordinate is \code{PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230}. Its exact byte digest is
-\code{49cfcf6de14f560842766adef7fe9e54437ce57ac2a6c4ace650308164be890a}. The report is regenerated from that inventory and the reviewed
+\code{cdb856c37a386ca99570dcdb1ade8f406fd21bf60d93dbdfb886086446d42fa1}. The report is regenerated from that inventory and the reviewed
 publication map. The reviewed milestone source-closure SHA-256 is
-\code{74e468b5d0b56a3eeb98794e81848300677a8412a2fc6d58733f856e452702ed}; the computed and pinned values match. Successful regeneration
+\code{dd9ab2ab8b625b8542b3f05a4f95602d80f00ce9d65574d8735d51a33b1c58ef}; the computed and pinned values match. Successful regeneration
 confirms consistency of these status surfaces; it does not turn an absent concrete theorem into a
 proof.
 

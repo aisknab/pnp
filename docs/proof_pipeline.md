@@ -1,22 +1,22 @@
 # Proof and Checker Pipeline
 
-<!-- M281-CURRENT-SUMMARY:BEGIN -->
-## Current M281 boundary
+<!-- M282-CURRENT-SUMMARY:BEGIN -->
+## Current M282 boundary
 
-M281 constructs the complete source-derived serialized normalizer for every input bitstring. The actual finite machine halts within an encoded-input polynomial bound and emits the exact checked packet, with a polynomial output bound and strict decoding. Its certificate language is equivalent to source CNF-SAT, and satisfiable inputs have short certificates.
+M282 connects the complete source-derived normalizer to a computed partial residual reduction. The repeated reductions retain every original constraint, preserve models, link each step to its preceding residual and recover checked encoded certificates from remaining models. Answers reported as true or false are sound for the original input.
 
-A residual system packet is not an unsatisfiability answer. Certificate existence is not certificate discovery. The general residual solver, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open; the normalizer does not prove the manuscript minimum-preserving `NormalizeOrGain` theorem. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
+A positive-dimensional stopped core remains unknown; it can be satisfiable or unsatisfiable. Stopping exhausts the implemented selector menu, not every possible contraction. The source-based step-count bound is not a proof of total polynomial runtime. The general residual solver, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
 
-M230’s complete Cook-Levin builder and M231’s concrete NP-completeness remain checked. The subsequent support-slack and fixed-window counterexamples retain their exact scope.
+M230's complete Cook-Levin builder, M231's concrete NP-completeness and M281's polynomial serialized normalizer remain checked. The support-slack and fixed-window counterexamples retain their exact scope.
 
-Formal artefact coverage: 257 of 259 current scoped publication rows earned.
+Formal artefact coverage: 258 of 260 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [complete serialized normalizer](./lean_serialized_normalizer.md). Earlier milestone notes retain their original scope.
-Publication decision: publish after verified core merge. This is one complete all-input construction with literal-machine runtime and encoding guarantees, not another fixed prefix or local sidecar. Batch pending core evidence and preserve the published corrections. The website must distinguish this new general capability from the still-open solver and retain the unchanged risk-weighted estimate.
-<!-- M281-CURRENT-SUMMARY:END -->
+See the [partial residual reducer and its limits](./lean_residual_reducer.md). Earlier milestone notes retain their original scope.
+Publication decision: publish after verified core merge. The complete source-bound partial reduction and certificate recovery form a substantial general capability beyond a local lemma or fixed instance. Publish one batch from the exact core merge, preserve prior corrections and show unknown outcomes and unresolved solver/runtime obligations explicitly. This does not change the risk-weighted proof estimate.
+<!-- M282-CURRENT-SUMMARY:END -->
 
 ## Subsequent correction — 24 September 2026
 

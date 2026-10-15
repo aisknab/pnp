@@ -29,6 +29,7 @@ on:
       - 'canonical_proof_report.pdf'
       - 'audits/lean-*.test.mjs'
       - 'audits/fixtures/serialized-normalizer-source-contract0.json'
+      - 'audits/fixtures/residual-reducer-source-contract0.json'
       - 'audits/formal-publication0.test.mjs'
       - 'docs/lean_*.md'
       - 'docs/plans/*.md'
@@ -3511,6 +3512,12 @@ jobs:
             lake env lean -DwarningAsError=true "lean-regression/PNP${name}Probe.lean"
           done
           node --test audits/lean-{fixed-window-coverage-obstruction,growing-window-universe-bound}{0,-publication0}.test.mjs
+      - name: Verify residual reduction
+        run: |
+          set -euo pipefail
+          npm run audit:m282
+          node scripts/check-lean-axioms.mjs lean-audit/PNPResidualReducerAxiomAudit.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPResidualReducer.lean
       - name: Check complete serialized normalizer contracts
         run: npm run audit:m281
       - name: Audit complete serialized normalizer

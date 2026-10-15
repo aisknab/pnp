@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,44 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanSourceBoundResidualReducerFormalized": true,
+  "leanSourceBoundResidualReducerAxiomAuditPassed": true,
+  "leanSourceBoundResidualReducerAuditedDeclarationCount": 16,
+  "leanSourceBoundResidualReducerCompleteSystemTheorem": "PNP.Concrete.ResidualReducer.source_family_iff",
+  "leanSourceBoundResidualReducerSourceRowCountTheorem": "PNP.Concrete.ResidualReducer.source_family_rows",
+  "leanSourceBoundResidualReducerResidualRowCountTheorem": "PNP.Concrete.ResidualReducer.result_rows",
+  "leanSourceBoundResidualReducerModelPreservationTheorem": "PNP.Concrete.ResidualReducer.model_preservation",
+  "leanSourceBoundResidualReducerParameterInverseTheorem": "PNP.Concrete.ResidualReducer.parameter_roundtrip",
+  "leanSourceBoundResidualReducerSourceModelInverseTheorem": "PNP.Concrete.ResidualReducer.source_model_roundtrip",
+  "leanSourceBoundResidualReducerLinkedTraceTheorem": "PNP.Concrete.ResidualReducer.trace_linked",
+  "leanSourceBoundResidualReducerDimensionAccountingTheorem": "PNP.Concrete.ResidualReducer.dimension_accounting",
+  "leanSourceBoundResidualReducerSelectorStoppingTheorem": "PNP.Concrete.ResidualReducer.terminal",
+  "leanSourceBoundResidualReducerSourceSatisfiabilityTheorem": "PNP.Concrete.ResidualReducer.residual_source_iff",
+  "leanSourceBoundResidualReducerEncodedCertificateRecoveryTheorem": "PNP.Concrete.ResidualReducer.recover_certificate",
+  "leanSourceBoundResidualReducerSourceStepBoundTheorem": "PNP.Concrete.ResidualReducer.step_bound",
+  "leanSourceBoundResidualReducerActualPacketDecisionTheorem": "PNP.Concrete.ResidualReducer.decision_packet",
+  "leanSourceBoundResidualReducerTrueSoundnessTheorem": "PNP.Concrete.ResidualReducer.decision_true_sound",
+  "leanSourceBoundResidualReducerFalseSoundnessTheorem": "PNP.Concrete.ResidualReducer.decision_false_sound",
+  "leanSourceBoundResidualReducerUnknownTheorem": "PNP.Concrete.ResidualReducer.decision_unknown",
+  "leanSourceBoundResidualReducerAllSourceBitstringsCovered": true,
+  "leanSourceBoundResidualReducerCompleteNativeConstraintsRetained": true,
+  "leanSourceBoundResidualReducerDataDerivedFromSource": true,
+  "leanSourceBoundResidualReducerLinkedRepeatedReductionProved": true,
+  "leanSourceBoundResidualReducerSatisfyingModelCertificateRecoveryProved": true,
+  "leanSourceBoundResidualReducerSourceEncodedStepCountBoundProved": true,
+  "leanSourceBoundResidualReducerCallerSuppliedConstructionOrCorrectnessRequired": false,
+  "leanSourceBoundResidualReducerPositiveDimensionRemainsUnknown": true,
+  "leanSourceBoundResidualReducerWholeContractionClassCompletenessProved": false,
+  "leanSourceBoundResidualReducerAllInputResidualDecisionProved": false,
+  "leanSourceBoundResidualReducerGeneralPolynomialRuntimeProved": false,
+  "leanSourceBoundResidualReducerGeneralEncodedSizeBoundProved": false,
+  "leanSourceBoundResidualReducerManuscriptResidualMinimizerProved": false,
+  "leanSourceBoundResidualReducerGlobalRouteCoverageProved": false,
+  "leanSourceBoundResidualReducerUnconditionalZeroSlackProved": false,
+  "leanSourceBoundResidualReducerExactPolynomialPCCMinProved": false,
+  "leanSourceBoundResidualReducerConcreteCNFSATInPProved": false,
+  "leanSourceBoundResidualReducerRuntimeExecutionIsProofAuthority": false,
+  "leanSourceBoundResidualReducerScope": "all-source-bitstrings-complete-native-constraints-source-derived-model-preserving-chain-linked-history-certificate-recovery-sound-partial-verdict-explicit-unknown-source-step-count-only-no-complete-residual-decision-whole-class-coverage-or-polynomial-runtime",
   "leanSerializedNormalizerFormalized": true,
   "leanSerializedNormalizerAxiomAuditPassed": true,
   "leanSerializedNormalizerAuditedDeclarationCount": 12,
@@ -3353,6 +3391,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m282",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPResidualReducerAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPResidualReducer.lean",
     "npm run audit:m281",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPSerializedNormalizerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPSerializedNormalizer.lean",
@@ -4320,7 +4361,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "74e468b5d0b56a3eeb98794e81848300677a8412a2fc6d58733f856e452702ed",
+    "actualSourceClosureSha256": "dd9ab2ab8b625b8542b3f05a4f95602d80f00ce9d65574d8735d51a33b1c58ef",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4353,19 +4394,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "49cfcf6de14f560842766adef7fe9e54437ce57ac2a6c4ace650308164be890a",
+  "leanTheoremInventorySha256": "cdb856c37a386ca99570dcdb1ade8f406fd21bf60d93dbdfb886086446d42fa1",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 68079,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 23202,
-  "leanTheoremInventoryTheoremCount": 37662,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 13972,
-  "leanTheoremInventorySourceClosureModuleCount": 1110,
-  "leanSourceClosureSha256": "74e468b5d0b56a3eeb98794e81848300677a8412a2fc6d58733f856e452702ed",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-10-13-281",
+  "leanTheoremInventoryDeclarationCount": 69490,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 23401,
+  "leanTheoremInventoryTheoremCount": 38440,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 14185,
+  "leanTheoremInventorySourceClosureModuleCount": 1151,
+  "leanSourceClosureSha256": "dd9ab2ab8b625b8542b3f05a4f95602d80f00ce9d65574d8735d51a33b1c58ef",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-10-15-282",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "df6630f534b9832214e55ca2e95ffc81e142bc028d145392389b1d60e068226b",
+  "formalPublicationMapSha256": "003c567dc6361069e74ec48398eb1c75464c1fc788704cb78cd56968f000defd",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -69489,9 +69530,235 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "source-bound-partial-residual-reducer",
+      "nonClaim": "Stopping exhausts the computed finite affine/line/plane selector menu, not the whole class of possible contractions. An unknown core can be satisfiable or unsatisfiable; useful reduction on every instance and all-input decision are not proved. The chain-length bound is not a polynomial bound on total encoded construction, storage or runtime. This is not the completed manuscript residual-band minimizer, unconditional SaturatePositive, BCELReady or ZeroSlack, exact polynomial PCCMin, deterministic CNFSAT membership in P, or the eligible root theorem. P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.Concrete.ResidualReducer.decision_false_sound",
+        "PNP.Concrete.ResidualReducer.decision_packet",
+        "PNP.Concrete.ResidualReducer.decision_true_sound",
+        "PNP.Concrete.ResidualReducer.decision_unknown",
+        "PNP.Concrete.ResidualReducer.dimension_accounting",
+        "PNP.Concrete.ResidualReducer.model_preservation",
+        "PNP.Concrete.ResidualReducer.parameter_roundtrip",
+        "PNP.Concrete.ResidualReducer.recover_certificate",
+        "PNP.Concrete.ResidualReducer.residual_source_iff",
+        "PNP.Concrete.ResidualReducer.result_rows",
+        "PNP.Concrete.ResidualReducer.source_family_iff",
+        "PNP.Concrete.ResidualReducer.source_family_rows",
+        "PNP.Concrete.ResidualReducer.source_model_roundtrip",
+        "PNP.Concrete.ResidualReducer.step_bound",
+        "PNP.Concrete.ResidualReducer.terminal",
+        "PNP.Concrete.ResidualReducer.trace_linked"
+      ],
+      "scope": "For every native sparse residual system, a computed translation retains all positive, linear and product constraints, including duplicate-term parity and coordinate order. A dimension-decreasing source-derived chain preserves models, links every step to its preceding residual, preserves the row count, and supplies inverse parameter and satisfying-source maps. For every original bitstring whose actual serialized normalizer output decodes to a system, the remaining core is satisfiable exactly when that original input is in CNFSAT; a remaining model reconstructs a correctly sized encoded certificate accepted by the actual output checker. The original-input partial verdict is sound for both true and false answers and returns unknown when positive dimension remains. At most 30 times the source bitstring length plus 12 reductions occur; this bounds steps, not execution work. No chosen contraction, family, route coverage certificate or correctness premise is supplied by a caller.",
+      "title": "Source-bound partial residual reduction and certificate recovery",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.ResidualReducer.decision_false_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "7659aa89dcd884cfd824bf2068bf0457f81331e8c03eda0942448fde04a63b5b",
+          "expectedKernelTypeSha256": "7659aa89dcd884cfd824bf2068bf0457f81331e8c03eda0942448fde04a63b5b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.decision_packet",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bd6c2ff99b86af77f392a8664964622be25c76f1dbc3e1f3dbd691a939ba1c62",
+          "expectedKernelTypeSha256": "bd6c2ff99b86af77f392a8664964622be25c76f1dbc3e1f3dbd691a939ba1c62",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.decision_true_sound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "063c912d84958f6e49e7dad9c9c8db6a91135a26bc341908fa1ec3f578b556a5",
+          "expectedKernelTypeSha256": "063c912d84958f6e49e7dad9c9c8db6a91135a26bc341908fa1ec3f578b556a5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.decision_unknown",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b715ecc4a0aabab250a2bd5c4742fbc4678d625d4abbfc81aaca9861605c8cdb",
+          "expectedKernelTypeSha256": "b715ecc4a0aabab250a2bd5c4742fbc4678d625d4abbfc81aaca9861605c8cdb",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.dimension_accounting",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "80b578136995d510d349ab0fbc21e90108d2c3c7e374bb3a97db88e51d761e9d",
+          "expectedKernelTypeSha256": "80b578136995d510d349ab0fbc21e90108d2c3c7e374bb3a97db88e51d761e9d",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.model_preservation",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "3fb80e01e0a01c66c4230d3650fc5153ef9b1648c68ceab5b5753e78dcfab7ec",
+          "expectedKernelTypeSha256": "3fb80e01e0a01c66c4230d3650fc5153ef9b1648c68ceab5b5753e78dcfab7ec",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.parameter_roundtrip",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "038ddd83c7cabd1af77ffbbbdbf4eb564f52a16c9a2dc47ed5c478234c5b10db",
+          "expectedKernelTypeSha256": "038ddd83c7cabd1af77ffbbbdbf4eb564f52a16c9a2dc47ed5c478234c5b10db",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.recover_certificate",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "644da333dc86f56baab0e379a0addbdba57d7a48b52a7650ba813720fd78872b",
+          "expectedKernelTypeSha256": "644da333dc86f56baab0e379a0addbdba57d7a48b52a7650ba813720fd78872b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.residual_source_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8c126421d3ceaf637cb0581d8fb3a6547f8e3cb190a4a19b60bc3b4772efecb0",
+          "expectedKernelTypeSha256": "8c126421d3ceaf637cb0581d8fb3a6547f8e3cb190a4a19b60bc3b4772efecb0",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.result_rows",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bc62e431ee82348ea56998d66e35ba11dc58aa8ba04b4d51377cb9a4f3777f81",
+          "expectedKernelTypeSha256": "bc62e431ee82348ea56998d66e35ba11dc58aa8ba04b4d51377cb9a4f3777f81",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.source_family_iff",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "258e2dd888772eb844d2a8a589b48d91e3890ca9ce11d4e581312c5c6c4d2139",
+          "expectedKernelTypeSha256": "258e2dd888772eb844d2a8a589b48d91e3890ca9ce11d4e581312c5c6c4d2139",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.source_family_rows",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8557f69a67b37eee88c41368dd399d3bd4005c07627de2b7adee007ea331fd9c",
+          "expectedKernelTypeSha256": "8557f69a67b37eee88c41368dd399d3bd4005c07627de2b7adee007ea331fd9c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.source_model_roundtrip",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "4cb8f56cc8b6c1b7fc7465a82da6c3c87722e35cda3572f252f72152dd6d65b5",
+          "expectedKernelTypeSha256": "4cb8f56cc8b6c1b7fc7465a82da6c3c87722e35cda3572f252f72152dd6d65b5",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.step_bound",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "901e5420db235aa2c64892dd1748387c48cd4579adf5f8ac86aca4b8a77a4775",
+          "expectedKernelTypeSha256": "901e5420db235aa2c64892dd1748387c48cd4579adf5f8ac86aca4b8a77a4775",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.terminal",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "62c8f8b85053c98535224719e82641fcd018fd23f59bee77ae5676dd94c9328b",
+          "expectedKernelTypeSha256": "62c8f8b85053c98535224719e82641fcd018fd23f59bee77ae5676dd94c9328b",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReducer.trace_linked",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "2da8089f4b90238d8f535053f1bbf75f371eb358643e22a85d740cf735956797",
+          "expectedKernelTypeSha256": "2da8089f4b90238d8f535053f1bbf75f371eb358643e22a85d740cf735956797",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-13-281",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-15-282",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true
