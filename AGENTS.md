@@ -474,6 +474,10 @@ lines.
   the equivalent of every changed workflow assertion on the configured remote
   build host before pushing; changing a step label does not update an embedded
   assertion.
+- Before running a broad suite for a workflow change, run
+  `node --test audits/lean-root-target0.test.mjs` on the remote build host.
+  Reconcile its closed trigger-path fixture with the intended coverage, retain
+  the workflow byte-size guard, and compact orchestration without dropping checks.
 - For every added or edited YAML `run: |` shell block, extract that exact block
   into an uncommitted temporary script and run `bash -n` before an expensive
   workflow. Then execute the exact block after its prerequisites are built.

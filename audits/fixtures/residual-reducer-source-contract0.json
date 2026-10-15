@@ -1,0 +1,2580 @@
+{
+  "kind": "PNPResidualReducerSourceContract0",
+  "version": 0,
+  "rootModules": [
+    "PNP.Concrete.ResidualReducer"
+  ],
+  "reviewBoundary": "Explicit repository root build, sixteen public theorem axiom closures, sixteen uniform type contracts and ten kernel guards. Frozen from the reviewed compiled source; tests must not regenerate it.",
+  "allowedAxioms": [
+    "propext",
+    "Quot.sound"
+  ],
+  "facadeDeclarationHeads": [
+    {
+      "kind": "def",
+      "name": "sourceFamily"
+    },
+    {
+      "kind": "def",
+      "name": "reduce"
+    },
+    {
+      "kind": "def",
+      "name": "recoverCertificate"
+    },
+    {
+      "kind": "def",
+      "name": "decision"
+    },
+    {
+      "kind": "theorem",
+      "name": "source_family_iff"
+    },
+    {
+      "kind": "theorem",
+      "name": "source_family_rows"
+    },
+    {
+      "kind": "theorem",
+      "name": "result_rows"
+    },
+    {
+      "kind": "theorem",
+      "name": "model_preservation"
+    },
+    {
+      "kind": "theorem",
+      "name": "parameter_roundtrip"
+    },
+    {
+      "kind": "theorem",
+      "name": "source_model_roundtrip"
+    },
+    {
+      "kind": "theorem",
+      "name": "trace_linked"
+    },
+    {
+      "kind": "theorem",
+      "name": "dimension_accounting"
+    },
+    {
+      "kind": "theorem",
+      "name": "terminal"
+    },
+    {
+      "kind": "theorem",
+      "name": "residual_source_iff"
+    },
+    {
+      "kind": "theorem",
+      "name": "recover_certificate"
+    },
+    {
+      "kind": "theorem",
+      "name": "step_bound"
+    },
+    {
+      "kind": "theorem",
+      "name": "decision_packet"
+    },
+    {
+      "kind": "theorem",
+      "name": "decision_true_sound"
+    },
+    {
+      "kind": "theorem",
+      "name": "decision_false_sound"
+    },
+    {
+      "kind": "theorem",
+      "name": "decision_unknown"
+    }
+  ],
+  "auditedTheorems": [
+    "PNP.Concrete.ResidualReducer.decision_false_sound",
+    "PNP.Concrete.ResidualReducer.decision_packet",
+    "PNP.Concrete.ResidualReducer.decision_true_sound",
+    "PNP.Concrete.ResidualReducer.decision_unknown",
+    "PNP.Concrete.ResidualReducer.dimension_accounting",
+    "PNP.Concrete.ResidualReducer.model_preservation",
+    "PNP.Concrete.ResidualReducer.parameter_roundtrip",
+    "PNP.Concrete.ResidualReducer.recover_certificate",
+    "PNP.Concrete.ResidualReducer.residual_source_iff",
+    "PNP.Concrete.ResidualReducer.result_rows",
+    "PNP.Concrete.ResidualReducer.source_family_iff",
+    "PNP.Concrete.ResidualReducer.source_family_rows",
+    "PNP.Concrete.ResidualReducer.source_model_roundtrip",
+    "PNP.Concrete.ResidualReducer.step_bound",
+    "PNP.Concrete.ResidualReducer.terminal",
+    "PNP.Concrete.ResidualReducer.trace_linked"
+  ],
+  "auxiliaryContracts": [
+    {
+      "file": "lean-audit/PNPResidualReducerAxiomAudit.lean",
+      "sourceContractSha256": "4bc7c87df030b7bec7de2dd82339ef2c0ae7a65a64f0e43e7d9752ec9a6586b4"
+    },
+    {
+      "file": "lean-regression/PNPResidualReducer.lean",
+      "sourceContractSha256": "9df404ca3a6f3fc69e1870d487bc0c56f1b8ecf289ded17dcedcc0fb2ba99662"
+    }
+  ],
+  "files": [
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCanonical.lean",
+      "sourceContractSha256": "3f04d12a5bec148d6bb3992f360f3c46c32ed5d1c98b0d805cc69f252690b5ca"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterClear.lean",
+      "sourceContractSha256": "d21377aa555ce2ca3b0a7346911c4cefde21d5bdfbc6b9a652359aa6faf3099b"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerControl.lean",
+      "sourceContractSha256": "4d1bb50aad32a3466edb92b10fc563012544ef8e3bd4919177887655ee31c223"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerExecution.lean",
+      "sourceContractSha256": "641c6342e0a5c7f8713343604f4c38a9f2c8e97695152914f95468ef1590db14"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerIO.lean",
+      "sourceContractSha256": "e7856b9ae246b0d8f20fe862ddf0453785c24b13d2a42d8818719752a8256124"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerIOBounds.lean",
+      "sourceContractSha256": "af7c063df43833f10c4a4d63c729fea2f575de850d79f9883c7281db2d99befd"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerIOPolynomial.lean",
+      "sourceContractSha256": "eff339c52854815b2e3f7c6ca354429644fcb0002ec845bd3b962479cf3dc6dd"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCompilerStep.lean",
+      "sourceContractSha256": "d2b653f1c1f11017f1f5a1e351bd37126f020fa965ceb6b713b95e21907bd8ec"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterControl.lean",
+      "sourceContractSha256": "eac32ad26d844cb28847dd32996f9c6a027c29bcf4d268018d92dcc785f87f1c"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterCopyProgram.lean",
+      "sourceContractSha256": "d42db996a7fffe64d3c87f75a4a24c936db66238c61ccfb1cae5b39cbea8517e"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterExecution.lean",
+      "sourceContractSha256": "34c4cde674526b900d5639ba20639a627e14c31216fa6b3377d8c9de1f7e62df"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterInput.lean",
+      "sourceContractSha256": "0ffa48a4972a39de1932cc565bea5a8b642704803f6c580bdbd674c4355f5147"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterInspection.lean",
+      "sourceContractSha256": "3a5acb9f4b62505d748ede77192d97bc1335d68851c18682e86af161f82d45e1"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterIOBounds.lean",
+      "sourceContractSha256": "7a289ad7e2e16e566cbcf201e3d2ed4d14835a39bcb03004e4eabce929418a16"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterIOPrimitives.lean",
+      "sourceContractSha256": "843e38c626d3d107e1bececb2c950342316426bfdff7250830da1154dfa4ae01"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterMutation.lean",
+      "sourceContractSha256": "189359bb020e4b4114d022300c72bd3f4255c9944e0b7e1cb007a53e80dc7141"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterOperations.lean",
+      "sourceContractSha256": "af55daa4a2d9256fbeb09fc7a3e658a7f42b47e5505a3b00d0c9f97c4d5a9c07"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterOutput.lean",
+      "sourceContractSha256": "548f751d218b9cc313abcd5c978e425ecba7744381c6b7ec8fed8977dee89725"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterProgram.lean",
+      "sourceContractSha256": "7e5924e753ed956c77e8138cbded112c61754586c8643ddad0baa7922817ed9c"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterStep.lean",
+      "sourceContractSha256": "bd121d67a3b07a4cc0d7584a96fb2e71f2df2eb74b46990c1828f1ba282d5012"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterStoreTape.lean",
+      "sourceContractSha256": "1bf2102edb5e1e87a95e32f050505f0d6743cbe3be83cffd7df66010bf9f62c0"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitRegisterTape.lean",
+      "sourceContractSha256": "936f37cbae4bcc3b79e023d97882ad1f04b0f7cf0603fe9fea9655b2f6d77be5"
+    },
+    {
+      "file": "lean/PNP/Concrete/BitString.lean",
+      "sourceContractSha256": "2b936d89f1d654233e78af16058c996f01da2a3ba695b7be1c72d89032bb497a"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNF.lean",
+      "sourceContractSha256": "63fd392a257c159302437b60318d8346b068b4982ab9b7993bb6a27ea4d8bad3"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFDecoderGrammar.lean",
+      "sourceContractSha256": "064117f574a19fe840e666895acb62b228994b949e808585bb33df0d02634693"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFSourceParserCompiled.lean",
+      "sourceContractSha256": "251bd4bebb4742817dc44777c2b12db4bfb39d894dd58861f786c9d8ebaeb599"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFSourceParserCorrectness.lean",
+      "sourceContractSha256": "a6ebbe65a74f3224c66fe6cc509ac3678500798a328143d3c00165fcbf646dc2"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFSourceParserMachine.lean",
+      "sourceContractSha256": "0373d1c8032d846569bb5d4ecf8054956fdcf45171eb393c22c69d388a13e018"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFSourceParserSpec.lean",
+      "sourceContractSha256": "788f9add4b3f526a1ca8d27c341e4cc5e904953a2c2c71b1e0d5a9e983f7ca87"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNAND.lean",
+      "sourceContractSha256": "9646113ebb457299120074cf59987e978c1179c4dba6fd37c48d97148cfb338c"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCarrierEncoder.lean",
+      "sourceContractSha256": "28c0d1b1da188ed0ff57c2a5764cdde48c004651f91e0b566f25e526f4a47a97"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCarrierTokenReader.lean",
+      "sourceContractSha256": "0ad937425fb90144024ffed13209c04a8e00418d932868a31e8874ce9cbec2f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCompilerCompiled.lean",
+      "sourceContractSha256": "4eb4b4271bff9c2af0466f35565ec3fd01344b4ab2334123ae8f3dabac10d844"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCompilerMachine.lean",
+      "sourceContractSha256": "e022220299126d66cd2ed0e83a9d2003eece39194eb39be2b1a6ea40c1879c49"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCompilerPolynomialBound.lean",
+      "sourceContractSha256": "dfca66bc2c36c53614828aa661b54484a3dfe134a41dc315dff245d6b703528d"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCompilerTotalTrace.lean",
+      "sourceContractSha256": "457ac00ee09641dba87afdefb47ecf261d7631853d493a0a5b8ed77f5355685c"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDCompilerTrace.lean",
+      "sourceContractSha256": "b9c7cab6810e4601f81f5d5ef7cf9056b52cab4b491977a40ac10905aeeccd4d"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDController.lean",
+      "sourceContractSha256": "aab83dd9e955d42a3a50a30925ff9c9f6c0f5582a85f159cd65a02011b22027c"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerBlocks.lean",
+      "sourceContractSha256": "5dd69869a5600d3d1f770c2d991e55db675921588a90b85b22c93bfc500d3f10"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerCanonicalTrace.lean",
+      "sourceContractSha256": "f9870572ff0919aca8f9fa6be2c82a6dfcb878315e8e6332ee8eb82b26587ea8"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerCompletionTrace.lean",
+      "sourceContractSha256": "5652e20ecda59302fd8292c75241631c4397316f9e4974fa5b4ec4af50c8e252"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerCountTrace.lean",
+      "sourceContractSha256": "18996fc03cc024b5832b2bd0a4ca347e70ba410d1f63da5ae9a647be033e8316"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerPolynomialBound.lean",
+      "sourceContractSha256": "cddbbce101828970e67f0572436841ec9dd39d11cf4cba6f393490a8a238b9b6"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerTotalBound.lean",
+      "sourceContractSha256": "e500435da84ccf7d9c79c7ddb7e5b40914954ed3b0aca638a5a1d8dcbb4ba376"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDControllerTotalTrace.lean",
+      "sourceContractSha256": "f40894541e4caf425eaa300ce4fd5cf9ce44f0c8fbd3895bc8b3a8d128f4b46b"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDEmitterPlan.lean",
+      "sourceContractSha256": "0a6ac3379b78c7c124cd31bf29edf0c199a10e4c538a50192496bf97beacb522"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFToNANDWorkspace.lean",
+      "sourceContractSha256": "7741a644049b6b25e05c69f80ae0ab73b1261e402fd144e8cd4ad996c2e45558"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFVerifier.lean",
+      "sourceContractSha256": "52b518ff48e0fc06419c644e1adc8cd6035910147f8e62f45ac7f1a831037552"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkCorrectness.lean",
+      "sourceContractSha256": "c6d45ac0941f061f120692b8bc49bf4ae0049a1ba283be0d2aa067d877e2c0f2"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkFrameCorrectness.lean",
+      "sourceContractSha256": "9f1458f6a17457bc8079c65aba81ca3e6746bdd1daa6b6a2a338dab2fa1b5943"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkInput.lean",
+      "sourceContractSha256": "01dfdc606bf64fb3b80579016411be305a00897676e0cadbea155f200da9406b"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkMachine.lean",
+      "sourceContractSha256": "78a21942018a46e01d9b6b495786f5a363de5a8ea266ebe1a8db16a43e580640"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkTransitions.lean",
+      "sourceContractSha256": "65457615d8271783750c273b5306feff7fba6a07a5b0f3504914d25706275275"
+    },
+    {
+      "file": "lean/PNP/Concrete/CNFWorkUniversalCorrectness.lean",
+      "sourceContractSha256": "863db26a1769a119011ea8bcbc2d358d52289fe00adaf4f165bcbcd06370fb4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/Complexity.lean",
+      "sourceContractSha256": "162706b848f18042c6108104d0782a30835e547e8280bfc46e84641e59c77ae5"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinFormulaSize.lean",
+      "sourceContractSha256": "cbdcbc877d68aca63cf90b1251af9da7e8e1da5e2ee3c4aebd2235fc6b4a435a"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinLayout.lean",
+      "sourceContractSha256": "95f759bde7f5d00022e7cef08c1860aa1fd30d798dc77552d5fdc79647e28fd1"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinLocalCNF.lean",
+      "sourceContractSha256": "79beca1b2c13c7d35221d8bbc38d5a7e8d77022f3db43db2a53c1ceddddc836e"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinRawTapeBridge.lean",
+      "sourceContractSha256": "7a70b6ad83806db9c57026130ab97519cfa4d3e47d7ddf9e009cd7ceb73e1730"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinTableau.lean",
+      "sourceContractSha256": "e126a58c8cb11278dc486e72e02e7478d64afa15515de0fe4d8e34230f8cd979"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinTableauCNF.lean",
+      "sourceContractSha256": "5ab067a515315bea3c7d99c363b63b9a1d85d71d73dc457a15e32024a2f534ec"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinTableauCNFSemantics.lean",
+      "sourceContractSha256": "571101596ad57d2b0b474b61e633d7cd9f50a7cdca7da2c5a4f9792b3a322f95"
+    },
+    {
+      "file": "lean/PNP/Concrete/CookLevinVerifierTableau.lean",
+      "sourceContractSha256": "f5778429fdcfa2308c718838039a6767e19856bc2801624663b2b862c09619d4"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDEncoding.lean",
+      "sourceContractSha256": "6ecbe02764d4f74240bc353d540e384b2a99ee9ac87fbb7e27ec6efe8af98db6"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDRawBuilder.lean",
+      "sourceContractSha256": "3991b34facfcb327b42477270fa398450d804eaaf605b70e3bf5a48702073ffe"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDReduction.lean",
+      "sourceContractSha256": "7224531a3bc32cc9abd02705abc68e4e02ea0c98b5cd639a6aa9abf253fd077c"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserFailureShapes.lean",
+      "sourceContractSha256": "36f1f09a4bb295dd15bd335100002e976ead98d899c40f417cc0d8cf95ceb57f"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserMachine.lean",
+      "sourceContractSha256": "e4def80fceb2354be25d00796d4b6cb267118245e4cb5c887c61d0d126282e44"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserSemantics.lean",
+      "sourceContractSha256": "fe5c2c12faa63aaeee587043edf0ccb932cc2e64ea0919312aa0f0714341b478"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserSpec.lean",
+      "sourceContractSha256": "b614ae3a05a406166dd0b1d11cb9de7138e08dbfbff0b7e61b7ac9781ae4111f"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserTotalTrace.lean",
+      "sourceContractSha256": "304f24657a148b32f6e20603e7263b28137e657466279a38029b73cb2431e1e8"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDSourceParserValidTrace.lean",
+      "sourceContractSha256": "781b1e6efbf6ac53f090f3a69f51b6786adf02c6acf9ee82d1f0907222ae73aa"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterBlockCompiler.lean",
+      "sourceContractSha256": "72e3016609a35f553c3b66563ac73c34f1bbb73dc855d44eba7e994e9885b545"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCapacity.lean",
+      "sourceContractSha256": "8ec56853b370cb75b85ea47fe0f857f5d94946f45aecb13a6e91b44f5eb18322"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCheckStack.lean",
+      "sourceContractSha256": "20511b83fcd2e4e01da9f10de58782d8e34407b1554bc6c97a62d7ed2f03b46d"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterController.lean",
+      "sourceContractSha256": "e7ac6d2f3b35ece86640c0211832a3a3b76d015a7868f380f2ee7458b2225621"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerCheckTrace.lean",
+      "sourceContractSha256": "9b00f5334a55ff605249f216bcb17b425b9c3935a9dcabc61a4efc106e45adf3"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerCompletionTrace.lean",
+      "sourceContractSha256": "d7cd38709d805904c6584a5cf7e6dd020ff8c911a9157adc5e4109383c0ac3b8"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerGateBound.lean",
+      "sourceContractSha256": "3b61dbc476163029924ba870c800e167d0da390a55e4f31256a82a99466b17a4"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerGateListTrace.lean",
+      "sourceContractSha256": "1bacd2a23107e5af3929a34b4f24c33573885c05647a3e31a9907e3e710401b8"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerGateTrace.lean",
+      "sourceContractSha256": "05e66d0da4f8941ea2dd33b17b025f1a54f932ef945915de9dbceaeb60a7f52f"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerHeaderBound.lean",
+      "sourceContractSha256": "0c020d1fef3401bc26014979a688ff54927978f2f498a019072d0107c02f93d0"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerHeaderTrace.lean",
+      "sourceContractSha256": "20fc3b88e9c6e21c271bb52b8d5c7d8c8e8c4b661e8b6f1cd9f2fba65f41c287"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerInitialTrace.lean",
+      "sourceContractSha256": "d6dd63db54df3b7ad3e7eec3531c6d58cd1550e876091e0ddc718580aaa513ae"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerNormalizationBound.lean",
+      "sourceContractSha256": "a7118aa104cd610f66752199f0a1a605884dd9972a5ce4357630a4704fdcfa38"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerNormalizationTrace.lean",
+      "sourceContractSha256": "53fb3225864da003023381f5901770739584ed968f0200780343555d605f22be"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerOutputBound.lean",
+      "sourceContractSha256": "5f5c443ad071f2e82421863e2344d0b1fdd2c09f084e587d5cd40966c2b604a5"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerOutputTrace.lean",
+      "sourceContractSha256": "fad31fa90376ade2db9bab14e720522b44cc3cb3659ccc691779727fd04c9b6a"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerPrefixBound.lean",
+      "sourceContractSha256": "089c70d22e8da79fa8c7a58d418a3df445421e78c3e238a1500abaaee0fb7b1f"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerPrefixTrace.lean",
+      "sourceContractSha256": "159c10558f5b061010988246c61bb49ed6e0509cc5d145c389d55bc685a06657"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerSourceTrace.lean",
+      "sourceContractSha256": "4651e84638ae5fe03c26d95069441c6a55b5ccebb742c4e436fd51cf0478a2d1"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterControllerTrace.lean",
+      "sourceContractSha256": "319d896b52ecb27711637535090bc0704508dbda557455b4fac135d49b783e76"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCursorAppender.lean",
+      "sourceContractSha256": "e1622ba5344c74438d19c0907b1156d4f8f3b7f6ae025043f699addfca140eb9"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCursorControl.lean",
+      "sourceContractSha256": "f397a1223ad37c9780d4d10292fb73151cea1d7b6f1617fe0da00dbbc3804dd9"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCursorFinalizer.lean",
+      "sourceContractSha256": "71e27433f608c83a1cbb6c594e80426d72568b5dae7bd3fab9778ed1b88fe6f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterCursorNatLoop.lean",
+      "sourceContractSha256": "811397747cdfec560fbc1871bae0a011130e6700e9c3faa86084fadd4c1737ac"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterFinalizer.lean",
+      "sourceContractSha256": "449828c75dee861875d24fb5d7083c8cde1ae149a72fed68c50c6bd9368812e7"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterGrammarScanner.lean",
+      "sourceContractSha256": "8e1489c92bd4f53a721752aaa05594b28e3c81bbc40db5b124ad31f9431a9362"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterLedger.lean",
+      "sourceContractSha256": "3efb4bbd89ed0fcc7a2a8b6148e6a6b68586bcde4b8a286b7e00dd0bff3cacf1"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterMachine.lean",
+      "sourceContractSha256": "1aace17f91ad70a8681358cff9e934cae26ba93d0b7e670b286988d1db383129"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterMarkedSourceReload.lean",
+      "sourceContractSha256": "32c2f3bd3c632eeb51d2bde0ac86b96ead55fd237cb187ae6c5d77fb1a46999e"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterNatLoop.lean",
+      "sourceContractSha256": "87b68b915462cf016e7391b76b1fc6a2a4ff557cb144c9f2010d530f5510112c"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterNavigator.lean",
+      "sourceContractSha256": "0bf626e053ee0e140a725c8ec97b8501ee1791a548b5afc8d77be7a7067b00e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterPlan.lean",
+      "sourceContractSha256": "a9b81c5287585c0f92de82b31bd81601ddb57ecc4760e43365df95ce1786cbde"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterPrimitiveCompiler.lean",
+      "sourceContractSha256": "b6791a8649f305042ff237b808c672ca7fdd460b25230bd004aed99ce7b89b3e"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterProgramSemantics.lean",
+      "sourceContractSha256": "106ed3e191c706ff032de09f3c6d4a0efe0d450d3e5a05adcd11968863dc1743"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntime.lean",
+      "sourceContractSha256": "3c6f8b07ad91d318877b11baf8a650fd0e7052c9669c86ef58a3adac5e539b58"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeCheckStack.lean",
+      "sourceContractSha256": "f938e3e467ed28f34815ea2cd7c06a7f54c92e6721b029b1b6bfbaeb54833517"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeLayout.lean",
+      "sourceContractSha256": "c1f6697c68b519eb36ac87e8e6eedc9a3404ca6cdeab9a68eadd10aa54e21882"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimePrimitives.lean",
+      "sourceContractSha256": "9ed7d23d520982b8f2d556b78388141820abbe2ed721e4ec7da032470721c729"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeProgram.lean",
+      "sourceContractSha256": "39d7a018e70f781c4a4d878dde39c3afacfad6fea6984e8cbcca56d4a2cd07a3"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeProgramBound.lean",
+      "sourceContractSha256": "2f53e24088668bbdc65cf3589622e90dcc825abdf396e51ecbd68dd7c299412c"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeProgramSafety.lean",
+      "sourceContractSha256": "bff1cf97989268025cd75ac9b4fec60e52c27b87ce3056440c5f74fe64ec1536"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterRuntimeSourceControl.lean",
+      "sourceContractSha256": "e6fea39bc68f704925051a127ccc67a9f9c299ba8e626c0b4435261f6a4a2aeb"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSchedule.lean",
+      "sourceContractSha256": "25a3beebc33f4b4a62dff89d194915de78abe0502db03bb66cfa4603bcaf5c99"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterScratchAddSlot.lean",
+      "sourceContractSha256": "05d1fe46d600873192ea9cb4acaac1d03ac7681a23eecb91d67f808e636e1949"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterScratchCompareSlot.lean",
+      "sourceContractSha256": "e2b3d31a5ea4852f606f5769b6a867c98ed57db415e0bd5b16edcc9c70fd27ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterScratchCompareSlotExact.lean",
+      "sourceContractSha256": "5188fee3cf97b62847be7d4ef6f01e1b3f78a6f8ec37b1d868ddfb2ca6670e4a"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterScratchIncrement.lean",
+      "sourceContractSha256": "3c8e1736dfe5d43cadbfd6970c0fceadf189986ec26a622abb18b143c283ec7f"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterScratchReset.lean",
+      "sourceContractSha256": "5f2be28634dedbb4d7803572f5bc84002aa7cc67cd9a477b93549ba4268131ac"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticCompletion.lean",
+      "sourceContractSha256": "bff6153fb43c23edf9300e223b5cb29529b689d794cc3c100420a3abed48df96"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticFinal.lean",
+      "sourceContractSha256": "fa3af9e3485b2c01da302331cb571c22c57dc28a97b39bc4846c47c65a39a46e"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticNormalization.lean",
+      "sourceContractSha256": "c13b2277199b9e945d98f8711e1c782cf84849bcf5cb96228d2b16df35360c46"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticOutput.lean",
+      "sourceContractSha256": "a4ed579cebb365e6ded6b5d36895a28463237b43cb7902479c891e5ed81a7702"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticPrefix.lean",
+      "sourceContractSha256": "91b06c354f85bdc574fcbeba2d42f76595414ab86e4b8e60764a24ce7b30d4f1"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticPrefixBridge.lean",
+      "sourceContractSha256": "bf84374bef0702b7b52f796ffe5ffae3293e05ebc042cd98e2dcc45706afc8e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSemanticSchedule.lean",
+      "sourceContractSha256": "5fb3d259ba93eb134c085e1a2fac46939ce5217e97170a2c428c9d968d792eb9"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSlotIncrement.lean",
+      "sourceContractSha256": "42e7e2d74c637cbc2ddc5a0f90964677b6d697d793c7395bcc65c026c0edc9b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/LockedNANDTargetEmitterSourceCapture.lean",
+      "sourceContractSha256": "8245c2b76147b68d70a8c1c76af98e4f4fc794900fe906396ffe9b7fd312400d"
+    },
+    {
+      "file": "lean/PNP/Concrete/Machine.lean",
+      "sourceContractSha256": "04e6bea9922a8a3854be5c43f53bda6a73182122fae8ea48faabc2d3658b3d24"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendBounds.lean",
+      "sourceContractSha256": "82d8917bf081adcced51f467155eae4206c8b7d0a98891c64516dd1a792f28fc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendCanonical.lean",
+      "sourceContractSha256": "7cd0b79e1da7853627b31f17d68a137eaed7ba5635701f644838ff9aef42621d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendClause.lean",
+      "sourceContractSha256": "a4c07319518435e5f9510f46d4e684df5ad0855fa2b1b0f069864454743b4e0a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendClosed.lean",
+      "sourceContractSha256": "ad501d6bd2639ba79219fa0457b79770c800b336f2af34663c24742bc610f2be"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendConstants.lean",
+      "sourceContractSha256": "a00199ec4d7883dfce60696192d9680b98e4c78cababd8bb74da9e973e85d243"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendData.lean",
+      "sourceContractSha256": "fd3dbd36215d7ae4220b6e7ebb65e43b24a96ac8ab07694d0b2654a0004002b1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendGate.lean",
+      "sourceContractSha256": "d19200a6be2d91cc97b028e5e5c4ee71fee865d7ab7962404e1ac75419290be7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendGateLoop.lean",
+      "sourceContractSha256": "5f3be93bd38804f8b8a3b8f37a323006a2a3189727eefcf1a4f45568bcc04037"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendGateRead.lean",
+      "sourceContractSha256": "6c09bc73d1843c0306b8048ea1c4e0f9c9b390bd73b45470052aff0988c801d6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendGateResult.lean",
+      "sourceContractSha256": "9907970625b9fcb68e99459241cee984468b70bf9290bb8a56509d7be139f8c9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendHeader.lean",
+      "sourceContractSha256": "e10d42a15888400adf53cb1e83038b47c4c1a95bb9a67e4203b2c3682fc27175"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendLiteral.lean",
+      "sourceContractSha256": "fa86a8d5cd6e758dfb530a61183b01e5781bb8e7850ec7de2cad5c36227e65bb"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendLoopResult.lean",
+      "sourceContractSha256": "74cbe3a377036982828dbc977ae498255d2d5bb7aa3ad1a32ad25db0162ac3b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendMarkers.lean",
+      "sourceContractSha256": "76430c451f92558130b1a74949399808ab118942f5f54d055d3f80171f8c750c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendOriginal.lean",
+      "sourceContractSha256": "d4c88294189b53ab099afb3545556d29770e48e1b336fdbeca58f3764e53a1f7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendOutput.lean",
+      "sourceContractSha256": "e7cf60be4091ced50d7645b0bc733d4f7da66b9e1bf438bc1b16183fea9b6757"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendOutputTail.lean",
+      "sourceContractSha256": "f3ecb969a9ae3fdcdb4429bb527884eb0b14524c731ce36205e61f46458858b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendPack.lean",
+      "sourceContractSha256": "5c9a2a044cd0efbb1b72a0114abf5a3f9a6fb5b06e7ed4dbbaa1f63d5ee7e882"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendPolynomial.lean",
+      "sourceContractSha256": "c7e56713c6aa71c954b47a7ad92181f0140eaedb9bb4e534c1d263032e2a9aca"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendProgram.lean",
+      "sourceContractSha256": "731fb2bc9ea018d10d1cb07804d3333724fefdcda8e3733f1005764c54024a7c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendRead.lean",
+      "sourceContractSha256": "429c9fab285454e4f60b69d573086fe2e32e440f181adb53478bff7bdd73abab"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendSource.lean",
+      "sourceContractSha256": "4d56ae1d7c5a1245983ebe06c2b0e395a025adbfdb4ba13d36c74cd3c14d904e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NANDFrontendUnary.lean",
+      "sourceContractSha256": "b7828d2a6dccdeb6d02fc9872894dc4c06a417c5dd062395d4396b1acb57aa90"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/CNFCompact.lean",
+      "sourceContractSha256": "ba9a6e2c48feb5f577129a00ed1c2c175043ceb3d26a27d074a82dfd7d9b2cfa"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/CNFCore.lean",
+      "sourceContractSha256": "57e7bd8dd3258cbe875f270cb4495a09e69b76c6204214227d4883dfefae297c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/CNFTransport.lean",
+      "sourceContractSha256": "f738d8d64e2855527a08b317ddb5c2821c3f9d60520d9071bca9c44774eb6225"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/CoefficientBridge.lean",
+      "sourceContractSha256": "9917746b49805a38e7d1240a91d42cb8c7da2997d2e4ce75b524a1c1ead3d5d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/FrontendBridge.lean",
+      "sourceContractSha256": "d07ed92e9caad0d55ea3124b462d59db6e04430662eef673b3b21921537156e3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MatchingCache.lean",
+      "sourceContractSha256": "a01abac7a70766a63ae82ee593b00c7a703bd79ed646e0723b27a1a60544991f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MatchingReach.lean",
+      "sourceContractSha256": "5a5e8ec72688c33b751b6fc5e56ccde01b50092dea349ddc9f6764e2e5b71d52"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MatchingSearch.lean",
+      "sourceContractSha256": "4e9bb0716ab22e3946d4a254c3459693fa15d45f2ce8e779beccc565033cd87c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MatchingUpdate.lean",
+      "sourceContractSha256": "1fdbcd16fb9104f0e486cd365de636087751c85f67e62297086df2148b499ce3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredAccess.lean",
+      "sourceContractSha256": "b75dc20413aa2fb74d2d7229d2ef66ac039b5708504905f0532972556391836f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredAssembly.lean",
+      "sourceContractSha256": "e3e1a1628c5f77e67d879536355c1b4889f72d3d8a9f036e2d1c55101f27b378"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredAugment.lean",
+      "sourceContractSha256": "a5b3f5e82203dd7d0d71dc5831bf0f78fd325f5bf358994fac44cdc835afa427"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredBits.lean",
+      "sourceContractSha256": "fc7ac8720f116439ac551e0277fde0aee09ea6a253193a2847b08b54607e2dd8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCache.lean",
+      "sourceContractSha256": "a3f969c040560d2052d28ab598b115aa363b40d6e7341fd69227cde8e476d484"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCandidate.lean",
+      "sourceContractSha256": "3ebb7691876b0a251e5b0727602804f0e1742778ded700089baf7f2d3c8a974e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredChoice.lean",
+      "sourceContractSha256": "544830e3dcaf580d03e8fb47d5e0e0534aa618bb7fe2593c9327d1d38e0e49f3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCollections.lean",
+      "sourceContractSha256": "ac95af603e713970d880409dc430aa5d8e58112958bddb82b83c7198f8c6e5aa"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCompanion.lean",
+      "sourceContractSha256": "ea6720a51a8275bc34a22da28a256c75eec3a8d6b51fe05f7923cc913bf257c7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCompilationExecution.lean",
+      "sourceContractSha256": "12c68209350916d2eeb8512e88ed8d2eafbf56706e97ee7a6159faf13c81fa9c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCompilationPlan.lean",
+      "sourceContractSha256": "857d25a700cba17e957d2ea86bf1b5ba33d97eef9198aa404e8ece3ea6da9249"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCut.lean",
+      "sourceContractSha256": "366889a174b8461326009ace5b60cc5e4ed940f7b87ab7dd166a0a47ba12fe87"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredCutRecovery.lean",
+      "sourceContractSha256": "e1bc492c3d5018f05305fa7581fe3df7cd277c0d5c22190b785dfefe5c226df4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredDecoder.lean",
+      "sourceContractSha256": "1ced5fed0943049e189d2f0641e74b0e319995d420c627481d1fb5401c30cdc5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredDecoderTokens.lean",
+      "sourceContractSha256": "3f5af52991606cd7b80cd14b3377e6a3c056a7713fc0d494df2ab654dbefd800"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredEncodedProducer.lean",
+      "sourceContractSha256": "1712bee4d5bce36d97bab7241541e702fc7fc8dcfe2c4ed9454f34f41191bd48"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredExplore.lean",
+      "sourceContractSha256": "071d0b5e66086442f7d7b2f2e13c4d3fcd143dc9f92eeef9edacc8fbc025b612"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredFrontendCost.lean",
+      "sourceContractSha256": "889a1cbf4e896394bf77ed5fea6260939c32066e72110dc51c6191770ffcc2a5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredMatching.lean",
+      "sourceContractSha256": "7b84ab123e6c3a2d78254554822b31d9d87857dafc496332ff25c737244f96d5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredMatchingLoop.lean",
+      "sourceContractSha256": "ebccf9fad01f6dd5fbe264381257eb6395c034f2cb4bf7f5efb8ff27295105f7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredMatchingPolynomial.lean",
+      "sourceContractSha256": "7ba2de64add88cdff9c2e8de20ef9b2aec218440532f6ca4bbe940de3f3dfebf"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredOperations.lean",
+      "sourceContractSha256": "d1632fdaf184c1134315e8879eb8965815e9468ac84a69fc37a0e0de2828f9de"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredParity.lean",
+      "sourceContractSha256": "cb23c1ed42d7b0874843f383fef302a6c61bd020849f8607a6fdbac10488acd7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredPrepared.lean",
+      "sourceContractSha256": "37664dc6fd2a2e75f6b791c27e6fe02a20c492e2a31845db8591536aa77ae3b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredPreparedPolynomial.lean",
+      "sourceContractSha256": "bab74c7264b1564d17a90f57a04eff32be951a93440cbb0872bff70a77e1ada1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredProducer.lean",
+      "sourceContractSha256": "0b348c162eee3df7cc57be6c350b310aec2a8fe9783aa0e7beafcb016bbec0a4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredProducerPolynomial.lean",
+      "sourceContractSha256": "83ed0f048deae3e780186e6d77fb3a7e8ef7e628543d3d1ec5fac3ee83792f66"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRawCompiler.lean",
+      "sourceContractSha256": "3ec918e6613701b643a63a3ab70b25226a9f68bf7bf5c90874263faf3d8a288c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRawFrontend.lean",
+      "sourceContractSha256": "bc37cf6f80f977c971efe765ef2c54da09316b9e0c7aae3e8e7447e9f9046f02"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredReach.lean",
+      "sourceContractSha256": "a792e3c4b7048c7b6ca290c29de793a9f9b596af675fa8dd099cd0d315015a21"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRecoveryPolynomial.lean",
+      "sourceContractSha256": "1cb74c54c68c413d4c91db24e0159824707a748c5194ec6f2d80406fdce939a6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRowEncoding.lean",
+      "sourceContractSha256": "4bb0c422d6160d7069aeed8f5ff86803afa10ab2409d449dbdfe1f97d88a3fa2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRows.lean",
+      "sourceContractSha256": "00680afeb76f7370b89a5f7838f3ab1851fd18b5fd1a0bba73453e02c939ab22"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRun.lean",
+      "sourceContractSha256": "bdc673a4dbe7cd4a0f43a47c5e37b2907b1b1af1b0d6b7a5f83619e1073280ba"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRunCorrectness.lean",
+      "sourceContractSha256": "e0c647e59b0947187d84615a6bda4ff80ff9025ef9aa58eaa94b0de6fcc02656"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredRunPolynomial.lean",
+      "sourceContractSha256": "fa8644da21de8e1b496797409e19844fbbad0f1ead65d7fdf0a2b882a375eec7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSearch.lean",
+      "sourceContractSha256": "bc33b6534b9b81bf6c97dacf24080415b95149a4a51dd6e337471ef1e0a294ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSelection.lean",
+      "sourceContractSha256": "cdfc4fe1cdd016c16e7d79ab320d427fcc7cafd654fcafd92597acc6580918ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSharedNormalizer.lean",
+      "sourceContractSha256": "55dc47a3a8622a283fb3f2558701f15ecb68e3c3af37a06a3538f61449a32f67"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSharedProducer.lean",
+      "sourceContractSha256": "53c6dd2a0414afd6f1e1c286edc0b8e720401bc110de4101a8bc96be0ada3440"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSourceCache.lean",
+      "sourceContractSha256": "f65062df4fe606815e82fdf7f1fe32de919a9bcfd6e1108dbaa977911d6b87af"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSourceCachePolynomial.lean",
+      "sourceContractSha256": "fc04111b4916124f2fbbd9d50c0aa9d1164b26261161b724482a48b05f6424a4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredSourceRecovery.lean",
+      "sourceContractSha256": "587e504c206f5fa83053234fb583db0d20737e54ad3089b389aed82efbb6d0d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredTerms.lean",
+      "sourceContractSha256": "5462ba34644536d6dfc74898c2c369e24d625fac46e6462f2ff2fe71aee50c71"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/MeasuredWitness.lean",
+      "sourceContractSha256": "ed50a551942187b3028fcbdd5be1c96e413e4cf9367d2dea8746ca9a9bd86dc6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeBasis.lean",
+      "sourceContractSha256": "fb3629de4c857f21d72952cb6c19932c2b9f32807b9eefdfbeca05bcd82ca34a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeBitCodec.lean",
+      "sourceContractSha256": "1da262145b43fa954cc593e37d76a958166e51571dc79ada6f978fc1bd904a0a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeCircuit.lean",
+      "sourceContractSha256": "20481836cd269925f2611fb87e936ba55f128f16800b902636bc174a202d5256"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeCoefficients.lean",
+      "sourceContractSha256": "5bdf2c7aa70938fe699dabc3beff170896fca8c997519a44b4b433cac0b5e1da"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeContext.lean",
+      "sourceContractSha256": "21e5a78bc5a653064e8e19c7c63f69473de85b5d8dc912ab7919b54a270f4274"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeDimensionCache.lean",
+      "sourceContractSha256": "40c58db2b9930039ee5b2a3629cf8705e2710503b76bfb54eae2774b66b82e97"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeEquations.lean",
+      "sourceContractSha256": "e097a8f6cc9afd2b6a95377d635b567dd2c4077b70007a8df2ed9e558caf8862"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeFrontend.lean",
+      "sourceContractSha256": "9aeafac73510c7181227a2c38a1874b46d9ccf7657f3c8213c6119a13b4830ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeFrontendBounds.lean",
+      "sourceContractSha256": "ddab06698decb22e61fdd086da628fe9c592d3c50761f13246e4a330edc59021"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeOutputPacket.lean",
+      "sourceContractSha256": "46346421cacb15615ba77c3f2b9d0c4fdaf8de4e4ba1fcfbf29967b770aada4e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativePreparedProducer.lean",
+      "sourceContractSha256": "e7c1cc9b2013cabf9687df1da61206856579e714663108e5bb39489a7485ed73"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSerializedNormalizer.lean",
+      "sourceContractSha256": "4fb0d7b747eb361ac6a825541435ec53c1d9ef5bb510ddb673ec1a3a49450c95"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSource.lean",
+      "sourceContractSha256": "c04931cc315dbdea6ce9d22544277ed3a7fb7518c47967e78397d605e26125de"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSourceCache.lean",
+      "sourceContractSha256": "f61e0e71b1a93af36603befc1cf9bdc73bc7d2e883e935c54606540bc6c95136"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSourceEquations.lean",
+      "sourceContractSha256": "26e49bef6c5e543d9d80ef786c8ecc0e869762d760065c58e4b31b87f5364fd5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSparseChecker.lean",
+      "sourceContractSha256": "6bf3c5842a5a26a5e34235c9b53b2b8ddbfbca978476226877fc45da1fccf48f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSparseSystem.lean",
+      "sourceContractSha256": "e5925c10bd1baddd29023a0a5344280f9eb6b9a6329c214228033299108dc225"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeSystemCodec.lean",
+      "sourceContractSha256": "2b06f32546584d657cad09acbd64bbcbb4ade5e6feea12001253ff7351256a4a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/NativeTseitin.lean",
+      "sourceContractSha256": "23f3f7cb2d65ddd556696e4d2729b12a4dd0c11a7be97c19a537d2bfe1283d4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/RecoveryBridge.lean",
+      "sourceContractSha256": "3fd7cdbe7d3391d084749c16a6b26bd26f3410b8de087bf4eaa6c1faa0211e61"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/SerializedMachineBridge.lean",
+      "sourceContractSha256": "7fbe7b13e1decc61721e5dfe938939541b7b1011d0735c5641b41b1d030b4a90"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/SourceAssemblyBridge.lean",
+      "sourceContractSha256": "76967452687b5b92e4189d7284822f6a104e9de7ea6f6e4231943ef2f85dc59e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/SourceCheckBridge.lean",
+      "sourceContractSha256": "f804c720dd49ec3755a1172ed475994bc58a4ac999ad023b46fc762b8c4600e4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/SourceRecoveryBridge.lean",
+      "sourceContractSha256": "a9be59c15cf8d89b61880a0b54b03e91f680d62f2c0c8dce95e66a498e2d6a14"
+    },
+    {
+      "file": "lean/PNP/Concrete/NativeNormalization/SystemAssemblyBridge.lean",
+      "sourceContractSha256": "9e3c375b32873614629e3920cdd04354fd4aa4d9c4332ebfdd2b5d7d30c29f32"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerAugmentationBounds.lean",
+      "sourceContractSha256": "c5ce92e8db376f6c7d745e1b31d954fee4c9b5056ce22b561a5dea00e75afa62"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerAugmentationPhase.lean",
+      "sourceContractSha256": "8efca7aa3d1b0e03800920a1af3fa6d0201211a2f93a26591350eab75026294e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerAugmentationPolynomial.lean",
+      "sourceContractSha256": "cd9735de2e1d47d24354859d41ca7716dfdd5d2940a513f27c31cb13c2c04c6c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchBody.lean",
+      "sourceContractSha256": "f036122f6992524a391ef8c08f02d6216da4400996cfc767a7aa623c017c036b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchCanonical.lean",
+      "sourceContractSha256": "4a590475aa8977acd8022123d9c2a291d74f7722c48d09d587c7ac7164f4b640"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchCanonicalBody.lean",
+      "sourceContractSha256": "3851feccf240b77c942e1d2686d1cf3aca4407247c771dd6403d06885384be8c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchHeaders.lean",
+      "sourceContractSha256": "ef84053400daa1e329065f99d57b147391c00989ddf78f255aa5da5f7d2de789"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchLoop.lean",
+      "sourceContractSha256": "4fbfa6439097803a7c7584a2e0a59b49a8c2a7c664a3871260e29b8f3f9ebe5c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchPacketCanonical.lean",
+      "sourceContractSha256": "6624e48438293516d986599ebbd2756aab87e8e87bb57713f9cd3fb2ffa39838"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchPacketLoader.lean",
+      "sourceContractSha256": "ba8f2a5f83f52698fbd87cc5861e864fb54a6e2593a8bbc77c0be1d877e559af"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchPacketSplit.lean",
+      "sourceContractSha256": "9e3cf78c5249cfc0f3d813963c225c6d172db7db4475c5859803b08a05145a09"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBatchPolynomial.lean",
+      "sourceContractSha256": "6346083d12ea08da9ff7c83ff391d634f8b7a8d8d9b9e8cd3d48f154615b1bd9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBitLookup.lean",
+      "sourceContractSha256": "2df19cf7efa855c3831bdf5466233ff87f4b4d0df68fd07bf66119578a7467e7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBlockExecution.lean",
+      "sourceContractSha256": "01f468db5b12371f1eac6f3801c232bd47c10de0c043633068b2ec08bc54007b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBlocks.lean",
+      "sourceContractSha256": "048ff31298558c770e2765ecd1712e0443065fd063369ffaac9db326f2c30a9c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerBooleanHead.lean",
+      "sourceContractSha256": "60cf2e2da4e7cdc50f71b478e447cdf01155066e2d7e50173375368bb309c64f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheCell.lean",
+      "sourceContractSha256": "1d6652f58c48bb6d444fd6a451da166d19c4e48886d13bcf4170a35a6850f1f5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheLiteralQuery.lean",
+      "sourceContractSha256": "f6433f7c7b81f6cf568d33721ba8c96191afd497cf5c277aeb1345d76703a3b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheLiteralScan.lean",
+      "sourceContractSha256": "7919adf96865ec7f780d3bf37bcf21465daa4080901acd4c74366d0f9b711e2b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheModeBody.lean",
+      "sourceContractSha256": "db58b1a9232d19b8306e16a3dba353866372073c8d2962030f74b0db178089de"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheModeCall.lean",
+      "sourceContractSha256": "e6df2295f495175baa4d43b606ff5af89094de024580b2763bbc6d33d3c25b8a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheModeLoop.lean",
+      "sourceContractSha256": "9a5edbc347b5157cadbb8d0af53f0ceecc227381cc717598b38cd186103b911b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheModeQuery.lean",
+      "sourceContractSha256": "f7bfe25cb273f7dedf641535ef9299f95ca5d16a92511680a2b11eb42a240f08"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheModeRead.lean",
+      "sourceContractSha256": "08f47b9d787c619632340796817f9beb04921c09e19f8442c453452afb7407f6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheOwnerFold.lean",
+      "sourceContractSha256": "146be54b1ba22ff0db9c4c1ab669d02b12c4e98f984ac9f93b79395ba47f2758"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheOwnerQuery.lean",
+      "sourceContractSha256": "f4a4d302b85617e438e2169702417446878ad2377ca067d2898da909e70372bf"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSigmaCall.lean",
+      "sourceContractSha256": "09f5b882c3ca0d15d62978b0d6ce8a399313bfbd951ade578d6cef505cb07475"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSigmaRead.lean",
+      "sourceContractSha256": "ec13e131fd8299c11bb6702436657708e8d56398f5621a3e44f9a15b6608f213"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSlotCall.lean",
+      "sourceContractSha256": "5e6a32a3fca00dbcce8f2686fbdb61190897880a7b824ebb9ee0210a65332477"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSlotChoose.lean",
+      "sourceContractSha256": "e9342c8e3269cbf48d1ec3fc605a933546ad1bb5c65f15f0306db35a4e0b62ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSlotProbe.lean",
+      "sourceContractSha256": "a9d47d97de0567d052daf688eefb57eb3b575e8966e9bcc467ac9a9410654e7d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCacheSlots.lean",
+      "sourceContractSha256": "d4add66c28c3227292ac8774c0c25616cc674fe6c32932422cb229923f393c3a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateBitsBody.lean",
+      "sourceContractSha256": "3e5178c59a1aa45a457317b6a2ae52a7b50a080cdb01c39f3b1d67f2b8dbb46c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateBitsCall.lean",
+      "sourceContractSha256": "4dec4968e757cc84b50cafff02e99c59d0a1b937de38f2df3f03d2699fb0d682"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateBitsLoop.lean",
+      "sourceContractSha256": "c2c46babebffe9f35f96cbcb1b21bb7a4cb0b635b535c154c4db7b156ebc8b4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateBody.lean",
+      "sourceContractSha256": "f1bfaf17c8b37ba231809e6f4165fd0c8ca93188340598d4dd61bdc926aee0d7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateCanonical.lean",
+      "sourceContractSha256": "14388b0e217294cf6dca4932c401a90c84036389d7183961118482f9deaca55c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateCanonicalBody.lean",
+      "sourceContractSha256": "3af21e5cffffb4052414d38001d542d6b1283fcdbffb96406a7e3df1ae837edc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateClause.lean",
+      "sourceContractSha256": "b53c5149e3edd14f36538b39ac79f220142bb96f7bb055c61acbcb441f6f4e6e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateLookup.lean",
+      "sourceContractSha256": "2bd08c3dbe4007bb40285cb502b2e3811868d31c1ab7d046fe4713fee539a802"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateLoop.lean",
+      "sourceContractSha256": "6f020a45b30a780bee9d62df8840568960f3ef6e1d8e15619af9c996421bfaac"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateOrder.lean",
+      "sourceContractSha256": "a5ab21b498c1dde9e51f1ecde2fbbf7911851ae2531e4fe4ceeb60cb68488d06"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidatePacketLoader.lean",
+      "sourceContractSha256": "46611ddda4436f0e0d20fc4515d85563bc81863d79f95ac37eba07da03c6ec91"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidatePacketOperations.lean",
+      "sourceContractSha256": "1be3241bcfec395ed0ed3fbdd9cd08035340d77ed83f3b4af1caecff38e088a7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidatePolynomial.lean",
+      "sourceContractSha256": "b78b2a1455e98d3a3c34c918c5d9a874f22d3ccf955520d492c6db255970a24d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCandidateTruth.lean",
+      "sourceContractSha256": "bea3865865973f9b9fac781029e3d28a9658652aea1242818d48753ea70a9a95"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseCanonical.lean",
+      "sourceContractSha256": "bf45d2ae8dfd8c1bef9a0caf77d11f99d0cf4e1e9289a5a9d45a8752a9e2b14c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseCount.lean",
+      "sourceContractSha256": "9c7dbcecf0e6537d9c36941db19283779d4728c25e1ac7797543b04198839d9b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseCountCanonical.lean",
+      "sourceContractSha256": "9c31302b6039f0e66d9756958942060544a243980ca054b0848765b98e803827"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseOperations.lean",
+      "sourceContractSha256": "771747fb1367f673b89fbab1049b5737f7618b8dd700b4a30027005d09513551"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClausePack.lean",
+      "sourceContractSha256": "868740c571874cf0e6d6da9a0125d8ae638685994571132fce241826eb8ef5b8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClausePolynomial.lean",
+      "sourceContractSha256": "fdab7de0d22541bd864692f7ecb5f6a31ada3d83b18b9cca6ca3fdc22a0fc5e2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseScan.lean",
+      "sourceContractSha256": "628599e5ad1989770838d52127dc550cfee1fa163161221a1d11344e1b377fde"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseSemantics.lean",
+      "sourceContractSha256": "6d3acc131f7adc1bbf505f0094e2f96dbf54faee9f0aab4ca4f15fc91c196cf8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerClauseTokens.lean",
+      "sourceContractSha256": "861548bf86aacb0a7cbf44e9d28cebbd16a909af9e20d83dc4a56833f4e2bc9c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientAnchor.lean",
+      "sourceContractSha256": "22410b066dc5af6ec20a519a18c4d1ad6ff08443eb440c85271f8e5b21de82dc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientAuxiliary.lean",
+      "sourceContractSha256": "9beb3b0ed8fa2a4c531bc4f3e57f243a0bd3294ef218a4ad00fd8c9cb0ed5fdf"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientBasicRows.lean",
+      "sourceContractSha256": "b0507673ea82fa3bcc4b5e93b7068420bb2e20c272cd582f7b557a7818061d5c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientCache.lean",
+      "sourceContractSha256": "7bb4357e223ad4e1e099a62a2978919509d9c4cd0a8482dd3928bfcde93f99e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientCompanion.lean",
+      "sourceContractSha256": "fbe7bbb37f5941274454451bc786b9102d1eaf0a0ef027b306cf83ccd148f9d7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientEligibility.lean",
+      "sourceContractSha256": "73cfc82bdfa6dc22b6ef1f65e76163bfa24ec834a0233ec868777267ab14c6b3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientEll.lean",
+      "sourceContractSha256": "f5574bf07c8cfd80abd5af75dd350fc588f84d9e2954536a955e1f395a4cbfbf"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientEntry.lean",
+      "sourceContractSha256": "6585a4066964f8e6e2d6e603a89d5673949bf5b50f0aa91e61d34418102a5a49"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientLiteral.lean",
+      "sourceContractSha256": "88fd2d1cd0e524409e663879216fbbfa40a4ca2ef80c1eb84e5b3d1fcf54e2da"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientPacket.lean",
+      "sourceContractSha256": "000be437d4c256c46cab3f2850ca866ed1fae42a5a19678b3cf2c3b77f7f9f75"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientRoutine.lean",
+      "sourceContractSha256": "625901d6bba58a72bd6c1dd324059c9d3af01bbcc6acb18a2b746d63480c5a36"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientRow.lean",
+      "sourceContractSha256": "7d8c1e0c8474a14a1cc594a7b7acc408d60e2dc92b2977b50f6f23cba8610e1b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientScratch.lean",
+      "sourceContractSha256": "12aa7720b14304d3a83c0b907e2846e9e0fd1a7dae43b7fe46ed26d22a10b07b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientState.lean",
+      "sourceContractSha256": "ef8f3dda9555e5e150b8f48376ea19638527ece5a706df9689d7fa8bcfcc6dca"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCoefficientTruth.lean",
+      "sourceContractSha256": "34e5143ccac4f3c86e9f8143278d34ead649790a6fa2a24c35a1816330f7a574"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactEmission.lean",
+      "sourceContractSha256": "fc4f6d1d814fe97e04bb62626723a9e53409e1f9ff0414bfe63f0be62e3b1814"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactLiteral.lean",
+      "sourceContractSha256": "08158b8a56a6e11cd5f3925922fea343f0f18d35a54ac0e0199e189745e30331"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactLookup.lean",
+      "sourceContractSha256": "1960ea78aa0352f781664aec40656f97dd768ceebfbe4b29a2475f68b711d03c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactLoop.lean",
+      "sourceContractSha256": "b3b74f7bbf624b82259734c9c855aa40fe079b484609bee88bec64bb39325141"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactRead.lean",
+      "sourceContractSha256": "cb8fe4014e6678f578f8678eef9d4572ad271c3185b8d0f1d14e3b4ab829ecc5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactSemantics.lean",
+      "sourceContractSha256": "2adaaf8fd537e6ad85ac3b25e5678c9553cb61dbfa54dc0824161a847048c021"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCompactStep.lean",
+      "sourceContractSha256": "0834213d6b2c044a46ccbe78067fe4776a712aa912aca40f9933977c0cf8fd38"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerConstructiveLists.lean",
+      "sourceContractSha256": "69ce372b7b01cf8ad783fb8c7becf0ef9dff311e8855dfc822eda203d2224adc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutBounds.lean",
+      "sourceContractSha256": "9c8e63fc7eda6b7cb4fc83092c667cfe88c4e3a9ea475242dac861d89e41edec"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutCalls.lean",
+      "sourceContractSha256": "934bbde8afba21346f6ad14c20b65d2dba7b4ee1a8d5d5aae043eef30f56e6d9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutPack.lean",
+      "sourceContractSha256": "a0665566f560b6b21d21ab7e20acd801deb61156a9c0640830f6b2a818c4ba16"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutPolynomial.lean",
+      "sourceContractSha256": "2c85a22f0b1e29dfdd562e56e744c988f4aba2c17733c0229648b05c10e0313c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutPrepared.lean",
+      "sourceContractSha256": "fe85ccdd4cb057c889570b9e80268e2e7fee788c91129bdaef76e804ce4336fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionCall.lean",
+      "sourceContractSha256": "ee9e09dc19b3f4041cfa56d18775501490045cf6960e32a15b58d0075e054c9a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionLoader.lean",
+      "sourceContractSha256": "a2f3c28c7b1ff915e7869ac825e870c7e6dfe403d364e4f9b6b8ae9de5515195"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionPolynomial.lean",
+      "sourceContractSha256": "f9920e4950210088a17ca20494f51c95f486c6346a8700fceda318a7a76f09e7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionRange.lean",
+      "sourceContractSha256": "3201ea87414c75386eaa624eef9c3bb4d09a68e86b23100bc607b2085c0ddefc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelections.lean",
+      "sourceContractSha256": "03a73bc2c3988055d04319cce4744732a2b2c6502f15392bcf2ca1b953a43a0b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionSemantics.lean",
+      "sourceContractSha256": "0610ec07a57619e2ccab04f0cd1d2b0ffda81d6b61c360b9567df9362803c54b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionState.lean",
+      "sourceContractSha256": "75fb110a9530f8b5e4c42eeeddfcb9fc79d7ef75fdd681c656a76d36c9ca2b77"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutSelectionStep.lean",
+      "sourceContractSha256": "2d221faf7c6bb4e01a882d98f635a4521d7b30f1ff80dd3437ff644e044009de"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutState.lean",
+      "sourceContractSha256": "ff81bd65a391af087b86dc78efd415de5e7d494f0fd016d0d138c9d0f36588d3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutTrace.lean",
+      "sourceContractSha256": "6945882d6a62b75889a586ec1a2e0e49903ed5a1c5c3ae086ca3304447390578"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerCutTracePolynomial.lean",
+      "sourceContractSha256": "1919f1175677f893275c685730340f049b6a9f77e1fa616065f9da7eee89dd10"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseAppend.lean",
+      "sourceContractSha256": "3092843526d6d578c60c40bfa8370e876aa83b1c4eeb69de35326934fed17661"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseBody.lean",
+      "sourceContractSha256": "e79f6a351272957e5717130f81174a3eb1bf391e7bd238f3f160bccd242a975e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseCall.lean",
+      "sourceContractSha256": "b3cca1983ddcc036718e576b9543e2f36bfc7d3755b257e7642da06d7c9cf9c4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseLoop.lean",
+      "sourceContractSha256": "bbfb88eb98a525a7edb0a47596c816ad6d435a4d92082ab344b6bb6a88a768f6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseQuery.lean",
+      "sourceContractSha256": "b06cbfe1f01837ca5af6965e8252684ea6f295b4697bebc2c065760c8e58e54a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseRead.lean",
+      "sourceContractSha256": "43e123fa7c5c5b1f5196164b1df5d1eaaa4c65016ab50f7c3e635d26b879e58d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerDenseSemantics.lean",
+      "sourceContractSha256": "415e4f91cacefd0e27c1b6f2c7bfa72fcbbbf1b3aa030436cf03898c958179ed"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerEdgeBranches.lean",
+      "sourceContractSha256": "877e7fa4666c0d7c340175a5633809c66d2500fdf3d5bdc6fc8ffade0953eb46"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerEdgeDispatch.lean",
+      "sourceContractSha256": "309f2d918a40a8d55388c0f10be498810793c11ba678b83dc3ad8c932a03cb65"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerEdgePolynomial.lean",
+      "sourceContractSha256": "fe71a059e3564332bd280f8488701b6e28ee2e28efeca45d23634672a3be91a4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerEligibility.lean",
+      "sourceContractSha256": "42dc2f000fc84c685cda684118831d728796769d6f3d35c3e323df8874c494ba"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerEligibilityPolynomial.lean",
+      "sourceContractSha256": "45d6b8e5cf7e4bef20daa5df45cc31daccf421468e66bab60094fb166365e558"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationAccept.lean",
+      "sourceContractSha256": "f0be6a932541d86689db22562b052bffb9d1493b0cd883b06c8eb5b2718d8052"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationBounds.lean",
+      "sourceContractSha256": "88b1084fb6bcdf6e09e83c3a22f068f652ad1e5aa28a07102512cc62888900c1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationBudget.lean",
+      "sourceContractSha256": "fd4222a8f6f7b83f4026d19529bd7b752569187c299b4435f07b21d4184d518b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationData.lean",
+      "sourceContractSha256": "734a0eb88484dfe3a4e670a746234ec88c4df1883bf88ea67aa4c02371a707c7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationInitialize.lean",
+      "sourceContractSha256": "d32f8dae1b53d0766bfc26396551c6c0801cfe40852777b745b26a435f4d7d5f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationLoader.lean",
+      "sourceContractSha256": "bc4129e0d979da801ec388362ed5fee9d6c64f7538e4bc7c0e85b053a7fbe310"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationPolynomial.lean",
+      "sourceContractSha256": "f39a5eade9db9bb57b31662931953b5d5a9169f4170d8e57865e6d54b9f50676"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationRuntime.lean",
+      "sourceContractSha256": "c39eb0e6e181f4bbc7b1006e3a87fcd8e0caf9f69bb47c19b7792cd12c7c0b86"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationScan.lean",
+      "sourceContractSha256": "992ade7cbacb27ec4c1f3eeacc42a84ea2931be16f9ba115f73d52d6041ed269"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationSemantics.lean",
+      "sourceContractSha256": "3fc6e7227ec8c48821702118c4f89da56c6f944999568536e8727375723da095"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationState.lean",
+      "sourceContractSha256": "854036509a6dfbff6aca7a5b5286941c22d676151c264d2ce08bb5bed057707d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationStep.lean",
+      "sourceContractSha256": "253949c7cab0ffc6b3298273211a5487b3055e86b084b4d85f86c40b0a83e952"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExplorationVertices.lean",
+      "sourceContractSha256": "610740ebdf843b90ab89f89baed795df37fbaae72d469e51bb0a47b6e8128d01"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractFinish.lean",
+      "sourceContractSha256": "d1d418d1737b565386efe2cf2addd9f7664660c1710f04fc0eb4f16e5be3a325"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractLoader.lean",
+      "sourceContractSha256": "24a6d17fb4823c6660ed3bb63e82296daf1662e75089a1aa26374b6ee8716eca"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractObservation.lean",
+      "sourceContractSha256": "a8ce14f585dd0dec52a2aa76c8b53db315545980ce4df1eb820e5e596f2ae874"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractPack.lean",
+      "sourceContractSha256": "9072876a5399eeafcb64e0f67b79253edb95b20d6707024fc32659e5821d5d68"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractPolynomial.lean",
+      "sourceContractSha256": "0c3454ef6fe53206de120b220adc0e96e20b7d80b881825962f6397121fe1612"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractQuery.lean",
+      "sourceContractSha256": "cb57e8d9cf9b6dadecc6cbf4dbc4f85f14f30ce79717783c3f2f56d5568b502a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractRange.lean",
+      "sourceContractSha256": "d1a005399066d235ad38f5584ea382504f7d45cae8483bb8cc8710df20c428b3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractRead.lean",
+      "sourceContractSha256": "65b14878adef33c1944a8cfadab8769a5497f34b9cde7b4345df159210d982fb"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractScan.lean",
+      "sourceContractSha256": "bc5e05fe9b9d93bbea790edd3c15dabce45453018e8c6f65dc05c8dc2bd26b19"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractSemantics.lean",
+      "sourceContractSha256": "38608cf5ffd5fe13d74edeb7f509778ace2f0b1be301c58e6c6da58dd60d5d70"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractStep.lean",
+      "sourceContractSha256": "63c288a4c7a7b61edb2fb11f9c3a70f51412c651f6358fe4643244e5b6784998"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerExtractView.lean",
+      "sourceContractSha256": "e7163bf3ad0147cdc9574d927bd76c3c99b272de66c802ddfef766d9ecdd35e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerFirstFailureBody.lean",
+      "sourceContractSha256": "8c0252253b550599d3d316886acc1d80f7f50ced08aa6ce0ffd050569707cf5f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerFirstFailureCall.lean",
+      "sourceContractSha256": "c7831e845e827ed0020735d05ab1a8ab910c54e0680b5eee07ddaf40b2d07dd8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerFirstFailureLoop.lean",
+      "sourceContractSha256": "89c949a493af3061de94449742805a01e3ef1c2e9ff5059a5cb5ed989e4c02da"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerFormulaOccurrence.lean",
+      "sourceContractSha256": "a608355a39405a5831308e82101d88f895b105e36c87871f20a77e4dd5458f8c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerForwardLoader.lean",
+      "sourceContractSha256": "0b20ec6d561446f350674f91925252ef13891b9f48949590e0ecccea750411a7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerForwardOperations.lean",
+      "sourceContractSha256": "b699569893c73b88813078f6730b7e79c23d067896a0da92c388ef154389ccde"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerForwardPolynomial.lean",
+      "sourceContractSha256": "9fdaa67e22019f2c45c0813353c2723005d5101962d121fb289edc2baf6bf768"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerGraphQuery.lean",
+      "sourceContractSha256": "398432d05b7946ce564b518c1f1cb8979d4a61bb479efb9b4df64fb2b39c2b3c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingAdvance.lean",
+      "sourceContractSha256": "8c45a7bf9212ada31adc43417f66b82e2f52f64290c117b675643b415d5ac31c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingCalls.lean",
+      "sourceContractSha256": "80a3c677fe0edaffde34acc85f55fe263093fba49a4da32caa69b8915ee80e8c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingExecution.lean",
+      "sourceContractSha256": "006a1f14e8c3da702997b8ff6f4d1b416a1155cf2170602fdb87b033a375aa96"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingInitialize.lean",
+      "sourceContractSha256": "6759f638e954190341d23da556d24ac4eed732eedc50537b2024dba62003d68e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingInvariant.lean",
+      "sourceContractSha256": "b48f9693c395d426ea6396ced092f8c9065a9972f3c83144794144eb197a99f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingLoop.lean",
+      "sourceContractSha256": "9a9d25726908a88573c25b945d874dc300ea742d5c3c89dd55a9fb2dcd369078"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingPackets.lean",
+      "sourceContractSha256": "698519712f094e81b78be8a60ca4d53917c6d93a2668fe0720eae8c57d485de7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingPolynomial.lean",
+      "sourceContractSha256": "d2aedb0138325a466d880027c431f433cfe0648a7b1dadd02aeebce2aa033537"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRange.lean",
+      "sourceContractSha256": "403ea04bb3f842ab607f55402b6d885a27321a7408ce78fb906db031a18146a5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRawInvariant.lean",
+      "sourceContractSha256": "a0f332cee8cd145c13e75f044ee2e774677a9fec4e66afc707c173955cd5fab9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRawRange.lean",
+      "sourceContractSha256": "3f231f102d7a91c32718f085c24e7a83e61a456a895826573dde34f4a0cce807"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRead.lean",
+      "sourceContractSha256": "63298f7c461d3e525194640c108c0348c165960df582513a4e0072bb411259bc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRelation.lean",
+      "sourceContractSha256": "c9bb50128c892d828f3268268af9f3490bd204b0fdcddcaa3a26b064e9546a92"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRoot.lean",
+      "sourceContractSha256": "e7b44cc788da324929d3d5194c175dbbe2f2126c5b80ba7ac32967b84bd887ae"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingRoundBounds.lean",
+      "sourceContractSha256": "8f47cbb5272c1e938d52042355d7f9ee61f0f114bc4c4e1d1359ec0e6dd5ce38"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingSemantics.lean",
+      "sourceContractSha256": "3c35518040d553551eabbc57895efca6f4ccbc9c26620f5910338c1a03c8ff23"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingSize.lean",
+      "sourceContractSha256": "2b83cfb8c3adb1066ff29284d076f16840578b67f2b93c5b2885597c08a6233e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingState.lean",
+      "sourceContractSha256": "2fad3d3007b7ef2e57eaf468a95aa2e3657b823b354b2a4b19968097c1cb93ec"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingStep.lean",
+      "sourceContractSha256": "0db4536e559c08899446233009b70f4f6f9749f73a6883b9a048dbc4b9dc5273"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingTable.lean",
+      "sourceContractSha256": "0af0b444004bd6bfb7729d2861a1267b0b276fe2c3593a031843e30575cee4fa"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingValueCanonical.lean",
+      "sourceContractSha256": "c1f6e752257a986556d19e5dcf4193425c899847639eb49fd51e8b974ca7d1cd"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingValueOperations.lean",
+      "sourceContractSha256": "ebfd5d7a52e76862436ff5719e5fb1d9fd954f6450caf204a9c34f4e467d9d67"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingValuePolynomial.lean",
+      "sourceContractSha256": "cd60dde8774b1828765d5910b94f67578d39e1ec053f1d5d75f1cf4bad822347"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMatchingValueScan.lean",
+      "sourceContractSha256": "33ea5ae92b9294533d53b71e1354bd4c01696a950a49a47727859c4af446d2c4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMemberCanonical.lean",
+      "sourceContractSha256": "17414ebb10eb4178de3e5e1b101d3f1e67f74aab65e7603f5e70866a5b25ef91"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMemberCompare.lean",
+      "sourceContractSha256": "0da9d199cd6053727a3d73a57e4a6321bf5c5d5202ceb06ec9217dd661a260ca"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMemberScan.lean",
+      "sourceContractSha256": "29c45058c5746108de4b457c311df25415d7e53e8ae36b6c2e4a61eeba825459"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerMemberStep.lean",
+      "sourceContractSha256": "ed522f9274d6636d5bd5369b77e86bcc345280a8cd4e2adc7ded0822dc85dbee"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerModeCacheDerive.lean",
+      "sourceContractSha256": "d69b21ab92d7ac6e472e78913139529f6c318d7f27b3eb498803cb0f25232b0f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerModeCachePolynomial.lean",
+      "sourceContractSha256": "e8565ced2d1788a069ee4ffa8c3c1c2a12eb8d22b22f634a5d000b2ea9e27a69"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerModeCacheState.lean",
+      "sourceContractSha256": "8adecda3c021259604d7243b0d60feefcca0a3801d3b281461a071ce7d9aaf61"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceCanonical.lean",
+      "sourceContractSha256": "d441de5a1f327638f834ed77d7f053d955ac501bb3bc1baffae1541f1a21594d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceHeader.lean",
+      "sourceContractSha256": "f74ffb29492b43c90dbea23f6e2bed88165826982d62968ff6148e4fcb5d3cbc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceOperations.lean",
+      "sourceContractSha256": "e6422de0f52f20056c9649690eecb7164ce45fcd310c52ddb24b25e4956df913"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrencePolynomial.lean",
+      "sourceContractSha256": "e950247713667f90b76b4513619e13b609bba20574185c7f4828db5da14ba472"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceScan.lean",
+      "sourceContractSha256": "0b2cfe48f6296abac83cbbad1b5d815d41eea592cdfb30f447b873e4a6073f92"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceSemantics.lean",
+      "sourceContractSha256": "c839d58fb8f16b1a937da4239164aa2161345c31eafc8def0892cf49f705c3b1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOccurrenceTokens.lean",
+      "sourceContractSha256": "6d91619e1207c4c7c011c3690bace30afad649eb573aece6e340648220ca5892"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOrdinalTest.lean",
+      "sourceContractSha256": "3c8875bee69c69dbf2713d5d9b128a469eca94705cf7aca54c9ba80d5bda7a0c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOriginalPolynomial.lean",
+      "sourceContractSha256": "7a7b03a1ae2a196152d6bf50bf12b7e45886c7ef65b924386edd3107b94210e0"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputDispatch.lean",
+      "sourceContractSha256": "bca7ab7d6246934b9d990be667d236658184d2296ad4e2d988d82536c2e124bf"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputLoader.lean",
+      "sourceContractSha256": "f477280131a89cd8c58a98eb5a6f5e85b7b8462a838b8814d23d7b1f70975442"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputLoaderCanonical.lean",
+      "sourceContractSha256": "deb5a7213fca0e6e4e557e06328616012a3f92d12f3651de252b95f870a7e1dd"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputPackets.lean",
+      "sourceContractSha256": "e29b48d84436f8fce76366c8e111bbfd588629e583e4ceecd1cdc54bc367b30d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputPostprocess.lean",
+      "sourceContractSha256": "29efb61d611ce1d12ef383eafdaa2d19f9a2c128dd26d1ce4c8781e82dd92a0d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputPostprocessPolynomial.lean",
+      "sourceContractSha256": "a175cb3909bb6e98891ec7b4e59ce4bccd1b7de0da0fdc930b10cf3744baf59d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOutputState.lean",
+      "sourceContractSha256": "40125ba254cef15fea6865a6d60cf770f82acd0338ed6e7d92c7d70e9cc3d0ba"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerCacheDerive.lean",
+      "sourceContractSha256": "d48d87f029b6a02db3aff7331ba2922c53eb9c4ff0ff574a15632bc7e8c6f43f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerCachePolynomial.lean",
+      "sourceContractSha256": "6e1e015194641aa7458b44049427b7f002ce790acde335b91e657ab31c8c8107"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerCanonical.lean",
+      "sourceContractSha256": "fab191cff966dd3d80b33544d2af469fc9d328dae852aa10a1ff43b50976b79e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerFrame.lean",
+      "sourceContractSha256": "13ce1300bdf8f407aa13ec2e87c1a312abd579b4891c730ab01ba4ae07424cd9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerOperations.lean",
+      "sourceContractSha256": "b2fcdef92356f504d86ab8ea5aefe4c0a972f87abdd3361a77cb8009e1b14018"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerOrder.lean",
+      "sourceContractSha256": "eaaa98c06d7b1b4846a004ffda5855d51342682b31e4db2bba6585b7194536ab"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerPolynomial.lean",
+      "sourceContractSha256": "48658f008a7114bc224259fc3748d31cae624ef36356c02920dd035bd3f9c7be"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerScan.lean",
+      "sourceContractSha256": "dfee4c9c771762ff6f84a8a26430f5670822c2e12b3c61cc915af11d250c447c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerSemantics.lean",
+      "sourceContractSha256": "784446ac30a08ba74b074075f887d7c7a0c597fb55aef5de37a7b088ab22d40c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerTokens.lean",
+      "sourceContractSha256": "4fc19dbc2fc36f6c3b8e7e6a06adaf0859ea572fc5f378e256d8336359a0d519"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerOwnerVertices.lean",
+      "sourceContractSha256": "4deeef88dddf816a71af2c0e852e3e9281644d7e7bc26e7d61ef16712d78c8b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPacketFrame.lean",
+      "sourceContractSha256": "e3d09e36a89b1c9edd117cfaa338b5af779fabf5b7277428268b960ef10f4159"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairCanonical.lean",
+      "sourceContractSha256": "7039f324d2dc5d28b8cb95ab3ffc526ad21eb1401efe5c2daa14e2d3ee8fd14f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairEmission.lean",
+      "sourceContractSha256": "684c5e5295b0d7079a0ae0b90d5f2c7d2694c263142c339d6b8241cc1e8beeec"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairPhase.lean",
+      "sourceContractSha256": "be95426a789c460a36334053b17acdcb11379d94bb1d479d463bdf1c312c1d7d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairPolynomial.lean",
+      "sourceContractSha256": "31c9d9f0c518f07b52170b8821bb145f4ce3a914cbc0a34533c20b3b9d0eec52"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairReader.lean",
+      "sourceContractSha256": "1b7c1df8eadf3b31bbed7d36f7f495232103dd811840f1f24b02e823ee51b9f5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairScan.lean",
+      "sourceContractSha256": "a1b9eee1fa43a793f9be0475c222fba79ba0cc5fec9b200f92f77560b3d85ff4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPairStep.lean",
+      "sourceContractSha256": "8ed1b59b7714f24fba541ee74c037fe883524b537b43491cca1e6b9301888d4e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentLoader.lean",
+      "sourceContractSha256": "ce62055dbb7c8e5566d9e8d8a456b126e3599c0a4a5b4c1a85f7a6c15c7cf1ab"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentNode.lean",
+      "sourceContractSha256": "c46773f6e8fe8a311d5b603b856f5c5c2a5cca6f0de2492f76eb4628d88953bc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentPhase.lean",
+      "sourceContractSha256": "a9e2a1ebd5794d60b9e53ba0ff4c63f4d245423603036b31c018ecdc1c79a5bd"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentPolynomial.lean",
+      "sourceContractSha256": "aa88c99c2a6353aabb2719acfa777c378def396192573df54109c66cc44e0e75"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentRange.lean",
+      "sourceContractSha256": "25bac89d8ee3f15eb6f0f3c7eae42ca112fbe42ef279f7e4fc6cbcbbfbcd8ce1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentRoot.lean",
+      "sourceContractSha256": "2a4ebb83b65270791bbead6abc9638a19f7b6ef30036f5607c9f4022cdc0d71c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentScan.lean",
+      "sourceContractSha256": "4dc28d10fdefac914968739f302069dcaad2db24353f416cf6729756cee7293f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentSemantics.lean",
+      "sourceContractSha256": "758869837fad05dcd3200f4a192ee544847904aed77f680a8091afb6d86d082f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentState.lean",
+      "sourceContractSha256": "7db95f236d1968a1cc8ef83c17c733e12005e3f23362bd315767de26b9966abb"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerParentStep.lean",
+      "sourceContractSha256": "3db486888e0720d9e46d81d660a1ea9ffab973a6506e87587834d9ab07fa21d6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathAppend.lean",
+      "sourceContractSha256": "998642342d548891261b6efa3b9ab3c3ef5522fd314489d10df9359e79496f12"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathCanonical.lean",
+      "sourceContractSha256": "463932cbc450185be65578096765254f36929a9878086ba855bfc8e491ffad64"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathCompare.lean",
+      "sourceContractSha256": "13cb584b0b6b5363918e0d456899d6445be87603f27646c2bcd1aa27499accfd"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathData.lean",
+      "sourceContractSha256": "94ca9deb35c430f46797f3b0402decfcb046af1271ed94e4fdb7f363e47e3e37"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathFollow.lean",
+      "sourceContractSha256": "f0207aa4c7b7e3deb28222ac153660707367d4c35e851cc96578ce9535eb8bf1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathLoader.lean",
+      "sourceContractSha256": "ab51ed53fe42e3188ccc984f5a4a3c5feba78704a62d247a556418ad37548a72"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathNode.lean",
+      "sourceContractSha256": "2e13195a49bdf5bae46b9b1d51db8871f131da19cf95e786be072a534c2e0772"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathPack.lean",
+      "sourceContractSha256": "9f54175d046876b95f26daec62d1f67d35683ebd7cd8347c051e8494664360a3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathPhase.lean",
+      "sourceContractSha256": "48df72858609974df99697a6fc1bac26f5c60ffa07d3cae44b2c51a00994f129"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathPolynomial.lean",
+      "sourceContractSha256": "93bef6b55b725caf25f0aea803256d306fd03193181d0e8cab5f85e44b22f972"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathScan.lean",
+      "sourceContractSha256": "fb12f95134d54fcc3984a4bae7a0b2f6e7d2e88b0f78faeaa83dd29c5ea76540"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathSemantics.lean",
+      "sourceContractSha256": "b318224f9fb9985e0b21e96ec49dc74da081f3da11ae08ebb74844c4ab08dd09"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPathStep.lean",
+      "sourceContractSha256": "46d2ad5a38b7483b85c4feebf5d980540a2c1c16de3c265f8ab9cee3ae140363"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPreparedDerive.lean",
+      "sourceContractSha256": "f1a7ab114ec5f85de64f040d6e045aaa3201cddba62b54501454d99cb670ea37"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPreparedPolynomial.lean",
+      "sourceContractSha256": "ebca4d3cdf5a328bddeeb09048730f1b64e004f07ff7214ce59235a4ab04db4a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerPreparedState.lean",
+      "sourceContractSha256": "215e4d285f1d8f97cf2837aef3971ab40f6062866d684bbc719f0f6aee8b4581"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRecoveryBit.lean",
+      "sourceContractSha256": "8c0e41543b24e1b63bf955cfd31714bafbc0307bc62497a7c71a6c7d784efe38"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRecoveryCall.lean",
+      "sourceContractSha256": "48e8117f347982135f3bdfa0a237e3e5753c95c3687534c34bb872ba9d797316"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRecoveryLoop.lean",
+      "sourceContractSha256": "5d18c4ceead594b4fed2fe6e5f0976daacd3d2948ff5aee4e52204012700a62e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRecoveryOwner.lean",
+      "sourceContractSha256": "c59e848535e4593b656df2a257db857634a1c5ea5dfbb78cfaae0d7d162d8eec"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRecoveryPreferred.lean",
+      "sourceContractSha256": "86360217a18635025491368d4807362415d40055fb5616d4231d9947c09b0754"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRegisterFrame.lean",
+      "sourceContractSha256": "55865cb56b64b99e03cdcebba4fd9fef34d31030b5d308ef25db1ba61d26aad6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRegisterReset.lean",
+      "sourceContractSha256": "fc97ea7e2a94a7fc1f08317ce801928f6905914da7251e79f9dc90392b4bedb2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRootKernel.lean",
+      "sourceContractSha256": "33d4f3fa1b3853e6eed6e1a28c2bbdad19b4dc8ee83b3d372d4b4e60ceff0ca6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerRootKinds.lean",
+      "sourceContractSha256": "d35e3da35ce3163a5156a04003b7a4c9c41ecbc6d8edc5aee5f520eb9edf6133"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchBounds.lean",
+      "sourceContractSha256": "e6c3df413c7488bb4c0ab32fc1dd7114c3793e8b0d05e44ecafbf5c54f63b30c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchCandidate.lean",
+      "sourceContractSha256": "6ae0b680e4d461a3cb78ca9a43933492b595bd807aae0c85033a7feddf5f6720"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchExecution.lean",
+      "sourceContractSha256": "77ea6db3ac7f28b2fe91401ee35f5038e26ef39e6e020f25a6cbab38382bbc24"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchOutput.lean",
+      "sourceContractSha256": "b6d637e27b4236b0795cb2c10569465dbc803413ad43a2746bfd2d1bd012cf7f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchPath.lean",
+      "sourceContractSha256": "5ea37cd39c69ed6ad57f266e79e581384c9f8449d6accd02be323301fb4a96f3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchPolynomial.lean",
+      "sourceContractSha256": "722a0d673c158cae252a40881d7c205d162c92437eea3155f50d47fd48adb74f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchState.lean",
+      "sourceContractSha256": "ae9ce91e1b4f2dad61555fc59fb0eb380f9916cb9706d6b89df872bcf1235e9e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSearchTrace.lean",
+      "sourceContractSha256": "5a411146a7cfabf6defd0396ead75e3c2c79d2c1b2442adbfe412788b8f41d55"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSeenData.lean",
+      "sourceContractSha256": "82ff0d6710b40a7d039004a700542d0ac5ed992dd429a607d17ebe3e61f909d0"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSeenEmission.lean",
+      "sourceContractSha256": "45703a90e9dc2e6e338aa8ec185d0ac5da552c9f9df13aa67b3b56338122b064"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSeenPhase.lean",
+      "sourceContractSha256": "625242c38ffe4874374f6d24facc99ec48feec583332c7fe97a0a61e22aa83d5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSeenScan.lean",
+      "sourceContractSha256": "8ad653cbcd113d738a3c03ad48d48857ed9d0a7ecbd8f1fee592bef03fa1af14"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSelectedFold.lean",
+      "sourceContractSha256": "3cb2c40cdeb877e05ff083e09a30b836591d4df1049f0798aa50e9e590887994"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSelectedFoldCall.lean",
+      "sourceContractSha256": "f10cc11ff8e5adda7b5f54ca94d8beab6277b25fb9a2d9d893891f2501214ee9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceAssemblyDispatch.lean",
+      "sourceContractSha256": "30be457af5b09a170b70457488a4913f518ce944d254103f5fafd05d61600613"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceAssemblyMigration.lean",
+      "sourceContractSha256": "147fdf91e15d199cd0b15497f0ad49a48c0c82cadb028d9376ae3f2814e14f42"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceAssemblyOverlay.lean",
+      "sourceContractSha256": "85cde2ca24bd37270e5cc1aa1654b29c6e4c5b3e8c823ba8ac8fc9de869ea71d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceAssemblyPolynomial.lean",
+      "sourceContractSha256": "2c4aa4be146e56aba325ee1bc613081804a4f42b936a6e6cf844f7e6abb22f41"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCacheDimensions.lean",
+      "sourceContractSha256": "5d4df771363a02f58800596dc3f51c98fc52031834975d65ebe951c92b12fdbc"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCachePolynomial.lean",
+      "sourceContractSha256": "58f36036c1d502f4d6416927d0b0c902d817b28b1d80ce6c64576aaa72cd1cf3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCacheSlots.lean",
+      "sourceContractSha256": "48134b433a00528e0f107b332d37a37a8d8a4d2c19bb6a37f26ff1b5c7a7c4ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCandidatePolynomial.lean",
+      "sourceContractSha256": "1ca574b708d9c1ef8b07da993e27eedddf2de4a704a29ceb464a6e79aa557ba6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCandidateState.lean",
+      "sourceContractSha256": "d011c72dd168437fbdf9d2f7ad9997273a5d276ec7b25cc77e766e585f666bb7"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCheckPolynomial.lean",
+      "sourceContractSha256": "79a0ffa6e9dfec81596f32576e3ff68ab05a1269f4a9fa3f18187ba874ffe322"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceCheckState.lean",
+      "sourceContractSha256": "9738064a7a47e2e550fe7487ec0bd9e52cdc5ec979238fda2dcff4f7d6bf1f53"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceRecoveryPolynomial.lean",
+      "sourceContractSha256": "41d09c6276eaac17258cbcd40ca1aa6d5ceed8fd3e0d7fe13fcf7195ae03002c"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSourceRecoveryState.lean",
+      "sourceContractSha256": "4899d623d487f770b6c4ee5d864dc49ce19336426d54ed22603ba410efd137b1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemAssembly.lean",
+      "sourceContractSha256": "469e052b381276bb61395400914cfcfe66c2394f14f17a6e5c963b2c306b0ac4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemAssemblyPrepend.lean",
+      "sourceContractSha256": "cb21cafcbee18443ecbea6351cbf84cf8ac8b6f5d7037abed638a2f0dd2c1e2e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemAssemblyState.lean",
+      "sourceContractSha256": "35ea89789f303945c89a4d31497a74c6090970210b4929b70013a7b84759ad0e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsA.lean",
+      "sourceContractSha256": "7854cf9862daf606a21ed99833bd1aa253cc0c565ea9534dda7ff3e1ddd3fadb"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsAppend.lean",
+      "sourceContractSha256": "fffbc05fcfc5cf56ac5bfd7a1686a88bf9545feb9772deaa330322b22feec33e"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsE.lean",
+      "sourceContractSha256": "529a8779a112405205c4b87694675d9fe8e849b0d00ca5e2505e05761efd6f6d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsList.lean",
+      "sourceContractSha256": "a841182f7c90cc327e2639dffcf18fc33e71cf63d13213bc61980ae313b5ecd6"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsLoop.lean",
+      "sourceContractSha256": "6e1a92803e335f0f16037d5182550b6e1b6238632f790b20fb36ba80812a32b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsPackets.lean",
+      "sourceContractSha256": "66a99b94fd9b1acf00d6bc137ef247317b248e1abd04d92a03566e729cc46de1"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsSemantics.lean",
+      "sourceContractSha256": "3c9ff6ea1d0091b25eabb29801e522ca2ddde6fb455ff6528d80e5cfd2904d00"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsState.lean",
+      "sourceContractSha256": "202aa060c4bc3678c3b0ad801b968254fe403d4ad6e3521aa92ed0b57dc52071"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerSystemRowsWholeSemantics.lean",
+      "sourceContractSha256": "78151a7c781803deec89e676e9e180485bf6f51c107fe8b8ba6612550eba325b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableCanonical.lean",
+      "sourceContractSha256": "f733ac864a46be4612cf5fb4c46778cf1e76148c67576e5e3714c09794eb2076"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableData.lean",
+      "sourceContractSha256": "868c8b23e4152e37cae837d1adebbc0ade714ac5fddba5e77158ff0032d0f6a8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableEmission.lean",
+      "sourceContractSha256": "4130295d7602b38082b185200ca39e00ec8eeea5b7a5bcb6e2fb8a4dc3c61ef5"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableGrowth.lean",
+      "sourceContractSha256": "6d0a7af8da25cd3c89364feeb5aca90352ac634da19d98eec671160868e1a77a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableInitialization.lean",
+      "sourceContractSha256": "34b196a3d9a334685e243af5ef59c9a4e43e047ab91493a0e241362018625252"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableInitializationCanonical.lean",
+      "sourceContractSha256": "8b7185b3dabf926d8571e39739c892058907c62bd2dc13d1bc0b48de22f1c376"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableInitializationPolynomial.lean",
+      "sourceContractSha256": "8eb31f6c8e1294f633571c517b6807548b3e50609862b8a5abd1d9120bf4abd4"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableOperations.lean",
+      "sourceContractSha256": "cc235ad5c4bd74f0ca6dc8002cc5fa771a055b4c3443af1a5b10b4553d9e453d"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTablePolynomial.lean",
+      "sourceContractSha256": "606e4ad486133483311a419ce2c7cf6e0235377efd413bf1966e3c9b2d699432"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableScan.lean",
+      "sourceContractSha256": "b0069a37c62d129bdf6c16cc50f75b30f8e89de325e3b0e3a9b392b71b312cb8"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableSemantics.lean",
+      "sourceContractSha256": "66990eb8a28061c7061cd81fa2f2f95d73e57006e592a16543c5ef63cda62791"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTableTokens.lean",
+      "sourceContractSha256": "a49191739ddb887e9075eabe371c6b593b6953f0f9e0889e81cd0d3b5bc78f59"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTraceCount.lean",
+      "sourceContractSha256": "438f8d75c9fc299441295b2d55a9e83e88c1df4104ca8abdfbcbd49cb883723a"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerTraceData.lean",
+      "sourceContractSha256": "8989b3dd844be407623628a9f47c0428410897a82a5ebc72ed92949ee40b750b"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerUnseenData.lean",
+      "sourceContractSha256": "a42a606b3e8ea41be83adaee0a014cfaddb6d4e5bc0c955c290d2ff58f1cc839"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexCanonical.lean",
+      "sourceContractSha256": "d3cfa40e9b0397b8fe018a0fbfd890717392f69f235d7b1d79102afdaada24de"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexEmission.lean",
+      "sourceContractSha256": "ef3bf99da9c6a600f940640301529444fd7d3c0434991e85eaf6056a8913eda3"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexEquality.lean",
+      "sourceContractSha256": "e1bdb46b39b5d2aa849073f2e0b39f67b9b16991229be4e5e23ee23f2528dba0"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexHeader.lean",
+      "sourceContractSha256": "f41c5f711ce79cae5152cbd76bcc49f22bcc51dd11378e2bb17c28a12e60cad2"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexPhase.lean",
+      "sourceContractSha256": "57f623bce3b6c7f3b25ec37db4e2eea41ff4a224589f43039565f391024f6980"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexPolynomial.lean",
+      "sourceContractSha256": "7705bf9e07f617acd7b7ff49ecbcc028f570f69cd049b3e82ac6d8799339ff4f"
+    },
+    {
+      "file": "lean/PNP/Concrete/NormalizerVertexRange.lean",
+      "sourceContractSha256": "834ef7004714548773c868f692191af9d1a4edfc27e9d0c8abbee9bb5d4c9eb8"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineCompiler.lean",
+      "sourceContractSha256": "e9afd9ee2de9e2f28fdf69c90476973603e030c20a5b5bed4f631857064d6126"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineInputFramer.lean",
+      "sourceContractSha256": "703ce60ce63546619ffcae32d5fb8f8a910cf2123291697fb200a803adc1337d"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineMachineSimulation.lean",
+      "sourceContractSha256": "4af23df6b88be61485746328536da22895a8983706d79d9660410a36c7c9eaec"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineOutputHandoff.lean",
+      "sourceContractSha256": "34d3a066f3e3777682296e5388c01523bbb56c33f8ed0f1adbdd4b9ade44e6ae"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelinePairedCompiler.lean",
+      "sourceContractSha256": "cac64beedebe3461d3a27771b5afa721ad1324266056e2c4fff6506ea5961125"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineRefinement.lean",
+      "sourceContractSha256": "73dd5e3812f331e4e3d47cad09d6a9d43376e6e049e42021c17d0a922165f716"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineSequentialCompiler.lean",
+      "sourceContractSha256": "01b9bc96ec28d58996e5c9a90c15e3b2018f489e7b04119a68412e0f5b6e6200"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineSequentialStateNamespace.lean",
+      "sourceContractSha256": "ccf29015503b61c26ff8efa63aaadfec4b10a66ba5a3cfec9151348ebeeead95"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineStageBridges.lean",
+      "sourceContractSha256": "96cdc2ecb5619eef2992530492f759a6630a10caa1ec95e37a9a4c84cf3cf39b"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineStateNamespace.lean",
+      "sourceContractSha256": "5b30df9a4219394cbb9c58367a255a477204e706d1fb2d437c4d2c3a1c4d0c06"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineTapeGeometry.lean",
+      "sourceContractSha256": "13ca9c13597336ff1a0851ec806dbba193aa5f67acda37c602d0001bac720f95"
+    },
+    {
+      "file": "lean/PNP/Concrete/PipelineTerminalBridge.lean",
+      "sourceContractSha256": "3b28c54f0d706a5a76400a54f59c31bc74ec253d5224c00e4d829767b398dae4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReducer.lean",
+      "sourceContractSha256": "68445334392f6cff90596a390cda8149ce50b5a1839cfbf2384350fdad4168c3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineBilinearSearch.lean",
+      "sourceContractSha256": "0055518e53c2dc70a93abc601072c5f504d763a1916594006e47aff03f4d2f08"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineSolutionMaps.lean",
+      "sourceContractSha256": "19832c9eeea1ea668a497f9872588edd61d5def5946164a15e2c36169f746d82"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearPullback.lean",
+      "sourceContractSha256": "cc98d1e4fbc0cff1646951fac2a3a139e1c194c719f4f4903cb9ef716cfdaf66"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearSelection.lean",
+      "sourceContractSha256": "82bc54cb1031441bb06a75473d5d05ec38750c737f71e041e839b9ef32315f2a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinaryLinearSolver.lean",
+      "sourceContractSha256": "f8e852f11e34950b6a1cd98e2ea12116df59f1744ee312632dd64f75e1257e09"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinarySolutionSpace.lean",
+      "sourceContractSha256": "b25f685a177ce6ca6492038ef6f1f0aacf4afa83c9b49f1812e9a060bda4a6d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BooleanCoefficients.lean",
+      "sourceContractSha256": "194d0ac551f472fd640de5e932e0a3347b78d1a3a6674624805ba766a8fc7263"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/CheckedContraction.lean",
+      "sourceContractSha256": "b76a9a83563f138b09a3dc0cc3a99cf09afce2c6cadfdeed6d6504b35ca5017c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/ConstrainedBilinear.lean",
+      "sourceContractSha256": "4ecb566d8635d7f7a7939c9bf518fcbb91982842d0e97bf64b3b2c100622628d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/FactoredContraction.lean",
+      "sourceContractSha256": "303834f570ef0ea128aba7267e7037f59672b67a9e5f27a3996fa495a2decad6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/KernelCoefficientMaps.lean",
+      "sourceContractSha256": "bd702a9925b93147d9e28d3b493e438ee69d0fc1bc1bcac9a5e342618114b5e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/LinearEquations.lean",
+      "sourceContractSha256": "4388923267ac798e918fb12419a2913a75c8263daecf33a49675362a6fbc0e40"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/NativeSourceCoordinates.lean",
+      "sourceContractSha256": "640de396b9abf0b8044794257263f3cbc634345498a90891fd29f7f49e43ee39"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/NativeSourceReduction.lean",
+      "sourceContractSha256": "e2491e65bd138ab27e30c70dfbcc88be5ae3e0be37ffdf0c07236925e1c6d822"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/NativeSourceSystem.lean",
+      "sourceContractSha256": "2e8a8dc2d9067278c0724c56cf4e0c0b11436328dcad82648077fd2688303636"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/PointSupport.lean",
+      "sourceContractSha256": "a88bdde9d5748003f18cd2cc8a325396fcca147c0d1af6d2642322ca00c4d7b0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityMatrix.lean",
+      "sourceContractSha256": "da8f1c6cd06888c3af20a10139c07835a29a738b9892c9f79fa6880d7a83ff47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffinePrelude.lean",
+      "sourceContractSha256": "d7f0125fcd1da14ea4b296b1067222d33660e42d65a7a7d38d82610d67a23f75"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedContract.lean",
+      "sourceContractSha256": "039c6e4c5a838e036a9e392b0aa5ea33e46522cd77e7391908413f33ddd443fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceConstructedStep.lean",
+      "sourceContractSha256": "677b3f58ef5c40fd59aff4630f59affe7453079737c2b7aaf7ed47d908e2406d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionChart.lean",
+      "sourceContractSha256": "a72412a3e01e9e43bb30684970d1f22ae6008d42a164d058d932a236444e8fdf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionSpace.lean",
+      "sourceContractSha256": "220c0557757c0e32b0ec97c27c2d26011ba0efa0d11100f5bdd2f0300effd1b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDualSpan.lean",
+      "sourceContractSha256": "a3b01f364314405a052f2bedea0ba2001f9b6d7904d3d26254c10bca38b3c2ed"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceGlobalSelector.lean",
+      "sourceContractSha256": "bf058800383ddc7021d2380df6184e73e461e158f19271e4088b2611ad1f59ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinearCoordinates.lean",
+      "sourceContractSha256": "76410bdb9f79507a1f3683d1895137ea259beee41f57e113ae7dc158e6f4ad47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixStorage.lean",
+      "sourceContractSha256": "ef39089f3543825e203341c6ec051a253d8bb3ba28cdfc666f66d273ef1cb312"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNormalMenu.lean",
+      "sourceContractSha256": "24cf63637c00944970bceb7797ebf0f8dbe9c39729f76d2949905bfaa864f666"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneClosure.lean",
+      "sourceContractSha256": "659138dede1c65d1c03f12b90bafbbe369af4e21d6f087cc84973ac43257490d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolar.lean",
+      "sourceContractSha256": "fcf57683251189aaa15d509332135672873f53dcacfdcd687d9cf48697ced98f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQueryChart.lean",
+      "sourceContractSha256": "d2797b8b34809b7a06af4cc0cc9df3db10efea3ef6a80a8b8b787f47f6e15f30"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneEquations.lean",
+      "sourceContractSha256": "188d8d68ad9a23f7ee5a01dea7ac9206e6fcc333386470dbae71a3231847a67b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneMatrices.lean",
+      "sourceContractSha256": "77ef28ab2b10caf8feed736797f144f5f801eae4859e54f9babccfdcb08f2a0d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneQuery.lean",
+      "sourceContractSha256": "f27a885a97862daf59214561ad92a1352215b11238d62a86d6477d737c141534"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoEquations.lean",
+      "sourceContractSha256": "9b6a3c1574cc3f6b62cbc9077e5050d23b5f70448e67a131ec80f0d005064f0b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoQuery.lean",
+      "sourceContractSha256": "6c28a8846971fae6e987d44643ab69e605133e4106fd5b5528a503cd96dfa77d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionChain.lean",
+      "sourceContractSha256": "a7ab5eceb6a91a1b7340d84c64ac433d5ca3d3318e9eb67cfab54c4bea45af88"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowDifference.lean",
+      "sourceContractSha256": "cef73fbf6e2acc7880c4815624eaaa0367459ef3756d55c6bf1ba05836a79b77"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarTail.lean",
+      "sourceContractSha256": "00b6dd2a4a1bca7ad67c988eabf0f6ce0309a787645e19dfa5c272c671fe5302"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectedScalar.lean",
+      "sourceContractSha256": "334e6bfdeba5a5044d616c88b2e9c4312fd0c7950cb810dda7c3ed582d73561d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessBalance.lean",
+      "sourceContractSha256": "d5debcb613ead213ac25a73a704381006b0480f8b64f362a07ac780a7aeba0ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/SerializedNormalizer.lean",
+      "sourceContractSha256": "a912d0980bc27e98dab089f61963715e8a9eab707e637aaaceea69c57684e56d"
+    },
+    {
+      "file": "lean/PNP/Concrete/TapeBlankEquivalence.lean",
+      "sourceContractSha256": "51de3598a323a96025d0eb1f23ad13c11ed8edec39db651a2a44023cc24a2a94"
+    },
+    {
+      "file": "lean/PNP/Concrete/TapeHandoff.lean",
+      "sourceContractSha256": "f79b21273e05ec4c6b15d968b6249771a6f7a91f4e4fb9b0df0232cfa0ac8ed9"
+    },
+    {
+      "file": "lean/PNP/Concrete/TerminalOutputPacker.lean",
+      "sourceContractSha256": "7af6ddbe4e67f7cfa05565f79c50e6a3d70e74fb69fcb8c918df88897fcd4a71"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkInput.lean",
+      "sourceContractSha256": "91fe9a56022feca71c3f856876ac9bdd64a67006364c9a2262e7cc35bf0cf91e"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachine.lean",
+      "sourceContractSha256": "2bc5828e67bbefa520497b0d17b33a470983d46032eb2e9acf364269380d20be"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachineBlankEquivalence.lean",
+      "sourceContractSha256": "6889838f0a69e37e9d9dda214ea1a0ef1ef11116bba2e5f901cccdbd540ade98"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachineChain.lean",
+      "sourceContractSha256": "45172a154cbf4251064e17f8635a4c9345792ca5c70d517a49160e443836e57f"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachineProgramGraph.lean",
+      "sourceContractSha256": "4e862a21f04839d05bae65fef8cfd14ede65e3eac13a417a5d482555ee2e22a0"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachineProgramPath.lean",
+      "sourceContractSha256": "0f684db9770a48bdc7522e2ed7e0858527562757a3c29ddde149f823bb5868e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/WorkMachineProgramPathBlankEquivalence.lean",
+      "sourceContractSha256": "671fdde612f210141f656e43d74a9674fa287feab605fb273587b5a56c69f203"
+    },
+    {
+      "file": "lean/PNP/DirectWireBaseline.lean",
+      "sourceContractSha256": "4f5aaec3fbbb9d8084902a0885770dadb518ae35bf9ed55f8ec688b11a9125e4"
+    },
+    {
+      "file": "lean/PNP/LockedNANDBaseline.lean",
+      "sourceContractSha256": "764ec83992b72dbf523a8f256b78d8d2bb45f441da36a5934b524337a85ec3e6"
+    },
+    {
+      "file": "lean/PNP/LockedNANDCarrierTrace.lean",
+      "sourceContractSha256": "0ceef226b344c3721aa7a7810682c3770e39f06673344c0933086f0c6fddad19"
+    },
+    {
+      "file": "lean/PNP/LockedNANDDirect.lean",
+      "sourceContractSha256": "424008c69028de9d5f3cb1daa1387d910bf9cd70d71f46002b8d9fb8c0fd9e3d"
+    },
+    {
+      "file": "lean/PNP/LockedNANDGlobalCandidates.lean",
+      "sourceContractSha256": "e84d012810795b74d105ce20fc4a92fcf5d904e6cf593fe59554784a87be4c85"
+    },
+    {
+      "file": "lean/PNP/LockedNANDGlobalSemanticThreshold.lean",
+      "sourceContractSha256": "ecdfedcc79833d3bd0a2bd6131905ab6d31baffe5f8c9c8d30cba413080e45f8"
+    },
+    {
+      "file": "lean/PNP/LockedNANDGlobalUnsatisfiableFinalZero.lean",
+      "sourceContractSha256": "71332e6a1d2a4acd46580b3ee341f99f39d00fdcc37745a6b24b2cab1749b036"
+    },
+    {
+      "file": "lean/PNP/LockedNANDLocalBaseline.lean",
+      "sourceContractSha256": "cd7ee74ce2938ae7ccf8e113bdbac0295da129c216a45871d301ca12ec819e05"
+    },
+    {
+      "file": "lean/PNP/LockedNANDMacros.lean",
+      "sourceContractSha256": "76dd6e10de711a1ac3d74deca899d69def2b22edc78a28d1b536c1f40007aab0"
+    },
+    {
+      "file": "lean/PNP/LockedNANDPrefix.lean",
+      "sourceContractSha256": "057178b5e24c9db87e9efccc514acaa5400c5ca94346f0ad199e3a414bdd7d49"
+    },
+    {
+      "file": "lean/PNP/LockedNANDThresholdBoundary.lean",
+      "sourceContractSha256": "9ba54bd623f481bee1e87fb999cce2cb80ee2121b1a55f623b49c12acf79ae7c"
+    },
+    {
+      "file": "lean/PNP/NANDComposition.lean",
+      "sourceContractSha256": "bbfee841bb398e6df0ff3b0ab86f5576afc6ad7d8be18ca5cbeb3cff609de1c2"
+    },
+    {
+      "file": "lean/PNP/NANDEnumerator.lean",
+      "sourceContractSha256": "3e0bc443254c19b944d4a12ae84e9dca45a6bcf7e7eea58ca2c9d7434aa6f2e6"
+    },
+    {
+      "file": "lean/PNP/NANDMinimum.lean",
+      "sourceContractSha256": "eea53ec16e6701a4f7a1ee889cf9b8e67428be7ec793037e77125c2d9fd7ace6"
+    },
+    {
+      "file": "lean/PNP/NANDSemantics.lean",
+      "sourceContractSha256": "322b21993aa71bbddd7613aa2c473dfc02327468c2727003fb3eb067bb965a3a"
+    },
+    {
+      "file": "lean/PNP/NANDSlack.lean",
+      "sourceContractSha256": "01ae7aaaaaaafdb5b922cd55e16215587a7228c1d3f826649eb11eafd58d7a57"
+    },
+    {
+      "file": "lean/PNP/NANDTruthTable.lean",
+      "sourceContractSha256": "ea71a3a2ca0f5b3248f65d97abab71f7f96320179f25f494a3d7cb813ef83d44"
+    }
+  ]
+}

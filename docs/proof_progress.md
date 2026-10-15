@@ -2,19 +2,19 @@
 
 The project reports two independent measurements. They answer different questions and must never be combined.
 
-Formal artefact coverage: 257 of 259 current scoped publication rows earned.
+Formal artefact coverage: 258 of 260 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
-At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-13-281`, 257 of 259 current scoped rows are earned, or 99.2 percent of that evidence ledger.
+At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282`, 258 of 260 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical difficulty, and the denominator can grow when dependencies are discovered or decomposed.
 
-M281 closes the complete source-to-serialized-residual construction edge: one input-derived finite machine has exact packet semantics and encoded-input polynomial runtime and output bounds. It does not discover a certificate or decide arbitrary residual systems, and does not reconstruct manuscript semantic minimization. The fixed reduction track was already earned; normalizer bounds do not retire the complete PCCMin runtime obligation. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
-See the [complete construction and its limits](./lean_serialized_normalizer.md).
+M282 closes the connection from the actual complete normalized source system to a model-preserving repeated residual reduction and checked encoded certificate recovery. Its original-input verdict is sound but partial: positive-dimensional stopped cores remain unknown, and stopping proves only exhaustion of the computed selector menu. The linear number-of-steps bound is not a complete encoded-runtime theorem. Useful all-input progress, whole-contraction-class coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
+See the [partial residual reduction and its limits](./lean_residual_reducer.md).
 
 ## Risk-weighted proof completion estimate
 

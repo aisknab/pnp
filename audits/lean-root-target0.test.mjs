@@ -333,6 +333,7 @@ const EXPECTED_LEAN_TRIGGER_PATHS0 = Object.freeze([
   "canonical_proof_report.pdf",
   "audits/lean-*.test.mjs",
   "audits/fixtures/serialized-normalizer-source-contract0.json",
+  "audits/fixtures/residual-reducer-source-contract0.json",
   "audits/formal-publication0.test.mjs",
   "docs/lean_*.md",
   "docs/plans/*.md",

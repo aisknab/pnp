@@ -5,9 +5,25 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '7d2c0b4bb64e856ca9e11ac46f0e7bc97668e96fe10cd77e67a273734a7ce15b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ac4ecd0d3af92d766613aef65042fe3e85a2339180599e38b2763d624904a364';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.Concrete.ResidualReducer.decision_false_sound",
+  "PNP.Concrete.ResidualReducer.decision_packet",
+  "PNP.Concrete.ResidualReducer.decision_true_sound",
+  "PNP.Concrete.ResidualReducer.decision_unknown",
+  "PNP.Concrete.ResidualReducer.dimension_accounting",
+  "PNP.Concrete.ResidualReducer.model_preservation",
+  "PNP.Concrete.ResidualReducer.parameter_roundtrip",
+  "PNP.Concrete.ResidualReducer.recover_certificate",
+  "PNP.Concrete.ResidualReducer.residual_source_iff",
+  "PNP.Concrete.ResidualReducer.result_rows",
+  "PNP.Concrete.ResidualReducer.source_family_iff",
+  "PNP.Concrete.ResidualReducer.source_family_rows",
+  "PNP.Concrete.ResidualReducer.source_model_roundtrip",
+  "PNP.Concrete.ResidualReducer.step_bound",
+  "PNP.Concrete.ResidualReducer.terminal",
+  "PNP.Concrete.ResidualReducer.trace_linked",
   "PNP.Concrete.SerializedNormalizer.certificate_bound",
   "PNP.Concrete.SerializedNormalizer.decode_output",
   "PNP.Concrete.SerializedNormalizer.halts",
@@ -4848,7 +4864,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-13-281') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-15-282') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'
