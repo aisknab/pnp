@@ -20,6 +20,14 @@ const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
 
+// Retain one privately owned analysis, never a status verdict. Every call still
+// reads both inventory mirrors, the map and the complete live Lean source closure.
+// Exact input bytes and the freshly computed closure identify reusable evidence;
+// neither a pathname nor file metadata can authorize a hit. Oversized inputs use
+// the ordinary uncached path.
+const PUBLICATION_ANALYSIS_CACHE_MAX_BYTES0 = 128 * 1024 * 1024;
+let publicationAnalysisSnapshot0 = null;
+
 export const FORMAL_RECONSTRUCTION_BLOCKERS0 = Object.freeze([
   'Formal.ConcreteSAT',
   'Formal.ResidualBandMinimizer',
@@ -4552,22 +4560,38 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       ));
     }
     const publicationMapBytes = await readFile(path.join(root, FORMAL_PUBLICATION_MAP_PATH0));
-    const inventory = JSON.parse(inventoryBytes.toString('utf8'));
-    const publicationMap = JSON.parse(publicationMapBytes.toString('utf8'));
+    const previous = publicationAnalysisSnapshot0;
+    const sameInventory = previous !== null && previous.inventoryBytes.equals(inventoryBytes);
+    const inventory = sameInventory
+      ? previous.inventory
+      : JSON.parse(inventoryBytes.toString('utf8'));
     const sourceClosureSha256 = await ComputeLeanSourceClosureSha2560(root, inventory);
-    const publication = DeriveFormalPublication0(
-      inventory,
-      publicationMap,
-      inventoryBytes,
-      sourceClosureSha256,
-    );
-    const publicationExpected = publicationExpected0(
-      publication,
-      inventory,
-      publicationMap,
-      sha2560(publicationMapBytes),
-      sourceClosureSha256,
-    );
+    let derivedJson;
+    if (sameInventory
+        && previous.publicationMapBytes.equals(publicationMapBytes)
+        && previous.sourceClosureSha256 === sourceClosureSha256) {
+      derivedJson = previous.derivedJson;
+    } else {
+      const publicationMap = JSON.parse(publicationMapBytes.toString('utf8'));
+      const publication = DeriveFormalPublication0(
+        inventory, publicationMap, inventoryBytes, sourceClosureSha256,
+      );
+      const publicationExpected = publicationExpected0(
+        publication, inventory, publicationMap, sha2560(publicationMapBytes),
+        sourceClosureSha256,
+      );
+      derivedJson = JSON.stringify({ publication, publicationExpected });
+      const retainedBytes = inventoryBytes.length + publicationMapBytes.length
+        + Buffer.byteLength(derivedJson, 'utf8');
+      publicationAnalysisSnapshot0 = retainedBytes <= PUBLICATION_ANALYSIS_CACHE_MAX_BYTES0
+        ? Object.freeze({
+          inventoryBytes, publicationMapBytes, inventory, sourceClosureSha256, derivedJson,
+        })
+        : null;
+    }
+    // Detach every result from the cached inventory, including on the first
+    // call. Diagnostic witnesses must never expose mutable cached objects.
+    const { publication, publicationExpected } = JSON.parse(derivedJson);
     const statusRead = await readJson0({
       root,
       filePath: options.statusPath ?? STATUS_PATH,
