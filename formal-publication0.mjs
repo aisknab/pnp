@@ -5,9 +5,19 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = 'ac4ecd0d3af92d766613aef65042fe3e85a2339180599e38b2763d624904a364';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '919a024f773b8fc1bf21aa3cf607fa60289a5c478941af5eae0537194fead93b';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu",
+  "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+  "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+  "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+  "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+  "PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero",
+  "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+  "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+  "PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient",
+  "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic",
   "PNP.Concrete.ResidualReducer.decision_false_sound",
   "PNP.Concrete.ResidualReducer.decision_packet",
   "PNP.Concrete.ResidualReducer.decision_true_sound",
@@ -4864,7 +4874,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-15-282') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-16-283') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

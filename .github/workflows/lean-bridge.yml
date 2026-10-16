@@ -96,126 +96,69 @@ jobs:
           grep -F 'Lake version 5.0.0-src+68218e8 (Lean version 4.31.0)' /tmp/lake-version.txt
       - name: Audit explicit root and assumption inventory
         run: node --test --test-concurrency=2 audits/lean-root-target0.test.mjs audits/lean-concrete-machine0.test.mjs audits/lean-concrete-tape-handoff0.test.mjs audits/lean-concrete-tape-blank-equivalence0.test.mjs audits/lean-concrete-pipeline-tape-geometry0.test.mjs audits/lean-concrete-pipeline-input-framer0.test.mjs audits/lean-concrete-pipeline-output-handoff0.test.mjs audits/lean-concrete-pipeline-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-state-namespace0.test.mjs audits/lean-concrete-pipeline-sequential-compiler0.test.mjs audits/lean-concrete-pipeline-stage-bridges0.test.mjs audits/lean-concrete-terminal-output-packer0.test.mjs audits/lean-concrete-pipeline-terminal-bridge0.test.mjs audits/lean-concrete-pipeline-paired-compiler0.test.mjs audits/lean-concrete-pipeline-compiler0.test.mjs audits/lean-concrete-pipeline-machine-simulation0.test.mjs audits/lean-concrete-complexity0.test.mjs audits/lean-concrete-pipeline-refinement0.test.mjs audits/lean-concrete-cnf0.test.mjs audits/lean-concrete-cook-levin-layout0.test.mjs audits/lean-concrete-cook-levin-tableau0.test.mjs audits/lean-nand-semantics0.test.mjs audits/lean-nand-enumerator0.test.mjs audits/lean-nand-reference-minimum0.test.mjs audits/lean-locked-nand-baseline0.test.mjs audits/lean-locked-nand-threshold-boundary0.test.mjs audits/lean-residual-routes0.test.mjs audits/lean-theorem-inventory0.test.mjs audits/formal-publication0.test.mjs
-      - name: Audit uniform bounded verifier-tableau source
-        run: node --test audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs
-      - name: Audit finite local Cook-Levin CNF compiler source
-        run: node --test audits/lean-concrete-cook-levin-local-cnf0.test.mjs
-      - name: Audit finite whole-tableau Cook-Levin CNF source
-        run: node --test audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs
-      - name: Audit finite whole-tableau Cook-Levin CNF semantics
-        run: node --test audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs
-      - name: Audit finite Cook-Levin raw-tape bridge
-        run: node --test audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs
-      - name: Audit external Cook-Levin formula-size bound
-        run: node --test audits/lean-concrete-cook-levin-formula-size0.test.mjs
-      - name: Audit rectangular Cook-Levin formula schedule
-        run: node --test audits/lean-concrete-cook-levin-formula-schedule0.test.mjs
-      - name: Audit direct Cook-Levin formula cursor
-        run: node --test audits/lean-concrete-cook-levin-formula-cursor0.test.mjs
-      - name: Audit literal Cook-Levin builder input-length tally
-        run: node --test audits/lean-concrete-cook-levin-builder-input-length0.test.mjs
-      - name: Audit executable Cook-Levin builder input prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs
-      - name: Audit standalone Cook-Levin builder token appender
-        run: node --test audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs
-      - name: Audit composed Cook-Levin builder first-token prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs
-      - name: Audit composed Cook-Levin complete width header
-        run: node --test audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs
-      - name: Audit composed Cook-Levin body-start prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs
-      - name: Audit composed Cook-Levin first-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs
-      - name: Audit composed Cook-Levin first-clause prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs
-      - name: Audit Cook-Levin dynamic token-cursor step
-        run: node --test audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs
-      - name: Audit Cook-Levin first-clause padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs
-      - name: Audit Cook-Levin full-schedule cursor controller
-        run: node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs
-      - name: Audit Cook-Levin arbitrary-slot header router
-        run: node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs
-      - name: Audit Cook-Levin arbitrary-slot post-header decoder
-        run: node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs
-      - name: Audit Cook-Levin post-header raw divider
-        run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs
-      - name: Audit Cook-Levin post-header raw launch
-        run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs
-      - name: Audit Cook-Levin post-header raw tape bridge
-        run: node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs
-      - name: Audit Cook-Levin post-divider raw route classifier
-        run: node --test audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs
-      - name: Audit Cook-Levin post-divider selected-token launch
-        run: node --test audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs
-      - name: Audit Cook-Levin complete schedule iteration
-        run: node --test audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs
-      - name: Audit Cook-Levin physical optional-token dispatch
-        run: node --test audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs
-      - name: Audit Cook-Levin physical dispatch schedule
-        run: node --test audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs
-      - name: Audit Cook-Levin second-clause separator step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs
-      - name: Audit Cook-Levin second-clause first-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin second-clause second-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin complete second-clause prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs
-      - name: Audit Cook-Levin second-clause padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs
-      - name: Audit Cook-Levin third-clause separator step
-        run: node --test audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs
-      - name: Audit Cook-Levin third-clause first-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin third-clause second-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin complete third-clause prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs
-      - name: Audit Cook-Levin third-clause padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs
-      - name: Audit Cook-Levin fourth-clause separator step
-        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs
-      - name: Audit Cook-Levin fourth-clause first-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin fourth-clause second-literal prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-second-literal-prefix0.test.mjs
-      - name: Audit Cook-Levin complete fourth-clause prefix
-        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-prefix0.test.mjs
-      - name: Audit Cook-Levin fourth-clause padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs
-      - name: Audit Cook-Levin fifth-clause padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs
-      - name: Audit Cook-Levin first-constraint padding run
-        run: node --test audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs
-      - name: Audit Cook-Levin second-constraint separator step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal sign step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-sign-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal first unary-unit step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-first-unary-unit-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal second unary-unit step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal third unary-unit step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal terminator step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint first-literal successor-token step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint padding-or-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint second padding-or-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint third padding-or-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint fourth padding-or-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint fifth padding-or-terminator opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-fifth-padding-or-terminator-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint sixth padding-or-opening-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs
-      - name: Audit Cook-Levin second-constraint seventh padding-or-unary opportunity step
-        run: node --test audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs
+      - name: Audit Cook-Levin source contracts
+        run: |
+          set -euo pipefail
+          node --test audits/lean-concrete-cook-levin-verifier-tableau0.test.mjs
+          node --test audits/lean-concrete-cook-levin-local-cnf0.test.mjs
+          node --test audits/lean-concrete-cook-levin-tableau-cnf0.test.mjs
+          node --test audits/lean-concrete-cook-levin-tableau-cnf-semantics0.test.mjs
+          node --test audits/lean-concrete-cook-levin-raw-tape-bridge0.test.mjs
+          node --test audits/lean-concrete-cook-levin-formula-size0.test.mjs
+          node --test audits/lean-concrete-cook-levin-formula-schedule0.test.mjs
+          node --test audits/lean-concrete-cook-levin-formula-cursor0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-input-length0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-input-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-token-appender0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-first-token-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-complete-header0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-body-start-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-first-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-first-clause-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-dynamic-token-cursor-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-first-clause-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-full-schedule-cursor-controller0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-header-router0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-arbitrary-slot-post-header-decoder0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-post-header-raw-divider0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-post-header-raw-launch0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-post-header-raw-tape-bridge0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-post-divider-raw-route-classifier0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-post-divider-selected-token-launch0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-complete-schedule-iteration0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-physical-optional-token-dispatch0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-physical-dispatch-schedule0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-clause-separator-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-clause-first-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-clause-second-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-clause-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-clause-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-third-clause-separator-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-third-clause-first-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-third-clause-second-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-third-clause-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-third-clause-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fourth-clause-separator-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fourth-clause-first-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fourth-clause-second-literal-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fourth-clause-prefix0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fourth-clause-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-fifth-clause-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-first-constraint-padding-run0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-separator-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-sign-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-first-unary-unit-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-second-unary-unit-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-third-unary-unit-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-terminator-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-first-literal-successor-token-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-padding-or-unary-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-second-padding-or-unary-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-third-padding-or-unary-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-fourth-padding-or-unary-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-fifth-padding-or-terminator-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step0.test.mjs
+          node --test audits/lean-concrete-cook-levin-builder-second-constraint-seventh-padding-or-unary-opportunity-step0.test.mjs
       - name: Audit locked-NAND global carrier and trace equivalence
         run: node --test audits/lean-locked-nand-carrier-trace0.test.mjs
 
@@ -3512,6 +3455,12 @@ jobs:
             lake env lean -DwarningAsError=true "lean-regression/PNP${name}Probe.lean"
           done
           node --test audits/lean-{fixed-window-coverage-obstruction,growing-window-universe-bound}{0,-publication0}.test.mjs
+      - name: Verify source-scalar quadratic contraction class
+        run: |
+          set -euo pipefail
+          npm run audit:m283
+          node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionClassAxiomAudit.lean
+          lake env lean -DwarningAsError=true lean-regression/PNPSourceContractionClass.lean
       - name: Verify residual reduction
         run: |
           set -euo pipefail

@@ -554,6 +554,83 @@ test('reviewed source audits have one complete literal workflow invocation', asy
   assertSourceAuditOwners0(await text0('.github/workflows/lean-bridge.yml'));
 });
 
+// Independent reviewed set moved from individual steps into one source-audit block.
+// Do not derive this expectation from the workflow that it is intended to check.
+test('batched Cook-Levin source contracts retain one complete workflow invocation', async () => {
+  const files = [
+    'verifier-tableau',
+    'local-cnf',
+    'tableau-cnf',
+    'tableau-cnf-semantics',
+    'raw-tape-bridge',
+    'formula-size',
+    'formula-schedule',
+    'formula-cursor',
+    'builder-input-length',
+    'builder-input-prefix',
+    'builder-token-appender',
+    'builder-first-token-prefix',
+    'builder-complete-header',
+    'builder-body-start-prefix',
+    'builder-first-literal-prefix',
+    'builder-first-clause-prefix',
+    'builder-dynamic-token-cursor-step',
+    'builder-first-clause-padding-run',
+    'builder-full-schedule-cursor-controller',
+    'builder-arbitrary-slot-header-router',
+    'builder-arbitrary-slot-post-header-decoder',
+    'builder-post-header-raw-divider',
+    'builder-post-header-raw-launch',
+    'builder-post-header-raw-tape-bridge',
+    'builder-post-divider-raw-route-classifier',
+    'builder-post-divider-selected-token-launch',
+    'builder-complete-schedule-iteration',
+    'builder-physical-optional-token-dispatch',
+    'builder-physical-dispatch-schedule',
+    'builder-second-clause-separator-step',
+    'builder-second-clause-first-literal-prefix',
+    'builder-second-clause-second-literal-prefix',
+    'builder-second-clause-prefix',
+    'builder-second-clause-padding-run',
+    'builder-third-clause-separator-step',
+    'builder-third-clause-first-literal-prefix',
+    'builder-third-clause-second-literal-prefix',
+    'builder-third-clause-prefix',
+    'builder-third-clause-padding-run',
+    'builder-fourth-clause-separator-step',
+    'builder-fourth-clause-first-literal-prefix',
+    'builder-fourth-clause-second-literal-prefix',
+    'builder-fourth-clause-prefix',
+    'builder-fourth-clause-padding-run',
+    'builder-fifth-clause-padding-run',
+    'builder-first-constraint-padding-run',
+    'builder-second-constraint-separator-step',
+    'builder-second-constraint-first-literal-sign-step',
+    'builder-second-constraint-first-literal-first-unary-unit-step',
+    'builder-second-constraint-first-literal-second-unary-unit-step',
+    'builder-second-constraint-first-literal-third-unary-unit-step',
+    'builder-second-constraint-first-literal-terminator-step',
+    'builder-second-constraint-first-literal-successor-token-step',
+    'builder-second-constraint-padding-or-unary-opportunity-step',
+    'builder-second-constraint-second-padding-or-unary-opportunity-step',
+    'builder-second-constraint-third-padding-or-unary-opportunity-step',
+    'builder-second-constraint-fourth-padding-or-unary-opportunity-step',
+    'builder-second-constraint-fifth-padding-or-terminator-opportunity-step',
+    'builder-second-constraint-sixth-padding-or-opening-unary-opportunity-step',
+    'builder-second-constraint-seventh-padding-or-unary-opportunity-step',
+  ].map((name) => 'audits/lean-concrete-cook-levin-' + name + '0.test.mjs');
+  assert.equal(files.length, 60);
+  assert.equal(new Set(files).size, files.length);
+  const workflow = await text0('.github/workflows/lean-bridge.yml');
+  assertSourceAuditOwners0(workflow, files);
+  const target = files[0];
+  const omitted = workflow.replace('node --test ' + target, 'true # omitted source audit');
+  assert.notEqual(omitted, workflow);
+  assert.throws(() => assertSourceAuditOwners0(omitted, files));
+  assert.throws(() => assertSourceAuditOwners0(
+    workflow + '\n      - run: node --test ' + target + '\n', files));
+});
+
 test('source audit ownership rejects missing, repeated and filtered calls', async () => {
   const workflow = await text0('.github/workflows/lean-bridge.yml');
   const file = SINGLE_OWNER_SOURCE_AUDITS0[0];

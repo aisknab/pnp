@@ -83,6 +83,7 @@
     "audit:m266": "node --test audits/lean-source-derived-history-ownership0.test.mjs audits/lean-source-derived-history-ownership-publication0.test.mjs",
     "audit:m267": "node --test audits/lean-descendant-history-ownership0.test.mjs audits/lean-descendant-history-ownership-publication0.test.mjs",
     "audit:m268": "node --test audits/lean-proper-descendant-certificates0.test.mjs audits/lean-proper-descendant-certificates-publication0.test.mjs",
+    "audit:m283": "node --test audits/lean-source-contraction-class0.test.mjs audits/lean-source-contraction-class-publication0.test.mjs",
     "audit:m282": "node --test audits/lean-residual-reducer0.test.mjs audits/lean-residual-reducer-publication0.test.mjs",
     "audit:m281": "node --test audits/lean-serialized-normalizer0.test.mjs audits/lean-serialized-normalizer-publication0.test.mjs",
     "audit:m280": "node --test audits/lean-closed-support-nested-gain0.test.mjs audits/lean-closed-support-nested-gain-publication0.test.mjs",

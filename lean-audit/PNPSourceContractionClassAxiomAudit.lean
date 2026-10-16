@@ -1,0 +1,12 @@
+import PNP
+
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart
+#print axioms PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart

@@ -1,0 +1,447 @@
+{
+  "kind": "PNPSourceContractionClassSourceContract0",
+  "version": 0,
+  "rootModules": [
+    "PNP.Concrete.ResidualReduction.SourceClassChart"
+  ],
+  "allowedAxioms": [
+    "propext",
+    "Quot.sound"
+  ],
+  "files": [
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineBilinearSearch.lean",
+      "sourceContractSha256": "0055518e53c2dc70a93abc601072c5f504d763a1916594006e47aff03f4d2f08"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineSolutionMaps.lean",
+      "sourceContractSha256": "19832c9eeea1ea668a497f9872588edd61d5def5946164a15e2c36169f746d82"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearPullback.lean",
+      "sourceContractSha256": "cc98d1e4fbc0cff1646951fac2a3a139e1c194c719f4f4903cb9ef716cfdaf66"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearSelection.lean",
+      "sourceContractSha256": "82bc54cb1031441bb06a75473d5d05ec38750c737f71e041e839b9ef32315f2a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinaryLinearSolver.lean",
+      "sourceContractSha256": "f8e852f11e34950b6a1cd98e2ea12116df59f1744ee312632dd64f75e1257e09"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinarySolutionSpace.lean",
+      "sourceContractSha256": "b25f685a177ce6ca6492038ef6f1f0aacf4afa83c9b49f1812e9a060bda4a6d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BooleanCoefficients.lean",
+      "sourceContractSha256": "194d0ac551f472fd640de5e932e0a3347b78d1a3a6674624805ba766a8fc7263"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/CheckedContraction.lean",
+      "sourceContractSha256": "b76a9a83563f138b09a3dc0cc3a99cf09afce2c6cadfdeed6d6504b35ca5017c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/ConstrainedBilinear.lean",
+      "sourceContractSha256": "4ecb566d8635d7f7a7939c9bf518fcbb91982842d0e97bf64b3b2c100622628d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/FactoredContraction.lean",
+      "sourceContractSha256": "303834f570ef0ea128aba7267e7037f59672b67a9e5f27a3996fa495a2decad6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/KernelCoefficientMaps.lean",
+      "sourceContractSha256": "bd702a9925b93147d9e28d3b493e438ee69d0fc1bc1bcac9a5e342618114b5e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/LinearEquations.lean",
+      "sourceContractSha256": "4388923267ac798e918fb12419a2913a75c8263daecf33a49675362a6fbc0e40"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/PointSupport.lean",
+      "sourceContractSha256": "a88bdde9d5748003f18cd2cc8a325396fcca147c0d1af6d2642322ca00c4d7b0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityMatrix.lean",
+      "sourceContractSha256": "da8f1c6cd06888c3af20a10139c07835a29a738b9892c9f79fa6880d7a83ff47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffinePrelude.lean",
+      "sourceContractSha256": "d7f0125fcd1da14ea4b296b1067222d33660e42d65a7a7d38d82610d67a23f75"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceClassChart.lean",
+      "sourceContractSha256": "d5018f480c25c510245a43811250319b624a3fadfe65a861c67e7058ca86de65"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceClassCompleteness.lean",
+      "sourceContractSha256": "ecd987897fdb24c1bd7a8f08d040634da1e087076553c57ae7a9636b3e0aaeeb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedContract.lean",
+      "sourceContractSha256": "039c6e4c5a838e036a9e392b0aa5ea33e46522cd77e7391908413f33ddd443fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceConstructedStep.lean",
+      "sourceContractSha256": "677b3f58ef5c40fd59aff4630f59affe7453079737c2b7aaf7ed47d908e2406d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceContractionClass.lean",
+      "sourceContractSha256": "708b6bbafec940ca972cd6639be2eba5696e433c83d49f5536b81ca6fb5ca71d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionChart.lean",
+      "sourceContractSha256": "a72412a3e01e9e43bb30684970d1f22ae6008d42a164d058d932a236444e8fdf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionSpace.lean",
+      "sourceContractSha256": "220c0557757c0e32b0ec97c27c2d26011ba0efa0d11100f5bdd2f0300effd1b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDualSpan.lean",
+      "sourceContractSha256": "a3b01f364314405a052f2bedea0ba2001f9b6d7904d3d26254c10bca38b3c2ed"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceGlobalSelector.lean",
+      "sourceContractSha256": "bf058800383ddc7021d2380df6184e73e461e158f19271e4088b2611ad1f59ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinearCoordinates.lean",
+      "sourceContractSha256": "76410bdb9f79507a1f3683d1895137ea259beee41f57e113ae7dc158e6f4ad47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixStorage.lean",
+      "sourceContractSha256": "ef39089f3543825e203341c6ec051a253d8bb3ba28cdfc666f66d273ef1cb312"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNormalMenu.lean",
+      "sourceContractSha256": "24cf63637c00944970bceb7797ebf0f8dbe9c39729f76d2949905bfaa864f666"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneClosure.lean",
+      "sourceContractSha256": "659138dede1c65d1c03f12b90bafbbe369af4e21d6f087cc84973ac43257490d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolar.lean",
+      "sourceContractSha256": "fcf57683251189aaa15d509332135672873f53dcacfdcd687d9cf48697ced98f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQueryChart.lean",
+      "sourceContractSha256": "d2797b8b34809b7a06af4cc0cc9df3db10efea3ef6a80a8b8b787f47f6e15f30"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneEquations.lean",
+      "sourceContractSha256": "188d8d68ad9a23f7ee5a01dea7ac9206e6fcc333386470dbae71a3231847a67b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneMatrices.lean",
+      "sourceContractSha256": "77ef28ab2b10caf8feed736797f144f5f801eae4859e54f9babccfdcb08f2a0d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneQuery.lean",
+      "sourceContractSha256": "f27a885a97862daf59214561ad92a1352215b11238d62a86d6477d737c141534"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoEquations.lean",
+      "sourceContractSha256": "9b6a3c1574cc3f6b62cbc9077e5050d23b5f70448e67a131ec80f0d005064f0b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoQuery.lean",
+      "sourceContractSha256": "6c28a8846971fae6e987d44643ab69e605133e4106fd5b5528a503cd96dfa77d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowDifference.lean",
+      "sourceContractSha256": "cef73fbf6e2acc7880c4815624eaaa0367459ef3756d55c6bf1ba05836a79b77"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarTail.lean",
+      "sourceContractSha256": "00b6dd2a4a1bca7ad67c988eabf0f6ce0309a787645e19dfa5c272c671fe5302"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectedScalar.lean",
+      "sourceContractSha256": "334e6bfdeba5a5044d616c88b2e9c4312fd0c7950cb810dda7c3ed582d73561d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessBalance.lean",
+      "sourceContractSha256": "d5debcb613ead213ac25a73a704381006b0480f8b64f362a07ac780a7aeba0ad"
+    }
+  ],
+  "auxiliaryContracts": [
+    {
+      "file": "lean-audit/PNPSourceContractionClassAxiomAudit.lean",
+      "sourceContractSha256": "efcbac3e2a17a410e2516e5acc25ab67cb2d6e3bb57cc09fb003fdb6c393074f"
+    },
+    {
+      "file": "lean-regression/PNPSourceContractionClass.lean",
+      "sourceContractSha256": "63fb64200e2ef313f19a9afe0ab86a8a29147e43f6266249b8d3892b86d47c8c"
+    }
+  ],
+  "auditedTheorems": [
+    "PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu",
+    "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+    "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+    "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+    "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+    "PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero",
+    "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+    "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+    "PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient",
+    "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic"
+  ],
+  "newModuleDeclarationHeads": {
+    "lean/PNP/Concrete/ResidualReduction/SourceContractionClass.lean": [
+      {
+        "kind": "def",
+        "name": "sourceRetraction"
+      },
+      {
+        "kind": "def",
+        "name": "Balanced"
+      },
+      {
+        "kind": "def",
+        "name": "SemanticContraction"
+      },
+      {
+        "kind": "def",
+        "name": "ExteriorZero"
+      },
+      {
+        "kind": "def",
+        "name": "CoefficientContraction"
+      },
+      {
+        "kind": "theorem",
+        "name": "polar_diagonal"
+      },
+      {
+        "kind": "theorem",
+        "name": "weightedPolar_comm"
+      },
+      {
+        "kind": "theorem",
+        "name": "weightedPolar_diagonal"
+      },
+      {
+        "kind": "theorem",
+        "name": "exterior_factor"
+      },
+      {
+        "kind": "theorem",
+        "name": "exterior_of_span"
+      },
+      {
+        "kind": "theorem",
+        "name": "polarForm_homogeneous"
+      },
+      {
+        "kind": "theorem",
+        "name": "polarForm_linearEval"
+      },
+      {
+        "kind": "theorem",
+        "name": "polarForm_mem_rowNormals"
+      },
+      {
+        "kind": "theorem",
+        "name": "polarForm_mem_sourceMenu"
+      },
+      {
+        "kind": "theorem",
+        "name": "qPolar_succ"
+      },
+      {
+        "kind": "theorem",
+        "name": "qPolar_additive_left"
+      },
+      {
+        "kind": "def",
+        "name": "functionPolar"
+      },
+      {
+        "kind": "def",
+        "name": "thirdDifference"
+      },
+      {
+        "kind": "theorem",
+        "name": "thirdDifference_qEval"
+      },
+      {
+        "kind": "theorem",
+        "name": "weightedValue_activity"
+      },
+      {
+        "kind": "theorem",
+        "name": "functionPolar_weighted_product"
+      },
+      {
+        "kind": "theorem",
+        "name": "thirdDifference_weighted_product"
+      },
+      {
+        "kind": "theorem",
+        "name": "sourceRetraction_eval"
+      },
+      {
+        "kind": "theorem",
+        "name": "semantic_implies_coefficient"
+      }
+    ],
+    "lean/PNP/Concrete/ResidualReduction/SourceClassCompleteness.lean": [
+      {
+        "kind": "theorem",
+        "name": "linearEval_of_zero_constant"
+      },
+      {
+        "kind": "theorem",
+        "name": "linear_nonzero_witness"
+      },
+      {
+        "kind": "theorem",
+        "name": "independent_linear_basis"
+      },
+      {
+        "kind": "def",
+        "name": "coefficientPoint"
+      },
+      {
+        "kind": "theorem",
+        "name": "coefficientPoint_eval"
+      },
+      {
+        "kind": "theorem",
+        "name": "linear_function_covector"
+      },
+      {
+        "kind": "theorem",
+        "name": "normalCode_injective_homogeneous"
+      },
+      {
+        "kind": "theorem",
+        "name": "derivative_line_cases"
+      },
+      {
+        "kind": "theorem",
+        "name": "exterior_two_basis"
+      },
+      {
+        "kind": "theorem",
+        "name": "exterior_kernel_zero"
+      },
+      {
+        "kind": "theorem",
+        "name": "single_kernel_iff"
+      },
+      {
+        "kind": "theorem",
+        "name": "double_kernel_iff"
+      },
+      {
+        "kind": "theorem",
+        "name": "polarForm_zero_value"
+      },
+      {
+        "kind": "theorem",
+        "name": "planeGood_swap"
+      },
+      {
+        "kind": "theorem",
+        "name": "coefficient_implies_menu"
+      },
+      {
+        "kind": "theorem",
+        "name": "semantic_implies_menu"
+      },
+      {
+        "kind": "theorem",
+        "name": "globalStep_complete_for_semantic"
+      },
+      {
+        "kind": "theorem",
+        "name": "globalStep_none_no_semantic"
+      }
+    ],
+    "lean/PNP/Concrete/ResidualReduction/SourceClassChart.lean": [
+      {
+        "kind": "theorem",
+        "name": "functionPolar_zero_left"
+      },
+      {
+        "kind": "theorem",
+        "name": "quadratic_of_third_zero"
+      },
+      {
+        "kind": "theorem",
+        "name": "third_zero_iff_quadratic"
+      },
+      {
+        "kind": "theorem",
+        "name": "coefficient_implies_semantic"
+      },
+      {
+        "kind": "theorem",
+        "name": "semantic_iff_coefficient"
+      },
+      {
+        "kind": "theorem",
+        "name": "quadratic_linear_pullback"
+      },
+      {
+        "kind": "theorem",
+        "name": "sourceRetraction_shift"
+      },
+      {
+        "kind": "theorem",
+        "name": "pointXor_associative"
+      },
+      {
+        "kind": "theorem",
+        "name": "pointXor_commutative"
+      },
+      {
+        "kind": "theorem",
+        "name": "pointXor_left_commutative"
+      },
+      {
+        "kind": "theorem",
+        "name": "pointXor_left_cancel"
+      },
+      {
+        "kind": "theorem",
+        "name": "shear_additive"
+      },
+      {
+        "kind": "theorem",
+        "name": "encode_additive"
+      },
+      {
+        "kind": "theorem",
+        "name": "encode_zero"
+      },
+      {
+        "kind": "theorem",
+        "name": "unchart_false_base"
+      },
+      {
+        "kind": "theorem",
+        "name": "decode_eq_retraction_base"
+      },
+      {
+        "kind": "theorem",
+        "name": "decode_encode_eq_retraction"
+      },
+      {
+        "kind": "def",
+        "name": "ChartQuadraticClosure"
+      },
+      {
+        "kind": "theorem",
+        "name": "semantic_iff_chart"
+      },
+      {
+        "kind": "theorem",
+        "name": "globalStep_complete_for_chart"
+      }
+    ]
+  }
+}

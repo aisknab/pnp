@@ -64,6 +64,16 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 set_option maxRecDepth 100000 in
 private def reviewedMilestoneTheoremNames : Array Name := #[
+  `PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu,
+  `PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction,
+  `PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart,
+  `PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic,
+  `PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic,
+  `PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero,
+  `PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart,
+  `PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient,
+  `PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient,
+  `PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic,
   `PNP.Concrete.ResidualReducer.decision_false_sound,
   `PNP.Concrete.ResidualReducer.decision_packet,
   `PNP.Concrete.ResidualReducer.decision_true_sound,
