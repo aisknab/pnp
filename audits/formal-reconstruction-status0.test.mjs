@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import {
+  cp, mkdir, mkdtemp, readFile, readdir, rename, rm, stat, utimes, writeFile,
+} from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import path from 'node:path';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 
 import {
   CheckFormalReconstructionStatus0,
@@ -31,6 +36,198 @@ async function currentProofProgressSources0() {
 function clone0(value) {
   return JSON.parse(JSON.stringify(value));
 }
+
+test('formal reconstruction status caches only exact publication analysis', async (t) => {
+  const sourceRoot = fileURLToPath(new URL('../', import.meta.url));
+  const fixture = await mkdtemp(path.join(tmpdir(), 'pnp-status-analysis-'));
+  try {
+    for (const relative of [
+      'lean', 'lean-toolchain', 'lakefile.lean', 'lake-manifest.json',
+      'lean-audit/PNPTheoremInventory.lean',
+      'status/LEAN_THEOREM_INVENTORY.json', 'public/pnp-theorem-inventory.json',
+      'publication/FORMAL_PUBLICATION_MAP.json',
+      'status/FORMAL_RECONSTRUCTION_STATUS.json', 'public/pnp-status.json',
+    ]) {
+      const destination = path.join(fixture, relative);
+      await mkdir(path.dirname(destination), { recursive: true });
+      await cp(path.join(sourceRoot, relative), destination, { recursive: true });
+    }
+    // Date-based utimes cannot restore arbitrary sub-millisecond timestamps.
+    // Normalize mutable fixtures before the cache is warmed, then require exact
+    // nanosecond preservation during every same-size mutation below.
+    const fixtureTime = new Date('2000-01-01T00:00:00.000Z');
+    for (const relative of [
+      'lean/PNP.lean', 'lean-toolchain',
+      'status/LEAN_THEOREM_INVENTORY.json', 'public/pnp-theorem-inventory.json',
+      'publication/FORMAL_PUBLICATION_MAP.json',
+    ]) {
+      await utimes(path.join(fixture, relative), fixtureTime, fixtureTime);
+    }
+    const { CheckFormalReconstructionStatus0: check } = await import(
+      '../pcc-formal-reconstruction-status0.mjs?publication-analysis-cache-contract'
+    );
+    const realParse = JSON.parse;
+    let inventoryParses = 0;
+    t.mock.method(JSON, 'parse', function (...args) {
+      const value = Reflect.apply(realParse, this, args);
+      if (value?.kind === 'PNPLeanTheoremInventory0') inventoryParses += 1;
+      return value;
+    });
+    const run = (root = fixture, options = {}) => check({ root, writeOutput: false, ...options });
+    const accepted = async (root = fixture, options = {}) => {
+      const out = await run(root, options);
+      assert.equal(out.tag, 'accept', JSON.stringify(out));
+      return out;
+    };
+    const rejected = async (coord, root = fixture, options = {}) => {
+      const out = await run(root, options);
+      assert.equal(out.tag, 'reject');
+      assert.equal(out.coord, coord);
+      return out;
+    };
+    const withEdit = async (relative, mutate, action) => {
+      const filename = path.join(fixture, relative);
+      const before = await readFile(filename);
+      const metadata = await stat(filename);
+      const originalStamp = await stat(filename, { bigint: true });
+      const after = mutate(Buffer.from(before));
+      assert.equal(after.length, before.length, 'same-size invalidation fixture');
+      await writeFile(filename, after);
+      await utimes(filename, metadata.atime, metadata.mtime);
+      try {
+        const changedStamp = await stat(filename, { bigint: true });
+        assert.equal(changedStamp.size, originalStamp.size);
+        assert.equal(changedStamp.mtimeNs, originalStamp.mtimeNs);
+        await action();
+      } finally {
+        await writeFile(filename, before);
+        await utimes(filename, metadata.atime, metadata.mtime);
+      }
+    };
+    const changeFinalWhitespace = (bytes) => {
+      assert.equal(bytes[bytes.length - 1], 10);
+      bytes[bytes.length - 1] = 13;
+      return bytes;
+    };
+    const replaceBytes = (before, after) => (bytes) => {
+      assert.equal(Buffer.byteLength(before), Buffer.byteLength(after));
+      const offset = bytes.indexOf(before);
+      assert.notEqual(offset, -1);
+      assert.equal(bytes.indexOf(before, offset + 1), -1);
+      bytes.write(after, offset, 'utf8');
+      return bytes;
+    };
+
+    await t.test('reuses parsing but checks each status and returned value independently', async () => {
+      const first = await accepted();
+      assert.equal(inventoryParses, 1);
+      first.remainingBlockers.length = 0;
+      first.formalReconstructionStatusAccepted = false;
+      const status = await currentStatus0();
+      const badStatus = { ...status, publicTheoremEmissionAllowed: true };
+      await rejected('FormalReconstructionStatus.Field', fixture, { statusOverride: badStatus });
+      const next = await accepted();
+      assert.deepEqual(next.remainingBlockers, FORMAL_RECONSTRUCTION_BLOCKERS0);
+      assert.equal(inventoryParses, 1, 'unchanged inventory must be parsed only once');
+      await accepted(sourceRoot);
+      assert.equal(inventoryParses, 1, 'equal bytes in another root may reuse analysis');
+    });
+
+    await t.test('checks both live inventory mirrors before reusing analysis', async () => {
+      await withEdit('public/pnp-theorem-inventory.json', changeFinalWhitespace, async () => {
+        await rejected('FormalReconstructionStatus.InventoryMirrorMismatch');
+      });
+      await accepted();
+    });
+
+    await t.test('rejects changed inventory bytes and recovers after a failed derivation', async () => {
+      const invalid = replaceBytes('"environmentProbeComplete":true', '"environmentProbeComplete":null');
+      await withEdit('status/LEAN_THEOREM_INVENTORY.json', invalid, async () => {
+        await withEdit('public/pnp-theorem-inventory.json', invalid, async () => {
+          const before = inventoryParses;
+          await rejected('FormalReconstructionStatus.UnhandledException');
+          assert.equal(inventoryParses, before + 1);
+        });
+      });
+      await accepted();
+    });
+
+    await t.test('evicts changed analysis rather than caching a status rejection', async () => {
+      const changeCount = (bytes) => {
+        const prefix = '"excludedPrivateDeclarationCount":';
+        const offset = bytes.indexOf(prefix);
+        assert.notEqual(offset, -1);
+        const digit = offset + prefix.length;
+        assert.ok(bytes[digit] >= 48 && bytes[digit] <= 57);
+        bytes[digit] = bytes[digit] === 49 ? 50 : 49;
+        return bytes;
+      };
+      const before = inventoryParses;
+      await withEdit('status/LEAN_THEOREM_INVENTORY.json', changeCount, async () => {
+        await withEdit('public/pnp-theorem-inventory.json', changeCount, async () => {
+          await rejected('FormalReconstructionStatus.Field');
+          await rejected('FormalReconstructionStatus.Field');
+          assert.equal(inventoryParses, before + 1);
+        });
+      });
+      await accepted();
+      assert.equal(inventoryParses, before + 2, 'only the latest inventory is retained');
+    });
+
+    await t.test('invalidates same-size map bytes even when timestamps are restored', async () => {
+      await withEdit('publication/FORMAL_PUBLICATION_MAP.json', changeFinalWhitespace, async () => {
+        await rejected('FormalReconstructionStatus.Field');
+      });
+      await accepted();
+    });
+
+    await t.test('still rejects a malformed map and then accepts restored evidence', async () => {
+      const invalid = replaceBytes('PNPFormalPublicationMap0', 'PNPFormalPublicationMap1');
+      await withEdit('publication/FORMAL_PUBLICATION_MAP.json', invalid, async () => {
+        await rejected('FormalReconstructionStatus.UnhandledException');
+      });
+      await accepted();
+    });
+
+    await t.test('rehashes live source and separates concurrent roots', async () => {
+      await withEdit('lean/PNP.lean', changeFinalWhitespace, async () => {
+        const results = await Promise.all([run(sourceRoot), run(fixture)]);
+        assert.equal(results[0].tag, 'accept');
+        assert.equal(results[1].tag, 'reject');
+        assert.equal(results[1].coord, 'FormalReconstructionStatus.Field');
+      });
+      await accepted();
+    });
+
+    await t.test('includes added and removed source files in every closure check', async () => {
+      const added = path.join(fixture, 'lean/CacheMutationProbe.lean');
+      try {
+        await writeFile(added, '-- source-closure invalidation fixture\n', { flag: 'wx' });
+        await rejected('FormalReconstructionStatus.Field');
+      } finally {
+        await rm(added, { force: true });
+      }
+      const original = path.join(fixture, 'lean/PNP.lean');
+      const hidden = path.join(fixture, 'lean/PNP.lean.cache-fixture');
+      await rename(original, hidden);
+      try {
+        await rejected('FormalReconstructionStatus.Field');
+      } finally {
+        await rename(hidden, original);
+      }
+      await accepted();
+    });
+
+    await t.test('retains the live toolchain boundary on a cache hit', async () => {
+      await withEdit('lean-toolchain', changeFinalWhitespace, async () => {
+        await rejected('FormalReconstructionStatus.Field');
+      });
+      await accepted();
+    });
+  } finally {
+    await rm(fixture, { recursive: true, force: true });
+  }
+});
 
 test('formal reconstruction status accepts the current source and public mirrors', async () => {
   const [out, status] = await Promise.all([
