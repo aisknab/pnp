@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -51,6 +51,9 @@ const LOCKED_NAND_THRESHOLD_MISSING_INSTANTIATION_INVENTORY =
   Object.freeze([]);
 
 const VERIFICATION_COMMANDS = Object.freeze([
+  "npm run audit:m283",
+  "node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionClassAxiomAudit.lean",
+  "lake env lean -DwarningAsError=true lean-regression/PNPSourceContractionClass.lean",
   "npm run audit:m282",
   "node scripts/check-lean-axioms.mjs lean-audit/PNPResidualReducerAxiomAudit.lean",
   "lake env lean -DwarningAsError=true lean-regression/PNPResidualReducer.lean",
@@ -3239,6 +3242,27 @@ const EXACT_FIELDS = Object.freeze({
   leanContextAwareSquareTransportPolynomialRuntimeProved: false,
   leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority: false,
   leanContextAwareSquareTransportScope: 'arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime',
+  leanSourceScalarQuadraticContractionClassFormalized: true,
+  leanSourceScalarQuadraticContractionClassAxiomAuditPassed: true,
+  leanSourceScalarQuadraticContractionClassAuditedDeclarationCount: 10,
+  leanSourceScalarQuadraticContractionClassSemanticCriterionTheorem: "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+  leanSourceScalarQuadraticContractionClassQuadraticCharacterizationTheorem: "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic",
+  leanSourceScalarQuadraticContractionClassComputedSelectorCompletenessTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+  leanSourceScalarQuadraticContractionClassStoppingExclusionTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+  leanSourceScalarQuadraticContractionClassActualDecoderTheorem: "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+  leanSourceScalarQuadraticContractionClassChartEquivalenceTheorem: "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+  leanSourceScalarQuadraticContractionClassChartSelectorCompletenessTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+  leanSourceScalarQuadraticContractionClassArbitraryPositiveDimensions: true,
+  leanSourceScalarQuadraticContractionClassAllSourceRowsRetained: true,
+  leanSourceScalarQuadraticContractionClassCallerSuppliedMenuCoverageRequired: false,
+  leanSourceScalarQuadraticContractionClassContractionExistenceRequired: true,
+  leanSourceScalarQuadraticContractionClassArbitraryContractionMapCoverageProved: false,
+  leanSourceScalarQuadraticContractionClassUsefulContractionOnEveryInputProved: false,
+  leanSourceScalarQuadraticContractionClassAllInputResidualDecisionProved: false,
+  leanSourceScalarQuadraticContractionClassCompletePolynomialRuntimeProved: false,
+  leanSourceScalarQuadraticContractionClassUnconditionalZeroSlackProved: false,
+  leanSourceScalarQuadraticContractionClassExactPolynomialPCCMinProved: false,
+  leanSourceScalarQuadraticContractionClassScope: "balanced-selected-source-equation-xor-scalar-fixed-direction-translations-all-row-quadratic-pullback-computed-selector-completeness-exact-quotient-decoder-no-universal-existence-arbitrary-map-coverage-total-solver-or-runtime",
   leanSourceBoundResidualReducerFormalized: true,
   leanSourceBoundResidualReducerAxiomAuditPassed: true,
   leanSourceBoundResidualReducerAuditedDeclarationCount: 16,
@@ -6715,6 +6739,27 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanContextAwareSquareTransportPolynomialRuntimeProved: false,
       leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority: false,
       leanContextAwareSquareTransportScope: 'arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime',
+      leanSourceScalarQuadraticContractionClassFormalized: true,
+      leanSourceScalarQuadraticContractionClassAxiomAuditPassed: true,
+      leanSourceScalarQuadraticContractionClassAuditedDeclarationCount: 10,
+      leanSourceScalarQuadraticContractionClassSemanticCriterionTheorem: "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+      leanSourceScalarQuadraticContractionClassQuadraticCharacterizationTheorem: "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic",
+      leanSourceScalarQuadraticContractionClassComputedSelectorCompletenessTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+      leanSourceScalarQuadraticContractionClassStoppingExclusionTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+      leanSourceScalarQuadraticContractionClassActualDecoderTheorem: "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+      leanSourceScalarQuadraticContractionClassChartEquivalenceTheorem: "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+      leanSourceScalarQuadraticContractionClassChartSelectorCompletenessTheorem: "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+      leanSourceScalarQuadraticContractionClassArbitraryPositiveDimensions: true,
+      leanSourceScalarQuadraticContractionClassAllSourceRowsRetained: true,
+      leanSourceScalarQuadraticContractionClassCallerSuppliedMenuCoverageRequired: false,
+      leanSourceScalarQuadraticContractionClassContractionExistenceRequired: true,
+      leanSourceScalarQuadraticContractionClassArbitraryContractionMapCoverageProved: false,
+      leanSourceScalarQuadraticContractionClassUsefulContractionOnEveryInputProved: false,
+      leanSourceScalarQuadraticContractionClassAllInputResidualDecisionProved: false,
+      leanSourceScalarQuadraticContractionClassCompletePolynomialRuntimeProved: false,
+      leanSourceScalarQuadraticContractionClassUnconditionalZeroSlackProved: false,
+      leanSourceScalarQuadraticContractionClassExactPolynomialPCCMinProved: false,
+      leanSourceScalarQuadraticContractionClassScope: "balanced-selected-source-equation-xor-scalar-fixed-direction-translations-all-row-quadratic-pullback-computed-selector-completeness-exact-quotient-decoder-no-universal-existence-arbitrary-map-coverage-total-solver-or-runtime",
       leanSourceBoundResidualReducerFormalized: true,
       leanSourceBoundResidualReducerAxiomAuditPassed: true,
       leanSourceBoundResidualReducerAuditedDeclarationCount: 16,

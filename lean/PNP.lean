@@ -1,4 +1,5 @@
 import PNP.Concrete.ResidualReducer
+import PNP.Concrete.ResidualReduction.SourceClassChart
 import PNP.Concrete.SerializedNormalizer
 import PNP.Main
 import PNP.NANDSemantics

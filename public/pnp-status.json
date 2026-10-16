@@ -2,7 +2,7 @@
   "kind": "PNPFormalReconstructionStatus0",
   "version": 0,
   "project": "PNP",
-  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282",
+  "coordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283",
   "status": "formal-reconstruction-in-progress",
   "claimStatus": "formal-reconstruction-in-progress",
   "currentStatusAuthority": true,
@@ -2080,6 +2080,27 @@
   "leanContextAwareSquareTransportPolynomialRuntimeProved": false,
   "leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority": false,
   "leanContextAwareSquareTransportScope": "arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime",
+  "leanSourceScalarQuadraticContractionClassFormalized": true,
+  "leanSourceScalarQuadraticContractionClassAxiomAuditPassed": true,
+  "leanSourceScalarQuadraticContractionClassAuditedDeclarationCount": 10,
+  "leanSourceScalarQuadraticContractionClassSemanticCriterionTheorem": "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+  "leanSourceScalarQuadraticContractionClassQuadraticCharacterizationTheorem": "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic",
+  "leanSourceScalarQuadraticContractionClassComputedSelectorCompletenessTheorem": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+  "leanSourceScalarQuadraticContractionClassStoppingExclusionTheorem": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+  "leanSourceScalarQuadraticContractionClassActualDecoderTheorem": "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+  "leanSourceScalarQuadraticContractionClassChartEquivalenceTheorem": "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+  "leanSourceScalarQuadraticContractionClassChartSelectorCompletenessTheorem": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+  "leanSourceScalarQuadraticContractionClassArbitraryPositiveDimensions": true,
+  "leanSourceScalarQuadraticContractionClassAllSourceRowsRetained": true,
+  "leanSourceScalarQuadraticContractionClassCallerSuppliedMenuCoverageRequired": false,
+  "leanSourceScalarQuadraticContractionClassContractionExistenceRequired": true,
+  "leanSourceScalarQuadraticContractionClassArbitraryContractionMapCoverageProved": false,
+  "leanSourceScalarQuadraticContractionClassUsefulContractionOnEveryInputProved": false,
+  "leanSourceScalarQuadraticContractionClassAllInputResidualDecisionProved": false,
+  "leanSourceScalarQuadraticContractionClassCompletePolynomialRuntimeProved": false,
+  "leanSourceScalarQuadraticContractionClassUnconditionalZeroSlackProved": false,
+  "leanSourceScalarQuadraticContractionClassExactPolynomialPCCMinProved": false,
+  "leanSourceScalarQuadraticContractionClassScope": "balanced-selected-source-equation-xor-scalar-fixed-direction-translations-all-row-quadratic-pullback-computed-selector-completeness-exact-quotient-decoder-no-universal-existence-arbitrary-map-coverage-total-solver-or-runtime",
   "leanSourceBoundResidualReducerFormalized": true,
   "leanSourceBoundResidualReducerAxiomAuditPassed": true,
   "leanSourceBoundResidualReducerAuditedDeclarationCount": 16,
@@ -3391,6 +3412,9 @@
   ],
   "leanLockedNANDThresholdMissingInstantiationInventory": [],
   "verificationCommands": [
+    "npm run audit:m283",
+    "node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionClassAxiomAudit.lean",
+    "lake env lean -DwarningAsError=true lean-regression/PNPSourceContractionClass.lean",
     "npm run audit:m282",
     "node scripts/check-lean-axioms.mjs lean-audit/PNPResidualReducerAxiomAudit.lean",
     "lake env lean -DwarningAsError=true lean-regression/PNPResidualReducer.lean",
@@ -4361,7 +4385,7 @@
     "actualConcreteTargetKernelValueSha256": "d10736cc9fc1d665512367ffe8fc9ff9345faa7ce4aa319cd5f976529f03a898",
     "actualRootKernelTypeSha256": null,
     "actualAxiomClosureSha256": "7de98496bd663ae170fcb7773362a3e89959de5d256b58837af49d746b96da3d",
-    "actualSourceClosureSha256": "dd9ab2ab8b625b8542b3f05a4f95602d80f00ce9d65574d8735d51a33b1c58ef",
+    "actualSourceClosureSha256": "e105e6b0ca19293c8142149e2505ad728c49b745f4623846df44c3c36290e7a3",
     "axiomClosure": [],
     "allowedLeanStandardAxioms": [
       "Classical.choice",
@@ -4394,19 +4418,19 @@
   "leanTheoremInventoryCoordinate": "PNP-LEAN-THEOREM-INVENTORY-2026-09-10-230",
   "leanTheoremInventoryPath": "status/LEAN_THEOREM_INVENTORY.json",
   "leanTheoremInventoryPublicPath": "public/pnp-theorem-inventory.json",
-  "leanTheoremInventorySha256": "cdb856c37a386ca99570dcdb1ade8f406fd21bf60d93dbdfb886086446d42fa1",
+  "leanTheoremInventorySha256": "0d6a07f01dc4aa297b9bc16f8b0391f8fa7940e5c3aaf69072617b4bb15a5add",
   "leanTheoremInventoryGeneratedFromCompiledEnvironment": true,
   "leanTheoremInventoryUsesEnvironmentConstants": true,
   "leanTheoremInventoryUsesCollectAxioms": true,
-  "leanTheoremInventoryDeclarationCount": 69490,
-  "leanTheoremInventoryExcludedPrivateDeclarationCount": 23401,
-  "leanTheoremInventoryTheoremCount": 38440,
-  "leanTheoremInventoryAssumptionFreeTheoremCount": 14185,
-  "leanTheoremInventorySourceClosureModuleCount": 1151,
-  "leanSourceClosureSha256": "dd9ab2ab8b625b8542b3f05a4f95602d80f00ce9d65574d8735d51a33b1c58ef",
-  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-10-15-282",
+  "leanTheoremInventoryDeclarationCount": 69570,
+  "leanTheoremInventoryExcludedPrivateDeclarationCount": 23420,
+  "leanTheoremInventoryTheoremCount": 38507,
+  "leanTheoremInventoryAssumptionFreeTheoremCount": 14200,
+  "leanTheoremInventorySourceClosureModuleCount": 1154,
+  "leanSourceClosureSha256": "e105e6b0ca19293c8142149e2505ad728c49b745f4623846df44c3c36290e7a3",
+  "formalPublicationMapCoordinate": "PNP-FORMAL-PUBLICATION-MAP-2026-10-16-283",
   "formalPublicationMapPath": "publication/FORMAL_PUBLICATION_MAP.json",
-  "formalPublicationMapSha256": "003c567dc6361069e74ec48398eb1c75464c1fc788704cb78cd56968f000defd",
+  "formalPublicationMapSha256": "a0e941ea37745155eb580cb644cce1852aa40ad32e3788e4e6b4a2bab548f624",
   "formalPublicationMilestones": [
     {
       "classification": "formalized-foundation-only",
@@ -69756,9 +69780,157 @@
       "sourceClosureFingerprintMatches": true,
       "earned": true,
       "status": "formalized-foundation-only"
+    },
+    {
+      "classification": "formalized-foundation-only",
+      "id": "source-scalar-quadratic-contraction-class-completeness",
+      "nonClaim": "Contraction existence remains a premise. This class consists only of balanced translations by a fixed direction with scalar equal to an XOR of selected source equations and with quadratic pullbacks of all rows. It does not include arbitrary contraction maps, higher-degree transformations or general residual decision procedures. A stopped core may still be satisfiable. No useful contraction on every input, complete residual solver, polynomial encoded construction or runtime, manuscript residual-band minimizer, unconditional SaturatePositive, BCELReady or ZeroSlack, exact polynomial PCCMin, concrete CNFSAT membership in P, or eligible root theorem is proved. P = NP is not proved.",
+      "requiredTheorems": [
+        "PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu",
+        "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+        "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+        "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+        "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+        "PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero",
+        "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+        "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+        "PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient",
+        "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic"
+      ],
+      "scope": "For every finite family of factored Boolean source equations in every positive dimension, every balanced selected-source-scalar translation whose pullback preserves quadratic degree on every source row implies that the actual affine/line/plane selector returns a step; the existing checked step-soundness contract applies. Semantic quadratic closure is equivalent to the exact coefficient obstruction criterion and to quadratic closure through the computed quotient decoder. The actual decoder composed with the encoder equals the balanced source retraction on every ambient point. A stopped selector has no contraction in this precisely defined class; no finite-menu membership or caller-supplied coverage premise is required.",
+      "title": "Complete search for balanced source-scalar quadratic contractions",
+      "theoremRows": [
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "bba76afa33a987468bfdec377a044cc89a61f7b0e38f33ea9e0bf0825ef46d6c",
+          "expectedKernelTypeSha256": "bba76afa33a987468bfdec377a044cc89a61f7b0e38f33ea9e0bf0825ef46d6c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "992abdbebab4b5f3b9594dc84d3a1c8ca57f3fb3d35caa2450d5f9323993d44c",
+          "expectedKernelTypeSha256": "992abdbebab4b5f3b9594dc84d3a1c8ca57f3fb3d35caa2450d5f9323993d44c",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "8858621a5b1b58da31a00f46b7cf7c592ff0b642f9d08189ef2a605f6d35ee2f",
+          "expectedKernelTypeSha256": "8858621a5b1b58da31a00f46b7cf7c592ff0b642f9d08189ef2a605f6d35ee2f",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_semantic",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b90d2a6a5a9ec79798484e9babadd52a462e3b8c5ce4bf504dc9a89e52157a2e",
+          "expectedKernelTypeSha256": "b90d2a6a5a9ec79798484e9babadd52a462e3b8c5ce4bf504dc9a89e52157a2e",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.globalStep_none_no_semantic",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "d9af3a99e970940da3d2a9ec1c2d49c8eb1b14b929713cf1085ade4bbe4a63b8",
+          "expectedKernelTypeSha256": "d9af3a99e970940da3d2a9ec1c2d49c8eb1b14b929713cf1085ade4bbe4a63b8",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.quadratic_of_third_zero",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "c8d8d6c28860023c738a71d5107f4d573cd1ef90baba4dab104760695f9eb5cf",
+          "expectedKernelTypeSha256": "c8d8d6c28860023c738a71d5107f4d573cd1ef90baba4dab104760695f9eb5cf",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_chart",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "08cd8f6e7d7268969c807d55761710d1ae95032ab436f3cda98fea54a8282fc4",
+          "expectedKernelTypeSha256": "08cd8f6e7d7268969c807d55761710d1ae95032ab436f3cda98fea54a8282fc4",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.semantic_iff_coefficient",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "b9aa26cb642c734f1b98138677bdb8015d05a0d60052132d2cc1b8d9938a42e1",
+          "expectedKernelTypeSha256": "b9aa26cb642c734f1b98138677bdb8015d05a0d60052132d2cc1b8d9938a42e1",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.semantic_implies_coefficient",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "a8ded3bb9d05fa40fcd13c0af0308cf9c2df8e0b835492a7813d274fe3dd6a65",
+          "expectedKernelTypeSha256": "a8ded3bb9d05fa40fcd13c0af0308cf9c2df8e0b835492a7813d274fe3dd6a65",
+          "kernelTypeFingerprintMatches": true
+        },
+        {
+          "name": "PNP.Concrete.ResidualReduction.SourceClass.third_zero_iff_quadratic",
+          "present": true,
+          "kind": "theorem",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ],
+          "actualKernelTypeSha256": "f73a4ba85cdd2c14b3003147e053f56e9d834aa14c529c8445507073dc306924",
+          "expectedKernelTypeSha256": "f73a4ba85cdd2c14b3003147e053f56e9d834aa14c529c8445507073dc306924",
+          "kernelTypeFingerprintMatches": true
+        }
+      ],
+      "allPresent": true,
+      "allAssumptionFree": false,
+      "axiomClosureUsesOnlyLeanStandardAllowlist": true,
+      "allKernelTypesMatch": true,
+      "sourceClosureFingerprintMatches": true,
+      "earned": true,
+      "status": "formalized-foundation-only"
     }
   ],
-  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-15-282",
+  "canonicalReportCoordinate": "PNP-CANONICAL-FORMAL-RECONSTRUCTION-REPORT-2026-10-16-283",
   "canonicalReportSource": "canonical_proof_report.tex",
   "canonicalReportPdf": "canonical_proof_report.pdf",
   "canonicalReportDerivedFromLeanInventory": true

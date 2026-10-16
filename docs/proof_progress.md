@@ -2,19 +2,19 @@
 
 The project reports two independent measurements. They answer different questions and must never be combined.
 
-Formal artefact coverage: 258 of 260 current scoped publication rows earned.
+Formal artefact coverage: 259 of 261 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
-At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-15-282`, 258 of 260 current scoped rows are earned, or 99.2 percent of that evidence ledger.
+At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283`, 259 of 261 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical difficulty, and the denominator can grow when dependencies are discovered or decomposed.
 
-M282 closes the connection from the actual complete normalized source system to a model-preserving repeated residual reduction and checked encoded certificate recovery. Its original-input verdict is sound but partial: positive-dimensional stopped cores remain unknown, and stopping proves only exhaustion of the computed selector menu. The linear number-of-steps bound is not a complete encoded-runtime theorem. Useful all-input progress, whole-contraction-class coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
-See the [partial residual reduction and its limits](./lean_residual_reducer.md).
+M283 removes the supplied finite-menu eligibility boundary for the complete balanced selected-source-scalar quadratic contraction class and connects the exact semantic criterion to the actual decoder. It does not construct a useful contraction on every input or decide an exhausted residual core, and does not prove complete encoded-runtime bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
+See the [exact contraction class and its limits](./lean_source_contraction_class.md).
 
 ## Risk-weighted proof completion estimate
 
