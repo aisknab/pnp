@@ -30,6 +30,7 @@ on:
       - 'audits/lean-*.test.mjs'
       - 'audits/fixtures/serialized-normalizer-source-contract0.json'
       - 'audits/fixtures/residual-reducer-source-contract0.json'
+      - 'audits/fixtures/source-contraction-runtime-source-contract0.json'
       - 'audits/formal-publication0.test.mjs'
       - 'docs/lean_*.md'
       - 'docs/plans/*.md'
@@ -56,7 +57,7 @@ concurrency:
 jobs:
   lean-bridge:
     runs-on: ubuntu-24.04
-    timeout-minutes: 180
+    timeout-minutes: 210
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -3455,6 +3456,11 @@ jobs:
             lake env lean -DwarningAsError=true "lean-regression/PNP${name}Probe.lean"
           done
           node --test audits/lean-{fixed-window-coverage-obstruction,growing-window-universe-bound}{0,-publication0}.test.mjs
+      - name: Verify polynomial source construction and witness replay
+        run: |
+          set -euo pipefail
+          npm run audit:m284
+          node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionRuntimeAxiomAudit.lean
       - name: Verify source-scalar quadratic contraction class
         run: |
           set -euo pipefail

@@ -15,7 +15,7 @@ import {
 
 const CHECKER = 'CheckFormalReconstructionStatus0';
 const VERSION = 0;
-const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283';
+const COORDINATE = 'PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-18-284';
 const STATUS_PATH = 'status/FORMAL_RECONSTRUCTION_STATUS.json';
 const SITE_PATH = 'public/pnp-status.json';
 const OUTPUT_PATH = 'artifacts/formal-reconstruction-status/latest-verdict.json';
@@ -59,6 +59,8 @@ const LOCKED_NAND_THRESHOLD_MISSING_INSTANTIATION_INVENTORY =
   Object.freeze([]);
 
 const VERIFICATION_COMMANDS = Object.freeze([
+  "npm run audit:m284",
+  "node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionRuntimeAxiomAudit.lean",
   "npm run audit:m283",
   "node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionClassAxiomAudit.lean",
   "lake env lean -DwarningAsError=true lean-regression/PNPSourceContractionClass.lean",
@@ -3250,6 +3252,29 @@ const EXACT_FIELDS = Object.freeze({
   leanContextAwareSquareTransportPolynomialRuntimeProved: false,
   leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority: false,
   leanContextAwareSquareTransportScope: 'arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime',
+  leanSourceContractionPhaseRuntimeFormalized: true,
+  leanSourceContractionPhaseRuntimeAxiomAuditPassed: true,
+  leanSourceContractionPhaseRuntimeAuditedDeclarationCount: 14,
+  leanSourceContractionPhaseRuntimeSourceOutputTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output",
+  leanSourceContractionPhaseRuntimeSourceHaltingTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_halts",
+  leanSourceContractionPhaseRuntimeSourceSizeTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output_size",
+  leanSourceContractionPhaseRuntimeSatisfiabilityTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_satisfiability",
+  leanSourceContractionPhaseRuntimeReplayOutputTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output",
+  leanSourceContractionPhaseRuntimeCertificateTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate",
+  leanSourceContractionPhaseRuntimeOriginalInputBoundTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate_runtime",
+  leanSourceContractionPhaseRuntimeProjectBoundTheorem: "PNP.Concrete.ResidualReduction.SourceReplayEndpointBudget.native_project_run",
+  leanSourceContractionPhaseRuntimeModelRoundtripTheorem: "PNP.Concrete.ResidualReduction.SourceReplayEndpointGenerated.project_recover_model",
+  leanSourceContractionPhaseRuntimeUnknownBoundaryTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.unresolved_remains_unknown",
+  leanSourceContractionPhaseRuntimeAllRawInputsCovered: true,
+  leanSourceContractionPhaseRuntimeActualSourceHistoryDerived: true,
+  leanSourceContractionPhaseRuntimePhysicalFiniteMachinesProved: true,
+  leanSourceContractionPhaseRuntimeOriginalEncodedInputBoundsProved: true,
+  leanSourceContractionPhaseRuntimeTerminalModelStillRequired: true,
+  leanSourceContractionPhaseRuntimeAdditionalRequestAssemblerProved: false,
+  leanSourceContractionPhaseRuntimeAllInputResidualDecisionProved: false,
+  leanSourceContractionPhaseRuntimeUnconditionalZeroSlackProved: false,
+  leanSourceContractionPhaseRuntimeExactPolynomialPCCMinProved: false,
+  leanSourceContractionPhaseRuntimeScope: "all-bitstring-closed-source-construction-polynomial-physical-time-and-output-source-derived-history-exact-closed-replay-original-input-runtime-source-checker-accepted-recovered-certificate-terminal-model-still-required-unknown-preserved-no-complete-solver",
   leanSourceScalarQuadraticContractionClassFormalized: true,
   leanSourceScalarQuadraticContractionClassAxiomAuditPassed: true,
   leanSourceScalarQuadraticContractionClassAuditedDeclarationCount: 10,
@@ -6763,6 +6788,29 @@ export async function CheckFormalReconstructionStatus0(options = {}) {
       leanContextAwareSquareTransportPolynomialRuntimeProved: false,
       leanContextAwareSquareTransportRuntimeExecutionIsProofAuthority: false,
       leanContextAwareSquareTransportScope: 'arbitrary-finite-nested-supports-all-open-boundary-valuations-computed-internalized-wire-substitution-selected-gate-and-interface-preservation-identity-composition-four-corner-path-equality-retained-full-and-quotient-realizer-outputs-no-arbitrary-observer-equality-or-charge-gluing-or-global-runtime',
+      leanSourceContractionPhaseRuntimeFormalized: true,
+      leanSourceContractionPhaseRuntimeAxiomAuditPassed: true,
+      leanSourceContractionPhaseRuntimeAuditedDeclarationCount: 14,
+      leanSourceContractionPhaseRuntimeSourceOutputTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output",
+      leanSourceContractionPhaseRuntimeSourceHaltingTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_halts",
+      leanSourceContractionPhaseRuntimeSourceSizeTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output_size",
+      leanSourceContractionPhaseRuntimeSatisfiabilityTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_satisfiability",
+      leanSourceContractionPhaseRuntimeReplayOutputTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output",
+      leanSourceContractionPhaseRuntimeCertificateTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate",
+      leanSourceContractionPhaseRuntimeOriginalInputBoundTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate_runtime",
+      leanSourceContractionPhaseRuntimeProjectBoundTheorem: "PNP.Concrete.ResidualReduction.SourceReplayEndpointBudget.native_project_run",
+      leanSourceContractionPhaseRuntimeModelRoundtripTheorem: "PNP.Concrete.ResidualReduction.SourceReplayEndpointGenerated.project_recover_model",
+      leanSourceContractionPhaseRuntimeUnknownBoundaryTheorem: "PNP.Concrete.ResidualReduction.SourceReductionRuntime.unresolved_remains_unknown",
+      leanSourceContractionPhaseRuntimeAllRawInputsCovered: true,
+      leanSourceContractionPhaseRuntimeActualSourceHistoryDerived: true,
+      leanSourceContractionPhaseRuntimePhysicalFiniteMachinesProved: true,
+      leanSourceContractionPhaseRuntimeOriginalEncodedInputBoundsProved: true,
+      leanSourceContractionPhaseRuntimeTerminalModelStillRequired: true,
+      leanSourceContractionPhaseRuntimeAdditionalRequestAssemblerProved: false,
+      leanSourceContractionPhaseRuntimeAllInputResidualDecisionProved: false,
+      leanSourceContractionPhaseRuntimeUnconditionalZeroSlackProved: false,
+      leanSourceContractionPhaseRuntimeExactPolynomialPCCMinProved: false,
+      leanSourceContractionPhaseRuntimeScope: "all-bitstring-closed-source-construction-polynomial-physical-time-and-output-source-derived-history-exact-closed-replay-original-input-runtime-source-checker-accepted-recovered-certificate-terminal-model-still-required-unknown-preserved-no-complete-solver",
       leanSourceScalarQuadraticContractionClassFormalized: true,
       leanSourceScalarQuadraticContractionClassAxiomAuditPassed: true,
       leanSourceScalarQuadraticContractionClassAuditedDeclarationCount: 10,

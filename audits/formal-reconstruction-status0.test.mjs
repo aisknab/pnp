@@ -68,12 +68,21 @@ test('formal reconstruction status caches only exact publication analysis', asyn
     );
     const realParse = JSON.parse;
     let inventoryParses = 0;
-    t.mock.method(JSON, 'parse', function (...args) {
+    const parseSpy = t.mock.method(JSON, 'parse', function (...args) {
       const value = Reflect.apply(realParse, this, args);
       if (value?.kind === 'PNPLeanTheoremInventory0') inventoryParses += 1;
       return value;
     });
-    const run = (root = fixture, options = {}) => check({ root, writeOutput: false, ...options });
+    const run = async (root = fixture, options = {}) => {
+      try {
+        return await check({ root, writeOutput: false, ...options });
+      } finally {
+        // The mock retains arguments and returned objects. Keep the independent
+        // parse counter, not full inventory copies from every completed call.
+        parseSpy.mock.resetCalls();
+        assert.equal(parseSpy.mock.calls.length, 0);
+      }
+    };
     const accepted = async (root = fixture, options = {}) => {
       const out = await run(root, options);
       assert.equal(out.tag, 'accept', JSON.stringify(out));

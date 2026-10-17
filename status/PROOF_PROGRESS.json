@@ -2,8 +2,8 @@
   "kind": "PNPProofProgress0",
   "version": 0,
   "modelId": "fixed-risk-weighted-checkpoints-v0",
-  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283",
-  "lastReviewedDate": "2026-10-16",
+  "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-18-284",
+  "lastReviewedDate": "2026-10-18",
   "proofCompletion": {
     "label": "risk-weighted proof completion estimate",
     "pointsEarned": 40,
@@ -17,8 +17,8 @@
   },
   "formalArtefactCoverage": {
     "label": "formal artefact coverage",
-    "earnedRows": 259,
-    "totalRows": 261,
+    "earnedRows": 260,
+    "totalRows": 262,
     "percentRoundedOneDecimal": 99.2,
     "isProofCompletionMetric": false,
     "denominatorCanGrow": true
@@ -4418,6 +4418,23 @@
       "changedCheckpointIds": [],
       "changeRecords": [],
       "rationale": "M283 removes the supplied finite-menu eligibility boundary for the complete balanced selected-source-scalar quadratic contraction class and connects the exact semantic criterion to the actual decoder. It does not construct a useful contraction on every input or decide an exhausted residual core, and does not prove complete encoded-runtime bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 259 of 261 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
+    },
+    {
+      "kind": "milestone-review",
+      "asOfCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-18-284",
+      "formalArtefactCoverage": {
+        "earnedRows": 260,
+        "totalRows": 262
+      },
+      "riskWeightedProofCompletionPercent": 40,
+      "uncertaintyLowPercent": 20,
+      "uncertaintyHighPercent": 40,
+      "globalGatesClosed": 0,
+      "globalGatesAvailable": 5,
+      "scoreChanged": false,
+      "changedCheckpointIds": [],
+      "changeRecords": [],
+      "rationale": "M284 retires the encoded-construction and physical-runtime obligations for the source-contraction phase and closed-request witness replay. The remaining core is not solved, a genuine terminal model is still required for certificate recovery, and a further request-assembly machine is not claimed. These endpoint bounds are not the complete PCCMin algorithm or its unconditional runtime and exactness proof. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged. Formal artefact coverage: 260 of 262 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5."
     }
   ],
   "nonClaims": [
