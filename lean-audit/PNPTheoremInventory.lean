@@ -64,6 +64,20 @@ private def isProjectDeclaration (env : Environment) (name : Name) : Bool :=
 
 set_option maxRecDepth 100000 in
 private def reviewedMilestoneTheoremNames : Array Name := #[
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate_runtime,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.recovery_output,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_halts,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output_size,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_halts,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output_size,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_satisfiability,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_system_output,
+  `PNP.Concrete.ResidualReduction.SourceReductionRuntime.unresolved_remains_unknown,
+  `PNP.Concrete.ResidualReduction.SourceReplayEndpointBudget.native_project_run,
+  `PNP.Concrete.ResidualReduction.SourceReplayEndpointGenerated.project_recover_model,
   `PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu,
   `PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction,
   `PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart,

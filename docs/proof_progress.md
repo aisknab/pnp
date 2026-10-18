@@ -2,19 +2,19 @@
 
 The project reports two independent measurements. They answer different questions and must never be combined.
 
-Formal artefact coverage: 259 of 261 current scoped publication rows earned.
+Formal artefact coverage: 260 of 262 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
 ## Formal artefact coverage
 
-At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-16-283`, 259 of 261 current scoped rows are earned, or 99.2 percent of that evidence ledger.
+At `PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-18-284`, 260 of 262 current scoped rows are earned, or 99.2 percent of that evidence ledger.
 
 This is not proof completion. Rows are not equal units of mathematical difficulty, and the denominator can grow when dependencies are discovered or decomposed.
 
-M283 removes the supplied finite-menu eligibility boundary for the complete balanced selected-source-scalar quadratic contraction class and connects the exact semantic criterion to the actual decoder. It does not construct a useful contraction on every input or decide an exhausted residual core, and does not prove complete encoded-runtime bounds. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
-See the [exact contraction class and its limits](./lean_source_contraction_class.md).
+M284 retires the encoded-construction and physical-runtime obligations for the source-contraction phase and closed-request witness replay. The remaining core is not solved, a genuine terminal model is still required for certificate recovery, and a further request-assembly machine is not claimed. These endpoint bounds are not the complete PCCMin algorithm or its unconditional runtime and exactness proof. No fixed load-bearing checkpoint changes state; weights, checkpoint statuses, proof estimate and uncertainty are unchanged.
+See the [polynomial phase and its remaining solver boundary](./lean_source_contraction_runtime.md).
 
 ## Risk-weighted proof completion estimate
 

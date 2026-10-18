@@ -5,9 +5,23 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '919a024f773b8fc1bf21aa3cf607fa60289a5c478941af5eae0537194fead93b';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = '32e151105021cfb6deee58ce93d02039cb8fb68039ece36f7056db77a09a1387';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate_runtime",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recovery_output",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_halts",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output_size",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_halts",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output_size",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_satisfiability",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_system_output",
+  "PNP.Concrete.ResidualReduction.SourceReductionRuntime.unresolved_remains_unknown",
+  "PNP.Concrete.ResidualReduction.SourceReplayEndpointBudget.native_project_run",
+  "PNP.Concrete.ResidualReduction.SourceReplayEndpointGenerated.project_recover_model",
   "PNP.Concrete.ResidualReduction.SourceClass.coefficient_implies_menu",
   "PNP.Concrete.ResidualReduction.SourceClass.decode_encode_eq_retraction",
   "PNP.Concrete.ResidualReduction.SourceClass.globalStep_complete_for_chart",
@@ -4874,7 +4888,7 @@ function validatePublicationMap0(map) {
       || !isObject0(map.gate) || !Array.isArray(map.milestones)) {
     throw new Error('formal publication map shape mismatch');
   }
-  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-16-283') {
+  if (map.coordinate !== 'PNP-FORMAL-PUBLICATION-MAP-2026-10-18-284') {
     throw new Error('formal publication map coordinate mismatch');
   }
   if (map.gate.compatibilityRootName !== 'PNP.Main.p_eq_np'

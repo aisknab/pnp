@@ -15,6 +15,7 @@ const PINNED_TOOLCHAIN_IMPORTS = new Set([
   'Init.Data.List.Erase',
   'Init.Data.List.FinRange',
   'Init.Data.List.Sort.Lemmas',
+  'Lean',
   'Std',
 ]);
 
@@ -179,7 +180,7 @@ test('PNP root import closure covers every tracked Lean source module', async ()
 
 test('root closure separates reviewed pinned-toolchain imports from project source', () => {
   const sources = {
-    'lean/PNP.lean': 'import PNP.Leaf\nimport Init.Data.List.FinRange\nimport Std\n',
+    'lean/PNP.lean': 'import PNP.Leaf\nimport Init.Data.List.FinRange\nimport Std\nimport Lean\n',
     'lean/PNP/Leaf.lean': 'import Init.Data.List.Erase\nimport Init.Data.List.FinRange\n',
   };
   assert.deepEqual(importClosure0(sources, 'PNP'), Object.keys(sources).sort());
@@ -191,6 +192,7 @@ test('root closure still rejects unknown external imports and missing project mo
     'Init.Data.List.Unreviewed',
     'Init.Data.List.Erase.Unreviewed',
     'Std.Unreviewed',
+    'Lean.Unreviewed',
   ]) {
     assert.throws(() => importClosure0({
       'lean/PNP.lean': 'import ' + moduleName + '\n',
@@ -230,7 +232,7 @@ test('Lean workflow pins the installer and performs one real explicit-root build
     text0('scripts/export-lean-theorem-inventory.mjs'),
   ]);
   assert.match(workflow, /runs-on: ubuntu-24\.04/u);
-  assert.match(workflow, /timeout-minutes: 180/u);
+  assert.match(workflow, /timeout-minutes: 210/u);
   assert.match(workflow, /actions\/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0/u);
   assert.match(workflow, /leanprover\/elan\/releases\/download\/v4\.2\.3\/elan-x86_64-unknown-linux-gnu\.tar\.gz/u);
   assert.match(workflow, /df0b2b3a439961ffcbb3985214365ffe40f49bc871df04dff268c7d8e21ca8b2/u);
@@ -334,6 +336,7 @@ const EXPECTED_LEAN_TRIGGER_PATHS0 = Object.freeze([
   "audits/lean-*.test.mjs",
   "audits/fixtures/serialized-normalizer-source-contract0.json",
   "audits/fixtures/residual-reducer-source-contract0.json",
+  "audits/fixtures/source-contraction-runtime-source-contract0.json",
   "audits/formal-publication0.test.mjs",
   "docs/lean_*.md",
   "docs/plans/*.md",

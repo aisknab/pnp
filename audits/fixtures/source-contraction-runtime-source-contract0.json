@@ -1,0 +1,1845 @@
+{
+  "kind": "PNPSourceContractionRuntimeSourceContract0",
+  "version": 0,
+  "reviewedCoordinate": "PNP-FORMAL-RECONSTRUCTION-STATUS-2026-10-18-284",
+  "allowedAxioms": [
+    "propext",
+    "Quot.sound"
+  ],
+  "requiredRootImports": [
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime",
+    "PNP.Concrete.ResidualReduction.CoefficientComparisonRegression",
+    "PNP.Concrete.ResidualReduction.MatrixColumnRegression",
+    "PNP.Concrete.ResidualReduction.MatrixKernelRegression",
+    "PNP.Concrete.ResidualReduction.MatrixPolynomialSolverRegression",
+    "PNP.Concrete.ResidualReduction.MatrixSolutionMapRegression",
+    "PNP.Concrete.ResidualReduction.MatrixSolutionRegression",
+    "PNP.Concrete.ResidualReduction.MatrixSweepRegression",
+    "PNP.Concrete.ResidualReduction.SourceActivityConstructionRegression",
+    "PNP.Concrete.ResidualReduction.SourceAffineOutputRegression",
+    "PNP.Concrete.ResidualReduction.SourceAffineSearchRegression",
+    "PNP.Concrete.ResidualReduction.SourceAxisWitnessRegression",
+    "PNP.Concrete.ResidualReduction.SourceBilinearPullbackRegression",
+    "PNP.Concrete.ResidualReduction.SourceBilinearSearchRegression",
+    "PNP.Concrete.ResidualReduction.SourceCandidateSearchRegression",
+    "PNP.Concrete.ResidualReduction.SourceCandidateSelectionRegression",
+    "PNP.Concrete.ResidualReduction.SourceChartFamilyRegression",
+    "PNP.Concrete.ResidualReduction.SourceChartRegression",
+    "PNP.Concrete.ResidualReduction.SourceChartedSuccessorRegression",
+    "PNP.Concrete.ResidualReduction.SourceCoefficientGateRegression",
+    "PNP.Concrete.ResidualReduction.SourceComputedTailRegression",
+    "PNP.Concrete.ResidualReduction.SourceDirectionRegression",
+    "PNP.Concrete.ResidualReduction.SourceFamilyReductionRegression",
+    "PNP.Concrete.ResidualReduction.SourceHistoryRegression",
+    "PNP.Concrete.ResidualReduction.SourceLineMatrixRegression",
+    "PNP.Concrete.ResidualReduction.SourceLineOutputRegression",
+    "PNP.Concrete.ResidualReduction.SourceLinePullbackRegression",
+    "PNP.Concrete.ResidualReduction.SourceLineQueryMatricesRegression",
+    "PNP.Concrete.ResidualReduction.SourceLineSolverRegression",
+    "PNP.Concrete.ResidualReduction.SourceLineWitnessRegression",
+    "PNP.Concrete.ResidualReduction.SourceMatrixRowRegression",
+    "PNP.Concrete.ResidualReduction.SourceMenuFamilyRegression",
+    "PNP.Concrete.ResidualReduction.SourceMenuInsertionRegression",
+    "PNP.Concrete.ResidualReduction.SourceMenuSortRegression",
+    "PNP.Concrete.ResidualReduction.SourceNativeAssemblyRegression",
+    "PNP.Concrete.ResidualReduction.SourceNativeEnvelopeRegression",
+    "PNP.Concrete.ResidualReduction.SourceNativeRegression",
+    "PNP.Concrete.ResidualReduction.SourceNativeSystemRegression",
+    "PNP.Concrete.ResidualReduction.SourceNativeTermsRegression",
+    "PNP.Concrete.ResidualReduction.SourceOrderedCandidateRegression",
+    "PNP.Concrete.ResidualReduction.SourceOrderedScanRegression",
+    "PNP.Concrete.ResidualReduction.SourceOriginalSuccessorRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlaneLiftRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlaneMatrixRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlaneMenuRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlanePartnerRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlanePipelineRegression",
+    "PNP.Concrete.ResidualReduction.SourcePlaneSolverRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolarFamilyRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialAffineQueryRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialDirectionRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialLineQueryRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialMatrixRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialMenuRegression",
+    "PNP.Concrete.ResidualReduction.SourcePolynomialPlaneQueryRegression",
+    "PNP.Concrete.ResidualReduction.SourceQuadraticRegression",
+    "PNP.Concrete.ResidualReduction.SourceQuadraticTailRegression",
+    "PNP.Concrete.ResidualReduction.SourceRawSelectorRegression",
+    "PNP.Concrete.ResidualReduction.SourceReductionEncodingRegression",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntimeRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayDataRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointClosedRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointExecuteRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointLoadRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointPhysicalRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointRunRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayHistoryRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayLoopRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayParserRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayRecordMachineRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayRecordRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayRecordStackRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayStepRegression",
+    "PNP.Concrete.ResidualReduction.SourceReplayTraversalRegression",
+    "PNP.Concrete.ResidualReduction.SourceRowReductionRegression",
+    "PNP.Concrete.ResidualReduction.SourceScalarRegression",
+    "PNP.Concrete.ResidualReduction.SourceSelectorAssemblyRegression",
+    "PNP.Concrete.ResidualReduction.SourceSelectorDispatchRegression",
+    "PNP.Concrete.ResidualReduction.SourceWitnessSelectionRegression"
+  ],
+  "auditedTheorems": [
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate_runtime",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recovery_output",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_halts",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.replay_output_size",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_halts",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_output_size",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_satisfiability",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.source_system_output",
+    "PNP.Concrete.ResidualReduction.SourceReductionRuntime.unresolved_remains_unknown",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointBudget.native_project_run",
+    "PNP.Concrete.ResidualReduction.SourceReplayEndpointGenerated.project_recover_model"
+  ],
+  "newSources": [
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/CoefficientComparison.lean",
+      "sourceContractSha256": "723d8642958e46541c21224873db0dfb10090edd7c8d75ab20b591248ba102c7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/CoefficientComparisonRegression.lean",
+      "sourceContractSha256": "0059381cf3125d8a9309fdbdffed6339091a0c4a2a62fd90843a44f3950faf60"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixColumnInstructions.lean",
+      "sourceContractSha256": "27ee7e41767f346174d467169238ebfa27695484f8219216689baf903090cf3d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixColumnRegression.lean",
+      "sourceContractSha256": "1f0ee79798b9503de94dd0cb4ce3db6e7db146ff54bdd532e45b62fccc121e9d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixCountedPayload.lean",
+      "sourceContractSha256": "00ea3a97c1c469bc4879b518950242eacb9d9e8228d0d3685ee5913e8672f126"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixEncodedSolver.lean",
+      "sourceContractSha256": "b569cc77a327c40858ec58d39eb997d9cd9ba62f6dff304bb931dbc0c4883933"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixFeasibilityInstructions.lean",
+      "sourceContractSha256": "56538729de8b551d0c52d1bd69090c5829e47421211dab1928ffb6a2fdca9478"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixFreeInstructions.lean",
+      "sourceContractSha256": "59ebb5d0fb5eafec328a22a475796527799449b227a29cd42d365c5e8c9c3916"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixHomogeneousInstructions.lean",
+      "sourceContractSha256": "b0cc0b6a2ab4d153d875fc480137bc2c689c7280cf55261bdd25f0d119cfd1cf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputConsumer.lean",
+      "sourceContractSha256": "c11561371f4efb3b86d93ae5b90ce15932e8f117e138f15dc852e02e9b7d62f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputEncoding.lean",
+      "sourceContractSha256": "55f40962405ee844aa97859862b58475799831f1caf1f76362976c00ff09db57"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputFields.lean",
+      "sourceContractSha256": "ebf850ed0b914c652d1b5beed1b6c453bc947c4bdbf466ad1cba1f1be0500f47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputHeaders.lean",
+      "sourceContractSha256": "38de4a4d0f177b2c91c4228dc121be5b9a6183a0c967b417af1f5c777ebe0cd1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputPayload.lean",
+      "sourceContractSha256": "ab90473f90bb8ca33d53e18625992908289206f3e6dc15e62c4e0d352d71e43a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixInputPreparation.lean",
+      "sourceContractSha256": "3fbd78389fdd66be1ccecc321ea0741ef1b7fd1a0e6cb920d679dfe19e869a17"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixKernelRegression.lean",
+      "sourceContractSha256": "7e7838ac09616b3ea61d5653a5abd738b1d03bcf33ae8303cbc6ec306b977df4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixKernelSolver.lean",
+      "sourceContractSha256": "fdbb0dbf8bc420eb56f970c7658c06ecdb7a9ea559499ba9fd811542f698c1b1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixLinearCombinationInstructions.lean",
+      "sourceContractSha256": "76364ee7f398c720a764b891feab6f74df9b002f9d4c2990e73199bfbd4fc888"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPayloadCounter.lean",
+      "sourceContractSha256": "9c4e41ddd11369a77483e8fa673263494313c5ae531775ddbc8c38ac8c474df9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPivotInstructions.lean",
+      "sourceContractSha256": "b8ce49cad0e671fe6368cdfc35c4fb6ac8e5ced20cbdbc3e9593d36582b23b16"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPivotMapInstructions.lean",
+      "sourceContractSha256": "8823e76be4eb578b7f715054fc56d32dab57e07791514af21055167adbd666c4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPolynomialSolver.lean",
+      "sourceContractSha256": "ff22c7beef26fdd000fdb1bafc21fa2648640802602579050e18c33024f9c4a6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPolynomialSolverRegression.lean",
+      "sourceContractSha256": "6daa9a330ddb94fa5a80cdf67dba76221119a5ed647e18444c837e49bef391d4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPullbackAlgebra.lean",
+      "sourceContractSha256": "c896301aa090cb933cd8c8ab8c9c1eee6be05b904a8f5c1b190d14293d20d76c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixPullbackInstructions.lean",
+      "sourceContractSha256": "2d1ee448f4742c0d016218bc22337e99d81f8b070ebc4d9d2b081217a55ceabb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixReconstructionLoop.lean",
+      "sourceContractSha256": "52aa7e729d1b54928b8f26dd6dc4b674f46a99b981b2c7815ea68da03cbc9551"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixReconstructionStep.lean",
+      "sourceContractSha256": "b5bf537e117e46083cbb4bfa3382b1be56c8b0acbc67e79c416072152b888ec2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixRowInstructions.lean",
+      "sourceContractSha256": "440daf11c3e0d67fc5106599c5df26f0d99a2ec7ed995072929c2f092b3bb6a5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionEncoding.lean",
+      "sourceContractSha256": "12f03b551d1f315dd13d4e556b8461709452407d0e6b99c0a46d949eeb2073bc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionHistory.lean",
+      "sourceContractSha256": "b6e5c6e6924e76e737c72827841bab7617779ba8fcca40236d42a0ee12783220"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionInstructions.lean",
+      "sourceContractSha256": "78683e55b62363faacc0d0e7451b0fd623ab645a36f0c63baf5505c6ddd3f3d7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionMapRegression.lean",
+      "sourceContractSha256": "1d51201116dfb13f829835fb31495deb36d1da3fe702f97e8b44987d27f96175"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionRegression.lean",
+      "sourceContractSha256": "694b008bbac6ee9e5880e696ec9c2fc879aa21f7e6a98bc309481772019f0851"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSolutionSerialization.lean",
+      "sourceContractSha256": "fa43d49b3e02ebd8f2362d4cc545637519539151fdb13c2e4290e01771b61c98"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixStrictHeader.lean",
+      "sourceContractSha256": "43882bfc5edb0130477735626e3fbc38c6152a184b8459c6354b675a48a5ba2a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSweepLoop.lean",
+      "sourceContractSha256": "744cc5ab4b6d7d0102452116100d512468619eb16470719c04c4f83c97169562"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSweepRegression.lean",
+      "sourceContractSha256": "31d7eb05239dcb5af00d9844806de0046675aec7a89f237e8fba9cf379f5c0bd"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/MatrixSweepStep.lean",
+      "sourceContractSha256": "bfea2670dde593d44327794ece689e1e91051bec9bf04bfaea2eca6301c49272"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityCoefficientInstructions.lean",
+      "sourceContractSha256": "c36a37b4214207e8c0e76be0bfafb2c69976160f505c498743e26a28e3c212af"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityConstruction.lean",
+      "sourceContractSha256": "109529a8698e0cd77e166b0e2e2e1b625f4edd80398c42387bc0f24b20d275b5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityConstructionRegression.lean",
+      "sourceContractSha256": "aab4cc7f5d203a37058223e917bcd8108f2318a479687e57d4d6a1c3939abb7c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityFamilyInstructions.lean",
+      "sourceContractSha256": "4460e5b65ba879e0d7e064364634184059ee9e81a3b89939c827d0095f925c91"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityInstructions.lean",
+      "sourceContractSha256": "a1a5c7c139d356a9572284fccb2d9e965ef502f5a388f9fce07b4591e9a1c363"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityMapAlgebra.lean",
+      "sourceContractSha256": "34c203eda82c4ac852c87962a38676978c1be210ca2e8b587b6f12c917d6d6a0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityRowInstructions.lean",
+      "sourceContractSha256": "db58feb4ec660c47e1ea87cb71933cf0f807e4919e73737099ddf7c473281b4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineEncodedSearch.lean",
+      "sourceContractSha256": "9c79e30df162f42ea6d577b158ffac5b5cf2c785d15edc8fceb8b598568e1873"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineInputBridge.lean",
+      "sourceContractSha256": "7ccdf8a467ac7169b253c135abd72471580c43ab8b9bba5fc24170011894690e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineOutputInstructions.lean",
+      "sourceContractSha256": "258bb2b8025da8f2a4433ff7d461e45167d05808574b5be1e0d4e7375b595590"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineOutputRegression.lean",
+      "sourceContractSha256": "2e184b5b6c13fca3e7c5fc7449e8f1da3340300e01fe6147fd1b916800d21122"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineRawQuery.lean",
+      "sourceContractSha256": "7635447f5905fc90844b8ba3bee69244d6995072c7d3d46082dfc8acc4fc5ebb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSearchCorrectness.lean",
+      "sourceContractSha256": "f51a36ab154feceafd8b363ea71427cb90e66cd8c99457fc8eac3728573bc187"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSearchInstructions.lean",
+      "sourceContractSha256": "b11c681ad0bc815970ada36d54f754618bfef46b819d98d3e8588faa461ce4d1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSearchLoop.lean",
+      "sourceContractSha256": "1f379936a9f9dc873f5fc2f2390e06ac7bcf34f0c53678a7ac7b2e7d118dd218"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSearchRegression.lean",
+      "sourceContractSha256": "cb44ddef66b33113ad9cbcc250a018895e10683b8545b8d4079eb1ef252e5cbe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSearchWitness.lean",
+      "sourceContractSha256": "fa3ba3a8183aa38028ace8c15ce91f0a8bd33c03bd101a2513d1b7d9bcea88d7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffineSolverBridge.lean",
+      "sourceContractSha256": "176175b43773c78af83ac66035881e2b8b50f586031a60b8f0ef3a80f8b118b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAxisWitnessAlgebra.lean",
+      "sourceContractSha256": "991382018b6f328b4c808f2071f4712bba537a4351dfdc2f2f65f85612b480bd"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAxisWitnessInstructions.lean",
+      "sourceContractSha256": "c4458db2cc0ee70d552640f48e381bf112304a8f0d6719a2904a0ebd76a96628"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAxisWitnessRegression.lean",
+      "sourceContractSha256": "89ac95feb6a9d71dfd9eb8adf822f201c9f43f19e1b503b1ada476987f740709"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearEvaluationInstructions.lean",
+      "sourceContractSha256": "558219cc3850f16cd00b005544f612d69037b1e0e8c7149cd6d28610e14ae43a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearFamily.lean",
+      "sourceContractSha256": "ef430c2403a7d79d730de1a5fce2782357e8178cd8f8371f8e274fbd0da6b3ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearMatrixInstructions.lean",
+      "sourceContractSha256": "1c18b4ceecb4b7e4085e385459647846bec697bfea72e41a235fe78f837f857d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearPullbackEntry.lean",
+      "sourceContractSha256": "9c4219947e45ebada71700ce2bdd77df0c09394d5004bdc41f241d57a0682126"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearPullbackInstructions.lean",
+      "sourceContractSha256": "fd03dbcdea707434d412a707b65595597bd27a58ec85e954db5b46ae066713b6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearPullbackRegression.lean",
+      "sourceContractSha256": "d69b6cf603cdab5c450c23b8b8186cca15dd02db583f214412b2ddfe36ccea2a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearRowInstructions.lean",
+      "sourceContractSha256": "358b41da811ee0fbce1b8ca1835d5494a66d82500cf08ee94cf637eef87251e6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearSearch.lean",
+      "sourceContractSha256": "1fe73800bce43861dd4f232f42f420c73e5349f9d077fdeb82b2793bf56a9aac"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceBilinearSearchRegression.lean",
+      "sourceContractSha256": "8174c219862d92e1eb239476f9e922c95bdafe86fe55bcae37b6883aee481d20"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateBudget.lean",
+      "sourceContractSha256": "9c8e863158fe2df6783d45ed184d0ab8a6b987d47d8bfd219edb0b2979bd4423"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateChoiceAlgebra.lean",
+      "sourceContractSha256": "869ea7fbab0efebb7dfe37b778906a2200b51f7a90c07defac224642cf99d45f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateChoiceInstructions.lean",
+      "sourceContractSha256": "76169774b91dd32e85b58b5865b2131dfe1c8919fbe21a8f5d3df15fcd923f39"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateCorners.lean",
+      "sourceContractSha256": "f955ce7a89d7958ab9aeb21a52ad266ffb11c0630a41a7eea5a8137cfa73ab72"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateDirectionSearch.lean",
+      "sourceContractSha256": "7481564dbd702ba5acb8c5a27884a148f3371ca4e916768cc4a093f89d61429e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateEvaluation.lean",
+      "sourceContractSha256": "f8d3e34199d1d5d4dc984113cfe927ac922b70fd40bba1bf71c74c77d22a0b81"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateLoad.lean",
+      "sourceContractSha256": "2d25802fc49689b1b6324e6729858586dc9a1288e3e3ed9d02c0952497c91d12"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateMapInstructions.lean",
+      "sourceContractSha256": "c5edad6e3eaf619651f0955172e3effc95cc5922dab8716b4104d61916939c08"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateMapLoop.lean",
+      "sourceContractSha256": "4e93145daf0b62f5fda20937c146316e3e9f8572dc4c664aa918ea55ed90e18a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateQueries.lean",
+      "sourceContractSha256": "6e45f9a297b8a07560c530cdf1da572aa650f708413d8f97ecdff317a1c15165"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateSearch.lean",
+      "sourceContractSha256": "424a6b5d0bdaa8b397c6fd6c43c6df6866464fb37240ac9ae0ee34bdb15c66db"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateSearchRegression.lean",
+      "sourceContractSha256": "d4818549f5bf98625581478082bddb40c58bbd3b8ea17bd15998ea1f151c7fc9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateSelection.lean",
+      "sourceContractSha256": "5ca574b19856cc4205f2a14cd4bdb514f6082d46d6977010be89f1c44eb60dcc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCandidateSelectionRegression.lean",
+      "sourceContractSha256": "00bf520d41c23fbbf9294ce648e2fee4c0fa8561385561a8a637c51b481aeb06"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartAffine.lean",
+      "sourceContractSha256": "58d0c05318f84595910419fad1bbef4f95b38f2f937f18e2e79735c40409b15f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartApply.lean",
+      "sourceContractSha256": "fbfdea84a5bceb3fe8830e61145bf11f5ce05741dae6739d546d1a9673ab0920"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartCoordinates.lean",
+      "sourceContractSha256": "8ecd156264062d9e752562b0cd688701db3e41691ee68f0a7243be28ede5dd4a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorBounds.lean",
+      "sourceContractSha256": "39dbbdc0438831216a0a531b7ab12d7a2def606d3aa30fc20c18b57d4eb226f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorFinish.lean",
+      "sourceContractSha256": "64825f6a1fd2bf34b61615902dacd6650eb63efa28ceabe91e11e6947e7895a9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorGate.lean",
+      "sourceContractSha256": "d43022c3a40312327b66eeb20b952a6ba08dc1214716d38df531bb92a1ec3f1f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorInput.lean",
+      "sourceContractSha256": "0e120482af0f98f82c853f13fef68a0322a5c65bba01c85ff4d7c09c91fda67b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorNormals.lean",
+      "sourceContractSha256": "a4dd2543a3a5e5418d0e435ebbb6b50ed11f46bf59f6c6729855af50c399fbc1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorRaw.lean",
+      "sourceContractSha256": "3dcc42d08e28d47382fb378d153f48f891ab10cfb0ec2497516834b27cfff7f1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorRegression.lean",
+      "sourceContractSha256": "9a97f15c0c1b192b8d4e1aef30a4d4eb070e3c20a84796d4c06004714eaaad10"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorScalar.lean",
+      "sourceContractSha256": "4c9821b3cc24824a34eefec25f090d20856c9f1b157b5304c2c4414c111204a3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorState.lean",
+      "sourceContractSha256": "2b02b8c2fd0a92463b2927b80a7315c2cdeb20f1a6c3c20b7e4420cd075b45ca"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorTail.lean",
+      "sourceContractSha256": "1801518a72a567383bb1963077003dcf67412ab1ed0b2772d02f8fc26b908045"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartedSuccessorWords.lean",
+      "sourceContractSha256": "e15e26c828495bd7e7b99860e6633ad6d813aadd4983c5717b924927598cec55"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartFamily.lean",
+      "sourceContractSha256": "b69c71380de679f7d279a2deec5a0dac666f56e46436a2c1cafd1147f2c76710"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartFamilyRegression.lean",
+      "sourceContractSha256": "d3d49d25b1d3cbb8eefdb772d2d6af5a1820dbf3c99191ec65937bdab32dd13d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartRegression.lean",
+      "sourceContractSha256": "b082822094812b37e95e2491171f8f9b7c62ac4b52664059ed3c57ddedac776e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartSelectedFamily.lean",
+      "sourceContractSha256": "11b85dec6ef3525d029c64aa9a01d7c3a39b658ce25e6899daf9e3e0c43f9b85"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartSelection.lean",
+      "sourceContractSha256": "8da15a5d3be78c0a39d666e7623a151d74cba7d39c4ff8a4f54beeeea80c3f3c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChartStream.lean",
+      "sourceContractSha256": "98cc0058ef1bedbb7f771e0ed1e2ba864f8857d06649a96bfbc57b7c192826f5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChoiceEncoding.lean",
+      "sourceContractSha256": "302f2a540165b3822bb833d5c0557e231d26a21b94f67af3902956f69bd40258"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChoiceLine.lean",
+      "sourceContractSha256": "17af7909a8f04f50021a278c87508c3d529a568c16c1cf45ee73dc080324175b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceChoiceOutput.lean",
+      "sourceContractSha256": "d3097331e0223b23d2ffd0298a3fcc7e32a4aa33999d180ba4ec0608101ae565"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientGateHead.lean",
+      "sourceContractSha256": "6e380de624533c65fd5a9d949db2450f8fd3ca06b1c14353ccde22a73d225bc4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientGateRaw.lean",
+      "sourceContractSha256": "7b4a6c57543bfcce8b3baeaa10c6742cbabb50a3500381c3c4ff8faa2a6e173f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientGateRegression.lean",
+      "sourceContractSha256": "39806de0074e7c8c5d9e771d10fd88d07a5829730624f0a7f0210c27fd3cc39e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientGateState.lean",
+      "sourceContractSha256": "ced916070f5405fde05882310a5212701b79ea955b517f18c9ad206ac0b67d1b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientGateTail.lean",
+      "sourceContractSha256": "9064d645039fc549e9642dc705bbc3662ba2a983bdfb92812fe399abf01666f4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceCoefficientInstructions.lean",
+      "sourceContractSha256": "9ab1a5ac52a96ec438ab9999946358f1bf0c4596fbb338ffc541c9e7ca906978"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedTailEncoding.lean",
+      "sourceContractSha256": "c9b83697c84512671f6366b4786aa134b8cd3d4121fe4007872b3adb1ac4e72c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedTailInstructions.lean",
+      "sourceContractSha256": "25e9b0c4f859a82b47fec1fc30b1d111f06282593dacfa96254bce26f267c48f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedTailNormals.lean",
+      "sourceContractSha256": "0cfe254d6efe53b4046b65780fca5352daecde66d433e22e9f3653765567f49c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedTailRegression.lean",
+      "sourceContractSha256": "bc0f53e5ac9fd4a7b0201cb00426211e50a8661435c5b78b1ecfeae80cf3386d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedTailState.lean",
+      "sourceContractSha256": "3f4b760ba2d61ef9fa2cacd8cd7dfd16ad54ded1d33cefc21f2b5841ec37399d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionBudget.lean",
+      "sourceContractSha256": "d61d60a389fe842fa72b80e8969b373f159ec74c281a5fa40e8736b2afed094a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionEncoding.lean",
+      "sourceContractSha256": "759213a34eb1e6d505d41f857a0d7d0fd73835bc82103a56df86ac91810182ae"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionInput.lean",
+      "sourceContractSha256": "f5e5d7c5b6e33af01c4e4705d3f4a766f8c3b1087aaeca9404725894d7e08899"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionInstructions.lean",
+      "sourceContractSha256": "b9da942a40b56f2472db2170dc33fadb0f8bbdb864632f39d888cdff03fadbd2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionLoader.lean",
+      "sourceContractSha256": "5cb62ca910888a9d388b5c83d7c2349d73810ea20bc8c32a99ab110c5eba812e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionRaw.lean",
+      "sourceContractSha256": "3ce89c0c79efad825c408a935e658ea1f3176d0cb0f323da04b6b04fc9b09956"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionRegression.lean",
+      "sourceContractSha256": "8783fc079c285700216e67a8aaace25742091c0362e65cea7f2e10d5acfab224"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceEncodedMatrix.lean",
+      "sourceContractSha256": "aad998c5f4841382e68ff304b3334727ef68e31be89721bd33d01d28d2e17856"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyInput.lean",
+      "sourceContractSha256": "9bc66631900037e3a286e9ced1d9fd8934248a81f552c18765e666481e719102"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyLoader.lean",
+      "sourceContractSha256": "40cb46a419d31723e6c78e2e40a9d016119a0a54889ca23aed8e32b26634152b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionEncoding.lean",
+      "sourceContractSha256": "5af19f75e6ae93a945ba802ea6505183bf0ad4f3f1c54b4898d77de3ed28555b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionInstructions.lean",
+      "sourceContractSha256": "03deeb6d089dc174a670052addccf63c71e8375f78fd86fe7871b452c59e4ede"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionLoad.lean",
+      "sourceContractSha256": "193492b25a3995fde3ad83c1ab3db7d83c9e1135ccbecfad750bd607f06fc54f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionLoop.lean",
+      "sourceContractSha256": "3bf0347badd5fc9d203838710a04e314694f54309e5504b0a59c01f12440cae8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionOutput.lean",
+      "sourceContractSha256": "44c352c1f536cd7bfc4f45ac61688c1f3c7d42b6d6a08ae965e774aa83193ad3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionRaw.lean",
+      "sourceContractSha256": "0fe499fd526f0c6a5ccfd5b82c668b8df74285b5558aa7da28d51f0b06fa4595"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionRegression.lean",
+      "sourceContractSha256": "c4b32ee1788f5c9ef2e56b49b6afe80996aa2eb3b6a54277b5132c8e4740f4c5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionRow.lean",
+      "sourceContractSha256": "7fd94b290e9138c9d722345afeb2b5de128d93463ad47fbde5aa1bb914d19b7b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyReductionState.lean",
+      "sourceContractSha256": "725760dafd9bcbd0c934cd451306c356be1da6e035727e7c34bf9f0928fd0348"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceFamilyTailLoad.lean",
+      "sourceContractSha256": "b2934e4e8a9960a50364d47be355f5301f3820327edab62c4ddcd8737ba40bd9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryAdvance.lean",
+      "sourceContractSha256": "a5acbbc7a89b6f2a149eb2bf5b5bce186ee459d07409fda7bffe74d81106fc41"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryBounds.lean",
+      "sourceContractSha256": "b7c72b264edc69b2451fbfcec8f17dac48b87ef59c386431ee53f1498ac45d37"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryEncoding.lean",
+      "sourceContractSha256": "5df94b269568f6a341d481fb00fe794eebe85a131d92e777d350f2fcc5397736"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryInput.lean",
+      "sourceContractSha256": "2e190410bed216d2204916b4b463766d08abd88f884cd14d92509dbd932f1972"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryLoop.lean",
+      "sourceContractSha256": "6de2ee4c4fe9397138a4fa827b4d1c2aa75da45d6a064887d34b9757f07c2f57"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryOutput.lean",
+      "sourceContractSha256": "a656b6c362afe19d1643bbafef3f0a3708475ababf87f554ae3e01d55998b701"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryPolynomial.lean",
+      "sourceContractSha256": "3358a956561bb1494e477b7c93b73522432889bdb0397d318e4d443c5350bc88"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryQuery.lean",
+      "sourceContractSha256": "9dac41f5305a80cc47725556fd1c20eeffe81d6dfac4806e244758f1ac26ba90"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryRaw.lean",
+      "sourceContractSha256": "fbc598916c74d4a059674df5e26e6c0c1dd80ed4a3c12eee83e15eea48fb9de7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryRecord.lean",
+      "sourceContractSha256": "163c91145cf8c875dba316822709272e51e49a21c9fb058702b15de383afe61b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryRegression.lean",
+      "sourceContractSha256": "0476cbf614bb3c4c62c00885bc16aad8525abb8aabd82adfe7dac8fd6de607c3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceHistoryState.lean",
+      "sourceContractSha256": "ef86fb11b04b25d2dbaac55f3523d32e9df69b161a2a4fd71cf9c2590846013a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinearMapInstructions.lean",
+      "sourceContractSha256": "9d316baad68ce617976bc47b55c6d332db64c28e5a4b8406caa35fe2e617af47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinearMapRowInstructions.lean",
+      "sourceContractSha256": "e14c3e1920071d98c9c5fba6885d5e42ab58bad10e865ffc87cecf19d3c73c74"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineInput.lean",
+      "sourceContractSha256": "9b163e936c3dc9942046797dacb64ab55fdb0250d0b740a11ba3cc0f84488f47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineMatrixAugmentation.lean",
+      "sourceContractSha256": "e5d0924fad617d6ff8bafd19bf4d4d9c904b632c09ea69d4c807489af57f3c04"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineMatrixConstruction.lean",
+      "sourceContractSha256": "5adc045a1aec977851013a38e0fff78172be2f6a779aaf98e78425286a1a20e3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineMatrixEncoding.lean",
+      "sourceContractSha256": "38173f3c32e4451bdc631829b088921f1aa1d2bd70258c0635836612825f769f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineMatrixRegression.lean",
+      "sourceContractSha256": "460d1d1eb1865965bed752e8f8150702f1f2469fd493e521ff6396f8f5e0cb5f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineMatrixRows.lean",
+      "sourceContractSha256": "761ca81c5036734812fb8ce29fb92fc0046408efebf6aac84b586946bf995601"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineOutputEncoding.lean",
+      "sourceContractSha256": "683942060a5b05e01eb4690cb885c34b4103d1283f3059d7c982da54a5059634"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineOutputInstructions.lean",
+      "sourceContractSha256": "6947ea61f96d32283673c08186ea364e3f6fcaa1c9c3f17483972e140a6d6b65"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineOutputRegression.lean",
+      "sourceContractSha256": "89bf905d8592ca9dc1788c46f17dfee9f6f06ab52554aeb96aec62c9cde28e77"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineOutputState.lean",
+      "sourceContractSha256": "9e8b8cf9ae1557cd17d3c4b5e6af111948914cb66911ff81b16781731f40e374"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePreparedQuery.lean",
+      "sourceContractSha256": "32b9938f30eae15eeec2b8dba63616ceef883bc25c6ad0f2db5935076ffcd732"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePullbackBudget.lean",
+      "sourceContractSha256": "f1dbfd6e03289fc5359a9209cd324b83d5b291adeed1a2bd19fa3245f0585e5c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePullbackInstructions.lean",
+      "sourceContractSha256": "50c4a956b0d1d277e8e16ed12160ac374aeab88f8f4847b947815a740ea42322"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePullbackKernels.lean",
+      "sourceContractSha256": "a58989ec86809d6cd5f94072ecd602b587e8856c3790c8bee1754c88b604507c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePullbackRegression.lean",
+      "sourceContractSha256": "5f5cb2b4a3d6e66b474598ef7fbdc2374de86c538adf58e5e4c65f02960dad4d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinePullbackState.lean",
+      "sourceContractSha256": "e5a0663e0d0952694193f523afcc3ef26c2ac59beaa96b073d7e1588a434eb0b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineQueryMatrices.lean",
+      "sourceContractSha256": "ac308843a921c25353f79a026a06dc51454c7baa7d015c393dcf950d69de1508"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineQueryMatricesRegression.lean",
+      "sourceContractSha256": "614fc6a67d330eb662e5a68380b51920c5bd5f514745ba5184b0c0fb078a1e11"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineQueryMatrixAlgebra.lean",
+      "sourceContractSha256": "ebc328fbf5b28e7ebf43b63d6a37efdc98f86a77e6bbe80f86166a3693fa9a15"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineQueryMatrixPadding.lean",
+      "sourceContractSha256": "d2b292e0e585874133708cdfd1b6b2446f423711b9f72159faca5deff7dd6f86"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineQueryMatrixProjection.lean",
+      "sourceContractSha256": "b7f9af110882721d8c3936a16bc75d8a0cc7b8e98ddb93395d7a67800f74665f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineRawBridge.lean",
+      "sourceContractSha256": "7d1dd9fbc5288e042db8bc0973cf27744de5e342340e781f46349e8a4222c398"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineRawQuery.lean",
+      "sourceContractSha256": "792dbea000194bfb67d7299357ac9916f3b399c5f19518c5e6d1ca1806e8fe3c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineSolver.lean",
+      "sourceContractSha256": "dfb460f2c70b3fea45e7aee5b7d72ee9a7286e56864c7515a6822cbca54cfb59"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineSolverHandoff.lean",
+      "sourceContractSha256": "ff3fa1ea7a23dd77a9b3775b084e3d229d6f8e651fd65c5f0d80ec4a1db8e3ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineSolverRegression.lean",
+      "sourceContractSha256": "7c540e5ad14227504846813d203c19d06df0b25243d228baca8707b5199ee6f5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineWitnessBudget.lean",
+      "sourceContractSha256": "255f14ceb2880a1f3f6d2729f2e87fef97aabe67adda1f43133a049002fed368"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineWitnessLifting.lean",
+      "sourceContractSha256": "bac7ebe3af2148327e3e56c5aacba3b408451afbbf626039e6f6e4745ebd6f8c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineWitnessRegression.lean",
+      "sourceContractSha256": "338c0a2245db8ecf45efcbaa8d642d649def68076c18798fc9031323b3821ec4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineWitnessSearch.lean",
+      "sourceContractSha256": "6e5e5d5af990dab2cb79034dd8dee8c00121367af3cd8b773af04870d56f3ef5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLineWitnessState.lean",
+      "sourceContractSha256": "16216e4b7221869e6cb2ac31ee5a11e6df661b2d88bfb48cc8433c74599fdfc8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMapUnitInstructions.lean",
+      "sourceContractSha256": "e5a57bf02f70b9d1265c054efc13db4a01102e18ab59dbb8da9664e1fb214644"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixBudget.lean",
+      "sourceContractSha256": "3588ef13a275a31a9f5f57e31ab403fcb7701382590f4c125a9a4ed581cba0b3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixColumnLoop.lean",
+      "sourceContractSha256": "32aa0807bc11c5ceb7dbd8a987950ce119a8bb959f9ee33387d36c2183b91ebd"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixEncoding.lean",
+      "sourceContractSha256": "147b68373a38522fd4aba0caa9710951d3160a9092f5c563221eca2cf128184a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixEntryInstructions.lean",
+      "sourceContractSha256": "f98211cd624a076030559b8bb25e27599285d0a1d5a9ec770edcecf98b6e2c26"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixLoop.lean",
+      "sourceContractSha256": "4cfae4b7c49b5e4093a1593ef29648b14ab93385f7fd000367907402f1a15511"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixPacket.lean",
+      "sourceContractSha256": "00b0904a0cf316caeeecbd0ea3a229007a3dd6ed3a1356883e6a0e887a5b5757"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixRowInstructions.lean",
+      "sourceContractSha256": "a7e7d64a40e801b181953e9fd66a1123dcbcac1379c208586e2ba163dbf1c108"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixRowRegression.lean",
+      "sourceContractSha256": "3bbbb2bce55c40b93fd36b45e486283cdd83e2ab091ac1504e572314f0c2be50"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixSchedule.lean",
+      "sourceContractSha256": "85358c165fc3b31cfdc9681be90afd62b6d9a437cefe36780eb7620c58262109"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixWitnessInstructions.lean",
+      "sourceContractSha256": "ac974d2a1d782eb36476bdda6d6e8059fc408a17e2812ea0a09a2a5536536f4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuBudget.lean",
+      "sourceContractSha256": "bc70cc67cae8dfb7743cc7a40a48cd430911db8a124e18b3b8afa640a13491d4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuBytes.lean",
+      "sourceContractSha256": "42ec0cd83dda703f7ffc50ee6ab32223e7fe69eb9618ad54a035584e66f80889"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuCandidates.lean",
+      "sourceContractSha256": "0a9b753551a88e64ccf2fe6a5c64b384eb1b1039ab10429db28c6dc2a1eaa45f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuCompare.lean",
+      "sourceContractSha256": "40152834bd8e23590d2a9ece648b26662aeea0837a18c46c82020f6fc2056b64"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuFamily.lean",
+      "sourceContractSha256": "51f6792480b596d8875b46c86209ef331755ac54633a34ec540612d8889e1645"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuFamilyRegression.lean",
+      "sourceContractSha256": "8bc96c45de0e3be95389dab42a676eb82c5276d0a398690c8b7f3700da9630b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuFromFamily.lean",
+      "sourceContractSha256": "58563784e5414c2a6bd0d1c0a51e959c6cb5b5f7a2a40c364e2c5ab07e5887c1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuInput.lean",
+      "sourceContractSha256": "4d00fc759a14c5c512a6451be4e858ae5f88ed492191da9869b9c940fa0cff46"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuInsertion.lean",
+      "sourceContractSha256": "db9eec66566102ef954548425cf9e0288a7bf2139802f5073d1b69d956ce36dc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuInsertionRegression.lean",
+      "sourceContractSha256": "4d76640f492fecfbb9c305c7c9a88919fbe86b7f200f41b92aea12d6d6220908"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuInsertOutput.lean",
+      "sourceContractSha256": "4047d9a0d53406c75649164011c10d202454b0601b46691dc7c57af6493cc26b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuInsertStep.lean",
+      "sourceContractSha256": "b362f4337ce40c9b6e80e57db4dcfd1d1f254b723d9dd99b2a9459603663c3eb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuOrderAlgebra.lean",
+      "sourceContractSha256": "b519eb42ed764736adc8f171bc1d11373211eb48bba56b89ebc82a56779050a1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuRawBridge.lean",
+      "sourceContractSha256": "42c8017853c5cfe626cad1c6e489c6c33459a118a7c39a45e593f1e48e45c67f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuRawQuery.lean",
+      "sourceContractSha256": "9cd539b2d98ccd6dc0478fac35097d44ae23a1dbb3f9aacd955e8775320eaf7f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuRow.lean",
+      "sourceContractSha256": "72e87f82724beb0e0d0f09a3d1493ddd04e60669a27bccf3efd140732685bf6c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuRowInput.lean",
+      "sourceContractSha256": "f0e7b77ae693e6fce6ecb2172ed594e0f8a72f6db3fb33ebf5deaf42cee0b725"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuScan.lean",
+      "sourceContractSha256": "ef84b01bb076de3258edd814ab86a308d9216b322f9490d3c7972ffcf6b7564a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuSerialization.lean",
+      "sourceContractSha256": "a3975b217d366e7cd7bbb02ee0d1d3081e69da068916c1d6170e14344ba2485b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuSort.lean",
+      "sourceContractSha256": "1e4252db7f0e7f11f721169b8c659812214c5758931186a4137123e9055f0a31"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuSortRegression.lean",
+      "sourceContractSha256": "6245eb231f64979c23609504599a46c48cd148aeb433024bf20fe53e691f8f3c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMenuSortStep.lean",
+      "sourceContractSha256": "67eea865358e70f42b6a0d2111839c7a629b44d18007c8843e35bdbdd1be5bf0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeAssemblyRegression.lean",
+      "sourceContractSha256": "d439768b11a288c6fa35545cbfb448dfb09d4fc07cd177da574e67614f3fbb18"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeCoordinate.lean",
+      "sourceContractSha256": "f6419643f8bec659f7e65fd220d21ef350dc9df160cec4970b5dc7deeed7944a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEncoding.lean",
+      "sourceContractSha256": "fae4e6063480d0aca9e5166aa9ddd32208ff889fb81e9bf1d113dac82a2492d4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEnvelopeInput.lean",
+      "sourceContractSha256": "988682f79b88158c7e6014075bb449e48de74c21ba99b8820afaf58dd90e9000"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEnvelopeOutput.lean",
+      "sourceContractSha256": "426c1cf56166f5869d1e26c832155b26ab7d510607fbb4cf338140f42cea159c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEnvelopePolynomial.lean",
+      "sourceContractSha256": "0753766a9d42ce62f575c6a15e64b23eafed5efe8b53a584d8c2738869df39af"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEnvelopeRegression.lean",
+      "sourceContractSha256": "44b2c4f0ea94139a366b836b575373e53a47ef234c5cae62d48f37cc284ac072"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeEnvelopeState.lean",
+      "sourceContractSha256": "56845da0e39f60a4d9af819a5a5ad228b8baebd17843c50b59a8490c5e24743f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeHistoryBridge.lean",
+      "sourceContractSha256": "89977987ca3d9d7b40f20bb8aa5c8c84360d981e5fe8a0050960b551c401a066"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeLabel.lean",
+      "sourceContractSha256": "0dd2337a9f7954600e56324e8a0b75390c942b882329ab94fa21b195a0bb3dcc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeRegression.lean",
+      "sourceContractSha256": "f837eabe04777c4a5e1b2f5e3ca892bbd05253a7f58edc85a830013fbdb7a02d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeRowIndex.lean",
+      "sourceContractSha256": "104bd52674a8b3336fdf40d6fdfc45d4d0aee6558b1d492ac14eef297a3e226d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemBody.lean",
+      "sourceContractSha256": "cdf8b659ee74a66d3f72d3923d541db1a28c625801237543725d9e4b67c6bad7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemCanonical.lean",
+      "sourceContractSha256": "6069e1a5aea2ce9051888a779878ee417184d40ceae69fb2d7143c7b0c8b3afb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemCapture.lean",
+      "sourceContractSha256": "9acc52f1c4fe72245d92b6420fd9e123927ddab3d56490979a8e52d2a8164dd7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemGroup.lean",
+      "sourceContractSha256": "61b2548605d312c99c7726c0dfb0374a73f8f58b94c6a8be2597f6bf94f66c7c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemHeader.lean",
+      "sourceContractSha256": "7ddd5e40441ae67a4fd286a2af7cfce35c6a72ed56130882f33301c0d9bc8f84"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemInput.lean",
+      "sourceContractSha256": "373119aedb555d3fbb8b27922c9101dbf129eb5daff31a9765bdd15532f33166"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemLabel.lean",
+      "sourceContractSha256": "f85ba04b2184a821c84b3197142726d37778f2fd00676969e87de449c35c9fa9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemLoop.lean",
+      "sourceContractSha256": "3ce322d56978b099aefe4ebeb7aaeb08474e82e5051bb0ce02432c4d22c65570"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemParse.lean",
+      "sourceContractSha256": "d5ff9dcb44dc173682eeb59c3d32e9b0e795b28710cffdd24a98044ec6eae1f9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemPolynomial.lean",
+      "sourceContractSha256": "6c51427c707cb972e0a8431d57f21216ffd348f1953970b48a4d05d883a2b2e4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemRegression.lean",
+      "sourceContractSha256": "64953caf2f4de7512423576f97eda7521c71299eafbc8edefd69fe58298f9ed2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemRow.lean",
+      "sourceContractSha256": "c4acc1034f47afd1c3f925311f41defd8251443bd14454dd58e3b204b243bd8b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemRows.lean",
+      "sourceContractSha256": "310fc4400ba854ef5c457f477a1fcd344310dc197e7b3cdc0ba3a3221d545a09"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemSerialize.lean",
+      "sourceContractSha256": "d6b0175a9c722f66e90db7b59ced41e07a8937122ad0e6055292a2db9b9eb261"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemState.lean",
+      "sourceContractSha256": "62599b6c2d0a5ace942570f545f7dea0defd827366331f81da6402e76c774228"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeSystemTerms.lean",
+      "sourceContractSha256": "a324183dc1a5249d3332b104081ae384b4690648ab129803043c782c07ef673b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTerm.lean",
+      "sourceContractSha256": "19fb51dd40ec9618f35f9ed0c1c4e045b194ffd2c0791a5b4d33638689cdbb3b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsAdd.lean",
+      "sourceContractSha256": "89c143a4972994ddc1d09f11771dcb9ac5acbbe49fe36799740fc95c10be9ada"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsInput.lean",
+      "sourceContractSha256": "0287518a2f9e0d14f754b1980b561b6cd6ed296814ea4da133e83a7831bf9147"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsLoop.lean",
+      "sourceContractSha256": "c9ecdc3660bdbb3f2db0dd6c9a5756979791e4813938edf814f162b52a5377df"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsRegression.lean",
+      "sourceContractSha256": "0c42a20e41889d5591512ec02dc6b41d5adde4db15c68ffbb2ae7468d4827a5a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsSeed.lean",
+      "sourceContractSha256": "b26af033424e9d6489a09cf93c4e2d179997a7eead9c8db10b46f35d9c5e1576"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsSpec.lean",
+      "sourceContractSha256": "ab5690970c94d57c2ec5f35e70fc31f26f1eb4dde2b2a48c4e3844175623f6e9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNativeTermsState.lean",
+      "sourceContractSha256": "df3632b898618583e49ccbbad905b5a993d8d8e1434ad3ec443b328a8f31dc3b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedCandidateRegression.lean",
+      "sourceContractSha256": "1b49226ac7907889d1333ac90afc8db4caa476873069793cd930a76070183f20"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedMatrixScan.lean",
+      "sourceContractSha256": "0e22b331b49099f3b88dc18b8c2fd42b9f1a9e69d61daf86b10de892c157a437"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedMatrixSelector.lean",
+      "sourceContractSha256": "3d9ae12dc69c18d606113270963bc6885b9d68aa2a031a7756feb60a5baf217a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedScanAlgebra.lean",
+      "sourceContractSha256": "2316fd6e8bff0b05f937c058a51e9e75ae2f4f16989b2c34f470addd7882690c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedScanCoordinate.lean",
+      "sourceContractSha256": "5bc8782b69991d5e96955632aed49a770cab7187d7eda582926f22f245cbf653"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedScanInstructions.lean",
+      "sourceContractSha256": "dc782ee2835ca154534f7470cfd951e240a692bfe2c1c5a944b0929e434e1ab1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedScanRegression.lean",
+      "sourceContractSha256": "9b5fa5139d35899d5bea0fd22397e81e0a0fcedc581f4444d7bb1a4b5d2372fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOrderedSelectorPrelude.lean",
+      "sourceContractSha256": "95d0729520f2b2a0b9324f6e7784f5c4e271692d19d0ed3bc4cfd83ac5c17c5c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorApply.lean",
+      "sourceContractSha256": "b0cf4f9c687bf75d4d2d9ef0575047ded1d4cb7bae26cc9905d0ffd364b704a2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorBounds.lean",
+      "sourceContractSha256": "a4f9e9f4a4f63a8aa64d305c0832648a94c7ba7fe7c20ad8e092c0ce0fca0397"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorChart.lean",
+      "sourceContractSha256": "a87dbf0ece769bc1b7215a9f040f795b6325d393541f7fa814a9eeb90d259f44"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorChoice.lean",
+      "sourceContractSha256": "8fc0c978130e6c2f598fa7a0c0cfa0ca857bfa33b4a8bfbe1e91fc260cd3e3f2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorInput.lean",
+      "sourceContractSha256": "cfe27a3792713e3d82b8efdea71a277b343d45fbaf203f5760d0801ba44327f3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorOutput.lean",
+      "sourceContractSha256": "c62b4929207e84fda398871403dd922eb3bb35bfa76b5752da10bdcb4d7eed92"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorPolynomial.lean",
+      "sourceContractSha256": "c35ec7b6ea4a558bcebbc11a28793e2709778010d033a94a08ceff7c5cd53b5f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorRaw.lean",
+      "sourceContractSha256": "a9e5e02aaacdbffe807de1588833b6d1be0bad5b1d2e105860ef0b0cf78a4819"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorRegression.lean",
+      "sourceContractSha256": "82ecd15975d607d7540abd85bbcf18e0be533455e262e60f2f63925674246182"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceOriginalSuccessorState.lean",
+      "sourceContractSha256": "c0fc2c855cfebda1a1750aca9e09ea7c7a3f9d1e691814a4d8ff4ac090e69e30"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneInput.lean",
+      "sourceContractSha256": "27cafb8c9607ff53a29f16c85804f735269728580d858db16760ec834a36b403"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneLiftInstructions.lean",
+      "sourceContractSha256": "35ea49590b394fb6a86650d707b331236606db5a14316ca0d20749d6b7bb38fc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneLiftRegression.lean",
+      "sourceContractSha256": "ca3b3e93841410c4f8fd06e843cca0e7b644395a4559320bf02c965a8817f87c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneLiftState.lean",
+      "sourceContractSha256": "2a741e70c1c3bde322fe625c63ef346354db6025c58a384ad3ef07da705c7535"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixAugmentation.lean",
+      "sourceContractSha256": "d38a3183168497c9328a0a8e0f7b6e00e2a267bbb0ca8e6147a292e28a37e31e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixBudget.lean",
+      "sourceContractSha256": "f8cf86e4e71d1ce33c91e673a5f7f488c4be1982575301d70a188a1aac7997dc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixConstruction.lean",
+      "sourceContractSha256": "0f3dfe1ba99e8af76283fc657cc23aa744b4f401d5da1f5fa9bc220c44c53774"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixEncoding.lean",
+      "sourceContractSha256": "e1290d26b56569584c84955f5b2f6696eac5fd558a27a4d1782dba53c58135a5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixProjection.lean",
+      "sourceContractSha256": "8487270f1b6f4260db3b468a31eea5d10486601f7c72684ff4f779cb252e0ce5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMatrixRegression.lean",
+      "sourceContractSha256": "2913553f0ea3bb95ecebd1e9f27865a9faf8fbb8fdd50665cbf57adc6a55d2ef"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenu.lean",
+      "sourceContractSha256": "ea9db04c8e3a5f6d37a94b426c077d7aee0d55e7abab1d1720f0730875f1bfc7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenuBudget.lean",
+      "sourceContractSha256": "ea682926d63e1aaf9b831f86f3646f8889e1bb22844867daf1773d3d7b8e6c17"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenuBytes.lean",
+      "sourceContractSha256": "9c37d162ce820fc8bf2724399a88982e51148ca991bc47980571cab06e1b866d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenuFromFamily.lean",
+      "sourceContractSha256": "b44132c39f851d2a991c28ac2594da84ef861eeeb561ba2487424179b0005efb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenuRegression.lean",
+      "sourceContractSha256": "e4aab46053c813cf0786acb22bbfe659b7663d9c201df6c1b65a2bb5d125546c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneMenuScan.lean",
+      "sourceContractSha256": "36575a5bdbba47e10530cf90f24c9731e46aac27b98b8410981884e41b4333e3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePartnerBuilder.lean",
+      "sourceContractSha256": "a76d0a07527b90f42d74426c11cf2b4399238030c4b49bab6dc50265b4b32894"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePartnerInstructions.lean",
+      "sourceContractSha256": "7501d334de96857d14eb00f151b386cd9842a39b2725d4ca8d4437f073d70ad7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePartnerRegression.lean",
+      "sourceContractSha256": "56d31a6797688c1e610151359ca4432fdcd3118865e07a5138c9923680531922"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePartnerSpecification.lean",
+      "sourceContractSha256": "0ad9cf4c5816a47255fcd9be6177e4cb2446a7d269b29031d211c38965f99011"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePipeline.lean",
+      "sourceContractSha256": "484afa52f6745b02a9ea3d71469bf9b11f8440815f1931f4be70cd9a00bb4200"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePipelineHandoff.lean",
+      "sourceContractSha256": "e904928bdc80906608b56542718a54c57c652025db9d7b020890f6db25e60c4c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePipelineRegression.lean",
+      "sourceContractSha256": "b9336703730ddab516c91f9d63967d001e5d9a5a12c46cec647970d4ac49101d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePipelineSearch.lean",
+      "sourceContractSha256": "8b71ac738859bbb646fb148529283a146b6d4d17acf7224cc080239fb5a2d10c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePipelineState.lean",
+      "sourceContractSha256": "6632540bdf68b21b14309da94181cfb17e84b4467ff09fd76c0e52bd6f189835"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePreparedQuery.lean",
+      "sourceContractSha256": "c00c104ad4a68864086e8d108288cb0107e50f661196c176f92033964e75a04f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlanePreparedSearch.lean",
+      "sourceContractSha256": "317972c45232498d87d4a0603a04a11af8d90c9f6db8f437ec4543c6602e5cbf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneRawBridge.lean",
+      "sourceContractSha256": "182ed09676da2252a49413f59abc8db90bc0ae6ed78a9e8361a8ba8719c7daa3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneRawQuery.lean",
+      "sourceContractSha256": "0bb1c4cbcf9d02314b0ddb9937a7750638cc27898c76d3587c0a09c22c210ff9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneRemainderInstructions.lean",
+      "sourceContractSha256": "1267c42eabbfd9e0e87fbde427c1e544a90d00621bbfbaa60e1897e541902e7a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneSolver.lean",
+      "sourceContractSha256": "5d1112ca0cdd4b547e8bb95b5f2f2a8fe28acb16ae8cdca1bd6e4f69df9fb35d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneSolverRegression.lean",
+      "sourceContractSha256": "3cc7779d44ce1bfe9f61d1f93b263abc389115f208b2d5b04f30c8f2057fd3f7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarFamilyInstructions.lean",
+      "sourceContractSha256": "573ef011f48fef805da12e15ce249d347720dce50d28fc97b47e602e4cff36df"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarFamilyRegression.lean",
+      "sourceContractSha256": "2ecbf15b0871e415ca548adfd91c294262df1152df4b70d83759213579ed12a2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarInstructions.lean",
+      "sourceContractSha256": "0a919c2ac82bc67be894ab629fede7c56b302a55759ccd2c496ad06b37b125cf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarPairInstructions.lean",
+      "sourceContractSha256": "9f5d57262cf0df7f66707b0aeac240bafdf07452ee0394ef8c5a296cd8ef6bab"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarRowAlgebra.lean",
+      "sourceContractSha256": "b84242fac57c704fd2a4be50418d785ef26c7d64633d1b1de644a3b28566a533"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolarRowInstructions.lean",
+      "sourceContractSha256": "1c8aa82fa4dc92d3de4c4fa20ea110f35b23f1d2474910cc040d928576b80870"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialAffineQuery.lean",
+      "sourceContractSha256": "cf866c9c3c6b90fad374c5fd9ae327c616d94efeb33b368837f32141667faf03"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialAffineQueryRegression.lean",
+      "sourceContractSha256": "0d0b6b594acc9036dac81f373b579a485124f72443cf3a40bcb9f45d65c96676"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialAffineSpace.lean",
+      "sourceContractSha256": "6a26b228dd8b199af6e7750fab4940b53263472df475db3297c1bc07ed193640"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialDirection.lean",
+      "sourceContractSha256": "7a18a91b85303c31c3d84d360a4c98ad214ec24b2b3d74929fe8b1b8178d6f2e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialDirectionRegression.lean",
+      "sourceContractSha256": "9d62230aba2c42daaaa51918138f426a59b6aa1aea7992c06c8f590a4da3e93a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialLineQuery.lean",
+      "sourceContractSha256": "fa70d7b32de36dade0a31e7c3db769f7cd83fc7d91d3a41c2a38394514be2f94"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialLineQueryRegression.lean",
+      "sourceContractSha256": "13d2ce9a54f1b52436da12c62030d54ebfb43b381ad4398999808a2fdee21f21"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialMatrix.lean",
+      "sourceContractSha256": "84145e041b1226aac13df9e08f69b98fe6ac813ee46bdd2d95ada008b56f0e23"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialMatrixRegression.lean",
+      "sourceContractSha256": "598c0cf1ecddacedb22f48ef5de89c82742eb264cd364b2deac2c5286e47458f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialMenu.lean",
+      "sourceContractSha256": "2bff4bfd421cd9d8a0f75487c87f28f1820cf2a8642680db1a266491f4c51d54"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialMenuRegression.lean",
+      "sourceContractSha256": "2ddf2d9343f7f9aa918d490631e2ae9f70e519f5ebdef03f715d01607543daa5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialPlaneQuery.lean",
+      "sourceContractSha256": "01610c9fdc8386e6fa4e1618cb999079f03a379c39648c4e86e94bd34e48c130"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialPlaneQueryRegression.lean",
+      "sourceContractSha256": "ecf45a7aa709059e60fbab81c78c9a156b84d2a6e800bc0e4b01d5e341a295e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolynomialSelector.lean",
+      "sourceContractSha256": "d296f9f80cf32573412d90167ce3723ef2cb0c264f1e73edf339f1a3cd53d2e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticDiagonal.lean",
+      "sourceContractSha256": "487448738ba00592b8394a0b52b6688e59933cc8055bbf0599b2d92784ff9011"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticDiagonalAlgebra.lean",
+      "sourceContractSha256": "ba0db61242d28609bae78cc29718a865cafe7d955da8ea6081d3c8be40f3f15c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticEncoding.lean",
+      "sourceContractSha256": "393a094c4873e5da558dc9ebb8df97f61d2df57534e4dd7f285e17ebd716fcec"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticEquality.lean",
+      "sourceContractSha256": "81e3a53aa814689e87272ac7865ff641f95441ebb882685b8ae04bc97df3f866"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticHead.lean",
+      "sourceContractSha256": "84d7ae786f8c140701507220b47cfab6463f880747bbbcd6bee71f90fc49253e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticProduct.lean",
+      "sourceContractSha256": "9df359cd734f07ba146d157bfdd119ea996bfd3e4d63520283796cb93ae609b3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticRegression.lean",
+      "sourceContractSha256": "43c22712e431ec6716ec9dc79411bb400b2b380428ec2b60b43b4e5e238c2594"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQuadraticTailRegression.lean",
+      "sourceContractSha256": "9e8fcf4ea429c6fd4cb867989910876a136b72bd16fa5f739f0269d22a8b7b0e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRawSelector.lean",
+      "sourceContractSha256": "a0abceae3f235dd90cc45511666359ec7ad51fc307bf206ea8afd57ef7f93790"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRawSelectorRegression.lean",
+      "sourceContractSha256": "cfdb0e7c767831b2520799ab34e82eae7806e02508796fb92d52d7e52bf3b222"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionEncoding.lean",
+      "sourceContractSha256": "7b21324d9048220614f4a32cb8f610aabc7479801fd48ad3ef01489fb7b1cbcc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionEncodingRegression.lean",
+      "sourceContractSha256": "9d4b3a116ef521939c577e53aac0a7e2d787c68c71a0858eac488f86099cfbcd"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionInputEncoding.lean",
+      "sourceContractSha256": "7163997c497811ca5b0d9827a8e6d2788c82693d622c0da3584328d9ae15b512"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionPolynomial.lean",
+      "sourceContractSha256": "c21c28f3258f265b2519084eaf7ba78057b169b5f5546c25b7ddff9a1073ff11"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionReplay.lean",
+      "sourceContractSha256": "fd06f2bc30081de66c72095729de1596d52df00d6920a0c98eef81e223daaf9e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionRuntime.lean",
+      "sourceContractSha256": "0e0bb3e1e28219f3e167bd6dfafe835d2850fba832f5e9ac0c25b667ca612138"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionRuntimeRegression.lean",
+      "sourceContractSha256": "913bbf059ef97e15a7f61293afdb85734d2d14a46e8f2982b7622a3a646b5393"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayAffine.lean",
+      "sourceContractSha256": "d4743d90b6e6d12b07b72211c7e8ce1eaf2a26315e44b43a441602c3b1b372a3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayAlgebra.lean",
+      "sourceContractSha256": "23c7be64707e9fcb6aea300502317f7a0560496e4aa3fcdf4ca77dfdb34f9526"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayBlob.lean",
+      "sourceContractSha256": "4dbf3b897e6ca6e2060215fd129c13632759cd85d9f6627947afa2475af61890"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayDataFields.lean",
+      "sourceContractSha256": "71a2d61f5772380ab78a4eb7aa2bd7f48f87a344f2aee531a3f29db2170e3de0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayDataMachine.lean",
+      "sourceContractSha256": "bf0f62960d9b7f8236e18a0fe8e339c14d3fa9a1b00531cb2780cd80e9a48ba1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayDataRegression.lean",
+      "sourceContractSha256": "76a865ec8fd64d183324b5102aee80c9811d8487f0a18b0f021affaee4b929f5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayDecode.lean",
+      "sourceContractSha256": "ec3f3f53ffaae4a86f2908ef70b627462a0e6f153f57f53a8eb42a1d43e8c55d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointBudget.lean",
+      "sourceContractSha256": "bc112bf2df6f6e23d6986d9030c25e0d77bae0286fa4726c84bba010a92814e8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointCheck.lean",
+      "sourceContractSha256": "d1f374ed6dca16285a1a2f8dfbc1e0cf3331a9cde1164ae6fa64532f22ccff9e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointClosed.lean",
+      "sourceContractSha256": "a72b37e0a8b81b55424553825ce2809a8cfdc6b98b03c8e756841642a1988938"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointClosedRegression.lean",
+      "sourceContractSha256": "a21bb7bc76be47aa3458b84250329da9db173d8292a370ca4031caa54ef003fb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointExecute.lean",
+      "sourceContractSha256": "5289d4f93be67a109df153b571e07c36f8e92a944761ac15bec07bda08825395"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointExecuteRegression.lean",
+      "sourceContractSha256": "d44503ec3619a29265c570944935704ae498bb8bc2c504a1a8382f43205a2fd3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointFields.lean",
+      "sourceContractSha256": "a50130686247b0514fedc65b3a0982bb8f0c6c11c5e21a6af05587a44945c839"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointGenerated.lean",
+      "sourceContractSha256": "65ed0ae8e0d34edf2bfb60f3f5ea915810be01fd8d5d0d5b2f10522d7411d9c1"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointLoad.lean",
+      "sourceContractSha256": "8971bb9136fe60fb0902ae5896d997f00367e8c182f92d7ea920272c0d887404"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointLoadRegression.lean",
+      "sourceContractSha256": "e9f892e89cc03b21c92f74ed414dae41b8d3842564bb091aea1755fbfae57d66"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointOutput.lean",
+      "sourceContractSha256": "8cde00ff9863704e81f763f083bf1b2a9bde94f7f2b145493706ee430c3a5373"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointPhysicalRegression.lean",
+      "sourceContractSha256": "a5cd7e9923f3e580717fb8128e51f9b799a15a766fd7e4caffb8390715b5c6d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointPolynomial.lean",
+      "sourceContractSha256": "31c15034763ab0273dd04977414e5402ff3bdc22cd90cb04f8a7b934c2e7e4c8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointReady.lean",
+      "sourceContractSha256": "0e52c8bf9cf7b1b05de34e1bd6c4bd0f3b44abb4722d26c21b0d6f7131375cc0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointReadyState.lean",
+      "sourceContractSha256": "82201c72421c26b54ddf18afe948319f5895113b88ff53e9407ab8c61223e3c4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointRun.lean",
+      "sourceContractSha256": "a798d4998b77c22d73888dbe9055c7de1ef4e76342a3d5469fb2f230e28623cc"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointRunRegression.lean",
+      "sourceContractSha256": "e52e55fbcdc8ba3f52011b475bc190e25a8ad42c1fa68bb36eda4a2bc99b73f7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointRunState.lean",
+      "sourceContractSha256": "75e1c98e2e480c6f5d154e29181f723d6e6e527900bcba29370e125f1e05813b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEndpointState.lean",
+      "sourceContractSha256": "5aff12aa3c164f49b214b890a8d3450c99edffb2153ff76e5c3c9c35e7a96e17"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayEvaluate.lean",
+      "sourceContractSha256": "ef6ef6e398657fc9f7e8725c832f46fd722a851d92abbb1ba21a2eaa3507b678"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayFamily.lean",
+      "sourceContractSha256": "76f066673d187c8c6c44b70234b675a7b5c3eaa8fc6b2ddadd80cca26bc9b6bd"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayFamilyFields.lean",
+      "sourceContractSha256": "20fd105d67b196d64488a88cea5c5a40e9dff41863921a0d6174bffc853f4c03"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayFixed.lean",
+      "sourceContractSha256": "5370141ea65d35832d34a6d2670d8a9f3dd81098f177eec3dd71580817c27c04"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayHistoryFields.lean",
+      "sourceContractSha256": "ff2924d550469c927c9aca2bead34411bbeb9de0a9ec262c304d601750b870fa"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayHistoryRegression.lean",
+      "sourceContractSha256": "c84ccf499e2029b4a3b76ceae57f422b8cebb3d684d2df86daa63e6b4a3a314a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayHistoryStack.lean",
+      "sourceContractSha256": "ce36113270b91fe3e38818b271dc1e4275c3b0b033366aa5fcb0b15d8aa501a6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayLoopFields.lean",
+      "sourceContractSha256": "76b64a930e52325c2bc370730972ec95b2eb46c33c71f45eb235ab2f6f288680"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayLoopMachine.lean",
+      "sourceContractSha256": "481ab804116a584483f57bc64920979f5f9fc422168678e77070710a813b435f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayLoopPrefix.lean",
+      "sourceContractSha256": "290d48d4c4860343f454082f3f0264658e51dd63fb9ba39cdef18675a1bf148e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayLoopRegression.lean",
+      "sourceContractSha256": "0f5d956783a19db6162b7366c85ca91638cad272186d5586e3f18603dc2c2494"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayParser.lean",
+      "sourceContractSha256": "ab210e05e9455cf0703cea0b270738f624c446f0580da1584cd79668f33a8f6b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayParserRegression.lean",
+      "sourceContractSha256": "60ac7ff97b64ee1e197e00b2d3c63b06f5173956de201462b8e1639dde232cf7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayParserState.lean",
+      "sourceContractSha256": "9fa53b54de4de1f2d2f8f66d96a82f013d5646a14145bff8ceebd3a4fc6230ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayPoint.lean",
+      "sourceContractSha256": "cf50d009882f2e74ed29c196fa10fe573d395e28d6cba4a46862c82712690c5f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayProject.lean",
+      "sourceContractSha256": "fef5140add4759feac578bb4811c2eb85addf86bfd6610563efc2d54d730eb68"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordFields.lean",
+      "sourceContractSha256": "509609c687eb7d59719479d8327232ec789df8e75b5f98ac6b4c3cfd667a8660"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordMachine.lean",
+      "sourceContractSha256": "06adefbe50935902813cbe5636baa881d1287b51beaec55b94bb8eac5104c847"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordMachineRegression.lean",
+      "sourceContractSha256": "cf526c1831b1e7ff10cc5a85708b6c2d186d8dd33710fc3cdad4572f5c73e4fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordRegression.lean",
+      "sourceContractSha256": "abe14747dc9fcc644937896fb6e0bfb9d5582429d2d24a1eadb371af7e67ce3e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordStack.lean",
+      "sourceContractSha256": "280d8d88253f1a9cc1b4694b3454b75fd00af6bc51bfc1b5fa652bd612203859"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordStackRegression.lean",
+      "sourceContractSha256": "2dc2b057f4617822343b4028e6ee83167552da05e7655fc335a1ace368aedbaf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRecordState.lean",
+      "sourceContractSha256": "f10a34733dae92e646f0e7f841ef848491b08ae28a4acc017e5a0ca12264c2c4"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRegression.lean",
+      "sourceContractSha256": "d733c03bac9216fa761e98809a735d20da737c0e9a4960fc8e2e28ba2dad4d6e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayRequest.lean",
+      "sourceContractSha256": "3accfdc7a45d705b5a8a25d9d16cad0d3b8a8fa3e55c2ec356e40e60931b606c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayState.lean",
+      "sourceContractSha256": "a669521bba4cbb97489247dd75a2e18352673aec54468fc082a77b845b283450"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayStepApply.lean",
+      "sourceContractSha256": "c3ad67cde045faaaae4b60c864a41487bb2d0d0e9e3b2b265eed8a0e96e98c56"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayStepMachine.lean",
+      "sourceContractSha256": "403ad180eebdf62eb4cc1a94dc90351962f3bf0e24e652e3e03ac6c9bf0be3d9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayStepPrepare.lean",
+      "sourceContractSha256": "44c06fe4689e2b90a9e15d5be56cef66832a9c34f589310c265496ea6b3e57a7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayStepRegression.lean",
+      "sourceContractSha256": "6d29a6a8e21dcb38d572e51f800ed475ccfa9159609fb261b3bc9e5c0464abd5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayStepState.lean",
+      "sourceContractSha256": "449b515adae79981e728b4055f5d19478f0db9001d523dc07bf787cfbb1cfdda"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayTraversal.lean",
+      "sourceContractSha256": "a947a77101082b032f0c15d463669d64d24f78090fcedfa6e9e233238778316a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayTraversalRegression.lean",
+      "sourceContractSha256": "8f0c07c50e965fd8c10ac6d7618ae22bc4030eaac1bc77dd073454cf1a65e502"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayValue.lean",
+      "sourceContractSha256": "65be77e5845b2a524e3c654763624ace9210b60beeefe66b10dbe3837390d5e8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReplayWitness.lean",
+      "sourceContractSha256": "9e865809f685791c926c361f547774f2c69c183df4c151ff6545cfbffa81f459"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowCoefficientAlgebra.lean",
+      "sourceContractSha256": "3029a6977b37191d832b8fc1f5367b5b66c24f783faf66fd7a54bb2258f83132"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowCoefficientInstructions.lean",
+      "sourceContractSha256": "8a17cd8ee3bf08ed2701900a0884e522b6ef237b17af1a59ec2fad08764d6dd9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionAffine.lean",
+      "sourceContractSha256": "a4e7d3e5e18e39368340ef246ed1b46157495cf9eb8c27a1fea040c413d2743a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionAssemble.lean",
+      "sourceContractSha256": "c75df37bc3aac938ce9e25380356dc60470dfdd5653ed8f61056574c2712e612"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionInstructions.lean",
+      "sourceContractSha256": "fae544057890fe37e2ad9b28ccfdc0a4de2d5678f52ed4fe8ff207bfb1abe004"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionLoad.lean",
+      "sourceContractSha256": "12ada145455f7f9bb0d1e7fe86b048d5a215f02d4fa3b44d9a564817d3f2a4ae"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionOutput.lean",
+      "sourceContractSha256": "8e786f3f18962a9d7342da60691a15760699b505de2cbfd3b2446c65d9c26f24"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionPlane.lean",
+      "sourceContractSha256": "1afb69d1633ff8aa76c800abce29d214dfbed1fb04b0978b4e5825c0e2424a42"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionRegression.lean",
+      "sourceContractSha256": "3dc8e0ffdcb7b30ef1db18452dfd89dacb35498ddb03146bcb284f3b12cd32a0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowReductionState.lean",
+      "sourceContractSha256": "4b55f7ddd7587e9e6d0ef9d94afd7b743856a502e40620506ac75534fcaabd3f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarFamily.lean",
+      "sourceContractSha256": "8ebc203a6b33201fb1ca18548998d5aad282c5c09daaf0d0cfc31a9b7ecfb092"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarInitialization.lean",
+      "sourceContractSha256": "4a5938a55e3ad975827b7529984a1f79eeca57463b55360e1c0d0009a35ca3bb"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarRegression.lean",
+      "sourceContractSha256": "6b90bf6a9769aa328ad96428d2fa3018a8936ff0221ee46861047287b55ff77d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarRow.lean",
+      "sourceContractSha256": "8a945d3efe555a88ad8f130d503eca70cfb02b9689a5d8935d3001a5eaf4d238"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarState.lean",
+      "sourceContractSha256": "325546c8029603c0d824d07b8bbe57b4050523b42685058830d7a9db847ea89a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectionFrame.lean",
+      "sourceContractSha256": "593ae5cc53faf262c286db17d15a304d85c1ada5a0451fb3bbc83ffa2794292e"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectionInvocation.lean",
+      "sourceContractSha256": "d2a99271aeefea10f384e3adb9f84076698f68bd5f9b83dd5d41bd9842f99d4b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectionPacket.lean",
+      "sourceContractSha256": "29d74ad4b6be5b9292f5e063a0e584d31fbfa2ed4fd8bfe3b934cad7e6b72434"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectionQueryCall.lean",
+      "sourceContractSha256": "dca951669ae367dfe0dec81f08c849f6eb026492813646898225441043f51073"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorAssemblyRegression.lean",
+      "sourceContractSha256": "f1253eea127747118e3b1653d1c40a5064958e5399f32a5d4cf6053ecf023eda"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorDispatch.lean",
+      "sourceContractSha256": "cff2fb1e8fe26f1d626b58f85051821177f1422b1b8a5e8e67a99f360cbc1eed"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorDispatchRegression.lean",
+      "sourceContractSha256": "22c88e2ebd79ae5b15cb1fa78afa01dfce067f322eff6d2088942b2d5b75a152"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorInput.lean",
+      "sourceContractSha256": "ddbd35fc94fb257f2dc810555291699006de5483a371fe1bbb0070a516ba1839"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorMenus.lean",
+      "sourceContractSha256": "3ad221c312b5d569f04b06f30900be918bd368c4134b845fa55ed968ce46d9fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorResult.lean",
+      "sourceContractSha256": "dc30185df6848a90b3f56df913dd550c9355dc3b6503639309959c136f34f414"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectorState.lean",
+      "sourceContractSha256": "46c0821111707792c0ae243fe07f182fd58b2f713639231c7b80e9911766e710"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceTailNormal.lean",
+      "sourceContractSha256": "d943a1bb1535b852fc7a56404dbb9ca4eb39a201c2b5b73c3464d1ad925209b2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceTailNormalAlgebra.lean",
+      "sourceContractSha256": "306c5916dad903f75a2d357711d970437cbe2862cf7d5dd0bed6747b569b667d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceTailPolynomial.lean",
+      "sourceContractSha256": "ad93e0ffec7b44614bb2c1c9e71dba10b5e5dc6f8ad8666418df4d9dbae79fa8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceTailPolynomialAffine.lean",
+      "sourceContractSha256": "3c59bc85ecf95efaba85c2e78a1b3509deb320ea7f3c3b494b1ac470459a19c3"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceUnitDirectionInstructions.lean",
+      "sourceContractSha256": "2737b2eddf014b4931a1c2ac60704a74afa7dcde7b2d142493ba2feeffc4890b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWeightedActivityInstructions.lean",
+      "sourceContractSha256": "ff003dead8948234ab540eb939d8c78d34daa1aadf0faf39260db2a50b68c2e2"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessLiftMachine.lean",
+      "sourceContractSha256": "22cde1c87f4bd545790dcfdbd747d057245d0f8e941a17b61fb49b32f65adb34"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessPairInstructions.lean",
+      "sourceContractSha256": "13323ca1ede937aea411eb6a460a3e21f361a73bd0c966cedd56ff4a45f29015"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessSelection.lean",
+      "sourceContractSha256": "cc20d59ea29645eb1f6744fef3d98cec2a051c40aaa7ca98ff2fc63a3033946b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessSelectionRegression.lean",
+      "sourceContractSha256": "c73dfa56acbeb80819c111e1c64b2dd14825133046c7b7708ea8584fcc9b1753"
+    }
+  ]
+}

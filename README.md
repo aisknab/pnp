@@ -1,22 +1,22 @@
 # pnp
 
-<!-- M283-CURRENT-SUMMARY:BEGIN -->
-## Current M283 boundary
+<!-- M284-CURRENT-SUMMARY:BEGIN -->
+## Current M284 boundary
 
-M283 proves that the computed search covers every balanced selected-source-scalar translation whose pullbacks of all source rows are quadratic. The exact coefficient criterion and the actual quotient decoder are equivalent to that semantic condition. This removes the supplied finite-menu eligibility boundary from the coverage theorem, without supplying a contraction for every input.
+M284 proves polynomial physical runtime and output bounds for the complete source-contraction phase. A separate closed replay endpoint reconstructs or projects witnesses through the generated history. Given a genuine model of the remaining core, reconstruction produces a certificate accepted by the original source checker, with replay time bounded in the original input length.
 
-General contraction existence remains open. An exhausted core can still be satisfiable; class coverage is not complete residual decision or total polynomial runtime. Coverage of arbitrary contraction maps, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
+The remaining core still requires a solver. A positive-dimensional stopped core remains unknown; the replay bound begins with its canonical encoded request and does not claim an additional request-building machine. Useful all-input progress, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
 
-M230's complete Cook-Levin builder, M231's concrete NP-completeness, M281's polynomial serialized normalizer and M282's source-bound partial residual reducer remain checked. Earlier correction and milestone records retain their exact scope.
+M230's complete Cook-Levin builder, M231's concrete NP-completeness, M281's polynomial serialized normalizer, M282's source-bound partial reducer and M283's precise contraction-class coverage remain checked. Earlier milestone records retain their own theorem scopes; the new phase-runtime guarantees do not imply a complete solver.
 
-Formal artefact coverage: 259 of 261 current scoped publication rows earned.
+Formal artefact coverage: 260 of 262 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [exact contraction class and its limits](./docs/lean_source_contraction_class.md).
-Publication decision: defer PNPLabs synchronization. This milestone certifies the completeness of the existing search for a precisely defined contraction class without adding an all-input decision capability, closing a fixed weighted checkpoint or changing a global gate. Keep the existing verified site source pin coherent and include this result in the next major publication batch.
-<!-- M283-CURRENT-SUMMARY:END -->
+See the [polynomial phase and its remaining solver boundary](./docs/lean_source_contraction_runtime.md).
+Publication decision: publish one major PNPLabs batch after the exact core merge passes verification. The source-construction and witness-replay endpoints now have complete finite-machine polynomial runtime contracts, a substantial general capability beyond a count of local milestones. Include pending earned M283 evidence in the same source-pinned site update. No fixed load-bearing checkpoint changes state, and no global gate closes.
+<!-- M284-CURRENT-SUMMARY:END -->
 
 ## Subsequent correction — 24 September 2026
 
@@ -77,12 +77,12 @@ mathematical validation.
 | --- | --- |
 | **What is this repository?** | Source code, finite certificate records, checker and replay machinery, tests, release artefacts, and audit documentation for the author's claimed `P = NP` result. |
 | **What extraordinary claim was proposed?** | The historical report claimed a deterministic polynomial-time SAT algorithm by reducing SAT to exact minimization of specially locked multi-output NAND words with residual slack at most four, then applying a claimed polynomial exact minimizer for that residual band. |
-| **What is the current verification status?** | M283 checks completeness of the existing search for balanced source-scalar quadratic contractions, including the actual decoder. A useful contraction on every input, global route coverage, complete residual decision and total polynomial runtime remain open. The eligible root is absent and the publication gate is false. |
+| **What is the current verification status?** | M284 checks polynomial source construction and witness replay, including certificates accepted by the original checker. The remaining core still requires a solver; global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. The eligible root is absent and the publication gate is false. |
 | **What can a hash check establish?** | That retrieved bytes match a published checksum ledger, subject to the hash implementation and collision assumptions. It does **not** establish theorem correctness, checker soundness, or correct generation. |
 | **What can the checker establish?** | That the supplied records satisfy the predicates implemented by the named checker and its linkage rules. Checker acceptance does **not** independently establish that those predicates are mathematically sufficient or correctly implemented. |
 | **What remains formally?** | Close the five global gates: deterministic Concrete SAT, residual-band minimisation, unconditional ZeroSlack, total polynomial runtime and certificate bounds, and the exact root theorem plus axiom audit. Deriving terminal families and faithful profile semantics from valid inputs, complete SaturatePositive/BCELReady routing and exact PCCMin construction remain load-bearing obligations. The complete Cook-Levin builder and concrete NP-completeness are already proved. |
 | **What is the current canonical report?** | The root TeX/PDF is a generated, concise formal-reconstruction report with theorem emission disabled. The historical 56-page claim manuscript is available only at the pinned legacy coordinate recorded under `archive/legacy-v0/`. |
-| **How is progress measured?** | Formal artefact coverage: 259 of 261 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage counts current evidence rows, not proof completion. The fixed-weight estimate is not a probability or time estimate. |
+| **How is progress measured?** | Formal artefact coverage: 260 of 262 current scoped publication rows earned. Risk-weighted proof completion estimate: 40%. Uncertainty range: 20% to 40%. Global gates closed: 0 of 5. Coverage counts current evidence rows, not proof completion. The fixed-weight estimate is not a probability or time estimate. |
 | **How do I run the current verification?** | Run `npm ci --ignore-scripts` and `npm run pnp:verify -- --no-write`. This checks the non-claiming formal status, current package surface, pinned archive identity, and the small current-authority test suite; it is not a proof verification. |
 | **Where should reviewers start?** | Start with the current-authority [compiled Lean theorem inventory](./docs/lean_theorem_inventory.md) and [formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md). The reviewer guide, proof pipeline, terminology crosswalk, trust model, and audit questions are historical checker-route review aids whose numbered report citations target the pinned 56-page manuscript. |
 

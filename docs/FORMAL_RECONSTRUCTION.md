@@ -1,22 +1,22 @@
 # Formal reconstruction notice
 
-<!-- M283-CURRENT-SUMMARY:BEGIN -->
-## Current M283 boundary
+<!-- M284-CURRENT-SUMMARY:BEGIN -->
+## Current M284 boundary
 
-M283 proves that the computed search covers every balanced selected-source-scalar translation whose pullbacks of all source rows are quadratic. The exact coefficient criterion and the actual quotient decoder are equivalent to that semantic condition. This removes the supplied finite-menu eligibility boundary from the coverage theorem, without supplying a contraction for every input.
+M284 proves polynomial physical runtime and output bounds for the complete source-contraction phase. A separate closed replay endpoint reconstructs or projects witnesses through the generated history. Given a genuine model of the remaining core, reconstruction produces a certificate accepted by the original source checker, with replay time bounded in the original input length.
 
-General contraction existence remains open. An exhausted core can still be satisfiable; class coverage is not complete residual decision or total polynomial runtime. Coverage of arbitrary contraction maps, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
+The remaining core still requires a solver. A positive-dimensional stopped core remains unknown; the replay bound begins with its canonical encoded request and does not claim an additional request-building machine. Useful all-input progress, global route coverage, unconditional ZeroSlack and exact polynomial PCCMin remain open. Deterministic CNF-SAT membership in P and the eligible root theorem remain absent, and the publication gate is false.
 
-M230's complete Cook-Levin builder, M231's concrete NP-completeness, M281's polynomial serialized normalizer and M282's source-bound partial residual reducer remain checked. Earlier correction and milestone records retain their exact scope.
+M230's complete Cook-Levin builder, M231's concrete NP-completeness, M281's polynomial serialized normalizer, M282's source-bound partial reducer and M283's precise contraction-class coverage remain checked. Earlier milestone records retain their own theorem scopes; the new phase-runtime guarantees do not imply a complete solver.
 
-Formal artefact coverage: 259 of 261 current scoped publication rows earned.
+Formal artefact coverage: 260 of 262 current scoped publication rows earned.
 Risk-weighted proof completion estimate: 40%.
 Uncertainty range: 20% to 40%.
 Global gates closed: 0 of 5.
 
-See the [exact contraction class and its limits](./lean_source_contraction_class.md).
-Publication decision: defer PNPLabs synchronization. This milestone certifies the completeness of the existing search for a precisely defined contraction class without adding an all-input decision capability, closing a fixed weighted checkpoint or changing a global gate. Keep the existing verified site source pin coherent and include this result in the next major publication batch.
-<!-- M283-CURRENT-SUMMARY:END -->
+See the [polynomial phase and its remaining solver boundary](./lean_source_contraction_runtime.md).
+Publication decision: publish one major PNPLabs batch after the exact core merge passes verification. The source-construction and witness-replay endpoints now have complete finite-machine polynomial runtime contracts, a substantial general capability beyond a count of local milestones. Include pending earned M283 evidence in the same source-pinned site update. No fixed load-bearing checkpoint changes state, and no global gate closes.
+<!-- M284-CURRENT-SUMMARY:END -->
 
 ## Subsequent correction — 24 September 2026
 
