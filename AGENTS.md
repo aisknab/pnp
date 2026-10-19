@@ -610,6 +610,37 @@ branch.
   arithmetic, then run a focused `#print axioms` or dependency-path probe before
   launching the complete generated audit.
 
+### Either-direction research objective
+
+- The research objective is an unconditional, rigorously audited, Lean-verified
+  resolution of P versus NP. Either P=NP or P!=NP is a successful mathematical
+  outcome. Treat the manuscript as fallible and select the highest-impact
+  justified approach, rather than requiring the original equality route to win.
+- A failed construction or restricted lower bound does not exclude every
+  polynomial algorithm or settle the problem. Record the exact scope of each
+  result, consult retained attempts before reopening a route, and pursue
+  concrete nonduplicate alternatives when available. Report a genuine current
+  research impasse honestly; neither pretend that all approaches were exhausted
+  nor manufacture activity by repeating rejected ideas.
+- Research direction and publication authority are separate. The existing
+  equality-route theorem, fixed-checkpoint ledger and publication contracts
+  remain exact until explicitly reviewed and versioned. In particular,
+  `PNP.Main.p_eq_np` must not be repurposed as a separation theorem.
+- Before claiming a separation milestone or changing the eligible final target,
+  review the exact theorem type, concrete machine model and model compatibility,
+  quantification over all polynomial-time deciders, dependency graph, permitted
+  axioms, root build, fingerprints and fail-closed publication tests. A bound for
+  one algorithm, representation, proof system or finite family is not P!=NP.
+- The current progress ledger measures its stated equality-route obligations;
+  do not reinterpret its points as separation progress. A materially different
+  proof route requires a documented progress-contract review, preserving earned
+  results and historical coordinates rather than relabeling them. Research
+  proposals, failed candidates and instructions-only changes earn no proof
+  checkpoint or milestone credit.
+- Completion requires the actual full theorem and its required audits. A
+  percentage, partial algorithm, green test suite or unproved bridge does not
+  establish either outcome.
+
 ### Mathematical milestone selection
 
 - Select the highest-impact unresolved proof obligation on the critical path,
