@@ -31,6 +31,7 @@ on:
       - 'audits/fixtures/serialized-normalizer-source-contract0.json'
       - 'audits/fixtures/residual-reducer-source-contract0.json'
       - 'audits/fixtures/source-contraction-runtime-source-contract0.json'
+      - 'audits/fixtures/shared-refutation-source-contract0.json'
       - 'audits/formal-publication0.test.mjs'
       - 'docs/lean_*.md'
       - 'docs/plans/*.md'
@@ -3461,6 +3462,11 @@ jobs:
           set -euo pipefail
           npm run audit:m284
           node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionRuntimeAxiomAudit.lean
+      - name: Verify source-generated shared refutations
+        run: |
+          set -euo pipefail
+          node --test audits/lean-shared-refutation0.test.mjs
+          lake env lean -DwarningAsError=true lean-audit/PNPSharedRefutationAxiomAudit.lean
       - name: Verify source-scalar quadratic contraction class
         run: |
           set -euo pipefail
