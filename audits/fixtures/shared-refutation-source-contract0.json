@@ -1,0 +1,1178 @@
+{
+  "kind": "PNPSharedRefutationSourceContract0",
+  "version": 0,
+  "rootModules": [
+    "PNP.Concrete.ResidualReduction.SharedRefutationAudit"
+  ],
+  "allowedAxioms": [
+    "propext",
+    "Quot.sound"
+  ],
+  "publicEndpoints": [
+    "PNP.Concrete.ResidualReduction.SharedRefutationExtraction.extract_of_false_verdict",
+    "PNP.Concrete.ResidualReduction.SharedRefutationExtraction.extract_some_false_verdict",
+    "PNP.Concrete.ResidualReduction.SharedRefutationExtraction.extract_contract",
+    "PNP.Concrete.ResidualReduction.SharedRefutationExtraction.extract_unsatisfiable",
+    "PNP.Concrete.ResidualReduction.SharedRefutationExtraction.unwind_linked"
+  ],
+  "claimBoundary": {
+    "sourceOnlyPublicExtractor": true,
+    "falseExistingVerdictImpliesExtraction": true,
+    "returnedCertificateRefutesOriginalRows": true,
+    "unknownIsFalse": false,
+    "universalSelectorCompleteness": false,
+    "wholeEncodedPolynomialRuntime": false,
+    "efficientStandaloneCircuitIdentityChecking": false,
+    "checkpointEarned": false
+  },
+  "files": [
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineBilinearSearch.lean",
+      "sourceContractSha256": "0055518e53c2dc70a93abc601072c5f504d763a1916594006e47aff03f4d2f08"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/AffineSolutionMaps.lean",
+      "sourceContractSha256": "19832c9eeea1ea668a497f9872588edd61d5def5946164a15e2c36169f746d82"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearPullback.lean",
+      "sourceContractSha256": "cc98d1e4fbc0cff1646951fac2a3a139e1c194c719f4f4903cb9ef716cfdaf66"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BilinearSelection.lean",
+      "sourceContractSha256": "82bc54cb1031441bb06a75473d5d05ec38750c737f71e041e839b9ef32315f2a"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinaryLinearSolver.lean",
+      "sourceContractSha256": "f8e852f11e34950b6a1cd98e2ea12116df59f1744ee312632dd64f75e1257e09"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BinarySolutionSpace.lean",
+      "sourceContractSha256": "b25f685a177ce6ca6492038ef6f1f0aacf4afa83c9b49f1812e9a060bda4a6d8"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/BooleanCoefficients.lean",
+      "sourceContractSha256": "194d0ac551f472fd640de5e932e0a3347b78d1a3a6674624805ba766a8fc7263"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/CheckedContraction.lean",
+      "sourceContractSha256": "b76a9a83563f138b09a3dc0cc3a99cf09afce2c6cadfdeed6d6504b35ca5017c"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/ConstrainedBilinear.lean",
+      "sourceContractSha256": "4ecb566d8635d7f7a7939c9bf518fcbb91982842d0e97bf64b3b2c100622628d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/FactoredContraction.lean",
+      "sourceContractSha256": "303834f570ef0ea128aba7267e7037f59672b67a9e5f27a3996fa495a2decad6"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/KernelCoefficientMaps.lean",
+      "sourceContractSha256": "bd702a9925b93147d9e28d3b493e438ee69d0fc1bc1bcac9a5e342618114b5e5"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/LinearEquations.lean",
+      "sourceContractSha256": "4388923267ac798e918fb12419a2913a75c8263daecf33a49675362a6fbc0e40"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/PointSupport.lean",
+      "sourceContractSha256": "a88bdde9d5748003f18cd2cc8a325396fcca147c0d1af6d2642322ca00c4d7b0"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAlgebra.lean",
+      "sourceContractSha256": "f488172e37bfe32862a76784b4dae48b62c8fe266b2530a82fe4e7ec9104e529"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAssembly.lean",
+      "sourceContractSha256": "106c720a4b66429e1a142d7d4388e98adbc877045c9ef798bcb6871511049e67"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAudit.lean",
+      "sourceContractSha256": "27b90c3bc7ab079550dbcca96733cfef37399f2a29ab7b607ef4db6d3b3597ad"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationCircuit.lean",
+      "sourceContractSha256": "1b3edb7a17f9ed01ba6613de644f10e1d0ab129ffd6df653103bf6f3bd5b4136"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationContraction.lean",
+      "sourceContractSha256": "0002515936c890b4f31f2dc2b7681c658db8fac7f1236167f49f61c024d04220"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationExtraction.lean",
+      "sourceContractSha256": "25810caf2553d5aeb1db7cb2175db5d5be438381723536c57eebfcbd050dba01"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationGlobalStep.lean",
+      "sourceContractSha256": "f4699592bf0800d4c4c3c1da742adf981f9c792122fae245f68a0d2779e6d8fa"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationRegression.lean",
+      "sourceContractSha256": "e7e0f30d5154946a35802435910c9ccbd4394a549709aa7e6da9909b6cbab239"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationSourceLift.lean",
+      "sourceContractSha256": "18759973b8fa4afc099c771729fec62f56353e242cef03ce7a699efd17cad15f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationTerminal.lean",
+      "sourceContractSha256": "8cd19cc77c38f375715a0d92df0b432e4069379a71fa1d6ad3eaa8f096336b98"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationTransport.lean",
+      "sourceContractSha256": "1bd0570fc9b7121504796ea52354bd6c8141310fc43564bfb99d2665e99deac7"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceActivityMatrix.lean",
+      "sourceContractSha256": "da8f1c6cd06888c3af20a10139c07835a29a738b9892c9f79fa6880d7a83ff47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceAffinePrelude.lean",
+      "sourceContractSha256": "d7f0125fcd1da14ea4b296b1067222d33660e42d65a7a7d38d82610d67a23f75"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceComputedContract.lean",
+      "sourceContractSha256": "039c6e4c5a838e036a9e392b0aa5ea33e46522cd77e7391908413f33ddd443fe"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceConstructedStep.lean",
+      "sourceContractSha256": "677b3f58ef5c40fd59aff4630f59affe7453079737c2b7aaf7ed47d908e2406d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionChart.lean",
+      "sourceContractSha256": "a72412a3e01e9e43bb30684970d1f22ae6008d42a164d058d932a236444e8fdf"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDirectionSpace.lean",
+      "sourceContractSha256": "220c0557757c0e32b0ec97c27c2d26011ba0efa0d11100f5bdd2f0300effd1b9"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceDualSpan.lean",
+      "sourceContractSha256": "a3b01f364314405a052f2bedea0ba2001f9b6d7904d3d26254c10bca38b3c2ed"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceGlobalSelector.lean",
+      "sourceContractSha256": "bf058800383ddc7021d2380df6184e73e461e158f19271e4088b2611ad1f59ff"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceLinearCoordinates.lean",
+      "sourceContractSha256": "76410bdb9f79507a1f3683d1895137ea259beee41f57e113ae7dc158e6f4ad47"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceMatrixStorage.lean",
+      "sourceContractSha256": "ef39089f3543825e203341c6ec051a253d8bb3ba28cdfc666f66d273ef1cb312"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceNormalMenu.lean",
+      "sourceContractSha256": "24cf63637c00944970bceb7797ebf0f8dbe9c39729f76d2949905bfaa864f666"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePlaneClosure.lean",
+      "sourceContractSha256": "659138dede1c65d1c03f12b90bafbbe369af4e21d6f087cc84973ac43257490d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourcePolar.lean",
+      "sourceContractSha256": "fcf57683251189aaa15d509332135672873f53dcacfdcd687d9cf48697ced98f"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceQueryChart.lean",
+      "sourceContractSha256": "d2797b8b34809b7a06af4cc0cc9df3db10efea3ef6a80a8b8b787f47f6e15f30"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneEquations.lean",
+      "sourceContractSha256": "188d8d68ad9a23f7ee5a01dea7ac9206e6fcc333386470dbae71a3231847a67b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneMatrices.lean",
+      "sourceContractSha256": "77ef28ab2b10caf8feed736797f144f5f801eae4859e54f9babccfdcb08f2a0d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankOneQuery.lean",
+      "sourceContractSha256": "f27a885a97862daf59214561ad92a1352215b11238d62a86d6477d737c141534"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoEquations.lean",
+      "sourceContractSha256": "9b6a3c1574cc3f6b62cbc9077e5050d23b5f70448e67a131ec80f0d005064f0b"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRankTwoQuery.lean",
+      "sourceContractSha256": "6c28a8846971fae6e987d44643ab69e605133e4106fd5b5528a503cd96dfa77d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceReductionChain.lean",
+      "sourceContractSha256": "a7ab5eceb6a91a1b7340d84c64ac433d5ca3d3318e9eb67cfab54c4bea45af88"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceRowDifference.lean",
+      "sourceContractSha256": "cef73fbf6e2acc7880c4815624eaaa0367459ef3756d55c6bf1ba05836a79b77"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceScalarTail.lean",
+      "sourceContractSha256": "00b6dd2a4a1bca7ad67c988eabf0f6ce0309a787645e19dfa5c272c671fe5302"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceSelectedScalar.lean",
+      "sourceContractSha256": "334e6bfdeba5a5044d616c88b2e9c4312fd0c7950cb810dda7c3ed582d73561d"
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SourceWitnessBalance.lean",
+      "sourceContractSha256": "d5debcb613ead213ac25a73a704381006b0480f8b64f362a07ac780a7aeba0ad"
+    }
+  ],
+  "reviewedSources": [
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAlgebra.lean",
+      "sha256": "7207720d29f0215f31e14e27005411323a9887a7392fc69592818631516df70e",
+      "bytes": 7770,
+      "declarationHeads": [
+        {
+          "kind": "theorem",
+          "name": "quadratic_head_quotient"
+        },
+        {
+          "kind": "theorem",
+          "name": "row_head_quotient"
+        },
+        {
+          "kind": "structure",
+          "name": "LiftRow"
+        },
+        {
+          "kind": "def",
+          "name": "rowSum"
+        },
+        {
+          "kind": "def",
+          "name": "guardValue"
+        },
+        {
+          "kind": "def",
+          "name": "correctionValue"
+        },
+        {
+          "kind": "def",
+          "name": "restrictedValue"
+        },
+        {
+          "kind": "def",
+          "name": "liftedMultiplier"
+        },
+        {
+          "kind": "def",
+          "name": "liftedValue"
+        },
+        {
+          "kind": "theorem",
+          "name": "rowSum_congr"
+        },
+        {
+          "kind": "theorem",
+          "name": "rowSum_xor"
+        },
+        {
+          "kind": "theorem",
+          "name": "rowSum_scale"
+        },
+        {
+          "kind": "theorem",
+          "name": "rowSum_zero"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftedValue_decomposition"
+        },
+        {
+          "kind": "theorem",
+          "name": "sourceValue_decomposition"
+        },
+        {
+          "kind": "theorem",
+          "name": "refutation_lift_sum"
+        },
+        {
+          "kind": "theorem",
+          "name": "refutation_lift_one"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftedValue_zero_of_source_zero"
+        },
+        {
+          "kind": "theorem",
+          "name": "refutation_lift_contradiction"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAssembly.lean",
+      "sha256": "86e86589ddfa215b2cfe90ee52353ba543030c88be77e70628bd6343b244b7b0",
+      "bytes": 9308,
+      "declarationHeads": [
+        {
+          "kind": "abbrev",
+          "name": "Certificate"
+        },
+        {
+          "kind": "def",
+          "name": "WellFormed"
+        },
+        {
+          "kind": "def",
+          "name": "Refutes"
+        },
+        {
+          "kind": "def",
+          "name": "attach"
+        },
+        {
+          "kind": "theorem",
+          "name": "attach_contract"
+        },
+        {
+          "kind": "theorem",
+          "name": "attach_exists"
+        },
+        {
+          "kind": "def",
+          "name": "liftRecorded"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftRecorded_exists"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationAudit.lean",
+      "sha256": "01c553fdde704bc87c806445edbf677c25e4c33fe41f299c8833b49cbb730d31",
+      "bytes": 1116,
+      "declarationHeads": []
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationCircuit.lean",
+      "sha256": "1117e2140460f1aeb0f066fec12824072671812c482727f3a252c05674b579af",
+      "bytes": 24087,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "bitAt"
+        },
+        {
+          "kind": "theorem",
+          "name": "bitAt_append_old"
+        },
+        {
+          "kind": "theorem",
+          "name": "bitAt_append_new"
+        },
+        {
+          "kind": "inductive",
+          "name": "Gate"
+        },
+        {
+          "kind": "abbrev",
+          "name": "Code"
+        },
+        {
+          "kind": "def",
+          "name": "gateEval"
+        },
+        {
+          "kind": "def",
+          "name": "evaluate"
+        },
+        {
+          "kind": "def",
+          "name": "value"
+        },
+        {
+          "kind": "def",
+          "name": "outputs"
+        },
+        {
+          "kind": "theorem",
+          "name": "outputs_eq_map_value"
+        },
+        {
+          "kind": "theorem",
+          "name": "evaluate_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "value_cons_old"
+        },
+        {
+          "kind": "theorem",
+          "name": "value_cons_new"
+        },
+        {
+          "kind": "def",
+          "name": "Extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "extends_refl"
+        },
+        {
+          "kind": "theorem",
+          "name": "extends_cons"
+        },
+        {
+          "kind": "theorem",
+          "name": "extends_trans"
+        },
+        {
+          "kind": "theorem",
+          "name": "extends_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "extends_value"
+        },
+        {
+          "kind": "structure",
+          "name": "InputRow"
+        },
+        {
+          "kind": "def",
+          "name": "RootsBounded"
+        },
+        {
+          "kind": "theorem",
+          "name": "roots_mono"
+        },
+        {
+          "kind": "def",
+          "name": "productSum"
+        },
+        {
+          "kind": "theorem",
+          "name": "productSum_extends"
+        },
+        {
+          "kind": "def",
+          "name": "addProduct"
+        },
+        {
+          "kind": "theorem",
+          "name": "addProduct_extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "addProduct_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "addProduct_value"
+        },
+        {
+          "kind": "def",
+          "name": "foldProducts"
+        },
+        {
+          "kind": "theorem",
+          "name": "foldProducts_extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "foldProducts_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "foldProducts_root_bound"
+        },
+        {
+          "kind": "theorem",
+          "name": "foldProducts_value"
+        },
+        {
+          "kind": "def",
+          "name": "buildCorrection"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildCorrection_extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildCorrection_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildCorrection_root_bound"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildCorrection_value"
+        },
+        {
+          "kind": "def",
+          "name": "activeCount"
+        },
+        {
+          "kind": "theorem",
+          "name": "activeCount_le"
+        },
+        {
+          "kind": "def",
+          "name": "updateRoots"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_count"
+        },
+        {
+          "kind": "def",
+          "name": "expectedRoots"
+        },
+        {
+          "kind": "theorem",
+          "name": "expectedRoots_extends"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_value"
+        },
+        {
+          "kind": "def",
+          "name": "compile"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_growth"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_root_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_value"
+        },
+        {
+          "kind": "def",
+          "name": "gateValid"
+        },
+        {
+          "kind": "def",
+          "name": "codeValid"
+        },
+        {
+          "kind": "def",
+          "name": "compileChecked"
+        },
+        {
+          "kind": "theorem",
+          "name": "addProduct_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "foldProducts_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildCorrection_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "updateRoots_roots"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "compile_roots"
+        },
+        {
+          "kind": "theorem",
+          "name": "all_roots_bounded"
+        },
+        {
+          "kind": "theorem",
+          "name": "compileChecked_contract"
+        },
+        {
+          "kind": "theorem",
+          "name": "compileChecked_value"
+        },
+        {
+          "kind": "theorem",
+          "name": "compileChecked_outputs"
+        },
+        {
+          "kind": "theorem",
+          "name": "compileChecked_growth"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationContraction.lean",
+      "sha256": "e13edd90168c8b218d9fab0c71ab2ff14d71295c39f04c97fe9956f5f52a8317",
+      "bytes": 4220,
+      "declarationHeads": [
+        {
+          "kind": "theorem",
+          "name": "planeRows_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "reduce_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "contract_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "contract_guard_value"
+        },
+        {
+          "kind": "theorem",
+          "name": "contract_row_quotients"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationExtraction.lean",
+      "sha256": "2bff96d45d9d70c65dc44b70ffe0143ec87aba8df0ded224a2561cf5bdaceec6",
+      "bytes": 6351,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "terminal"
+        },
+        {
+          "kind": "def",
+          "name": "unwind"
+        },
+        {
+          "kind": "theorem",
+          "name": "unwind_linked"
+        },
+        {
+          "kind": "theorem",
+          "name": "terminal_complete"
+        },
+        {
+          "kind": "theorem",
+          "name": "terminal_some_false"
+        },
+        {
+          "kind": "def",
+          "name": "extract"
+        },
+        {
+          "kind": "theorem",
+          "name": "extract_of_false_verdict"
+        },
+        {
+          "kind": "theorem",
+          "name": "extract_some_false_verdict"
+        },
+        {
+          "kind": "theorem",
+          "name": "extract_contract"
+        },
+        {
+          "kind": "theorem",
+          "name": "extract_unsatisfiable"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationGlobalStep.lean",
+      "sha256": "7ad06e92cea7620b315b2c65f50efa74ae0882d69205290fdab39010a4e9471e",
+      "bytes": 6841,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "charted"
+        },
+        {
+          "kind": "def",
+          "name": "tailPolynomial"
+        },
+        {
+          "kind": "theorem",
+          "name": "markSource_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "chartRows_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "charted_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "charted_values"
+        },
+        {
+          "kind": "def",
+          "name": "StepData"
+        },
+        {
+          "kind": "theorem",
+          "name": "buildStep_data"
+        },
+        {
+          "kind": "theorem",
+          "name": "globalStep_data"
+        },
+        {
+          "kind": "theorem",
+          "name": "globalStep_guard"
+        },
+        {
+          "kind": "theorem",
+          "name": "globalStep_values"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationRegression.lean",
+      "sha256": "960796e356dfc021096fbed38387aeca146eb077d22088b6d2f4ec02edd1cb5c",
+      "bytes": 9526,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "seed"
+        },
+        {
+          "kind": "def",
+          "name": "inputBit"
+        },
+        {
+          "kind": "def",
+          "name": "oneRow"
+        },
+        {
+          "kind": "def",
+          "name": "twoRows"
+        },
+        {
+          "kind": "theorem",
+          "name": "one_row_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "one_row_gate_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "one_row_code_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "mixed_weights_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "mixed_weights_gate_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "mixed_weights_code_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "empty_root_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "empty_gate_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "invalid_forward_reference"
+        },
+        {
+          "kind": "theorem",
+          "name": "invalid_input_root"
+        },
+        {
+          "kind": "def",
+          "name": "transportedShear"
+        },
+        {
+          "kind": "def",
+          "name": "transportedSwap"
+        },
+        {
+          "kind": "theorem",
+          "name": "transported_shear_values"
+        },
+        {
+          "kind": "theorem",
+          "name": "transported_swap_values"
+        },
+        {
+          "kind": "def",
+          "name": "headEquation"
+        },
+        {
+          "kind": "def",
+          "name": "oppositeEquation"
+        },
+        {
+          "kind": "def",
+          "name": "sourceRows"
+        },
+        {
+          "kind": "def",
+          "name": "oldRefutation"
+        },
+        {
+          "kind": "def",
+          "name": "falseOldRefutation"
+        },
+        {
+          "kind": "def",
+          "name": "sourceResult"
+        },
+        {
+          "kind": "def",
+          "name": "sourceResultValue"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_result_returned"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_result_gate_count"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_result_refutation"
+        },
+        {
+          "kind": "theorem",
+          "name": "wrong_source_guard_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_root_out_of_range_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "missing_coefficient_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "missing_source_value_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "valid_guard_does_not_invent_refutation"
+        },
+        {
+          "kind": "def",
+          "name": "nonlinearTail"
+        },
+        {
+          "kind": "def",
+          "name": "nonlinearRows"
+        },
+        {
+          "kind": "def",
+          "name": "nonlinearOld"
+        },
+        {
+          "kind": "def",
+          "name": "nonlinearResult"
+        },
+        {
+          "kind": "theorem",
+          "name": "nonlinear_result_returned"
+        },
+        {
+          "kind": "theorem",
+          "name": "nonlinear_source_refutation"
+        },
+        {
+          "kind": "def",
+          "name": "zeroRows"
+        },
+        {
+          "kind": "theorem",
+          "name": "terminal_selects_only_first_violation"
+        },
+        {
+          "kind": "theorem",
+          "name": "terminal_even_violations_still_refute"
+        },
+        {
+          "kind": "theorem",
+          "name": "attachment_missing_root_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "attachment_extra_root_rejected"
+        },
+        {
+          "kind": "theorem",
+          "name": "empty_history_wrong_dimension_rejected"
+        },
+        {
+          "kind": "def",
+          "name": "contradictoryInput"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_history_extracts"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_history_refutes_every_input"
+        },
+        {
+          "kind": "theorem",
+          "name": "source_history_growth_bound"
+        },
+        {
+          "kind": "theorem",
+          "name": "positive_dimension_unknown_not_refuted"
+        },
+        {
+          "kind": "theorem",
+          "name": "satisfiable_terminal_not_refuted"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationSourceLift.lean",
+      "sha256": "cb8dc10a414f2923ba23fbe0adc723d057a8e9d935da5cdbc834f99cf02f441b",
+      "bytes": 16737,
+      "declarationHeads": [
+        {
+          "kind": "structure",
+          "name": "HeadRow"
+        },
+        {
+          "kind": "def",
+          "name": "sourceFamily"
+        },
+        {
+          "kind": "def",
+          "name": "inputRow"
+        },
+        {
+          "kind": "def",
+          "name": "inputRows"
+        },
+        {
+          "kind": "def",
+          "name": "oldRoots"
+        },
+        {
+          "kind": "def",
+          "name": "guardPolynomial"
+        },
+        {
+          "kind": "def",
+          "name": "liftChecked"
+        },
+        {
+          "kind": "def",
+          "name": "pairedSum"
+        },
+        {
+          "kind": "theorem",
+          "name": "pairedSum_ne_true_of_zero"
+        },
+        {
+          "kind": "def",
+          "name": "originalValues"
+        },
+        {
+          "kind": "def",
+          "name": "restrictedValues"
+        },
+        {
+          "kind": "def",
+          "name": "originalSum"
+        },
+        {
+          "kind": "def",
+          "name": "residualSum"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_checks"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_contract"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_growth"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_sum"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_refutes"
+        },
+        {
+          "kind": "theorem",
+          "name": "liftChecked_unsatisfiable"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationTerminal.lean",
+      "sha256": "6a849037de1fe6c243ceefeb7d841948e885c4a21c5d3be54351460af215b0c7",
+      "bytes": 4672,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "code"
+        },
+        {
+          "kind": "def",
+          "name": "roots"
+        },
+        {
+          "kind": "def",
+          "name": "certificate"
+        },
+        {
+          "kind": "theorem",
+          "name": "code_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "code_valid"
+        },
+        {
+          "kind": "theorem",
+          "name": "value_zero"
+        },
+        {
+          "kind": "theorem",
+          "name": "value_one"
+        },
+        {
+          "kind": "theorem",
+          "name": "roots_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "roots_bound"
+        },
+        {
+          "kind": "theorem",
+          "name": "scalar_identity"
+        },
+        {
+          "kind": "theorem",
+          "name": "refutes"
+        },
+        {
+          "kind": "theorem",
+          "name": "certificate_contract"
+        },
+        {
+          "kind": "theorem",
+          "name": "certificate_scalar_identity"
+        },
+        {
+          "kind": "theorem",
+          "name": "certificate_refutes"
+        }
+      ]
+    },
+    {
+      "file": "lean/PNP/Concrete/ResidualReduction/SharedRefutationTransport.lean",
+      "sha256": "12e5f1eafdd674f9303e1f941fe92a3a20bfab369ef3b6d89bb867f444bae9cd",
+      "bytes": 4571,
+      "declarationHeads": [
+        {
+          "kind": "def",
+          "name": "mapGate"
+        },
+        {
+          "kind": "def",
+          "name": "transport"
+        },
+        {
+          "kind": "theorem",
+          "name": "transport_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "gateEval_map"
+        },
+        {
+          "kind": "theorem",
+          "name": "evaluate_transport"
+        },
+        {
+          "kind": "theorem",
+          "name": "outputs_transport"
+        },
+        {
+          "kind": "theorem",
+          "name": "gateValid_map"
+        },
+        {
+          "kind": "theorem",
+          "name": "codeValid_transport"
+        },
+        {
+          "kind": "def",
+          "name": "chartLeaf"
+        },
+        {
+          "kind": "theorem",
+          "name": "chartLeaf_eval"
+        },
+        {
+          "kind": "def",
+          "name": "chartCode"
+        },
+        {
+          "kind": "theorem",
+          "name": "chartCode_outputs"
+        },
+        {
+          "kind": "theorem",
+          "name": "chartCode_length"
+        },
+        {
+          "kind": "theorem",
+          "name": "chartCode_valid"
+        }
+      ]
+    }
+  ],
+  "auxiliaryContracts": [
+    {
+      "file": "lean-audit/PNPSharedRefutationAxiomAudit.lean",
+      "sourceContractSha256": "181c7ce193def730963af696770e52840391b5ee75df6204545bd64a7c656c9a"
+    }
+  ]
+}
