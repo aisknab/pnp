@@ -5,7 +5,7 @@ import path from 'node:path';
 export const LEAN_INVENTORY_PATH0 = 'status/LEAN_THEOREM_INVENTORY.json';
 export const LEAN_INVENTORY_PUBLIC_PATH0 = 'public/pnp-theorem-inventory.json';
 export const FORMAL_PUBLICATION_MAP_PATH0 = 'publication/FORMAL_PUBLICATION_MAP.json';
-const REQUIRED_PUBLICATION_MAP_SHA2560 = '72a564cc2289b77d16b7e583bf99efc03735254f4a0069135d897c6197b5d4ac';
+const REQUIRED_PUBLICATION_MAP_SHA2560 = 'f58dfe586c6fac070cb33bd45b97cc711e0a058cc5373d4cc2386db750668b4f';
 
 export const REQUIRED_MILESTONE_THEOREMS0 = Object.freeze([
   "PNP.Concrete.ResidualReduction.SourceReductionRuntime.recover_certificate",
