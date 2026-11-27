@@ -3462,6 +3462,12 @@ jobs:
           set -euo pipefail
           npm run audit:m284
           node scripts/check-lean-axioms.mjs lean-audit/PNPSourceContractionRuntimeAxiomAudit.lean
+      - name: Verify the signed ternary matrix representation of CNFSAT
+        run: |
+          set -euo pipefail
+          node --test audits/lean-signed-ternary-matrix0.test.mjs
+          lake env lean -DwarningAsError=true lean-regression/PNPSignedTernaryMatrix.lean
+          lake env lean -DwarningAsError=true lean-audit/PNPSignedTernaryMatrixAxiomAudit.lean
       - name: Verify source-generated shared refutations
         run: |
           set -euo pipefail

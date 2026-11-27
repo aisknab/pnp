@@ -796,3 +796,4 @@ import PNP.Concrete.NormalizerVertexHeaderRegression
 import PNP.Concrete.NormalizerVertexPhaseRegression
 import PNP.Concrete.NormalizerVertexPolynomialRegression
 import PNP.Concrete.NormalizerVertexRangeRegression
+import PNP.SignedTernary.Encoding
