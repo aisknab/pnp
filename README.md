@@ -961,6 +961,8 @@ recorded by [`archive/legacy-v0/`](./archive/legacy-v0/README.md).
 
 ## Reviewer map
 
+The [signed ternary matrix representation](./docs/lean_signed_ternary_matrix.md) gives strict CNFSAT a second, equivalent decision predicate on actual encoded matrices. Its quadratic output-size bound is not a polynomial-time solver.
+
 - [Compiled Lean theorem inventory](./docs/lean_theorem_inventory.md): current deterministic environment inventory, concrete publication gate, milestone bindings, and generated-report boundary.
 - [Formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md): current authority, earned scope, blockers, and nonclaims.
 - [Reviewer guide](./docs/reviewer_guide.md): historical checker-route overview, audit paths, and fast falsification checklist.
