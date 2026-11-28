@@ -3474,6 +3474,12 @@ jobs:
           node --test audits/lean-clause-square0.test.mjs
           lake env lean -DwarningAsError=true lean-regression/PNPClauseSquare.lean
           lake env lean -DwarningAsError=true lean-audit/PNPClauseSquareAxiomAudit.lean
+      - name: Verify the three-occurrence word encoding of strict CNFSAT
+        run: |
+          set -euo pipefail
+          node --test audits/lean-three-use0.test.mjs
+          lake env lean -DwarningAsError=true lean-regression/PNPThreeUse.lean
+          lake env lean -DwarningAsError=true lean-audit/PNPThreeUseAxiomAudit.lean
       - name: Verify source-generated shared refutations
         run: |
           set -euo pipefail

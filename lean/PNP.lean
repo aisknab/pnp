@@ -798,3 +798,4 @@ import PNP.Concrete.NormalizerVertexPolynomialRegression
 import PNP.Concrete.NormalizerVertexRangeRegression
 import PNP.SignedTernary.Encoding
 import PNP.ClauseSquare.Framed
+import PNP.ThreeUse.Witness
