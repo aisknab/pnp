@@ -1,0 +1,11 @@
+# Why three occurrences still carry all of strict CNFSAT
+
+Every encoded CNF bitstring is translated into a finite list of equations over a group of just eight elements: the upper unitriangular 3-by-3 matrices over the two-element field. The decoded target uses each declared variable **exactly three times**. No word uses a variable twice. The first word has length four and must give one specified nonidentity central matrix; every remaining word has length at most twelve and must give the identity.
+
+These restrictions do not remove the need for one assignment that satisfies **all** the equations. The construction makes one copy per original signed use and adds equality words in a cycle. An assignment on the physical slots therefore cannot choose conflicting values for different uses of the same source. The typed route uses commutators to represent the products of literal-failure bits. Empty clauses, empty conjunctions, missing variables of either polarity, and malformed inputs use the repository's strict semantics.
+
+The [target verifier](../lean/PNP/ThreeUse/Witness.lean) reads only a target bitstring and a proposed witness. The format gives the slot count and row count, then each row's three target bits, word length, and signed zero-based slot indices. Counts and indices use unary notation with a terminator. The decoder consumes the entire word, rejects out-of-range indices, and requires canonical re-encoding. A syntactically well-formed packet with the wrong occurrence pattern is not in the restricted language.
+
+For an input of length `L`, `PNP.ThreeUse.Encoding.source_encoded` establishes equivalence to that target language and bounds the **entire serialized target** by `8000 (L + 1)²` bits. The witness uses three bits per declared slot; `source_short_witness` bounds it by `144 (L + 1)`. Given any accepted witness for an emitted target, `witness_replay` recovers an assignment satisfying the original decoded formula.
+
+These are representation, size, and witness-recovery results. They do not supply a polynomial-time algorithm for finding the witness, a runtime theorem for the whole construction, or a proof that CNFSAT is in P. The [fixed proof-progress tracker](../status/PROOF_PROGRESS.json) measures those obligations separately.

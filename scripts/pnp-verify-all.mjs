@@ -141,6 +141,7 @@ export const CURRENT_VERIFICATION_TESTS0 = Object.freeze([
   'audits/lean-shared-refutation0.test.mjs',
   'audits/lean-signed-ternary-matrix0.test.mjs',
   'audits/lean-clause-square0.test.mjs',
+  'audits/lean-three-use0.test.mjs',
   'audits/lean-source-contraction-runtime0.test.mjs',
   'audits/lean-source-contraction-runtime-publication0.test.mjs',
   'audits/lean-source-contraction-class0.test.mjs',

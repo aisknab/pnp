@@ -965,6 +965,8 @@ The [signed ternary matrix representation](./docs/lean_signed_ternary_matrix.md)
 
 The [affine binary square](./docs/lean_clause_square.md) preserves each original assignment: the selected matrix is singular exactly for a satisfying word. This equivalence does not find the word.
 
+The [three-occurrence word encoding](./docs/lean_three_use.md) translates strict CNFSAT into short equations over eight group elements, with a quadratic bound on the target length and a checked return to the original assignment.
+
 - [Compiled Lean theorem inventory](./docs/lean_theorem_inventory.md): current deterministic environment inventory, concrete publication gate, milestone bindings, and generated-report boundary.
 - [Formal reconstruction notice](./docs/FORMAL_RECONSTRUCTION.md): current authority, earned scope, blockers, and nonclaims.
 - [Reviewer guide](./docs/reviewer_guide.md): historical checker-route overview, audit paths, and fast falsification checklist.
