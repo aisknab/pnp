@@ -3468,6 +3468,12 @@ jobs:
           node --test audits/lean-signed-ternary-matrix0.test.mjs
           lake env lean -DwarningAsError=true lean-regression/PNPSignedTernaryMatrix.lean
           lake env lean -DwarningAsError=true lean-audit/PNPSignedTernaryMatrixAxiomAudit.lean
+      - name: Verify the marked affine square representation of CNFSAT
+        run: |
+          set -euo pipefail
+          node --test audits/lean-clause-square0.test.mjs
+          lake env lean -DwarningAsError=true lean-regression/PNPClauseSquare.lean
+          lake env lean -DwarningAsError=true lean-audit/PNPClauseSquareAxiomAudit.lean
       - name: Verify source-generated shared refutations
         run: |
           set -euo pipefail
